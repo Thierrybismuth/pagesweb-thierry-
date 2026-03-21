@@ -51,11 +51,11 @@
 <section class="hero">
   <div class="hero-left">
     <div class="hero-eyebrow">Franchiseurs</div>
-    <h1>Votre réseau grandit-il aussi vite que votre concept <em>le mérite ?</em></h1>
+    <h1>Votre réseau grandit-il aussi vite que votre concept <em>le mérite ?</em></h1>
     <p class="hero-question">J'ai trois façons de vous aider à accélérer.</p>
   </div>
   <div class="hero-right">
-    <p>Que vous soyez en train de lancer votre réseau, de le structurer, ou de l'étendre après des années de croissance — le défi reste le même : <strong>trouver les bons franchisés, les convaincre, les installer, les faire durer.</strong></p>
+    <p>Que vous soyez en train de lancer votre réseau, de le structurer, ou de l'étendre après des années de croissance — le défi reste le même : <strong>trouver les bons franchisés, les convaincre, les installer, les faire durer.</strong></p>
     <p style="margin-top: 1.2rem;">C'est un métier à part entière. Je m'en occupe pour vous, selon la formule qui correspond à votre situation.</p>
   </div>
 </section>
@@ -93,5 +93,13 @@
     <a href="tel:0610703090" class="cta-btn">Prendre contact</a>
   </div>
 </div>
+
+<script>
+function sendHeight(){var h=document.documentElement.scrollHeight||document.body.scrollHeight;window.parent.postMessage({iframeHeight:h},"*");}
+window.addEventListener("load",sendHeight);
+window.addEventListener("resize",sendHeight);
+setTimeout(sendHeight,600);
+setTimeout(sendHeight,1200);
+</script>
 </body>
 </html>
