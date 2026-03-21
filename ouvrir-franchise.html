@@ -10,132 +10,93 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body { background: var(--blanc); color: var(--texte); font-family: 'Outfit', sans-serif; font-weight: 300; line-height: 1.7; width: 100%; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  .hero { background: var(--marine); padding: 56px 8% 64px; width: 100%; position: relative; overflow: hidden; }
-  .hero::after { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(200,135,58,0.1) 0%, transparent 70%); top: -80px; right: -80px; pointer-events: none; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .hero { padding: 56px 8% 64px; width: 100%; border-bottom: 1px solid var(--gris-clair); }
   .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.8rem; opacity: 0; animation: fadeUp 0.5s 0.1s forwards; }
   .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: block; }
-  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; color: #fff; line-height: 1.08; margin-bottom: 1.4rem; max-width: 760px; opacity: 0; animation: fadeUp 0.5s 0.2s forwards; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4.5vw, 3.8rem); font-weight: 700; color: var(--marine); line-height: 1.1; margin-bottom: 1.2rem; max-width: 780px; opacity: 0; animation: fadeUp 0.5s 0.25s forwards; }
   .hero h1 em { font-style: italic; color: var(--accent); }
-  .hero p { font-size: 1rem; color: rgba(255,255,255,0.6); max-width: 600px; line-height: 1.85; opacity: 0; animation: fadeUp 0.5s 0.3s forwards; }
-  .erreur { width: 100%; padding: 56px 8%; background: var(--blanc-pur); border-bottom: 1px solid var(--gris-clair); }
-  .erreur-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto; }
-  .section-eyebrow { display: flex; align-items: center; gap: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
-  .section-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: block; }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--marine); line-height: 1.15; margin-bottom: 1rem; }
-  .section-title em { font-style: italic; color: var(--accent); }
-  .section-intro { font-size: 0.97rem; color: var(--gris); line-height: 1.85; max-width: 560px; }
-  .section-intro p { margin-bottom: 0.9rem; }
-  .erreurs-liste { display: flex; flex-direction: column; gap: 2px; background: var(--gris-clair); }
-  .erreur-item { background: var(--blanc); padding: 1.4rem 1.8rem; display: flex; align-items: flex-start; gap: 1rem; }
-  .erreur-item .ei-icon { font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
-  .erreur-item p { font-size: 0.92rem; color: var(--gris); line-height: 1.7; }
-  .erreur-item p strong { color: var(--texte); font-weight: 500; }
-  .questions { width: 100%; padding: 56px 8%; background: var(--blanc); }
-  .questions-inner { max-width: 1100px; margin: 0 auto; }
-  .questions-intro { max-width: 680px; margin-bottom: 3rem; }
-  .questions-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px; background: var(--gris-clair); }
-  .question-card { background: var(--blanc-pur); padding: 2rem; display: flex; flex-direction: column; gap: 0.8rem; transition: background 0.2s; }
-  .question-card:hover { background: #fdfcf8; }
-  .question-vs { display: flex; align-items: center; gap: 0.6rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
-  .question-vs span { flex: 1; font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: var(--marine); text-transform: none; letter-spacing: 0; }
-  .question-vs .ou { font-family: 'Outfit', sans-serif; font-size: 0.7rem; color: var(--gris); background: var(--gris-clair); padding: 2px 8px; border-radius: 100px; font-weight: 400; text-transform: lowercase; letter-spacing: 0; flex: 0; }
-  .methode { width: 100%; padding: 56px 8%; background: var(--marine); }
-  .methode-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-  .methode h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 1rem; }
+  .hero p { font-size: 1rem; color: var(--gris); max-width: 580px; line-height: 1.85; opacity: 0; animation: fadeUp 0.5s 0.4s forwards; }
+  .questions { padding: 56px 8%; width: 100%; }
+  .qs-header { margin-bottom: 3rem; }
+  .qs-eyebrow { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+  .qs-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+  .qs-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; color: var(--marine); line-height: 1.15; }
+  .qs-header h2 em { font-style: italic; color: var(--accent); }
+  .qs-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--gris-clair); overflow: hidden; }
+  .q { display: grid; grid-template-columns: 48px 1fr; background: var(--blanc-pur); border-bottom: 1px solid var(--gris-clair); transition: background 0.25s; }
+  .q:last-child { border-bottom: none; }
+  .q:hover { background: #fdfcf8; }
+  .q-num { background: var(--marine); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: var(--accent); padding: 1.5rem 0; }
+  .q-content { padding: 1.5rem 1.8rem; }
+  .q-content strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: var(--marine); margin-bottom: 0.3rem; }
+  .q-content p { font-size: 0.88rem; color: var(--gris); line-height: 1.7; }
+  .methode { background: var(--marine); padding: 56px 8%; width: 100%; }
+  .methode-inner { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; }
+  .methode h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 1.5rem; }
   .methode h2 em { font-style: italic; color: var(--accent); }
-  .methode p { font-size: 0.97rem; color: rgba(255,255,255,0.6); line-height: 1.85; margin-bottom: 0.8rem; }
-  .methode-badge { display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(200,135,58,0.15); border: 1px solid rgba(200,135,58,0.3); color: var(--accent); font-size: 0.82rem; font-weight: 500; padding: 0.6rem 1.2rem; border-radius: 100px; margin-top: 0.4rem; }
-  .methode-detail { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 2px; padding: 2.4rem; }
-  .methode-detail h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 1.4rem; }
-  .methode-steps { display: flex; flex-direction: column; gap: 1.2rem; }
-  .mstep { display: flex; gap: 1rem; align-items: flex-start; }
-  .mstep-num { width: 28px; height: 28px; background: var(--accent); color: var(--marine); font-size: 0.78rem; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-  .mstep p { font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.6; margin: 0; }
-  .mstep p strong { color: #fff; font-weight: 500; }
-  .cta { width: 100%; padding: 56px 8%; background: var(--blanc-pur); border-top: 1px solid var(--gris-clair); text-align: center; }
-  .cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--marine); margin-bottom: 0.8rem; }
-  .cta h2 em { font-style: italic; color: var(--accent); }
-  .cta p { font-size: 0.97rem; color: var(--gris); margin-bottom: 2.4rem; }
-  .cta-contacts { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
-  .cta-btn { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 1rem 2.2rem; transition: all 0.25s; }
-  .cta-btn.primary { background: var(--marine); color: #fff; }
-  .cta-btn.primary:hover { background: var(--marine-clair); }
-  .cta-btn.secondary { border: 1px solid var(--marine); color: var(--marine); }
-  .cta-btn.secondary:hover { background: var(--marine); color: #fff; }
-  @media (max-width: 860px) { .erreur-inner { grid-template-columns: 1fr; gap: 2rem; } .methode-inner { grid-template-columns: 1fr; gap: 2rem; } }
+  .methode p { font-size: 0.97rem; color: rgba(255,255,255,0.6); line-height: 1.85; margin-bottom: 1rem; }
+  .methode p strong { color: rgba(255,255,255,0.9); font-weight: 500; }
+  .methode-cta { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); padding: 2.4rem; }
+  .methode-cta .mc-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: block; }
+  .methode-cta h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 1.2rem; }
+  .methode-cta p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 1.5rem; }
+  .mc-contacts { display: flex; flex-direction: column; gap: 0.6rem; }
+  .mc-btn { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 0.9rem 1.6rem; transition: all 0.25s; }
+  .mc-btn.primary { background: var(--accent); color: #fff; }
+  .mc-btn.primary:hover { background: #b5762f; }
+  .mc-btn.secondary { color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.15); }
+  .mc-btn.secondary:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+  @media (max-width: 860px) { .methode-inner { grid-template-columns: 1fr; gap: 2.5rem; } }
 </style>
 </head>
 <body>
 <section class="hero">
   <div class="hero-eyebrow">Vous voulez créer</div>
-  <h1>Avant de choisir une enseigne,<br><em>répondez aux bonnes questions.</em></h1>
-  <p>Entreprendre exige de l'envie — mais aussi de la lucidité. Se lancer sur une plaquette commerciale ou une intuition est une erreur classique. Un regard extérieur, non affectif, change tout.</p>
-</section>
-<section class="erreur">
-  <div class="erreur-inner">
-    <div>
-      <div class="section-eyebrow">Le piège le plus fréquent</div>
-      <h2 class="section-title">Se lancer vite<br>est séduisant.<br><em>Et risqué.</em></h2>
-      <div class="section-intro">
-        <p>Entreprendre exige envie mais aussi lucidité et une compréhension non orientée du modèle économique.</p>
-        <p>Avant de choisir une enseigne ou un secteur, il faut répondre à des questions essentielles — avec un regard extérieur et non affectif.</p>
-      </div>
-    </div>
-    <div class="erreurs-liste">
-      <div class="erreur-item"><span class="ei-icon">⚠️</span><p>Se lancer <strong>sur la base d'une plaquette commerciale</strong> sans comprendre le modèle économique réel.</p></div>
-      <div class="erreur-item"><span class="ei-icon">⚠️</span><p>Suivre <strong>une envie instinctive</strong> sans l'avoir challengée sous plusieurs angles.</p></div>
-      <div class="erreur-item"><span class="ei-icon">⚠️</span><p>Écouter <strong>le conseil bienveillant mais peu éclairé</strong> d'un proche qui veut vous voir réussir.</p></div>
-      <div class="erreur-item"><span class="ei-icon">⚠️</span><p>Choisir une enseigne <strong>sans avoir défini son propre profil</strong> d'entrepreneur au préalable.</p></div>
-    </div>
-  </div>
+  <h1>7 questions à vous poser<br><em>avant de choisir une enseigne.</em></h1>
+  <p>La majorité des erreurs en franchise viennent d'un mauvais alignement entre le projet de vie et le concept choisi. Pas d'un mauvais concept.</p>
 </section>
 <section class="questions">
-  <div class="questions-inner">
-    <div class="questions-intro">
-      <div class="section-eyebrow">Les vraies questions</div>
-      <h2 class="section-title">Quel entrepreneur<br><em>êtes-vous vraiment ?</em></h2>
-      <p style="font-size:0.97rem;color:var(--gris);line-height:1.85;">Avant de choisir un secteur ou une enseigne, il faut se positionner sur ces axes fondamentaux. Chaque réponse oriente radicalement le choix du bon modèle.</p>
-    </div>
-    <div class="questions-grid">
-      <div class="question-card"><div class="question-vs"><span>Particuliers</span><span class="ou">ou</span><span>Professionnels ?</span></div></div>
-      <div class="question-card"><div class="question-vs"><span>Commerçant</span><span class="ou">ou</span><span>Commercial ?</span></div></div>
-      <div class="question-card"><div class="question-vs"><span>Manager</span><span class="ou">ou</span><span>Gestionnaire ?</span></div></div>
-      <div class="question-card"><div class="question-vs"><span>Home office</span><span class="ou">ou</span><span>Point de vente ?</span></div></div>
-      <div class="question-card"><div class="question-vs"><span>Seul</span><span class="ou">ou</span><span>Petite ou grosse équipe ?</span></div></div>
-      <div class="question-card"><div class="question-vs"><span>Travail le WE</span><span class="ou">ou</span><span>Liberté complète ?</span></div></div>
-      <div class="question-card"><div class="question-vs"><span>Plaisir du métier</span><span class="ou">ou</span><span>Rentabilité avant tout ?</span></div></div>
-      <div class="question-card" style="background:var(--marine);"><p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:rgba(255,255,255,0.75);line-height:1.6;">Chaque réponse oriente radicalement le bon modèle. C'est ce qu'on explore ensemble en 30 minutes.</p></div>
-    </div>
+  <div class="qs-header">
+    <div class="qs-eyebrow">Les bonnes questions d'abord</div>
+    <h2>Avant le choix de l'enseigne,<br><em>le choix du projet.</em></h2>
+  </div>
+  <div class="qs-grid">
+    <div class="q"><div class="q-num">1</div><div class="q-content"><strong>Pourquoi maintenant ?</strong><p>L'élément déclencheur compte autant que le projet. Un licenciement, une envie de changement ou une opportunité financière ne donnent pas la même solidité au projet.</p></div></div>
+    <div class="q"><div class="q-num">2</div><div class="q-content"><strong>Quelle est votre vraie contrainte de temps ?</strong><p>Franchise de service, commerce de flux, franchise à domicile — les modèles n'ont pas les mêmes exigences en présence physique. Votre disponibilité réelle oriente déjà le choix.</p></div></div>
+    <div class="q"><div class="q-num">3</div><div class="q-content"><strong>Vous voulez travailler seul, avec une équipe, ou sans contact client ?</strong><p>Ce n'est pas une question de confort — c'est un filtre majeur. Certains modèles nécessitent du management, d'autres du commerce pur, d'autres encore une expertise technique.</p></div></div>
+    <div class="q"><div class="q-num">4</div><div class="q-content"><strong>Quel est votre apport réel disponible ?</strong><p>Le chiffre annoncé sur la plaquette ne reflète pas toujours l'investissement total. Fonds de roulement, aménagement, dépôt de garantie — le vrai budget est souvent 30 à 50 % plus élevé.</p></div></div>
+    <div class="q"><div class="q-num">5</div><div class="q-content"><strong>Avez-vous déjà rencontré des franchisés (sans le commercial de l'enseigne) ?</strong><p>Le seul moyen d'évaluer réellement un réseau. Pas les témoignages sur le site — une vraie conversation avec des gens qui ont signé.</p></div></div>
+    <div class="q"><div class="q-num">6</div><div class="q-content"><strong>Avez-vous lu le DIP et le contrat complétement ?</strong><p>Moins de 20 % des candidats franchisés lisent le Document d'Information Précontractuel en entier. C'est pourtant la base légale de tout ce qui suivra.</p></div></div>
+    <div class="q"><div class="q-num">7</div><div class="q-content"><strong>Avez-vous un plan B si ça ne marche pas ?</strong><p>Ce n'est pas du pessimisme — c'est de la lucidité. Un projet solide intègre un scénario de sortie. Ça rassure aussi les banques.</p></div></div>
   </div>
 </section>
 <section class="methode">
   <div class="methode-inner">
     <div>
-      <div class="section-eyebrow" style="color:var(--accent);">La méthode</div>
-      <h2>30 minutes.<br><em>Gratuites.</em><br>Structurées.</h2>
-      <p>Une discussion articulée autour de 10 questions pour envisager votre projet sous de nouveaux angles — ou entrevoir d'autres idées d'entrepreneuriat que vous n'aviez pas envisagées.</p>
-      <p>Ce premier échange est financé par les enseignes que je représente. Vous n'avez rien à payer, aucun engagement.</p>
-      <div class="methode-badge">❆ &nbsp; Financé par les enseignes partenaires</div>
+      <h2>30 minutes pour <em>tout challenger.</em></h2>
+      <p>Je reçois en entretien gratuit tout porteur de projet sérieux. Pas pour vendre une enseigne — pour tester la solidité du projet et orienter vers les bons choix.</p>
+      <p><strong>Je travaille avec une dizaine d'enseignes</strong> dans des secteurs variés. Si votre profil correspond, je vous les présenterai. Sinon, je vous dirai pourquoi.</p>
+      <p>Mon intérêt : accompagner des projets qui tiennent. Pas des signataires qui revendent dans 18 mois.</p>
     </div>
-    <div class="methode-detail">
-      <h3>Ce qu'on fait ensemble</h3>
-      <div class="methode-steps">
-        <div class="mstep"><div class="mstep-num">1</div><p><strong>On challenge votre envie</strong> — pas pour décourager, mais pour la solidifier ou la recadrer.</p></div>
-        <div class="mstep"><div class="mstep-num">2</div><p><strong>On définit votre profil réel</strong> d'entrepreneur selon les 7 axes fondamentaux.</p></div>
-        <div class="mstep"><div class="mstep-num">3</div><p><strong>On explore des pistes</strong> que vous n'aviez peut-être pas encore envisagées.</p></div>
-        <div class="mstep"><div class="mstep-num">4</div><p>Si une enseigne correspond, <strong>je vous la présente sans pression</strong> — je suis rémunéré au succès, pas à la signature.</p></div>
+    <div class="methode-cta">
+      <span class="mc-label">Météo Job</span>
+      <h3>L'entretien de 30 min qui change tout.</h3>
+      <p>Un cadre structuré, des questions directes, aucune pression commerciale. On repart avec une vision claire — ou on décide ensemble que ce n'est pas le bon moment.</p>
+      <div class="mc-contacts">
+        <a href="tel:0610703090" target="_top" class="mc-btn primary">📞 06 10 70 30 90</a>
+        <a href="mailto:thierry@thierrybismuth.com" target="_top" class="mc-btn secondary">✉ thierry@thierrybismuth.com</a>
       </div>
     </div>
   </div>
 </section>
-<section class="cta">
-  <h2>Challengez votre projet.<br><em>30 minutes suffisent.</em></h2>
-  <p>Appelez-moi ou envoyez un message — je vous rappelle sous 24h pour fixer un premier échange.</p>
-  <div class="cta-contacts">
-    <a href="tel:0610703090" target="_top" class="cta-btn primary">📞 06 10 70 30 90</a>
-    <a href="mailto:bismuththierry@gmail.com" target="_top" class="cta-btn secondary">✉ bismuththierry@gmail.com</a>
-  </div>
-</section>
+
+<script>
+function sendHeight(){var h=document.documentElement.scrollHeight||document.body.scrollHeight;window.parent.postMessage({iframeHeight:h},"*");}
+window.addEventListener("load",sendHeight);
+window.addEventListener("resize",sendHeight);
+setTimeout(sendHeight,600);
+setTimeout(sendHeight,1200);
+</script>
 </body>
 </html>
