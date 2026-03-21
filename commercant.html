@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vous êtes commerçant | Thierry Bismuth</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --blanc: #f7f5f0; --blanc-pur: #ffffff; --marine: #1a2e44; --marine-clair: #2a4a6b; --accent: #c8873a; --gris: #6b7280; --gris-clair: #e8e4dc; --texte: #1c1c1c; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--blanc); color: var(--texte); font-family: 'Outfit', sans-serif; font-weight: 300; line-height: 1.7; width: 100%; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero { background: var(--marine); padding: 56px 8% 64px; width: 100%; position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(200,135,58,0.1) 0%, transparent 70%); top: -80px; right: -80px; pointer-events: none; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.8rem; opacity: 0; animation: fadeUp 0.5s 0.1s forwards; }
+  .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: block; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; color: #fff; line-height: 1.08; margin-bottom: 1.4rem; max-width: 760px; opacity: 0; animation: fadeUp 0.5s 0.2s forwards; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero p { font-size: 1rem; color: rgba(255,255,255,0.6); max-width: 600px; line-height: 1.85; opacity: 0; animation: fadeUp 0.5s 0.3s forwards; }
+  .section-eyebrow { display: flex; align-items: center; gap: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+  .section-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: block; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--marine); line-height: 1.15; margin-bottom: 1rem; }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .atouts { width: 100%; padding: 56px 8%; background: var(--blanc-pur); border-bottom: 1px solid var(--gris-clair); }
+  .atouts-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .atouts p { font-size: 0.97rem; color: var(--gris); line-height: 1.85; margin-bottom: 0.9rem; }
+  .atouts-cards { display: flex; flex-direction: column; gap: 2px; background: var(--gris-clair); }
+  .atout-item { background: var(--blanc); padding: 1.4rem 1.8rem; display: flex; align-items: flex-start; gap: 1rem; border-left: 3px solid transparent; transition: border-color 0.25s, background 0.25s; }
+  .atout-item:hover { border-left-color: var(--accent); background: var(--blanc-pur); }
+  .atout-item .ai-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+  .atout-item p { font-size: 0.92rem; color: var(--gris); line-height: 1.7; margin: 0; }
+  .atout-item p strong { color: var(--texte); font-weight: 500; }
+  .danger { width: 100%; padding: 56px 8%; background: var(--marine); }
+  .danger-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .danger h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 1rem; }
+  .danger h2 em { font-style: italic; color: var(--accent); }
+  .danger p { font-size: 0.97rem; color: rgba(255,255,255,0.6); line-height: 1.85; margin-bottom: 0.9rem; }
+  .danger-quote { background: rgba(200,135,58,0.12); border: 1px solid rgba(200,135,58,0.25); border-radius: 2px; padding: 2.4rem 2.8rem; position: relative; }
+  .danger-quote::before { content: '\00AB'; font-family: 'Cormorant Garamond', serif; font-size: 6rem; color: var(--accent); opacity: 0.25; position: absolute; top: -1rem; left: 1.2rem; line-height: 1; }
+  .danger-quote p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: #fff; line-height: 1.6; position: relative; margin: 0; }
+  .danger-quote .dq-note { font-family: 'Outfit', sans-serif; font-style: normal; font-size: 0.85rem; color: rgba(255,255,255,0.45); margin-top: 1.2rem; line-height: 1.6; display: block; }
+  .options { width: 100%; padding: 56px 8%; background: var(--blanc); }
+  .options-inner { max-width: 1100px; margin: 0 auto; }
+  .options-intro { max-width: 620px; margin-bottom: 3rem; }
+  .options-intro p { font-size: 0.97rem; color: var(--gris); line-height: 1.85; }
+  .options-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--gris-clair); }
+  .option-card { background: var(--blanc-pur); padding: 2.4rem 2rem; display: flex; flex-direction: column; gap: 0.8rem; border-top: 3px solid transparent; transition: border-color 0.3s, background 0.3s; }
+  .option-card:hover { border-top-color: var(--accent); background: #fdfcf8; }
+  .option-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700; color: var(--gris-clair); line-height: 1; }
+  .option-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; color: var(--marine); line-height: 1.2; }
+  .option-card p { font-size: 0.9rem; color: var(--gris); line-height: 1.75; }
+  .processus { width: 100%; padding: 56px 8%; background: var(--blanc-pur); border-top: 1px solid var(--gris-clair); }
+  .processus-inner { max-width: 1100px; margin: 0 auto; }
+  .processus-intro { max-width: 620px; margin-bottom: 3rem; }
+  .processus-intro p { font-size: 0.97rem; color: var(--gris); line-height: 1.85; }
+  .steps { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--gris-clair); overflow: hidden; }
+  .step { display: grid; grid-template-columns: 72px 1fr; border-bottom: 1px solid var(--gris-clair); transition: background 0.2s; }
+  .step:last-child { border-bottom: none; }
+  .step:hover { background: #fdfcf8; }
+  .step-num { background: var(--marine); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+  .step-content { padding: 1.6rem 2rem; }
+  .step-content h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: var(--marine); margin-bottom: 0.3rem; }
+  .step-content p { font-size: 0.9rem; color: var(--gris); line-height: 1.7; }
+  .cta { width: 100%; padding: 56px 8%; background: var(--blanc); border-top: 1px solid var(--gris-clair); text-align: center; }
+  .cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--marine); margin-bottom: 0.8rem; }
+  .cta h2 em { font-style: italic; color: var(--accent); }
+  .cta p { font-size: 0.97rem; color: var(--gris); margin-bottom: 2.4rem; }
+  .cta-contacts { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 1rem 2.2rem; transition: all 0.25s; }
+  .cta-btn.primary { background: var(--marine); color: #fff; }
+  .cta-btn.primary:hover { background: var(--marine-clair); }
+  .cta-btn.secondary { border: 1px solid var(--marine); color: var(--marine); }
+  .cta-btn.secondary:hover { background: var(--marine); color: #fff; }
+  @media (max-width: 860px) { .atouts-inner { grid-template-columns: 1fr; gap: 2rem; } .danger-inner { grid-template-columns: 1fr; gap: 2rem; } .options-grille { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<section class="hero">
+  <div class="hero-eyebrow">Vous êtes commerçant</div>
+  <h1>Vous avez tout pour réussir<br>un pivot.<br><em>Mais la fenêtre se referme.</em></h1>
+  <p>Un emplacement. Une clientèle. Une notoriété locale. Changer d'activité n'est pas un échec — c'est une décision stratégique. Le vrai danger n'est pas de pivoter. Le vrai danger est d'attendre.</p>
+</section>
+<section class="atouts">
+  <div class="atouts-inner">
+    <div>
+      <div class="section-eyebrow">Ce que vous avez déjà</div>
+      <h2 class="section-title">Vous partez avec<br><em>une longueur d'avance.</em></h2>
+      <p>Contrairement à un créateur qui repart de zéro, vous avez déjà les actifs les plus difficiles à construire. Il s'agit de les redéployer intelligemment — pas de tout recommencer.</p>
+      <p>Tant que l'envie, la trésorerie et la clientèle sont encore là, il est possible de transformer plutôt que de subir.</p>
+    </div>
+    <div class="atouts-cards">
+      <div class="atout-item"><span class="ai-icon">📍</span><p><strong>Un emplacement</strong> — souvent le critère numéro un pour toute nouvelle enseigne cherchant à s'installer.</p></div>
+      <div class="atout-item"><span class="ai-icon">👥</span><p><strong>Une clientèle existante</strong> — qui vous connaît, qui passe devant chez vous, qui peut vous suivre.</p></div>
+      <div class="atout-item"><span class="ai-icon">🏪</span><p><strong>Une notoriété locale</strong> — une réputation dans votre ville que vous avez mise des années à construire.</p></div>
+      <div class="atout-item"><span class="ai-icon">⚙️</span><p><strong>Une expérience du commerce</strong> — vous savez gérer une boutique, des fournisseurs, des clients difficiles.</p></div>
+    </div>
+  </div>
+</section>
+<section class="danger">
+  <div class="danger-inner">
+    <div>
+      <div class="section-eyebrow" style="color:var(--accent);">Le vrai risque</div>
+      <h2>Le danger,<br>ce n'est pas<br><em>de pivoter.</em></h2>
+      <p>Le danger, c'est d'attendre que la situation se dégrade au point où le pivot n'est plus possible sereinement — quand la trésorerie est tendue, quand l'énergie est épuisée, quand les options se réduisent.</p>
+      <p>Un pivot réussi se décide dans un contexte encore favorable, pas dans l'urgence.</p>
+    </div>
+    <div class="danger-quote">
+      <p>Tant que l'envie, la trésorerie et la clientèle sont encore là, il est possible de transformer plutôt que de subir.</p>
+      <span class="dq-note">La question n'est pas "est-ce que mon activité peut encore durer ?" mais "est-ce que je veux encore la faire durer ?"</span>
+    </div>
+  </div>
+</section>
+<section class="options">
+  <div class="options-inner">
+    <div class="options-intro">
+      <div class="section-eyebrow">Ce qu'on peut faire ensemble</div>
+      <h2 class="section-title">Trois façons de<br><em>transformer votre situation.</em></h2>
+      <p>Selon votre profil, votre local, et vos envies — les options ne sont pas les mêmes. Voici les trois pistes les plus fréquentes.</p>
+    </div>
+    <div class="options-grille">
+      <div class="option-card"><div class="option-num">01</div><h3>Changer d'enseigne dans votre local</h3><p>Votre emplacement reste. Votre activité change. On trouve une enseigne compatible avec votre local, votre ville et votre profil.</p></div>
+      <div class="option-card"><div class="option-num">02</div><h3>Diversifier avec une seconde activité</h3><p>Vous gardez votre commerce principal et ajoutez une offre complémentaire en franchise — pour sécuriser vos revenus sans tout remettre en cause.</p></div>
+      <div class="option-card"><div class="option-num">03</div><h3>Céder et reprendre autre chose</h3><p>Vendre au bon moment pour réinvestir dans un nouveau projet avec les moyens et l'énergie qu'il faut.</p></div>
+    </div>
+  </div>
+</section>
+<section class="processus">
+  <div class="processus-inner">
+    <div class="processus-intro">
+      <div class="section-eyebrow">Comment ça se passe</div>
+      <h2 class="section-title">Un premier échange.<br><em>Sans engagement.</em></h2>
+      <p>30 minutes pour faire le point sur votre situation, vos atouts et les options qui s'offrent à vous. Financé par les enseignes partenaires — vous ne payez rien.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><h3>On fait le point sur votre situation</h3><p>Emplacement, activité actuelle, trésorerie, envies — un diagnostic honnête sans jugement.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><h3>On identifie vos options réelles</h3><p>Selon votre profil et votre local, on explore les pistes concrètes et réalistes — pas les idées génériques.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><h3>Si une enseigne correspond, je vous la présente</h3><p>Sans pression, sans engagement. Je suis rémunéré au succès — mon intérêt est que ça marche pour vous.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><h3>Vous décidez à votre rythme</h3><p>Je vous accompagne dans les étapes suivantes si vous souhaitez aller plus loin — à votre rythme, pas au mien.</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="cta">
+  <h2>Votre situation mérite<br><em>un regard extérieur.</em></h2>
+  <p>30 minutes, gratuites, sans engagement. On fait le point ensemble.</p>
+  <div class="cta-contacts">
+    <a href="tel:0610703090" target="_top" class="cta-btn primary">📞 06 10 70 30 90</a>
+    <a href="mailto:bismuththierry@gmail.com" target="_top" class="cta-btn secondary">✉ bismuththierry@gmail.com</a>
+  </div>
+</section>
+</body>
+</html>
