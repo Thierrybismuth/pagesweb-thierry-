@@ -77,6 +77,14 @@
     </a>
   </div>
 </div>
+
+<script>
+function sendHeight(){var h=document.documentElement.scrollHeight||document.body.scrollHeight;window.parent.postMessage({iframeHeight:h},"*");}
+window.addEventListener("load",sendHeight);
+window.addEventListener("resize",sendHeight);
+setTimeout(sendHeight,600);
+setTimeout(sendHeight,1200);
+</script>
 </body>
 </html>
 <style>html,body{height:auto;overflow:hidden;}</style>
