@@ -142,7 +142,7 @@ body { background: #fff; color: #111; font-family: 'Plus Jakarta Sans', sans-ser
     <div class="profil-text">
       <div class="label">Vous vous reconnaissez ?</div>
       <h2 class="big-h">Le profil<br><em>multipotentiel.</em></h2>
-      <p>Switcher, zèbre, HPI — peu importe le nom. Ce qui compte : vous vous ennuyez vite, vous voyez des opportunités partout, et l'idée de rester dans une seule enseigne des années vous paralyse.</p>
+      <p>Switcher, zèbre, HPI — peu importe le nom. Ce qui compte : vous vous ennuyez vite, vous voyez des opportunités partout, et l'idée de rester dans une seule enseigne des années vous paralyse.</p>
       <p>Ce n'est pas un défaut. C'est un profil. Il existe un modèle qui l'exploite plutôt que de le contraindre.</p>
     </div>
     <div class="signes">
@@ -160,8 +160,8 @@ body { background: #fff; color: #111; font-family: 'Plus Jakarta Sans', sans-ser
     <div class="pb-text">
       <div class="label">Le problème</div>
       <h2 class="big-h">La franchise classique<br><em>n'est pas faite pour vous.</em></h2>
-      <p>La franchise standard impose un cadre : une enseigne, un territoire, un concept, un contrat de 4 ou 7 ans. C'est exactement ce qui bloque les profils multipotentiels.</p>
-      <p>Résultat : soit vous n'entreprendrez jamais, soit vous forcez un modèle qui vous rend malheureux au bout de 18 mois.</p>
+      <p>La franchise standard impose un cadre : une enseigne, un territoire, un concept, un contrat de 4 ou 7 ans. C'est exactement ce qui bloque les profils multipotentiels.</p>
+      <p>Résultat : soit vous n'entreprendrez jamais, soit vous forcez un modèle qui vous rend malheureux au bout de 18 mois.</p>
     </div>
     <div class="pb-items">
       <div class="pb-row"><span class="arrow">→</span><p><strong>Une seule enseigne</strong> — vous vous ennuyez au bout de 2 ans.</p></div>
@@ -192,14 +192,14 @@ body { background: #fff; color: #111; font-family: 'Plus Jakarta Sans', sans-ser
   <div class="etapes">
     <div class="etape"><span class="etape-n">01</span><h3>Vous démarrez avec 2 enseignes</h3><p>Deux concepts qui correspondent à votre territoire et votre profil. Pas plus, pour commencer.</p></div>
     <div class="etape"><span class="etape-n">02</span><h3>Un seul contrat, plusieurs activités</h3><p>Je négocie avec les franchiseurs. Vous vous concentrez sur le terrain.</p></div>
-    <div class="etape"><span class="etape-n">03</span><h3>Vous scalez : 2, puis 4, puis plus</h3><p>Vous ajoutez des enseignes à votre rythme. Le réseau grandit avec vous.</p></div>
+    <div class="etape"><span class="etape-n">03</span><h3>Vous scalez : 2, puis 4, puis plus</h3><p>Vous ajoutez des enseignes à votre rythme. Le réseau grandit avec vous.</p></div>
     <div class="etape"><span class="etape-n">04</span><h3>Le réseau est votre franchise</h3><p>Pas le franchisé d'une enseigne — membre d'un réseau dont la somme est votre vraie franchise.</p></div>
   </div>
 </section>
 <section class="sec sec-alt">
   <div class="comp-grid">
     <div class="comp-text">
-      <div class="label">Vous êtes déjà entrepreneur ?</div>
+      <div class="label">Vous êtes déjà entrepreneur ?</div>
       <h2 class="big-h">Gardez votre activité.<br><em>Ajoutez la nôtre.</em></h2>
       <p>Vous êtes déjà à votre compte — dans l'immobilier, le courtage, le recrutement, le service ou le conseil. Vous n'avez pas forcément envie de tout plaquer.</p>
       <p><strong>Le réseau Multipotentiel peut venir compléter ce que vous faites déjà.</strong> Vous conservez votre activité historique et vous y ajoutez une ou plusieurs enseignes — pour équilibrer les creux, diversifier vos revenus, ou construire quelque chose de plus grand.</p>
@@ -226,8 +226,8 @@ body { background: #fff; color: #111; font-family: 'Plus Jakarta Sans', sans-ser
 </section>
 <section class="cta-sec">
   <div class="cta-left">
-    <div class="label">Prêt à démarrer ?</div>
-    <h2 class="big-h">Vous êtes<br><em>multipotentiel ?</em></h2>
+    <div class="label">Prêt à démarrer ?</div>
+    <h2 class="big-h">Vous êtes<br><em>multipotentiel ?</em></h2>
     <p>30 minutes pour voir si le réseau correspond à votre profil — que vous partiez de zéro ou que vous ayez déjà une activité en cours.</p>
   </div>
   <div class="cta-right">
@@ -236,5 +236,13 @@ body { background: #fff; color: #111; font-family: 'Plus Jakarta Sans', sans-ser
     <p class="cta-note">Entretien de 30 min — sans engagement.<br>Je réponds personnellement.</p>
   </div>
 </section>
+
+<script>
+function sendHeight(){var h=document.documentElement.scrollHeight||document.body.scrollHeight;window.parent.postMessage({iframeHeight:h},"*");}
+window.addEventListener("load",sendHeight);
+window.addEventListener("resize",sendHeight);
+setTimeout(sendHeight,600);
+setTimeout(sendHeight,1200);
+</script>
 </body>
 </html>
