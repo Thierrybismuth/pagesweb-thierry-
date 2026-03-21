@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Je recrute vos franchisés | Thierry Bismuth</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --blanc: #f7f5f0; --blanc-pur: #ffffff; --marine: #1a2e44; --marine-clair: #2a4a6b; --accent: #c8873a; --gris: #6b7280; --gris-clair: #e8e4dc; --texte: #1c1c1c; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--blanc); color: var(--texte); font-family: 'Outfit', sans-serif; font-weight: 300; line-height: 1.7; width: 100%; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero { background: var(--marine); padding: 56px 8% 64px; width: 100%; position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(200,135,58,0.12) 0%, transparent 70%); top: -100px; right: -80px; pointer-events: none; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.5s 0.1s forwards; }
+  .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: block; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 700; color: #fff; line-height: 1.08; margin-bottom: 1.6rem; max-width: 780px; opacity: 0; animation: fadeUp 0.5s 0.2s forwards; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-intro { font-size: 1.05rem; color: rgba(255,255,255,0.65); max-width: 620px; line-height: 1.85; opacity: 0; animation: fadeUp 0.5s 0.3s forwards; }
+  .probleme { background: var(--blanc-pur); padding: 56px 8%; width: 100%; border-bottom: 1px solid var(--gris-clair); }
+  .probleme-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto; }
+  .probleme h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--marine); line-height: 1.15; margin-bottom: 1.2rem; }
+  .probleme h2 em { font-style: italic; color: var(--accent); }
+  .probleme p { font-size: 0.97rem; color: var(--gris); line-height: 1.85; margin-bottom: 1rem; }
+  .quote-bloc { background: var(--marine); border-radius: 2px; padding: 2.4rem 2.8rem; position: relative; }
+  .quote-bloc::before { content: '\00AB'; font-family: 'Cormorant Garamond', serif; font-size: 6rem; color: var(--accent); opacity: 0.3; position: absolute; top: -1rem; left: 1.5rem; line-height: 1; }
+  .quote-bloc p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: #fff; line-height: 1.6; position: relative; }
+  .methodo { background: var(--blanc); padding: 56px 8%; width: 100%; }
+  .methodo-inner { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem; }
+  .section-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: block; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--marine); line-height: 1.15; margin-bottom: 0.8rem; }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .section-intro { font-size: 0.97rem; color: var(--gris); line-height: 1.85; margin-bottom: 3rem; max-width: 620px; }
+  .steps { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--gris-clair); border-radius: 2px; overflow: hidden; }
+  .step { display: grid; grid-template-columns: 80px 1fr; background: var(--blanc-pur); border-bottom: 1px solid var(--gris-clair); transition: background 0.25s; }
+  .step:last-child { border-bottom: none; }
+  .step:hover { background: #fdfcf8; }
+  .step-num { background: var(--marine); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--accent); padding: 1.8rem 0; }
+  .step-content { padding: 1.8rem 2rem; }
+  .step-content h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 700; color: var(--marine); margin-bottom: 0.4rem; }
+  .step-content p { font-size: 0.9rem; color: var(--gris); line-height: 1.7; }
+  .controle { background: var(--marine); padding: 56px 8%; width: 100%; }
+  .controle-inner { max-width: 1100px; margin: 0 auto; }
+  .controle-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 0.6rem; }
+  .controle-title em { font-style: italic; color: var(--accent); }
+  .controle-sub { font-size: 0.97rem; color: rgba(255,255,255,0.55); margin-bottom: 2.5rem; max-width: 560px; }
+  .controle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(255,255,255,0.08); }
+  .controle-card { background: rgba(255,255,255,0.04); padding: 2rem 1.8rem; border-top: 2px solid transparent; transition: border-color 0.3s, background 0.3s; }
+  .controle-card:hover { border-color: var(--accent); background: rgba(255,255,255,0.07); }
+  .controle-card .cc-icon { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
+  .controle-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+  .controle-card p { font-size: 0.87rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+  .tarif { background: var(--blanc-pur); padding: 56px 8%; width: 100%; }
+  .tarif-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .tarif-fixe { background: var(--marine); border-radius: 2px; padding: 2.8rem; }
+  .tarif-fixe .tf-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: block; }
+  .tarif-fixe .tf-prix { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 0.3rem; }
+  .tarif-fixe .tf-periode { font-size: 0.9rem; color: rgba(255,255,255,0.5); margin-bottom: 1.8rem; }
+  .tarif-fixe .tf-detail { font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.8; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.4rem; }
+  .tarif-succes { padding: 0.2rem 0; }
+  .tarif-succes h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: var(--marine); margin-bottom: 1.2rem; }
+  .succes-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1.4rem 0; border-bottom: 1px solid var(--gris-clair); }
+  .succes-item:last-child { border-bottom: none; }
+  .succes-item .si-icon { width: 36px; height: 36px; background: var(--blanc); border: 1px solid var(--gris-clair); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; margin-top: 2px; }
+  .succes-item .si-text strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; color: var(--marine); margin-bottom: 0.2rem; }
+  .succes-item .si-text span { font-size: 0.87rem; color: var(--gris); line-height: 1.6; }
+  .cta { background: var(--blanc); padding: 56px 8%; width: 100%; border-top: 1px solid var(--gris-clair); text-align: center; }
+  .cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--marine); margin-bottom: 0.8rem; }
+  .cta h2 em { font-style: italic; color: var(--accent); }
+  .cta p { font-size: 0.97rem; color: var(--gris); margin-bottom: 2.4rem; }
+  .cta-contacts { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 1rem 2.2rem; transition: all 0.25s; }
+  .cta-btn.primary { background: var(--marine); color: #fff; }
+  .cta-btn.primary:hover { background: var(--marine-clair); }
+  .cta-btn.secondary { border: 1px solid var(--marine); color: var(--marine); }
+  .cta-btn.secondary:hover { background: var(--marine); color: #fff; }
+  @media (max-width: 860px) { .probleme-inner { grid-template-columns: 1fr; gap: 2rem; } .tarif-inner { grid-template-columns: 1fr; } .controle-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<section class="hero">
+  <div class="hero-eyebrow">Service 1 — Chasse de franchisés</div>
+  <h1>Vous ne pouvez pas<br>vous permettre d'<em>attendre.</em></h1>
+  <p class="hero-intro">Vous cherchez à développer votre enseigne ou céder un point de vente ? Une annonce et une veille générique ne suffisent pas quand on cherche un entrepreneur à un endroit précis dans un délai contraint. La chasse s'applique quand on ne peut pas se permettre de diffuser, attendre et espérer.</p>
+</section>
+<section class="probleme">
+  <div class="probleme-inner">
+    <div>
+      <h2>Trouver le bon candidat<br>au bon endroit —<br><em>c'est un métier.</em></h2>
+      <p>Une annonce sur un portail touche ceux qui cherchent. La chasse terrain touche ceux qui n'ont pas encore décidé — les commerçants qui pourraient se reconvertir, les entrepreneurs locaux qui cherchent un second souffle, les clients d'un expert-comptable qui se posent des questions.</p>
+      <p>C'est ce que je fais. Pas de la diffusion. De la chasse.</p>
+    </div>
+    <div class="quote-bloc">
+      <p>La chasse s'applique quand on ne peut pas se permettre de diffuser, attendre et espérer des retours.</p>
+    </div>
+  </div>
+</section>
+<section class="methodo">
+  <div class="methodo-inner">
+    <div class="section-eyebrow">La méthode</div>
+    <h2 class="section-title">Une méthodologie <em>structurée et suivie</em></h2>
+    <p class="section-intro">Chaque mission suit un processus en 6 étapes, reproductible ville par ville, avec des livrables concrets à chaque étape.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><h3>Rédaction de la notice d'information</h3><p>On rédige ensemble le document qui sera partagé avec les entrepreneurs rencontrés. Un support clair, adapté au profil des candidats terrain.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><h3>Déplacements mensuels : 2 à 4 villes</h3><p>Je me déplace physiquement sur le terrain — 25 à 40 déplacements par an pour vous représenter. Pas de délégation, pas de sous-traitance.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><h3>Prospection des commerces de centre-ville</h3><p>Je visite les commerçants pour leur proposer une reconversion de leur local et activité, ou une diversification avec votre enseigne.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><h3>Rencontres d'entrepreneurs locaux</h3><p>5 à 10 candidats entrepreneurs par ville, rencontrés en face-à-face pour présenter votre enseigne dans leur contexte local.</p></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-content"><h3>Réunion d'information chez un expert-comptable</h3><p>J'anime une réunion d'info locale chez un EC partenaire pour présenter votre enseigne à ses clients — les meilleurs candidats locaux.</p></div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-content"><h3>Envoi des notices & organisation des RDVs</h3><p>Les notices sont envoyées à tous les contacts intéressés. Les rendez-vous avec vous sont organisés et chaque dossier est suivi ensemble.</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="controle">
+  <div class="controle-inner">
+    <div class="section-eyebrow" style="color:var(--accent);">Transparence totale</div>
+    <h2 class="controle-title">Vous gardez <em>le contrôle.</em></h2>
+    <p class="controle-sub">Trois dispositifs pour suivre chaque action en temps réel et piloter ensemble.</p>
+    <div class="controle-grid">
+      <div class="controle-card"><span class="cc-icon">📞</span><h4>Point bimensuel</h4><p>Tous les 15 jours, un appel pour faire le bilan des échanges, ajuster les priorités et valider les dossiers en cours.</p></div>
+      <div class="controle-card"><span class="cc-icon">📊</span><h4>Tableau de suivi en temps réel</h4><p>Chaque appel, chaque contact, chaque statut — tracé dans un tableau partagé mis à jour en continu.</p></div>
+      <div class="controle-card"><span class="cc-icon">🗺️</span><h4>Villes prioritaires</h4><p>Vous m'indiquez vos zones prioritaires. Je concentre la chasse là où c'est stratégique pour vous.</p></div>
+    </div>
+  </div>
+</section>
+<section class="tarif">
+  <div class="tarif-inner">
+    <div class="tarif-fixe">
+      <span class="tf-label">Contribution aux frais de représentation</span>
+      <div class="tf-prix">2 000 €</div>
+      <div class="tf-periode">HT · Pour 12 mois</div>
+      <div class="tf-detail">Inclut les 25 à 40 déplacements annuels pour vous représenter sur le terrain, et l'organisation des réunions d'information locales chez les experts-comptables partenaires.</div>
+    </div>
+    <div class="tarif-succes">
+      <h3>Au succès</h3>
+      <div class="succes-item"><div class="si-icon">🤝</div><div class="si-text"><strong>25 % HT de la Redevance Initiale Forfaitaire</strong><span>En cas de création d'un nouveau point de vente franchisé.</span></div></div>
+      <div class="succes-item"><div class="si-icon">🏪</div><div class="si-text"><strong>7 % du prix de cession</strong><span>En cas de vente d'un point de vente existant.</span></div></div>
+      <p style="font-size:0.82rem;color:var(--gris);margin-top:1.2rem;line-height:1.6;">Un modèle simple : je m'engage sur la durée pour un coût fixe maîtrisé, et je suis aligné sur votre succès à chaque signature.</p>
+    </div>
+  </div>
+</section>
+<section class="cta">
+  <h2>Prêt à lancer <em>la chasse ?</em></h2>
+  <p>Dites-moi votre enseigne et vos zones prioritaires — je vous rappelle sous 24h.</p>
+  <div class="cta-contacts">
+    <a href="tel:0610703090" target="_top" class="cta-btn primary">📞 06 10 70 30 90</a>
+    <a href="mailto:bismuththierry@gmail.com" target="_top" class="cta-btn secondary">✉ bismuththierry@gmail.com</a>
+  </div>
+</section>
+</body>
+</html>
