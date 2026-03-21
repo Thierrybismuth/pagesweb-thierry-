@@ -4,238 +4,157 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Réseau Multipotentiel</title>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { background: #fff; color: #111; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.hero { min-height: 100vh; padding: 8vw 8% 6vw; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; border-bottom: 2px solid #111; }
-.hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: #c8873a; margin-bottom: 2.4rem; opacity: 0; animation: fadeUp 0.5s 0.1s forwards; }
-.hero-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: #c8873a; animation: blink 1.8s infinite; }
-.hero h1 { font-family: 'Unbounded', sans-serif; font-size: clamp(2.4rem, 5.5vw, 5.2rem); font-weight: 900; line-height: 1.0; letter-spacing: -0.03em; color: #111; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.5s 0.2s forwards; }
-.hero h1 .accent { color: #c8873a; }
-.hero h1 .outline { color: transparent; -webkit-text-stroke: 2px #111; }
-.hero-desc { font-size: 1rem; color: #555; line-height: 1.8; max-width: 420px; opacity: 0; animation: fadeUp 0.5s 0.35s forwards; padding-left: 1.2rem; border-left: 3px solid #c8873a; }
-.hero-right { opacity: 0; animation: fadeUp 0.5s 0.45s forwards; }
-.hero-number-block { font-family: 'Unbounded', sans-serif; font-size: clamp(6rem, 14vw, 13rem); font-weight: 900; color: transparent; -webkit-text-stroke: 1.5px #e8e8e8; line-height: 1; letter-spacing: -0.05em; text-align: right; user-select: none; margin-bottom: 1.5rem; }
-.hero-right-text { text-align: right; }
-.hero-right-text p { font-size: 0.85rem; color: #888; line-height: 1.7; }
-.hero-right-text strong { display: block; font-family: 'Unbounded', sans-serif; font-size: 0.68rem; font-weight: 700; color: #111; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
-.marquee-wrap { overflow: hidden; border-top: 1px solid #e8e8e8; border-bottom: 1px solid #e8e8e8; background: #f9f9f9; padding: 0.9rem 0; }
-.marquee-track { display: flex; white-space: nowrap; animation: marquee 18s linear infinite; }
-.marquee-item { display: inline-flex; align-items: center; gap: 1.2rem; padding: 0 2.4rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #999; }
-.marquee-sep { width: 4px; height: 4px; background: #c8873a; border-radius: 50%; flex-shrink: 0; }
-.sec { padding: 80px 8%; border-bottom: 1px solid #e8e8e8; }
-.sec-alt { background: #f9f9f9; }
-.label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: #c8873a; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
-.label::before { content: ''; width: 18px; height: 1px; background: #c8873a; display: block; }
-.big-h { font-family: 'Unbounded', sans-serif; font-size: clamp(1.8rem, 3.5vw, 3.2rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; color: #111; margin-bottom: 1.2rem; }
-.big-h em { font-style: italic; color: #c8873a; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300; font-size: 0.95em; }
-.profil-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
-.profil-text p { font-size: 0.97rem; color: #555; line-height: 1.85; margin-bottom: 0.9rem; }
-.signes { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #e8e8e8; }
-.signe-card { background: #fff; padding: 1.6rem; transition: background 0.2s; }
-.sec-alt .signe-card { background: #f9f9f9; }
-.signe-card:hover { background: #fffbf7; }
-.signe-card .num { font-family: 'Unbounded', sans-serif; font-size: 0.58rem; font-weight: 700; color: #ddd; letter-spacing: 0.1em; margin-bottom: 0.7rem; display: block; transition: color 0.2s; }
-.signe-card:hover .num { color: #c8873a; }
-.signe-card p { font-size: 0.88rem; color: #555; line-height: 1.65; }
-.signe-card p strong { color: #111; font-weight: 500; }
-.pb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-.pb-text p { font-size: 0.97rem; color: #555; line-height: 1.85; margin-bottom: 0.9rem; }
-.pb-items { display: flex; flex-direction: column; gap: 1px; background: #e8e8e8; }
-.pb-row { background: #f9f9f9; padding: 1.3rem 1.6rem; display: flex; align-items: center; gap: 1rem; transition: all 0.2s; cursor: default; }
-.pb-row:hover { background: #fff; transform: translateX(6px); }
-.pb-row .arrow { font-size: 0.85rem; color: #c8873a; flex-shrink: 0; transition: transform 0.2s; }
-.pb-row:hover .arrow { transform: translateX(3px); }
-.pb-row p { font-size: 0.9rem; color: #555; line-height: 1.55; }
-.pb-row p strong { color: #111; font-weight: 500; }
-.modele-top { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-bottom: 4rem; }
-.modele-text p { font-size: 0.97rem; color: #555; line-height: 1.85; margin-bottom: 0.9rem; }
-.modele-text p strong { color: #111; font-weight: 500; }
-.flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; gap: 1px; background: #e8e8e8; }
-.flow-cell { background: #fff; padding: 1.8rem 1.4rem; text-align: center; }
-.flow-cell.pivot { background: #111; }
-.flow-cell .fi { font-size: 1.3rem; margin-bottom: 0.6rem; display: block; }
-.flow-cell .ft { font-family: 'Unbounded', sans-serif; font-size: 0.65rem; font-weight: 700; color: #111; letter-spacing: 0.04em; margin-bottom: 0.3rem; display: block; }
-.flow-cell.pivot .ft { color: #c8873a; }
-.flow-cell .fd { font-size: 0.76rem; color: #888; line-height: 1.5; }
-.flow-cell.pivot .fd { color: rgba(255,255,255,0.5); }
-.flow-arrow { background: #fff; display: flex; align-items: center; justify-content: center; padding: 0 0.6rem; color: #c8873a; font-size: 1rem; }
-.etapes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #e8e8e8; }
-.etape { background: #fff; padding: 2.4rem 1.8rem; transition: background 0.2s; }
-.etape:hover { background: #fffbf7; }
-.etape-n { font-family: 'Unbounded', sans-serif; font-size: 2.8rem; font-weight: 900; color: transparent; -webkit-text-stroke: 1px #e0e0e0; line-height: 1; margin-bottom: 1rem; display: block; transition: -webkit-text-stroke-color 0.2s; }
-.etape:hover .etape-n { -webkit-text-stroke-color: rgba(200,135,58,0.3); }
-.etape h3 { font-family: 'Unbounded', sans-serif; font-size: 0.7rem; font-weight: 700; color: #111; margin-bottom: 0.7rem; letter-spacing: 0.02em; line-height: 1.4; }
-.etape p { font-size: 0.85rem; color: #666; line-height: 1.65; }
-.comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-.comp-text p { font-size: 0.97rem; color: #555; line-height: 1.85; margin-bottom: 0.9rem; }
-.comp-text p strong { color: #111; font-weight: 500; }
-.act-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #e8e8e8; }
-.act-card { background: #fff; padding: 1.6rem; transition: background 0.2s; }
-.act-card:hover { background: #fffbf7; }
-.act-icon { font-size: 1.2rem; margin-bottom: 0.7rem; display: block; }
-.act-card h4 { font-family: 'Unbounded', sans-serif; font-size: 0.62rem; font-weight: 700; color: #111; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
-.act-card p { font-size: 0.83rem; color: #666; line-height: 1.55; }
-.av-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #e8e8e8; margin-top: 3rem; }
-.av-card { background: #f9f9f9; padding: 2.4rem 2rem; position: relative; overflow: hidden; transition: background 0.2s; }
-.av-card::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 3px; background: #c8873a; transition: width 0.35s ease; }
-.av-card:hover { background: #fff; }
-.av-card:hover::before { width: 100%; }
-.av-card h3 { font-family: 'Unbounded', sans-serif; font-size: 0.7rem; font-weight: 700; color: #111; letter-spacing: 0.04em; margin-bottom: 0.7rem; line-height: 1.4; }
-.av-card p { font-size: 0.86rem; color: #666; line-height: 1.7; }
-.cta-sec { padding: 100px 8%; background: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-.cta-left p { font-size: 1rem; color: #555; line-height: 1.8; max-width: 440px; margin-top: 1rem; }
-.cta-right { display: flex; flex-direction: column; gap: 1rem; }
-.cta-btn { display: flex; align-items: center; gap: 1rem; padding: 1.4rem 2rem; text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; transition: all 0.2s; border: 1px solid #e0e0e0; color: #111; background: #fff; }
-.cta-btn:hover { border-color: #c8873a; background: #fffbf7; }
-.cta-btn.main { background: #111; color: #fff; border-color: #111; }
-.cta-btn.main:hover { background: #c8873a; border-color: #c8873a; }
-.cta-btn .btn-icon { font-size: 1.1rem; }
-.cta-btn .btn-label { flex: 1; }
-.cta-btn .btn-arrow { font-size: 0.8rem; opacity: 0.4; transition: opacity 0.2s, transform 0.2s; }
-.cta-btn:hover .btn-arrow { opacity: 1; transform: translateX(4px); }
-.cta-note { font-size: 0.78rem; color: #aaa; line-height: 1.6; padding-top: 0.5rem; }
-@media (max-width: 860px) { .hero { grid-template-columns: 1fr; min-height: auto; } .hero-right { display: none; } .profil-grid, .pb-grid, .modele-top, .comp-grid, .cta-sec { grid-template-columns: 1fr; gap: 2.5rem; } .signes { grid-template-columns: 1fr; } .etapes { grid-template-columns: 1fr 1fr; } .av-grid { grid-template-columns: 1fr 1fr; } .flow { grid-template-columns: 1fr; } .flow-arrow { transform: rotate(90deg); padding: 0.3rem; } .act-grid { grid-template-columns: 1fr; } }
-@media (max-width: 520px) { .etapes, .av-grid { grid-template-columns: 1fr; } }
+  :root { --blanc: #f7f5f0; --blanc-pur: #ffffff; --marine: #1a2e44; --marine-clair: #2a4a6b; --accent: #c8873a; --gris: #6b7280; --gris-clair: #e8e4dc; --texte: #1c1c1c; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--blanc); color: var(--texte); font-family: 'Outfit', sans-serif; font-weight: 300; line-height: 1.7; width: 100%; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero { background: var(--marine); padding: 56px 8% 64px; width: 100%; position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(200,135,58,0.1) 0%, transparent 70%); top: -80px; right: -80px; pointer-events: none; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.8rem; opacity: 0; animation: fadeUp 0.5s 0.1s forwards; }
+  .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: block; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; color: #fff; line-height: 1.08; margin-bottom: 1.4rem; max-width: 760px; opacity: 0; animation: fadeUp 0.5s 0.2s forwards; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero p { font-size: 1rem; color: rgba(255,255,255,0.6); max-width: 600px; line-height: 1.85; opacity: 0; animation: fadeUp 0.5s 0.3s forwards; }
+  .section-eyebrow { display: flex; align-items: center; gap: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+  .section-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: block; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--marine); line-height: 1.15; margin-bottom: 1rem; }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .profil { width: 100%; padding: 56px 8%; background: var(--blanc-pur); border-bottom: 1px solid var(--gris-clair); }
+  .profil-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .profil p { font-size: 0.97rem; color: var(--gris); line-height: 1.85; margin-bottom: 0.9rem; }
+  .profil-tests { display: flex; flex-direction: column; gap: 2px; background: var(--gris-clair); }
+  .profil-test { background: var(--blanc-pur); padding: 1.4rem 1.8rem; display: flex; align-items: flex-start; gap: 1rem; border-left: 3px solid transparent; transition: border-color 0.25s, background 0.25s; cursor: default; }
+  .profil-test:hover { border-left-color: var(--accent); background: var(--blanc); }
+  .pt-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+  .pt-content strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 700; color: var(--marine); margin-bottom: 0.2rem; }
+  .pt-content p { font-size: 0.88rem; color: var(--gris); line-height: 1.65; margin: 0; }
+  .modele { width: 100%; padding: 56px 8%; background: var(--marine); }
+  .modele-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .modele h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 1rem; }
+  .modele h2 em { font-style: italic; color: var(--accent); }
+  .modele p { font-size: 0.97rem; color: rgba(255,255,255,0.6); line-height: 1.85; margin-bottom: 0.9rem; }
+  .modele-schema { display: flex; flex-direction: column; gap: 2px; }
+  .ms-row { display: grid; grid-template-columns: 1fr; gap: 0; }
+  .ms-bloc { background: rgba(255,255,255,0.06); padding: 1.4rem 1.8rem; border-left: 3px solid transparent; transition: border-color 0.3s; }
+  .ms-bloc:hover { border-left-color: var(--accent); }
+  .ms-bloc .mb-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; display: block; }
+  .ms-bloc h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem; }
+  .ms-bloc p { font-size: 0.87rem; color: rgba(255,255,255,0.5); line-height: 1.65; margin: 0; }
+  .enseignes-section { width: 100%; padding: 56px 8%; background: var(--blanc); }
+  .enseignes-inner { max-width: 1100px; margin: 0 auto; }
+  .enseignes-intro { max-width: 620px; margin-bottom: 3rem; }
+  .enseignes-intro p { font-size: 0.97rem; color: var(--gris); line-height: 1.85; }
+  .enseignes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2px; background: var(--gris-clair); }
+  .enseigne-card { background: var(--blanc-pur); padding: 2rem 1.6rem; display: flex; flex-direction: column; gap: 0.6rem; border-top: 3px solid transparent; transition: border-color 0.3s, background 0.3s; }
+  .enseigne-card:hover { border-top-color: var(--accent); background: #fdfcf8; }
+  .ec-secteur { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+  .enseigne-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 700; color: var(--marine); line-height: 1.2; }
+  .enseigne-card p { font-size: 0.87rem; color: var(--gris); line-height: 1.65; }
+  .ec-apport { font-size: 0.8rem; color: var(--marine); font-weight: 500; border-top: 1px solid var(--gris-clair); padding-top: 0.6rem; margin-top: 0.2rem; }
+  .engagement { width: 100%; padding: 56px 8%; background: var(--blanc-pur); border-top: 1px solid var(--gris-clair); }
+  .engagement-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .engagement h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--marine); line-height: 1.15; margin-bottom: 1rem; }
+  .engagement h2 em { font-style: italic; color: var(--accent); }
+  .engagement p { font-size: 0.97rem; color: var(--gris); line-height: 1.85; margin-bottom: 0.9rem; }
+  .tarifs-grid { display: flex; flex-direction: column; gap: 2px; background: var(--gris-clair); }
+  .tarif-item { background: var(--blanc); padding: 1.4rem 1.8rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1.5rem; }
+  .tarif-item .ti-label { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 700; color: var(--marine); }
+  .tarif-item .ti-detail { font-size: 0.82rem; color: var(--gris); margin-top: 0.2rem; }
+  .tarif-item .ti-prix { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--accent); white-space: nowrap; }
+  .cta { width: 100%; padding: 56px 8%; background: var(--marine); }
+  .cta-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3rem; }
+  .cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 2.5vw, 2.4rem); font-weight: 600; color: #fff; line-height: 1.3; }
+  .cta h2 em { font-style: italic; color: var(--accent); }
+  .cta-coords { text-align: right; }
+  .cta-coords a { display: block; font-size: 0.9rem; color: rgba(247,245,240,0.65); text-decoration: none; transition: color 0.2s; margin-bottom: 0.4rem; }
+  .cta-coords a:hover { color: #fff; }
+  .cta-btn { display: inline-block; margin-top: 1.2rem; background: var(--accent); color: var(--marine); padding: 0.85rem 2.2rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; }
+  .cta-btn:hover { background: #d4943f; }
+  @media (max-width: 860px) { .profil-inner { grid-template-columns: 1fr; gap: 2rem; } .modele-inner { grid-template-columns: 1fr; gap: 2rem; } .engagement-inner { grid-template-columns: 1fr; gap: 2rem; } .cta-inner { grid-template-columns: 1fr; } .cta-coords { text-align: left; } }
 </style>
 </head>
 <body>
 <section class="hero">
-  <div class="hero-left">
-    <div class="hero-tag"><span class="hero-tag-dot"></span>Réseau Multipotentiel</div>
-    <h1>Une seule<br>enseigne,<br><span class="outline">c'est pas</span><br><span class="accent">assez.</span></h1>
-    <p class="hero-desc">Vous voulez entreprendre sur plusieurs concepts, combiner des univers, ne pas vous enfermer dans un seul contrat de 4 ou 7 ans. Ce n'est pas une faiblesse — c'est un profil.</p>
-  </div>
-  <div class="hero-right">
-    <div class="hero-number-block">∞</div>
-    <div class="hero-right-text">
-      <strong>Le modèle multipotentiel</strong>
-      <p>2 enseignes pour commencer.<br>Autant que vous voulez ensuite.<br>Un seul interlocuteur. Zéro enfermement.</p>
+  <div class="hero-eyebrow">Réseau Multipotentiel</div>
+  <h1>Un seul réseau<br>ne vous suffit pas.<br><em>Ce n'est pas un défaut.</em></h1>
+  <p>Vous voulez entreprendre sur plusieurs enseignes en même temps. Vous avez l'énergie, la capacité, et la vision. Il existe un modèle fait pour vous.</p>
+</section>
+<section class="profil">
+  <div class="profil-inner">
+    <div>
+      <div class="section-eyebrow">Votre profil</div>
+      <h2 class="section-title">Vous ne vous reconnaissez<br>dans<br><em>aucun moule.</em></h2>
+      <p>La plupart des enseignes cherchent des franchisés monovalents — qui se consacrent à 100% à une seule activité. Mais certains profils fonctionnent différemment.</p>
+      <p>Vous avez besoin de stimulation intellectuelle multiple. Une seule enseigne ne vous suffit pas. Ce n'est pas de l'instabilité — c'est de la multipotentialité.</p>
+    </div>
+    <div class="profil-tests">
+      <div class="profil-test"><span class="pt-icon">🧠</span><div class="pt-content"><strong>Switcher / HPI</strong><p>Vous vous ennuyez vite, vous avez besoin de stimulation intellectuelle constante, une seule activité ne vous suffit pas.</p></div></div>
+      <div class="profil-test"><span class="pt-icon">📊</span><div class="pt-content"><strong>Entrepreneur en série</strong><p>Vous avez déjà lancé plusieurs projets et souhaitez sécuriser vos revenus en diversifiant vos activités.</p></div></div>
+      <div class="profil-test"><span class="pt-icon">🏗️</span><div class="pt-content"><strong>Bâtisseur de portefeuille</strong><p>Votre vision est patrimoniale : construire un ensemble d'activités complémentaires qui se renforcent mutuellement.</p></div></div>
+      <div class="profil-test"><span class="pt-icon">🌐</span><div class="pt-content"><strong>Profil hybride</strong><p>Vous avez une compétence métier forte mais souhaitez aussi développer d'autres activités en parallèle, sans tout remettre en cause.</p></div></div>
     </div>
   </div>
 </section>
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span class="marquee-item">Plusieurs enseignes <span class="marquee-sep"></span></span>
-    <span class="marquee-item">Un seul contrat <span class="marquee-sep"></span></span>
-    <span class="marquee-item">Zéro enfermement <span class="marquee-sep"></span></span>
-    <span class="marquee-item">Plusieurs revenus <span class="marquee-sep"></span></span>
-    <span class="marquee-item">Votre rythme <span class="marquee-sep"></span></span>
-    <span class="marquee-item">Garder votre activité <span class="marquee-sep"></span></span>
-    <span class="marquee-item">Multipotentiel <span class="marquee-sep"></span></span>
-    <span class="marquee-item">Plusieurs enseignes <span class="marquee-sep"></span></span>
-    <span class="marquee-item">Un seul contrat <span class="marquee-sep"></span></span>
-    <span class="marquee-item">Zéro enfermement <span class="marquee-sep"></span></span>
-    <span class="marquee-item">Plusieurs revenus <span class="marquee-sep"></span></span>
-    <span class="marquee-item">Votre rythme <span class="marquee-sep"></span></span>
-    <span class="marquee-item">Garder votre activité <span class="marquee-sep"></span></span>
-    <span class="marquee-item">Multipotentiel <span class="marquee-sep"></span></span>
+<section class="modele">
+  <div class="modele-inner">
+    <div>
+      <div class="section-eyebrow" style="color:var(--accent);">Le modèle</div>
+      <h2>Vous représentez<br>plusieurs enseignes.<br><em>Je coordonne.</em></h2>
+      <p>Le réseau Multipotentiel, c'est un modèle où vous pouvez représenter plusieurs enseignes simultanément, avec un seul interlocuteur — moi — qui centralise, coordonne, et facilite.</p>
+      <p>Vous ne jongler pas entre différents franchiseurs. Vous avez un partenaire unique qui gère l'interface entre vous et chacune des enseignes.</p>
+    </div>
+    <div class="modele-schema">
+      <div class="ms-bloc"><span class="mb-label">Vous</span><h4>Un entrepreneur — plusieurs activités</h4><p>Vous développez vos concepts en parallèle, sous votre propre dynamique entrepreneuriale.</p></div>
+      <div class="ms-bloc" style="margin-top:2px;"><span class="mb-label">Moi</span><h4>Un interlocuteur unique</h4><p>Je centralise les enseignes, coordonne les formats, et simplifie votre gestion administrative et commerciale.</p></div>
+      <div class="ms-bloc" style="margin-top:2px;"><span class="mb-label">Les enseignes</span><h4>Des partenaires sélectionnés</h4><p>KW France, Smart Duck, LAV, Anacours, ADA — des réseaux sélectionnés pour leur compatibilité avec votre profil multipotentiel.</p></div>
+    </div>
+  </div>
+</section>
+<section class="enseignes-section">
+  <div class="enseignes-inner">
+    <div class="enseignes-intro">
+      <div class="section-eyebrow">Les enseignes disponibles</div>
+      <h2 class="section-title">5 concepts.<br><em>Compatibles entre eux.</em></h2>
+      <p>Ces enseignes ont été sélectionnées parce qu'elles peuvent coexister dans votre portefeuille sans conflit d'intérêts ni surcharge opérationnelle.</p>
+    </div>
+    <div class="enseignes-grid">
+      <div class="enseigne-card"><div class="ec-secteur">Immobilier</div><h3>Keller Williams</h3><p>Agent immobilier indépendant dans le plus grand réseau mondial. Home office, 100% commission, zéro stock.</p><div class="ec-apport">Apport : 20 000 €</div></div>
+      <div class="enseigne-card"><div class="ec-secteur">Épilation laser</div><h3>Smart Duck</h3><p>Institut d'épilation laser à la lumière pulsée. Concept clé-en-main, clientele b2c récurrente.</p><div class="ec-apport">Apport : 50 000 €</div></div>
+      <div class="enseigne-card"><div class="ec-secteur">Rénovation énergétique</div><h3>Les Artisans Verts</h3><p>Accès aux CEE (Certificats d'Économie d'Énergie). Marché en forte croissance, clientele B2B et B2C.</p><div class="ec-apport">Apport : 15 000 €</div></div>
+      <div class="enseigne-card"><div class="ec-secteur">Soutien scolaire</div><h3>Anacours</h3><p>Soutien scolaire à domicile. Réseau établi, apport accessible, forte demande locale.</p><div class="ec-apport">Apport : 15 000 €</div></div>
+      <div class="enseigne-card"><div class="ec-secteur">Location de véhicules</div><h3>ADA</h3><p>Location de voitures et utilitaires. Point de vente physique, clientèle locale fidèle, modèle stable.</p><div class="ec-apport">Apport : 100 000 €</div></div>
+    </div>
+  </div>
+</section>
+<section class="engagement">
+  <div class="engagement-inner">
+    <div>
+      <div class="section-eyebrow">Votre engagement</div>
+      <h2>Un seul contrat.<br><em>Plusieurs enseignes.</em></h2>
+      <p>Vous adhérez au réseau Multipotentiel via un contrat unique avec ODYSKILLS. Pas de négociation individuelle avec chaque enseigne — tout passe par moi.</p>
+      <p>En contrepartie, je m'engage à vous accéder à toutes les enseignes disponibles, à faciliter vos démarches, et à être votre interlocuteur unique sur la durée.</p>
+    </div>
+    <div class="tarifs-grid">
+      <div class="tarif-item"><div><div class="ti-label">Starter — 2 enseignes</div><div class="ti-detail">Accès à 2 enseignes de votre choix</div></div><div class="ti-prix">200 €/mois</div></div>
+      <div class="tarif-item"><div><div class="ti-label">Pro — 4 enseignes</div><div class="ti-detail">Accès à 4 enseignes de votre choix</div></div><div class="ti-prix">300 €/mois</div></div>
+      <div class="tarif-item"><div><div class="ti-label">Illimité — toutes les enseignes</div><div class="ti-detail">Accès illimité à tout le catalogue</div></div><div class="ti-prix">500 €/mois</div></div>
+      <div class="tarif-item" style="background:var(--marine);color:#fff;"><div><div class="ti-label" style="color:var(--accent);">Essai gratuit</div><div class="ti-detail" style="color:rgba(255,255,255,0.55);">Premier mois offert, sans engagement</div></div><div class="ti-prix" style="color:var(--accent);">0 €</div></div>
+    </div>
+  </div>
+</section>
+<div class="cta">
+  <div class="cta-inner">
+    <h2>Rejoignez le réseau<br><em>Multipotentiel.</em></h2>
+    <div class="cta-coords">
+      <a href="tel:0610703090" target="_top">06 10 70 30 90</a>
+      <a href="mailto:bismuththierry@gmail.com" target="_top">bismuththierry@gmail.com</a>
+      <a href="tel:0610703090" target="_top" class="cta-btn">Prendre contact</a>
+    </div>
   </div>
 </div>
-<section class="sec">
-  <div class="profil-grid">
-    <div class="profil-text">
-      <div class="label">Vous vous reconnaissez ?</div>
-      <h2 class="big-h">Le profil<br><em>multipotentiel.</em></h2>
-      <p>Switcher, zèbre, HPI — peu importe le nom. Ce qui compte : vous vous ennuyez vite, vous voyez des opportunités partout, et l'idée de rester dans une seule enseigne des années vous paralyse.</p>
-      <p>Ce n'est pas un défaut. C'est un profil. Il existe un modèle qui l'exploite plutôt que de le contraindre.</p>
-    </div>
-    <div class="signes">
-      <div class="signe-card"><span class="num">01</span><p>Vous êtes <strong>curieux de tout</strong> et vous vous projetez dans des univers très différents.</p></div>
-      <div class="signe-card"><span class="num">02</span><p>L'idée de <strong>faire la même chose 10 ans</strong> vous semble épuisante.</p></div>
-      <div class="signe-card"><span class="num">03</span><p>Vous voyez <strong>plusieurs opportunités en même temps</strong> et avez du mal à n'en choisir qu'une.</p></div>
-      <div class="signe-card"><span class="num">04</span><p>Vous voulez <strong>plusieurs sources de revenus</strong> plutôt que tout miser sur une activité.</p></div>
-      <div class="signe-card"><span class="num">05</span><p>Vous aimez <strong>construire des systèmes</strong>, pas juste exécuter un process imposé.</p></div>
-      <div class="signe-card"><span class="num">06</span><p>Vous refusez de <strong>choisir entre vos projets</strong> — vous voulez les mener ensemble.</p></div>
-    </div>
-  </div>
-</section>
-<section class="sec sec-alt">
-  <div class="pb-grid">
-    <div class="pb-text">
-      <div class="label">Le problème</div>
-      <h2 class="big-h">La franchise classique<br><em>n'est pas faite pour vous.</em></h2>
-      <p>La franchise standard impose un cadre : une enseigne, un territoire, un concept, un contrat de 4 ou 7 ans. C'est exactement ce qui bloque les profils multipotentiels.</p>
-      <p>Résultat : soit vous n'entreprendrez jamais, soit vous forcez un modèle qui vous rend malheureux au bout de 18 mois.</p>
-    </div>
-    <div class="pb-items">
-      <div class="pb-row"><span class="arrow">→</span><p><strong>Une seule enseigne</strong> — vous vous ennuyez au bout de 2 ans.</p></div>
-      <div class="pb-row"><span class="arrow">→</span><p><strong>Un seul territoire</strong> — vous voulez voir plus loin.</p></div>
-      <div class="pb-row"><span class="arrow">→</span><p><strong>Un contrat de 4 ou 7 ans</strong> — une éternité pour quelqu'un qui pense en sprints.</p></div>
-      <div class="pb-row"><span class="arrow">→</span><p><strong>Un seul franchiseur</strong> — vous préférez construire plusieurs relations.</p></div>
-    </div>
-  </div>
-</section>
-<section class="sec">
-  <div class="modele-top">
-    <div class="modele-text">
-      <div class="label">La solution</div>
-      <h2 class="big-h">Le Réseau<br><em>Multipotentiel.</em></h2>
-      <p>Un réseau d'entrepreneurs comme vous, qui développent plusieurs enseignes en simultané. J'en suis le pivot — un seul interlocuteur pour tous les franchiseurs, une liberté totale pour chaque membre.</p>
-      <p>Vous commencez par <strong>2 enseignes</strong>. Vous passez à 4, puis à plus, quand vous êtes prêt. Pas d'obligation de tout déployer d'un coup.</p>
-    </div>
-    <div>
-      <div class="flow">
-        <div class="flow-cell"><span class="fi">🏪</span><span class="ft">Franchiseurs</span><span class="fd">Les enseignes partenaires du réseau</span></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-cell pivot"><span class="fi">🔗</span><span class="ft">Je suis votre pivot</span><span class="fd">Interlocuteur unique — je gère les franchiseurs pour vous</span></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-cell"><span class="fi">🧑‍💼</span><span class="ft">Vous</span><span class="fd">Vous développez les enseignes qui vous correspondent</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="etapes">
-    <div class="etape"><span class="etape-n">01</span><h3>Vous démarrez avec 2 enseignes</h3><p>Deux concepts qui correspondent à votre territoire et votre profil. Pas plus, pour commencer.</p></div>
-    <div class="etape"><span class="etape-n">02</span><h3>Un seul contrat, plusieurs activités</h3><p>Je négocie avec les franchiseurs. Vous vous concentrez sur le terrain.</p></div>
-    <div class="etape"><span class="etape-n">03</span><h3>Vous scalez : 2, puis 4, puis plus</h3><p>Vous ajoutez des enseignes à votre rythme. Le réseau grandit avec vous.</p></div>
-    <div class="etape"><span class="etape-n">04</span><h3>Le réseau est votre franchise</h3><p>Pas le franchisé d'une enseigne — membre d'un réseau dont la somme est votre vraie franchise.</p></div>
-  </div>
-</section>
-<section class="sec sec-alt">
-  <div class="comp-grid">
-    <div class="comp-text">
-      <div class="label">Vous êtes déjà entrepreneur ?</div>
-      <h2 class="big-h">Gardez votre activité.<br><em>Ajoutez la nôtre.</em></h2>
-      <p>Vous êtes déjà à votre compte — dans l'immobilier, le courtage, le recrutement, le service ou le conseil. Vous n'avez pas forcément envie de tout plaquer.</p>
-      <p><strong>Le réseau Multipotentiel peut venir compléter ce que vous faites déjà.</strong> Vous conservez votre activité historique et vous y ajoutez une ou plusieurs enseignes — pour équilibrer les creux, diversifier vos revenus, ou construire quelque chose de plus grand.</p>
-    </div>
-    <div class="act-grid">
-      <div class="act-card"><span class="act-icon">🏠</span><h4>Immobilier</h4><p>Mandataire, agent, investisseur — vous avez déjà un réseau terrain solide.</p></div>
-      <div class="act-card"><span class="act-icon">📊</span><h4>Courtage</h4><p>Assurance, crédit, financement — des clients qui ont d'autres besoins.</p></div>
-      <div class="act-card"><span class="act-icon">👥</span><h4>Recrutement</h4><p>Cabinets, chasseurs, RH indépendants — une vision large du marché.</p></div>
-      <div class="act-card"><span class="act-icon">💼</span><h4>Service &amp; conseil</h4><p>Consultant, coach, formateur — vous savez vendre de la valeur.</p></div>
-    </div>
-  </div>
-</section>
-<section class="sec">
-  <div class="label">Ce que vous y gagnez</div>
-  <h2 class="big-h" style="max-width:680px">Entreprendre<br><em>comme vous fonctionnez vraiment.</em></h2>
-  <div class="av-grid">
-    <div class="av-card"><h3>Diversification réelle</h3><p>Plusieurs enseignes, plusieurs marchés, plusieurs revenus. Vous ne mettez pas tous vos œufs dans le même panier.</p></div>
-    <div class="av-card"><h3>Un interlocuteur unique</h3><p>Je gère les franchiseurs. Vous vous concentrez sur le développement terrain.</p></div>
-    <div class="av-card"><h3>Pas d'enfermement</h3><p>Vous faites évoluer votre mix d'enseignes dans le temps. Le réseau est vivant.</p></div>
-    <div class="av-card"><h3>Un réseau de pairs</h3><p>D'autres entrepreneurs multipotentiels — des profils qui vous ressemblent, avec qui vous pouvez construire.</p></div>
-    <div class="av-card"><h3>Effet d'échelle</h3><p>Certains coûts sont mutualisés. Plus le réseau grandit, plus chaque membre en profite.</p></div>
-    <div class="av-card"><h3>Un actif, pas juste une activité</h3><p>Un patrimoine entrepreneurial constitué de plusieurs briques indépendantes.</p></div>
-  </div>
-</section>
-<section class="cta-sec">
-  <div class="cta-left">
-    <div class="label">Prêt à démarrer ?</div>
-    <h2 class="big-h">Vous êtes<br><em>multipotentiel ?</em></h2>
-    <p>30 minutes pour voir si le réseau correspond à votre profil — que vous partiez de zéro ou que vous ayez déjà une activité en cours.</p>
-  </div>
-  <div class="cta-right">
-    <a href="tel:0610703090" target="_top" class="cta-btn main"><span class="btn-icon">📞</span><span class="btn-label">06 10 70 30 90</span><span class="btn-arrow">→</span></a>
-    <a href="mailto:thierry@thierrybismuth.com" target="_top" class="cta-btn"><span class="btn-icon">✉</span><span class="btn-label">thierry@thierrybismuth.com</span><span class="btn-arrow">→</span></a>
-    <p class="cta-note">Entretien de 30 min — sans engagement.<br>Je réponds personnellement.</p>
-  </div>
-</section>
 
 <script>
 function sendHeight(){var h=document.documentElement.scrollHeight||document.body.scrollHeight;window.parent.postMessage({iframeHeight:h},"*");}
