@@ -6,153 +6,161 @@
 <title>Je deviens votre réseau | Thierry Bismuth</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root { --blanc: #f7f5f0; --blanc-pur: #ffffff; --marine: #1a2e44; --accent: #c8873a; --gris: #6b7280; --gris-clair: #e8e4dc; --texte: #1c1c1c; --vert: #2d5a3d; }
+  :root { --blanc: #f7f5f0; --blanc-pur: #ffffff; --marine: #1a2e44; --marine-clair: #2a4a6b; --accent: #c8873a; --gris: #6b7280; --gris-clair: #e8e4dc; --texte: #1c1c1c; }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { background: var(--blanc); color: var(--texte); font-family: 'Outfit', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
-  .hero { padding: 48px 6vw 56px; border-bottom: 1px solid var(--gris-clair); }
-  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.6s 0.1s forwards; }
+  body { background: var(--blanc); color: var(--texte); font-family: 'Outfit', sans-serif; font-weight: 300; line-height: 1.7; width: 100%; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero { background: var(--marine); padding: 56px 8% 64px; width: 100%; position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(200,135,58,0.1) 0%, transparent 70%); top: -80px; right: -80px; pointer-events: none; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.8rem; opacity: 0; animation: fadeUp 0.5s 0.1s forwards; }
   .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: block; }
-  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 4.4rem); font-weight: 700; line-height: 1.08; color: var(--marine); max-width: 780px; opacity: 0; animation: fadeUp 0.6s 0.25s forwards; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; color: #fff; line-height: 1.08; margin-bottom: 1.4rem; max-width: 760px; opacity: 0; animation: fadeUp 0.5s 0.2s forwards; }
   .hero h1 em { font-style: italic; color: var(--accent); }
-  .hero-sub { margin-top: 2rem; font-size: 1.05rem; color: var(--gris); max-width: 600px; line-height: 1.8; opacity: 0; animation: fadeUp 0.6s 0.4s forwards; }
-  .hero-sub strong { color: var(--texte); font-weight: 500; }
-  .probleme { padding: 5rem 6vw; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; border-bottom: 1px solid var(--gris-clair); }
-  .probleme-left h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 2.5vw, 2.4rem); font-weight: 600; color: var(--marine); line-height: 1.25; margin-bottom: 1.5rem; }
-  .probleme-left p { color: var(--gris); font-size: 0.95rem; line-height: 1.85; margin-bottom: 1rem; }
-  .probleme-left p strong { color: var(--texte); font-weight: 500; }
-  .stat-bloc { display: flex; flex-direction: column; gap: 1.5rem; }
-  .stat { background: var(--blanc-pur); border-left: 3px solid var(--accent); padding: 1.5rem 2rem; }
-  .stat-chiffre { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: var(--marine); line-height: 1; margin-bottom: 0.4rem; }
-  .stat-label { font-size: 0.85rem; color: var(--gris); line-height: 1.5; }
-  .missions { padding: 5rem 6vw; border-bottom: 1px solid var(--gris-clair); }
-  .missions-header { margin-bottom: 3.5rem; }
-  .section-eyebrow { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
-  .missions-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 2.5vw, 2.4rem); font-weight: 600; color: var(--marine); }
-  .missions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--gris-clair); }
-  .mission { background: var(--blanc-pur); padding: 2.2rem 2rem; position: relative; overflow: hidden; transition: background 0.25s; }
-  .mission::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
-  .mission:hover { background: #fdfcf8; }
-  .mission:hover::after { transform: scaleX(1); }
-  .mission-icon { font-size: 1.4rem; margin-bottom: 1rem; display: block; }
-  .mission h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--marine); margin-bottom: 0.7rem; line-height: 1.2; }
-  .mission p { font-size: 0.88rem; color: var(--gris); line-height: 1.7; }
-  .partage { padding: 4rem 6vw; background: var(--marine); display: flex; align-items: center; gap: 4rem; }
-  .partage-texte { flex: 1; }
-  .partage-texte .section-eyebrow { color: rgba(200,135,58,0.9); }
-  .partage-texte h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 2.2vw, 2.2rem); font-weight: 600; color: var(--blanc); line-height: 1.25; margin-bottom: 1rem; }
-  .partage-texte p { color: rgba(247,245,240,0.65); font-size: 0.92rem; line-height: 1.8; max-width: 500px; }
-  .partage-schema { display: flex; align-items: center; gap: 1.5rem; flex-shrink: 0; }
-  .schema-bloc { text-align: center; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 1.8rem 2rem; min-width: 130px; }
-  .schema-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(247,245,240,0.45); margin-bottom: 0.6rem; }
-  .schema-valeur { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--blanc); line-height: 1.1; }
-  .schema-arrow { font-size: 1.2rem; color: var(--accent); }
-  .cas { padding: 5rem 6vw; border-bottom: 1px solid var(--gris-clair); }
-  .cas-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-  .cas-left .section-eyebrow { margin-bottom: 1rem; }
-  .cas-left h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 2.5vw, 2.4rem); font-weight: 600; color: var(--marine); line-height: 1.2; margin-bottom: 1.5rem; }
-  .cas-left p { font-size: 0.95rem; color: var(--gris); line-height: 1.85; margin-bottom: 1rem; }
-  .cas-left p strong { color: var(--texte); font-weight: 500; }
-  .cas-citation { background: var(--blanc-pur); border-left: 3px solid var(--vert); padding: 2rem 2rem 2rem 2.5rem; }
-  .cas-citation p { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: var(--marine); line-height: 1.5; margin-bottom: 1rem; }
-  .cas-citation .source { font-size: 0.78rem; font-style: normal; font-family: 'Outfit', sans-serif; color: var(--gris); letter-spacing: 0.06em; }
-  .cas-timeline { display: flex; flex-direction: column; gap: 0; }
-  .timeline-item { display: grid; grid-template-columns: 80px 1fr; gap: 1.5rem; position: relative; }
-  .timeline-item:not(:last-child)::before { content: ''; position: absolute; left: 39px; top: 36px; bottom: -1px; width: 1px; background: var(--gris-clair); }
-  .timeline-date { text-align: center; padding-top: 0.4rem; }
-  .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin: 0 auto 0.5rem; }
-  .timeline-annee { font-size: 0.72rem; color: var(--gris); letter-spacing: 0.08em; }
-  .timeline-content { padding: 0.2rem 0 2.5rem; }
-  .timeline-content h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--marine); margin-bottom: 0.4rem; }
-  .timeline-content p { font-size: 0.88rem; color: var(--gris); line-height: 1.7; }
-  .cta-final { background: var(--marine); padding: 5rem 6vw; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3rem; }
-  .cta-final h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 2.5vw, 2.4rem); font-weight: 600; color: var(--blanc); line-height: 1.3; }
-  .cta-final h2 span { color: var(--accent); }
-  .cta-coords { text-align: right; }
-  .cta-coords a { display: block; font-size: 0.9rem; color: rgba(247,245,240,0.65); text-decoration: none; transition: color 0.2s; margin-bottom: 0.4rem; }
-  .cta-coords a:hover { color: var(--blanc); }
-  .cta-btn { display: inline-block; margin-top: 1.2rem; background: var(--accent); color: var(--blanc); padding: 0.85rem 2.2rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; }
-  .cta-btn:hover { background: #b5762f; }
-  @media (max-width: 900px) { .probleme, .cas-inner { grid-template-columns: 1fr; gap: 3rem; } .missions-grid { grid-template-columns: 1fr; } .partage { flex-direction: column; gap: 2.5rem; } .cta-final { grid-template-columns: 1fr; } .cta-coords { text-align: left; } }
+  .hero p { font-size: 1rem; color: rgba(255,255,255,0.6); max-width: 600px; line-height: 1.85; opacity: 0; animation: fadeUp 0.5s 0.3s forwards; }
+  .section-eyebrow { display: flex; align-items: center; gap: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+  .section-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: block; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--marine); line-height: 1.15; margin-bottom: 1rem; }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .probleme { width: 100%; padding: 56px 8%; background: var(--blanc-pur); border-bottom: 1px solid var(--gris-clair); }
+  .probleme-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .probleme p { font-size: 0.97rem; color: var(--gris); line-height: 1.85; margin-bottom: 0.9rem; }
+  .pb-quote { background: var(--marine); padding: 2.4rem 2.8rem; position: relative; }
+  .pb-quote::before { content: '\00AB'; font-family: 'Cormorant Garamond', serif; font-size: 6rem; color: var(--accent); opacity: 0.2; position: absolute; top: -1rem; left: 1.2rem; line-height: 1; }
+  .pb-quote p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: #fff; line-height: 1.6; position: relative; margin: 0; }
+  .cas-pratique { width: 100%; padding: 56px 8%; background: var(--blanc); }
+  .cas-inner { max-width: 1100px; margin: 0 auto; }
+  .cas-intro { max-width: 680px; margin-bottom: 3rem; }
+  .cas-intro p { font-size: 0.97rem; color: var(--gris); line-height: 1.85; }
+  .cas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--gris-clair); margin-bottom: 3rem; }
+  .cas-card { background: var(--blanc-pur); padding: 2.4rem 2rem; }
+  .cc-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: block; }
+  .cas-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--marine); line-height: 1.2; margin-bottom: 0.8rem; }
+  .cas-card p { font-size: 0.9rem; color: var(--gris); line-height: 1.75; }
+  .cas-card.marine { background: var(--marine); }
+  .cas-card.marine h3 { color: #fff; }
+  .cas-card.marine p { color: rgba(255,255,255,0.6); }
+  .cas-card.marine .cc-label { color: var(--accent); }
+  .ce-que-japporte { width: 100%; padding: 56px 8%; background: var(--blanc-pur); border-top: 1px solid var(--gris-clair); }
+  .ce-que-japporte-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .ce-que-japporte h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--marine); line-height: 1.15; margin-bottom: 1rem; }
+  .ce-que-japporte h2 em { font-style: italic; color: var(--accent); }
+  .ce-que-japporte p { font-size: 0.97rem; color: var(--gris); line-height: 1.85; margin-bottom: 0.9rem; }
+  .apporte-items { display: flex; flex-direction: column; gap: 2px; background: var(--gris-clair); }
+  .apporte-item { background: var(--blanc); padding: 1.4rem 1.8rem; display: flex; align-items: flex-start; gap: 1rem; border-left: 3px solid transparent; transition: border-color 0.25s, background 0.25s; }
+  .apporte-item:hover { border-left-color: var(--accent); background: var(--blanc-pur); }
+  .ai-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+  .apporte-item p { font-size: 0.9rem; color: var(--gris); line-height: 1.7; margin: 0; }
+  .apporte-item p strong { color: var(--texte); font-weight: 500; }
+  .conditions { width: 100%; padding: 56px 8%; background: var(--marine); }
+  .conditions-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .conditions h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 1rem; }
+  .conditions h2 em { font-style: italic; color: var(--accent); }
+  .conditions p { font-size: 0.97rem; color: rgba(255,255,255,0.6); line-height: 1.85; margin-bottom: 0.9rem; }
+  .conditions-grid { display: flex; flex-direction: column; gap: 2px; background: rgba(255,255,255,0.08); }
+  .cond-item { background: rgba(255,255,255,0.04); padding: 1.4rem 1.8rem; display: flex; align-items: flex-start; gap: 0.8rem; }
+  .cond-num { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--accent); flex-shrink: 0; line-height: 1.2; }
+  .cond-item p { font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.7; margin: 0; }
+  .cond-item p strong { color: #fff; font-weight: 500; }
+  .cta { width: 100%; padding: 56px 8%; background: var(--blanc-pur); border-top: 1px solid var(--gris-clair); text-align: center; }
+  .cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--marine); margin-bottom: 0.8rem; }
+  .cta h2 em { font-style: italic; color: var(--accent); }
+  .cta p { font-size: 0.97rem; color: var(--gris); margin-bottom: 2.4rem; }
+  .cta-contacts { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 1rem 2.2rem; transition: all 0.25s; }
+  .cta-btn.primary { background: var(--marine); color: #fff; }
+  .cta-btn.primary:hover { background: var(--marine-clair); }
+  .cta-btn.secondary { border: 1px solid var(--marine); color: var(--marine); }
+  .cta-btn.secondary:hover { background: var(--marine); color: #fff; }
+  @media (max-width: 860px) { .probleme-inner { grid-template-columns: 1fr; gap: 2rem; } .cas-grid { grid-template-columns: 1fr; } .ce-que-japporte-inner { grid-template-columns: 1fr; gap: 2rem; } .conditions-inner { grid-template-columns: 1fr; gap: 2rem; } }
 </style>
 </head>
 <body>
 <section class="hero">
   <div class="hero-eyebrow">Formule 02 — Animation réseau</div>
-  <h1>Vous êtes un excellent commerçant,<br>artisan, restaurateur… <em>Restez-le.</em></h1>
-  <p class="hero-sub">Construire un réseau de franchise demande deux choses : un bon concept, et quelqu'un pour le déployer. <strong>Vous avez le premier. Je m'occupe du second.</strong></p>
+  <h1>Vous n'avez pas<br>de réseau de franchise.<br><em>Je le deviens.</em></h1>
+  <p>Vous avez une activité de service ou de conseil qui mériterait d'être dupliquée. Vous ne voulez pas créer une franchise, mais vous avez besoin d'un développement terrain structuré et représenté. C'est ce que je propose.</p>
 </section>
 <section class="probleme">
-  <div class="probleme-left">
-    <h2>Deux métiers dans un seul, c'est un de trop.</h2>
-    <p>Être un formidable artisan ou commerçant, c'est un talent. Savoir développer, animer, faire croître et sécuriser un réseau de plusieurs dizaines de franchisés, c'en est un autre.</p>
-    <p>Beaucoup d'entrepreneurs essaient de cumuler les deux. <strong>La plupart s'épuisent à mi-chemin</strong> — ou sacrifient leur cœur de métier pour animer un réseau qu'ils ne maîtrisent pas.</p>
-    <p>Si vous avez envie de développer votre activité sans changer de métier, <strong>je deviens votre réseau.</strong></p>
-  </div>
-  <div class="stat-bloc">
-    <div class="stat"><div class="stat-chiffre">15 ans</div><div class="stat-label">à créer, développer et animer un réseau de 150 entrepreneurs indépendants</div></div>
-    <div class="stat"><div class="stat-chiffre">3,5 M€</div><div class="stat-label">de chiffre d'affaires généré par le réseau à son pic</div></div>
-    <div class="stat"><div class="stat-chiffre">1 règle</div><div class="stat-label">chacun dans sa spécialité — vous exécutez, je développe</div></div>
-  </div>
-</section>
-<section class="missions">
-  <div class="missions-header">
-    <div class="section-eyebrow">Ce que je prends en charge</div>
-    <h2>Je monte le réseau à votre nom.<br>Je le développe, je l'anime, je le sécurise.</h2>
-  </div>
-  <div class="missions-grid">
-    <div class="mission"><span class="mission-icon">🎯</span><h3>Convaincre d'entreprendre</h3><p>J'identifie les candidats et les aide à franchir le pas — du premier contact à la signature.</p></div>
-    <div class="mission"><span class="mission-icon">📊</span><h3>Monter le business plan</h3><p>Construction du prévisionnel, négociation avec les banques, montage du dossier de financement.</p></div>
-    <div class="mission"><span class="mission-icon">📍</span><h3>Trouver les locaux</h3><p>Recherche d'emplacement, analyse de la zone de chalandise, négociation du bail commercial.</p></div>
-    <div class="mission"><span class="mission-icon">🚀</span><h3>Installer le point de vente</h3><p>Pilotage de l'ouverture, formation initiale, mise en route opérationnelle.</p></div>
-    <div class="mission"><span class="mission-icon">📣</span><h3>Trouver les premiers clients</h3><p>Actions de lancement local, activation du réseau, premiers chiffres d'affaires.</p></div>
-    <div class="mission"><span class="mission-icon">💪</span><h3>Faire durer</h3><p>Animation régulière, recrutement des équipes, motivation et fidélisation dans la durée.</p></div>
+  <div class="probleme-inner">
+    <div>
+      <div class="section-eyebrow">La situation</div>
+      <h2 class="section-title">Vous avez un concept.<br>Vous n'avez pas<br><em>la structure.</em></h2>
+      <p>Certaines activités méritent d'être développées sans pour autant nécessiter la création d'une franchise complète avec DIP, contrat type, territoire exclusif et toute la machinerie juridique qui l'accompagne.</p>
+      <p>Vous voulez simplement des entrepreneurs locaux qui représentent votre activité, avec une structure légère, évolutive, et pilotée par quelqu'un qui connaît le terrain.</p>
+    </div>
+    <div class="pb-quote">
+      <p>Vous n'êtes pas encore une franchise. Mais vous pouvez fonctionner comme un réseau — avec les avantages sans la contrainte structurelle.</p>
+    </div>
   </div>
 </section>
-<div class="partage">
-  <div class="partage-texte">
-    <div class="section-eyebrow">Le modèle économique</div>
-    <h2>On se partage le revenu<br>de manière intelligente.</h2>
-    <p>Vous fournissez le savoir-faire et les produits ou services distribués par les franchisés. Je prends en charge le développement et l'animation. Chacun valorise ce qu'il sait faire — et on partage ce qu'on crée ensemble.</p>
-  </div>
-  <div class="partage-schema">
-    <div class="schema-bloc"><div class="schema-label">Vous</div><div class="schema-valeur">Savoir-faire<br>&amp; produits</div></div>
-    <div class="schema-arrow">+</div>
-    <div class="schema-bloc"><div class="schema-label">Moi</div><div class="schema-valeur">Réseau<br>&amp; animation</div></div>
-    <div class="schema-arrow">→</div>
-    <div class="schema-bloc"><div class="schema-label">Ensemble</div><div class="schema-valeur">Revenu<br>partagé</div></div>
-  </div>
-</div>
-<section class="cas">
+<section class="cas-pratique">
   <div class="cas-inner">
-    <div class="cas-left">
-      <div class="section-eyebrow">Exemple concret — Les Artisans Verts</div>
-      <h2>Leur réseau.<br>Mes mains.</h2>
-      <p>Dix ans de chantiers. Des milliers de rénovations financées par les CEE et MaPrimeRénov'. Des équipes techniques rodées, une maîtrise parfaite des processus de financement par les délégataires.</p>
-      <p>Et une conviction forte : <strong>se développer sans devenir une tête de réseau.</strong></p>
-      <p>On a créé <strong>Les Artisans Verts Développement</strong> — leur structure de franchise dédiée. Eux restent sur leurs chantiers. Moi je recrute, j'anime, je développe.</p>
-      <br>
-      <div class="cas-citation">
-        <p>« Dans 5 ans, une agence franchisée dans chaque grande ville de France — sans qu'ils aient quitté leurs chantiers. »</p>
-        <span class="source">Thierry Bismuth — Les Artisans Verts Développement, 2025</span>
+    <div class="cas-intro">
+      <div class="section-eyebrow">Un exemple concret</div>
+      <h2 class="section-title">Le cas <em>Les Artisans Verts Développement.</em></h2>
+      <p>LAV est une entreprise qui développe l'accès aux CEE (Certificats d'Économie d'Énergie) pour les particuliers et les entreprises. Elle a un concept solide, une équipe opérationnelle — mais elle n'a pas vocation à créer une franchise formelle avec tout ce que cela implique.</p>
+    </div>
+    <div class="cas-grid">
+      <div class="cas-card">
+        <span class="cc-label">Le problème</span>
+        <h3>Un concept viable, pas de réseau</h3>
+        <p>LAV sait ce qu'elle fait. Elle a les process, les outils, les partenaires. Mais elle ne peut pas se développer sur tout le territoire sans une présence terrain qu'elle n'a pas les moyens ni l'envie de structurer seule.</p>
+      </div>
+      <div class="cas-card marine">
+        <span class="cc-label">La solution</span>
+        <h3>Je deviens leur réseau</h3>
+        <p>Je recrute des entrepreneurs locaux sous contrat de mandataire ou de licence. Je les forme, je les accompagne, je pilote le développement terrain. LAV garde le contrôle opérationnel. Je gère la croissance.</p>
       </div>
     </div>
-    <div class="cas-timeline">
-      <div class="timeline-item"><div class="timeline-date"><div class="timeline-dot"></div><div class="timeline-annee">J-1</div></div><div class="timeline-content"><h4>Le concept existe, le réseau non</h4><p>Une entreprise de travaux solide, un savoir-faire reconnu, zéro infrastructure franchise.</p></div></div>
-      <div class="timeline-item"><div class="timeline-date"><div class="timeline-dot"></div><div class="timeline-annee">2025</div></div><div class="timeline-content"><h4>Création des Artisans Verts Développement</h4><p>Structure commune dédiée au réseau. Modèle économique, documents franchise, premiers recrutements.</p></div></div>
-      <div class="timeline-item"><div class="timeline-date"><div class="timeline-dot"></div><div class="timeline-annee">2026</div></div><div class="timeline-content"><h4>Déploiement national</h4><p>Premières agences franchisées ouvertes. Prospection active dans toutes les grandes villes.</p></div></div>
-      <div class="timeline-item"><div class="timeline-date"><div class="timeline-dot"></div><div class="timeline-annee">2030</div></div><div class="timeline-content"><h4>Dans tous les appartements de France</h4><p>Un réseau national — sans qu'ils aient changé de métier.</p></div></div>
+    <p style="font-size:0.9rem;color:var(--gris);max-width:620px;line-height:1.8;">Ce modèle est applicable à tout concept qui a une valeur ajoutée réelle mais qui ne veut pas — ou ne peut pas encore — structurer un réseau complet.</p>
+  </div>
+</section>
+<section class="ce-que-japporte">
+  <div class="ce-que-japporte-inner">
+    <div>
+      <div class="section-eyebrow">Ce que j'apporte</div>
+      <h2>Un développement terrain.<br><em>Clé en main.</em></h2>
+      <p>Je prends en charge l'intégralité du développement humain et terrain de votre réseau. Vous vous concentrez sur ce que vous savez faire.</p>
+    </div>
+    <div class="apporte-items">
+      <div class="apporte-item"><span class="ai-icon">🌍</span><p><strong>Prospection terrain</strong> — identification des entrepreneurs locaux correspondant au profil recherché</p></div>
+      <div class="apporte-item"><span class="ai-icon">🤝</span><p><strong>Sélection et qualification</strong> — entretiens Meteorjob, évaluation des candidatures, présentation des dossiers retenus</p></div>
+      <div class="apporte-item"><span class="ai-icon">💼</span><p><strong>Structuration du partenariat</strong> — mise en place du cadre contractuel avec votre service juridique</p></div>
+      <div class="apporte-item"><span class="ai-icon">📊</span><p><strong>Animation du réseau</strong> — suivi des développs, reporting, points périodiques avec les entrepreneurs actifs</p></div>
+      <div class="apporte-item"><span class="ai-icon">📣</span><p><strong>Réunions entrepreneuriales</strong> — organisation d'événements locaux chez des EC partenaires pour recruter de nouveaux profils</p></div>
     </div>
   </div>
 </section>
-<div class="cta-final">
-  <h2>Parlons de <span>votre réseau.</span></h2>
-  <div class="cta-coords">
-    <a href="tel:0610703090" target="_top">06 10 70 30 90</a>
-    <a href="mailto:thierry@thierrybismuth.com" target="_top">thierry@thierrybismuth.com</a>
-    <a href="mailto:thierry@thierrybismuth.com" target="_top" class="cta-btn">Me contacter</a>
+<section class="conditions">
+  <div class="conditions-inner">
+    <div>
+      <div class="section-eyebrow" style="color:var(--accent);">Les conditions</div>
+      <h2>Trois critères<br>pour que <em>ça marche.</em></h2>
+      <p>Ce modèle ne convient pas à tout le monde. Pour que la relation soit efficace et durable, trois conditions sont nécessaires.</p>
+    </div>
+    <div class="conditions-grid">
+      <div class="cond-item"><div class="cond-num">1</div><p><strong>Un concept reproductible</strong> — votre activité peut être représentée par un entrepreneur local indépendant sans perte de qualité ni de valeur.</p></div>
+      <div class="cond-item"><div class="cond-num">2</div><div><p><strong>Un modèle économique pour l'entrepreneur</strong> — le commissionnement, la licence ou la marge doit permettre à l'entrepreneur de vivre de l'activité dès les premiers mois.</p></div></div>
+      <div class="cond-item"><div class="cond-num">3</div><p><strong>Un engagement sur la durée</strong> — le développement réseau est un travail de fond. Les premiers résultats arrivent en général 3 à 6 mois après le lancement.</p></div>
+    </div>
   </div>
-</div>
+</section>
+<section class="cta">
+  <h2>Votre activité mérite<br><em>d'être dupliquée.</em></h2>
+  <p>Dites-moi votre concept et votre objectif de développement — je vous rappelle sous 24h pour voir si ce modèle vous correspond.</p>
+  <div class="cta-contacts">
+    <a href="tel:0610703090" target="_top" class="cta-btn primary">📞 06 10 70 30 90</a>
+    <a href="mailto:bismuththierry@gmail.com" target="_top" class="cta-btn secondary">✉ bismuththierry@gmail.com</a>
+  </div>
+</section>
+
+<script>
+function sendHeight(){var h=document.documentElement.scrollHeight||document.body.scrollHeight;window.parent.postMessage({iframeHeight:h},"*");}
+window.addEventListener("load",sendHeight);
+window.addEventListener("resize",sendHeight);
+setTimeout(sendHeight,600);
+setTimeout(sendHeight,1200);
+</script>
 </body>
 </html>
