@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entreprendre ou convertir mon commerce | Thierry Bismuth</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --blanc: #f7f5f0; --blanc-pur: #ffffff; --marine: #1a2e44; --accent: #c8873a; --gris: #6b7280; --gris-clair: #e8e4dc; --texte: #1c1c1c; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--blanc); color: var(--texte); font-family: 'Outfit', sans-serif; font-weight: 300; line-height: 1.7; width: 100%; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero { padding: 56px 8% 64px; width: 100%; border-bottom: 1px solid var(--gris-clair); opacity: 0; animation: fadeUp 0.5s 0.1s forwards; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.8rem; }
+  .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: block; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4.5vw, 3.8rem); font-weight: 700; color: var(--marine); line-height: 1.1; margin-bottom: 1.2rem; max-width: 780px; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero p { font-size: 1rem; color: var(--gris); max-width: 620px; line-height: 1.85; }
+  .grille { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--gris-clair); width: 100%; }
+  .cible { background: var(--blanc-pur); padding: 3.6rem 8%; text-decoration: none; color: inherit; display: block; position: relative; overflow: hidden; transition: background 0.3s; }
+  .cible::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+  .cible:hover { background: #fdfcf8; }
+  .cible:hover::after { transform: scaleX(1); }
+  .cible-tag { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+  .cible-tag::before { content: ''; width: 20px; height: 1px; background: var(--accent); display: block; }
+  .cible h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 700; color: var(--marine); line-height: 1.15; margin-bottom: 0.9rem; }
+  .cible p { font-size: 0.92rem; color: var(--gris); line-height: 1.8; margin-bottom: 1.8rem; max-width: 400px; }
+  .cible-lien { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--marine); transition: gap 0.25s; }
+  .cible-lien::after { content: '→'; }
+  .cible:hover .cible-lien { gap: 0.9rem; }
+  .cible.dark { background: var(--marine); }
+  .cible.dark:hover { background: #1f3650; }
+  .cible.dark .cible-tag { color: var(--accent); }
+  .cible.dark .cible-tag::before { background: var(--accent); }
+  .cible.dark h2 { color: #fff; }
+  .cible.dark p { color: rgba(255,255,255,0.55); }
+  .cible.dark .cible-lien { color: var(--accent); }
+  .cible.dark::after { background: var(--accent); }
+  @media (max-width: 760px) { .grille { grid-template-columns: 1fr; } .hero { padding: 48px 6% 52px; } .cible { padding: 3rem 6%; } }
+</style>
+</head>
+<body>
+<section class="hero">
+  <div class="hero-eyebrow">Entrepreneurs &amp; Commerçants</div>
+  <h1>Vous voulez entreprendre —<br><em>ou vous demandez si c'est encore le bon moment.</em></h1>
+  <p>Commerçant en réflexion, futur entrepreneur, expert-comptable souhaitant animer ses clients, ou multipotentiel qui ne se reconnaît dans aucun moule : je m'adresse à vous directement.</p>
+</section>
+<div class="grille">
+  <a class="cible" href="https://www.thierrybismuth.com/commer%C3%A7ant-en-reconversion" target="_top">
+    <div class="cible-tag">Vous êtes commerçant</div>
+    <h2>Votre activité ralentit.<br>Il est encore temps de pivoter.</h2>
+    <p>Vous avez un emplacement, une clientèle, une notoriété locale. Tant que l'envie et la trésorerie sont encore là, transformer vaut mieux que subir.</p>
+    <span class="cible-lien">Voir comment pivoter</span>
+  </a>
+  <a class="cible" href="https://www.thierrybismuth.com/ouvrir-en-franchise" target="_top">
+    <div class="cible-tag">Vous voulez créer</div>
+    <h2>Avant de choisir une enseigne,<br>répondez aux bonnes questions.</h2>
+    <p>Se lancer sur une plaquette commerciale ou une envie instinctive est une erreur classique. 30 minutes de dialogue structuré changent tout.</p>
+    <span class="cible-lien">Challenger mon projet</span>
+  </a>
+  <a class="cible" href="https://www.thierrybismuth.com/expert-comptable" target="_top">
+    <div class="cible-tag">Vous êtes expert-comptable</div>
+    <h2>Organisez une réunion entrepreneuriale<br>dans vos locaux.</h2>
+    <p>Invitez vos clients, j'invite des entrepreneurs en herbe. 1h30 de réflexion collective — vos clients trouvent des projets, mes entrepreneurs vous découvrent.</p>
+    <span class="cible-lien">Accueillir une réunion</span>
+  </a>
+  <a class="cible dark" href="https://www.thierrybismuth.com/le-r%C3%A9seau-multi-potentiel" target="_top">
+    <div class="cible-tag">Vous êtes multipotentiel</div>
+    <h2>Un seul réseau ne vous suffit pas.<br>Ce n'est pas un défaut.</h2>
+    <p>Vous voulez entreprendre sur plusieurs enseignes en simultané. Il existe un modèle fait pour vous — et je peux en être votre meilleur franchisé.</p>
+    <span class="cible-lien">Découvrir le réseau multipotentiel</span>
+  </a>
+</div>
+</body>
+</html>
