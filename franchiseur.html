@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franchiseurs | Thierry Bismuth</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blanc: #f7f5f0;
+    --blanc-pur: #ffffff;
+    --marine: #1a2e44;
+    --marine-clair: #2a4a6b;
+    --accent: #c8873a;
+    --gris: #6b7280;
+    --gris-clair: #e8e4dc;
+    --texte: #1c1c1c;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--blanc); color: var(--texte); font-family: 'Outfit', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  .hero { padding: 40px 6vw 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; }
+  .hero-left { position: relative; }
+  .hero-right { color: var(--gris); font-size: 1rem; line-height: 1.85; padding-left: 2rem; border-left: 2px solid var(--gris-clair); }
+  .hero-right strong { color: var(--texte); font-weight: 500; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.7s 0.1s forwards; }
+  .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem, 5vw, 4.8rem); font-weight: 700; line-height: 1.08; color: var(--marine); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.7s 0.25s forwards; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-question { font-size: 1.05rem; color: var(--gris); max-width: 460px; line-height: 1.7; opacity: 0; animation: fadeUp 0.7s 0.4s forwards; }
+  .sep { width: 6vw; height: 1px; background: var(--gris-clair); margin: 5rem auto; }
+  .offres { padding: 2rem 6vw 6rem; }
+  .offres-header { text-align: center; margin-bottom: 4rem; opacity: 0; animation: fadeUp 0.7s 0.1s forwards; }
+  .offres-header .eyebrow { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .offres-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 600; color: var(--marine); }
+  .offres-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--gris-clair); }
+  .offre { background: var(--blanc-pur); padding: 3rem 2.5rem 2.5rem; position: relative; overflow: hidden; transition: transform 0.3s ease; display
