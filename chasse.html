@@ -19,7 +19,7 @@
   .hero h1 em { font-style: italic; color: var(--accent); }
   .hero-intro { font-size: 1.05rem; color: rgba(255,255,255,0.65); max-width: 620px; line-height: 1.85; opacity: 0; animation: fadeUp 0.5s 0.3s forwards; }
   .probleme { background: var(--blanc-pur); padding: 56px 8%; width: 100%; border-bottom: 1px solid var(--gris-clair); }
-  .probleme-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .probleme-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto; }
   .probleme h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--marine); line-height: 1.15; margin-bottom: 1.2rem; }
   .probleme h2 em { font-style: italic; color: var(--accent); }
   .probleme p { font-size: 0.97rem; color: var(--gris); line-height: 1.85; margin-bottom: 1rem; }
@@ -27,7 +27,7 @@
   .quote-bloc::before { content: '\00AB'; font-family: 'Cormorant Garamond', serif; font-size: 6rem; color: var(--accent); opacity: 0.3; position: absolute; top: -1rem; left: 1.5rem; line-height: 1; }
   .quote-bloc p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: #fff; line-height: 1.6; position: relative; }
   .methodo { background: var(--blanc); padding: 56px 8%; width: 100%; }
-  .methodo-inner { }
+  .methodo-inner { max-width: 1100px; margin: 0 auto; }
   .section-eyebrow { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem; }
   .section-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: block; }
   .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--marine); line-height: 1.15; margin-bottom: 0.8rem; }
@@ -42,6 +42,7 @@
   .step-content h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 700; color: var(--marine); margin-bottom: 0.4rem; }
   .step-content p { font-size: 0.9rem; color: var(--gris); line-height: 1.7; }
   .controle { background: var(--marine); padding: 56px 8%; width: 100%; }
+  .controle-inner { max-width: 1100px; margin: 0 auto; }
   .controle-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 0.6rem; }
   .controle-title em { font-style: italic; color: var(--accent); }
   .controle-sub { font-size: 0.97rem; color: rgba(255,255,255,0.55); margin-bottom: 2.5rem; max-width: 560px; }
@@ -52,7 +53,7 @@
   .controle-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
   .controle-card p { font-size: 0.87rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
   .tarif { background: var(--blanc-pur); padding: 56px 8%; width: 100%; }
-  .tarif-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .tarif-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
   .tarif-fixe { background: var(--marine); border-radius: 2px; padding: 2.8rem; }
   .tarif-fixe .tf-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: block; }
   .tarif-fixe .tf-prix { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 0.3rem; }
@@ -81,7 +82,7 @@
 <body>
 <section class="hero">
   <div class="hero-eyebrow">Service 1 — Chasse de franchisés</div>
-  <h1>Vous ne pouvez pas<br>vous permettre d'<em>attendre.</em></h1>
+  <h1>Vous ne pouvez pas<br>vous permettre d'—<em>attendre.</em></h1>
   <p class="hero-intro">Vous cherchez à développer votre enseigne ou céder un point de vente ? Une annonce et une veille générique ne suffisent pas quand on cherche un entrepreneur à un endroit précis dans un délai contraint. La chasse s'applique quand on ne peut pas se permettre de diffuser, attendre et espérer.</p>
 </section>
 <section class="probleme">
@@ -133,8 +134,8 @@
     </div>
     <div class="tarif-succes">
       <h3>Au succès</h3>
-      <div class="succes-item"><div class="si-icon">🤝</div><div class="si-text"><strong>25 % HT de la Redevance Initiale Forfaitaire</strong><span>En cas de création d'un nouveau point de vente franchisé.</span></div></div>
-      <div class="succes-item"><div class="si-icon">🏪</div><div class="si-text"><strong>7 % du prix de cession</strong><span>En cas de vente d'un point de vente existant.</span></div></div>
+      <div class="succes-item"><div class="si-icon">🤝</div><div class="si-text"><strong>25 % HT de la Redevance Initiale Forfaitaire</strong><span>En cas de création d'un nouveau point de vente franchisé.</span></div></div>
+      <div class="succes-item"><div class="si-icon">🏦</div><div class="si-text"><strong>7 % du prix de cession</strong><span>En cas de vente d'un point de vente existant.</span></div></div>
       <p style="font-size:0.82rem;color:var(--gris);margin-top:1.2rem;line-height:1.6;">Un modèle simple : je m'engage sur la durée pour un coût fixe maîtrisé, et je suis aligné sur votre succès à chaque signature.</p>
     </div>
   </div>
@@ -144,7 +145,7 @@
   <p>Dites-moi votre enseigne et vos zones prioritaires — je vous rappelle sous 24h.</p>
   <div class="cta-contacts">
     <a href="tel:0610703090" target="_top" class="cta-btn primary">📞 06 10 70 30 90</a>
-    <a href="mailto:thierry@thierrybismuth.com" target="_top" class="cta-btn secondary">✉ thierry@thierrybismuth.com</a>
+    <a href="mailto:bismuththierry@gmail.com" target="_top" class="cta-btn secondary">✉ bismuththierry@gmail.com</a>
   </div>
 </section>
 
