@@ -31,7 +31,7 @@ html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.75; overflow-x: hidden; }
 @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
 @keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.hero { min-height: 100vh; padding: 100px 8% 90px; display: flex; flex-direction: column; justify-content: center; position: relative; }
+.hero { min-height: 60vh; padding: 80px 8% 60px; display: flex; flex-direction: column; justify-content: center; position: relative; }
 .hero::before { content: ''; position: absolute; top: -120px; left: -80px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(200,135,58,0.10) 0%, transparent 70%); pointer-events: none; }
 .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; animation: fadeUp 0.7s ease both; }
 .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.6rem, 6vw, 5.2rem); font-weight: 800; line-height: 1.07; letter-spacing: -0.03em; max-width: 820px; animation: fadeUp 0.7s 0.1s ease both; }
@@ -174,5 +174,13 @@ body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-
   <a href="tel:0610703090" class="cta-btn" target="_top">Prendre contact →</a>
 </div>
 <style>html,body{height:auto;overflow:hidden;}</style>
+<script>
+function sendHeight(){var h=document.documentElement.scrollHeight||document.body.scrollHeight;window.parent.postMessage({iframeHeight:h},"*");}
+window.addEventListener("load",sendHeight);
+window.addEventListener("resize",sendHeight);
+setTimeout(sendHeight,600);
+setTimeout(sendHeight,1500);
+setTimeout(sendHeight,3000);
+</script>
 </body>
 </html>
