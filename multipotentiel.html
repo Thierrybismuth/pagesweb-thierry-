@@ -7,89 +7,76 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0c0c0b;
-  --bg2: #131311;
-  --surface: #1a1a17;
-  --white: #f0ebe0;
-  --dim: rgba(240,235,224,0.5);
-  --faint: rgba(240,235,224,0.08);
-  --accent: #c8873a;
-  --accent2: #e0a050;
-  --accent-glow: rgba(200,135,58,0.15);
-  --c1: #c8873a;
-  --c1-soft: rgba(200,135,58,0.12);
-  --c1-mid: rgba(200,135,58,0.35);
-  --c2: #5b8fa8;
-  --c2-soft: rgba(91,143,168,0.12);
-  --c2-mid: rgba(91,143,168,0.35);
-  --c3: #6aab7e;
-  --c3-soft: rgba(106,171,126,0.12);
-  --c3-mid: rgba(106,171,126,0.35);
+  --bg: #0c0c0b; --bg2: #131311; --surface: #1a1a17; --white: #f0ebe0;
+  --dim: rgba(240,235,224,0.5); --faint: rgba(240,235,224,0.08);
+  --accent: #c8873a; --accent2: #e0a050; --accent-glow: rgba(200,135,58,0.15);
+  --c1: #c8873a; --c1-soft: rgba(200,135,58,0.12); --c1-mid: rgba(200,135,58,0.35);
+  --c2: #5b8fa8; --c2-soft: rgba(91,143,168,0.12); --c2-mid: rgba(91,143,168,0.35);
+  --c3: #6aab7e; --c3-soft: rgba(106,171,126,0.12); --c3-mid: rgba(106,171,126,0.35);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.75; overflow-x: hidden; }
 @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
 @keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.hero { min-height: 60vh; padding: 80px 8% 60px; display: flex; flex-direction: column; justify-content: center; position: relative; }
+.hero { padding: 80px 8% 60px; display: flex; flex-direction: column; justify-content: center; position: relative; }
 .hero::before { content: ''; position: absolute; top: -120px; left: -80px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(200,135,58,0.10) 0%, transparent 70%); pointer-events: none; }
-.hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; animation: fadeUp 0.7s ease both; }
-.hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.6rem, 6vw, 5.2rem); font-weight: 800; line-height: 1.07; letter-spacing: -0.03em; max-width: 820px; animation: fadeUp 0.7s 0.1s ease both; }
+.hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; animation: fadeUp 0.7s ease both; }
+.hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.4rem, 5vw, 4.5rem); font-weight: 800; line-height: 1.07; letter-spacing: -0.03em; max-width: 820px; animation: fadeUp 0.7s 0.1s ease both; }
 .hero h1 em { font-style: normal; color: var(--accent); }
-.hero-sub { margin-top: 2rem; font-size: 1.1rem; color: var(--dim); max-width: 560px; line-height: 1.8; animation: fadeUp 0.7s 0.2s ease both; }
-.marquee-wrap { overflow: hidden; border-top: 1px solid var(--faint); border-bottom: 1px solid var(--faint); padding: 14px 0; background: var(--bg2); }
+.hero-sub { margin-top: 1.5rem; font-size: 1rem; color: var(--dim); max-width: 560px; line-height: 1.8; animation: fadeUp 0.7s 0.2s ease both; }
+.marquee-wrap { overflow: hidden; border-top: 1px solid var(--faint); border-bottom: 1px solid var(--faint); padding: 12px 0; background: var(--bg2); }
 .marquee-track { display: flex; width: max-content; animation: scroll-left 28s linear infinite; }
 .marquee-item { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); padding: 0 2.5rem; white-space: nowrap; }
 .marquee-item::after { content: '·'; margin-left: 2.5rem; color: var(--accent); }
-.sec { padding: 90px 8%; }
-.sec-alt { background: var(--bg2); padding: 90px 8%; }
-.eyebrow { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.4rem; }
-.big-h { font-family: 'Syne', sans-serif; font-size: clamp(1.9rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.12; letter-spacing: -0.025em; margin-bottom: 1.6rem; }
+.sec { padding: 70px 8%; }
+.sec-alt { background: var(--bg2); padding: 70px 8%; }
+.eyebrow { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
+.big-h { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 700; line-height: 1.12; letter-spacing: -0.025em; margin-bottom: 1.4rem; }
 .big-h em { font-style: italic; color: var(--accent); }
-.profils-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; margin-top: 3rem; border: 1.5px solid var(--faint); }
-.profil-card { padding: 2.5rem 2rem; background: var(--surface); position: relative; transition: background 0.3s; }
+.profils-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; margin-top: 2rem; border: 1.5px solid var(--faint); }
+.profil-card { padding: 2rem 1.8rem; background: var(--surface); position: relative; transition: background 0.3s; }
 .profil-card:hover { background: #1f1f1c; }
-.profil-num { font-family: 'Syne', sans-serif; font-size: 3.5rem; font-weight: 800; color: var(--faint); line-height: 1; margin-bottom: 1rem; transition: color 0.3s; }
-.profil-card:hover .profil-num { color: var(--accent-glow); }
-.profil-card h3 { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.9rem; color: var(--white); }
-.profil-card p { font-size: 0.9rem; color: var(--dim); line-height: 1.75; }
-.profil-accent { display: block; width: 32px; height: 2px; background: var(--accent); margin-bottom: 1.4rem; }
-.exemple-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 3rem; }
-.exemple-left p { font-size: 0.95rem; color: var(--dim); line-height: 1.85; margin-bottom: 1.2rem; }
+.profil-num { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; color: var(--faint); line-height: 1; margin-bottom: 0.8rem; }
+.profil-card h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.7rem; color: var(--white); }
+.profil-card p { font-size: 0.88rem; color: var(--dim); line-height: 1.7; }
+.profil-accent { display: block; width: 28px; height: 2px; background: var(--accent); margin-bottom: 1.2rem; }
+.exemple-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-top: 2rem; }
+.exemple-left p { font-size: 0.92rem; color: var(--dim); line-height: 1.8; margin-bottom: 1rem; }
 .exemple-left p strong { color: var(--white); font-weight: 500; }
-.exemple-right { background: var(--surface); border: 1px solid var(--faint); border-left: 3px solid var(--accent); padding: 2.5rem; }
-.ex-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.85rem 0; border-bottom: 1px solid var(--faint); gap: 1rem; }
+.exemple-right { background: var(--surface); border: 1px solid var(--faint); border-left: 3px solid var(--accent); padding: 2rem; }
+.ex-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.75rem 0; border-bottom: 1px solid var(--faint); gap: 1rem; }
 .ex-row:last-child { border-bottom: none; }
-.ex-label { font-size: 0.85rem; color: var(--dim); flex: 1; }
-.ex-amount { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 600; color: var(--white); white-space: nowrap; }
-.ex-amount.total { color: var(--accent); font-size: 1.3rem; }
+.ex-label { font-size: 0.83rem; color: var(--dim); flex: 1; }
+.ex-amount { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--white); white-space: nowrap; }
+.ex-amount.total { color: var(--accent); font-size: 1.2rem; }
 .ex-row.total-row { border-top: 1px solid rgba(200,135,58,0.35); margin-top: 0.3rem; }
-.ex-tag { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); background: var(--accent-glow); padding: 3px 8px; border-radius: 2px; display: inline-block; margin-bottom: 1.2rem; }
-.univers-intro { max-width: 560px; font-size: 0.95rem; color: var(--dim); line-height: 1.85; margin-top: 1rem; margin-bottom: 3.5rem; }
-.univers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.u-card { padding: 2rem 1.8rem; border: 1px solid transparent; background: var(--surface); position: relative; transition: transform 0.25s, border-color 0.25s, background 0.25s; cursor: default; overflow: hidden; }
+.ex-tag { font-size: 0.63rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); background: var(--accent-glow); padding: 3px 8px; border-radius: 2px; display: inline-block; margin-bottom: 1rem; }
+.univers-intro { max-width: 560px; font-size: 0.92rem; color: var(--dim); line-height: 1.8; margin-top: 0.8rem; margin-bottom: 2.5rem; }
+.univers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.u-card { padding: 1.6rem 1.5rem; border: 1px solid transparent; background: var(--surface); position: relative; transition: transform 0.25s, border-color 0.25s, background 0.25s; cursor: default; overflow: hidden; }
 .u-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; transition: background 0.3s; }
 .u-card:hover { transform: translateY(-3px); }
 .c1::before { background: var(--c1); } .c1 { border-color: var(--c1-mid); background: var(--c1-soft); } .c1:hover { background: rgba(200,135,58,0.18); } .c1 .u-dot { background: var(--c1); } .c1 .u-icon { color: var(--c1); }
 .c2::before { background: var(--c2); } .c2 { border-color: var(--c2-mid); background: var(--c2-soft); } .c2:hover { background: rgba(91,143,168,0.18); } .c2 .u-dot { background: var(--c2); } .c2 .u-icon { color: var(--c2); }
 .c3::before { background: var(--c3); } .c3 { border-color: var(--c3-mid); background: var(--c3-soft); } .c3:hover { background: rgba(106,171,126,0.18); } .c3 .u-dot { background: var(--c3); } .c3 .u-icon { color: var(--c3); }
-.u-dot { width: 7px; height: 7px; border-radius: 50%; margin-bottom: 1.2rem; display: block; }
-.u-icon { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; }
-.u-card h3 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--white); letter-spacing: 0.01em; }
-.u-card p { font-size: 0.82rem; color: var(--dim); line-height: 1.65; }
-.cluster-legend { display: flex; gap: 2rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--faint); }
-.legend-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.75rem; color: var(--dim); letter-spacing: 0.05em; }
+.u-dot { width: 6px; height: 6px; border-radius: 50%; margin-bottom: 1rem; display: block; }
+.u-icon { font-size: 1.3rem; margin-bottom: 0.6rem; display: block; }
+.u-card h3 { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--white); }
+.u-card p { font-size: 0.78rem; color: var(--dim); line-height: 1.6; }
+.cluster-legend { display: flex; gap: 2rem; margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid var(--faint); }
+.legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; color: var(--dim); }
 .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.choix-wrap { text-align: center; max-width: 720px; margin: 0 auto; padding: 90px 8%; }
-.choix-wrap .big-h { margin-bottom: 1rem; }
-.choix-sub { font-size: 0.95rem; color: var(--dim); margin-bottom: 3rem; line-height: 1.8; }
-.choix-options { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-.choix-pill { padding: 0.65rem 1.6rem; border: 1px solid var(--faint); background: var(--surface); color: var(--dim); font-size: 0.85rem; letter-spacing: 0.05em; cursor: default; transition: border-color 0.25s, color 0.25s, background 0.25s; }
+.choix-wrap { text-align: center; max-width: 680px; margin: 0 auto; padding: 70px 8%; }
+.choix-wrap .big-h { margin-bottom: 0.8rem; }
+.choix-sub { font-size: 0.92rem; color: var(--dim); margin-bottom: 2.5rem; line-height: 1.8; }
+.choix-options { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; }
+.choix-pill { padding: 0.55rem 1.4rem; border: 1px solid var(--faint); background: var(--surface); color: var(--dim); font-size: 0.82rem; cursor: default; transition: border-color 0.25s, color 0.25s, background 0.25s; }
 .choix-pill:hover, .choix-pill.active { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
-.cta-section { padding: 80px 8%; background: var(--bg2); border-top: 1px solid var(--faint); display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap; }
-.cta-left h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; line-height: 1.2; margin-bottom: 0.8rem; }
-.cta-left p { font-size: 0.9rem; color: var(--dim); max-width: 440px; }
-.cta-btn { display: inline-block; padding: 1rem 2.5rem; background: var(--accent); color: #0c0c0b; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.25s, transform 0.2s; white-space: nowrap; }
+.cta-section { padding: 60px 8%; background: var(--bg2); border-top: 1px solid var(--faint); display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap; }
+.cta-left h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 700; line-height: 1.2; margin-bottom: 0.7rem; }
+.cta-left p { font-size: 0.88rem; color: var(--dim); max-width: 420px; }
+.cta-btn { display: inline-block; padding: 0.9rem 2.2rem; background: var(--accent); color: #0c0c0b; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.25s, transform 0.2s; white-space: nowrap; }
 .cta-btn:hover { background: var(--accent2); transform: translateY(-2px); }
 @media (max-width: 900px) { .profils-grid { grid-template-columns: 1fr; } .exemple-wrap { grid-template-columns: 1fr; gap: 2rem; } .univers-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .univers-grid { grid-template-columns: 1fr; } .cta-section { flex-direction: column; } }
@@ -106,20 +93,19 @@ body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-
   <div class="eyebrow">À qui s'adresse ce réseau ?</div>
   <h2 class="big-h">Trois façons<br>d'être <em>multipotentiel.</em></h2>
   <div class="profils-grid">
-    <div class="profil-card"><div class="profil-num">01</div><span class="profil-accent"></span><h3>Vous voulez plusieurs activités en parallèle</h3><p>Plusieurs marchés, plusieurs types de clients. Vous ne voulez pas dépendre d'un seul secteur, ni vous lasser d'un seul univers.</p></div>
-    <div class="profil-card"><div class="profil-num">02</div><span class="profil-accent"></span><h3>Vous voulez tester avant de trancher</h3><p>Pas encore fixé sur un seul concept. Vous vous donnez quelques mois pour essayer plusieurs choses simultanément — et choisir en connaissance de cause.</p></div>
-    <div class="profil-card"><div class="profil-num">03</div><span class="profil-accent"></span><h3>Vous avez déjà une activité et vous voulez l'enrichir</h3><p>Vous n'avez pas envie de tout plaquer. Vous voulez greffer des enseignes complémentaires sur ce que vous faites déjà — même clientèle, revenus additionnels.</p></div>
+    <div class="profil-card"><div class="profil-num">01</div><span class="profil-accent"></span><h3>Vous voulez plusieurs activités en parallèle</h3><p>Plusieurs marchés, plusieurs types de clients. Ne pas dépendre d'un seul secteur, ni se lasser d'un seul univers.</p></div>
+    <div class="profil-card"><div class="profil-num">02</div><span class="profil-accent"></span><h3>Vous voulez tester avant de trancher</h3><p>Pas encore fixé sur un seul concept. Vous vous donnez quelques mois pour essayer plusieurs choses simultanément.</p></div>
+    <div class="profil-card"><div class="profil-num">03</div><span class="profil-accent"></span><h3>Vous avez déjà une activité et voulez l'enrichir</h3><p>Vous n'avez pas envie de tout plaquer. Vous greffez des enseignes complémentaires — même clientèle, revenus additionnels.</p></div>
   </div>
 </section>
 <section class="sec-alt">
   <div class="eyebrow">La puissance de la complémentarité</div>
-  <h2 class="big-h">Un client.<br>Une transaction.<br><em>Plusieurs commissions.</em></h2>
+  <h2 class="big-h">Un client. Une transaction.<br><em>Plusieurs commissions.</em></h2>
   <div class="exemple-wrap">
     <div class="exemple-left">
-      <p>Vous vendez un bien à <strong>400 000 €</strong> à Bordeaux — appartement de 90 m², acquéreurs qui empruntent 320 000 €, 35 000 € de travaux à prévoir.</p>
+      <p>Vous vendez un bien à <strong>400 000 €</strong> à Bordeaux — 90 m², 320 000 € empruntés, 35 000 € de travaux à prévoir.</p>
       <p>Avec une seule casquette, vous touchez votre commission et passez au dossier suivant.</p>
-      <p>Avec plusieurs enseignes complémentaires sur ce même client, le calcul change radicalement — <strong>sans effort commercial supplémentaire.</strong></p>
-      <p style="margin-top:1.6rem; font-size:0.82rem; color:var(--dim); font-style:italic;">Ordres de grandeur indicatifs — variables selon les enseignes activées et le profil du client.</p>
+      <p>Avec plusieurs enseignes complémentaires sur ce même client — <strong>même effort commercial, revenus multipliés.</strong></p>
     </div>
     <div class="exemple-right">
       <span class="ex-tag">Exemple Bordeaux — 400 000 €</span>
@@ -133,20 +119,20 @@ body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-
 </section>
 <section class="sec">
   <div class="eyebrow">Les univers disponibles — au 1er avril 2026</div>
-  <h2 class="big-h">Choisissez vos<br><em>combinaisons.</em></h2>
-  <p class="univers-intro">Onze univers d'activité, trois logiques de marché. Les couleurs vous guident — à vous de construire votre portefeuille.</p>
+  <h2 class="big-h">Choisissez vos <em>combinaisons.</em></h2>
+  <p class="univers-intro">Onze univers, trois logiques de marché. Les couleurs vous guident — à vous de construire votre portefeuille.</p>
   <div class="univers-grid">
-    <div class="u-card c1"><span class="u-icon">🏠</span><span class="u-dot"></span><h3>Immobilier</h3><p>Particuliers. Transaction, mandataire, investissement — un réseau terrain et une clientèle qui a d'autres besoins.</p></div>
-    <div class="u-card c1"><span class="u-icon">🔧</span><span class="u-dot"></span><h3>Bricolage & petits travaux</h3><p>Particuliers et professionnels. Interventions rapides, clientèle locale, récurrence naturelle.</p></div>
-    <div class="u-card c1"><span class="u-icon">🌿</span><span class="u-dot"></span><h3>Rénovation énergétique</h3><p>Particuliers et professionnels. Marché en forte croissance, accès aux financements publics.</p></div>
-    <div class="u-card c1"><span class="u-icon">💶</span><span class="u-dot"></span><h3>Renégociation de crédit</h3><p>Particuliers et professionnels. Un service à forte valeur perçue, souvent déclenché par un changement de vie.</p></div>
-    <div class="u-card c2"><span class="u-icon">🍽️</span><span class="u-dot"></span><h3>Vaisselle réutilisable</h3><p>Événements, collectivités, grandes entreprises. Location circulaire, marché RSE en pleine expansion.</p></div>
-    <div class="u-card c2"><span class="u-icon">📦</span><span class="u-dot"></span><h3>Vente de colis perdus</h3><p>Événements et grand public. Animation, surprise — un produit qui se vend tout seul.</p></div>
-    <div class="u-card c3"><span class="u-icon">🏢</span><span class="u-dot"></span><h3>Rénovation énergétique tertiaire</h3><p>Bâtiments professionnels, bureaux, commerces. Obligations réglementaires croissantes, tickets élevés.</p></div>
-    <div class="u-card c3"><span class="u-icon">🥗</span><span class="u-dot"></span><h3>Vaisselle réutilisable entreprises</h3><p>Cantines, événements corporate, RSE. Un interlocuteur RH ou facility manager — un contrat récurrent.</p></div>
-    <div class="u-card c3"><span class="u-icon">📋</span><span class="u-dot"></span><h3>Courtage crédit professionnel</h3><p>Financement de projets, assurance emprunteur pro. Des dirigeants qui ont besoin de faire financer leur développement.</p></div>
-    <div class="u-card c3"><span class="u-icon">🎯</span><span class="u-dot"></span><h3>Assistance recrutement</h3><p>PME, commerces, franchisés. Un besoin permanent, un service à forte valeur ajoutée pour l'entreprise.</p></div>
-    <div class="u-card c3"><span class="u-icon">🛠️</span><span class="u-dot"></span><h3>Maintenance réseaux de magasins</h3><p>Enseignes, franchises, retail. Interventions multi-sites, contrats cadres, interlocuteur unique pour les réseaux.</p></div>
+    <div class="u-card c1"><span class="u-icon">🏠</span><span class="u-dot"></span><h3>Immobilier</h3><p>Particuliers. Transaction, mandataire, investissement.</p></div>
+    <div class="u-card c1"><span class="u-icon">🔧</span><span class="u-dot"></span><h3>Bricolage & petits travaux</h3><p>Particuliers et professionnels. Récurrence naturelle.</p></div>
+    <div class="u-card c1"><span class="u-icon">🌿</span><span class="u-dot"></span><h3>Rénovation énergétique</h3><p>Particuliers et pros. Marché en forte croissance.</p></div>
+    <div class="u-card c1"><span class="u-icon">💶</span><span class="u-dot"></span><h3>Renégociation de crédit</h3><p>Particuliers et pros. Forte valeur perçue.</p></div>
+    <div class="u-card c2"><span class="u-icon">🍽️</span><span class="u-dot"></span><h3>Vaisselle réutilisable</h3><p>Événements, collectivités. Marché RSE en expansion.</p></div>
+    <div class="u-card c2"><span class="u-icon">📦</span><span class="u-dot"></span><h3>Vente de colis perdus</h3><p>Événements. Animation, surprise.</p></div>
+    <div class="u-card c3"><span class="u-icon">🏢</span><span class="u-dot"></span><h3>Rénovation tertiaire</h3><p>Bâtiments pros, bureaux, commerces.</p></div>
+    <div class="u-card c3"><span class="u-icon">🥗</span><span class="u-dot"></span><h3>Vaisselle entreprises</h3><p>Cantines, événements corporate, RSE.</p></div>
+    <div class="u-card c3"><span class="u-icon">📋</span><span class="u-dot"></span><h3>Courtage crédit pro</h3><p>Financement projets, assurance emprunteur.</p></div>
+    <div class="u-card c3"><span class="u-icon">🎯</span><span class="u-dot"></span><h3>Assistance recrutement</h3><p>PME, commerces, franchisés.</p></div>
+    <div class="u-card c3"><span class="u-icon">🛠️</span><span class="u-dot"></span><h3>Maintenance réseaux</h3><p>Enseignes, franchises, retail multi-sites.</p></div>
   </div>
   <div class="cluster-legend">
     <div class="legend-item"><div class="legend-dot" style="background:var(--c1);"></div>Particulier</div>
@@ -156,8 +142,8 @@ body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-
 </section>
 <div class="choix-wrap">
   <div class="eyebrow">Votre portefeuille</div>
-  <h2 class="big-h">2 enseignes, 3, 5<br><em>— ou toutes.</em></h2>
-  <p class="choix-sub">Commencez par ce qui vous parle. Ajoutez-en une autre quand vous êtes prêt. Faites évoluer votre mix dans le temps. Pas d'obligation de tout déployer d'un coup.</p>
+  <h2 class="big-h">2 enseignes, 3, 5 <em>— ou toutes.</em></h2>
+  <p class="choix-sub">Commencez par ce qui vous parle. Ajoutez-en une autre quand vous êtes prêt. Pas d'obligation de tout déployer d'un coup.</p>
   <div class="choix-options">
     <div class="choix-pill active">2 enseignes</div>
     <div class="choix-pill">3 enseignes</div>
@@ -168,8 +154,8 @@ body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-
 </div>
 <div class="cta-section">
   <div class="cta-left">
-    <h2>Parlons de votre<br>combinaison idéale.</h2>
-    <p>Un échange de 20 minutes pour identifier les enseignes qui correspondent à votre profil, votre territoire, votre façon d'entreprendre.</p>
+    <h2>Parlons de votre combinaison idéale.</h2>
+    <p>Un échange de 20 minutes pour identifier les enseignes qui correspondent à votre profil, territoire et façon d'entreprendre.</p>
   </div>
   <a href="tel:0610703090" class="cta-btn" target="_top">Prendre contact →</a>
 </div>
@@ -178,9 +164,9 @@ body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-
 function sendHeight(){var h=document.documentElement.scrollHeight||document.body.scrollHeight;window.parent.postMessage({iframeHeight:h},"*");}
 window.addEventListener("load",sendHeight);
 window.addEventListener("resize",sendHeight);
-setTimeout(sendHeight,600);
-setTimeout(sendHeight,1500);
-setTimeout(sendHeight,3000);
+setTimeout(sendHeight,300);
+setTimeout(sendHeight,800);
+setTimeout(sendHeight,2000);
 </script>
 </body>
 </html>
