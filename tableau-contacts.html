@@ -6,16 +6,7 @@
 <title>Tableau de Chasse — TB</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #1a2e44;
-    --terra: #c8873a;
-    --cream: #f7f5f0;
-    --light: #edeae4;
-    --muted: #8a9bb0;
-    --green: #2e7d52;
-    --red: #b03a2e;
-    --orange: #c8873a;
-  }
+  :root { --navy: #1a2e44; --terra: #c8873a; --cream: #f7f5f0; --light: #edeae4; --muted: #8a9bb0; --green: #2e7d52; --red: #b03a2e; --orange: #c8873a; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--navy); min-height: 100vh; }
   header { background: var(--navy); color: white; padding: 16px 20px 12px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(26,46,68,0.25); }
@@ -94,7 +85,6 @@
     <input type="text" id="search" placeholder="Chercher un nom, ville, entreprise..." oninput="filterCards()">
   </div>
   <div class="filter-row" id="enseigne-filters"></div>
-  <div class="filter-row" id="bilan-filters"></div>
 </div>
 
 <div class="stats-bar" id="stats">Chargement des contacts...</div>
@@ -117,12 +107,11 @@ const N8N_MAJ = 'https://thierryb.app.n8n.cloud/webhook/a61ef07d-e237-45af-85ab-
 
 let allContacts = [];
 let activeEnseigne = 'Tous';
-let activeBilan = 'Tous';
 
 function getBilanClass(bilan) {
   if (!bilan) return 'bilan-default';
   const b = bilan.toLowerCase();
-  if (b.includes('rdv') || b.includes('réunion') || b.includes('mars') || b.includes('aix')) return 'bilan-rdv';
+  if (b.includes('rdv') || b.includes('mars') || b.includes('aix')) return 'bilan-rdv';
   if (b.includes('en cours')) return 'bilan-encours';
   if (b.includes('ko') || b.includes('non') || b.includes('refus')) return 'bilan-ko';
   if (b.includes('ok') || b.includes('signé') || b.includes('validé')) return 'bilan-ok';
@@ -183,28 +172,24 @@ async function loadData() {
 
 function buildFilters() {
   const enseignes = ['Tous', ...new Set(allContacts.map(c => c['Enseigne envisagée']).filter(Boolean))];
-  const bilans = ['Tous', ...new Set(allContacts.map(c => c['Bilan']).filter(Boolean))];
   document.getElementById('enseigne-filters').innerHTML = enseignes.map(e =>
     `<button class="chip ${e === activeEnseigne ? 'active' : ''}" onclick="setEnseigne('${e}')">${e}</button>`).join('');
-  document.getElementById('bilan-filters').innerHTML = bilans.map(b =>
-    `<button class="chip terra ${b === activeBilan ? 'active' : ''}" onclick="setBilan('${b}')">${b}</button>`).join('');
 }
 
 function setEnseigne(e) { activeEnseigne = e; buildFilters(); filterCards(); }
-function setBilan(b) { activeBilan = b; buildFilters(); filterCards(); }
 
 function filterCards() {
   const q = (document.getElementById('search').value || '').toLowerCase();
   let filtered = allContacts.filter(c => {
     const matchEnseigne = activeEnseigne === 'Tous' || c['Enseigne envisagée'] === activeEnseigne;
-    const matchBilan = activeBilan === 'Tous' || c['Bilan'] === activeBilan;
     const matchSearch = !q || Object.values(c).some(v => v.toLowerCase().includes(q));
     const loc0 = c['Localisation'] || c['localisation'] || '';
     const matchProx = !proximityMode || (contactDistances[loc0] !== undefined && contactDistances[loc0] <= 10);
-    return matchEnseigne && matchBilan && matchSearch && matchProx;
+    const bilanVierge = !c['Bilan'] || c['Bilan'].trim() === '';
+    return matchEnseigne && matchSearch && matchProx && bilanVierge;
   });
 
-  document.getElementById('stats').innerHTML = `<span>${filtered.length}</span> contact${filtered.length > 1 ? 's' : ''} affiché${filtered.length > 1 ? 's' : ''} sur <span>${allContacts.length}</span>`;
+  document.getElementById('stats').innerHTML = `<span>${filtered.length}</span> contact${filtered.length > 1 ? 's' : ''} à appeler (bilan vierge) sur <span>${allContacts.length}</span>`;
 
   if (!filtered.length) {
     document.getElementById('cards').innerHTML = '<div class="empty">Aucun contact trouvé</div>';
@@ -223,10 +208,7 @@ function filterCards() {
       } else { telIntl = raw; telDisplay = raw; }
     }
     const mail = c['Mail'] || '';
-    const bilan = c['Bilan'] || '';
     const commentaire = (c['Commentaire'] || '').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    const borderColor = getBilanBorderColor(bilan);
-    const bilanClass = getBilanClass(bilan);
     const loc0 = c['Localisation'] || c['localisation'] || '';
     const dist = contactDistances[loc0];
     const quiEsc = (c['Qui'] || '').replace(/'/g, "\\'");
@@ -241,10 +223,10 @@ function filterCards() {
       ['Signé', '✅ Signé'],
       ['KO', '🔴 KO'],
       ['Non joignable', '⚫ Non joignable']
-    ].map(([val, label]) => `<option value="${val}" ${bilan === val ? 'selected' : ''}>${label}</option>`).join('');
+    ].map(([val, label]) => `<option value="${val}">${label}</option>`).join('');
 
     return `
-    <div class="card" style="border-left-color: ${borderColor}">
+    <div class="card" style="border-left-color: var(--light)">
       <div class="card-header">
         <div>
           <div class="card-name">${c['Qui'] || '—'}</div>
@@ -256,14 +238,13 @@ function filterCards() {
         ${loc0 ? `<span class="info-tag">📍 ${loc0}</span>` : ''}
         ${loc0 && dist !== undefined ? `<span class="dist-badge ${dist > 10 ? 'dist-far' : ''}">${Math.round(dist)}km d'Aix</span>` : ''}
         ${c['Origine fichier'] ? `<span class="info-tag">${c['Origine fichier']}</span>` : ''}
-        ${bilan ? `<span class="bilan-badge ${bilanClass}">${bilan}</span>` : ''}
       </div>
       ${commentaire ? `<div class="comment">${commentaire}</div>` : ''}
       <div class="card-actions">
         ${telIntl ? `<a class="action-btn btn-call" href="tel:${telIntl}">📞 ${telDisplay}</a>` : ''}
         ${mail ? `<a class="action-btn btn-mail" href="mailto:${mail}">✉️ Mail</a>` : ''}
       </div>
-      <button class="edit-btn" onclick="toggleEdit(this)">✏️ Modifier commentaire / bilan</button>
+      <button class="edit-btn" onclick="toggleEdit(this)">✏️ Qualifier ce contact</button>
       <div class="edit-form" style="display:none">
         <textarea placeholder="Commentaire...">${commentaire}</textarea>
         <select>${bilanOptions}</select>
@@ -299,16 +280,10 @@ async function saveCard(saveBtn, qui) {
   try {
     const body = { qui, commentaire };
     if (bilan) body.bilan = bilan;
-    await fetch(N8N_MAJ, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
+    await fetch(N8N_MAJ, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     saveBtn.textContent = '✅ Enregistré !';
     saveBtn.classList.remove('saving');
     saveBtn.classList.add('saved');
-    const contact = allContacts.find(c => c['Qui'] === qui);
-    if (contact) { contact['Commentaire'] = commentaire; if (bilan) contact['Bilan'] = bilan; }
     setTimeout(() => { cancelEdit(saveBtn); saveBtn.textContent = '💾 Enregistrer'; saveBtn.classList.remove('saved'); filterCards(); }, 1200);
   } catch(e) {
     saveBtn.textContent = '❌ Erreur';
