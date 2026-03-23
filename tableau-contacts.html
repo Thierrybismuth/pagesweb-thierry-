@@ -476,7 +476,8 @@ function filterCards() {
     const matchEnseigne = activeEnseigne === 'Tous' || c['Enseigne envisagée'] === activeEnseigne;
     const matchBilan = activeBilan === 'Tous' || c['Bilan'] === activeBilan;
     const matchSearch = !q || Object.values(c).some(v => v.toLowerCase().includes(q));
-    const matchProx = !proximityMode || (contactDistances[c['Localisation']] !== undefined && contactDistances[c['Localisation']] <= 10);
+    const loc0 = c['Localisation'] || c['localisation'] || '';
+    const matchProx = !proximityMode || (contactDistances[loc0] !== undefined && contactDistances[loc0] <= 10);
     return matchEnseigne && matchBilan && matchSearch && matchProx;
   });
 
@@ -488,16 +489,12 @@ function filterCards() {
   }
 
   document.getElementById('cards').innerHTML = filtered.map(c => {
-    // Normalisation du numéro
     let raw = String(c['Tel'] || '').replace(/[\s.\-()]/g, '');
     let telIntl = '';
     let telDisplay = '';
     if (raw) {
-      // Cas: 33XXXXXXXXX (stocké comme entier sans le +)
       if (raw.match(/^33\d{9}$/)) raw = '0' + raw.slice(2);
-      // Cas: +33XXXXXXXXX
       if (raw.match(/^\+33\d{9}$/)) raw = '0' + raw.slice(3);
-      // On a maintenant 0XXXXXXXXX
       if (raw.match(/^0\d{9}$/)) {
         telIntl = '+33' + raw.slice(1);
         telDisplay = raw.replace(/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
@@ -510,6 +507,8 @@ function filterCards() {
     const bilan = c['Bilan'] || '';
     const borderColor = getBilanBorderColor(bilan);
     const bilanClass = getBilanClass(bilan);
+    const loc0 = c['Localisation'] || c['localisation'] || '';
+    const dist = contactDistances[loc0];
 
     return `
     <div class="card" style="border-left-color: ${borderColor}">
@@ -522,8 +521,8 @@ function filterCards() {
       </div>
 
       <div class="card-info">
-        ${c['Localisation'] ? `<span class="info-tag">📍 ${c['Localisation']}</span>` : ''}
-        ${c['Localisation'] && contactDistances[c['Localisation']] !== undefined ? `<span class="dist-badge ${contactDistances[c['Localisation']] > 10 ? 'dist-far' : ''}">${Math.round(contactDistances[c['Localisation']])}km d'Aix</span>` : ''}
+        ${loc0 ? `<span class="info-tag">📍 ${loc0}</span>` : ''}
+        ${loc0 && dist !== undefined ? `<span class="dist-badge ${dist > 10 ? 'dist-far' : ''}">${Math.round(dist)}km d'Aix</span>` : ''}
         ${c['Origine fichier'] ? `<span class="info-tag">${c['Origine fichier']}</span>` : ''}
         ${bilan ? `<span class="bilan-badge ${bilanClass}">${bilan}</span>` : ''}
       </div>
@@ -540,7 +539,6 @@ function filterCards() {
 
 loadData();
 
-// --- PROXIMITÉ AIX ---
 const AIX = { lat: 43.5297, lon: 5.4474 };
 const geocodeCache = {};
 let proximityMode = false;
@@ -587,17 +585,14 @@ async function toggleProxFilter() {
   btn.classList.add('prox-loading');
   label.textContent = 'Calcul...';
 
-  const locs = [...new Set(allContacts.map(c => c['Localisation']).filter(Boolean))];
+  const locs = [...new Set(allContacts.map(c => c['Localisation'] || c['localisation'] || '').filter(Boolean))];
   for (const loc of locs) {
     if (!geocodeCache[loc]) {
       const coords = await geocode(loc);
-      if (coords) {
-        contactDistances[loc] = haversine(AIX.lat, AIX.lon, coords.lat, coords.lon);
-      }
+      if (coords) contactDistances[loc] = haversine(AIX.lat, AIX.lon, coords.lat, coords.lon);
       await new Promise(r => setTimeout(r, 300));
     } else {
-      const coords = geocodeCache[loc];
-      contactDistances[loc] = haversine(AIX.lat, AIX.lon, coords.lat, coords.lon);
+      contactDistances[loc] = haversine(AIX.lat, AIX.lon, geocodeCache[loc].lat, geocodeCache[loc].lon);
     }
   }
 
