@@ -16,338 +16,69 @@
     --red: #b03a2e;
     --orange: #c8873a;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Outfit', sans-serif;
-    background: var(--cream);
-    color: var(--navy);
-    min-height: 100vh;
-  }
-
-  header {
-    background: var(--navy);
-    color: white;
-    padding: 16px 20px 12px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 12px rgba(26,46,68,0.25);
-  }
-
-  header h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-  }
-
-  header p {
-    font-size: 0.72rem;
-    color: var(--muted);
-    margin-top: 2px;
-    font-weight: 300;
-  }
-
-  .filters {
-    background: white;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--light);
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    position: sticky;
-    top: 70px;
-    z-index: 90;
-  }
-
-  .search-wrap {
-    position: relative;
-  }
-
-  .search-wrap input {
-    width: 100%;
-    padding: 10px 14px 10px 36px;
-    border: 1.5px solid var(--light);
-    border-radius: 8px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.88rem;
-    background: var(--cream);
-    color: var(--navy);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
+  body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--navy); min-height: 100vh; }
+  header { background: var(--navy); color: white; padding: 16px 20px 12px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(26,46,68,0.25); }
+  header h1 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; letter-spacing: 0.03em; }
+  header p { font-size: 0.72rem; color: var(--muted); margin-top: 2px; font-weight: 300; }
+  .filters { background: white; padding: 12px 16px; border-bottom: 1px solid var(--light); display: flex; flex-direction: column; gap: 8px; position: sticky; top: 70px; z-index: 90; }
+  .search-wrap { position: relative; }
+  .search-wrap input { width: 100%; padding: 10px 14px 10px 36px; border: 1.5px solid var(--light); border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.88rem; background: var(--cream); color: var(--navy); outline: none; transition: border-color 0.2s; }
   .search-wrap input:focus { border-color: var(--terra); }
-
-  .search-icon {
-    position: absolute;
-    left: 11px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-
-  .filter-row {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
+  .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 0.9rem; }
+  .filter-row { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
   .filter-row::-webkit-scrollbar { display: none; }
-
-  .chip {
-    flex-shrink: 0;
-    padding: 5px 12px;
-    border-radius: 20px;
-    border: 1.5px solid var(--light);
-    background: white;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 500;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
-  }
-
-  .chip.active {
-    background: var(--navy);
-    border-color: var(--navy);
-    color: white;
-  }
-
-  .chip.terra.active {
-    background: var(--terra);
-    border-color: var(--terra);
-    color: white;
-  }
-
-  .stats-bar {
-    padding: 8px 16px;
-    font-size: 0.75rem;
-    color: var(--muted);
-    background: var(--cream);
-    border-bottom: 1px solid var(--light);
-  }
-
+  .chip { flex-shrink: 0; padding: 5px 12px; border-radius: 20px; border: 1.5px solid var(--light); background: white; font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .chip.active { background: var(--navy); border-color: var(--navy); color: white; }
+  .chip.terra.active { background: var(--terra); border-color: var(--terra); color: white; }
+  .stats-bar { padding: 8px 16px; font-size: 0.75rem; color: var(--muted); background: var(--cream); border-bottom: 1px solid var(--light); }
   .stats-bar span { font-weight: 600; color: var(--navy); }
-
-  .cards {
-    padding: 12px 12px 80px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .card {
-    background: white;
-    border-radius: 12px;
-    padding: 14px 16px;
-    box-shadow: 0 1px 4px rgba(26,46,68,0.08);
-    border-left: 3px solid var(--light);
-    transition: box-shadow 0.2s;
-  }
-
+  .cards { padding: 12px 12px 80px; display: flex; flex-direction: column; gap: 10px; }
+  .card { background: white; border-radius: 12px; padding: 14px 16px; box-shadow: 0 1px 4px rgba(26,46,68,0.08); border-left: 3px solid var(--light); transition: box-shadow 0.2s; }
   .card:active { box-shadow: 0 3px 12px rgba(26,46,68,0.15); }
-
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 6px;
-  }
-
-  .card-name {
-    font-weight: 600;
-    font-size: 0.98rem;
-    color: var(--navy);
-    line-height: 1.2;
-  }
-
-  .card-sub {
-    font-size: 0.75rem;
-    color: var(--muted);
-    font-weight: 300;
-    margin-top: 1px;
-  }
-
-  .badge {
-    font-size: 0.68rem;
-    font-weight: 600;
-    padding: 3px 8px;
-    border-radius: 10px;
-    background: var(--light);
-    color: var(--navy);
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-left: 8px;
-  }
-
-  .bilan-badge {
-    font-size: 0.68rem;
-    font-weight: 500;
-    padding: 3px 8px;
-    border-radius: 10px;
-    white-space: nowrap;
-  }
-
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+  .card-name { font-weight: 600; font-size: 0.98rem; color: var(--navy); line-height: 1.2; }
+  .card-sub { font-size: 0.75rem; color: var(--muted); font-weight: 300; margin-top: 1px; }
+  .badge { font-size: 0.68rem; font-weight: 600; padding: 3px 8px; border-radius: 10px; background: var(--light); color: var(--navy); white-space: nowrap; flex-shrink: 0; margin-left: 8px; }
+  .bilan-badge { font-size: 0.68rem; font-weight: 500; padding: 3px 8px; border-radius: 10px; white-space: nowrap; }
   .bilan-encours { background: #fff3e0; color: #c8873a; }
   .bilan-rdv { background: #e8f5e9; color: #2e7d52; }
   .bilan-ko { background: #fce4e4; color: #b03a2e; }
   .bilan-ok { background: #e3f2fd; color: #1565c0; }
   .bilan-default { background: var(--light); color: var(--navy); }
-
-  .card-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 10px;
-  }
-
-  .action-btn {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 500;
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-    transition: all 0.15s;
-    flex: 1;
-    justify-content: center;
-  }
-
-  .btn-call {
-    background: var(--navy);
-    color: white;
-  }
-
+  .card-actions { display: flex; gap: 8px; margin-top: 10px; }
+  .action-btn { display: flex; align-items: center; gap: 5px; padding: 8px 14px; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 500; text-decoration: none; cursor: pointer; border: none; transition: all 0.15s; flex: 1; justify-content: center; }
+  .btn-call { background: var(--navy); color: white; }
   .btn-call:active { background: #0f1d2b; }
-
-  .btn-mail {
-    background: var(--light);
-    color: var(--navy);
-  }
-
+  .btn-mail { background: var(--light); color: var(--navy); }
   .btn-mail:active { background: #ddd8d0; }
-
-  .card-info {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 8px;
-  }
-
-  .info-tag {
-    font-size: 0.72rem;
-    color: var(--muted);
-    background: var(--cream);
-    padding: 2px 8px;
-    border-radius: 6px;
-    font-weight: 400;
-  }
-
-  .comment {
-    margin-top: 8px;
-    font-size: 0.78rem;
-    color: #5a6e82;
-    line-height: 1.4;
-    font-style: italic;
-    border-top: 1px solid var(--light);
-    padding-top: 8px;
-  }
-
-  .loading {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--muted);
-  }
-
-  .loading-spinner {
-    width: 32px;
-    height: 32px;
-    border: 3px solid var(--light);
-    border-top-color: var(--terra);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin: 0 auto 16px;
-  }
-
+  .card-info { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+  .info-tag { font-size: 0.72rem; color: var(--muted); background: var(--cream); padding: 2px 8px; border-radius: 6px; font-weight: 400; }
+  .comment { margin-top: 8px; font-size: 0.78rem; color: #5a6e82; line-height: 1.4; font-style: italic; border-top: 1px solid var(--light); padding-top: 8px; }
+  .loading { text-align: center; padding: 60px 20px; color: var(--muted); }
+  .loading-spinner { width: 32px; height: 32px; border: 3px solid var(--light); border-top-color: var(--terra); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  .empty {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--muted);
-  }
-
-  .refresh-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 48px;
-    height: 48px;
-    background: var(--terra);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    cursor: pointer;
-    box-shadow: 0 4px 16px rgba(200,135,58,0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s;
-  }
-
+  .empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+  .refresh-btn { position: fixed; bottom: 20px; right: 20px; width: 48px; height: 48px; background: var(--terra); color: white; border: none; border-radius: 50%; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 16px rgba(200,135,58,0.4); display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
   .refresh-btn:active { transform: scale(0.9); }
-
-  .prox-btn {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    padding: 10px 16px;
-    background: white;
-    color: var(--navy);
-    border: 2px solid var(--light);
-    border-radius: 24px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(26,46,68,0.12);
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .prox-btn.active {
-    background: #e8f5e9;
-    border-color: #2e7d52;
-    color: #2e7d52;
-  }
-
+  .prox-btn { position: fixed; bottom: 20px; left: 20px; padding: 10px 16px; background: white; color: var(--navy); border: 2px solid var(--light); border-radius: 24px; font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; box-shadow: 0 2px 10px rgba(26,46,68,0.12); transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
+  .prox-btn.active { background: #e8f5e9; border-color: #2e7d52; color: #2e7d52; }
   .prox-loading { animation: pulse 1s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-
-  .dist-badge {
-    font-size: 0.65rem;
-    background: #e8f5e9;
-    color: #2e7d52;
-    padding: 1px 6px;
-    border-radius: 8px;
-    font-weight: 600;
-    margin-left: 4px;
-  }
+  .dist-badge { font-size: 0.65rem; background: #e8f5e9; color: #2e7d52; padding: 1px 6px; border-radius: 8px; font-weight: 600; margin-left: 4px; }
   .dist-far { background: #fce4e4; color: #b03a2e; }
+  .edit-btn { margin-top: 8px; width: 100%; padding: 6px; background: var(--cream); border: 1px dashed var(--light); border-radius: 6px; font-family: 'Outfit', sans-serif; font-size: 0.75rem; color: var(--muted); cursor: pointer; transition: all 0.15s; text-align: center; }
+  .edit-btn:hover { border-color: var(--terra); color: var(--terra); }
+  .edit-form { margin-top: 10px; border-top: 1px solid var(--light); padding-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .edit-form textarea { width: 100%; padding: 8px 10px; border: 1.5px solid var(--light); border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.8rem; color: var(--navy); background: var(--cream); resize: vertical; min-height: 70px; outline: none; transition: border-color 0.2s; }
+  .edit-form textarea:focus { border-color: var(--terra); }
+  .edit-form select { width: 100%; padding: 8px 10px; border: 1.5px solid var(--light); border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.8rem; color: var(--navy); background: white; outline: none; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238a9bb0' d='M6 8L0 0h12z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
+  .edit-actions { display: flex; gap: 6px; }
+  .save-btn { flex: 1; padding: 8px; background: var(--navy); color: white; border: none; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+  .save-btn:active { background: #0f1d2b; }
+  .save-btn.saving { opacity: 0.6; pointer-events: none; }
+  .save-btn.saved { background: #2e7d52; }
+  .cancel-btn { padding: 8px 12px; background: var(--light); color: var(--muted); border: none; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.8rem; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -382,6 +113,7 @@
 const SHEET_ID = '1CqFrk0RgkO9xJuglSTPz3dgcd-tbU33VrYaM0lt_BJg';
 const TAB_NAME = 'Suivi contacts';
 const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(TAB_NAME)}`;
+const N8N_MAJ = 'https://thierryb.app.n8n.cloud/webhook/a61ef07d-e237-45af-85ab-370fbe07bd7b';
 
 let allContacts = [];
 let activeEnseigne = 'Tous';
@@ -390,7 +122,7 @@ let activeBilan = 'Tous';
 function getBilanClass(bilan) {
   if (!bilan) return 'bilan-default';
   const b = bilan.toLowerCase();
-  if (b.includes('rdv') || b.includes('réunion') || b.includes('reunion') || b.includes('mars') || b.includes('aix')) return 'bilan-rdv';
+  if (b.includes('rdv') || b.includes('réunion') || b.includes('mars') || b.includes('aix')) return 'bilan-rdv';
   if (b.includes('en cours')) return 'bilan-encours';
   if (b.includes('ko') || b.includes('non') || b.includes('refus')) return 'bilan-ko';
   if (b.includes('ok') || b.includes('signé') || b.includes('validé')) return 'bilan-ok';
@@ -432,41 +164,30 @@ async function loadData() {
     const res = await fetch(URL + '&t=' + Date.now());
     const text = await res.text();
     const rows = parseCSV(text);
-    if (rows.length < 2) throw new Error('Données vides');
-
+    if (rows.length < 2) throw new Error('vide');
     const headers = rows[0];
-    allContacts = rows.slice(1)
-      .filter(r => r.some(c => c))
-      .map(r => {
-        const obj = {};
-        headers.forEach((h, i) => obj[h] = r[i] || '');
-        return obj;
-      });
-
+    allContacts = rows.slice(1).filter(r => r.some(c => c)).map(r => {
+      const obj = {};
+      headers.forEach((h, i) => obj[h] = r[i] || '');
+      return obj;
+    });
     buildFilters();
     filterCards();
-    // Lancer le filtre proximité automatiquement
     toggleProxFilter();
-
     const now = new Date();
     document.getElementById('last-update').textContent = `Mis à jour à ${now.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'})}`;
   } catch(e) {
-    document.getElementById('cards').innerHTML = `<div class="empty">⚠️ Impossible de charger les données.<br><small>Vérifiez que le Sheet est partagé "Tout le monde avec le lien".</small></div>`;
-    document.getElementById('last-update').textContent = 'Erreur de chargement';
+    document.getElementById('cards').innerHTML = `<div class="empty">⚠️ Impossible de charger.<br><small>Vérifiez le partage du Sheet.</small></div>`;
   }
 }
 
 function buildFilters() {
   const enseignes = ['Tous', ...new Set(allContacts.map(c => c['Enseigne envisagée']).filter(Boolean))];
   const bilans = ['Tous', ...new Set(allContacts.map(c => c['Bilan']).filter(Boolean))];
-
   document.getElementById('enseigne-filters').innerHTML = enseignes.map(e =>
-    `<button class="chip ${e === activeEnseigne ? 'active' : ''}" onclick="setEnseigne('${e}')">${e}</button>`
-  ).join('');
-
+    `<button class="chip ${e === activeEnseigne ? 'active' : ''}" onclick="setEnseigne('${e}')">${e}</button>`).join('');
   document.getElementById('bilan-filters').innerHTML = bilans.map(b =>
-    `<button class="chip terra ${b === activeBilan ? 'active' : ''}" onclick="setBilan('${b}')">${b}</button>`
-  ).join('');
+    `<button class="chip terra ${b === activeBilan ? 'active' : ''}" onclick="setBilan('${b}')">${b}</button>`).join('');
 }
 
 function setEnseigne(e) { activeEnseigne = e; buildFilters(); filterCards(); }
@@ -492,25 +213,35 @@ function filterCards() {
 
   document.getElementById('cards').innerHTML = filtered.map(c => {
     let raw = String(c['Tel'] || '').replace(/[\s.\-()]/g, '');
-    let telIntl = '';
-    let telDisplay = '';
+    let telIntl = '', telDisplay = '';
     if (raw) {
       if (raw.match(/^33\d{9}$/)) raw = '0' + raw.slice(2);
       if (raw.match(/^\+33\d{9}$/)) raw = '0' + raw.slice(3);
       if (raw.match(/^0\d{9}$/)) {
         telIntl = '+33' + raw.slice(1);
         telDisplay = raw.replace(/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
-      } else {
-        telIntl = raw;
-        telDisplay = raw;
-      }
+      } else { telIntl = raw; telDisplay = raw; }
     }
     const mail = c['Mail'] || '';
     const bilan = c['Bilan'] || '';
+    const commentaire = (c['Commentaire'] || '').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     const borderColor = getBilanBorderColor(bilan);
     const bilanClass = getBilanClass(bilan);
     const loc0 = c['Localisation'] || c['localisation'] || '';
     const dist = contactDistances[loc0];
+    const quiEsc = (c['Qui'] || '').replace(/'/g, "\\'");
+
+    const bilanOptions = [
+      ['', '— Bilan —'],
+      ['En cours', '🟠 En cours'],
+      ['RDV 24 mars 9h - Aix', '🟢 RDV 24 mars 9h - Aix'],
+      ['RDV 24 mars 14h - Aix', '🟢 RDV 24 mars 14h - Aix'],
+      ['À recontacter', '🔵 À recontacter'],
+      ['Intéressé', '🔵 Intéressé'],
+      ['Signé', '✅ Signé'],
+      ['KO', '🔴 KO'],
+      ['Non joignable', '⚫ Non joignable']
+    ].map(([val, label]) => `<option value="${val}" ${bilan === val ? 'selected' : ''}>${label}</option>`).join('');
 
     return `
     <div class="card" style="border-left-color: ${borderColor}">
@@ -521,25 +252,70 @@ function filterCards() {
         </div>
         <span class="badge">${c['Enseigne envisagée'] || '—'}</span>
       </div>
-
       <div class="card-info">
         ${loc0 ? `<span class="info-tag">📍 ${loc0}</span>` : ''}
         ${loc0 && dist !== undefined ? `<span class="dist-badge ${dist > 10 ? 'dist-far' : ''}">${Math.round(dist)}km d'Aix</span>` : ''}
         ${c['Origine fichier'] ? `<span class="info-tag">${c['Origine fichier']}</span>` : ''}
         ${bilan ? `<span class="bilan-badge ${bilanClass}">${bilan}</span>` : ''}
       </div>
-
-      ${c['Commentaire'] ? `<div class="comment">${c['Commentaire']}</div>` : ''}
-
+      ${commentaire ? `<div class="comment">${commentaire}</div>` : ''}
       <div class="card-actions">
         ${telIntl ? `<a class="action-btn btn-call" href="tel:${telIntl}">📞 ${telDisplay}</a>` : ''}
         ${mail ? `<a class="action-btn btn-mail" href="mailto:${mail}">✉️ Mail</a>` : ''}
+      </div>
+      <button class="edit-btn" onclick="toggleEdit(this)">✏️ Modifier commentaire / bilan</button>
+      <div class="edit-form" style="display:none">
+        <textarea placeholder="Commentaire...">${commentaire}</textarea>
+        <select>${bilanOptions}</select>
+        <div class="edit-actions">
+          <button class="save-btn" onclick="saveCard(this, '${quiEsc}')">💾 Enregistrer</button>
+          <button class="cancel-btn" onclick="cancelEdit(this)">Annuler</button>
+        </div>
       </div>
     </div>`;
   }).join('');
 }
 
 loadData();
+
+function toggleEdit(btn) {
+  const form = btn.nextElementSibling;
+  form.style.display = 'block';
+  btn.style.display = 'none';
+}
+
+function cancelEdit(cancelBtn) {
+  const form = cancelBtn.closest('.edit-form');
+  form.style.display = 'none';
+  form.previousElementSibling.style.display = '';
+}
+
+async function saveCard(saveBtn, qui) {
+  const form = saveBtn.closest('.edit-form');
+  const commentaire = form.querySelector('textarea').value;
+  const bilan = form.querySelector('select').value;
+  saveBtn.textContent = '⏳ Envoi...';
+  saveBtn.classList.add('saving');
+  try {
+    const body = { qui, commentaire };
+    if (bilan) body.bilan = bilan;
+    await fetch(N8N_MAJ, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    saveBtn.textContent = '✅ Enregistré !';
+    saveBtn.classList.remove('saving');
+    saveBtn.classList.add('saved');
+    const contact = allContacts.find(c => c['Qui'] === qui);
+    if (contact) { contact['Commentaire'] = commentaire; if (bilan) contact['Bilan'] = bilan; }
+    setTimeout(() => { cancelEdit(saveBtn); saveBtn.textContent = '💾 Enregistrer'; saveBtn.classList.remove('saved'); filterCards(); }, 1200);
+  } catch(e) {
+    saveBtn.textContent = '❌ Erreur';
+    saveBtn.classList.remove('saving');
+    setTimeout(() => { saveBtn.textContent = '💾 Enregistrer'; }, 2000);
+  }
+}
 
 const AIX = { lat: 43.5297, lon: 5.4474 };
 const geocodeCache = {};
@@ -559,15 +335,9 @@ async function geocode(location) {
   if (geocodeCache[location]) return geocodeCache[location];
   try {
     const q = encodeURIComponent(location + ', France');
-    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${q}&format=json&limit=1`, {
-      headers: { 'Accept-Language': 'fr' }
-    });
+    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${q}&format=json&limit=1`, { headers: { 'Accept-Language': 'fr' } });
     const data = await res.json();
-    if (data[0]) {
-      const result = { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
-      geocodeCache[location] = result;
-      return result;
-    }
+    if (data[0]) { const result = { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) }; geocodeCache[location] = result; return result; }
   } catch(e) {}
   return null;
 }
@@ -575,7 +345,6 @@ async function geocode(location) {
 async function toggleProxFilter() {
   const btn = document.getElementById('proxBtn');
   const label = document.getElementById('proxLabel');
-
   if (proximityMode) {
     proximityMode = false;
     btn.classList.remove('active');
@@ -583,10 +352,8 @@ async function toggleProxFilter() {
     filterCards();
     return;
   }
-
   btn.classList.add('prox-loading');
   label.textContent = 'Calcul...';
-
   const locs = [...new Set(allContacts.map(c => c['Localisation'] || c['localisation'] || '').filter(Boolean))];
   for (const loc of locs) {
     if (!geocodeCache[loc]) {
@@ -597,7 +364,6 @@ async function toggleProxFilter() {
       contactDistances[loc] = haversine(AIX.lat, AIX.lon, geocodeCache[loc].lat, geocodeCache[loc].lon);
     }
   }
-
   proximityMode = true;
   btn.classList.remove('prox-loading');
   btn.classList.add('active');
