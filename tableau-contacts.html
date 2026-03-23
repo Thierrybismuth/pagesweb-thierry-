@@ -31,12 +31,6 @@
   .card-name { font-weight: 600; font-size: 0.98rem; color: var(--navy); line-height: 1.2; }
   .card-sub { font-size: 0.75rem; color: var(--muted); font-weight: 300; margin-top: 1px; }
   .badge { font-size: 0.68rem; font-weight: 600; padding: 3px 8px; border-radius: 10px; background: var(--light); color: var(--navy); white-space: nowrap; flex-shrink: 0; margin-left: 8px; }
-  .bilan-badge { font-size: 0.68rem; font-weight: 500; padding: 3px 8px; border-radius: 10px; white-space: nowrap; }
-  .bilan-encours { background: #fff3e0; color: #c8873a; }
-  .bilan-rdv { background: #e8f5e9; color: #2e7d52; }
-  .bilan-ko { background: #fce4e4; color: #b03a2e; }
-  .bilan-ok { background: #e3f2fd; color: #1565c0; }
-  .bilan-default { background: var(--light); color: var(--navy); }
   .card-actions { display: flex; gap: 8px; margin-top: 10px; }
   .action-btn { display: flex; align-items: center; gap: 5px; padding: 8px 14px; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 500; text-decoration: none; cursor: pointer; border: none; transition: all 0.15s; flex: 1; justify-content: center; }
   .btn-call { background: var(--navy); color: white; }
@@ -107,26 +101,6 @@ const N8N_MAJ = 'https://thierryb.app.n8n.cloud/webhook/a61ef07d-e237-45af-85ab-
 
 let allContacts = [];
 let activeEnseigne = 'Tous';
-
-function getBilanClass(bilan) {
-  if (!bilan) return 'bilan-default';
-  const b = bilan.toLowerCase();
-  if (b.includes('rdv') || b.includes('mars') || b.includes('aix')) return 'bilan-rdv';
-  if (b.includes('en cours')) return 'bilan-encours';
-  if (b.includes('ko') || b.includes('non') || b.includes('refus')) return 'bilan-ko';
-  if (b.includes('ok') || b.includes('signé') || b.includes('validé')) return 'bilan-ok';
-  return 'bilan-default';
-}
-
-function getBilanBorderColor(bilan) {
-  if (!bilan) return 'var(--light)';
-  const b = bilan.toLowerCase();
-  if (b.includes('rdv') || b.includes('mars') || b.includes('aix')) return '#2e7d52';
-  if (b.includes('en cours')) return 'var(--terra)';
-  if (b.includes('ko') || b.includes('non')) return '#b03a2e';
-  if (b.includes('ok') || b.includes('signé')) return '#1565c0';
-  return 'var(--light)';
-}
 
 function parseCSV(text) {
   const rows = [];
@@ -221,7 +195,7 @@ function filterCards() {
       ['À recontacter', '🔵 À recontacter'],
       ['Intéressé', '🔵 Intéressé'],
       ['Signé', '✅ Signé'],
-      ['KO', '🔴 KO'],
+      ['Stop', '🔴 Stop'],
       ['Non joignable', '⚫ Non joignable']
     ].map(([val, label]) => `<option value="${val}">${label}</option>`).join('');
 
