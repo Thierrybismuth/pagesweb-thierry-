@@ -7,8 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0c0c0b; --bg2: #131311; --surface: #1a1a17; --white: #f0ebe0;
-  --dim: rgba(240,235,224,0.5); --faint: rgba(240,235,224,0.08);
+  --bg: #ffffff; --bg2: #f7f5f0; --surface: #f0ede6; --white: #1a2e44;
+  --dim: rgba(26,46,68,0.6); --faint: rgba(26,46,68,0.12);
   --accent: #c8873a; --accent2: #e0a050; --accent-glow: rgba(200,135,58,0.15);
   --c1: #c8873a; --c1-soft: rgba(200,135,58,0.12); --c1-mid: rgba(200,135,58,0.35);
   --c2: #5b8fa8; --c2-soft: rgba(91,143,168,0.12); --c2-mid: rgba(91,143,168,0.35);
@@ -36,7 +36,7 @@ body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-
 .big-h em { font-style: italic; color: var(--accent); }
 .profils-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; margin-top: 2rem; border: 1.5px solid var(--faint); }
 .profil-card { padding: 2rem 1.8rem; background: var(--surface); position: relative; transition: background 0.3s; }
-.profil-card:hover { background: #1f1f1c; }
+.profil-card:hover { background: #e8e3d8; }
 .profil-num { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; color: var(--faint); line-height: 1; margin-bottom: 0.8rem; }
 .profil-card h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.7rem; color: var(--white); }
 .profil-card p { font-size: 0.88rem; color: var(--dim); line-height: 1.7; }
@@ -67,6 +67,16 @@ body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-
 .cluster-legend { display: flex; gap: 2rem; margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid var(--faint); }
 .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; color: var(--dim); }
 .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.tarifs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 860px; margin-top: 2rem; }
+.tarif-card { border: 1.5px solid var(--faint); background: var(--bg); padding: 2rem 1.8rem; position: relative; }
+.tarif-card.featured { border: 2px solid var(--accent); }
+.tarif-badge { font-family: 'Syne', sans-serif; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+.tarif-price { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--accent); line-height: 1; }
+.tarif-period { font-size: 0.72rem; color: var(--dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.tarif-name { font-weight: 700; color: var(--white); margin-bottom: 0.5rem; font-family: 'Syne', sans-serif; }
+.tarif-desc { font-size: 0.88rem; color: var(--dim); line-height: 1.7; }
+.tarif-desc strong { color: var(--white); }
+.tarif-note { font-size: 0.78rem; color: var(--dim); margin-top: 1.5rem; }
 .choix-wrap { text-align: center; max-width: 680px; margin: 0 auto; padding: 70px 8%; }
 .choix-wrap .big-h { margin-bottom: 0.8rem; }
 .choix-sub { font-size: 0.92rem; color: var(--dim); margin-bottom: 2.5rem; line-height: 1.8; }
@@ -76,15 +86,15 @@ body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-
 .cta-section { padding: 60px 8%; background: var(--bg2); border-top: 1px solid var(--faint); display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap; }
 .cta-left h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 700; line-height: 1.2; margin-bottom: 0.7rem; }
 .cta-left p { font-size: 0.88rem; color: var(--dim); max-width: 420px; }
-.cta-btn { display: inline-block; padding: 0.9rem 2.2rem; background: var(--accent); color: #0c0c0b; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.25s, transform 0.2s; white-space: nowrap; }
+.cta-btn { display: inline-block; padding: 0.9rem 2.2rem; background: var(--accent); color: #ffffff; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.25s, transform 0.2s; white-space: nowrap; }
 .cta-btn:hover { background: var(--accent2); transform: translateY(-2px); }
-@media (max-width: 900px) { .profils-grid { grid-template-columns: 1fr; } .exemple-wrap { grid-template-columns: 1fr; gap: 2rem; } .univers-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 900px) { .profils-grid { grid-template-columns: 1fr; } .exemple-wrap { grid-template-columns: 1fr; gap: 2rem; } .univers-grid { grid-template-columns: 1fr 1fr; } .tarifs-grid { grid-template-columns: 1fr; } }
 @media (max-width: 600px) { .univers-grid { grid-template-columns: 1fr; } .cta-section { flex-direction: column; } }
 </style>
 </head>
 <body>
 <section class="hero">
-  <div class="hero-eyebrow">Réseau Multi-Potentiel — ODYSKILLS</div>
+  <div class="hero-eyebrow">Réseau Multi-Potentiel – ODYSKILLS</div>
   <h1>Un seul réseau<br>ne vous suffit pas.<br><em>Ce n'est pas un défaut.</em></h1>
   <p class="hero-sub">Vous voyez des opportunités partout, vous vous ennuyez vite, et l'idée de rester enfermé dans un seul concept des années vous paralyse. Il existe un modèle fait pour vous.</p>
 </section>
@@ -95,7 +105,7 @@ body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-
   <div class="profils-grid">
     <div class="profil-card"><div class="profil-num">01</div><span class="profil-accent"></span><h3>Vous voulez plusieurs activités en parallèle</h3><p>Plusieurs marchés, plusieurs types de clients. Ne pas dépendre d'un seul secteur, ni se lasser d'un seul univers.</p></div>
     <div class="profil-card"><div class="profil-num">02</div><span class="profil-accent"></span><h3>Vous voulez tester avant de trancher</h3><p>Pas encore fixé sur un seul concept. Vous vous donnez quelques mois pour essayer plusieurs choses simultanément.</p></div>
-    <div class="profil-card"><div class="profil-num">03</div><span class="profil-accent"></span><h3>Vous avez déjà une activité et voulez l'enrichir</h3><p>Vous n'avez pas envie de tout plaquer. Vous greffez des enseignes complémentaires — même clientèle, revenus additionnels.</p></div>
+    <div class="profil-card"><div class="profil-num">03</div><span class="profil-accent"></span><h3>Vous avez déjà une activité et voulez l'enrichir</h3><p>Vous n'avez pas envie de tout plaquer. Vous greffez des enseignes complémentaires – même clientèle, revenus additionnels.</p></div>
   </div>
 </section>
 <section class="sec-alt">
@@ -103,12 +113,12 @@ body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-
   <h2 class="big-h">Un client. Une transaction.<br><em>Plusieurs commissions.</em></h2>
   <div class="exemple-wrap">
     <div class="exemple-left">
-      <p>Vous vendez un bien à <strong>400 000 €</strong> à Bordeaux — 90 m², 320 000 € empruntés, 35 000 € de travaux à prévoir.</p>
+      <p>Vous vendez un bien à <strong>400 000 €</strong> à Bordeaux – 90 m², 320 000 € empruntés, 35 000 € de travaux à prévoir.</p>
       <p>Avec une seule casquette, vous touchez votre commission et passez au dossier suivant.</p>
-      <p>Avec plusieurs enseignes complémentaires sur ce même client — <strong>même effort commercial, revenus multipliés.</strong></p>
+      <p>Avec plusieurs enseignes complémentaires sur ce même client – <strong>même effort commercial, revenus multipliés.</strong></p>
     </div>
     <div class="exemple-right">
-      <span class="ex-tag">Exemple Bordeaux — 400 000 €</span>
+      <span class="ex-tag">Exemple Bordeaux – 400 000 €</span>
       <div class="ex-row"><span class="ex-label">Commission immobilière</span><span class="ex-amount">10 000 €</span></div>
       <div class="ex-row"><span class="ex-label">Changement assurance emprunteur</span><span class="ex-amount">+1 500 €</span></div>
       <div class="ex-row"><span class="ex-label">Courtage travaux (7% sur 35K)</span><span class="ex-amount">+2 000 €</span></div>
@@ -118,12 +128,12 @@ body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-
   </div>
 </section>
 <section class="sec">
-  <div class="eyebrow">Les univers disponibles — au 1er avril 2026</div>
+  <div class="eyebrow">Les univers disponibles – au 1er avril 2026</div>
   <h2 class="big-h">Choisissez vos <em>combinaisons.</em></h2>
-  <p class="univers-intro">Onze univers, trois logiques de marché. Les couleurs vous guident — à vous de construire votre portefeuille.</p>
+  <p class="univers-intro">Onze univers, trois logiques de marché. Les couleurs vous guident – à vous de construire votre portefeuille.</p>
   <div class="univers-grid">
     <div class="u-card c1"><span class="u-icon">🏠</span><span class="u-dot"></span><h3>Immobilier</h3><p>Particuliers. Transaction, mandataire, investissement.</p></div>
-    <div class="u-card c1"><span class="u-icon">🔧</span><span class="u-dot"></span><h3>Bricolage & petits travaux</h3><p>Particuliers et professionnels. Récurrence naturelle.</p></div>
+    <div class="u-card c1"><span class="u-icon">🔧</span><span class="u-dot"></span><h3>Bricolage &amp; petits travaux</h3><p>Particuliers et professionnels. Récurrence naturelle.</p></div>
     <div class="u-card c1"><span class="u-icon">🌿</span><span class="u-dot"></span><h3>Rénovation énergétique</h3><p>Particuliers et pros. Marché en forte croissance.</p></div>
     <div class="u-card c1"><span class="u-icon">💶</span><span class="u-dot"></span><h3>Renégociation de crédit</h3><p>Particuliers et pros. Forte valeur perçue.</p></div>
     <div class="u-card c2"><span class="u-icon">🍽️</span><span class="u-dot"></span><h3>Vaisselle réutilisable</h3><p>Événements, collectivités. Marché RSE en expansion.</p></div>
@@ -131,7 +141,7 @@ body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-
     <div class="u-card c3"><span class="u-icon">🏢</span><span class="u-dot"></span><h3>Rénovation tertiaire</h3><p>Bâtiments pros, bureaux, commerces.</p></div>
     <div class="u-card c3"><span class="u-icon">🥗</span><span class="u-dot"></span><h3>Vaisselle entreprises</h3><p>Cantines, événements corporate, RSE.</p></div>
     <div class="u-card c3"><span class="u-icon">📋</span><span class="u-dot"></span><h3>Courtage crédit pro</h3><p>Financement projets, assurance emprunteur.</p></div>
-    <div class="u-card c3"><span class="u-icon">🎯</span><span class="u-dot"></span><h3>Assistance recrutement</h3><p>PME, commerces, franchisés.</p></div>
+    <div class="u-card c3"><span class="u-icon">👥</span><span class="u-dot"></span><h3>Assistance recrutement</h3><p>PME, commerces, franchisés.</p></div>
     <div class="u-card c3"><span class="u-icon">🛠️</span><span class="u-dot"></span><h3>Maintenance réseaux</h3><p>Enseignes, franchises, retail multi-sites.</p></div>
   </div>
   <div class="cluster-legend">
@@ -140,9 +150,36 @@ body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-
     <div class="legend-item"><div class="legend-dot" style="background:var(--c3);"></div>B2B</div>
   </div>
 </section>
+<section class="sec-alt">
+  <div class="eyebrow">Rejoindre le réseau</div>
+  <h2 class="big-h">Des tarifs <em>transparents.</em></h2>
+  <p style="font-size:0.92rem;color:var(--dim);max-width:560px;margin-bottom:2rem;line-height:1.8;">Droits d&rsquo;entrée&nbsp;: 0&nbsp;&euro;&nbsp;&mdash; Formation initiale&nbsp;: 0&nbsp;&euro;&nbsp;&mdash; Pack de démarrage&nbsp;: 0&nbsp;&euro;. Vous payez uniquement votre accès aux enseignes et aux outils.</p>
+  <div class="tarifs-grid">
+    <div class="tarif-card">
+      <div class="tarif-price">200 €</div>
+      <div class="tarif-period">HT / mois &mdash; 240 € TTC</div>
+      <div class="tarif-name">Starter</div>
+      <div class="tarif-desc">Représenter <strong>2 enseignes</strong> de votre choix. Formations en ligne, accès intranet, leads qualifiés.</div>
+    </div>
+    <div class="tarif-card featured">
+      <div class="tarif-badge">Le plus choisi</div>
+      <div class="tarif-price">300 €</div>
+      <div class="tarif-period">HT / mois</div>
+      <div class="tarif-name">Développeur</div>
+      <div class="tarif-desc">Représenter <strong>4 enseignes</strong>. Idéal pour construire un portefeuille complémentaire multi-marchés.</div>
+    </div>
+    <div class="tarif-card">
+      <div class="tarif-price">500 €</div>
+      <div class="tarif-period">HT / mois</div>
+      <div class="tarif-name">Illimité</div>
+      <div class="tarif-desc">Accès à <strong>toutes les enseignes</strong> du réseau. Upgrade possible chaque début de mois.</div>
+    </div>
+  </div>
+  <p class="tarif-note">Upgrade possible à tout moment &mdash; downgrade une fois par an (préavis 3 mois).</p>
+</section>
 <div class="choix-wrap">
   <div class="eyebrow">Votre portefeuille</div>
-  <h2 class="big-h">2 enseignes, 3, 5 <em>— ou toutes.</em></h2>
+  <h2 class="big-h">2 enseignes, 3, 5 <em>– ou toutes.</em></h2>
   <p class="choix-sub">Commencez par ce qui vous parle. Ajoutez-en une autre quand vous êtes prêt. Pas d'obligation de tout déployer d'un coup.</p>
   <div class="choix-options">
     <div class="choix-pill active">2 enseignes</div>
