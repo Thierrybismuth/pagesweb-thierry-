@@ -488,8 +488,24 @@ function filterCards() {
   }
 
   document.getElementById('cards').innerHTML = filtered.map(c => {
-    const tel = c['Tel'] ? c['Tel'].replace(/\s/g,'') : '';
-    const telIntl = tel.startsWith('0') ? '+33' + tel.slice(1) : tel;
+    // Normalisation du numéro
+    let raw = String(c['Tel'] || '').replace(/[\s.\-()]/g, '');
+    let telIntl = '';
+    let telDisplay = '';
+    if (raw) {
+      // Cas: 33XXXXXXXXX (stocké comme entier sans le +)
+      if (raw.match(/^33\d{9}$/)) raw = '0' + raw.slice(2);
+      // Cas: +33XXXXXXXXX
+      if (raw.match(/^\+33\d{9}$/)) raw = '0' + raw.slice(3);
+      // On a maintenant 0XXXXXXXXX
+      if (raw.match(/^0\d{9}$/)) {
+        telIntl = '+33' + raw.slice(1);
+        telDisplay = raw.replace(/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
+      } else {
+        telIntl = raw;
+        telDisplay = raw;
+      }
+    }
     const mail = c['Mail'] || '';
     const bilan = c['Bilan'] || '';
     const borderColor = getBilanBorderColor(bilan);
@@ -515,7 +531,7 @@ function filterCards() {
       ${c['Commentaire'] ? `<div class="comment">${c['Commentaire']}</div>` : ''}
 
       <div class="card-actions">
-        ${tel ? `<a class="action-btn btn-call" href="tel:${telIntl}">📞 ${c['Tel']}</a>` : ''}
+        ${telIntl ? `<a class="action-btn btn-call" href="tel:${telIntl}">📞 ${telDisplay}</a>` : ''}
         ${mail ? `<a class="action-btn btn-mail" href="mailto:${mail}">✉️ Mail</a>` : ''}
       </div>
     </div>`;
