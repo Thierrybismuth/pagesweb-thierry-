@@ -21,7 +21,6 @@
   .filter-row::-webkit-scrollbar { display: none; }
   .chip { flex-shrink: 0; padding: 5px 12px; border-radius: 20px; border: 1.5px solid var(--light); background: white; font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
   .chip.active { background: var(--navy); border-color: var(--navy); color: white; }
-  .chip.terra.active { background: var(--terra); border-color: var(--terra); color: white; }
   .stats-bar { padding: 8px 16px; font-size: 0.75rem; color: var(--muted); background: var(--cream); border-bottom: 1px solid var(--light); }
   .stats-bar span { font-weight: 600; color: var(--navy); }
   .cards { padding: 12px 12px 80px; display: flex; flex-direction: column; gap: 10px; }
@@ -163,7 +162,7 @@ function filterCards() {
     return matchEnseigne && matchSearch && matchProx && bilanVierge;
   });
 
-  document.getElementById('stats').innerHTML = `<span>${filtered.length}</span> contact${filtered.length > 1 ? 's' : ''} à appeler (bilan vierge) sur <span>${allContacts.length}</span>`;
+  document.getElementById('stats').innerHTML = `<span>${filtered.length}</span> contact${filtered.length > 1 ? 's' : ''} à appeler sur <span>${allContacts.length}</span>`;
 
   if (!filtered.length) {
     document.getElementById('cards').innerHTML = '<div class="empty">Aucun contact trouvé</div>';
@@ -190,13 +189,10 @@ function filterCards() {
     const bilanOptions = [
       ['', '— Bilan —'],
       ['En cours', '🟠 En cours'],
+      ['NL', '⚫ NL'],
       ['RDV 24 mars 9h - Aix', '🟢 RDV 24 mars 9h - Aix'],
       ['RDV 24 mars 14h - Aix', '🟢 RDV 24 mars 14h - Aix'],
-      ['À recontacter', '🔵 À recontacter'],
-      ['Intéressé', '🔵 Intéressé'],
-      ['Signé', '✅ Signé'],
-      ['Stop', '🔴 Stop'],
-      ['Non joignable', '⚫ Non joignable']
+      ['Stop', '🔴 Stop']
     ].map(([val, label]) => `<option value="${val}">${label}</option>`).join('');
 
     return `
