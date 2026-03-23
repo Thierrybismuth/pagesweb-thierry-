@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tableau de Chasse — TB</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2e44;
+    --terra: #c8873a;
+    --cream: #f7f5f0;
+    --light: #edeae4;
+    --muted: #8a9bb0;
+    --green: #2e7d52;
+    --red: #b03a2e;
+    --orange: #c8873a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 16px 20px 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(26,46,68,0.25);
+  }
+
+  header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  header p {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 2px;
+    font-weight: 300;
+  }
+
+  .filters {
+    background: white;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--light);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: sticky;
+    top: 70px;
+    z-index: 90;
+  }
+
+  .search-wrap {
+    position: relative;
+  }
+
+  .search-wrap input {
+    width: 100%;
+    padding: 10px 14px 10px 36px;
+    border: 1.5px solid var(--light);
+    border-radius: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.88rem;
+    background: var(--cream);
+    color: var(--navy);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-wrap input:focus { border-color: var(--terra); }
+
+  .search-icon {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .filter-row {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .filter-row::-webkit-scrollbar { display: none; }
+
+  .chip {
+    flex-shrink: 0;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1.5px solid var(--light);
+    background: white;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .chip.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: white;
+  }
+
+  .chip.terra.active {
+    background: var(--terra);
+    border-color: var(--terra);
+    color: white;
+  }
+
+  .stats-bar {
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    background: var(--cream);
+    border-bottom: 1px solid var(--light);
+  }
+
+  .stats-bar span { font-weight: 600; color: var(--navy); }
+
+  .cards {
+    padding: 12px 12px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 4px rgba(26,46,68,0.08);
+    border-left: 3px solid var(--light);
+    transition: box-shadow 0.2s;
+  }
+
+  .card:active { box-shadow: 0 3px 12px rgba(26,46,68,0.15); }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+  }
+
+  .card-name {
+    font-weight: 600;
+    font-size: 0.98rem;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+
+  .card-sub {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 300;
+    margin-top: 1px;
+  }
+
+  .badge {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 10px;
+    background: var(--light);
+    color: var(--navy);
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+
+  .bilan-badge {
+    font-size: 0.68rem;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  .bilan-encours { background: #fff3e0; color: #c8873a; }
+  .bilan-rdv { background: #e8f5e9; color: #2e7d52; }
+  .bilan-ko { background: #fce4e4; color: #b03a2e; }
+  .bilan-ok { background: #e3f2fd; color: #1565c0; }
+  .bilan-default { background: var(--light); color: var(--navy); }
+
+  .card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .btn-call {
+    background: var(--navy);
+    color: white;
+  }
+
+  .btn-call:active { background: #0f1d2b; }
+
+  .btn-mail {
+    background: var(--light);
+    color: var(--navy);
+  }
+
+  .btn-mail:active { background: #ddd8d0; }
+
+  .card-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+  }
+
+  .info-tag {
+    font-size: 0.72rem;
+    color: var(--muted);
+    background: var(--cream);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 400;
+  }
+
+  .comment {
+    margin-top: 8px;
+    font-size: 0.78rem;
+    color: #5a6e82;
+    line-height: 1.4;
+    font-style: italic;
+    border-top: 1px solid var(--light);
+    padding-top: 8px;
+  }
+
+  .loading {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+  }
+
+  .loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--light);
+    border-top-color: var(--terra);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+  }
+
+  .refresh-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    background: var(--terra);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(200,135,58,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+
+  .refresh-btn:active { transform: scale(0.9); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎯 Tableau de Chasse</h1>
+  <p id="last-update">Chargement...</p>
+</header>
+
+<div class="filters">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search" placeholder="Chercher un nom, ville, entreprise..." oninput="filterCards()">
+  </div>
+  <div class="filter-row" id="enseigne-filters"></div>
+  <div class="filter-row" id="bilan-filters"></div>
+</div>
+
+<div class="stats-bar" id="stats">Chargement des contacts...</div>
+
+<div class="cards" id="cards">
+  <div class="loading">
+    <div class="loading-spinner"></div>
+    <p>Récupération des données...</p>
+  </div>
+</div>
+
+<button class="refresh-btn" onclick="loadData()" title="Actualiser">↻</button>
+
+<script>
+const SHEET_ID = '1CqFrk0RgkO9xJuglSTPz3dgcd-tbU33VrYaM0lt_BJg';
+const TAB_NAME = 'Suivi contacts';
+const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(TAB_NAME)}`;
+
+let allContacts = [];
+let activeEnseigne = 'Tous';
+let activeBilan = 'Tous';
+
+function getBilanClass(bilan) {
+  if (!bilan) return 'bilan-default';
+  const b = bilan.toLowerCase();
+  if (b.includes('rdv') || b.includes('réunion') || b.includes('reunion') || b.includes('mars') || b.includes('aix')) return 'bilan-rdv';
+  if (b.includes('en cours')) return 'bilan-encours';
+  if (b.includes('ko') || b.includes('non') || b.includes('refus')) return 'bilan-ko';
+  if (b.includes('ok') || b.includes('signé') || b.includes('validé')) return 'bilan-ok';
+  return 'bilan-default';
+}
+
+function getBilanBorderColor(bilan) {
+  if (!bilan) return 'var(--light)';
+  const b = bilan.toLowerCase();
+  if (b.includes('rdv') || b.includes('mars') || b.includes('aix')) return '#2e7d52';
+  if (b.includes('en cours')) return 'var(--terra)';
+  if (b.includes('ko') || b.includes('non')) return '#b03a2e';
+  if (b.includes('ok') || b.includes('signé')) return '#1565c0';
+  return 'var(--light)';
+}
+
+function parseCSV(text) {
+  const rows = [];
+  let row = [], field = '', inQ = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (c === '"') { inQ = !inQ; continue; }
+    if (c === ',' && !inQ) { row.push(field.trim()); field = ''; continue; }
+    if ((c === '\n' || c === '\r') && !inQ) {
+      if (field || row.length) { row.push(field.trim()); rows.push(row); }
+      field = ''; row = [];
+      if (text[i+1] === '\n') i++;
+      continue;
+    }
+    field += c;
+  }
+  if (field || row.length) { row.push(field.trim()); rows.push(row); }
+  return rows;
+}
+
+async function loadData() {
+  document.getElementById('cards').innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Actualisation...</p></div>';
+  try {
+    const res = await fetch(URL + '&t=' + Date.now());
+    const text = await res.text();
+    const rows = parseCSV(text);
+    if (rows.length < 2) throw new Error('Données vides');
+
+    const headers = rows[0];
+    allContacts = rows.slice(1)
+      .filter(r => r.some(c => c))
+      .map(r => {
+        const obj = {};
+        headers.forEach((h, i) => obj[h] = r[i] || '');
+        return obj;
+      });
+
+    buildFilters();
+    filterCards();
+
+    const now = new Date();
+    document.getElementById('last-update').textContent = `Mis à jour à ${now.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'})}`;
+  } catch(e) {
+    document.getElementById('cards').innerHTML = `<div class="empty">⚠️ Impossible de charger les données.<br><small>Vérifiez que le Sheet est partagé "Tout le monde avec le lien".</small></div>`;
+    document.getElementById('last-update').textContent = 'Erreur de chargement';
+  }
+}
+
+function buildFilters() {
+  const enseignes = ['Tous', ...new Set(allContacts.map(c => c['Enseigne envisagée']).filter(Boolean))];
+  const bilans = ['Tous', ...new Set(allContacts.map(c => c['Bilan']).filter(Boolean))];
+
+  document.getElementById('enseigne-filters').innerHTML = enseignes.map(e =>
+    `<button class="chip ${e === activeEnseigne ? 'active' : ''}" onclick="setEnseigne('${e}')">${e}</button>`
+  ).join('');
+
+  document.getElementById('bilan-filters').innerHTML = bilans.map(b =>
+    `<button class="chip terra ${b === activeBilan ? 'active' : ''}" onclick="setBilan('${b}')">${b}</button>`
+  ).join('');
+}
+
+function setEnseigne(e) { activeEnseigne = e; buildFilters(); filterCards(); }
+function setBilan(b) { activeBilan = b; buildFilters(); filterCards(); }
+
+function filterCards() {
+  const q = (document.getElementById('search').value || '').toLowerCase();
+  let filtered = allContacts.filter(c => {
+    const matchEnseigne = activeEnseigne === 'Tous' || c['Enseigne envisagée'] === activeEnseigne;
+    const matchBilan = activeBilan === 'Tous' || c['Bilan'] === activeBilan;
+    const matchSearch = !q || Object.values(c).some(v => v.toLowerCase().includes(q));
+    return matchEnseigne && matchBilan && matchSearch;
+  });
+
+  document.getElementById('stats').innerHTML = `<span>${filtered.length}</span> contact${filtered.length > 1 ? 's' : ''} affiché${filtered.length > 1 ? 's' : ''} sur <span>${allContacts.length}</span>`;
+
+  if (!filtered.length) {
+    document.getElementById('cards').innerHTML = '<div class="empty">Aucun contact trouvé</div>';
+    return;
+  }
+
+  document.getElementById('cards').innerHTML = filtered.map(c => {
+    const tel = c['Tel'] ? c['Tel'].replace(/\s/g,'') : '';
+    const telIntl = tel.startsWith('0') ? '+33' + tel.slice(1) : tel;
+    const mail = c['Mail'] || '';
+    const bilan = c['Bilan'] || '';
+    const borderColor = getBilanBorderColor(bilan);
+    const bilanClass = getBilanClass(bilan);
+
+    return `
+    <div class="card" style="border-left-color: ${borderColor}">
+      <div class="card-header">
+        <div>
+          <div class="card-name">${c['Qui'] || '—'}</div>
+          <div class="card-sub">${[c['Poste'], c['Entreprise']].filter(Boolean).join(' · ')}</div>
+        </div>
+        <span class="badge">${c['Enseigne envisagée'] || '—'}</span>
+      </div>
+
+      <div class="card-info">
+        ${c['Localisation'] ? `<span class="info-tag">📍 ${c['Localisation']}</span>` : ''}
+        ${c['Origine fichier'] ? `<span class="info-tag">${c['Origine fichier']}</span>` : ''}
+        ${bilan ? `<span class="bilan-badge ${bilanClass}">${bilan}</span>` : ''}
+      </div>
+
+      ${c['Commentaire'] ? `<div class="comment">${c['Commentaire']}</div>` : ''}
+
+      <div class="card-actions">
+        ${tel ? `<a class="action-btn btn-call" href="tel:${telIntl}">📞 ${c['Tel']}</a>` : ''}
+        ${mail ? `<a class="action-btn btn-mail" href="mailto:${mail}">✉️ Mail</a>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+loadData();
+</script>
+</body>
+</html>
