@@ -48,12 +48,10 @@
   .cta-final h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(24px, 3vw, 36px); color: #fff; margin-bottom: 14px; font-weight: 600; }
   .cta-final p { font-size: 16px; opacity: 0.65; max-width: 520px; margin: 0 auto 28px; }
   .footer-note { text-align: center; font-size: 12px; color: #999; padding: 20px 40px; background: #f7f5f0; }
-  html, body { height: auto; overflow: hidden; }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
 <div class="hero">
   <p class="hero-label">Multi-Potentiel — Réseau d’apporteurs d’affaires</p>
   <h1>Des affaires que vos équipes<br>n’auraient <em>jamais trouvées seules.</em></h1>
@@ -62,13 +60,11 @@
   <a href="https://drive.google.com/file/d/1oJwoiLwgwReO0N097swNzVvMYieGYeSv/view?usp=sharing" target="_blank" class="btn-outline">Voir le contrat</a>
 </div>
 
-<!-- VALEUR -->
 <div class="section">
   <div class="section-inner">
     <p class="section-label">Ce que le réseau apporte</p>
     <h2>Quatre sources de leads<br>hors de portée de votre prospection habituelle.</h2>
     <p>Vos équipes commerciales font leur travail. Multi-Potentiel fait le reste — là où elles ne peuvent pas ou ne pensent pas à aller.</p>
-
     <div class="value-grid">
       <div class="value-card">
         <div class="value-card-num">01</div>
@@ -94,7 +90,6 @@
   </div>
 </div>
 
-<!-- PRINCIPE -->
 <div class="section section-alt">
   <div class="section-inner">
     <p class="section-label">Le principe</p>
@@ -121,14 +116,12 @@
   </div>
 </div>
 
-<!-- CONTRAT CTA -->
 <div class="contrat-block">
   <h2>Les conditions d’apport d’affaires sont dans le contrat.</h2>
   <p>Un document court, sans jargon, qui pose clairement les règles du jeu pour les deux parties. Lisez-le avant qu’on se parle.</p>
   <a href="https://drive.google.com/file/d/1oJwoiLwgwReO0N097swNzVvMYieGYeSv/view?usp=sharing" target="_blank" class="btn-white">Découvrir le contrat de partenariat</a>
 </div>
 
-<!-- POUR QUI -->
 <div class="section">
   <div class="section-inner">
     <p class="section-label">Pour qui ?</p>
@@ -137,7 +130,6 @@
   </div>
 </div>
 
-<!-- CTA FINAL -->
 <div class="cta-final">
   <h2>20 minutes pour savoir<br>si le fit est là.</h2>
   <p>Un échange rapide pour comprendre votre marché et vous dire honnêtement si Multi-Potentiel peut apporter quelque chose.</p>
@@ -148,6 +140,17 @@
   ODYSKILLS — Multi-Potentiel &nbsp;|&nbsp; thierry@thierrybismuth.com &nbsp;|&nbsp;
   <a href="https://drive.google.com/file/d/1oJwoiLwgwReO0N097swNzVvMYieGYeSv/view?usp=sharing" target="_blank" style="color:#c8873a;">Contrat de partenariat</a>
 </div>
+
+<script>
+function sendHeight() {
+  var h = document.documentElement.scrollHeight || document.body.scrollHeight;
+  window.parent.postMessage({ iframeHeight: h }, '*');
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+setTimeout(sendHeight, 400);
+setTimeout(sendHeight, 1200);
+</script>
 
 </body>
 </html>
