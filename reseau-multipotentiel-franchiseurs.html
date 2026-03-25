@@ -3,258 +3,311 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Le réseau Multipotentiel | Thierry Bismuth</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Votre réseau commercial MULTI-POTENTIEL | Thierry Bismuth</title>
 <style>
-  :root { --blanc: #f7f5f0; --blanc-pur: #ffffff; --marine: #1a2e44; --marine-clair: #2a4a6b; --accent: #c8873a; --gris: #6b7280; --gris-clair: #e8e4dc; --texte: #1c1c1c; }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--blanc); color: var(--texte); font-family: 'Outfit', sans-serif; font-weight: 300; line-height: 1.7; width: 100%; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* HERO */
-  .hero { background: var(--marine); padding: 56px 8% 64px; width: 100%; position: relative; overflow: hidden; }
-  .hero::after { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(200,135,58,0.1) 0%, transparent 70%); top: -80px; right: -80px; pointer-events: none; }
-  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.8rem; opacity: 0; animation: fadeUp 0.5s 0.1s forwards; }
-  .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: block; }
-  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; color: #fff; line-height: 1.08; margin-bottom: 1.4rem; max-width: 760px; opacity: 0; animation: fadeUp 0.5s 0.2s forwards; }
-  .hero h1 em { font-style: italic; color: var(--accent); }
-  .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.6); max-width: 600px; line-height: 1.85; opacity: 0; animation: fadeUp 0.5s 0.3s forwards; }
-  .hero-sub strong { color: #fff; font-weight: 500; }
-
-  /* SCHEMA */
-  .schema { width: 100%; padding: 56px 8%; background: var(--blanc-pur); border-bottom: 1px solid var(--gris-clair); }
-  .schema-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-  .schema-text { }
-  .section-eyebrow { display: flex; align-items: center; gap: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
-  .section-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: block; }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; color: var(--marine); line-height: 1.15; margin-bottom: 1rem; }
-  .section-title em { font-style: italic; color: var(--accent); }
-  .schema-text p { font-size: 0.97rem; color: var(--gris); line-height: 1.85; margin-bottom: 0.9rem; }
-  .schema-visual { display: flex; flex-direction: column; align-items: center; gap: 0; background: var(--marine); padding: 2.4rem 2rem; }
-  .sv-top { background: var(--accent); color: var(--marine); padding: 1rem 1.8rem; text-align: center; width: 100%; }
-  .sv-top .sv-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; opacity: 0.8; margin-bottom: 0.3rem; }
-  .sv-top .sv-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; line-height: 1.2; }
-  .sv-arrows { display: flex; gap: 3rem; padding: 0.8rem 0; }
-  .sv-arrow { font-size: 1.2rem; color: rgba(255,255,255,0.35); }
-  .sv-enseignes { display: flex; gap: 2px; width: 100%; }
-  .sv-enseigne { flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 1rem 0.6rem; text-align: center; }
-  .sv-enseigne .sv-label { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.3rem; }
-  .sv-enseigne .sv-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 700; color: #fff; line-height: 1.1; }
-  .sv-enseigne .sv-sub { font-size: 0.7rem; color: rgba(255,255,255,0.35); margin-top: 0.2rem; }
-
-  /* PROFIL RARE */
-  .profil { width: 100%; padding: 56px 8%; background: var(--blanc); }
-  .profil-inner { max-width: 1100px; margin: 0 auto; }
-  .profil-intro { max-width: 680px; margin-bottom: 3rem; }
-  .profil-intro p { font-size: 0.97rem; color: var(--gris); line-height: 1.85; margin-bottom: 0.9rem; }
-  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
-  .tag { background: var(--marine); color: rgba(255,255,255,0.7); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.35rem 0.9rem; }
-  .profil-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--gris-clair); }
-  .profil-card { background: var(--blanc-pur); padding: 2rem 1.8rem; }
-  .profil-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 700; color: var(--marine); margin-bottom: 0.7rem; line-height: 1.2; }
-  .profil-card p { font-size: 0.88rem; color: var(--gris); line-height: 1.75; }
-
-  /* FONCTIONNEMENT */
-  .fonctionnement { width: 100%; padding: 56px 8%; background: var(--marine); }
-  .fonctionnement-inner { max-width: 1100px; margin: 0 auto; }
-  .fonctionnement-header { max-width: 600px; margin-bottom: 3rem; }
-  .fonctionnement-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; color: #fff; line-height: 1.15; }
-  .fonctionnement-header h2 em { font-style: italic; color: var(--accent); }
-  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: rgba(255,255,255,0.08); }
-  .step { background: rgba(255,255,255,0.04); padding: 2rem 1.8rem; }
-  .step-num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 700; color: var(--accent); opacity: 0.5; line-height: 1; margin-bottom: 1rem; }
-  .step h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 0.6rem; line-height: 1.2; }
-  .step p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.75; }
-
-  /* AVANTAGES */
-  .avantages { width: 100%; padding: 56px 8%; background: var(--blanc-pur); border-top: 1px solid var(--gris-clair); }
-  .avantages-inner { max-width: 1100px; margin: 0 auto; }
-  .avantages-header { max-width: 600px; margin-bottom: 3rem; }
-  .avantages-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; color: var(--marine); line-height: 1.15; }
-  .avantages-header h2 em { font-style: italic; color: var(--accent); }
-  .av-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--gris-clair); }
-  .av-card { background: var(--blanc); padding: 2.2rem 2rem; border-top: 3px solid transparent; transition: border-color 0.3s, background 0.3s; }
-  .av-card:hover { border-top-color: var(--accent); background: #fdfcf8; }
-  .av-icon { font-size: 1.6rem; margin-bottom: 1rem; display: block; }
-  .av-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; color: var(--marine); margin-bottom: 0.6rem; line-height: 1.2; }
-  .av-card p { font-size: 0.88rem; color: var(--gris); line-height: 1.75; }
-
-  /* CTA */
-  .cta { width: 100%; padding: 56px 8%; background: var(--marine); text-align: center; }
-  .cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; color: #fff; margin-bottom: 0.8rem; }
-  .cta h2 em { font-style: italic; color: var(--accent); }
-  .cta p { font-size: 0.97rem; color: rgba(255,255,255,0.55); margin-bottom: 2.4rem; }
-  .cta-contacts { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
-  .cta-btn { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 1rem 2.2rem; transition: all 0.25s; }
-  .cta-btn.primary { background: var(--accent); color: var(--marine); }
-  .cta-btn.primary:hover { background: #b5762f; }
-  .cta-btn.secondary { border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.8); }
-  .cta-btn.secondary:hover { border-color: #fff; color: #fff; }
-
-  @media (max-width: 860px) {
-    .schema-inner { grid-template-columns: 1fr; gap: 2rem; }
-    .profil-grid { grid-template-columns: 1fr; }
-    .steps { grid-template-columns: 1fr 1fr; }
-    .av-grid { grid-template-columns: 1fr; }
+  body {
+    font-family: 'Outfit', 'Helvetica Neue', sans-serif;
+    background: #f7f5f0;
+    color: #1a2e44;
+    font-size: 16px;
+    line-height: 1.65;
   }
-  @media (max-width: 560px) {
-    .steps { grid-template-columns: 1fr; }
+
+  .hero {
+    background: #1a2e44;
+    color: #f7f5f0;
+    padding: 70px 40px 60px;
+    text-align: center;
   }
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c8873a;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 22px;
+    color: #f7f5f0;
+  }
+  .hero h1 em { color: #c8873a; font-style: italic; }
+  .hero-sub {
+    font-size: 17px;
+    max-width: 680px;
+    margin: 0 auto 36px;
+    color: #d4cfc8;
+    line-height: 1.7;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: #c8873a;
+    color: #fff;
+    padding: 14px 34px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: #b5762f; }
+  .btn-outline {
+    display: inline-block;
+    border: 1.5px solid #c8873a;
+    color: #c8873a;
+    padding: 12px 28px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    margin-left: 14px;
+  }
+  .btn-outline:hover { background: #c8873a; color: #fff; }
+
+  .section { padding: 64px 40px; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .section-alt { background: #fff; }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c8873a;
+    margin-bottom: 10px;
+  }
+  .section h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 600;
+    margin-bottom: 20px;
+    line-height: 1.3;
+    color: #1a2e44;
+  }
+  .section p { color: #3a4a5a; margin-bottom: 14px; font-size: 15.5px; }
+
+  .pitch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-top: 36px;
+  }
+  @media (max-width: 640px) { .pitch-grid { grid-template-columns: 1fr; } }
+  .pitch-card {
+    background: #f7f5f0;
+    border-left: 3px solid #c8873a;
+    padding: 22px 24px;
+    border-radius: 2px;
+  }
+  .pitch-card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a2e44;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .pitch-card p { font-size: 14.5px; color: #3a4a5a; margin: 0; }
+
+  .tarif-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 22px;
+    margin-top: 36px;
+  }
+  @media (max-width: 760px) { .tarif-grid { grid-template-columns: 1fr; } }
+  .tarif-card {
+    background: #f7f5f0;
+    border-top: 3px solid #1a2e44;
+    padding: 28px 24px;
+    border-radius: 2px;
+    text-align: center;
+  }
+  .tarif-card.highlight { border-top-color: #c8873a; background: #fff8f1; }
+  .tarif-pct {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #c8873a;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .tarif-card h3 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #1a2e44;
+    margin-bottom: 12px;
+  }
+  .tarif-card p { font-size: 14px; color: #3a4a5a; margin: 0; line-height: 1.6; }
+  .tarif-card .tarif-setup { font-size: 11px; color: #888; margin-top: 10px; font-style: italic; }
+
+  .engage-list { list-style: none; margin-top: 28px; }
+  .engage-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid #e8e4de;
+    font-size: 15px;
+    color: #3a4a5a;
+  }
+  .engage-list li:last-child { border-bottom: none; }
+  .engage-list li::before { content: "→"; color: #c8873a; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+
+  .contrat-block {
+    background: #1a2e44;
+    color: #f7f5f0;
+    padding: 48px 40px;
+    text-align: center;
+  }
+  .contrat-block h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px;
+    color: #f7f5f0;
+    margin-bottom: 14px;
+  }
+  .contrat-block p { color: #b0aaa3; font-size: 15px; max-width: 560px; margin: 0 auto 28px; }
+
+  .cta-final { background: #c8873a; color: #fff; padding: 60px 40px; text-align: center; }
+  .cta-final h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(24px, 3vw, 36px);
+    color: #fff;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .cta-final p { font-size: 16px; opacity: 0.9; max-width: 520px; margin: 0 auto 28px; }
+  .btn-white {
+    display: inline-block;
+    background: #fff;
+    color: #c8873a;
+    padding: 14px 36px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .footer-note { text-align: center; font-size: 12px; color: #999; padding: 20px 40px; background: #f7f5f0; }
+  html, body { height: auto; overflow: hidden; }
 </style>
 </head>
 <body>
 
-<section class="hero">
-  <div class="hero-eyebrow">Formule 03 — Réseau Multipotentiel</div>
-  <h1>Un seul interlocuteur.<br>Des dizaines d'entrepreneurs <em>derrière.</em></h1>
-  <p class="hero-sub">Vous cherchez un franchisé fiable, engagé, qui génère du chiffre&nbsp;? <strong>Je vous en apporte des dizaines — en un seul partenaire.</strong></p>
-</section>
+<div class="hero">
+  <p class="hero-label">Multi-Potentiel — Réseau d'apporteurs d'affaires</p>
+  <h1>Votre prochain contrat viendra peut-être<br>d'un entrepreneur que vous n'avez <em>jamais rencontré.</em></h1>
+  <p class="hero-sub">Multi-Potentiel est un réseau d'apporteurs d'affaires indépendants, animé en continu, qui travaille en complément de vos équipes commerciales — sans coût fixe, sans exclusivité, sans concurrence avec vos canaux existants.</p>
+  <a href="tel:0610703090" class="btn-primary">Parlons-en — 20 minutes</a>
+  <a href="https://drive.google.com/file/d/1oJwoiLwgwReO0N097swNzVvMYieGYeSv/view?usp=sharing" target="_blank" class="btn-outline">Voir le contrat</a>
+</div>
 
-<section class="schema">
-  <div class="schema-inner">
-    <div class="schema-text">
-      <div class="section-eyebrow">Votre interlocuteur unique</div>
-      <h2 class="section-title">Une seule relation.<br>Un réseau entier <em>derrière.</em></h2>
-      <p>Plutôt que de gérer dix franchisés individuels, vous traitez avec un seul partenaire — Thierry Bismuth — qui pilote, anime et développe un réseau d'entrepreneurs Multipotentiel en votre nom.</p>
-      <p>Moins de complexité contractuelle. Moins de dispersion. Un seul interlocuteur qui répond de tout.</p>
-    </div>
-    <div class="schema-visual">
-      <div class="sv-top">
-        <div class="sv-label">Votre interlocuteur unique</div>
-        <div class="sv-name">Thierry Bismuth<br>+ réseau Multipotentiel</div>
+<div class="section">
+  <div class="section-inner">
+    <p class="section-label">Le principe</p>
+    <h2>Un canal additionnel,<br>pas un concurrent.</h2>
+    <p>Nos Membres sont des entrepreneurs avec des carnets d'adresses actifs, formés sur votre offre et motivés par la performance. Ils ouvrent des portes que vos équipes n'auraient jamais franchies — par recommandation, par réseau croisé, par présence sur des marchés hors scope.</p>
+    <p>Vous restez maître de votre politique commerciale. Nous venons en renfort.</p>
+    <div class="pitch-grid">
+      <div class="pitch-card">
+        <h3>Zéro coût fixe</h3>
+        <p>Hors mise en place initiale, vous ne payez qu'à la performance — sur chaque affaire effectivement conclue.</p>
       </div>
-      <div class="sv-arrows">
-        <span class="sv-arrow">↙</span>
-        <span class="sv-arrow">↓</span>
-        <span class="sv-arrow">↘</span>
+      <div class="pitch-card">
+        <h3>Zéro exclusivité</h3>
+        <p>MP intervient en complément, jamais à la place. Aucun territoire réservé, aucune concurrence avec vos réseaux.</p>
       </div>
-      <div class="sv-enseignes">
-        <div class="sv-enseigne">
-          <div class="sv-label">Enseigne A</div>
-          <div class="sv-name">Votre<br>réseau</div>
-        </div>
-        <div class="sv-enseigne">
-          <div class="sv-label">Enseigne B</div>
-          <div class="sv-name">Autre<br>réseau</div>
-          <div class="sv-sub">concurrent exclu</div>
-        </div>
-        <div class="sv-enseigne">
-          <div class="sv-label">Enseigne C</div>
-          <div class="sv-name">Autre<br>réseau</div>
-          <div class="sv-sub">concurrent exclu</div>
-        </div>
+      <div class="pitch-card">
+        <h3>Réseau enrichi en continu</h3>
+        <p>Recrutement permanent de Membres par zone géographique et verticale métier. Le réseau s'élargit chaque semaine.</p>
+      </div>
+      <div class="pitch-card">
+        <h3>Un interlocuteur unique</h3>
+        <p>Thierry Bismuth coordonne l'ensemble du dispositif. Vous ne gérez pas les Membres — c'est notre affaire.</p>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<section class="profil">
-  <div class="profil-inner">
-    <div class="profil-intro">
-      <div class="section-eyebrow">Le profil rare</div>
-      <h2 class="section-title">Le franchisé que tout réseau rêve de trouver — <em>et ne sait pas accueillir.</em></h2>
-      <p>Il existe un type d'entrepreneur que les réseaux de franchise ne savent pas vraiment intégrer&nbsp;: ultra-actif, multi-compétent, incapable de se fixer sur une seule activité.</p>
-      <p>Les nouvelles générations les appellent <em>switchers</em>. On pourrait aussi dire zèbres, HPI, entrepreneurs en série. <strong style="color:var(--texte);font-weight:500;">Ceux qui font dix fois plus de business que la moyenne</strong> — à condition qu'on ne les enferme pas dans un seul concept.</p>
-      <p>Le réseau Multipotentiel les réunit. Et les met au service de votre enseigne.</p>
-      <div class="tags">
-        <span class="tag">Switchers</span>
-        <span class="tag">Zèbres</span>
-        <span class="tag">HPI</span>
-        <span class="tag">Multi-actifs</span>
-        <span class="tag">Entrepreneurs en série</span>
-        <span class="tag">Ultra-motivés</span>
+<div class="section section-alt">
+  <div class="section-inner">
+    <p class="section-label">Conditions financières</p>
+    <h2>Simple. Transparent. À la performance.</h2>
+    <p>Deux niveaux de commission selon le degré d'implication de MP dans la conclusion de l'affaire.</p>
+    <div class="tarif-grid">
+      <div class="tarif-card">
+        <p class="tarif-pct">5K€</p>
+        <h3>Mise en place</h3>
+        <p>Création des supports, formation initiale des équipes MP, démarrage du dispositif. Unique, non récurrent.</p>
+        <p class="tarif-setup">Acquis à MP dès versement</p>
       </div>
-    </div>
-    <div class="profil-grid">
-      <div class="profil-card">
-        <h3>Ils s'ennuient vite</h3>
-        <p>Un seul concept ne les fait pas vibrer longtemps. Mais plusieurs en simultané, oui — et c'est là qu'ils explosent.</p>
+      <div class="tarif-card highlight">
+        <p class="tarif-pct">10%</p>
+        <h3>Lead qualifié</h3>
+        <p>MP apporte un RDV fixé, une demande de rappel confirmée ou un contact décideur direct. Vous gérez le suivi jusqu'à signature.</p>
       </div>
-      <div class="profil-card">
-        <h3>Ils sont ultra-productifs</h3>
-        <p>Là où un franchisé classique développe un point de vente, un Multipotentiel en développe plusieurs — pour plusieurs enseignes.</p>
-      </div>
-      <div class="profil-card">
-        <h3>Ils ont besoin d'un cadre</h3>
-        <p>C'est le rôle du réseau&nbsp;: canaliser leur énergie, les orienter vers les bonnes enseignes, partager équitablement les revenus.</p>
+      <div class="tarif-card highlight">
+        <p class="tarif-pct">20%</p>
+        <h3>Vente accompagnée</h3>
+        <p>MP gère l'intégralité du cycle commercial jusqu'à la signature — relances, RDV, suivi inclus.</p>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<section class="fonctionnement">
-  <div class="fonctionnement-inner">
-    <div class="fonctionnement-header">
-      <div class="section-eyebrow" style="color:var(--accent);">Comment ça fonctionne pour vous</div>
-      <h2><em>Simple, clair, efficace.</em></h2>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <h4>Un seul contact</h4>
-        <p>Moi. Pas dix interlocuteurs, pas de dispersion. Un seul point d'entrée pour tout.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <h4>Un seul contrat</h4>
-        <p>Une seule relation contractuelle, une seule négociation, un seul partenaire juridique.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <h4>Une seule relation financière</h4>
-        <p>Redevances, royalties, chiffre d'affaires — tout passe par moi. Je redistribue au réseau.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <h4>Une force de frappe collective</h4>
-        <p>Des dizaines d'entrepreneurs actifs qui développent votre enseigne sur le terrain, en simultané.</p>
-      </div>
-    </div>
+<div class="section">
+  <div class="section-inner">
+    <p class="section-label">Nos engagements</p>
+    <h2>Ce que MP s'engage<br>à faire pour vous.</h2>
+    <ul class="engage-list">
+      <li>Former et animer ses Membres en continu sur votre offre — actifs et nouveaux entrants</li>
+      <li>N'utiliser que les supports et éléments de langage que vous aurez validés</li>
+      <li>Vous transmettre un reporting tous les 15 jours : leads, statuts, avancement</li>
+      <li>Coordonner l'ensemble du dispositif — diffusion, relances, suivi des dossiers</li>
+      <li>Traiter sous 5 jours ouvrés toute demande de retrait d'un Membre si nécessaire</li>
+      <li>Intervenir en renfort sur vos RDV importants, avec un expert métier si besoin</li>
+    </ul>
   </div>
-</section>
+</div>
 
-<section class="avantages">
-  <div class="avantages-inner">
-    <div class="avantages-header">
-      <div class="section-eyebrow">Ce que vous y gagnez</div>
-      <h2>Moins de complexité.<br><em>Plus de résultats.</em></h2>
-    </div>
-    <div class="av-grid">
-      <div class="av-card">
-        <span class="av-icon">⚡</span>
-        <h3>Déploiement accéléré</h3>
-        <p>Plusieurs points de vente ouverts en simultané, dans plusieurs villes, portés par plusieurs entrepreneurs.</p>
-      </div>
-      <div class="av-card">
-        <span class="av-icon">🔗</span>
-        <h3>Zéro dispersion</h3>
-        <p>Un seul contrat, une seule facture, une seule relation. Vous gérez un partenaire, pas une multitude.</p>
-      </div>
-      <div class="av-card">
-        <span class="av-icon">📈</span>
-        <h3>Profils hors normes</h3>
-        <p>Des entrepreneurs qui génèrent bien au-delà de la moyenne — parce qu'ils sont structurellement incapables de faire les choses à moitié.</p>
-      </div>
-    </div>
+<div class="contrat-block">
+  <h2>Tout est dans le contrat.</h2>
+  <p>Un document court, sans jargon, qui pose clairement les règles du jeu pour les deux parties. Lisez-le avant qu'on se parle.</p>
+  <a href="https://drive.google.com/file/d/1oJwoiLwgwReO0N097swNzVvMYieGYeSv/view?usp=sharing" target="_blank" class="btn-primary">Télécharger le contrat de partenariat</a>
+</div>
+
+<div class="section section-alt">
+  <div class="section-inner">
+    <p class="section-label">Pour qui ?</p>
+    <h2>Multi-Potentiel est fait pour vous si…</h2>
+    <ul class="engage-list">
+      <li>Vos équipes commerciales internes ne couvrent pas tout le territoire</li>
+      <li>Vous cherchez un canal d'acquisition sans coût fixe supplémentaire</li>
+      <li>Vous avez des zones blanches ou des marchés difficiles à pénétrer</li>
+      <li>Vous voulez accéder à des affaires par recommandation plutôt que par démarchage froid</li>
+      <li>Vous êtes franchiseur, réseau de services, ou toute activité à cycle de vente commercial</li>
+    </ul>
   </div>
-</section>
+</div>
 
-<section class="cta">
-  <h2>Parlons de <em>votre réseau.</em></h2>
-  <p>Dites-moi quelle zone géographique ou quel profil vous manque — je vous explique comment le réseau peut y répondre.</p>
-  <div class="cta-contacts">
-    <a href="tel:0610703090" target="_top" class="cta-btn primary">📞 06 10 70 30 90</a>
-    <a href="mailto:thierry@thierrybismuth.com" target="_top" class="cta-btn secondary">✉ thierry@thierrybismuth.com</a>
-  </div>
-</section>
+<div class="cta-final">
+  <h2>20 minutes pour savoir<br>si le fit est là.</h2>
+  <p>Un échange rapide pour comprendre votre marché, votre périmètre, et vous dire honnêtement si Multi-Potentiel peut apporter quelque chose.</p>
+  <a href="tel:0610703090" class="btn-white">📞 06 10 70 30 90</a>
+</div>
 
-<script>
-function sendHeight(){var h=document.documentElement.scrollHeight||document.body.scrollHeight;window.parent.postMessage({iframeHeight:h},"*");}
-window.addEventListener("load",sendHeight);
-window.addEventListener("resize",sendHeight);
-setTimeout(sendHeight,600);
-setTimeout(sendHeight,1200);
-</script>
+<div class="footer-note">
+  ODYSKILLS — Multi-Potentiel &nbsp;|&nbsp; thierry@thierrybismuth.com &nbsp;|&nbsp;
+  <a href="https://drive.google.com/file/d/1oJwoiLwgwReO0N097swNzVvMYieGYeSv/view?usp=sharing" target="_blank" style="color:#c8873a;">Contrat de partenariat</a>
+</div>
+
 </body>
 </html>
