@@ -6,302 +6,142 @@
 <title>Votre réseau commercial MULTI-POTENTIEL | Thierry Bismuth</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Outfit', 'Helvetica Neue', sans-serif; background: #f7f5f0; color: #1a2e44; font-size: 16px; line-height: 1.65; }
 
-  body {
-    font-family: 'Outfit', 'Helvetica Neue', sans-serif;
-    background: #f7f5f0;
-    color: #1a2e44;
-    font-size: 16px;
-    line-height: 1.65;
-  }
-
-  .hero {
-    background: #1a2e44;
-    color: #f7f5f0;
-    padding: 70px 40px 60px;
-    text-align: center;
-  }
-  .hero-label {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #c8873a;
-    margin-bottom: 18px;
-  }
-  .hero h1 {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(28px, 4vw, 46px);
-    font-weight: 600;
-    line-height: 1.25;
-    margin-bottom: 22px;
-    color: #f7f5f0;
-  }
+  .hero { background: #1a2e44; color: #f7f5f0; padding: 70px 40px 60px; text-align: center; }
+  .hero-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #c8873a; margin-bottom: 18px; }
+  .hero h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(28px, 4vw, 46px); font-weight: 600; line-height: 1.25; margin-bottom: 22px; color: #f7f5f0; }
   .hero h1 em { color: #c8873a; font-style: italic; }
-  .hero-sub {
-    font-size: 17px;
-    max-width: 680px;
-    margin: 0 auto 36px;
-    color: #d4cfc8;
-    line-height: 1.7;
-  }
-  .btn-primary {
-    display: inline-block;
-    background: #c8873a;
-    color: #fff;
-    padding: 14px 34px;
-    border-radius: 3px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    transition: background 0.2s;
-  }
+  .hero-sub { font-size: 17px; max-width: 680px; margin: 0 auto 36px; color: #d4cfc8; line-height: 1.7; }
+  .btn-primary { display: inline-block; background: #c8873a; color: #fff; padding: 14px 34px; border-radius: 3px; text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 0.5px; transition: background 0.2s; }
   .btn-primary:hover { background: #b5762f; }
-  .btn-outline {
-    display: inline-block;
-    border: 1.5px solid #c8873a;
-    color: #c8873a;
-    padding: 12px 28px;
-    border-radius: 3px;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    transition: all 0.2s;
-    margin-left: 14px;
-  }
+  .btn-outline { display: inline-block; border: 1.5px solid #c8873a; color: #c8873a; padding: 12px 28px; border-radius: 3px; text-decoration: none; font-size: 13px; font-weight: 600; transition: all 0.2s; margin-left: 14px; }
   .btn-outline:hover { background: #c8873a; color: #fff; }
 
   .section { padding: 64px 40px; }
   .section-inner { max-width: 900px; margin: 0 auto; }
   .section-alt { background: #fff; }
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #c8873a;
-    margin-bottom: 10px;
-  }
-  .section h2 {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(24px, 3vw, 36px);
-    font-weight: 600;
-    margin-bottom: 20px;
-    line-height: 1.3;
-    color: #1a2e44;
-  }
+  .section-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #c8873a; margin-bottom: 10px; }
+  .section h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(24px, 3vw, 36px); font-weight: 600; margin-bottom: 20px; line-height: 1.3; color: #1a2e44; }
   .section p { color: #3a4a5a; margin-bottom: 14px; font-size: 15.5px; }
 
-  .pitch-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-    margin-top: 36px;
-  }
-  @media (max-width: 640px) { .pitch-grid { grid-template-columns: 1fr; } }
-  .pitch-card {
-    background: #f7f5f0;
-    border-left: 3px solid #c8873a;
-    padding: 22px 24px;
-    border-radius: 2px;
-  }
-  .pitch-card h3 {
-    font-size: 14px;
-    font-weight: 700;
-    color: #1a2e44;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .pitch-card p { font-size: 14.5px; color: #3a4a5a; margin: 0; }
+  .value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 36px; }
+  @media (max-width: 640px) { .value-grid { grid-template-columns: 1fr; } }
+  .value-card { background: #1a2e44; padding: 28px 26px; border-radius: 2px; }
+  .value-card-num { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 36px; font-weight: 700; color: #c8873a; opacity: 0.5; line-height: 1; margin-bottom: 12px; }
+  .value-card h3 { font-size: 15px; font-weight: 700; color: #f7f5f0; margin-bottom: 10px; line-height: 1.3; }
+  .value-card p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; margin: 0; }
 
-  .tarif-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 22px;
-    margin-top: 36px;
-  }
-  @media (max-width: 760px) { .tarif-grid { grid-template-columns: 1fr; } }
-  .tarif-card {
-    background: #f7f5f0;
-    border-top: 3px solid #1a2e44;
-    padding: 28px 24px;
-    border-radius: 2px;
-    text-align: center;
-  }
-  .tarif-card.highlight { border-top-color: #c8873a; background: #fff8f1; }
-  .tarif-pct {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 48px;
-    font-weight: 700;
-    color: #c8873a;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .tarif-card h3 {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: #1a2e44;
-    margin-bottom: 12px;
-  }
-  .tarif-card p { font-size: 14px; color: #3a4a5a; margin: 0; line-height: 1.6; }
-  .tarif-card .tarif-setup { font-size: 11px; color: #888; margin-top: 10px; font-style: italic; }
+  .principe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 36px; }
+  @media (max-width: 640px) { .principe-grid { grid-template-columns: 1fr; } }
+  .principe-card { background: #f7f5f0; border-left: 3px solid #c8873a; padding: 22px 24px; border-radius: 2px; }
+  .principe-card h3 { font-size: 14px; font-weight: 700; color: #1a2e44; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .principe-card p { font-size: 14.5px; color: #3a4a5a; margin: 0; }
 
-  .engage-list { list-style: none; margin-top: 28px; }
-  .engage-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 14px 0;
-    border-bottom: 1px solid #e8e4de;
-    font-size: 15px;
-    color: #3a4a5a;
-  }
-  .engage-list li:last-child { border-bottom: none; }
-  .engage-list li::before { content: "→"; color: #c8873a; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .contrat-block { background: #c8873a; color: #fff; padding: 52px 40px; text-align: center; }
+  .contrat-block h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; color: #fff; margin-bottom: 12px; font-weight: 600; }
+  .contrat-block p { font-size: 15px; max-width: 540px; margin: 0 auto 28px; opacity: 0.9; }
+  .btn-white { display: inline-block; background: #fff; color: #c8873a; padding: 14px 36px; border-radius: 3px; text-decoration: none; font-size: 14px; font-weight: 700; transition: opacity 0.2s; }
+  .btn-white:hover { opacity: 0.88; }
 
-  .contrat-block {
-    background: #1a2e44;
-    color: #f7f5f0;
-    padding: 48px 40px;
-    text-align: center;
-  }
-  .contrat-block h2 {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 28px;
-    color: #f7f5f0;
-    margin-bottom: 14px;
-  }
-  .contrat-block p { color: #b0aaa3; font-size: 15px; max-width: 560px; margin: 0 auto 28px; }
-
-  .cta-final { background: #c8873a; color: #fff; padding: 60px 40px; text-align: center; }
-  .cta-final h2 {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(24px, 3vw, 36px);
-    color: #fff;
-    margin-bottom: 14px;
-    font-weight: 600;
-  }
-  .cta-final p { font-size: 16px; opacity: 0.9; max-width: 520px; margin: 0 auto 28px; }
-  .btn-white {
-    display: inline-block;
-    background: #fff;
-    color: #c8873a;
-    padding: 14px 36px;
-    border-radius: 3px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-  }
+  .cta-final { background: #1a2e44; color: #fff; padding: 60px 40px; text-align: center; }
+  .cta-final h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(24px, 3vw, 36px); color: #fff; margin-bottom: 14px; font-weight: 600; }
+  .cta-final p { font-size: 16px; opacity: 0.65; max-width: 520px; margin: 0 auto 28px; }
   .footer-note { text-align: center; font-size: 12px; color: #999; padding: 20px 40px; background: #f7f5f0; }
   html, body { height: auto; overflow: hidden; }
 </style>
 </head>
 <body>
 
+<!-- HERO -->
 <div class="hero">
-  <p class="hero-label">Multi-Potentiel — Réseau d'apporteurs d'affaires</p>
-  <h1>Votre prochain contrat viendra peut-être<br>d'un entrepreneur que vous n'avez <em>jamais rencontré.</em></h1>
-  <p class="hero-sub">Multi-Potentiel est un réseau d'apporteurs d'affaires indépendants, animé en continu, qui travaille en complément de vos équipes commerciales — sans coût fixe, sans exclusivité, sans concurrence avec vos canaux existants.</p>
+  <p class="hero-label">Multi-Potentiel — Réseau d’apporteurs d’affaires</p>
+  <h1>Des affaires que vos équipes<br>n’auraient <em>jamais trouvées seules.</em></h1>
+  <p class="hero-sub">Multi-Potentiel est un réseau d’apporteurs d’affaires indépendants qui travaille en complément de vos dispositifs commerciaux existants — sans coût fixe, sans exclusivité, sans concurrence avec vos propres canaux.</p>
   <a href="tel:0610703090" class="btn-primary">Parlons-en — 20 minutes</a>
   <a href="https://drive.google.com/file/d/1oJwoiLwgwReO0N097swNzVvMYieGYeSv/view?usp=sharing" target="_blank" class="btn-outline">Voir le contrat</a>
 </div>
 
+<!-- VALEUR -->
 <div class="section">
+  <div class="section-inner">
+    <p class="section-label">Ce que le réseau apporte</p>
+    <h2>Quatre sources de leads<br>hors de portée de votre prospection habituelle.</h2>
+    <p>Vos équipes commerciales font leur travail. Multi-Potentiel fait le reste — là où elles ne peuvent pas ou ne pensent pas à aller.</p>
+
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-card-num">01</div>
+        <h3>Le carnet d’adresses personnel de chaque Membre</h3>
+        <p>Des contacts hors scope, apportés par affinité ou recommandation directe. Ces affaires n’existent dans aucun fichier de prospection — elles viennent du réseau humain.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card-num">02</div>
+        <h3>Une prospection locale que vos dispositifs ne couvrent pas</h3>
+        <p>Des Membres ancrés dans leur territoire, qui frappent des portes que votre tête de réseau n’atteint pas — par manque de temps, de ressources ou de présence terrain.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card-num">03</div>
+        <h3>La prospection multi-offre qui désarmé les prospects récalcitrants</h3>
+        <p>Un entrepreneur qui présente plusieurs concepts touche des prospects moins réceptifs à un discours mono-produit. L’entrée se fait par le projet, pas par l’enseigne. Et ça change tout.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card-num">04</div>
+        <h3>Des Membres ultra-spécialisés ou ultra-reconnus localement</h3>
+        <p>Certains Membres sont des experts métiers reconnus dans leur vertical, ou des figures locales avec une crédibilité instantanée. Leur recommandation vaut mieux que dix appels à froid.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRINCIPE -->
+<div class="section section-alt">
   <div class="section-inner">
     <p class="section-label">Le principe</p>
     <h2>Un canal additionnel,<br>pas un concurrent.</h2>
-    <p>Nos Membres sont des entrepreneurs avec des carnets d'adresses actifs, formés sur votre offre et motivés par la performance. Ils ouvrent des portes que vos équipes n'auraient jamais franchies — par recommandation, par réseau croisé, par présence sur des marchés hors scope.</p>
-    <p>Vous restez maître de votre politique commerciale. Nous venons en renfort.</p>
-    <div class="pitch-grid">
-      <div class="pitch-card">
+    <p>MP intervient exclusivement en complément de vos dispositifs. Aucune exclusivité territoriale, aucune interférence avec vos canaux. Vous restez maître de votre politique commerciale.</p>
+    <div class="principe-grid">
+      <div class="principe-card">
         <h3>Zéro coût fixe</h3>
-        <p>Hors mise en place initiale, vous ne payez qu'à la performance — sur chaque affaire effectivement conclue.</p>
+        <p>Vous ne payez qu’à la performance, sur les affaires effectivement conclues. Les conditions sont détaillées dans le contrat.</p>
       </div>
-      <div class="pitch-card">
+      <div class="principe-card">
         <h3>Zéro exclusivité</h3>
-        <p>MP intervient en complément, jamais à la place. Aucun territoire réservé, aucune concurrence avec vos réseaux.</p>
+        <p>Aucun territoire réservé. MP vient en renfort, jamais à la place de vos équipes ou de vos franchisés existants.</p>
       </div>
-      <div class="pitch-card">
+      <div class="principe-card">
         <h3>Réseau enrichi en continu</h3>
-        <p>Recrutement permanent de Membres par zone géographique et verticale métier. Le réseau s'élargit chaque semaine.</p>
+        <p>Recrutement permanent de Membres par zone géographique et verticale métier. Le réseau s’élargit chaque semaine.</p>
       </div>
-      <div class="pitch-card">
+      <div class="principe-card">
         <h3>Un interlocuteur unique</h3>
-        <p>Thierry Bismuth coordonne l'ensemble du dispositif. Vous ne gérez pas les Membres — c'est notre affaire.</p>
+        <p>Thierry Bismuth coordonne l’ensemble du dispositif. Vous ne gérez pas les Membres — c’est l’affaire de MP.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="section section-alt">
-  <div class="section-inner">
-    <p class="section-label">Conditions financières</p>
-    <h2>Simple. Transparent. À la performance.</h2>
-    <p>Deux niveaux de commission selon le degré d'implication de MP dans la conclusion de l'affaire.</p>
-    <div class="tarif-grid">
-      <div class="tarif-card">
-        <p class="tarif-pct">5K€</p>
-        <h3>Mise en place</h3>
-        <p>Création des supports, formation initiale des équipes MP, démarrage du dispositif. Unique, non récurrent.</p>
-        <p class="tarif-setup">Acquis à MP dès versement</p>
-      </div>
-      <div class="tarif-card highlight">
-        <p class="tarif-pct">10%</p>
-        <h3>Lead qualifié</h3>
-        <p>MP apporte un RDV fixé, une demande de rappel confirmée ou un contact décideur direct. Vous gérez le suivi jusqu'à signature.</p>
-      </div>
-      <div class="tarif-card highlight">
-        <p class="tarif-pct">20%</p>
-        <h3>Vente accompagnée</h3>
-        <p>MP gère l'intégralité du cycle commercial jusqu'à la signature — relances, RDV, suivi inclus.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-inner">
-    <p class="section-label">Nos engagements</p>
-    <h2>Ce que MP s'engage<br>à faire pour vous.</h2>
-    <ul class="engage-list">
-      <li>Former et animer ses Membres en continu sur votre offre — actifs et nouveaux entrants</li>
-      <li>N'utiliser que les supports et éléments de langage que vous aurez validés</li>
-      <li>Vous transmettre un reporting tous les 15 jours : leads, statuts, avancement</li>
-      <li>Coordonner l'ensemble du dispositif — diffusion, relances, suivi des dossiers</li>
-      <li>Traiter sous 5 jours ouvrés toute demande de retrait d'un Membre si nécessaire</li>
-      <li>Intervenir en renfort sur vos RDV importants, avec un expert métier si besoin</li>
-    </ul>
-  </div>
-</div>
-
+<!-- CONTRAT CTA -->
 <div class="contrat-block">
-  <h2>Tout est dans le contrat.</h2>
-  <p>Un document court, sans jargon, qui pose clairement les règles du jeu pour les deux parties. Lisez-le avant qu'on se parle.</p>
-  <a href="https://drive.google.com/file/d/1oJwoiLwgwReO0N097swNzVvMYieGYeSv/view?usp=sharing" target="_blank" class="btn-primary">Télécharger le contrat de partenariat</a>
+  <h2>Les conditions d’apport d’affaires sont dans le contrat.</h2>
+  <p>Un document court, sans jargon, qui pose clairement les règles du jeu pour les deux parties. Lisez-le avant qu’on se parle.</p>
+  <a href="https://drive.google.com/file/d/1oJwoiLwgwReO0N097swNzVvMYieGYeSv/view?usp=sharing" target="_blank" class="btn-white">Découvrir le contrat de partenariat</a>
 </div>
 
-<div class="section section-alt">
+<!-- POUR QUI -->
+<div class="section">
   <div class="section-inner">
     <p class="section-label">Pour qui ?</p>
     <h2>Multi-Potentiel est fait pour vous si…</h2>
-    <ul class="engage-list">
-      <li>Vos équipes commerciales internes ne couvrent pas tout le territoire</li>
-      <li>Vous cherchez un canal d'acquisition sans coût fixe supplémentaire</li>
-      <li>Vous avez des zones blanches ou des marchés difficiles à pénétrer</li>
-      <li>Vous voulez accéder à des affaires par recommandation plutôt que par démarchage froid</li>
-      <li>Vous êtes franchiseur, réseau de services, ou toute activité à cycle de vente commercial</li>
-    </ul>
+    <p>Vos équipes ne couvrent pas tout le territoire. Vous avez des zones blanches ou des marchés difficiles à pénétrer. Vous voulez des affaires issues de la recommandation plutôt que du démarchage froid. Vous êtes franchiseur, réseau de services, ou toute activité où un écosystème de confiance accélère la signature.</p>
   </div>
 </div>
 
+<!-- CTA FINAL -->
 <div class="cta-final">
   <h2>20 minutes pour savoir<br>si le fit est là.</h2>
-  <p>Un échange rapide pour comprendre votre marché, votre périmètre, et vous dire honnêtement si Multi-Potentiel peut apporter quelque chose.</p>
-  <a href="tel:0610703090" class="btn-white">📞 06 10 70 30 90</a>
+  <p>Un échange rapide pour comprendre votre marché et vous dire honnêtement si Multi-Potentiel peut apporter quelque chose.</p>
+  <a href="tel:0610703090" class="btn-primary">📞 06 10 70 30 90</a>
 </div>
 
 <div class="footer-note">
