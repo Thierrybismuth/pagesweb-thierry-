@@ -1,1 +1,361 @@
-CONTENT_PLACEHOLDER
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Sélection DBA Oracle — Linedata · Dossier Confidentiel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0f0f0d;--paper:#f5f0e8;--cream:#ede8dc;--gold:#c8960a;--gold-light:#f2c040;--gold-dark:#7a5c00;--red:#8b1a1a;--mid:#4a4540;--rule:#b8af9a;--score-bg:#1a1712;--label:#8a7a60}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-weight:300;min-height:100vh}
+.masthead{background:var(--score-bg);padding:48px 60px 40px;border-bottom:3px solid var(--gold);position:relative;overflow:hidden}
+.masthead::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 60px,rgba(242,192,64,.04) 60px,rgba(242,192,64,.04) 61px)}
+.masthead-inner{max-width:960px;margin:0 auto;position:relative}
+.confidential-stamp{display:inline-block;border:2px solid var(--red);color:#e05555;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:4px;padding:4px 12px;text-transform:uppercase;margin-bottom:24px;transform:rotate(-1.5deg)}
+.masthead h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:700;color:#f0ebe0;line-height:1.1;margin-bottom:8px}
+.masthead h1 em{color:var(--gold-light);font-style:italic}
+.masthead-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#a09880;letter-spacing:2px;margin-top:20px;display:flex;gap:40px;flex-wrap:wrap}
+.masthead-meta span::before{content:'— ';color:var(--gold-light)}
+.intro-band{background:var(--cream);border-bottom:1px solid var(--rule);padding:28px 60px}
+.intro-band p{max-width:760px;margin:0 auto;font-size:13.5px;color:#5a5048;line-height:1.8;font-style:italic}
+.grid{max-width:1040px;margin:0 auto;padding:48px 40px 80px;display:grid;gap:32px}
+.card{background:#fff;border:1px solid var(--rule);display:grid;grid-template-columns:280px 1fr;position:relative;transition:box-shadow .25s;animation:rise .4s ease both}
+.card:hover{box-shadow:8px 8px 0 var(--gold),0 0 0 1px var(--gold)}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.10s}.card:nth-child(3){animation-delay:.15s}.card:nth-child(4){animation-delay:.20s}.card:nth-child(5){animation-delay:.25s}.card:nth-child(6){animation-delay:.30s}.card:nth-child(7){animation-delay:.35s}.card:nth-child(8){animation-delay:.40s}.card:nth-child(9){animation-delay:.45s}.card:nth-child(10){animation-delay:.50s}
+.rank-badge{position:absolute;top:-1px;left:-1px;background:var(--score-bg);color:var(--gold-light);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:5px 14px;letter-spacing:1px}
+.rank-badge.top3{background:var(--gold);color:#1a1400;font-weight:500}
+.card-left{background:var(--cream);border-right:1px solid var(--rule);padding:40px 24px 28px;display:flex;flex-direction:column;gap:20px}
+.candidate-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--label);text-transform:uppercase;margin-top:16px}
+.candidate-code{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--ink);line-height:1}
+.candidate-role{font-size:12px;color:var(--mid);line-height:1.5;font-style:italic;border-left:2px solid var(--gold);padding-left:10px}
+.score-block{background:var(--score-bg);padding:16px;display:flex;align-items:center;gap:12px}
+.score-num{font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:var(--gold-light);line-height:1}
+.score-denom{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#7a7060}
+.score-bar{flex:1;height:4px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
+.score-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:2px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;padding:4px 9px;background:transparent;border:1px solid #c0b898;color:var(--mid);text-transform:uppercase}
+.tag.hot{border-color:var(--gold);color:var(--gold-dark);background:rgba(200,150,10,.10);font-weight:500}
+.tag.warn{border-color:#a02020;color:#8b1a1a;background:rgba(139,26,26,.07);font-weight:500}
+.card-right{padding:40px 32px 28px;display:flex;flex-direction:column;gap:16px}
+.section-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--label)}
+.cr-body{font-size:13.5px;line-height:1.85;color:#2a2520}
+.mini-scores{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-top:16px;border-top:1px solid var(--rule)}
+.mini-score{display:flex;flex-direction:column;gap:3px}
+.ms-label{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:1.5px;color:var(--label);text-transform:uppercase}
+.ms-bar{height:3px;background:#ddd5c0;border-radius:2px;overflow:hidden}
+.ms-fill{height:100%;background:var(--gold);border-radius:2px}
+.ms-val{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--mid)}
+.cv-toggle-btn{margin-top:4px;display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--gold);color:var(--gold-dark);font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;padding:6px 14px;cursor:pointer;text-transform:uppercase;transition:background .2s,color .2s}
+.cv-toggle-btn:hover{background:var(--gold);color:#1a1400}
+.cv-toggle-btn .arrow{transition:transform .2s;display:inline-block}
+.cv-anon{display:none;margin-top:4px;border:1px solid #d8cfba;background:#faf8f3;padding:20px 22px}
+.cv-anon.visible{display:block}
+.cv-section{margin-bottom:14px}
+.cv-section:last-child{margin-bottom:0}
+.cv-section-title{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dark);margin-bottom:7px;font-weight:500;border-bottom:1px solid #e0d8c8;padding-bottom:4px}
+.cv-item{font-size:12px;color:#3a342c;line-height:1.7;margin-bottom:5px}
+.cv-item strong{font-weight:500;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.5px}
+.cv-tech{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--mid);background:#eee8d8;padding:2px 6px;margin:2px 2px 0 0;display:inline-block}
+footer{background:var(--score-bg);border-top:1px solid var(--gold);padding:24px 60px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6a6050;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{color:var(--gold-light);text-decoration:none}
+@media(max-width:720px){.card{grid-template-columns:1fr}.card-left{border-right:none;border-bottom:1px solid var(--rule)}.masthead,.intro-band{padding-left:24px;padding-right:24px}.grid{padding:24px 16px 60px}footer{padding:20px 24px}}
+</style>
+</head>
+<body>
+<header class="masthead"><div class="masthead-inner">
+<div class="confidential-stamp">Dossier confidentiel</div>
+<h1>Sélection <em>Ingénieur Système / DBA Oracle</em><br>pour Linedata — Arcueil (94)</h1>
+<div class="masthead-meta"><span>10 profils retenus / 48 analysés</span><span>Mission : Lending &amp; Leasing</span><span>Mars 2026</span><span>Consultant : T. Bismuth · ODYSKILLS</span></div>
+</div></header>
+<div class="intro-band"><p>Les profils ci-dessous ont été sélectionnés sur la base de la fiche de poste (Oracle + Linux, secteur financier, anglais requis, espagnol apprécié). Chaque dossier est anonymisé. Identités complètes communiquées sur simple demande après validation de principe.</p></div>
+<main class="grid">
+
+<article class="card"><div class="rank-badge top3">#01 · 82/100</div>
+<div class="card-left">
+<div><div class="candidate-label">Candidat</div><div class="candidate-code">A</div><div class="candidate-role">Ingénieur Informaticien · Consultant Unix/Oracle<br>Études &amp; Développement · Production</div></div>
+<div class="score-block"><div><div class="score-num">82</div><div class="score-denom">/100</div></div><div class="score-bar"><div class="score-fill" style="width:82%"></div></div></div>
+<div class="tags"><span class="tag hot">Oracle 8→12g</span><span class="tag hot">Unix AIX</span><span class="tag hot">BNP Paribas</span><span class="tag">PL/SQL</span><span class="tag">26 ans XP</span><span class="tag">Bac+5 CNAM</span></div>
+</div>
+<div class="card-right">
+<div class="section-label">Compte rendu entretien</div>
+<div class="cr-body">Ingénieur Bac+5 du CNAM avec 26 ans d'expérience dont une quinzaine concentrée sur Oracle et Unix : il est tout simplement le profil le plus aligné du lot. Maîtrise complète d'Oracle 8i à 12g — install, PL/SQL, SQL*Loader, Pro*C, migrations majeures. Cinq ans chez BNP Paribas (filiale bancaire) comme responsable exploitation informatique : production Oracle d'un Core Banking (Atlas), encadrement de 6 exploitants, astreintes 24/7. AIX, HP-UX, Solaris, Linux (ksh) documentés mission après mission. Capacité à rédiger des procédures, former des équipes et dialoguer avec les métiers. Point d'attention : anglais déclaré technique — à confirmer à l'oral compte tenu des déplacements prévus.</div>
+<div class="mini-scores">
+<div class="mini-score"><div class="ms-label">Oracle DBA</div><div class="ms-bar"><div class="ms-fill" style="width:83%"></div></div><div class="ms-val">25/30</div></div>
+<div class="mini-score"><div class="ms-label">Linux/Unix</div><div class="ms-bar"><div class="ms-fill" style="width:93%"></div></div><div class="ms-val">14/15</div></div>
+<div class="mini-score"><div class="ms-label">Banque</div><div class="ms-bar"><div class="ms-fill" style="width:87%"></div></div><div class="ms-val">13/15</div></div>
+</div>
+<button class="cv-toggle-btn" onclick="toggleCV(this)"><span class="arrow">▶</span> CV anonymisé</button>
+<div class="cv-anon">
+<div class="cv-section"><div class="cv-section-title">Formation</div>
+<div class="cv-item"><strong>Bac+5</strong> Ingénieur Info — Option SI · CNAM, France · 2001</div>
+<div class="cv-item"><strong>Bac+3</strong> Licence Info · 1997 · <strong>DUT</strong> Info · 1996</div></div>
+<div class="cv-section"><div class="cv-section-title">Expériences principales</div>
+<div class="cv-item"><strong>2023–2024 · Ingénieur Production</strong> · Établissement bancaire public, Paris<br>Incidents/ordonnancement Unix, Vega, CFT, scripts ksh, flux SFTP</div>
+<div class="cv-item"><strong>2014–2018 · Responsable Exploitation Informatique</strong> · Filiale BNP Paribas Afrique (5 ans)<br>Core Banking Atlas, Oracle production, encadrement 6 personnes, astreintes 24/7, TSM, ITIL</div>
+<div class="cv-item"><strong>2011–2013 · Ingénieur PL/SQL</strong> · Grand groupe eau/environnement<br>Oracle 8i→11g, migrations, PL/SQL, SQL*Loader, Unix AIX ksh, VB6</div>
+<div class="cv-item"><strong>2007–2010 · Ingénieur E&amp;D</strong> · Location de véhicules européen<br>Oracle 9i, Forms 6i, Pro*C, shell ksh</div></div>
+<div class="cv-section"><div class="cv-section-title">Compétences techniques</div>
+<span class="cv-tech">Oracle 8i→12g</span><span class="cv-tech">PL/SQL</span><span class="cv-tech">SQL*Loader</span><span class="cv-tech">Pro*C</span><span class="cv-tech">Forms 6i</span><span class="cv-tech">Unix AIX/HP/Solaris</span><span class="cv-tech">Linux RHEL</span><span class="cv-tech">Shell ksh</span><span class="cv-tech">CFT</span><span class="cv-tech">TWS/Autosys</span><span class="cv-tech">ITIL</span></div>
+<div class="cv-section"><div class="cv-section-title">Langues</div><div class="cv-item">Anglais technique · Français courant</div></div>
+</div></div></article>
+
+<article class="card"><div class="rank-badge top3">#02 · 77/100</div>
+<div class="card-left">
+<div><div class="candidate-label">Candidat</div><div class="candidate-code">B</div><div class="candidate-role">Ingénieur Production · DBA Oracle Certifié<br>Intégration applicative · Exploitation bancaire</div></div>
+<div class="score-block"><div><div class="score-num">77</div><div class="score-denom">/100</div></div><div class="score-bar"><div class="score-fill" style="width:77%"></div></div></div>
+<div class="tags"><span class="tag hot">Certifié Oracle DBA</span><span class="tag hot">Oracle 9→19C</span><span class="tag hot">NATIXIS 8 ans</span><span class="tag">Linux RHEL</span><span class="tag">Control-M</span><span class="tag">Bac+5</span></div>
+</div>
+<div class="card-right">
+<div class="section-label">Compte rendu entretien</div>
+<div class="cr-body">Seul candidat du lot à détenir une certification officielle Oracle DBA Workshop — stack Oracle 9i→19C. Huit ans chez Natixis : intégrateur (install, config, schémas, sauvegardes, SQL métier) puis ingénieur production (incidents N1/N2, déploiements, standards bancaires). Avant Natixis : développeur Oracle Forms 10g — Oracle est sa langue maternelle. Linux solide (RHEL 7, Control-M 8, Zabbix, Ansible), vraie culture DevOps bancaire. Combinaison certification + banque longue durée + Oracle multi-versions difficile à battre. Anglais à valider.</div>
+<div class="mini-scores">
+<div class="mini-score"><div class="ms-label">Oracle DBA</div><div class="ms-bar"><div class="ms-fill" style="width:87%"></div></div><div class="ms-val">26/30</div></div>
+<div class="mini-score"><div class="ms-label">Linux/Unix</div><div class="ms-bar"><div class="ms-fill" style="width:67%"></div></div><div class="ms-val">10/15</div></div>
+<div class="mini-score"><div class="ms-label">Banque</div><div class="ms-bar"><div class="ms-fill" style="width:93%"></div></div><div class="ms-val">14/15</div></div>
+</div>
+<button class="cv-toggle-btn" onclick="toggleCV(this)"><span class="arrow">▶</span> CV anonymisé</button>
+<div class="cv-anon">
+<div class="cv-section"><div class="cv-section-title">Formation</div>
+<div class="cv-item"><strong>Bac+5</strong> Ingénieur Informatique · 2008</div>
+<div class="cv-item">Certifications : <strong>Oracle DB 12C Administration Workshop</strong> (2017) · Linux Admin RHEL1 · MySQL for DBA · Kubernetes</div></div>
+<div class="cv-section"><div class="cv-section-title">Expériences principales</div>
+<div class="cv-item"><strong>2024–2025 · Ingénieur Production</strong> · Établissement bancaire mutualiste<br>Install applicatifs, gestion BDD, sauvegardes, scripts PowerShell, supervision</div>
+<div class="cv-item"><strong>2020–2023 · Ingénieur Production</strong> · Grande banque d'investissement (8 ans total)<br>Incidents N1/N2, déploiements, standards bancaires, procédures production Oracle</div>
+<div class="cv-item"><strong>2015–2019 · Intégrateur Applications</strong> · Même établissement<br>Install/config Oracle, schémas, sauvegardes, scripts SQL métier, matrices habilitations</div>
+<div class="cv-item"><strong>2012–2015 · Analyste-Développeur</strong> · Informatique publique<br>Oracle Forms 10g, Reports 6i, PL/SQL, procédures stockées, triggers</div></div>
+<div class="cv-section"><div class="cv-section-title">Compétences techniques</div>
+<span class="cv-tech">Oracle 9i→19C</span><span class="cv-tech">PL/SQL</span><span class="cv-tech">Forms 10g</span><span class="cv-tech">MySQL</span><span class="cv-tech">PostgreSQL</span><span class="cv-tech">Linux RHEL7</span><span class="cv-tech">Control-M 8</span><span class="cv-tech">Ansible</span><span class="cv-tech">Docker</span><span class="cv-tech">Zabbix</span><span class="cv-tech">CFT</span></div>
+<div class="cv-section"><div class="cv-section-title">Langues</div><div class="cv-item">Anglais (à confirmer) · Français courant</div></div>
+</div></div></article>
+
+<article class="card"><div class="rank-badge top3">#03 · 74/100</div>
+<div class="card-left">
+<div><div class="candidate-label">Candidat</div><div class="candidate-code">C</div><div class="candidate-role">Expert Infrastructure &amp; Production Run<br>Paiements bancaires · SWIFT · Core Banking</div></div>
+<div class="score-block"><div><div class="score-num">74</div><div class="score-denom">/100</div></div><div class="score-bar"><div class="score-fill" style="width:74%"></div></div></div>
+<div class="tags"><span class="tag hot">Anglais excellent</span><span class="tag hot">Société Générale</span><span class="tag hot">SWIFT Alliance</span><span class="tag">Oracle + DB2</span><span class="tag">Unix AIX</span><span class="tag">15 ans XP</span></div>
+</div>
+<div class="card-right">
+<div class="section-label">Compte rendu entretien</div>
+<div class="cr-body">Anglais excellent (écrit &amp; oral), validé sur projets avec banques centrales Moyen-Orient et équipes internationales — atout rare dans ce lot. Production bancaire haute criticité : SWIFT Alliance GPI, RTGS, Clearing, Fircosoft, Core Banking pour Société Générale/Transactis (2023) et banques Liban/Irak avant. Oracle sur AIX, Linux, Windows Server. Certifié Administrateur Swift Alliance, AWS SysOps, MCSE. Profil SWIFT + anglais courant = avantage concurrentiel immédiat pour clients Linedata (SG, CA, ING) et déplacements internationaux.</div>
+<div class="mini-scores">
+<div class="mini-score"><div class="ms-label">Oracle DBA</div><div class="ms-bar"><div class="ms-fill" style="width:43%"></div></div><div class="ms-val">13/30</div></div>
+<div class="mini-score"><div class="ms-label">Linux/Unix</div><div class="ms-bar"><div class="ms-fill" style="width:87%"></div></div><div class="ms-val">13/15</div></div>
+<div class="mini-score"><div class="ms-label">Anglais</div><div class="ms-bar"><div class="ms-fill" style="width:90%"></div></div><div class="ms-val">9/10</div></div>
+</div>
+<button class="cv-toggle-btn" onclick="toggleCV(this)"><span class="arrow">▶</span> CV anonymisé</button>
+<div class="cv-anon">
+<div class="cv-section"><div class="cv-section-title">Formation</div>
+<div class="cv-item"><strong>Bac+3</strong> Computer Science · Université internationale, Beyrouth · 2007</div>
+<div class="cv-item">Certifications : <strong>Administrateur Swift Alliance</strong> · AWS SysOps · MCSE · MCSA · CAPM</div></div>
+<div class="cv-section"><div class="cv-section-title">Expériences principales</div>
+<div class="cv-item"><strong>2023–Présent · Ingénieur Support Production/Run</strong> · Grande banque française (Paris)<br>Plateformes Unix/Linux, Oracle, PostgreSQL, Fircosoft (Trust/Continuity), WebSphere ND, Tomcat, AWS/Azure, Control-M, astreintes 24/7</div>
+<div class="cv-item"><strong>2008–2023 · Chef de Projet Technique / Ingénieur</strong> · Banques Moyen-Orient (Liban, Irak — 15 ans)<br>SWIFT Alliance GPI, Core Banking Atlas, FATCA, RTGS/Clearing, équipes multinationales</div></div>
+<div class="cv-section"><div class="cv-section-title">Compétences techniques</div>
+<span class="cv-tech">Oracle/DB2/Aurora/PostgreSQL</span><span class="cv-tech">Unix AIX</span><span class="cv-tech">Linux</span><span class="cv-tech">VMware</span><span class="cv-tech">SWIFT Alliance</span><span class="cv-tech">Fircosoft</span><span class="cv-tech">WebSphere</span><span class="cv-tech">AWS SysOps</span><span class="cv-tech">Control-M</span><span class="cv-tech">CFT/TSM</span></div>
+<div class="cv-section"><div class="cv-section-title">Langues</div><div class="cv-item">Anglais excellent (écrit &amp; oral) · Français bon niveau · Arabe courant</div></div>
+</div></div></article>
+
+<article class="card"><div class="rank-badge">#04 · 72/100</div>
+<div class="card-left">
+<div><div class="candidate-label">Candidat</div><div class="candidate-code">D</div><div class="candidate-role">Ingénieur de Production &amp; Exploitation<br>Core Banking · Monétique · Unix 22 ans</div></div>
+<div class="score-block"><div><div class="score-num">72</div><div class="score-denom">/100</div></div><div class="score-bar"><div class="score-fill" style="width:72%"></div></div></div>
+<div class="tags"><span class="tag hot">BNP 8 ans</span><span class="tag hot">DEXIA · BPCE</span><span class="tag hot">Unix expert</span><span class="tag">Oracle certifié 11g</span><span class="tag">Control-M 9 ans</span><span class="tag warn">Anglais A2 ⚠</span></div>
+</div>
+<div class="card-right">
+<div class="section-label">Compte rendu entretien</div>
+<div class="cr-body">25 ans de production informatique bancaire — cursus le plus dense du lot. BNP Monétique (2005), Core Banking (2014-2022), DEXIA, BPCE. Unix AIX/Linux coté expert (22 ans, niveau 4/4), Control-M sur 9 ans, certification Oracle 11g. Connaît tous les acteurs financiers que Linedata adresse. Point de vigilance sérieux : anglais A2. Pour un poste avec déplacements en Espagne, Allemagne, Canada — discussion franche dès le premier entretien. Profil technique de très haute valeur si engagement sur remise à niveau linguistique.</div>
+<div class="mini-scores">
+<div class="mini-score"><div class="ms-label">Oracle DBA</div><div class="ms-bar"><div class="ms-fill" style="width:57%"></div></div><div class="ms-val">17/30</div></div>
+<div class="mini-score"><div class="ms-label">Linux/Unix</div><div class="ms-bar"><div class="ms-fill" style="width:93%"></div></div><div class="ms-val">14/15</div></div>
+<div class="mini-score"><div class="ms-label">Banque</div><div class="ms-bar"><div class="ms-fill" style="width:100%"></div></div><div class="ms-val">15/15</div></div>
+</div>
+<button class="cv-toggle-btn" onclick="toggleCV(this)"><span class="arrow">▶</span> CV anonymisé</button>
+<div class="cv-anon">
+<div class="cv-section"><div class="cv-section-title">Formation</div>
+<div class="cv-item"><strong>Master Maths &amp; Informatique</strong> · 1995</div>
+<div class="cv-item">Certifications : Oracle 11g (2012) · Unix Admin (2008) · Autosys Admin (2002) · Tivoli (2005)</div></div>
+<div class="cv-section"><div class="cv-section-title">Expériences principales</div>
+<div class="cv-item"><strong>2024–2025 · Ingénieur Production</strong> · Énergie (EDF) — Control-M, incidents N2, MEP</div>
+<div class="cv-item"><strong>2022–2024 · Ingénieur Production</strong> · Banque restructuration (DEXIA/BPCE) — Core Banking, Monétique, flux Gateway</div>
+<div class="cv-item"><strong>2014–2022 · Analyste Production (8 ans)</strong> · Grande banque française — Oracle, Autosys, Control-M, WinSCP</div>
+<div class="cv-item"><strong>2007–2014 · Analyste Production</strong> · Grand opérateur télécom — $Universe, CFT, Unix AIX</div>
+<div class="cv-item"><strong>2005–2007 · Analyste Production Monétique</strong> · Grande banque française</div></div>
+<div class="cv-section"><div class="cv-section-title">Compétences techniques</div>
+<span class="cv-tech">Unix AIX (22 ans)</span><span class="cv-tech">Linux (22 ans)</span><span class="cv-tech">Oracle (10 ans)</span><span class="cv-tech">SQL Server</span><span class="cv-tech">Control-M (9 ans)</span><span class="cv-tech">Autosys (17 ans)</span><span class="cv-tech">CFT</span><span class="cv-tech">ITSM/ServiceNow</span></div>
+<div class="cv-section"><div class="cv-section-title">Langues</div><div class="cv-item"><strong>⚠ Anglais A2</strong> (débutant — point bloquant poste international) · Portugais C1 · Arabe courant</div></div>
+</div></div></article>
+
+<article class="card"><div class="rank-badge">#05 · 68/100</div>
+<div class="card-left">
+<div><div class="candidate-label">Candidat</div><div class="candidate-code">E</div><div class="candidate-role">Ingénieur Systèmes Unix Senior<br>Gestion Datacenters · Finance · International</div></div>
+<div class="score-block"><div><div class="score-num">68</div><div class="score-denom">/100</div></div><div class="score-bar"><div class="score-fill" style="width:68%"></div></div></div>
+<div class="tags"><span class="tag hot">Anglais courant</span><span class="tag hot">Espagnol scolaire</span><span class="tag hot">20+ ans Linux/Unix</span><span class="tag">Oracle + MySQL</span><span class="tag">BMW Financial</span><span class="tag">Synopsys 7 ans</span></div>
+</div>
+<div class="card-right">
+<div class="section-label">Compte rendu entretien</div>
+<div class="cr-body">Profil le plus complet sur les langues dans ce top 10 : anglais courant (Synopsys, BMW, Mentor Graphics, Air France) + espagnol scolaire — atout direct pour missions Linedata Espagne. 7 ans chez Synopsys à gérer 3 datacenters intégralement (Linux centos/sles/rocky, VMware, OpenStack, HPC). Architecte systèmes BMW Financial Services — sensibilité financière réelle. Oracle (Toad, DB Artisan, Pro*C) en production. Profil hybride sysadmin/DBA exactement décrit par la FDP : applications n-tiers Oracle/Unix. Habitué aux astreintes et environnements multi-clients.</div>
+<div class="mini-scores">
+<div class="mini-score"><div class="ms-label">Oracle DBA</div><div class="ms-bar"><div class="ms-fill" style="width:43%"></div></div><div class="ms-val">13/30</div></div>
+<div class="mini-score"><div class="ms-label">Linux/Unix</div><div class="ms-bar"><div class="ms-fill" style="width:93%"></div></div><div class="ms-val">14/15</div></div>
+<div class="mini-score"><div class="ms-label">Anglais</div><div class="ms-bar"><div class="ms-fill" style="width:80%"></div></div><div class="ms-val">8/10</div></div>
+</div>
+<button class="cv-toggle-btn" onclick="toggleCV(this)"><span class="arrow">▶</span> CV anonymisé</button>
+<div class="cv-anon">
+<div class="cv-section"><div class="cv-section-title">Formation</div><div class="cv-item">Certifications VMware, AWS, Nutanix · Bac Maths-Techniques</div></div>
+<div class="cv-section"><div class="cv-section-title">Expériences principales</div>
+<div class="cv-item"><strong>2017–2024 · Ingénieur Systèmes Unix (7 ans)</strong> · Constructeur émulateurs hardware international<br>3 datacenters : Linux centos/sles/rocky/alma, VMware/OpenStack, HPC UGE, Netapp, Ansible, Nagios, ServiceNow</div>
+<div class="cv-item"><strong>Avant 2016 · Architecte Systèmes</strong> · Constructeur automobile — services financiers (international)<br>Oracle, Unix, VMware — environnement bancaire/financier</div>
+<div class="cv-item"><strong>Avant · Expert Technique</strong> · ESN, clients BNP/Caisse d'Épargne/Min. Justice — Oracle RAC étendu, VMware, SAN EMC</div></div>
+<div class="cv-section"><div class="cv-section-title">Compétences techniques</div>
+<span class="cv-tech">Linux centos/sles/rocky/alma</span><span class="cv-tech">Unix Solaris/AIX</span><span class="cv-tech">Oracle</span><span class="cv-tech">MySQL/MariaDB</span><span class="cv-tech">Toad/Pro*C</span><span class="cv-tech">VMware/OpenStack</span><span class="cv-tech">Ansible</span><span class="cv-tech">Netapp</span></div>
+<div class="cv-section"><div class="cv-section-title">Langues</div><div class="cv-item">Anglais courant (Synopsys, BMW, Mentor Graphics, Air France) · Espagnol scolaire</div></div>
+</div></div></article>
+
+<article class="card"><div class="rank-badge">#06 · 57/100</div>
+<div class="card-left">
+<div><div class="candidate-label">Candidat</div><div class="candidate-code">F</div><div class="candidate-role">Administrateur Système Linux/Unix<br>VINCI · Total · Oracle RHEL / Solaris</div></div>
+<div class="score-block"><div><div class="score-num">57</div><div class="score-denom">/100</div></div><div class="score-bar"><div class="score-fill" style="width:57%"></div></div></div>
+<div class="tags"><span class="tag hot">Oracle install/config</span><span class="tag hot">RHEL + HP-UX + Solaris</span><span class="tag">Ansible · Docker</span><span class="tag">VINCI 3 ans</span><span class="tag">Total 2 ans</span><span class="tag">Master Lorraine</span></div>
+</div>
+<div class="card-right">
+<div class="section-label">Compte rendu entretien</div>
+<div class="cr-body">Master 2016, profil jeune mais densité technique Linux/Unix impressionnante : RHEL, CentOS, Debian, HP-UX, Solaris — quasi la totalité des environnements Linedata. Chez VINCI puis Total : Oracle installé et administré en production, sauvegardes/restaurations, scripts Bash, RedHat Satellite. Ansible + Docker + Kubernetes = profil DevOps natif répondant aux missions amélioration d'outils de la FDP. Manque d'exposition bancaire et anglais technique — compensables par la qualité du socle. À considérer si profils A-E non disponibles.</div>
+<div class="mini-scores">
+<div class="mini-score"><div class="ms-label">Oracle DBA</div><div class="ms-bar"><div class="ms-fill" style="width:60%"></div></div><div class="ms-val">18/30</div></div>
+<div class="mini-score"><div class="ms-label">Linux/Unix</div><div class="ms-bar"><div class="ms-fill" style="width:93%"></div></div><div class="ms-val">14/15</div></div>
+<div class="mini-score"><div class="ms-label">Banque</div><div class="ms-bar"><div class="ms-fill" style="width:0%"></div></div><div class="ms-val">0/15</div></div>
+</div>
+<button class="cv-toggle-btn" onclick="toggleCV(this)"><span class="arrow">▶</span> CV anonymisé</button>
+<div class="cv-anon">
+<div class="cv-section"><div class="cv-section-title">Formation</div><div class="cv-item"><strong>Master 2 Informatique</strong> · Université de Lorraine · 2016</div></div>
+<div class="cv-section"><div class="cv-section-title">Expériences principales</div>
+<div class="cv-item"><strong>2022–Présent · Admin Système Linux/Unix</strong> · Grand groupe construction (3 ans)<br>RHEL+Solaris, Oracle install/config/sauvegarde, Bash, RedHat Satellite, Docker, Kubernetes, Ansible, ELK</div>
+<div class="cv-item"><strong>2020–2022 · Admin Système Linux/Unix</strong> · Major pétrolier<br>HP-UX, Oracle gestion BDD + optimisation, scripts Bash, MCO sécurité</div></div>
+<div class="cv-section"><div class="cv-section-title">Compétences techniques</div>
+<span class="cv-tech">Linux RHEL/CentOS/Debian</span><span class="cv-tech">Unix HP-UX/Solaris</span><span class="cv-tech">Oracle</span><span class="cv-tech">MySQL/SQL Server</span><span class="cv-tech">RedHat Satellite</span><span class="cv-tech">Ansible</span><span class="cv-tech">Docker</span><span class="cv-tech">Kubernetes</span><span class="cv-tech">Jenkins</span></div>
+<div class="cv-section"><div class="cv-section-title">Langues</div><div class="cv-item">Anglais technique · Français courant</div></div>
+</div></div></article>
+
+<article class="card"><div class="rank-badge">#07 · 57/100</div>
+<div class="card-left">
+<div><div class="candidate-label">Candidat</div><div class="candidate-code">G</div><div class="candidate-role">Chef de Projet MOE/MOA · PRINCE2<br>BNP Paribas · SG Égypte · Amen Bank</div></div>
+<div class="score-block"><div><div class="score-num">57</div><div class="score-denom">/100</div></div><div class="score-bar"><div class="score-fill" style="width:57%"></div></div></div>
+<div class="tags"><span class="tag hot">Anglais courant</span><span class="tag hot">BNP · SG · Amen Bank</span><span class="tag">Oracle / Linux</span><span class="tag">ITIL 4</span><span class="tag">PRINCE2</span><span class="tag">15+ ans banque</span></div>
+</div>
+<div class="card-right">
+<div class="section-label">Compte rendu entretien</div>
+<div class="cr-body">Profil atypique : chef de projet bancaire (PRINCE2 Practitioner, Scrum PO, ITIL 4) avec 15 ans chez BNP Paribas, SG Égypte et Amen Bank. Connaissance sectorielle d'une profondeur rare. Base technique Oracle/Linux/PL/SQL solide. Anglais courant. Pertinent pour les missions participation aux conceptions globales d'infrastructures et suivi projets clients mentionnées dans la FDP. À positionner sur un profil hybride technique/projet plutôt que DBA pur.</div>
+<div class="mini-scores">
+<div class="mini-score"><div class="ms-label">Oracle DBA</div><div class="ms-bar"><div class="ms-fill" style="width:17%"></div></div><div class="ms-val">5/30</div></div>
+<div class="mini-score"><div class="ms-label">Banque</div><div class="ms-bar"><div class="ms-fill" style="width:80%"></div></div><div class="ms-val">12/15</div></div>
+<div class="mini-score"><div class="ms-label">Anglais</div><div class="ms-bar"><div class="ms-fill" style="width:80%"></div></div><div class="ms-val">8/10</div></div>
+</div>
+<button class="cv-toggle-btn" onclick="toggleCV(this)"><span class="arrow">▶</span> CV anonymisé</button>
+<div class="cv-anon">
+<div class="cv-section"><div class="cv-section-title">Formation</div>
+<div class="cv-item"><strong>Bac+5</strong> Ingénieur Info Temps Réel · 2010</div>
+<div class="cv-item">Certifications : ITIL 4 Foundation (2024) · PRINCE2 Practitioner (2020) · Scrum PO (2019)</div></div>
+<div class="cv-section"><div class="cv-section-title">Expériences principales</div>
+<div class="cv-item"><strong>2020–Présent · Chef de Projet IT</strong> · Grand équipementier automobile — Azure DevOps, TMA, POC Low-code</div>
+<div class="cv-item"><strong>2017–2020 · Chef de Projet IT/MOA</strong> · Grande banque française — Oracle, Hadoop, données pilotage, assurance</div>
+<div class="cv-item"><strong>2013–2017 · Ingénieur Développement</strong> · Grande banque française — Payments, Clearing, Settlement, Oracle, Linux</div>
+<div class="cv-item"><strong>2011–2012 · Développeur</strong> · SG Égypte · <strong>2007</strong> · Amen Bank Tunisie</div></div>
+<div class="cv-section"><div class="cv-section-title">Compétences techniques</div>
+<span class="cv-tech">Oracle</span><span class="cv-tech">PL/SQL</span><span class="cv-tech">PostgreSQL</span><span class="cv-tech">Linux/Unix</span><span class="cv-tech">Java/J2EE</span><span class="cv-tech">Azure DevOps</span><span class="cv-tech">Spring Batch</span></div>
+<div class="cv-section"><div class="cv-section-title">Langues</div><div class="cv-item">Anglais courant · Allemand technique · Français courant</div></div>
+</div></div></article>
+
+<article class="card"><div class="rank-badge">#08 · 55/100</div>
+<div class="card-left">
+<div><div class="candidate-label">Candidat</div><div class="candidate-code">H</div><div class="candidate-role">Architecte IT Senior · Consultant<br>BNP · Crédit Agricole · 30 ans d'expérience</div></div>
+<div class="score-block"><div><div class="score-num">55</div><div class="score-denom">/100</div></div><div class="score-bar"><div class="score-fill" style="width:55%"></div></div></div>
+<div class="tags"><span class="tag hot">30 ans XP</span><span class="tag hot">BNP · CA via CapGemini</span><span class="tag">Oracle RAC</span><span class="tag">RedHat · Oracle Linux</span><span class="tag">Anglais écrit/oral</span><span class="tag">Polytech Nice</span></div>
+</div>
+<div class="card-right">
+<div class="section-label">Compte rendu entretien</div>
+<div class="cr-body">30 ans d'expérience dont une décennie responsable technique d'agence Cap Gemini E&amp;Y (100 collaborateurs, clients BNP et CA). Oracle RAC, Oracle Linux, infras virtualisées en contexte bancaire. Master Management Projet (Polytech Nice) + certifications VMware et AWS. Capacité à écrire dossiers d'architecture, animer ateliers et gérer relations clients complexes — directement utile pour suivi projets Linedata chez SG ou CA. Positionnement idéal : référent technique senior plutôt que DBA opérationnel pur.</div>
+<div class="mini-scores">
+<div class="mini-score"><div class="ms-label">Oracle DBA</div><div class="ms-bar"><div class="ms-fill" style="width:17%"></div></div><div class="ms-val">5/30</div></div>
+<div class="mini-score"><div class="ms-label">Banque</div><div class="ms-bar"><div class="ms-fill" style="width:60%"></div></div><div class="ms-val">9/15</div></div>
+<div class="mini-score"><div class="ms-label">XP Totale</div><div class="ms-bar"><div class="ms-fill" style="width:100%"></div></div><div class="ms-val">25/25</div></div>
+</div>
+<button class="cv-toggle-btn" onclick="toggleCV(this)"><span class="arrow">▶</span> CV anonymisé</button>
+<div class="cv-anon">
+<div class="cv-section"><div class="cv-section-title">Formation</div>
+<div class="cv-item"><strong>Master Administration des Affaires</strong> — Management de Projet (Mention Bien) · Polytech Nice · CNAM Option Programmation Système</div>
+<div class="cv-item">Certifications : AWS Architecture · Nutanix · VMware (ESX/View) · NOVELL CNE</div></div>
+<div class="cv-section"><div class="cv-section-title">Expériences principales</div>
+<div class="cv-item"><strong>2023–Présent · Urbaniste SI</strong> · Ministère des Armées — rationalisation SI, analyses architecture</div>
+<div class="cv-item"><strong>2018–2023 · Architecte/Consultant</strong> · Cabinet conseil (co-fondateur) — Oracle RAC, architecture hybride Azure/SAP/VMware, PRA, AO SNCF/EDF/GRTgaz</div>
+<div class="cv-item"><strong>Avant 2006 · Resp. Technique d'Agence</strong> · ESN (Cap Gemini E&amp;Y), 100 collaborateurs — BNP Paribas, Crédit Agricole, Oracle, Linux/Unix</div></div>
+<div class="cv-section"><div class="cv-section-title">Compétences techniques</div>
+<span class="cv-tech">Oracle RAC</span><span class="cv-tech">Oracle Linux</span><span class="cv-tech">RedHat</span><span class="cv-tech">SQL Server</span><span class="cv-tech">VMware/Nutanix</span><span class="cv-tech">AWS/Azure</span><span class="cv-tech">PowerShell</span></div>
+<div class="cv-section"><div class="cv-section-title">Langues</div><div class="cv-item">Anglais lu, parlé, écrit</div></div>
+</div></div></article>
+
+<article class="card"><div class="rank-badge">#09 · 52/100</div>
+<div class="card-left">
+<div><div class="candidate-label">Candidat</div><div class="candidate-code">I</div><div class="candidate-role">Ingénieur Développeur C++ / SQL<br>NATIXIS · Trading · Marchés financiers</div></div>
+<div class="score-block"><div><div class="score-num">52</div><div class="score-denom">/100</div></div><div class="score-bar"><div class="score-fill" style="width:52%"></div></div></div>
+<div class="tags"><span class="tag hot">Anglais professionnel</span><span class="tag hot">NATIXIS 3 ans</span><span class="tag">SQL / PL/SQL</span><span class="tag">Unix + Linux</span><span class="tag">Trading · Dérivés</span><span class="tag">ENIT Ingénieur</span></div>
+</div>
+<div class="card-right">
+<div class="section-label">Compte rendu entretien</div>
+<div class="cr-body">Ingénieur développeur C++ avec 3 ans chez NATIXIS (trading Clearvision et Ubix — dérivés, futures, options). Culture marchés financiers proche de l'univers Linedata. C++, Python, Perl, SQL/PL/SQL sous Unix, Agile Scrum. Anglais professionnel validé. Compréhension fonctionnelle des produits financiers rare dans ce lot — accélérateur potentiel pour prise en charge des applicatifs Lending &amp; Leasing. À positionner sur missions avec proximité équipes développement.</div>
+<div class="mini-scores">
+<div class="mini-score"><div class="ms-label">Oracle DBA</div><div class="ms-bar"><div class="ms-fill" style="width:17%"></div></div><div class="ms-val">5/30</div></div>
+<div class="mini-score"><div class="ms-label">Banque</div><div class="ms-bar"><div class="ms-fill" style="width:67%"></div></div><div class="ms-val">10/15</div></div>
+<div class="mini-score"><div class="ms-label">Anglais</div><div class="ms-bar"><div class="ms-fill" style="width:80%"></div></div><div class="ms-val">8/10</div></div>
+</div>
+<button class="cv-toggle-btn" onclick="toggleCV(this)"><span class="arrow">▶</span> CV anonymisé</button>
+<div class="cv-anon">
+<div class="cv-section"><div class="cv-section-title">Formation</div><div class="cv-item"><strong>Ingénieur Télécommunications</strong> · ENIT · 2011</div></div>
+<div class="cv-section"><div class="cv-section-title">Expériences principales</div>
+<div class="cv-item"><strong>2024–Présent · Développeur C++</strong> · PMU — systèmes PMC pari mutuel, C++14, SQL/PLSQL, Linux</div>
+<div class="cv-item"><strong>2021–2024 · Ingénieur Développeur</strong> · Grande banque d'investissement (Natixis, 3 ans)<br>Trading Clearvision et Ubix, dérivés/futures/options, C++17, SQL/PLSQL, Python, Perl, Unix, Agile Scrum</div>
+<div class="cv-item"><strong>2018–2021 · Ingénieur Développeur</strong> · Grand groupe aéronautique (Thales)<br>Système d'alerte ATLAS pour avions, C++, Linux, temps réel</div></div>
+<div class="cv-section"><div class="cv-section-title">Compétences techniques</div>
+<span class="cv-tech">C++14/17</span><span class="cv-tech">Python</span><span class="cv-tech">Perl</span><span class="cv-tech">SQL/PL/SQL</span><span class="cv-tech">Unix/Linux</span><span class="cv-tech">GIT/SVN</span><span class="cv-tech">Dérivés/Options/Futures</span></div>
+<div class="cv-section"><div class="cv-section-title">Langues</div><div class="cv-item">Anglais professionnel · Français courant</div></div>
+</div></div></article>
+
+<article class="card"><div class="rank-badge">#10 · 50/100</div>
+<div class="card-left">
+<div><div class="candidate-label">Candidat</div><div class="candidate-code">J</div><div class="candidate-role">Data Engineer · Consultant<br>Société Générale · Master Dauphine</div></div>
+<div class="score-block"><div><div class="score-num">50</div><div class="score-denom">/100</div></div><div class="score-bar"><div class="score-fill" style="width:50%"></div></div></div>
+<div class="tags"><span class="tag hot">Anglais courant</span><span class="tag hot">Société Générale</span><span class="tag">Oracle · PostgreSQL</span><span class="tag">Formations finance</span><span class="tag">Master Dauphine</span><span class="tag">10 ans XP</span></div>
+</div>
+<div class="card-right">
+<div class="section-label">Compte rendu entretien</div>
+<div class="cr-body">Master MIAGE Informatique Décisionnelle (Paris Dauphine), 10 ans d'expérience dont SG/RESG/GTS Cloud Platform. 3 formations certifiantes First Finance (produits de banque, dérivés) — investissement personnel sérieux sur les produits financiers. Stack Oracle, PostgreSQL, Kafka, Spark, Docker. Anglais courant. À retenir pour les missions Cloud et conceptions globales d'infrastructures mentionnées dans la FDP — profil hybride data/infra pertinent en complément des profils Oracle classiques.</div>
+<div class="mini-scores">
+<div class="mini-score"><div class="ms-label">Oracle DBA</div><div class="ms-bar"><div class="ms-fill" style="width:17%"></div></div><div class="ms-val">5/30</div></div>
+<div class="mini-score"><div class="ms-label">Banque</div><div class="ms-bar"><div class="ms-fill" style="width:67%"></div></div><div class="ms-val">10/15</div></div>
+<div class="mini-score"><div class="ms-label">Anglais</div><div class="ms-bar"><div class="ms-fill" style="width:80%"></div></div><div class="ms-val">8/10</div></div>
+</div>
+<button class="cv-toggle-btn" onclick="toggleCV(this)"><span class="arrow">▶</span> CV anonymisé</button>
+<div class="cv-anon">
+<div class="cv-section"><div class="cv-section-title">Formation</div>
+<div class="cv-item"><strong>Master MIAGE</strong> Informatique Décisionnelle · Paris Dauphine-PSL · 2014</div>
+<div class="cv-item">Formations First Finance : produits de banque · dérivés &amp; pricing options · Trading Forex</div></div>
+<div class="cv-section"><div class="cv-section-title">Expériences principales</div>
+<div class="cv-item"><strong>2023–2024 · Data Engineer</strong> · Grande banque française (RESG/GTS, Cloud Platform)<br>Big Data platform, Kafka/Spark/Elastic/HDFS, Oracle, PostgreSQL, équipe agile internationale</div>
+<div class="cv-item"><strong>Avant 2023 · Consultant Data Engineer</strong> · Divers clients (10 ans)<br>ETL, Data Warehouse, Oracle, PostgreSQL, Kafka, Docker, Python, Java/Spring</div></div>
+<div class="cv-section"><div class="cv-section-title">Compétences techniques</div>
+<span class="cv-tech">Oracle</span><span class="cv-tech">PostgreSQL</span><span class="cv-tech">MongoDB</span><span class="cv-tech">Kafka</span><span class="cv-tech">Spark</span><span class="cv-tech">Hadoop/HDFS</span><span class="cv-tech">Elasticsearch</span><span class="cv-tech">Docker</span><span class="cv-tech">AWS/Azure</span><span class="cv-tech">Python</span></div>
+<div class="cv-section"><div class="cv-section-title">Langues</div><div class="cv-item">Anglais courant · Français courant</div></div>
+</div></div></article>
+
+</main>
+<footer>
+<span>© 2026 ODYSKILLS · thierrybismuth.com</span>
+<span>Dossier confidentiel — usage interne Linedata</span>
+<span>Contact : <a href="mailto:thierry@thierrybismuth.com">thierry@thierrybismuth.com</a> · 06 10 70 30 90</span>
+</footer>
+<script>
+function toggleCV(btn){const d=btn.nextElementSibling;const o=d.classList.contains('visible');d.classList.toggle('visible',!o);btn.querySelector('.arrow').textContent=o?'▶':'▼';}
+</script>
+</body>
+</html>
