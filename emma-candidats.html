@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMMA – Dossier Candidats</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #1a1a1a;
+    --warm-white: #faf8f5;
+    --cream: #f0ebe3;
+    --gold: #c9a96e;
+    --border: #e0d8cf;
+    --text-muted: #888;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--warm-white); color: var(--black); font-family: 'DM Sans', sans-serif; font-weight: 300; }
+  header { background: var(--black); padding: 36px 60px; display: flex; align-items: center; justify-content: space-between; }
+  .logo-text { font-family: 'Playfair Display', serif; font-size: 30px; color: white; letter-spacing: 8px; font-weight: 400; }
+  .header-right { text-align: right; }
+  .header-subtitle { color: var(--gold); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; }
+  .header-date { color: rgba(255,255,255,0.4); font-size: 12px; margin-top: 4px; }
+  .hero-band { background: var(--gold); padding: 14px 60px; display: flex; align-items: center; justify-content: space-between; }
+  .hero-band h1 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--black); font-style: italic; }
+  .hero-band span { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(26,26,26,0.6); }
+  main { max-width: 900px; margin: 0 auto; padding: 48px 40px; }
+  .day-label { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; margin-top: 36px; }
+  .day-label:first-child { margin-top: 0; }
+  .day-label span { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+  .day-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .card { background: white; border: 1px solid var(--border); border-radius: 2px; margin-bottom: 14px; display: grid; grid-template-columns: 90px 1fr auto; overflow: hidden; transition: box-shadow 0.2s, transform 0.2s; }
+  .card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-1px); }
+  .card-time { background: var(--black); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 12px; }
+  .card-time .hour { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--gold); line-height: 1; }
+  .card-time .min { font-size: 12px; color: rgba(255,255,255,0.4); }
+  .card-body { padding: 20px 26px; border-right: 1px solid var(--border); }
+  .candidate-name { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 600; margin-bottom: 3px; }
+  .candidate-role { font-size: 11px; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500; margin-bottom: 12px; }
+  .candidate-points li { font-size: 13px; color: #555; list-style: none; padding-left: 14px; position: relative; line-height: 1.5; margin-bottom: 3px; }
+  .candidate-points li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-size: 11px; top: 1px; }
+  .card-action { padding: 20px 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-width: 100px; }
+  .cv-btn { display: flex; flex-direction: column; align-items: center; gap: 5px; text-decoration: none; color: var(--black); padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 2px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500; transition: all 0.2s; width: 100%; font-family: 'DM Sans', sans-serif; }
+  .cv-btn:hover { background: var(--black); color: white; border-color: var(--black); }
+  .cv-btn svg { width: 18px; height: 18px; }
+  .cv-btn:hover svg { stroke: white; }
+  .card-index { width: 20px; height: 20px; border-radius: 50%; background: var(--cream); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--text-muted); }
+  footer { background: var(--cream); border-top: 1px solid var(--border); padding: 22px 60px; display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
+  footer span { font-size: 11px; color: var(--text-muted); letter-spacing: 1px; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 14px; color: var(--black); letter-spacing: 4px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo-text">EMMA</div>
+  <div class="header-right">
+    <div class="header-subtitle">Recrutement Franchise — Île-de-France</div>
+    <div class="header-date">Semaine du 30 mars 2026</div>
+  </div>
+</header>
+<div class="hero-band">
+  <h1>Dossier de présentation candidats</h1>
+  <span>5 profils sélectionnés</span>
+</div>
+<main>
+  <div class="day-label"><span>Lundi 30 mars</span></div>
+  <div class="card">
+    <div class="card-time"><div class="hour">13</div><div class="min">h30</div></div>
+    <div class="card-body">
+      <div class="candidate-name">Elias Mliha Touati</div>
+      <div class="candidate-role">Management &amp; Business Development</div>
+      <ul class="candidate-points">
+        <li>Manager Commerce Auchan – 40 collaborateurs (sept. 2024–2025)</li>
+        <li>Master ICD Business School – International Business Development</li>
+        <li>Business Developer InvestissementLocatif.com + Leroy Merlin SGdB</li>
+        <li>Anglais bilingue TOEIC 925 – Double diplôme Finlande</li>
+      </ul>
+    </div>
+    <div class="card-action">
+      <a class="cv-btn" href="https://drive.google.com/file/d/1jtca_Me9PUyyUYP4GKm2pxKzheZQFJAm/view" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9,15 12,18 15,15"/></svg>
+        Voir CV
+      </a>
+      <div class="card-index">1</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-time"><div class="hour">14</div><div class="min">h00</div></div>
+    <div class="card-body">
+      <div class="candidate-name">Nicolas Naihan</div>
+      <div class="candidate-role">Responsable Magasin / Vendeur Literie</div>
+      <ul class="candidate-points">
+        <li>Gérant boutique Tempur literie 8 ans (2007–2015) – Antony 92</li>
+        <li>Responsable magasin Maison de la Literie – Villebon-sur-Yvette</li>
+        <li>Vendeur Meubles/Literie (boutiques et foires) 2015–2018</li>
+        <li>École de vente Renault – contrat qualification mention bien</li>
+      </ul>
+    </div>
+    <div class="card-action">
+      <a class="cv-btn" href="https://drive.google.com/file/d/1cHfVrE9tNdwRhS2quOjV4mEW4zcEgEWn/view" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9,15 12,18 15,15"/></svg>
+        Voir CV
+      </a>
+      <div class="card-index">2</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-time"><div class="hour">15</div><div class="min">h00</div></div>
+    <div class="card-body">
+      <div class="candidate-name">Michael Benhinni</div>
+      <div class="candidate-role">Responsable / Directeur Magasin Literie</div>
+      <ul class="candidate-points">
+        <li>Vendeur itinérant Maison de la Literie IDF (2019–2025)</li>
+        <li>Responsable Magasin Cuir Center – stratégie commerciale hebdo</li>
+        <li>Responsable autonome Home Convertible 4 ans (2013–2017)</li>
+        <li>15+ ans en gestion de points de vente mobilier/literie</li>
+      </ul>
+    </div>
+    <div class="card-action">
+      <a class="cv-btn" href="https://drive.google.com/file/d/1CTqz2V2UT2lC3_qS7kyaGIfNLMm86qRe/view" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9,15 12,18 15,15"/></svg>
+        Voir CV
+      </a>
+      <div class="card-index">3</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-time"><div class="hour">16</div><div class="min">h00</div></div>
+    <div class="card-body">
+      <div class="candidate-name">Julien Combes</div>
+      <div class="candidate-role">Responsable Boutiques Literie &amp; Commerce</div>
+      <ul class="candidate-points">
+        <li>Responsable boutiques La Compagnie du Lit / Simmons / MDL (2019–2025)</li>
+        <li>Maison de la Literie – Responsable magasin (2009–2011)</li>
+        <li>Anglais bilingue, Espagnol courant – BTS Action Commerciale</li>
+        <li>Parcours international : Ambassade France Malaisie, DHL Freight</li>
+      </ul>
+    </div>
+    <div class="card-action">
+      <a class="cv-btn" href="https://drive.google.com/file/d/1FxFUduwVn3G2T1_6wAT8vfNmBCiA3ydU/view" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9,15 12,18 15,15"/></svg>
+        Voir CV
+      </a>
+      <div class="card-index">4</div>
+    </div>
+  </div>
+  <div class="day-label"><span>Mardi 31 mars</span></div>
+  <div class="card">
+    <div class="card-time"><div class="hour">19</div><div class="min">h15</div></div>
+    <div class="card-body">
+      <div class="candidate-name">Blandine Dumons</div>
+      <div class="candidate-role">Responsable de Magasin Literie</div>
+      <ul class="candidate-points">
+        <li>Commerciale Crozatier / France Literie – Sainte-Geneviève (2022–présent)</li>
+        <li>Responsable Mon Lit et Moi / Maison de la Literie 500m² (2018–2022)</li>
+        <li>Responsable Maison de la Literie Reims – équipe 5 personnes (2006–2013)</li>
+        <li>Bac+ GRH en cours – mobile sur toute la France</li>
+      </ul>
+    </div>
+    <div class="card-action">
+      <a class="cv-btn" href="https://drive.google.com/file/d/1lMnUk-0BE3Qt3Gy1ySOmXRQu1JcJzWNa/view" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9,15 12,18 15,15"/></svg>
+        Voir CV
+      </a>
+      <div class="card-index">5</div>
+    </div>
+  </div>
+</main>
+<footer>
+  <span>Document confidentiel — Usage interne Thierry Bismuth Conseil</span>
+  <span class="footer-logo">EMMA</span>
+  <span>Mars 2026</span>
+</footer>
+</body>
+</html>
