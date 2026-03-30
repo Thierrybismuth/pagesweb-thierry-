@@ -72,7 +72,8 @@ html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans
 .step-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--marine); margin-bottom: 6px; }
 .step-text { font-size: 0.88rem; color: var(--gris); line-height: 1.7; }
 .formules { padding: 70px 40px; background: var(--gris-leger); }
-.formules h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 800; color: var(--marine); margin-bottom: 40px; }
+.formules h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 800; color: var(--marine); margin-bottom: 12px; }
+.formules-sub { font-size: 0.95rem; color: var(--gris); margin-bottom: 40px; line-height: 1.6; }
 .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
 .plan { background: white; padding: 36px 28px; position: relative; border-top: 4px solid var(--gris-leger); }
 .plan.featured { background: var(--marine); border-top: 4px solid var(--accent); }
@@ -85,8 +86,11 @@ html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans
 .plan-desc { font-size: 0.8rem; color: var(--gris); margin-bottom: 24px; line-height: 1.5; }
 .plan-items { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .plan-item { font-size: 0.85rem; color: var(--marine); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
-.plan-item::before { content: 'checkmark'; color: var(--vert); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.plan-item::before { content: '✓'; color: var(--vert); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
 .plan.featured .plan-item::before { color: var(--accent); }
+.plan-engage { font-size: 0.75rem; color: var(--vert); font-weight: 500; margin-top: 20px; display: flex; align-items: center; gap: 6px; }
+.plan.featured .plan-engage { color: rgba(255,255,255,0.6); }
+.plan-engage::before { content: '↺'; font-size: 0.9rem; }
 .cta { padding: 70px 40px; background: var(--accent); text-align: center; }
 .cta h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.6rem, 3vw, 2.6rem); font-weight: 800; color: white; margin-bottom: 16px; line-height: 1.15; }
 .cta p { font-size: 1rem; color: rgba(255,255,255,0.8); margin-bottom: 36px; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.7; }
@@ -97,61 +101,97 @@ html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans
 </head>
 <body>
 <section class="hero">
-  <div class="hero-tag">Le réseau Multi-Potentiel</div>
-  <h1>Représentez plusieurs enseignes.<br><em>Multipliez vos revenus.</em></h1>
-  <p class="hero-lead">Vous n'avez pas à choisir un seul concept pour toute votre vie entrepreneuriale. Le réseau Multi-Potentiel vous permet de porter 2, 3, 4 enseignes complémentaires — et de les combiner pour décupler votre impact commercial.</p>
+  <div class="hero-tag">Le réseau des entrepreneurs multi-mandats</div>
+  <h1>Plusieurs enseignes.<br><em>Une seule activité.</em></h1>
+  <p class="hero-lead">Vous n'avez pas à choisir un seul concept pour toute votre vie entrepreneuriale. Multi-Potentiel vous permet de représenter 2, 3, 4 enseignes complémentaires — et de les combiner pour démultiplier vos sources de revenus sans multiplier vos efforts.</p>
   <div class="hero-stats">
     <div class="stat"><span class="stat-num">2<span>→</span>5</span><span class="stat-label">Enseignes au choix</span></div>
     <div class="stat"><span class="stat-num">×<span>3</span></span><span class="stat-label">Revenus potentiels</span></div>
-    <div class="stat"><span class="stat-num">4<span>-</span>7</span><span class="stat-label">Ans de contrat</span></div>
     <div class="stat"><span class="stat-num">0<span>€</span></span><span class="stat-label">Droit d'entrée réseau</span></div>
+    <div class="stat"><span class="stat-num">Sans</span><span class="stat-label">Engagement de durée</span></div>
   </div>
 </section>
 <section class="calcul">
   <div class="calcul-tag">La logique Multi-Potentiel</div>
   <h2>1 client. 3 offres.<br><em>3 fois plus de valeur pour le même effort.</em></h2>
   <div class="equation">
-    <div class="eq-item"><span class="eq-icon">🏡</span><div class="eq-title">Une transaction immobilière</div><div class="eq-sub">Votre client achète ou vend. C'est le point de départ.</div></div>
-    <div class="eq-item"><span class="eq-icon">🔧</span><div class="eq-title">Des travaux financés</div><div class="eq-sub">CEE, rénovation énergétique, bâtiment. Le même client, le même moment de vie.</div></div>
-    <div class="eq-item"><span class="eq-icon">📋</span><div class="eq-title">Un service complémentaire</div><div class="eq-sub">Assurance, déménagement, service à la personne. Même famille, besoins multiples.</div></div>
+    <div class="eq-item"><span class="eq-icon">🤝</span><div class="eq-title">Votre premier contact</div><div class="eq-sub">Un prospect vous contacte pour un besoin précis. C'est le point de départ.</div></div>
+    <div class="eq-item"><span class="eq-icon">🔗</span><div class="eq-title">Vos enseignes complémentaires</div><div class="eq-sub">Ce même client a d'autres besoins liés. Vos autres mandats vous permettent de les adresser immédiatement.</div></div>
+    <div class="eq-item"><span class="eq-icon">💡</span><div class="eq-title">Une offre globale unique</div><div class="eq-sub">Vous devenez l'interlocuteur de référence sur plusieurs marchés. Votre valeur perçue explose.</div></div>
   </div>
   <div class="calcul-result">
     <div class="result-num">3× CA</div>
-    <div class="result-text"><strong>Un seul effort commercial.</strong> Trois sources de revenus actives. Votre réseau d'enseignes travaille pour vous en parallèle.</div>
+    <div class="result-text"><strong>Un seul effort commercial.</strong> Plusieurs commissions actives sur le même client. C'est la force du multi-mandat.</div>
   </div>
 </section>
 <section class="pour-qui">
   <div class="section-tag">Pour qui ?</div>
   <h2>Ce réseau est fait pour vous<br><em>si vous vous reconnaissez ici.</em></h2>
   <div class="profils">
-    <div class="profil"><span class="profil-icon">🔄</span><div class="profil-title">Vous voulez tester avant de vous engager</div><p class="profil-text">Quelques mois pour explorer plusieurs concepts, identifier celui qui vous correspond le mieux, sans vous enfermer dans un seul marché.</p></div>
-    <div class="profil"><span class="profil-icon">🏗️</span><div class="profil-title">Vous êtes déjà entrepreneur</div><p class="profil-text">Vous exercez dans l'immobilier, le courtage, le recrutement. Gardez votre activité et ajoutez des enseignes complémentaires qui l'enrichissent.</p></div>
-    <div class="profil"><span class="profil-icon">🎯</span><div class="profil-title">Vous voulez plusieurs cordes à votre arc</div><p class="profil-text">Un seul marché, c'est un seul risque. Plusieurs enseignes complémentaires, c'est une activité plus solide.</p></div>
-    <div class="profil"><span class="profil-icon">🚀</span><div class="profil-title">Vous pensez grand dès le départ</div><p class="profil-text">Vous voulez construire une activité multi-enseignes avec du volume, pas juste un complément de revenus.</p></div>
+    <div class="profil"><span class="profil-icon">🔄</span><div class="profil-title">Vous voulez tester avant de vous engager</div><p class="profil-text">Quelques mois pour explorer plusieurs concepts, identifier ceux qui correspondent à votre profil, sans vous enfermer dans un seul marché ni dans un contrat long terme.</p></div>
+    <div class="profil"><span class="profil-icon">🏗️</span><div class="profil-title">Vous êtes déjà entrepreneur</div><p class="profil-text">Vous exercez dans l'immobilier, le courtage, le conseil, le recrutement. Gardez votre activité principale et ajoutez des mandats complémentaires qui l'enrichissent naturellement.</p></div>
+    <div class="profil"><span class="profil-icon">🎯</span><div class="profil-title">Vous voulez diversifier vos risques</div><p class="profil-text">Dépendre d'un seul marché, c'est subir ses cycles. Plusieurs enseignes complémentaires, c'est une activité plus résiliente et plus régulière tout au long de l'année.</p></div>
+    <div class="profil"><span class="profil-icon">🚀</span><div class="profil-title">Vous pensez grand dès le départ</div><p class="profil-text">Vous voulez construire une activité multi-enseignes avec du volume réel — pas juste un complément de revenus, mais un véritable portefeuille de mandats.</p></div>
   </div>
 </section>
 <section class="comment">
   <div class="section-tag">Comment ça marche</div>
-  <h2>Vous choisissez. On vous forme.<br>Vous recommandez. On vous rémunère.</h2>
+  <h2>Vous choisissez. On vous forme.<br>Vous développez. On vous rémunère.</h2>
   <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Vous choisissez vos enseignes</div><p class="step-text">Commencez par 2 enseignes compatibles. Ajoutez-en d'autres quand vous êtes prêt. Faites évoluer votre mix dans le temps.</p></div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Vous êtes formé sur chaque concept</div><p class="step-text">Formation complète par enseigne — arguments, process, profils clients, outils. Sessions live mensuelles et réunion hebdomadaire cross-enseignes.</p></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Vous recommandez et apportez des affaires</div><p class="step-text">Vous identifiez des prospects pour vos enseignes, remontez les leads via formulaire. Chaque signature dans les 24 mois vous est attribuée.</p></div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Vous êtes rémunéré à la signature</div><p class="step-text">Commission versée dès encaissement par l'enseigne. Le montant varie selon les concepts — défini dans votre contrat d'adhésion.</p></div></div>
+    <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Vous choisissez vos enseignes</div><p class="step-text">Commencez par 2 enseignes compatibles avec votre profil et votre territoire. Ajoutez-en d'autres à votre rythme. Vous pouvez faire évoluer votre portefeuille à tout moment — sans pénalité, sans engagement de durée.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Vous êtes formé sur chaque concept</div><p class="step-text">Formation complète par enseigne — arguments commerciaux, process, profils clients, outils. Sessions live mensuelles et réunion hebdomadaire commune pour partager les bonnes pratiques entre membres.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Vous représentez vos enseignes sur le terrain</div><p class="step-text">Vous prospectez, qualifiez et présentez les offres de vos enseignes à vos prospects et clients. Vous êtes leur ambassadeur local — avec les outils, les supports et l'appui du réseau derrière vous.</p></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Vous êtes rémunéré à la signature</div><p class="step-text">Commission versée dès encaissement par l'enseigne. Chaque affaire signée dans les 24 mois suivant votre mise en relation vous est attribuée. Les montants varient selon les concepts — détaillés dans votre contrat d'adhésion.</p></div></div>
   </div>
 </section>
 <section class="formules">
   <div class="section-tag">Votre abonnement mensuel</div>
   <h2>Un abonnement. Plusieurs enseignes. Zéro droit d'entrée.</h2>
+  <p class="formules-sub">Pas d'engagement de durée. Vous résiliez quand vous voulez, sans frais. Vous payez simplement pour accéder au réseau, aux formations et à l'animation.</p>
   <div class="plans">
-    <div class="plan"><div class="plan-name">Starter</div><div class="plan-price">200 <sub>€HT/mois</sub></div><div class="plan-desc">Pour démarrer avec 2 enseignes et tester le modèle.</div><ul class="plan-items"><li class="plan-item">2 enseignes de votre choix</li><li class="plan-item">Formations incluses</li><li class="plan-item">Supports marketing</li><li class="plan-item">Réunion hebdo animée par MP</li></ul></div>
-    <div class="plan featured"><div class="plan-badge">Le plus choisi</div><div class="plan-name">Développement</div><div class="plan-price">300 <sub>€HT/mois</sub></div><div class="plan-desc">Pour monter en puissance avec 4 enseignes complémentaires.</div><ul class="plan-items"><li class="plan-item">4 enseignes de votre choix</li><li class="plan-item">Formations incluses</li><li class="plan-item">Supports marketing</li><li class="plan-item">Sessions live mensuelles</li><li class="plan-item">Accompagnement dossiers complexes</li></ul></div>
-    <div class="plan"><div class="plan-name">Multi-Max</div><div class="plan-price">500 <sub>€HT/mois</sub></div><div class="plan-desc">Illimité. Pour les entrepreneurs qui pensent grand.</div><ul class="plan-items"><li class="plan-item">Enseignes illimitées</li><li class="plan-item">Toutes les formations</li><li class="plan-item">Accès prioritaire nouveaux concepts</li><li class="plan-item">Accompagnement renforcé</li></ul></div>
+    <div class="plan">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">200 <sub>€HT/mois</sub></div>
+      <div class="plan-desc">Pour démarrer avec 2 enseignes et valider le modèle sur votre territoire.</div>
+      <ul class="plan-items">
+        <li class="plan-item">2 enseignes de votre choix</li>
+        <li class="plan-item">Formations incluses</li>
+        <li class="plan-item">Supports marketing</li>
+        <li class="plan-item">Réunion hebdo animée par MP</li>
+      </ul>
+      <div class="plan-engage">Résiliable à tout moment</div>
+    </div>
+    <div class="plan featured">
+      <div class="plan-badge">Le plus choisi</div>
+      <div class="plan-name">Développement</div>
+      <div class="plan-price">300 <sub>€HT/mois</sub></div>
+      <div class="plan-desc">Pour monter en puissance avec 4 enseignes et un accompagnement renforcé.</div>
+      <ul class="plan-items">
+        <li class="plan-item">4 enseignes de votre choix</li>
+        <li class="plan-item">Formations incluses</li>
+        <li class="plan-item">Supports marketing</li>
+        <li class="plan-item">Sessions live mensuelles</li>
+        <li class="plan-item">Accompagnement dossiers complexes</li>
+      </ul>
+      <div class="plan-engage">Résiliable à tout moment</div>
+    </div>
+    <div class="plan">
+      <div class="plan-name">Multi-Max</div>
+      <div class="plan-price">500 <sub>€HT/mois</sub></div>
+      <div class="plan-desc">Illimité. Pour les entrepreneurs qui construisent un vrai portefeuille multi-enseignes.</div>
+      <ul class="plan-items">
+        <li class="plan-item">Enseignes illimitées</li>
+        <li class="plan-item">Toutes les formations</li>
+        <li class="plan-item">Accès prioritaire nouveaux concepts</li>
+        <li class="plan-item">Accompagnement renforcé</li>
+      </ul>
+      <div class="plan-engage">Résiliable à tout moment</div>
+    </div>
   </div>
 </section>
 <section class="cta">
   <h2>Parlons de votre combinaison idéale.</h2>
-  <p>20 minutes pour identifier les enseignes qui correspondent à votre profil, votre territoire et votre façon d'entreprendre.</p>
+  <p>20 minutes pour identifier les enseignes qui correspondent à votre profil, votre territoire et votre façon d'entreprendre. Sans engagement.</p>
   <a href="tel:0610703090" class="cta-btn" target="_top">Prendre contact</a>
   <div class="cta-tel">ou écrivez à <a href="mailto:thierry@thierrybismuth.com">thierry@thierrybismuth.com</a></div>
 </section>
