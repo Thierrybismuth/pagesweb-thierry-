@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vous avez des contacts particuliers ? — Multi-Potentiel</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --rouge:   #e53935;
+  --jaune:   #fdd835;
+  --orange:  #fb8c00;
+  --bleu:    #1e88e5;
+  --bleu-f:  #1565c0;
+  --vert:    #2e7d32;
+  --texte:   #1a1a2e;
+  --gris:    #6b7280;
+  --gris-bg: #f3f4f6;
+  --blanc:   #ffffff;
+  --creme:   #fef9f0;
+}
+html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-serif; font-weight:300; color:var(--texte); }
+
+/* ─── HERO ─────────────────────────────── */
+.hero {
+  background: var(--texte);
+  padding: 56px 40px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:4px;
+  background: linear-gradient(90deg, var(--rouge), var(--orange), var(--jaune), var(--bleu));
+}
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:10px; font-weight:500; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--orange); margin-bottom:20px;
+}
+.hero-eyebrow::before { content:''; width:24px; height:2px; background:var(--orange); }
+.hero h1 {
+  font-family:'Syne',sans-serif;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight:800; line-height:1.05; color:var(--blanc); margin-bottom:20px;
+}
+.hero h1 em { color:var(--orange); font-style:italic; font-weight:600; font-family:'DM Sans',sans-serif; }
+.hero-lead {
+  font-size: clamp(.95rem,1.5vw,1.1rem); color:rgba(255,255,255,.65);
+  line-height:1.8; max-width:600px; margin-bottom:36px;
+}
+.hero-chips { display:flex; flex-wrap:wrap; gap:10px; }
+.chip {
+  padding:6px 16px; font-size:.75rem; font-weight:500;
+  letter-spacing:.08em; text-transform:uppercase; border-radius:2px;
+}
+.chip-kw    { background:var(--rouge);  color:white; }
+.chip-apc   { background:var(--bleu);   color:white; }
+.chip-av    { background:var(--vert);   color:white; }
+
+/* ─── CARTE ENSEIGNE ────────────────────── */
+.enseignes { display:flex; flex-direction:column; gap:0; }
+
+.enseigne {
+  display:grid; grid-template-columns:320px 1fr;
+  min-height:360px;
+}
+.enseigne:nth-child(even) { direction:rtl; }
+.enseigne:nth-child(even) > * { direction:ltr; }
+
+/* Panneau couleur */
+.ens-color {
+  display:flex; flex-direction:column; justify-content:center;
+  align-items:center; padding:48px 36px; gap:28px;
+}
+.enseigne-kw  .ens-color { background:var(--rouge); }
+.enseigne-apc .ens-color { background:var(--bleu);  }
+.enseigne-av  .ens-color { background:var(--vert);  }
+
+.ens-logo {
+  width:180px; height:80px; object-fit:contain;
+  filter:brightness(0) invert(1); /* logo blanc */
+}
+.ens-gain {
+  background:rgba(0,0,0,.18); padding:14px 20px; text-align:center;
+  border-radius:2px; min-width:180px;
+}
+.ens-gain-num {
+  font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800;
+  color:var(--jaune); line-height:1;
+}
+.ens-gain-label { font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.75); margin-top:4px; }
+
+/* Panneau contenu */
+.ens-content { background:var(--blanc); padding:48px 44px; }
+.ens-tag {
+  font-size:10px; letter-spacing:.3em; text-transform:uppercase;
+  display:flex; align-items:center; gap:8px; margin-bottom:16px;
+}
+.enseigne-kw  .ens-tag { color:var(--rouge); }
+.enseigne-kw  .ens-tag::before { content:''; width:24px; height:2px; background:var(--rouge); }
+.enseigne-apc .ens-tag { color:var(--bleu); }
+.enseigne-apc .ens-tag::before { content:''; width:24px; height:2px; background:var(--bleu); }
+.enseigne-av  .ens-tag { color:var(--vert); }
+.enseigne-av  .ens-tag::before { content:''; width:24px; height:2px; background:var(--vert); }
+
+.ens-h2 {
+  font-family:'Syne',sans-serif; font-size:clamp(1.3rem,2.2vw,1.9rem);
+  font-weight:800; line-height:1.15; color:var(--texte); margin-bottom:20px;
+}
+.ens-h2 em { font-style:italic; font-weight:400; font-family:'DM Sans',sans-serif; }
+.ens-pitch { font-size:.9rem; color:var(--gris); line-height:1.8; margin-bottom:28px; }
+
+.ens-steps { display:flex; flex-direction:column; gap:10px; }
+.ens-step {
+  display:grid; grid-template-columns:36px 1fr;
+  gap:12px; align-items:start;
+}
+.ens-step-icon {
+  width:36px; height:36px; border-radius:50%; display:flex; align-items:center;
+  justify-content:center; font-size:1rem; flex-shrink:0;
+}
+.enseigne-kw  .ens-step-icon { background:#fde8e8; }
+.enseigne-apc .ens-step-icon { background:#dbeafe; }
+.enseigne-av  .ens-step-icon { background:#dcfce7; }
+
+.ens-step-text { font-size:.88rem; color:var(--texte); line-height:1.65; padding-top:6px; }
+.ens-step-text strong { font-weight:500; }
+
+/* highlight commission */
+.commission {
+  display:inline-block; margin-top:16px;
+  padding:12px 20px; font-size:.9rem; font-weight:500; border-left:3px solid;
+  line-height:1.5;
+}
+.enseigne-kw  .commission { border-color:var(--rouge); background:#fef2f2; color:var(--rouge); }
+.enseigne-apc .commission { border-color:var(--bleu);  background:#eff6ff; color:var(--bleu-f); }
+.enseigne-av  .commission { border-color:var(--vert);  background:#f0fdf4; color:var(--vert);  }
+
+/* ─── SÉPARATEUR ───────────────────────── */
+.sep { height:4px; background:linear-gradient(90deg, var(--rouge), var(--orange), var(--jaune), var(--bleu)); }
+
+/* ─── CTA FINAL ────────────────────────── */
+.cta {
+  padding:70px 40px; background:var(--texte); text-align:center;
+}
+.cta-eyebrow {
+  font-size:10px; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--orange); margin-bottom:16px;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.cta-eyebrow::before, .cta-eyebrow::after { content:''; width:24px; height:2px; background:var(--orange); }
+.cta h2 {
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.6rem,3vw,2.6rem); font-weight:800;
+  color:var(--blanc); margin-bottom:16px; line-height:1.15;
+}
+.cta p { font-size:1rem; color:rgba(255,255,255,.65); max-width:520px; margin:0 auto 40px; line-height:1.8; }
+
+.cta-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.btn-primary {
+  display:inline-block; background:var(--orange); color:white;
+  font-family:'Syne',sans-serif; font-size:.85rem; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase;
+  padding:16px 36px; text-decoration:none;
+}
+.btn-primary:hover { background:var(--jaune); color:var(--texte); }
+.btn-secondary {
+  display:inline-block; border:2px solid rgba(255,255,255,.3); color:rgba(255,255,255,.8);
+  font-family:'Syne',sans-serif; font-size:.85rem; font-weight:600;
+  letter-spacing:.06em; text-transform:uppercase;
+  padding:14px 32px; text-decoration:none;
+}
+.btn-secondary:hover { border-color:var(--orange); color:var(--orange); }
+.cta-contact {
+  margin-top:28px; font-size:.85rem; color:rgba(255,255,255,.45);
+  display:flex; gap:28px; justify-content:center; flex-wrap:wrap;
+}
+.cta-contact a { color:rgba(255,255,255,.7); text-decoration:none; }
+.cta-contact a:hover { color:var(--jaune); }
+
+/* ─── LOGOS BARRE ──────────────────────── */
+.logos-bar {
+  padding:32px 40px; background:var(--creme);
+  display:flex; align-items:center; justify-content:center;
+  gap:48px; flex-wrap:wrap; border-top:3px solid var(--orange);
+}
+.logos-bar-title { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gris); }
+.logos-bar img { height:40px; object-fit:contain; opacity:.7; filter:grayscale(30%); }
+
+/* ─── RESPONSIVE ────────────────────────── */
+@media (max-width: 720px) {
+  .enseigne { grid-template-columns:1fr; direction:ltr !important; }
+  .ens-color { flex-direction:row; justify-content:space-between; padding:28px 24px; min-height:unset; }
+  .ens-logo { width:120px; height:52px; }
+  .ens-gain { padding:10px 14px; }
+  .ens-gain-num { font-size:1.3rem; }
+  .ens-content { padding:28px 24px; }
+  .hero { padding:40px 24px 36px; }
+  .cta { padding:50px 24px; }
+  .logos-bar { gap:28px; padding:24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Multi-Potentiel — Réseau d'enseignes</div>
+  <h1>Vous avez des contacts<br>particuliers ?<br><em>Ils valent de l'or.</em></h1>
+  <p class="hero-lead">Propriétaires, locataires, actifs, familles… chacun de vos contacts a des besoins que vous pouvez adresser. Trois enseignes complémentaires, une même conversation, plusieurs commissions.</p>
+  <div class="hero-chips">
+    <span class="chip chip-kw">🏠 Immobilier KW</span>
+    <span class="chip chip-apc">🛡️ Assurance emprunteur APC</span>
+    <span class="chip chip-av">🌿 Travaux Artisans Verts</span>
+  </div>
+</section>
+
+<!-- BARRE LOGOS -->
+<div class="logos-bar">
+  <span class="logos-bar-title">Vos enseignes</span>
+  <img src="https://drive.usercontent.google.com/download?id=1WKj31YxBQbxfa_XomYJFKgFwzm5uKFbd&export=view" alt="Keller Williams">
+  <img src="https://drive.usercontent.google.com/download?id=1ce63vs8Tw4bZE215CGcu9EB0ymOa1vAU&export=view" alt="APC Assurément Pas Cher">
+  <img src="https://drive.usercontent.google.com/download?id=1wOGPaDJQKob9_fKTb0yhH-z0oDswzyXz&export=view" alt="Artisans Verts">
+</div>
+
+<!-- ENSEIGNES -->
+<div class="enseignes">
+
+  <!-- KW -->
+  <div class="enseigne enseigne-kw">
+    <div class="ens-color">
+      <img class="ens-logo" src="https://drive.usercontent.google.com/download?id=1WKj31YxBQbxfa_XomYJFKgFwzm5uKFbd&export=view" alt="Keller Williams">
+      <div class="ens-gain">
+        <div class="ens-gain-num">8%</div>
+        <div class="ens-gain-label">de la commission KW</div>
+      </div>
+    </div>
+    <div class="ens-content">
+      <div class="ens-tag">Immobilier · Leader mondial</div>
+      <h2 class="ens-h2">Chaque mois, 1% de vos contacts<br><em>vend ou achète un bien.</em></h2>
+      <p class="ens-pitch">Keller Williams est le n°1 mondial de l'immobilier. Vos contacts sont propriétaires — certains y pensent sans oser le dire. Vous n'avez pas besoin d'être agent : juste d'avoir la bonne conversation.</p>
+      <div class="ens-steps">
+        <div class="ens-step">
+          <div class="ens-step-icon">💬</div>
+          <div class="ens-step-text"><strong>Bavardez.</strong> Identifiez un vendeur dans votre entourage, professionnel ou personnel.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">📋</div>
+          <div class="ens-step-text"><strong>Proposez une estimation gratuite.</strong> KW s'en charge. Vous faites juste la mise en relation.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">🍽️</div>
+          <div class="ens-step-text"><strong>Invitez votre contact à déjeuner.</strong> Le deal se fait. Vous touchez votre commission.</div>
+        </div>
+      </div>
+      <div class="commission">💰 Vous touchez <strong>8% de la commission KW</strong> en cas de vente signée.</div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- APC -->
+  <div class="enseigne enseigne-apc">
+    <div class="ens-color">
+      <img class="ens-logo" src="https://drive.usercontent.google.com/download?id=1ce63vs8Tw4bZE215CGcu9EB0ymOa1vAU&export=view" alt="Assurément Pas Cher">
+      <div class="ens-gain">
+        <div class="ens-gain-num">~500€</div>
+        <div class="ens-gain-label">par crédit renégocié</div>
+      </div>
+    </div>
+    <div class="ens-content">
+      <div class="ens-tag">Assurance emprunteur · Économies immédiates</div>
+      <h2 class="ens-h2">80% des propriétaires<br><em>paient trop cher leur assurance.</em></h2>
+      <p class="ens-pitch">58% des ménages français sont propriétaires. Parmi eux, la grande majorité a conservé l'assurance emprunteur de sa banque — et paie de 30% à 60% trop cher. Vous pouvez leur faire économiser le prix d'une voiture, en 10 minutes.</p>
+      <div class="ens-steps">
+        <div class="ens-step">
+          <div class="ens-step-icon">🏠</div>
+          <div class="ens-step-text"><strong>Vos contacts propriétaires ont un crédit immobilier.</strong> C'est votre point d'entrée.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">📞</div>
+          <div class="ens-step-text"><strong>Assurément Pas Cher les appelle de votre part.</strong> Analyse gratuite, sans engagement.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">✅</div>
+          <div class="ens-step-text"><strong>Ils obtiennent une assurance équivalente</strong> auprès d'un assureur de premier plan — et économisent entre <strong>1 000€ et 20 000€</strong> sur la durée de leur contrat.</div>
+        </div>
+      </div>
+      <div class="commission">💰 Vous touchez en moyenne <strong>500€ par crédit</strong> — et vos amis vous doivent un déjeuner.</div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- ARTISANS VERTS -->
+  <div class="enseigne enseigne-av">
+    <div class="ens-color">
+      <img class="ens-logo" src="https://drive.usercontent.google.com/download?id=1wOGPaDJQKob9_fKTb0yhH-z0oDswzyXz&export=view" alt="Artisans Verts">
+      <div class="ens-gain">
+        <div class="ens-gain-num">7%</div>
+        <div class="ens-gain-label">du montant du chantier</div>
+      </div>
+    </div>
+    <div class="ens-content">
+      <div class="ens-tag">Rénovation énergétique · 100% financé</div>
+      <h2 class="ens-h2">Travaux zéro reste à charge.<br><em>Vous touchez 7% du chantier.</em></h2>
+      <p class="ens-pitch">Vos contacts propriétaires veulent baisser leur facture d'électricité mais ne passent pas à l'acte — souvent parce qu'ils croient que c'est trop cher. Les Artisans Verts organisent des travaux 100% financés par MaPrimeRénov' et les CEE. Votre rôle : signaler le contact.</p>
+      <div class="ens-steps">
+        <div class="ens-step">
+          <div class="ens-step-icon">🏡</div>
+          <div class="ens-step-text"><strong>Votre contact est propriétaire</strong> et parle de sa facture d'énergie ou de confort thermique.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">📲</div>
+          <div class="ens-step-text"><strong>Les Artisans Verts l'appellent de votre part.</strong> Diagnostic gratuit, dossier de financement inclus.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">🔨</div>
+          <div class="ens-step-text"><strong>Les travaux sont financés à 100%</strong> — isolation, pompe à chaleur, fenêtres. Zéro reste à charge.</div>
+        </div>
+      </div>
+      <div class="commission">💰 Vous touchez <strong>7% du chantier</strong>, soit entre <strong>1 000€ et 2 000€</strong> selon l'habitation.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-eyebrow">Rejoindre le réseau</div>
+  <h2>Une ou plusieurs de ces enseignes<br>vous intéresse ?</h2>
+  <p>Rejoignez Multi-Potentiel, représentez les enseignes qui correspondent à votre réseau, et commencez à générer des commissions sans quitter votre activité actuelle.</p>
+  <div class="cta-btns">
+    <a href="https://drive.google.com/file/d/1ZvWNOzwfBpULxFn8rsL-xLwrksCcuuVh/view" target="_top" class="btn-primary">📄 Voir le contrat d'adhésion</a>
+    <a href="tel:0610703090" class="btn-secondary">📞 Contacter Thierry Bismuth</a>
+  </div>
+  <div class="cta-contact">
+    <a href="tel:0610703090">06 10 70 30 90</a>
+    <a href="mailto:thierry@thierrybismuth.com">thierry@thierrybismuth.com</a>
+    <a href="https://www.thierrybismuth.com" target="_top">thierrybismuth.com</a>
+  </div>
+</section>
+
+</body>
+</html>
