@@ -9,101 +9,126 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --blanc: #ffffff;
-  --creme: #faf8f5;
-  --marine: #1a2e44;
-  --accent: #c8873a;
-  --vert: #2d7a4f;
-  --indigo: #3d5fa0;
-  --corail: #e05c3a;
-  --jaune: #f0b429;
+  --creme: #fef9f0;
+  --rouge: #e53935;
+  --jaune: #fdd835;
+  --orange: #fb8c00;
+  --bleu: #1e88e5;
+  --bleu-fonce: #1565c0;
+  --texte: #1a1a2e;
   --gris: #6b7280;
-  --gris-leger: #f3f0eb;
+  --gris-leger: #f3f4f6;
 }
-html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans-serif; font-weight: 300; color: var(--marine); }
-.hero { background: var(--blanc); padding: 60px 40px 0; border-bottom: 3px solid var(--accent); }
-.hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
-.hero-tag::before { content: ''; width: 24px; height: 2px; background: var(--accent); display: block; }
-.hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 800; line-height: 1.05; color: var(--marine); margin-bottom: 24px; }
-.hero h1 em { font-style: italic; font-weight: 600; color: var(--accent); font-family: 'DM Sans', sans-serif; }
+html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans-serif; font-weight: 300; color: var(--texte); }
+
+/* HERO */
+.hero { background: var(--blanc); padding: 60px 40px 0; border-bottom: 4px solid var(--orange); }
+.hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--orange); margin-bottom: 20px; }
+.hero-tag::before { content: ''; width: 24px; height: 2px; background: var(--orange); display: block; }
+.hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 800; line-height: 1.05; color: var(--texte); margin-bottom: 24px; }
+.hero h1 em { font-style: italic; font-weight: 600; color: var(--rouge); font-family: 'DM Sans', sans-serif; }
 .hero-lead { font-size: clamp(1rem, 1.5vw, 1.15rem); line-height: 1.75; color: var(--gris); max-width: 640px; margin-bottom: 40px; }
 .hero-stats { display: flex; gap: 32px; padding: 28px 0 40px; border-top: 1px solid #e8e4dc; }
 .stat { display: flex; flex-direction: column; }
-.stat-num { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--marine); line-height: 1; }
-.stat-num span { color: var(--accent); }
+.stat-num { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--texte); line-height: 1; }
+.stat-num span { color: var(--orange); }
 .stat-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); margin-top: 4px; }
-.calcul { background: var(--marine); padding: 60px 40px; color: white; }
-.calcul-tag { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-.calcul-tag::before { content:''; width:24px; height:2px; background:var(--accent); }
+
+/* CALCUL */
+.calcul { background: var(--bleu-fonce); padding: 60px 40px; color: white; }
+.calcul-tag { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--jaune); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.calcul-tag::before { content:''; width:24px; height:2px; background:var(--jaune); }
 .calcul h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.6rem, 3vw, 2.6rem); font-weight: 800; line-height: 1.15; margin-bottom: 40px; color: white; }
-.calcul h2 em { font-style:italic; font-weight:400; color: var(--accent); }
+.calcul h2 em { font-style:italic; font-weight:400; color: var(--jaune); }
 .equation { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 40px; }
-.eq-item { background: rgba(255,255,255,0.06); padding: 24px 20px; position: relative; }
-.eq-item::after { content: '+'; position: absolute; right: -14px; top: 50%; transform: translateY(-50%); font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--accent); z-index: 2; }
+.eq-item { background: rgba(255,255,255,0.08); padding: 24px 20px; position: relative; }
+.eq-item::after { content: '+'; position: absolute; right: -14px; top: 50%; transform: translateY(-50%); font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--jaune); z-index: 2; }
 .eq-item:last-child::after { display: none; }
 .eq-icon { font-size: 1.6rem; margin-bottom: 10px; display: block; }
 .eq-title { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; color: white; margin-bottom: 6px; }
-.eq-sub { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
-.calcul-result { background: var(--accent); padding: 20px 28px; display: flex; align-items: center; gap: 20px; }
+.eq-sub { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+.calcul-result { background: var(--orange); padding: 20px 28px; display: flex; align-items: center; gap: 20px; }
 .result-num { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: white; white-space: nowrap; }
-.result-text { font-size: 0.9rem; color: rgba(255,255,255,0.85); line-height: 1.5; }
+.result-text { font-size: 0.9rem; color: rgba(255,255,255,0.9); line-height: 1.5; }
+
+/* POUR QUI */
 .pour-qui { padding: 70px 40px; background: var(--creme); }
-.section-tag { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-.section-tag::before { content:''; width:24px; height:2px; background:var(--accent); }
-.pour-qui h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 800; color: var(--marine); margin-bottom: 40px; line-height: 1.2; }
-.pour-qui h2 em { font-style:italic; font-weight:400; color:var(--accent); font-family:'DM Sans',sans-serif; }
+.section-tag { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.section-tag::before { content:''; width:24px; height:2px; background:var(--orange); }
+.pour-qui h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 800; color: var(--texte); margin-bottom: 40px; line-height: 1.2; }
+.pour-qui h2 em { font-style:italic; font-weight:400; color:var(--rouge); font-family:'DM Sans',sans-serif; }
 .profils { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
 .profil { background: white; padding: 32px 28px; border-top: 4px solid transparent; }
-.profil:nth-child(1) { border-color: var(--indigo); }
-.profil:nth-child(2) { border-color: var(--vert); }
-.profil:nth-child(3) { border-color: var(--corail); }
+.profil:nth-child(1) { border-color: var(--bleu); }
+.profil:nth-child(2) { border-color: var(--rouge); }
+.profil:nth-child(3) { border-color: var(--orange); }
 .profil:nth-child(4) { border-color: var(--jaune); }
 .profil-icon { font-size: 1.8rem; margin-bottom: 14px; display: block; }
-.profil-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--marine); margin-bottom: 10px; }
+.profil-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--texte); margin-bottom: 10px; }
 .profil-text { font-size: 0.88rem; color: var(--gris); line-height: 1.7; }
+
+/* COMMENT */
 .comment { padding: 70px 40px; background: white; }
-.comment h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 800; color: var(--marine); margin-bottom: 40px; line-height: 1.2; }
+.comment h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 800; color: var(--texte); margin-bottom: 40px; line-height: 1.2; }
 .steps { display: flex; flex-direction: column; gap: 2px; }
 .step { display: grid; grid-template-columns: 72px 1fr; background: var(--gris-leger); }
-.step-num { background: var(--marine); color: white; font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; display: flex; align-items: center; justify-content: center; }
-.step:nth-child(2) .step-num { background: var(--indigo); }
-.step:nth-child(3) .step-num { background: var(--vert); }
-.step:nth-child(4) .step-num { background: var(--accent); }
+.step-num { background: var(--bleu); color: white; font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.step:nth-child(2) .step-num { background: var(--rouge); }
+.step:nth-child(3) .step-num { background: var(--orange); }
+.step:nth-child(4) .step-num { background: #f9a825; color: var(--texte); }
 .step-body { padding: 24px 28px; }
-.step-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--marine); margin-bottom: 6px; }
+.step-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--texte); margin-bottom: 6px; }
 .step-text { font-size: 0.88rem; color: var(--gris); line-height: 1.7; }
+
+/* FORMULES */
 .formules { padding: 70px 40px; background: var(--gris-leger); }
-.formules h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 800; color: var(--marine); margin-bottom: 12px; }
+.formules h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 800; color: var(--texte); margin-bottom: 12px; }
 .formules-sub { font-size: 0.95rem; color: var(--gris); margin-bottom: 40px; line-height: 1.6; }
 .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
 .plan { background: white; padding: 36px 28px; position: relative; border-top: 4px solid var(--gris-leger); }
-.plan.featured { background: var(--marine); border-top: 4px solid var(--accent); }
-.plan-badge { position: absolute; top: -14px; left: 28px; background: var(--accent); color: white; font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; padding: 3px 10px; }
+.plan.featured { background: var(--bleu-fonce); border-top: 4px solid var(--jaune); }
+.plan-badge { position: absolute; top: -14px; left: 28px; background: var(--rouge); color: white; font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; padding: 3px 10px; }
 .plan-name { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gris); margin-bottom: 12px; }
-.plan-price { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--marine); line-height: 1; margin-bottom: 4px; }
+.plan-price { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--texte); line-height: 1; margin-bottom: 4px; }
 .plan.featured .plan-name, .plan.featured .plan-price, .plan.featured .plan-desc, .plan.featured .plan-item { color: rgba(255,255,255,0.9) !important; }
 .plan.featured .plan-price { color: white !important; }
 .plan-price sub { font-size: 0.8rem; font-weight: 400; font-family: 'DM Sans', sans-serif; }
 .plan-desc { font-size: 0.8rem; color: var(--gris); margin-bottom: 24px; line-height: 1.5; }
 .plan-items { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.plan-item { font-size: 0.85rem; color: var(--marine); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
-.plan-item::before { content: '✓'; color: var(--vert); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-.plan.featured .plan-item::before { color: var(--accent); }
-.plan-engage { font-size: 0.75rem; color: var(--vert); font-weight: 500; margin-top: 20px; display: flex; align-items: center; gap: 6px; }
+.plan-item { font-size: 0.85rem; color: var(--texte); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+.plan-item::before { content: '✓'; color: var(--bleu); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.plan.featured .plan-item::before { color: var(--jaune); }
+.plan-engage { font-size: 0.75rem; color: var(--bleu); font-weight: 500; margin-top: 20px; display: flex; align-items: center; gap: 6px; }
 .plan.featured .plan-engage { color: rgba(255,255,255,0.6); }
 .plan-engage::before { content: '↺'; font-size: 0.9rem; }
-.cta { padding: 70px 40px; background: var(--accent); text-align: center; }
+
+/* CTA */
+.cta { padding: 70px 40px; background: var(--rouge); text-align: center; }
 .cta h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.6rem, 3vw, 2.6rem); font-weight: 800; color: white; margin-bottom: 16px; line-height: 1.15; }
-.cta p { font-size: 1rem; color: rgba(255,255,255,0.8); margin-bottom: 36px; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.7; }
-.cta-btn { display: inline-block; background: white; color: var(--accent); font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 18px 44px; text-decoration: none; }
-.cta-tel { margin-top: 20px; font-size: 0.85rem; color: rgba(255,255,255,0.65); }
-.cta-tel a { color: white; text-decoration: none; font-weight: 500; }
+.cta p { font-size: 1rem; color: rgba(255,255,255,0.85); max-width: 520px; margin: 0 auto 36px; line-height: 1.7; }
+.cta-btn { display: inline-block; background: white; color: var(--rouge); font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 16px 40px; text-decoration: none; }
+.cta-btn:hover { background: var(--jaune); color: var(--texte); }
+.cta-tel { margin-top: 20px; font-size: 0.85rem; color: rgba(255,255,255,0.7); }
+.cta-tel a { color: white; text-decoration: underline; }
+
+/* CONTRAT */
+.contrat { padding: 70px 40px; background: var(--creme); }
+.contrat-tag { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--bleu); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.contrat-tag::before { content:''; width:24px; height:2px; background:var(--bleu); }
+.contrat h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 800; color: var(--texte); margin-bottom: 12px; line-height: 1.2; }
+.contrat-sub { font-size: 0.95rem; color: var(--gris); margin-bottom: 32px; line-height: 1.6; }
+.contrat-frame { width: 100%; height: 900px; border: none; border-top: 4px solid var(--bleu); display: block; }
+.contrat-dl { margin-top: 18px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 500; color: var(--bleu); text-decoration: none; }
+.contrat-dl:hover { color: var(--rouge); }
+.contrat-dl::before { content: '↓'; font-size: 1rem; }
 </style>
 </head>
 <body>
+
 <section class="hero">
-  <div class="hero-tag">Le réseau des entrepreneurs multi-mandats</div>
-  <h1>Plusieurs enseignes.<br><em>Une seule activité.</em></h1>
-  <p class="hero-lead">Vous n'avez pas à choisir un seul concept pour toute votre vie entrepreneuriale. Multi-Potentiel vous permet de représenter 2, 3, 4 enseignes complémentaires — et de les combiner pour démultiplier vos sources de revenus sans multiplier vos efforts.</p>
+  <div class="hero-tag">Rejoindre le réseau</div>
+  <h1>Représentez plusieurs enseignes.<br><em>Multipliez vos revenus.</em></h1>
+  <p class="hero-lead">Multi-Potentiel est un réseau d'entrepreneurs indépendants qui représentent 2 à 5 enseignes complémentaires simultanément — sans droit d'entrée, sans engagement de durée, avec formation et animation continues.</p>
   <div class="hero-stats">
     <div class="stat"><span class="stat-num">2<span>→</span>5</span><span class="stat-label">Enseignes au choix</span></div>
     <div class="stat"><span class="stat-num">×<span>3</span></span><span class="stat-label">Revenus potentiels</span></div>
@@ -111,6 +136,7 @@ html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans
     <div class="stat"><span class="stat-num">Sans</span><span class="stat-label">Engagement de durée</span></div>
   </div>
 </section>
+
 <section class="calcul">
   <div class="calcul-tag">La logique Multi-Potentiel</div>
   <h2>1 client. 3 offres.<br><em>3 fois plus de valeur pour le même effort.</em></h2>
@@ -124,6 +150,7 @@ html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans
     <div class="result-text"><strong>Un seul effort commercial.</strong> Plusieurs commissions actives sur le même client. C'est la force du multi-mandat.</div>
   </div>
 </section>
+
 <section class="pour-qui">
   <div class="section-tag">Pour qui ?</div>
   <h2>Ce réseau est fait pour vous<br><em>si vous vous reconnaissez ici.</em></h2>
@@ -134,6 +161,7 @@ html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans
     <div class="profil"><span class="profil-icon">🚀</span><div class="profil-title">Vous pensez grand dès le départ</div><p class="profil-text">Vous voulez construire une activité multi-enseignes avec du volume réel — pas juste un complément de revenus, mais un véritable portefeuille de mandats.</p></div>
   </div>
 </section>
+
 <section class="comment">
   <div class="section-tag">Comment ça marche</div>
   <h2>Vous choisissez. On vous forme.<br>Vous développez. On vous rémunère.</h2>
@@ -144,6 +172,7 @@ html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans
     <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Vous êtes rémunéré à la signature</div><p class="step-text">Commission versée dès encaissement par l'enseigne. Chaque affaire signée dans les 24 mois suivant votre mise en relation vous est attribuée. Les montants varient selon les concepts — détaillés dans votre contrat d'adhésion.</p></div></div>
   </div>
 </section>
+
 <section class="formules">
   <div class="section-tag">Votre abonnement mensuel</div>
   <h2>Un abonnement. Plusieurs enseignes. Zéro droit d'entrée.</h2>
@@ -188,12 +217,25 @@ html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans
     </div>
   </div>
 </section>
+
 <section class="cta">
   <h2>Parlons de votre combinaison idéale.</h2>
   <p>20 minutes pour identifier les enseignes qui correspondent à votre profil, votre territoire et votre façon d'entreprendre. Sans engagement.</p>
   <a href="tel:0610703090" class="cta-btn" target="_top">Prendre contact</a>
   <div class="cta-tel">ou écrivez à <a href="mailto:thierry@thierrybismuth.com">thierry@thierrybismuth.com</a></div>
 </section>
+
+<section class="contrat">
+  <div class="contrat-tag">Documents officiels</div>
+  <h2>Contrat d'adhésion Membre</h2>
+  <p class="contrat-sub">Consultez ci-dessous le contrat d'adhésion au réseau Multi-Potentiel. Ce document régit les conditions de votre participation en tant que Membre représentant.</p>
+  <iframe class="contrat-frame"
+    src="https://drive.google.com/file/d/1ZvWNOzwfBpULxFn8rsL-xLwrksCcuuVh/preview"
+    allow="autoplay">
+  </iframe>
+  <a class="contrat-dl" href="https://drive.google.com/uc?export=download&id=1ZvWNOzwfBpULxFn8rsL-xLwrksCcuuVh" target="_blank">Télécharger le contrat (PDF)</a>
+</section>
+
 <style>html,body{height:auto;overflow:hidden;}</style>
 </body>
 </html>
