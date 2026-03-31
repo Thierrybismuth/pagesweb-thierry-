@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vos clients sont de grandes entreprises ? — Multi-Potentiel</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --rouge:   #e53935;
+  --jaune:   #fdd835;
+  --orange:  #fb8c00;
+  --bleu:    #1e88e5;
+  --bleu-f:  #1565c0;
+  --violet:  #6d28d9;
+  --teal:    #00897b;
+  --texte:   #1a1a2e;
+  --gris:    #6b7280;
+  --gris-bg: #f3f4f6;
+  --blanc:   #ffffff;
+  --creme:   #fef9f0;
+}
+html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-serif; font-weight:300; color:var(--texte); }
+
+/* ─── HERO ─────────────────────────────── */
+.hero {
+  background: var(--texte);
+  padding: 56px 40px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:4px;
+  background: linear-gradient(90deg, var(--rouge), var(--orange), var(--jaune), var(--bleu));
+}
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:10px; font-weight:500; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--orange); margin-bottom:20px;
+}
+.hero-eyebrow::before { content:''; width:24px; height:2px; background:var(--orange); }
+.hero h1 {
+  font-family:'Syne',sans-serif;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight:800; line-height:1.05; color:var(--blanc); margin-bottom:20px;
+}
+.hero h1 em { color:var(--jaune); font-style:italic; font-weight:600; font-family:'DM Sans',sans-serif; }
+.hero-lead {
+  font-size: clamp(.95rem,1.5vw,1.1rem); color:rgba(255,255,255,.65);
+  line-height:1.8; max-width:620px; margin-bottom:36px;
+}
+.hero-chips { display:flex; flex-wrap:wrap; gap:10px; }
+.chip {
+  padding:6px 16px; font-size:.75rem; font-weight:500;
+  letter-spacing:.08em; text-transform:uppercase; border-radius:2px;
+}
+.chip-convok { background:var(--rouge);  color:white; }
+.chip-lav    { background:var(--teal);   color:white; }
+.chip-reuz   { background:var(--teal);   color:white; background:#00695c; }
+
+/* ─── BARRE LOGOS ───────────────────────── */
+.logos-bar {
+  padding:32px 40px; background:var(--creme);
+  display:flex; align-items:center; justify-content:center;
+  gap:48px; flex-wrap:wrap; border-top:3px solid var(--orange);
+}
+.logos-bar-title { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gris); }
+.logos-bar img { height:44px; object-fit:contain; opacity:.75; }
+
+/* ─── ENSEIGNES ─────────────────────────── */
+.enseignes { display:flex; flex-direction:column; gap:0; }
+.enseigne {
+  display:grid; grid-template-columns:320px 1fr;
+  min-height:360px;
+}
+.enseigne:nth-child(even) { direction:rtl; }
+.enseigne:nth-child(even) > * { direction:ltr; }
+
+.ens-color {
+  display:flex; flex-direction:column; justify-content:center;
+  align-items:center; padding:48px 36px; gap:28px;
+}
+.enseigne-convok .ens-color { background:#c0392b; }
+.enseigne-lav    .ens-color { background:var(--teal); }
+.enseigne-reuz   .ens-color { background:#00695c; }
+
+.ens-logo {
+  width:190px; height:80px; object-fit:contain;
+  filter:brightness(0) invert(1);
+}
+.ens-gain {
+  background:rgba(0,0,0,.2); padding:14px 20px; text-align:center;
+  border-radius:2px; min-width:180px;
+}
+.ens-gain-num {
+  font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800;
+  color:var(--jaune); line-height:1;
+}
+.ens-gain-label { font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.75); margin-top:4px; }
+
+.ens-content { background:var(--blanc); padding:48px 44px; }
+.ens-tag {
+  font-size:10px; letter-spacing:.3em; text-transform:uppercase;
+  display:flex; align-items:center; gap:8px; margin-bottom:16px;
+}
+.enseigne-convok .ens-tag { color:#c0392b; }
+.enseigne-convok .ens-tag::before { content:''; width:24px; height:2px; background:#c0392b; }
+.enseigne-lav    .ens-tag { color:var(--teal); }
+.enseigne-lav    .ens-tag::before { content:''; width:24px; height:2px; background:var(--teal); }
+.enseigne-reuz   .ens-tag { color:#00695c; }
+.enseigne-reuz   .ens-tag::before { content:''; width:24px; height:2px; background:#00695c; }
+
+.ens-h2 {
+  font-family:'Syne',sans-serif; font-size:clamp(1.3rem,2.2vw,1.9rem);
+  font-weight:800; line-height:1.15; color:var(--texte); margin-bottom:20px;
+}
+.ens-h2 em { font-style:italic; font-weight:400; font-family:'DM Sans',sans-serif; }
+.ens-pitch { font-size:.9rem; color:var(--gris); line-height:1.8; margin-bottom:28px; }
+
+.ens-steps { display:flex; flex-direction:column; gap:10px; }
+.ens-step {
+  display:grid; grid-template-columns:36px 1fr;
+  gap:12px; align-items:start;
+}
+.ens-step-icon {
+  width:36px; height:36px; border-radius:50%; display:flex; align-items:center;
+  justify-content:center; font-size:1rem; flex-shrink:0;
+}
+.enseigne-convok .ens-step-icon { background:#fde8e8; }
+.enseigne-lav    .ens-step-icon { background:#e0f2f1; }
+.enseigne-reuz   .ens-step-icon { background:#e0f2f1; }
+
+.ens-step-text { font-size:.88rem; color:var(--texte); line-height:1.65; padding-top:6px; }
+.ens-step-text strong { font-weight:500; }
+
+.commission {
+  display:inline-block; margin-top:16px;
+  padding:12px 20px; font-size:.9rem; font-weight:500; border-left:3px solid;
+  line-height:1.5;
+}
+.enseigne-convok .commission { border-color:#c0392b; background:#fef2f2; color:#c0392b; }
+.enseigne-lav    .commission { border-color:var(--teal); background:#e0f2f1; color:var(--teal); }
+.enseigne-reuz   .commission { border-color:#00695c; background:#e0f2f1; color:#00695c; }
+
+/* ─── CONTEXTE BOX ──────────────────────── */
+.context-box {
+  margin-bottom:24px; padding:16px 20px;
+  background:var(--gris-bg); border-left:3px solid var(--orange);
+  font-size:.85rem; color:var(--texte); line-height:1.7;
+}
+.context-box strong { font-weight:600; }
+
+/* ─── TAG LIST ──────────────────────────── */
+.tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+.tag {
+  padding:4px 12px; font-size:.75rem; font-weight:500;
+  border-radius:2px; background:var(--gris-bg); color:var(--gris);
+}
+
+/* ─── SEP ───────────────────────────────── */
+.sep { height:4px; background:linear-gradient(90deg, var(--rouge), var(--orange), var(--jaune), var(--bleu)); }
+
+/* ─── CTA ───────────────────────────────── */
+.cta { padding:70px 40px; background:var(--texte); text-align:center; }
+.cta-eyebrow {
+  font-size:10px; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--orange); margin-bottom:16px;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.cta-eyebrow::before, .cta-eyebrow::after { content:''; width:24px; height:2px; background:var(--orange); }
+.cta h2 {
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.6rem,3vw,2.6rem); font-weight:800;
+  color:var(--blanc); margin-bottom:16px; line-height:1.15;
+}
+.cta p { font-size:1rem; color:rgba(255,255,255,.65); max-width:520px; margin:0 auto 40px; line-height:1.8; }
+.cta-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.btn-primary {
+  display:inline-block; background:var(--orange); color:white;
+  font-family:'Syne',sans-serif; font-size:.85rem; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase;
+  padding:16px 36px; text-decoration:none;
+}
+.btn-primary:hover { background:var(--jaune); color:var(--texte); }
+.btn-secondary {
+  display:inline-block; border:2px solid rgba(255,255,255,.3); color:rgba(255,255,255,.8);
+  font-family:'Syne',sans-serif; font-size:.85rem; font-weight:600;
+  letter-spacing:.06em; text-transform:uppercase;
+  padding:14px 32px; text-decoration:none;
+}
+.btn-secondary:hover { border-color:var(--orange); color:var(--orange); }
+.cta-contact {
+  margin-top:28px; font-size:.85rem; color:rgba(255,255,255,.45);
+  display:flex; gap:28px; justify-content:center; flex-wrap:wrap;
+}
+.cta-contact a { color:rgba(255,255,255,.7); text-decoration:none; }
+.cta-contact a:hover { color:var(--jaune); }
+
+/* ─── RESPONSIVE ────────────────────────── */
+@media (max-width: 720px) {
+  .enseigne { grid-template-columns:1fr; direction:ltr !important; }
+  .ens-color { flex-direction:row; justify-content:space-between; padding:28px 24px; min-height:unset; }
+  .ens-logo { width:120px; height:52px; }
+  .ens-gain { padding:10px 14px; }
+  .ens-gain-num { font-size:1.3rem; }
+  .ens-content { padding:28px 24px; }
+  .hero { padding:40px 24px 36px; }
+  .cta { padding:50px 24px; }
+  .logos-bar { gap:28px; padding:24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Multi-Potentiel — Réseau d'enseignes</div>
+  <h1>Vos clients sont<br>de grandes entreprises ?<br><em>Voilà ce qu'ils attendent de vous.</em></h1>
+  <p class="hero-lead">Recrutement sans frais de chasse, rénovation énergétique zéro reste à charge, écocupes pour leurs événements. Trois offres à fort impact — et trois sources de commissions à fort potentiel.</p>
+  <div class="hero-chips">
+    <span class="chip chip-convok">🎯 Recrutement ConvoK</span>
+    <span class="chip chip-lav">🏭 CEE Grandes surfaces LAV</span>
+    <span class="chip chip-reuz">♻️ Écocupes Re-uz</span>
+  </div>
+</section>
+
+<!-- BARRE LOGOS -->
+<div class="logos-bar">
+  <span class="logos-bar-title">Vos enseignes</span>
+  <img src="https://drive.usercontent.google.com/download?id=1YoXUxZQJ6-zNCr-dFQMDVBz9gGa5kcBX&export=view" alt="ConvoK">
+  <img src="https://drive.usercontent.google.com/download?id=1wOGPaDJQKob9_fKTb0yhH-z0oDswzyXz&export=view" alt="Les Artisans Verts">
+  <img src="https://drive.usercontent.google.com/download?id=1E_TPZh30ghod4aIo4fJyUGzNIr9WgMFA&export=view" alt="Re-uz">
+</div>
+
+<!-- ENSEIGNES -->
+<div class="enseignes">
+
+  <!-- CONVOK -->
+  <div class="enseigne enseigne-convok">
+    <div class="ens-color">
+      <img class="ens-logo" src="https://drive.usercontent.google.com/download?id=1YoXUxZQJ6-zNCr-dFQMDVBz9gGa5kcBX&export=view" alt="ConvoK">
+      <div class="ens-gain">
+        <div class="ens-gain-num">-80%</div>
+        <div class="ens-gain-label">vs un cabinet de chasse classique</div>
+      </div>
+    </div>
+    <div class="ens-content">
+      <div class="ens-tag">Recrutement · IA · Simple · Rapide</div>
+      <h2 class="ens-h2">Vos clients recrutent.<br><em>Mais ne veulent plus payer 20%.</em></h2>
+      <div class="context-box">
+        Les grandes entreprises recrutent en permanence — mais les honoraires des cabinets de chasse (15 à 25% du salaire annuel) sont de plus en plus contestés. ConvoK propose une alternative IA, rapide et transparente, à une fraction du coût.
+      </div>
+      <div class="ens-steps">
+        <div class="ens-step">
+          <div class="ens-step-icon">🎯</div>
+          <div class="ens-step-text"><strong>Votre client a un poste ouvert.</strong> Il cherche une solution moins chère et plus rapide qu'un cabinet traditionnel.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">🤖</div>
+          <div class="ens-step-text"><strong>ConvoK prend le relais.</strong> IA + recrutement humain — sourcing, qualification, shortlist — livré rapidement.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">✅</div>
+          <div class="ens-step-text"><strong>Votre client embauche.</strong> Sans payer le prix d'un chasseur de tête. Vous avez rendu un vrai service.</div>
+        </div>
+      </div>
+      <div class="commission">💰 Commission sur chaque mission de recrutement signée via votre mise en relation.</div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- LAV GRANDS BÂTIMENTS -->
+  <div class="enseigne enseigne-lav">
+    <div class="ens-color">
+      <img class="ens-logo" src="https://drive.usercontent.google.com/download?id=1wOGPaDJQKob9_fKTb0yhH-z0oDswzyXz&export=view" alt="Les Artisans Verts">
+      <div class="ens-gain">
+        <div class="ens-gain-num">8%</div>
+        <div class="ens-gain-label">d'un chantier souvent &gt; 100 000€</div>
+      </div>
+    </div>
+    <div class="ens-content">
+      <div class="ens-tag">CEE Grandes Surfaces · 2026–2030 · Zéro reste à charge</div>
+      <h2 class="ens-h2">Vos clients ont de grands bâtiments.<br><em>L'État va payer pour les rénover.</em></h2>
+      <div class="context-box">
+        Entre 2026 et 2030, les Certificats d'Économies d'Énergie (CEE) seront prioritairement destinés aux <strong>grandes entreprises</strong>. C'est une fenêtre courte — et une opportunité massive pour vos clients qui ont de la surface.
+      </div>
+      <div class="tag-list">
+        <span class="tag">Entrepôts</span>
+        <span class="tag">Usines</span>
+        <span class="tag">Hôtels</span>
+        <span class="tag">Hôpitaux</span>
+        <span class="tag">Gymnases</span>
+        <span class="tag">Salles des fêtes</span>
+        <span class="tag">Zones d'activité</span>
+        <span class="tag">≥ 5 000 m² · ≥ 4m sous plafond</span>
+      </div>
+      <div class="ens-steps">
+        <div class="ens-step">
+          <div class="ens-step-icon">🏭</div>
+          <div class="ens-step-text"><strong>Votre client a de la surface.</strong> Isolation, chauffage, éclairage, récupération de chaleur, destratification, chambres froides...</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">📋</div>
+          <div class="ens-step-text"><strong>LAV monte le dossier CEE.</strong> Audit, chiffrage, financement — le client ne dépense rien ou presque.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">🔨</div>
+          <div class="ens-step-text"><strong>Les travaux sont réalisés.</strong> Reste à charge : <strong>0€</strong> dans la plupart des cas. Votre client rénove, économise, et ne sort pas un euro.</div>
+        </div>
+      </div>
+      <div class="commission">💰 Vous touchez <strong>8% du chantier</strong> — dont la valorisation dépasse presque toujours <strong>100 000€</strong>.</div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- RE-UZ -->
+  <div class="enseigne enseigne-reuz">
+    <div class="ens-color">
+      <img class="ens-logo" src="https://drive.usercontent.google.com/download?id=1E_TPZh30ghod4aIo4fJyUGzNIr9WgMFA&export=view" alt="Re-uz">
+      <div class="ens-gain">
+        <div class="ens-gain-num">8%</div>
+        <div class="ens-gain-label">du CA Re-uz généré</div>
+      </div>
+    </div>
+    <div class="ens-content">
+      <div class="ens-tag">Écocupes · Leader européen · Économies massives</div>
+      <h2 class="ens-h2">Votre client organise des événements.<br><em>Les écocupes sont gratuites.</em></h2>
+      <div class="context-box">
+        Re-uz est le leader européen de la consigne d'écocupes réutilisables. Des dizaines de milliers d'euros économisés, une logistique simplifiée, et des tonnes de CO₂ épargnées. <strong>Les écocupes sont gratuites</strong> — le client paie uniquement la logistique.
+      </div>
+      <div class="tag-list">
+        <span class="tag">Salons professionnels</span>
+        <span class="tag">Stades</span>
+        <span class="tag">Salles de concert</span>
+        <span class="tag">Festivals</span>
+        <span class="tag">Hôpitaux</span>
+        <span class="tag">Parcs à thème</span>
+        <span class="tag">Lieux publics récurrents</span>
+      </div>
+      <div class="ens-steps">
+        <div class="ens-step">
+          <div class="ens-step-icon">🏟️</div>
+          <div class="ens-step-text"><strong>Votre client est un lieu public ou un organisateur d'événements.</strong> Il utilise encore des gobelets jetables.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">🤝</div>
+          <div class="ens-step-text"><strong>Vous le mettez en relation avec Re-uz.</strong> Un spécialiste lui présente la solution — économies chiffrées, logistique incluse.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">♻️</div>
+          <div class="ens-step-text"><strong>Re-uz prend en charge tout le système de consigne.</strong> Votre client économise des dizaines de milliers d'euros et améliore son bilan CO₂.</div>
+        </div>
+      </div>
+      <div class="commission">💰 Vous touchez <strong>8% du CA Re-uz</strong> — et selon le nombre de visiteurs et la récurrence, ça monte vite. 🙂</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-eyebrow">Rejoindre le réseau</div>
+  <h2>Une ou plusieurs de ces enseignes<br>vous intéresse ?</h2>
+  <p>Rejoignez Multi-Potentiel, représentez les enseignes qui correspondent à votre réseau clients, et commencez à générer des commissions à fort potentiel sans quitter votre activité actuelle.</p>
+  <div class="cta-btns">
+    <a href="https://drive.google.com/file/d/1ZvWNOzwfBpULxFn8rsL-xLwrksCcuuVh/view" target="_top" class="btn-primary">📄 Voir le contrat d'adhésion</a>
+    <a href="tel:0610703090" class="btn-secondary">📞 Contacter Thierry Bismuth</a>
+  </div>
+  <div class="cta-contact">
+    <a href="tel:0610703090">06 10 70 30 90</a>
+    <a href="mailto:thierry@thierrybismuth.com">thierry@thierrybismuth.com</a>
+    <a href="https://www.thierrybismuth.com" target="_top">thierrybismuth.com</a>
+  </div>
+</section>
+
+</body>
+</html>
