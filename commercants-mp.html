@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vos clients sont des commerçants ? — Multi-Potentiel</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --rouge:   #e53935;
+  --jaune:   #fdd835;
+  --orange:  #fb8c00;
+  --bleu:    #1e88e5;
+  --bleu-f:  #1565c0;
+  --violet:  #6a1b9a;
+  --texte:   #1a1a2e;
+  --gris:    #6b7280;
+  --gris-bg: #f3f4f6;
+  --blanc:   #ffffff;
+  --creme:   #fef9f0;
+}
+html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-serif; font-weight:300; color:var(--texte); }
+.hero { background:var(--texte); padding:56px 40px 48px; position:relative; overflow:hidden; }
+.hero::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--rouge),var(--orange),var(--jaune),var(--bleu)); }
+.hero-eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:10px; font-weight:500; letter-spacing:.3em; text-transform:uppercase; color:var(--orange); margin-bottom:20px; }
+.hero-eyebrow::before { content:''; width:24px; height:2px; background:var(--orange); }
+.hero h1 { font-family:'Syne',sans-serif; font-size:clamp(2rem,5vw,3.6rem); font-weight:800; line-height:1.05; color:var(--blanc); margin-bottom:20px; }
+.hero h1 em { color:var(--orange); font-style:italic; font-weight:600; font-family:'DM Sans',sans-serif; }
+.hero-lead { font-size:clamp(.95rem,1.5vw,1.1rem); color:rgba(255,255,255,.65); line-height:1.8; max-width:620px; margin-bottom:36px; }
+.hero-chips { display:flex; flex-wrap:wrap; gap:10px; }
+.chip { padding:6px 16px; font-size:.75rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase; border-radius:2px; }
+.chip-convok  { background:var(--rouge);  color:white; }
+.chip-recomer { background:var(--violet); color:white; }
+.chip-apc     { background:var(--bleu);   color:white; }
+
+.logos-bar { padding:32px 40px; background:var(--creme); display:flex; align-items:center; justify-content:center; gap:48px; flex-wrap:wrap; border-top:3px solid var(--orange); }
+.logos-bar-title { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gris); }
+.logos-bar img { height:44px; object-fit:contain; opacity:.75; }
+
+.enseignes { display:flex; flex-direction:column; }
+.enseigne { display:grid; grid-template-columns:320px 1fr; min-height:360px; }
+.enseigne:nth-child(even) { direction:rtl; }
+.enseigne:nth-child(even) > * { direction:ltr; }
+.ens-color { display:flex; flex-direction:column; justify-content:center; align-items:center; padding:48px 36px; gap:28px; }
+.enseigne-convok  .ens-color { background:#c0392b; }
+.enseigne-recomer .ens-color { background:var(--violet); }
+.enseigne-apc     .ens-color { background:var(--bleu-f); }
+.ens-logo { width:190px; height:80px; object-fit:contain; filter:brightness(0) invert(1); }
+.ens-gain { background:rgba(0,0,0,.2); padding:14px 20px; text-align:center; border-radius:2px; min-width:180px; }
+.ens-gain-num { font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800; color:var(--jaune); line-height:1; }
+.ens-gain-label { font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.75); margin-top:4px; }
+
+.ens-content { background:var(--blanc); padding:48px 44px; }
+.ens-tag { font-size:10px; letter-spacing:.3em; text-transform:uppercase; display:flex; align-items:center; gap:8px; margin-bottom:16px; }
+.enseigne-convok  .ens-tag { color:#c0392b; }
+.enseigne-convok  .ens-tag::before { content:''; width:24px; height:2px; background:#c0392b; }
+.enseigne-recomer .ens-tag { color:var(--violet); }
+.enseigne-recomer .ens-tag::before { content:''; width:24px; height:2px; background:var(--violet); }
+.enseigne-apc     .ens-tag { color:var(--bleu-f); }
+.enseigne-apc     .ens-tag::before { content:''; width:24px; height:2px; background:var(--bleu-f); }
+
+.ens-h2 { font-family:'Syne',sans-serif; font-size:clamp(1.3rem,2.2vw,1.9rem); font-weight:800; line-height:1.15; color:var(--texte); margin-bottom:20px; }
+.ens-h2 em { font-style:italic; font-weight:400; font-family:'DM Sans',sans-serif; }
+.ens-pitch { font-size:.9rem; color:var(--gris); line-height:1.8; margin-bottom:24px; }
+
+.tarif-box { display:grid; grid-template-columns:1fr auto 1fr; gap:2px; margin-bottom:24px; }
+.tarif { padding:18px 20px; text-align:center; }
+.tarif-ou { background:#c0392b; color:white; display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-weight:800; font-size:1rem; padding:0 16px; }
+.tarif-a { background:#fde8e8; }
+.tarif-b { background:#fff5f5; }
+.tarif-num { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; color:#c0392b; line-height:1; }
+.tarif-label { font-size:.75rem; color:var(--gris); margin-top:6px; line-height:1.4; }
+
+.ens-steps { display:flex; flex-direction:column; gap:10px; }
+.ens-step { display:grid; grid-template-columns:36px 1fr; gap:12px; align-items:start; }
+.ens-step-icon { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+.enseigne-convok  .ens-step-icon { background:#fde8e8; }
+.enseigne-recomer .ens-step-icon { background:#f3e5f5; }
+.enseigne-apc     .ens-step-icon { background:#dbeafe; }
+.ens-step-text { font-size:.88rem; color:var(--texte); line-height:1.65; padding-top:6px; }
+.ens-step-text strong { font-weight:500; }
+
+.commission { display:inline-block; margin-top:16px; padding:12px 20px; font-size:.9rem; font-weight:500; border-left:3px solid; line-height:1.5; }
+.enseigne-convok  .commission { border-color:#c0392b; background:#fef2f2; color:#c0392b; }
+.enseigne-recomer .commission { border-color:var(--violet); background:#f3e5f5; color:var(--violet); }
+.enseigne-apc     .commission { border-color:var(--bleu-f); background:#eff6ff; color:var(--bleu-f); }
+
+.context-box { margin-bottom:20px; padding:16px 20px; background:var(--gris-bg); border-left:3px solid var(--orange); font-size:.85rem; color:var(--texte); line-height:1.7; }
+.context-box strong { font-weight:600; }
+
+.sep { height:4px; background:linear-gradient(90deg,var(--rouge),var(--orange),var(--jaune),var(--bleu)); }
+
+.cta { padding:70px 40px; background:var(--texte); text-align:center; }
+.cta-eyebrow { font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:var(--orange); margin-bottom:16px; display:flex; align-items:center; justify-content:center; gap:8px; }
+.cta-eyebrow::before, .cta-eyebrow::after { content:''; width:24px; height:2px; background:var(--orange); }
+.cta h2 { font-family:'Syne',sans-serif; font-size:clamp(1.6rem,3vw,2.6rem); font-weight:800; color:var(--blanc); margin-bottom:16px; line-height:1.15; }
+.cta p { font-size:1rem; color:rgba(255,255,255,.65); max-width:520px; margin:0 auto 40px; line-height:1.8; }
+.cta-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.btn-primary { display:inline-block; background:var(--orange); color:white; font-family:'Syne',sans-serif; font-size:.85rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:16px 36px; text-decoration:none; }
+.btn-primary:hover { background:var(--jaune); color:var(--texte); }
+.btn-secondary { display:inline-block; border:2px solid rgba(255,255,255,.3); color:rgba(255,255,255,.8); font-family:'Syne',sans-serif; font-size:.85rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:14px 32px; text-decoration:none; }
+.btn-secondary:hover { border-color:var(--orange); color:var(--orange); }
+.cta-contact { margin-top:28px; font-size:.85rem; color:rgba(255,255,255,.45); display:flex; gap:28px; justify-content:center; flex-wrap:wrap; }
+.cta-contact a { color:rgba(255,255,255,.7); text-decoration:none; }
+.cta-contact a:hover { color:var(--jaune); }
+
+@media (max-width:720px) {
+  .enseigne { grid-template-columns:1fr; direction:ltr !important; }
+  .ens-color { flex-direction:row; justify-content:space-between; padding:28px 24px; min-height:unset; }
+  .ens-logo { width:120px; height:52px; }
+  .ens-content { padding:28px 24px; }
+  .hero { padding:40px 24px 36px; }
+  .cta { padding:50px 24px; }
+  .logos-bar { gap:28px; padding:24px; }
+  .tarif-box { grid-template-columns:1fr; }
+  .tarif-ou { padding:12px; }
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-eyebrow">Multi-Potentiel — Réseau d'enseignes</div>
+  <h1>Vos clients sont<br>des commerçants ?<br><em>Voici ce que vous pouvez faire pour eux.</em></h1>
+  <p class="hero-lead">Recrutement abordable, reconversion d'activité, assurance emprunteur. Trois leviers concrets pour aider vos commerçants — et générer des commissions significatives à chaque mise en relation.</p>
+  <div class="hero-chips">
+    <span class="chip chip-convok">🎯 Recrutement ConvoK</span>
+    <span class="chip chip-recomer">🔄 Reconversion RecommerCer</span>
+    <span class="chip chip-apc">🛡️ Assurance APC</span>
+  </div>
+</section>
+
+<div class="logos-bar">
+  <span class="logos-bar-title">Vos enseignes</span>
+  <img src="https://drive.usercontent.google.com/download?id=1YoXUxZQJ6-zNCr-dFQMDVBz9gGa5kcBX&export=view" alt="ConvoK">
+  <img src="https://drive.usercontent.google.com/download?id=1edqdeqQSnPNfGOcRWRurxNEfNsUCjguA&export=view" alt="RecommerCer">
+  <img src="https://drive.usercontent.google.com/download?id=1ce63vs8Tw4bZE215CGcu9EB0ymOa1vAU&export=view" alt="APC">
+</div>
+
+<div class="enseignes">
+
+  <!-- CONVOK -->
+  <div class="enseigne enseigne-convok">
+    <div class="ens-color">
+      <img class="ens-logo" src="https://drive.usercontent.google.com/download?id=1YoXUxZQJ6-zNCr-dFQMDVBz9gGa5kcBX&export=view" alt="ConvoK">
+      <div class="ens-gain">
+        <div class="ens-gain-num">1 000€</div>
+        <div class="ens-gain-label">pour ½ journée de travail</div>
+      </div>
+    </div>
+    <div class="ens-content">
+      <div class="ens-tag">Recrutement · IA · Simple · Rapide</div>
+      <h2 class="ens-h2">30% de vos commerçants veulent recruter.<br><em>Mais plus à n'importe quel prix.</em></h2>
+      <p class="ens-pitch">Fini les 5 000€ ou 8 000€ de frais de recrutement des années fastes. ConvoK propose une alternative ultra-lisible pour les petits patrons — efficace, rapide, et à un tarif qui leur parle enfin.</p>
+      <div class="tarif-box">
+        <div class="tarif tarif-a">
+          <div class="tarif-num">2 000€</div>
+          <div class="tarif-label">HT à l'embauche</div>
+        </div>
+        <div class="tarif-ou">OU</div>
+        <div class="tarif tarif-b">
+          <div class="tarif-num">300€</div>
+          <div class="tarif-label">HT/mois · 12 mois<br>recrutement garanti</div>
+        </div>
+      </div>
+      <div class="ens-steps">
+        <div class="ens-step">
+          <div class="ens-step-icon">📋</div>
+          <div class="ens-step-text"><strong>Vous recueillez le cahier des charges</strong> — poste, profil, contraintes du client.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">🤖</div>
+          <div class="ens-step-text"><strong>ConvoK automatise tout :</strong> recherche de CVs, mails, SMS, convocations, rappels. Sous 8 jours, 3 à 6 candidats sont convoqués.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">🤝</div>
+          <div class="ens-step-text"><strong>Vous êtes présent 8 jours après</strong> pour rencontrer les candidats avec votre client. À la marge : quelques appels de candidats impatients.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">🛑</div>
+          <div class="ens-step-text"><strong>Il ne recrute pas ? Stop.</strong> Aucun frais. Il recrute ? La facture est émise.</div>
+        </div>
+      </div>
+      <div class="commission">💰 <strong>50% du CA vous revient</strong> — soit <strong>1 000€ pour une demi-journée de travail</strong>.</div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- RECOMMERCER -->
+  <div class="enseigne enseigne-recomer">
+    <div class="ens-color">
+      <img class="ens-logo" src="https://drive.usercontent.google.com/download?id=1edqdeqQSnPNfGOcRWRurxNEfNsUCjguA&export=view" alt="RecommerCer">
+      <div class="ens-gain">
+        <div class="ens-gain-num">12%</div>
+        <div class="ens-gain-label">du droit d'entrée (10K–30K€)</div>
+      </div>
+    </div>
+    <div class="ens-content">
+      <div class="ens-tag">Reconversion · Commerce organisé · 2 000 enseignes</div>
+      <h2 class="ens-h2">Ne laissez pas votre commerçant<br><em>mourir avec son marché.</em></h2>
+      <div class="context-box">
+        Le commerce mue. Certains secteurs sont en croissance, d'autres ont raté le virage du web, du télétravail, des réseaux sociaux, de l'IA. Votre commerçant a un local, des clients, un banquier, une entreprise — <strong>aidons-le à changer de métier sans perdre son entreprise.</strong>
+      </div>
+      <div class="ens-steps">
+        <div class="ens-step">
+          <div class="ens-step-icon">📝</div>
+          <div class="ens-step-text"><strong>Étape 1 — Vous recueillez les contraintes :</strong> surface et config du local, type de clientèle, souhaits du commerçant.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">🔍</div>
+          <div class="ens-step-text"><strong>Étape 2 — RecommerCer contacte les 2 000 enseignes</strong> du commerce organisé compatibles avec le profil.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">📂</div>
+          <div class="ens-step-text"><strong>Étape 3 — Vous revenez vers votre commerçant</strong> avec 3 à 6 enseignes intéressées par son emplacement.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">✅</div>
+          <div class="ens-step-text"><strong>Étape 4 — Si une enseigne lui plaît,</strong> elle l'appelle et l'accompagne dans toute sa conversion.</div>
+        </div>
+      </div>
+      <div class="commission">💰 Vous touchez <strong>12% du droit d'entrée</strong> — entre <strong>1 200€ et 3 600€</strong>. Et accessoirement, vous avez sauvé un commerçant.</div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- APC -->
+  <div class="enseigne enseigne-apc">
+    <div class="ens-color">
+      <img class="ens-logo" src="https://drive.usercontent.google.com/download?id=1ce63vs8Tw4bZE215CGcu9EB0ymOa1vAU&export=view" alt="APC">
+      <div class="ens-gain">
+        <div class="ens-gain-num">~500€</div>
+        <div class="ens-gain-label">par crédit renégocié</div>
+      </div>
+    </div>
+    <div class="ens-content">
+      <div class="ens-tag">Assurance emprunteur · Pro &amp; Perso · Économies immédiates</div>
+      <h2 class="ens-h2">Votre commerçant est endetté<br><em>comme tout le monde — et paie trop cher.</em></h2>
+      <p class="ens-pitch">Crédit professionnel ou personnel, peu importe : s'il a un emprunt immobilier, il paie très probablement son assurance trop cher. En 10 minutes, APC peut lui faire économiser plusieurs milliers d'euros.</p>
+      <div class="ens-steps">
+        <div class="ens-step">
+          <div class="ens-step-icon">💳</div>
+          <div class="ens-step-text"><strong>Votre commerçant a un crédit</strong> — pro ou perso. C'est votre point d'entrée.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">📞</div>
+          <div class="ens-step-text"><strong>APC l'appelle de votre part.</strong> Analyse gratuite, sans engagement, en 10 minutes.</div>
+        </div>
+        <div class="ens-step">
+          <div class="ens-step-icon">✅</div>
+          <div class="ens-step-text"><strong>Il obtient une assurance équivalente</strong> auprès d'un assureur de premier plan — et économise entre <strong>1 000€ et 20 000€</strong> sur la durée.</div>
+        </div>
+      </div>
+      <div class="commission">💰 Vous touchez en moyenne <strong>500€ par crédit renégocié</strong>.</div>
+    </div>
+  </div>
+
+</div>
+
+<section class="cta">
+  <div class="cta-eyebrow">Rejoindre le réseau</div>
+  <h2>Une ou plusieurs de ces enseignes<br>vous intéresse ?</h2>
+  <p>Rejoignez Multi-Potentiel, représentez les enseignes qui correspondent à votre réseau de commerçants, et commencez à générer des commissions sans quitter votre activité actuelle.</p>
+  <div class="cta-btns">
+    <a href="https://drive.google.com/file/d/1ZvWNOzwfBpULxFn8rsL-xLwrksCcuuVh/view" target="_top" class="btn-primary">📄 Voir le contrat d'adhésion</a>
+    <a href="tel:0610703090" class="btn-secondary">📞 Contacter Thierry Bismuth</a>
+  </div>
+  <div class="cta-contact">
+    <a href="tel:0610703090">06 10 70 30 90</a>
+    <a href="mailto:thierry@thierrybismuth.com">thierry@thierrybismuth.com</a>
+    <a href="https://www.thierrybismuth.com" target="_top">thierrybismuth.com</a>
+  </div>
+</section>
+
+</body>
+</html>
