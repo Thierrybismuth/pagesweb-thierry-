@@ -121,6 +121,20 @@ html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans
 .contrat-dl { margin-top: 18px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 500; color: var(--bleu); text-decoration: none; }
 .contrat-dl:hover { color: var(--rouge); }
 .contrat-dl::before { content: '↓'; font-size: 1rem; }
+.enseignes-nav { padding: 70px 40px; background: var(--gris-leger); }
+.nav-h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 800; color: var(--texte); margin-bottom: 12px; line-height: 1.2; }
+.nav-sub { font-size: 0.95rem; color: var(--gris); margin-bottom: 36px; line-height: 1.6; max-width: 600px; }
+.nav-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.nav-card { display: flex; flex-direction: column; padding: 32px 28px; text-decoration: none; color: white; position: relative; transition: opacity .2s; }
+.nav-card:hover { opacity: .88; }
+.nav-card-rouge { background: var(--rouge); }
+.nav-card-orange { background: var(--orange); }
+.nav-card-bleu   { background: var(--bleu-fonce); }
+.nav-card-icon { font-size: 2rem; margin-bottom: 16px; }
+.nav-card-label { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 800; margin-bottom: 6px; }
+.nav-card-desc { font-size: 0.8rem; color: rgba(255,255,255,0.75); line-height: 1.5; flex: 1; }
+.nav-card-arrow { font-size: 1.4rem; margin-top: 20px; color: var(--jaune); font-weight: 700; }
+@media (max-width: 640px) { .nav-cards { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -215,6 +229,32 @@ html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans
       </ul>
       <div class="plan-engage">Résiliable à tout moment</div>
     </div>
+  </div>
+</section>
+
+<section class="enseignes-nav">
+  <div class="section-tag">Nos enseignes partenaires</div>
+  <h2 class="nav-h2">Découvrez nos enseignes selon la nature de vos clients</h2>
+  <p class="nav-sub">Chaque profil d'entrepreneur a ses contacts naturels. Choisissez la page qui correspond à votre réseau et découvrez les commissions associées.</p>
+  <div class="nav-cards">
+    <a href="https://thierrybismuth.github.io/pagesweb-thierry-/particuliers-mp.html" target="_top" class="nav-card nav-card-rouge">
+      <div class="nav-card-icon">👨‍👩‍👧</div>
+      <div class="nav-card-label">Particuliers</div>
+      <div class="nav-card-desc">KW · APC · Artisans Verts</div>
+      <div class="nav-card-arrow">→</div>
+    </a>
+    <a href="#" target="_top" class="nav-card nav-card-orange">
+      <div class="nav-card-icon">🏪</div>
+      <div class="nav-card-label">Commerçants · TPE-PME</div>
+      <div class="nav-card-desc">Bientôt disponible</div>
+      <div class="nav-card-arrow">→</div>
+    </a>
+    <a href="https://thierrybismuth.github.io/pagesweb-thierry-/grandes-entreprises-mp.html" target="_top" class="nav-card nav-card-bleu">
+      <div class="nav-card-icon">🏢</div>
+      <div class="nav-card-label">Grandes entreprises</div>
+      <div class="nav-card-desc">ConvoK · LAV · Re-uz</div>
+      <div class="nav-card-arrow">→</div>
+    </a>
   </div>
 </section>
 
