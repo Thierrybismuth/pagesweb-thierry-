@@ -205,6 +205,12 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
 .ens-gallery { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:24px; }
 .ens-gallery img { width:100%; height:auto; display:block; border-radius:2px; }
 @media(max-width:600px){ .ens-gallery { grid-template-columns:1fr; } }
+
+/* SLIDE GALLERIES */
+.ens-gallery { display:grid; grid-template-columns: repeat(2, 1fr); gap:4px; margin:20px 0; }
+.ens-gallery img { width:100%; height:180px; object-fit:cover; border-radius:2px; }
+@media(max-width:680px){ .ens-gallery { grid-template-columns:1fr; } .ens-gallery img { height:160px; } }
+
 </style>
 </head>
 <body>
@@ -245,7 +251,8 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
       <div class="ens-tag">Immobilier · Leader mondial</div>
       <h2 class="ens-h2">Chaque mois, 1% de vos contacts<br><em>vend ou achète un bien.</em></h2>
       <p class="ens-pitch">Keller Williams est le n°1 mondial de l'immobilier. Vos contacts sont propriétaires — certains y pensent sans oser le dire. Vous n'avez pas besoin d'être agent : juste d'avoir la bonne conversation.</p>
-      <div class="ens-steps">
+      <div <div class="ens-gallery"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/kw/slide1.jpg" alt="KW"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/kw/slide2.jpg" alt="KW"></div>
+      class="ens-steps">
         <div class="ens-step">
           <div class="ens-step-icon">💬</div>
           <div class="ens-step-text"><strong>Bavardez.</strong> Identifiez un vendeur dans votre entourage, professionnel ou personnel.</div>
@@ -283,7 +290,8 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
       <div class="ens-tag">Assurance emprunteur · Économies immédiates</div>
       <h2 class="ens-h2">80% des propriétaires<br><em>paient trop cher leur assurance.</em></h2>
       <p class="ens-pitch">58% des ménages français sont propriétaires. Parmi eux, la grande majorité a conservé l'assurance emprunteur de sa banque — et paie de 30% à 60% trop cher. Vous pouvez leur faire économiser le prix d'une voiture, en 10 minutes.</p>
-      <div class="ens-steps">
+      <div <div class="ens-gallery"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/apc/slide1.jpg" alt="APC"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/apc/slide2.jpg" alt="APC"></div>
+      class="ens-steps">
         <div class="ens-step">
           <div class="ens-step-icon">🏠</div>
           <div class="ens-step-text"><strong>Vos contacts propriétaires ont un crédit immobilier.</strong> C'est votre point d'entrée.</div>
