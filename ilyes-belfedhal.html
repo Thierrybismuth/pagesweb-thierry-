@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ilyes Belfedhal — Opticien-Lunetier</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #f7f5f0;
+      color: #1a2e44;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    .top-bar {
+      background: #1a2e44;
+      color: #f7f5f0;
+      padding: 10px 40px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .top-bar span { opacity: 0.7; }
+    .badge-rdv {
+      background: #c8873a;
+      color: #fff;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    /* HERO */
+    .hero {
+      background: #1a2e44;
+      color: #f7f5f0;
+      padding: 52px 40px 44px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: #c8873a;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 700;
+      color: #fff; flex-shrink: 0;
+    }
+    .hero-text h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 700;
+      line-height: 1.1;
+    }
+    .hero-text .subtitle {
+      font-size: 0.9rem; opacity: 0.7;
+      margin-top: 6px; letter-spacing: 0.05em;
+    }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 18px;
+      margin-top: 16px; font-size: 0.85rem; opacity: 0.85;
+    }
+    .hero-meta a { color: #f7f5f0; text-decoration: none; }
+    .hero-meta a:hover { text-decoration: underline; }
+
+    /* MAIN */
+    main { padding: 40px 40px; max-width: 900px; }
+
+    section { margin-bottom: 40px; }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 700;
+      color: #1a2e44;
+      border-bottom: 2px solid #c8873a;
+      padding-bottom: 6px;
+      margin-bottom: 18px;
+    }
+
+    /* PROFIL */
+    .profil-box {
+      background: #fff;
+      border-left: 4px solid #c8873a;
+      padding: 20px 24px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #1a2e44;
+    }
+
+    /* NOTE */
+    .note-box {
+      background: #1a2e44;
+      color: #f7f5f0;
+      border-radius: 6px;
+      padding: 22px 28px;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .note-box .note-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    /* EXPERIENCE */
+    .xp-item { margin-bottom: 28px; }
+    .xp-header {
+      display: flex; justify-content: space-between;
+      align-items: baseline; flex-wrap: wrap; gap: 4px;
+    }
+    .xp-title { font-weight: 600; font-size: 1rem; }
+    .xp-company { color: #c8873a; font-weight: 500; font-size: 0.9rem; margin-top: 2px; }
+    .xp-date { font-size: 0.8rem; opacity: 0.6; white-space: nowrap; }
+    .xp-location { font-size: 0.8rem; opacity: 0.55; margin-top: 2px; }
+    .xp-desc {
+      margin-top: 8px; font-size: 0.88rem;
+      line-height: 1.65; color: #1a2e44; opacity: 0.85;
+    }
+    .xp-divider { border: none; border-top: 1px solid #e8e4dc; margin: 24px 0; }
+
+    /* GRILLES */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+
+    /* TAGS */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .tag {
+      background: #f0ede7;
+      color: #1a2e44;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    .tag.accent { background: #c8873a; color: #fff; }
+
+    /* LANGUES */
+    .lang-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .lang-label { font-size: 0.88rem; width: 80px; }
+    .lang-dots { display: flex; gap: 5px; }
+    .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #c8873a;
+    }
+    .dot.empty { background: #e0dbd2; }
+
+    /* FORMATION */
+    .formation-item { margin-bottom: 16px; }
+    .formation-titre { font-weight: 600; font-size: 0.95rem; }
+    .formation-ecole { color: #c8873a; font-size: 0.85rem; margin-top: 2px; }
+    .formation-date { font-size: 0.78rem; opacity: 0.55; }
+    .formation-detail { font-size: 0.82rem; opacity: 0.7; margin-top: 4px; line-height: 1.5; }
+
+    /* FOOTER */
+    footer {
+      background: #1a2e44;
+      color: #f7f5f0;
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    footer .recruiter { font-size: 0.9rem; line-height: 1.7; }
+    footer .recruiter strong { font-size: 1rem; }
+    footer .confidential { font-size: 0.75rem; opacity: 0.5; text-align: right; }
+
+    @media (max-width: 640px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .hero { flex-direction: column; align-items: flex-start; }
+      main { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <span>ODYSKILLS · Franchise & Recrutement</span>
+    <span>Dossier Candidat</span>
+  </div>
+
+  <div class="hero">
+    <div class="badge-rdv" style="position:absolute;right:40px;top:52px;">📅 RDV lundi 6 avril à 11h — Mezzo di Pasta, Sainte-Geneviève-des-Bois</div>
+    <div class="avatar">IB</div>
+    <div class="hero-text">
+      <h1>Ilyes Belfedhal</h1>
+      <div class="subtitle">Opticien · Lunetier · 10 ans d'expérience</div>
+      <div class="hero-meta">
+        <span>📍 Vincennes / Villejuif (94)</span>
+        <a href="tel:0615720029">📞 06 15 72 00 29</a>
+        <a href="mailto:ilyesbelfedhal@gmail.com">✉️ ilyesbelfedhal@gmail.com</a>
+        <a href="https://linkedin.com/in/ilyesbelfedhal" target="_blank">🔗 LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <section>
+      <h2>Profil</h2>
+      <div class="profil-box">
+        Opticien-lunetier avec 10 ans d'expérience cumulée en France et en Algérie, dont plusieurs années en tant que gérant de son propre magasin. 
+        Ilyes maîtrise l'intégralité de la chaîne optique : accueil client, conseil, vente, montage atelier (cerclés, percés, formes sur mesure), tiers payant et SAV. 
+        Sa double culture terrain — gestion d'entreprise + point de vente — lui confère une vision complète du métier. 
+        Fort d'une présence digitale active sur les réseaux sociaux, il est également à l'aise avec la promotion et la prospection client en ligne.
+      </div>
+    </section>
+
+    <section>
+      <h2>Note de présentation</h2>
+      <div class="note-box">
+        <div class="note-label">Commentaire Thierry Bismuth · ODYSKILLS</div>
+        Garçon dynamique, sensé dans ses questions — son projet est clair et assumé. Actuellement en atelier d'optique, Ilyes souhaite revenir en point de vente : c'est précisément ce que permet ce poste. Sa proximité avec Sainte-Geneviève-des-Bois (basé à Villejuif) est un atout géographique réel. Profil opérationnel, autonome, avec un vrai sens commercial forgé dès ses premières expériences de gérant.
+      </div>
+    </section>
+
+    <section>
+      <h2>Expérience professionnelle</h2>
+
+      <div class="xp-item">
+        <div class="xp-header">
+          <div>
+            <div class="xp-title">Opticien lunetier</div>
+            <div class="xp-company">Optic Sonopty</div>
+            <div class="xp-location">📍 Paris</div>
+          </div>
+          <div class="xp-date">Fév. 2024 — Présent</div>
+        </div>
+        <div class="xp-desc">Suivi administratif et tiers payant · Montage et réparation de montures · Accueil, vente et conseil client · Gestion des dossiers mutuelles · SAV</div>
+      </div>
+
+      <hr class="xp-divider"/>
+
+      <div class="xp-item">
+        <div class="xp-header">
+          <div>
+            <div class="xp-title">Opticien lunetier</div>
+            <div class="xp-company">Art Optic</div>
+            <div class="xp-location">📍 215 Bd Voltaire, Paris 11e</div>
+          </div>
+          <div class="xp-date">Avr. 2023 — Fév. 2024</div>
+        </div>
+        <div class="xp-desc">Gestion complète de l'atelier : montages cerclés, percés et formes sur mesure · Ajustage et réparations · SAV et suivi matériel · Vente, négociation et fidélisation client</div>
+      </div>
+
+      <hr class="xp-divider"/>
+
+      <div class="xp-item">
+        <div class="xp-header">
+          <div>
+            <div class="xp-title">Opticien lunetier</div>
+            <div class="xp-company">Tropical Optic Shop — Magasin de créateurs</div>
+            <div class="xp-location">📍 Bordeaux / Paris 5e</div>
+          </div>
+          <div class="xp-date">Oct. 2022 — Mar. 2023</div>
+        </div>
+        <div class="xp-desc">Service clientèle haut de gamme · Vente, montage et réparations · Gestion du tiers payant et des colis · Promotion des montures en ligne</div>
+      </div>
+
+      <hr class="xp-divider"/>
+
+      <div class="xp-item">
+        <div class="xp-header">
+          <div>
+            <div class="xp-title">Gérant et propriétaire</div>
+            <div class="xp-company">Yes Optic</div>
+            <div class="xp-location">📍 Alger, Algérie</div>
+          </div>
+          <div class="xp-date">2016 — 2020</div>
+        </div>
+        <div class="xp-desc">Création et gestion de son propre magasin d'optique · Gestion des ventes et des stocks · Service clientèle · Vente, montage, ajustage et réparations</div>
+      </div>
+
+      <hr class="xp-divider"/>
+
+      <div class="xp-item">
+        <div class="xp-header">
+          <div>
+            <div class="xp-title">Gérant de magasin & vendeur</div>
+            <div class="xp-company">Dounia Optic / Allague Optic / Islam Optic</div>
+            <div class="xp-location">📍 Alger, Algérie</div>
+          </div>
+          <div class="xp-date">2013 — 2016</div>
+        </div>
+        <div class="xp-desc">Gestion de la vente et de l'atelier · Comptabilité et gestion du stock · Prospection des fournisseurs d'optique</div>
+      </div>
+    </section>
+
+    <div class="grid-2">
+      <section>
+        <h2>Formation</h2>
+        <div class="formation-item">
+          <div class="formation-titre">Optique Lunetterie</div>
+          <div class="formation-ecole">Institut Paramédical Ibn Nafis</div>
+          <div class="formation-date">2010 — 2012</div>
+          <div class="formation-detail">Évaluation de la vision · Optique géométrique · Visagisme · Montage & ajustement · Technologie des matériaux</div>
+        </div>
+
+        <h2 style="margin-top:28px;">Compétences métier</h2>
+        <div class="tags">
+          <span class="tag accent">Point de vente</span>
+          <span class="tag accent">Montage atelier</span>
+          <span class="tag">Tiers payant</span>
+          <span class="tag">Conseil client</span>
+          <span class="tag">Vente</span>
+          <span class="tag">SAV</span>
+          <span class="tag">WinOptics</span>
+          <span class="tag">Négociation</span>
+          <span class="tag">Réseaux sociaux</span>
+          <span class="tag">Pack Office</span>
+          <span class="tag">Photoshop</span>
+          <span class="tag">Gestion d'entreprise</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Langues</h2>
+        <div class="lang-item">
+          <span class="lang-label">Français</span>
+          <div class="lang-dots">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+        <div class="lang-item">
+          <span class="lang-label">Anglais</span>
+          <div class="lang-dots">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot empty"></div>
+          </div>
+        </div>
+        <div class="lang-item">
+          <span class="lang-label">Arabe</span>
+          <div class="lang-dots">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+
+        <h2 style="margin-top:28px;">Centres d'intérêt</h2>
+        <div class="tags">
+          <span class="tag">🎵 Artiste musicien (RS)</span>
+          <span class="tag">🥊 Kick-boxing</span>
+          <span class="tag">📚 Lecture</span>
+          <span class="tag">🎨 Art</span>
+        </div>
+
+        <h2 style="margin-top:28px;">Certifications</h2>
+        <div class="formation-item">
+          <div class="formation-titre">Les 7 Habitudes des Gens Très Efficaces</div>
+          <div class="formation-ecole">FranklinCovey</div>
+          <div class="formation-date">Avril 2021</div>
+        </div>
+        <div class="formation-item">
+          <div class="formation-titre">Next Level Program</div>
+          <div class="formation-ecole">Ambassade des États-Unis en Algérie</div>
+          <div class="formation-date">2017</div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="recruiter">
+      <strong>Thierry Bismuth</strong><br/>
+      ODYSKILLS · Multi-Potentiel<br/>
+      06 10 70 30 90 · thierry@thierrybismuth.com
+    </div>
+    <div class="confidential">
+      Dossier préparé par <strong>ODYSKILLS</strong> — Avril 2026<br/>
+      Confidentiel · Usage interne client
+    </div>
+  </footer>
+
+</body>
+</html>
