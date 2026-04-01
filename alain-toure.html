@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alain Touré — Directeur de Magasin</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --off-white: #f7f5f0;
+    --navy: #1a2e44;
+    --terracotta: #c8873a;
+    --muted: #8a9ab0;
+    --border: #ddd8cf;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--off-white); font-family: 'Outfit', sans-serif; color: var(--navy); min-height: 100vh; }
+  .top-bar { background: var(--navy); padding: 14px 40px; display: flex; align-items: center; justify-content: space-between; }
+  .top-bar .brand { font-family: 'Cormorant Garamond', serif; color: var(--off-white); font-size: 1rem; letter-spacing: 0.12em; opacity: 0.85; }
+  .top-bar .badge { background: var(--terracotta); color: white; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; border-radius: 2px; }
+  .rdv-banner { background: linear-gradient(135deg, #c85a20 0%, var(--terracotta) 100%); padding: 14px 40px; display: flex; align-items: center; gap: 14px; color: white; font-size: 0.85rem; font-weight: 500; }
+  .rdv-banner .rdv-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .hero { background: var(--navy); padding: 60px 40px 50px; position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; right: -60px; top: -60px; width: 320px; height: 320px; border-radius: 50%; border: 60px solid rgba(200,135,58,0.08); pointer-events: none; }
+  .hero-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: flex-end; gap: 40px; }
+  .avatar-ring { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--terracotta); display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: rgba(200,135,58,0.12); }
+  .avatar-initials { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--terracotta); font-weight: 300; }
+  .hero-text h1 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--off-white); letter-spacing: 0.04em; line-height: 1.1; }
+  .hero-text h1 span { color: var(--terracotta); }
+  .hero-text .subtitle { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+  .contacts-strip { background: #14253a; padding: 16px 40px; display: flex; gap: 32px; flex-wrap: wrap; }
+  .contact-item { display: flex; align-items: center; gap: 8px; color: var(--off-white); opacity: 0.82; font-size: 0.84rem; }
+  .contact-item a { color: inherit; text-decoration: none; }
+  .contact-item a:hover { color: var(--terracotta); }
+  .main { max-width: 860px; margin: 0 auto; padding: 50px 40px 80px; display: grid; grid-template-columns: 1fr 280px; gap: 50px; align-items: start; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: var(--navy); letter-spacing: 0.06em; padding-bottom: 10px; border-bottom: 1px solid var(--terracotta); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+  .section-title::before { content: ''; display: inline-block; width: 4px; height: 18px; background: var(--terracotta); border-radius: 2px; }
+  .profil-text { font-size: 0.92rem; line-height: 1.8; color: #3a4f66; font-weight: 300; }
+  .atouts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .atout-card { background: white; border: 1px solid var(--border); border-radius: 4px; padding: 14px 16px; border-left: 3px solid var(--terracotta); }
+  .atout-card .atout-icon { font-size: 1.1rem; margin-bottom: 6px; }
+  .atout-card .atout-title { font-weight: 600; font-size: 0.82rem; color: var(--navy); margin-bottom: 4px; }
+  .atout-card .atout-desc { font-size: 0.78rem; color: #4a5f76; line-height: 1.5; font-weight: 300; }
+  .exp-block { margin-bottom: 28px; }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+  .exp-title { font-weight: 600; font-size: 0.95rem; color: var(--navy); }
+  .exp-company { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--terracotta); font-style: italic; }
+  .exp-date { font-size: 0.78rem; color: var(--muted); font-weight: 400; white-space: nowrap; margin-top: 2px; }
+  .exp-location { font-size: 0.78rem; color: var(--muted); margin-bottom: 8px; }
+  .exp-desc { font-size: 0.86rem; line-height: 1.7; color: #4a5f76; font-weight: 300; }
+  .exp-divider { height: 1px; background: var(--border); margin: 22px 0; }
+  .formation-block { margin-bottom: 18px; }
+  .formation-title { font-weight: 600; font-size: 0.93rem; color: var(--navy); }
+  .formation-school { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--terracotta); font-style: italic; }
+  .formation-date { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+  .sidebar-section { margin-bottom: 36px; }
+  .skills-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-pill { background: var(--navy); color: var(--off-white); font-size: 0.75rem; font-weight: 400; padding: 5px 12px; border-radius: 2px; letter-spacing: 0.05em; }
+  .skill-pill.secondary { background: transparent; border: 1px solid var(--border); color: var(--navy); }
+  .skill-pill.highlight { background: var(--terracotta); color: white; }
+  .langue-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; font-size: 0.85rem; color: var(--navy); }
+  .langue-dots { display: flex; gap: 4px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+  .dot.filled { background: var(--terracotta); }
+  .note-block { margin-top: 40px; border: 1px dashed var(--border); border-radius: 4px; padding: 20px 24px; background: rgba(200,135,58,0.04); }
+  .note-block .note-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--terracotta); font-weight: 600; margin-bottom: 8px; }
+  .note-block p { font-size: 0.84rem; line-height: 1.7; color: #4a5f76; font-weight: 300; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .tag { font-size: 0.72rem; background: rgba(26,46,68,0.07); color: var(--navy); padding: 3px 9px; border-radius: 2px; font-weight: 500; }
+  footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--muted); }
+  footer .brand-footer { font-family: 'Cormorant Garamond', serif; color: var(--navy); font-size: 0.9rem; }
+  @media (max-width: 720px) {
+    .main { grid-template-columns: 1fr; padding: 30px 20px 60px; }
+    .hero { padding: 40px 20px; }
+    .hero-text h1 { font-size: 2.2rem; }
+    .contacts-strip { padding: 12px 20px; gap: 16px; }
+    .top-bar, .rdv-banner { padding: 12px 20px; }
+    .atouts-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="brand">ODYSKILLS · Franchise &amp; Recrutement</div>
+  <div class="badge">Dossier Candidat</div>
+</div>
+
+<div class="rdv-banner">
+  <span class="rdv-icon">📅</span>
+  <span><strong>RDV vendredi à 10h30</strong> — Mezzo di Pasta, Sainte-Geneviève-des-Bois · avec <strong>Gilles Ankri</strong> · Poste : Directeur de Magasin EMMA</span>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="avatar-ring"><span class="avatar-initials">AT</span></div>
+    <div class="hero-text">
+      <h1>Alain <span>Touré</span></h1>
+      <div class="subtitle">Manager · Gestionnaire · Directeur de point de vente</div>
+    </div>
+  </div>
+</div>
+
+<div class="contacts-strip">
+  <div class="contact-item">📍 <span>Bry-sur-Marne (94)</span></div>
+  <div class="contact-item">📞 <a href="tel:0745352369">07 45 35 23 69</a></div>
+  <div class="contact-item">✉️ <a href="mailto:alain.toure777@gmail.com">alain.toure777@gmail.com</a></div>
+</div>
+
+<div class="main">
+  <div>
+    <section style="margin-bottom:40px">
+      <div class="section-title">Profil</div>
+      <p class="profil-text">Profil de manager confirmé, fort d'un Master II en Management des Organisations et de plus de 15 ans d'expérience en gestion d'entreprise à responsabilités totales. Alain a piloté des structures multisectorielles incluant le commerce de détail, la gestion de stocks, la logistique, les achats et la distribution — autant de compétences directement transposables à la direction d'un magasin EMMA. Son intelligence opérationnelle, son excellent niveau d'expression et son aisance naturelle en font un profil de direction immédiatement opérationnel.</p>
+    </section>
+
+    <section style="margin-bottom:40px">
+      <div class="section-title">Atouts clés pour ce poste</div>
+      <div class="atouts-grid">
+        <div class="atout-card">
+          <div class="atout-icon">📦</div>
+          <div class="atout-title">Gestion stocks &amp; commandes</div>
+          <div class="atout-desc">Pilotage complet des achats, stocks et approvisionnements — expérience terrain sur des volumes conséquents (jusqu'à 10 vendeurs, ~100 ventes/jour).</div>
+        </div>
+        <div class="atout-card">
+          <div class="atout-icon">🛋️</div>
+          <div class="atout-title">Retail ameublement &amp; literie</div>
+          <div class="atout-desc">Ancienne direction d'un bazar généraliste (salons, mobilier, matelas) — connaissance directe du segment literie/ameublement et de sa clientèle.</div>
+        </div>
+        <div class="atout-card">
+          <div class="atout-icon">👥</div>
+          <div class="atout-title">Management d'équipe</div>
+          <div class="atout-desc">Encadrement d'équipes de vendeurs, supervision des livraisons et du SAV client — leadership reconnu, méthode et rigueur.</div>
+        </div>
+        <div class="atout-card">
+          <div class="atout-icon">📊</div>
+          <div class="atout-title">Gestion administrative &amp; financière</div>
+          <div class="atout-desc">Formation Audit &amp; Contrôle de gestion, maîtrise des indicateurs, des comptes fournisseurs/clients et du reporting — bien au-delà du seul profil commercial.</div>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-bottom:40px">
+      <div class="section-title">Expérience professionnelle</div>
+      <div class="exp-block">
+        <div class="exp-header">
+          <div><div class="exp-company">VOTRE MAGASIN BONPRI S.A.R.L.</div><div class="exp-title">Responsable d'exploitation</div></div>
+          <div class="exp-date">Oct. 2008 — Fév. 2012</div>
+        </div>
+        <div class="exp-location">📍 Abidjan, Côte d'Ivoire</div>
+        <p class="exp-desc">Direction opérationnelle d'un commerce de détail à fort volume (salons, mobilier, matelas, articles divers). Management de 10 vendeurs, supervision des ventes et livraisons, gestion administrative des stocks et des comptes clients/fournisseurs. Profil comparable à la direction d'un magasin EMMA : pilotage 360° du point de vente.</p>
+      </div>
+      <div class="exp-divider"></div>
+      <div class="exp-block">
+        <div class="exp-header">
+          <div><div class="exp-company">S.I.C.A.T.D S.A.R.L.</div><div class="exp-title">Gérant</div></div>
+          <div class="exp-date">Mai 2015 — Déc. 2024</div>
+        </div>
+        <div class="exp-location">📍 Abidjan, Côte d'Ivoire</div>
+        <p class="exp-desc">Direction générale d'une société pluridisciplinaire : gestion administrative et comptable, coordination logistique, achats, distribution import-export, suivi de chantiers B.T.P. Structuration financière de projets d'investissement. Rôle de pilotage global à responsabilités complètes.</p>
+      </div>
+      <div class="exp-divider"></div>
+      <div class="exp-block">
+        <div class="exp-header">
+          <div><div class="exp-company">PANAFRIKA INTERNATIONAL PTE LDT</div><div class="exp-title">Directeur Associé</div></div>
+          <div class="exp-date">Juin 2018 — Déc. 2020</div>
+        </div>
+        <div class="exp-location">📍 Singapour</div>
+        <p class="exp-desc">Commerce import-export international, structuration économique et financière de projets d'investissements. Ouverture et pilotage d'une entité à Singapour — capacité avérée à créer et diriger des organisations dans des environnements exigeants.</p>
+      </div>
+      <div class="exp-divider"></div>
+      <div class="exp-block">
+        <div class="exp-header">
+          <div><div class="exp-company">OLAM IVOIRE S.A.R.L.</div><div class="exp-title">Représentant logistique — Département Coton</div></div>
+          <div class="exp-date">Fév. 2007 — Août 2008</div>
+        </div>
+        <div class="exp-location">📍 Abidjan — filiale OLAM INTERNATIONAL LTD Singapore</div>
+        <p class="exp-desc">Suivi des opérations de déchargement, emmagasinage et empotage. Gestion des états de stocks, coordination des ordres de transit et opérations d'embarquement. Relation fournisseurs et intervenants de la filière.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">Formation</div>
+      <div class="formation-block">
+        <div class="formation-title">Master II — Management des Organisations</div>
+        <div class="formation-school">École de Commerce et de Gestion d'Abidjan (RCI)</div>
+        <div class="formation-date">2004 · Option : Gestion des entreprises</div>
+      </div>
+      <div style="height:1px;background:var(--border);margin:14px 0"></div>
+      <div class="formation-block">
+        <div class="formation-title">D.S.S. — Audit et Contrôle de Gestion</div>
+        <div class="formation-school">Pigier Côte d'Ivoire</div>
+        <div class="formation-date">2002</div>
+      </div>
+      <div style="height:1px;background:var(--border);margin:14px 0"></div>
+      <div class="formation-block">
+        <div class="formation-title">B.T.S. — Finances &amp; Comptabilité</div>
+        <div class="formation-school">Pigier Côte d'Ivoire</div>
+        <div class="formation-date">2001</div>
+      </div>
+    </section>
+
+    <div class="note-block">
+      <div class="note-label">Note de présentation</div>
+      <p>Alain est basé à Bry-sur-Marne (94) et cherche à se stabiliser en Île-de-France. Sa proximité avec Sainte-Geneviève-des-Bois est un atout réel. Ce qui distingue ce profil : il ne vient pas du pur commercial, mais d'une culture de gestion complète — pilotage des stocks, des livraisons, des équipes et du SAV. C'est exactement ce que requiert la direction d'un magasin EMMA. Son intelligence, son aisance relationnelle et son excellent niveau d'expression ont été immédiatement remarqués en entretien.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="sidebar-section">
+      <div class="section-title" style="font-size:1.1rem">Compétences clés</div>
+      <div class="skills-list">
+        <span class="skill-pill highlight">Direction de magasin</span>
+        <span class="skill-pill">Gestion de stocks</span>
+        <span class="skill-pill">Management équipe</span>
+        <span class="skill-pill">SAV clients</span>
+        <span class="skill-pill">Commandes &amp; achats</span>
+        <span class="skill-pill">Logistique</span>
+        <span class="skill-pill">Comptabilité</span>
+        <span class="skill-pill secondary">Import-export</span>
+        <span class="skill-pill secondary">Coordination BTP</span>
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <div class="section-title" style="font-size:1.1rem">Outils &amp; maîtrise</div>
+      <div class="tag-list">
+        <span class="tag">Word / Excel</span>
+        <span class="tag">PowerPoint</span>
+        <span class="tag">AutoCAD</span>
+        <span class="tag">Gestion comptable</span>
+        <span class="tag">Suivi stocks</span>
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <div class="section-title" style="font-size:1.1rem">Langues</div>
+      <div class="langue-item"><span>Français</span><div class="langue-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span></div></div>
+      <div class="langue-item"><span>Anglais (B2)</span><div class="langue-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span></div></div>
+      <div class="langue-item"><span>Allemand (A2)</span><div class="langue-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+    </div>
+    <div class="sidebar-section">
+      <div class="section-title" style="font-size:1.1rem">Profil humain</div>
+      <div class="tag-list">
+        <span class="tag">Méthode &amp; rigueur</span>
+        <span class="tag">Agilité</span>
+        <span class="tag">Polyvalence</span>
+        <span class="tag">Excellent communicant</span>
+        <span class="tag">Mobilité nationale</span>
+        <span class="tag">Permis B</span>
+      </div>
+    </div>
+    <div style="background:var(--navy);border-radius:4px;padding:20px;color:var(--off-white)">
+      <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--terracotta);margin-bottom:10px">Contact recruteur</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;margin-bottom:4px">Thierry Bismuth</div>
+      <div style="font-size:0.78rem;opacity:0.7;line-height:1.8">ODYSKILLS · Multi-Potentiel<br>06 10 70 30 90<br>thierry@thierrybismuth.com</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>Dossier préparé par <strong class="brand-footer">ODYSKILLS</strong> — Avril 2026</div>
+  <div>Confidentiel · Usage interne client EMMA</div>
+</footer>
+
+</body>
+</html>
