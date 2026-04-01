@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulateur CEE — Les Artisans Verts</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-dark: #1b5e20;
+  --green: #2e7d32;
+  --green-mid: #388e3c;
+  --green-light: #a5d6a7;
+  --green-pale: #e8f5e9;
+  --blue-dark: #0d47a1;
+  --blue: #1565c0;
+  --blue-light: #bbdefb;
+  --white: #ffffff;
+  --grey-bg: #f0f4f0;
+  --grey-light: #f5f5f5;
+  --grey: #757575;
+  --grey-dark: #212121;
+  --orange: #e65100;
+  --orange-bg: #fff3e0;
+  --red: #b71c1c;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Barlow', sans-serif; background: var(--grey-bg); color: var(--grey-dark); min-height: 100vh; }
+
+/* HEADER */
+.header {
+  background: var(--green-dark);
+  color: white;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  position: sticky; top: 0; z-index: 100;
+}
+.logo-svg { width: 52px; height: 52px; flex-shrink: 0; }
+.header-text h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1; }
+.header-text p { font-size: 12px; opacity: 0.75; margin-top: 3px; }
+.header-badges { margin-left: auto; display: flex; gap: 10px; }
+.hbadge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 6px; padding: 6px 14px; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
+.hbadge.blue { background: var(--blue); border-color: transparent; }
+
+/* LAYOUT */
+.wrap { max-width: 1140px; margin: 0 auto; padding: 28px 20px 40px; }
+.grid2 { display: grid; grid-template-columns: 480px 1fr; gap: 24px; align-items: start; }
+.grid-full { grid-column: 1 / -1; }
+@media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } }
+
+/* CARD */
+.card { background: white; border-radius: 12px; padding: 26px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+.card + .card { margin-top: 20px; }
+.card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--green-dark); margin-bottom: 20px; padding-bottom: 10px;
+  border-bottom: 3px solid var(--green-light);
+  display: flex; align-items: center; gap: 8px;
+}
+.section-sep { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--grey); margin: 18px 0 10px; display: flex; align-items: center; gap: 8px; }
+.section-sep::after { content: ''; flex: 1; height: 1px; background: #e0e0e0; }
+
+/* FORM */
+.field { margin-bottom: 14px; }
+.field label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #555; margin-bottom: 5px; }
+.field input, .field select, .field textarea {
+  width: 100%; padding: 9px 13px; border: 1.5px solid #d5d5d5; border-radius: 6px;
+  font-family: 'Barlow', sans-serif; font-size: 14px; color: var(--grey-dark);
+  transition: border-color 0.2s, box-shadow 0.2s; background: white;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(46,125,50,0.12);
+}
+.field textarea { resize: vertical; min-height: 72px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+/* Checkbox */
+.check-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.check-item { display: flex; align-items: center; gap: 7px; cursor: pointer; font-size: 13px; font-weight: 500; padding: 5px 10px; border: 1.5px solid #ddd; border-radius: 6px; transition: all 0.15s; user-select: none; }
+.check-item:hover { border-color: var(--green); background: var(--green-pale); }
+.check-item input { width: 15px; height: 15px; accent-color: var(--green); }
+
+/* BTN */
+.btn-primary {
+  width: 100%; background: var(--green); color: white; border: none; border-radius: 8px;
+  padding: 15px; font-family: 'Barlow Condensed', sans-serif; font-size: 18px;
+  font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+  margin-top: 10px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(46,125,50,0.35); }
+.btn-secondary { background: var(--blue); color: white; border: none; border-radius: 7px; padding: 10px 20px; font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: background 0.2s; margin-right: 10px; }
+.btn-secondary:hover { background: var(--blue-dark); }
+.btn-ghost { background: #f5f5f5; color: #555; border: 1.5px solid #ddd; border-radius: 7px; padding: 10px 20px; font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; cursor: pointer; }
+
+/* ALERT */
+.alert-warn { background: var(--orange-bg); border: 1.5px solid #fb8c00; border-radius: 8px; padding: 12px 16px; font-size: 13px; line-height: 1.6; margin-bottom: 16px; }
+.alert-warn strong { color: var(--orange); }
+
+/* FICHE CARD */
+.fiche { border-radius: 10px; border-left: 5px solid; padding: 18px 20px; margin-bottom: 14px; }
+.fiche.ok { background: var(--green-pale); border-color: var(--green); }
+.fiche.ko { background: #fafafa; border-color: #ccc; }
+.fiche.sup { background: #fff8e1; border-color: #fb8c00; }
+.fiche-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.fiche-ref { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--grey); }
+.fiche-name { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; color: var(--grey-dark); margin-top: 2px; }
+.badge { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; white-space: nowrap; }
+.badge.ok { background: var(--green); color: white; }
+.badge.ko { background: #9e9e9e; color: white; }
+.badge.sup { background: #fb8c00; color: white; }
+
+.kwh-row { background: var(--green-dark); color: white; border-radius: 8px; padding: 13px 18px; margin-top: 12px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.kwh-num { font-family: 'Barlow Condensed', sans-serif; font-size: 34px; font-weight: 800; line-height: 1; }
+.kwh-unit { font-size: 13px; opacity: 0.8; }
+.kwh-euro { margin-left: auto; background: rgba(255,255,255,0.18); border-radius: 6px; padding: 6px 14px; font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; }
+.fiche-detail { font-size: 12px; color: #555; margin-top: 8px; line-height: 1.5; }
+.fail-list { list-style: none; margin-top: 6px; }
+.fail-list li { font-size: 13px; color: var(--red); font-weight: 600; padding: 2px 0; }
+.fail-list li::before { content: '✗ '; }
+.fiche-extra { font-size: 12px; color: var(--grey); font-style: italic; margin-top: 8px; }
+
+/* TOTAL BLOCK */
+.total-block { background: var(--green-dark); color: white; border-radius: 12px; padding: 24px 28px; margin-top: 0; }
+.total-label { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; opacity: 0.7; margin-bottom: 6px; }
+.total-val { font-family: 'Barlow Condensed', sans-serif; font-size: 48px; font-weight: 800; line-height: 1; }
+.total-unit { font-size: 14px; opacity: 0.7; margin-top: 4px; }
+.total-euro-line { margin-top: 14px; background: rgba(255,255,255,0.15); border-radius: 8px; padding: 12px 18px; font-size: 15px; font-weight: 600; }
+.total-note { font-size: 11px; opacity: 0.6; margin-top: 8px; font-style: italic; }
+
+/* PRE-STUDY */
+.prestudy-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+@media (max-width: 768px) { .prestudy-grid { grid-template-columns: 1fr; } }
+.ps-full { grid-column: 1 / -1; }
+.ps-actions { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* HIDDEN */
+.hidden { display: none !important; }
+
+/* PRINT */
+@media print {
+  .header { background: #1b5e20 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .btn-primary, .btn-secondary, .btn-ghost, .ps-actions { display: none; }
+  .wrap { padding: 10px; }
+  .grid2 { grid-template-columns: 1fr 1fr; }
+  .card { box-shadow: none; border: 1px solid #ddd; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <svg class="logo-svg" viewBox="0 0 60 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="30,4 58,20 58,52 30,68 2,52 2,20" fill="white"/>
+    <text x="30" y="24" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="800" font-size="8" fill="#1b5e20">LES</text>
+    <text x="30" y="36" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="800" font-size="9" fill="#1b5e20">ARTISANS</text>
+    <text x="30" y="48" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="800" font-size="9" fill="#1b5e20">VERTS</text>
+    <text x="30" y="59" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="7" fill="#388e3c">⚡</text>
+  </svg>
+  <div class="header-text">
+    <h1>Simulateur CEE</h1>
+    <p>Éligibilité &amp; estimation des économies d'énergie</p>
+  </div>
+  <div class="header-badges">
+    <div class="hbadge">🌿 RGE Qualibat</div>
+    <div class="hbadge blue">⚡ Financé à 100%</div>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="grid2">
+
+  <!-- ======== FORMULAIRE ======== -->
+  <div>
+    <div class="card">
+      <div class="card-title">📋 Informations du site</div>
+
+      <div class="section-sep">Bâtiment</div>
+      <div class="field">
+        <label>Secteur d'activité</label>
+        <select id="secteur">
+          <option value="">— Sélectionner —</option>
+          <option value="entrepot">Entrepôt / Logistique</option>
+          <option value="industrie">Industrie / Production</option>
+          <option value="sante">Santé</option>
+          <option value="commerce_grand">Commerce &gt; 400 m²</option>
+          <option value="commerce_petit">Commerce &lt; 400 m²</option>
+          <option value="bureau">Bureaux / Restauration</option>
+          <option value="hotellerie">Hôtellerie</option>
+          <option value="enseignement">Enseignement</option>
+        </select>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label>Surface au sol (m²)</label>
+          <input type="number" id="surface" placeholder="ex : 2 500" min="0">
+        </div>
+        <div class="field">
+          <label>Hauteur sous plafond (m)</label>
+          <input type="number" id="hauteur" placeholder="ex : 8" min="0" step="0.5">
+        </div>
+      </div>
+      <div class="field">
+        <label>Zone climatique</label>
+        <select id="zone">
+          <option value="H1">H1 — Nord / Île-de-France / Centre-Est</option>
+          <option value="H2" selected>H2 — Ouest / Sud-Ouest / Rhône-Alpes</option>
+          <option value="H3">H3 — PACA / Languedoc / Méditerranée</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Bâtiment existant depuis &gt; 2 ans ?</label>
+        <select id="existant">
+          <option value="oui">Oui</option>
+          <option value="non">Non (neuf)</option>
+        </select>
+      </div>
+
+      <div class="section-sep">Chauffage</div>
+      <div class="field">
+        <label>Type de chauffage</label>
+        <select id="type_chauffage">
+          <option value="aucun">Pas de chauffage</option>
+          <option value="convectif">Convectif (aérothèrme, souffleur d'air chaud, VMC…)</option>
+          <option value="radiatif">Radiatif (panneaux, cassettes, tubes rayonnants…)</option>
+          <option value="mixte">Mixte (convectif + radiatif)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Puissance nominale totale du chauffage (kW)</label>
+        <input type="number" id="puissance_chauffage" placeholder="ex : 120" min="0">
+      </div>
+
+      <div class="section-sep">Froid commercial</div>
+      <div class="row2">
+        <div class="field">
+          <label>Nombre de groupes froids</label>
+          <input type="number" id="nb_groupes" placeholder="ex : 2" min="0">
+        </div>
+        <div class="field">
+          <label>Puissance électrique totale (kW)</label>
+          <input type="number" id="puissance_froid" placeholder="ex : 45" min="0">
+        </div>
+      </div>
+      <div class="field">
+        <label>Régulation HP flottante déjà installée ?</label>
+        <select id="hp_existante">
+          <option value="non">Non</option>
+          <option value="oui">Oui (déjà équipé)</option>
+        </select>
+      </div>
+
+      <div class="section-sep">Éclairage</div>
+      <div class="row2">
+        <div class="field">
+          <label>Nb de points lumineux actuels</label>
+          <input type="number" id="nb_luminaires" placeholder="ex : 80" min="0">
+        </div>
+        <div class="field">
+          <label>Type d'éclairage actuel</label>
+          <select id="type_eclairage">
+            <option value="sodium">Sodium / Mercure (HID)</option>
+            <option value="fluocompact">Fluorescent / Fluo compact</option>
+            <option value="halogene">Halogène</option>
+            <option value="led">Déjà en LED</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-sep">Isolation existante</div>
+      <div class="field">
+        <label>Zones déjà isolées (cocher)</label>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox" id="iso_sol"> Sol</label>
+          <label class="check-item"><input type="checkbox" id="iso_mur"> Murs</label>
+          <label class="check-item"><input type="checkbox" id="iso_plafond"> Plafond / Toiture</label>
+          <label class="check-item"><input type="checkbox" id="iso_aucun"> Aucune</label>
+        </div>
+      </div>
+
+      <div class="section-sep">Logistique</div>
+      <div class="field">
+        <label>Nacelle disponible sur site</label>
+        <select id="nacelle">
+          <option value="oui">Oui</option>
+          <option value="non">Non (à prévoir)</option>
+        </select>
+      </div>
+
+      <button class="btn-primary" onclick="simuler()">
+        ⚡ Simuler les travaux CEE
+      </button>
+    </div>
+  </div>
+
+  <!-- ======== RÉSULTATS ======== -->
+  <div id="col-results" class="hidden">
+
+    <div id="alert-led" class="alert-warn hidden">
+      ⚠️ <strong>Attention :</strong> La fiche <strong>BAT-EQ-127 (LED intérieur) a été supprimée par arrêté du 23 février 2026</strong>, entrée en vigueur le 24/02/2026. Elle ne s'applique plus qu'aux opérations dont le devis a été <strong>signé avant le 24/02/2026</strong> et recensées auprès du Ministère dans les 10 jours suivant la publication.
+    </div>
+
+    <div class="card">
+      <div class="card-title">⚡ Fiches CEE éligibles</div>
+      <div id="fiches-container"></div>
+    </div>
+
+    <div class="total-block" style="margin-top:20px">
+      <div class="total-label">Total kWh cumac estimé</div>
+      <div class="total-val" id="total-kwh">—</div>
+      <div class="total-unit">kWh cumac (durées de vie conventionnelles)</div>
+      <div class="total-euro-line" id="total-euro">Calcul en cours…</div>
+      <div class="total-note">Prix indicatif basé sur ~3,5 €/MWh cumac. Valeur définitive selon appel d'offres CEE.</div>
+    </div>
+
+    <!-- PRE-STUDY -->
+    <div class="card" style="margin-top:20px">
+      <div class="card-title">📄 Fiche de pré-étude client</div>
+      <div class="prestudy-grid">
+        <div class="field">
+          <label>Nom du site / Entreprise</label>
+          <input type="text" id="ps_nom" placeholder="">
+        </div>
+        <div class="field">
+          <label>Contact / Fonction</label>
+          <input type="text" id="ps_contact" placeholder="">
+        </div>
+        <div class="field">
+          <label>Téléphone</label>
+          <input type="tel" id="ps_tel" placeholder="06 …">
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="ps_email" placeholder="">
+        </div>
+        <div class="field">
+          <label>Adresse du site</label>
+          <input type="text" id="ps_adresse" placeholder="">
+        </div>
+        <div class="field">
+          <label>Code postal / Ville</label>
+          <input type="text" id="ps_ville" placeholder="">
+        </div>
+        <div class="field">
+          <label>Commercial</label>
+          <input type="text" id="ps_commercial" placeholder="">
+        </div>
+        <div class="field">
+          <label>Date de visite</label>
+          <input type="date" id="ps_date">
+        </div>
+        <div class="field">
+          <label>Nacelle dispo sur site ?</label>
+          <select id="ps_nacelle">
+            <option value="oui">Oui</option>
+            <option value="non">Non</option>
+          </select>
+        </div>
+        <div class="field ps-full">
+          <label>Remarques / Observations du technicien</label>
+          <textarea id="ps_remarques" placeholder="Accessibilité, état des équipements, contraintes particulières, photos jointes…"></textarea>
+        </div>
+      </div>
+
+      <div class="ps-actions">
+        <button class="btn-secondary" onclick="imprimer()">🖨️ Imprimer / PDF</button>
+        <button class="btn-ghost" onclick="reinitialiser()">🔄 Nouvelle simulation</button>
+      </div>
+
+      <p style="font-size:11px;color:#999;margin-top:14px;line-height:1.5">
+        <em>Simulation indicative établie par Les Artisans Verts — 6 passage Eugène Barbier, 92400 Courbevoie — 01 87 66 27 08 — contact@artisansverts.energy<br>
+        Partenaire EDF Certificats d'Économies d'Énergie. Sous réserve d'éligibilité technique et de validation du dossier CEE. Outil outil d'aide à la décision, non contractuel.</em>
+      </p>
+    </div>
+
+  </div><!-- /col-results -->
+
+  <!-- placeholder quand pas encore simulé -->
+  <div id="col-placeholder" style="display:flex;align-items:center;justify-content:center;min-height:300px;">
+    <div style="text-align:center;color:#aaa;">
+      <div style="font-size:64px;margin-bottom:16px">⚡</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Remplissez le formulaire</div>
+      <div style="font-size:14px;margin-top:6px">puis cliquez sur "Simuler"</div>
+    </div>
+  </div>
+
+</div><!-- /grid2 -->
+</div><!-- /wrap -->
+
+<script>
+const PRIX_KWCH = 0.0035; // €/kWh cumac
+
+// ======== MOTEUR DE SIMULATION ========
+
+function simuler() {
+  const secteur = document.getElementById('secteur').value;
+  const surface = parseFloat(document.getElementById('surface').value) || 0;
+  const hauteur = parseFloat(document.getElementById('hauteur').value) || 0;
+  const zone = document.getElementById('zone').value;
+  const existant = document.getElementById('existant').value;
+  const typeChauffage = document.getElementById('type_chauffage').value;
+  const puissanceChauffage = parseFloat(document.getElementById('puissance_chauffage').value) || 0;
+  const nbGroupes = parseInt(document.getElementById('nb_groupes').value) || 0;
+  const puissanceFroid = parseFloat(document.getElementById('puissance_froid').value) || 0;
+  const hpExistante = document.getElementById('hp_existante').value;
+  const nbLuminaires = parseInt(document.getElementById('nb_luminaires').value) || 0;
+  const typeEclairage = document.getElementById('type_eclairage').value;
+
+  if (!secteur || surface === 0) {
+    alert('Merci de renseigner au minimum le secteur d\'activité et la surface.');
+    return;
+  }
+
+  const ctx = { secteur, surface, hauteur, zone, existant, typeChauffage, puissanceChauffage, nbGroupes, puissanceFroid, hpExistante, nbLuminaires, typeEclairage };
+
+  const fiches = [
+    ficheBAT_EQ_127(ctx),
+    ficheIND_BA_110(ctx),
+    ficheBAT_TH_134(ctx)
+  ];
+
+  let totalKwh = fiches.reduce((acc, f) => acc + (f.eligible ? f.kwh : 0), 0);
+  afficher(fiches, totalKwh);
+}
+
+// ---- BAT-EQ-127 : LED Intérieur (SUPPRIMÉE 24/02/2026) ----
+function ficheBAT_EQ_127(c) {
+  const secteursOk = ['entrepot','industrie','sante','commerce_grand','commerce_petit','bureau','hotellerie','enseignement'];
+  const ko = [];
+
+  if (!secteursOk.includes(c.secteur)) ko.push('Secteur non éligible à cette fiche');
+  if (c.surface < 1000) ko.push(`Surface insuffisante : ${c.surface} m² (minimum 1 000 m²)`);
+  if (c.hauteur < 4) ko.push(`Hauteur insuffisante : ${c.hauteur} m (minimum 4 m requis)`);
+  if (c.existant === 'non') ko.push('Bâtiment neuf non éligible');
+  if (c.typeEclairage === 'led') ko.push('Éclairage déjà en LED');
+  if (c.typeEclairage === 'halogene') ko.push('Remplacement halogène exclu par la fiche (art. 3.1)');
+
+  const eligible = ko.length === 0;
+
+  // Calcul : 1 LED / 30 m², 250 W/LED, efficacité 185 lm/W (UFC Power 250 Thaleos)
+  const nbLED = Math.ceil(c.surface / 30);
+  const puissW = nbLED * 250;
+
+  // Coefficients kWhc/W installé selon secteur (IRC < 90, eff ≥ 185 lm/W)
+  const coeffs = { hotellerie:67, sante:63, entrepot:63, industrie:63, commerce_grand:63, enseignement:47, commerce_petit:39, bureau:39 };
+  const coeff = coeffs[c.secteur] || 39;
+  const kwh = puissW * coeff;
+
+  return {
+    ref: 'BAT-EQ-127', nom: 'LED Intérieur', emoji: '💡',
+    eligible, supprimee: true, kwh: eligible ? kwh : 0,
+    details: eligible ? `${nbLED} luminaires × 250 W = ${fmt_kw(puissW/1000)} kW — coeff. ${coeff} kWhc/W (IRC < 90, ≥ 185 lm/W)` : '',
+    ko, extra: '⚠️ Fiche supprimée par arrêté du 23/02/2026. Applicable uniquement si opération engagée avant le 24/02/2026.'
+  };
+}
+
+// ---- IND-BA-110 : Destratificateur d'air ----
+function ficheIND_BA_110(c) {
+  const ko = [];
+  // Secteurs éligibles : industrie/production UNIQUEMENT — pas entrepôts logistiques ni stockage
+  if (c.secteur !== 'industrie') ko.push('Réservé aux bâtiments industriels de production (usines, halls de fabrication)');
+  if (c.hauteur < 5) ko.push(`Hauteur insuffisante : ${c.hauteur} m (minimum 5 m requis)`);
+  if (c.typeChauffage === 'aucun') ko.push('Local non chauffé (chauffage obligatoire)');
+  if (c.puissanceChauffage <= 0) ko.push('Puissance de chauffage non renseignée');
+  if (c.existant === 'non') ko.push('Bâtiment neuf non éligible');
+
+  const eligible = ko.length === 0;
+
+  // Coefficients kWhc/kW de chauffage (durée vie 15 ans)
+  const cCoeff = { H1: 7200, H2: 8000, H3: 8500 };
+  const rCoeff = { H1: 2500, H2: 2800, H3: 3000 };
+
+  let kwh = 0;
+  if (eligible) {
+    if (c.typeChauffage === 'convectif') kwh = cCoeff[c.zone] * c.puissanceChauffage;
+    else if (c.typeChauffage === 'radiatif') kwh = rCoeff[c.zone] * c.puissanceChauffage;
+    else if (c.typeChauffage === 'mixte') kwh = (cCoeff[c.zone] + rCoeff[c.zone]) * c.puissanceChauffage;
+  }
+
+  const typeLabel = { convectif:'convectif', radiatif:'radiatif', mixte:'mixte (conv.+rad.)' };
+
+  return {
+    ref: 'IND-BA-110', nom: 'Destratificateur d\'air', emoji: '🌀',
+    eligible, supprimee: false, kwh,
+    details: eligible ? `${c.puissanceChauffage} kW × chauffage ${typeLabel[c.typeChauffage]} — Zone ${c.zone} — Durée vie : 15 ans` : '',
+    ko, extra: 'Économies chauffage estimées : 20 à 30%. Étude dimensionnement préalable obligatoire (qualification OPQIBI 1327).'
+  };
+}
+
+// ---- BAT-TH-134 : Haute Pression Flottante ----
+function ficheBAT_TH_134(c) {
+  const ko = [];
+  if (c.nbGroupes <= 0) ko.push('Aucun groupe froid renseigné');
+  if (c.puissanceFroid <= 0) ko.push('Puissance électrique groupe froid non renseignée');
+  if (c.hpExistante === 'oui') ko.push('Régulation HP flottante déjà installée');
+  if (c.existant === 'non') ko.push('Bâtiment neuf non éligible');
+
+  const eligible = ko.length === 0;
+
+  // Estimation montant CEE : ~1 400 kWhc/kW électrique installé (durée vie 14 ans)
+  // Basé sur économie 15-20% × facteur COP moyen
+  const kwh = eligible ? c.puissanceFroid * 1400 : 0;
+
+  return {
+    ref: 'BAT-TH-134', nom: 'Haute Pression Flottante', emoji: '❄️',
+    eligible, supprimee: false, kwh,
+    details: eligible ? `${c.nbGroupes} groupe(s) — ${c.puissanceFroid} kW élec. — Économies : 15–20% conso froid — Durée vie : 14 ans` : '',
+    ko, extra: 'Visite technique préalable obligatoire. Étude thermodynamique + justificatif de régulation HP flottante requis.'
+  };
+}
+
+// ======== AFFICHAGE ========
+
+function afficher(fiches, totalKwh) {
+  // Afficher alerte LED si applicable
+  const ledFiche = fiches.find(f => f.ref === 'BAT-EQ-127');
+  document.getElementById('alert-led').classList.toggle('hidden', !ledFiche || !ledFiche.eligible);
+
+  const container = document.getElementById('fiches-container');
+  container.innerHTML = '';
+
+  fiches.forEach(f => {
+    const cls = f.supprimee ? 'sup' : (f.eligible ? 'ok' : 'ko');
+    const badgeCls = f.supprimee ? 'sup' : (f.eligible ? 'ok' : 'ko');
+    const badgeTxt = f.supprimee ? '⚠️ Supprimée' : (f.eligible ? '✅ Éligible' : '✗ Non éligible');
+
+    let kwhHtml = '';
+    if (f.eligible) {
+      const euros = Math.round(f.kwh * PRIX_KWCH);
+      kwhHtml = `
+        <div class="kwh-row">
+          <div>
+            <div class="kwh-num">${fmtKwh(f.kwh)}</div>
+            <div class="kwh-unit">kWh cumac</div>
+          </div>
+          <div class="kwh-euro">≈ ${fmtEuro(euros)}</div>
+        </div>`;
+    }
+
+    let koHtml = '';
+    if (!f.eligible && f.ko.length) {
+      koHtml = `<ul class="fail-list">${f.ko.map(k => `<li>${k}</li>`).join('')}</ul>`;
+    }
+
+    let detailHtml = f.details ? `<div class="fiche-detail">📐 ${f.details}</div>` : '';
+
+    container.innerHTML += `
+      <div class="fiche ${cls}">
+        <div class="fiche-top">
+          <div>
+            <div class="fiche-ref">${f.emoji} ${f.ref}</div>
+            <div class="fiche-name">${f.nom}</div>
+          </div>
+          <span class="badge ${badgeCls}">${badgeTxt}</span>
+        </div>
+        ${kwhHtml}
+        ${koHtml}
+        ${detailHtml}
+        <div class="fiche-extra">${f.extra}</div>
+      </div>`;
+  });
+
+  // Total
+  document.getElementById('total-kwh').textContent = fmtKwh(totalKwh);
+  const totalEuro = Math.round(totalKwh * PRIX_KWCH);
+  document.getElementById('total-euro').textContent =
+    `Valeur estimée : ${fmtEuro(totalEuro)}  •  Prix indicatif 3,5 €/MWh cumac`;
+
+  // Afficher colonne résultats
+  document.getElementById('col-placeholder').style.display = 'none';
+  document.getElementById('col-results').classList.remove('hidden');
+  document.getElementById('col-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ======== UTILITAIRES ========
+
+function fmtKwh(n) {
+  if (n === 0) return '0';
+  if (n >= 1e9) return (n/1e9).toFixed(2) + ' G';
+  if (n >= 1e6) return (n/1e6).toFixed(2) + ' M';
+  if (n >= 1e3) return Math.round(n/1e3).toLocaleString('fr-FR') + ' k';
+  return Math.round(n).toLocaleString('fr-FR');
+}
+
+function fmtEuro(n) {
+  return n.toLocaleString('fr-FR') + ' €';
+}
+
+function fmt_kw(n) { return n.toFixed(1); }
+
+function imprimer() { window.print(); }
+
+function reinitialiser() {
+  document.getElementById('col-results').classList.add('hidden');
+  document.getElementById('col-placeholder').style.display = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
