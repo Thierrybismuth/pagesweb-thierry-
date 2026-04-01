@@ -1,0 +1,834 @@
+{
+  "meta": {
+    "workflow_id": "E7Yv4uGQpOizOwA3",
+    "workflow_name": "📣 Multi-Potentiel - Posts LI + IG Automatiques",
+    "sauvegarde_le": "2026-04-01",
+    "version": "v5",
+    "description": "Workflow publication automatique LinkedIn + WhatsApp Instagram pour Multi-Potentiel. Lun/Mer/Ven 9h. Claude génère posts éditoriaux avec actu RSS franchise. DALL-E génère image LinkedIn. 4 angles enseignes + 4 angles candidats en rotation."
+  },
+  "angles_enseignes": [
+    "COMPLÉMENTARITÉ : Multi-Potentiel couvre les zones géographiques vides ou verticales non exploitées. Chiffre additionnel, pas réorganisation.",
+    "TEST DE MARCHÉ : tester la demande terrain avant d'investir 20-50k€ dans une équipe commerciale.",
+    "AGILITÉ / SCALE-UP : garder le cœur en interne, externaliser les territoires périphériques. Découpage par région, clientèle, gamme produit.",
+    "URGENCE CONCURRENTIELLE : accélérateur commercial immédiat sans délais ni coûts d'un recrutement classique."
+  ],
+  "angles_candidats": [
+    "DIVERSIFICATION : représenter plusieurs réseaux pour lisser les aléas d'un seul marché.",
+    "FILET DE SÉCURITÉ : mensualité abordable donne accès portefeuille multi-marques, outils, communauté.",
+    "VITESSE DE DÉMARRAGE : accès immédiat à plusieurs enseignes et clientèles dès le lancement.",
+    "LIBERTÉ CHOISIE : indépendant multi-cartes, liberté de choisir enseignes, territoires, rythme."
+  ],
+  "regles_prompt": [
+    "Ton journalistique/éditorial — pas commercial",
+    "Accroche = question ou constat terrain",
+    "2-3 paragraphes courts, pas de liste à puces",
+    "Emojis discrets (2-3 max)",
+    "Ne JAMAIS dénigrer la mono-franchise",
+    "Multi-Potentiel = complémentaire, pas concurrent",
+    "JAMAIS 'sans coût fixe' pour les candidats — dire mensualité abordable rapidement amortie",
+    "CTA : 📞 06 10 70 30 90 | 📧 thierry@thierrybismuth.com | 🔗 URL"
+  ],
+  "cibles": {
+    "enseignes": {
+      "url": "https://www.thierrybismuth.com/reseaucommercialmultipotentiel",
+      "jours": "Lundi + Vendredi"
+    },
+    "candidats": {
+      "url": "https://www.thierrybismuth.com/rejoindremulti-potentiel",
+      "jour": "Mercredi"
+    }
+  },
+  "workflow_json": {
+    "updatedAt": "2026-04-01T16:43:07.702Z",
+    "createdAt": "2026-04-01T10:15:39.134Z",
+    "id": "E7Yv4uGQpOizOwA3",
+    "name": "📣 Multi-Potentiel - Posts LI + IG Automatiques",
+    "description": null,
+    "active": true,
+    "isArchived": false,
+    "nodes": [
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "cronExpression",
+                "expression": "0 9 * * 1,3,5"
+              }
+            ]
+          }
+        },
+        "name": "🗓️ Lun-Mer-Ven 9h",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          0,
+          300
+        ],
+        "id": "76663204-dd60-400b-92c5-9fcd21aa18d9"
+      },
+      {
+        "parameters": {
+          "jsCode": "const day = new Date().getDay();\nconst config = {\n  1: { cible: 'enseigne', label: '🏢 Franchiseurs', url: 'https://www.thierrybismuth.com/reseaucommercialmultipotentiel' },\n  3: { cible: 'candidat', label: '🙋 Candidats Multi-Potentiel', url: 'https://www.thierrybismuth.com/rejoindremulti-potentiel' },\n  5: { cible: 'enseigne', label: '🏢 Franchiseurs', url: 'https://www.thierrybismuth.com/reseaucommercialmultipotentiel' }\n};\nconst conf = config[day] || config[1];\nreturn [{ json: conf }];"
+        },
+        "name": "🎯 Cible du jour",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          240,
+          300
+        ],
+        "id": "3861e35f-b770-4e47-ae36-4efcfa498a5b"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.anthropic.com/v1/messages",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "x-api-key",
+                "value": "<<ANTHROPIC_API_KEY>>"
+              },
+              {
+                "name": "anthropic-version",
+                "value": "2023-06-01"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify({\n  model: 'claude-haiku-4-5-20251001',\n  max_tokens: 1500,\n  messages: [{\n    role: 'user',\n    content: (() => {\n      const anglesEnseignes = [\n        \"Angle COMPLÉMENTARITÉ : Multi-Potentiel ne remplace pas ce qui existe déjà (franchisés, commerciaux internes, flux entrants). Il vient couvrir les zones géographiques vides ou les verticales non exploitées. C'est du chiffre additionnel, pas une réorganisation.\",\n        \"Angle TEST DE MARCHÉ : identifier un marché ne suffit pas. Avant d'investir 20 ou 50k€ dans une équipe commerciale, Multi-Potentiel permet de tester la demande terrain réelle — sans engagement structurel. On structure ensuite si ça tient.\",\n        \"Angle AGILITÉ / SCALE-UP : belle traction mais impossible d'être partout. L'idée : garder le cœur en interne, externaliser les territoires périphériques via Multi-Potentiel. Découpage par région, par clientèle, par gamme produit — selon les priorités.\",\n        \"Angle URGENCE CONCURRENTIELLE : la fenêtre d'opportunité est courte. La concurrence, les banques, le marché n'attendent pas. Multi-Potentiel comme accélérateur commercial immédiat — sans les délais et les coûts d'un recrutement classique.\"\n      ];\n      const anglesCandidats = [\n        \"Angle DIVERSIFICATION : représenter une seule enseigne, c'est mettre tous ses œufs dans le même panier. Multi-Potentiel permet de combiner plusieurs réseaux et de lisser les aléas d'un seul marché.\",\n        \"Angle FILET DE SÉCURITÉ : entreprendre sans tout risquer. La mensualité Multi-Potentiel donne accès à un portefeuille multi-marques, des outils, une communauté — un investissement de départ amorti dès les premières missions.\",\n        \"Angle VITESSE DE DÉMARRAGE : inutile d'attendre d'avoir le réseau parfait pour se lancer. Multi-Potentiel donne accès immédiatement à plusieurs enseignes et clientèles — on construit son activité en marchant.\",\n        \"Angle LIBERTÉ CHOISIE : ni salarié, ni franchisé mono-enseigne. Un statut d'indépendant multi-cartes qui conserve la liberté de choisir ses enseignes, ses territoires, son rythme.\"\n      ];\n      const idx = new Date().getDay() % 4;\n      const angles = $json.cible === 'enseigne' ? anglesEnseignes : anglesCandidats;\n      const angleChoisi = angles[idx];\n      return 'Tu es rédacteur pour un média spécialisé franchise et entrepreneuriat. Tu écris des posts LinkedIn et Instagram avec un angle éditorial : tu informes, tu questionnes, tu illustres une réalité du terrain. Pas de discours commercial, pas de superlatifs. Ton factuel, humain, légèrement journalistique.\\n\\nCible : ' + $json.label + '\\nURL : ' + $json.url + '\\nActualité franchise du moment (utilise comme contexte si pertinent) : ' + $json.actu_franchise + '\\n\\nANGLE ÉDITORIAL DU JOUR (base-toi sur cet angle en priorité) :\\n' + angleChoisi + '\\n\\nContexte Multi-Potentiel de Thierry Bismuth :\\nMulti-Potentiel est un réseau multi-enseignes dont les membres représentent plusieurs marques ou réseaux commerciaux simultanément (franchiseurs, réseaux de services, de distribution, partenaires commerciaux).\\n\\nRÈGLE ABSOLUE : ne jamais dénigrer la mono-franchise ni le modèle franchisé classique. Multi-Potentiel est une alternative complémentaire, pas un concurrent.\\n\\nSTYLE : accroche sous forme de question ou constat de terrain, 2-3 paragraphes courts, pas de liste à puces, pas de mot type découvrez ou révolutionnaire. Emojis discrets (2-3 max).\\n\\nCTA sobre en fin de post :\\n📞 06 10 70 30 90\\n📧 thierry@thierrybismuth.com\\n🔗 ' + $json.url + '\\n\\nRéponds UNIQUEMENT avec un JSON valide, sans markdown ni backticks :\\n{\"linkedin_post\": \"[post LinkedIn avec hashtags]\", \"instagram_caption\": \"[version courte Instagram avec hashtags]\"}';\n    })()\n  }]\n}) }}"
+        },
+        "name": "🤖 Claude - Génère les posts",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          480,
+          300
+        ],
+        "id": "56a54ab7-f5d0-44bc-8780-930d32c0f863"
+      },
+      {
+        "parameters": {
+          "jsCode": "const text = $json.content[0].text.trim();\nlet parsed;\ntry {\n  parsed = JSON.parse(text);\n} catch(e) {\n  const match = text.match(/\\{[\\s\\S]*\\}/);\n  parsed = match ? JSON.parse(match[0]) : { linkedin_post: text, instagram_caption: text };\n}\nreturn [{ json: parsed }];"
+        },
+        "name": "📝 Parser JSON",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          720,
+          300
+        ],
+        "id": "82302f0d-8d99-4d9a-b37a-5c83277262c5"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://graph.facebook.com/v22.0/821774277688343/messages",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <<META_WA_TOKEN>>"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify({ messaging_product: 'whatsapp', to: '33610703090', type: 'text', text: { body: '📲 POST INSTAGRAM du jour :\\n\\n' + $json.instagram_caption } }) }}"
+        },
+        "name": "📱 WhatsApp - Caption Instagram",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1920,
+          440
+        ],
+        "id": "76155610-d9db-4039-b690-41993e09f48d"
+      },
+      {
+        "name": "🎨 DALL-E - Génère image",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          960,
+          300
+        ],
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.openai.com/v1/images/generations",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <<OPENAI_API_KEY>>"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify({\n  model: 'dall-e-3',\n  prompt: 'Professional LinkedIn post visual for a French franchise consulting brand called Multi-Potentiel. Topic: ' + $('📝 Parser JSON').item.json.linkedin_post.substring(0, 100) + '. Style: clean, modern, professional, minimalist. Colors: navy blue, off-white, terracotta. No text in the image. Photorealistic business scene.',\n  n: 1,\n  size: '1792x1024',\n  quality: 'standard'\n}) }}"
+        },
+        "id": "50ab44f1-0c08-4906-939b-233ccd18c681"
+      },
+      {
+        "name": "⬇️ Download Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1200,
+          300
+        ],
+        "parameters": {
+          "method": "GET",
+          "url": "={{ $json.data[0].url }}",
+          "options": {
+            "response": {
+              "response": {
+                "responseFormat": "file"
+              }
+            }
+          }
+        },
+        "id": "1b5167ec-b5ab-4534-bb6b-110ca7f7c708"
+      },
+      {
+        "name": "🔗 LI - Init Upload",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1440,
+          300
+        ],
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.linkedin.com/v2/assets?action=registerUpload",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify({ registerUploadRequest: { recipes: [\"urn:li:digitalmediaRecipe:feedshare-image\"], owner: \"urn:li:person:me\", serviceRelationships: [{ relationshipType: \"OWNER\", identifier: \"urn:li:userGeneratedContent\" }] } }) }}",
+          "credentials": {
+            "linkedInOAuth2Api": {
+              "id": "linkedInOAuth2Api",
+              "name": "LinkedIn Thierry Bismuth"
+            }
+          }
+        },
+        "id": "ba19047f-141f-4378-8b24-dae614d7063f"
+      },
+      {
+        "name": "📤 LI - Upload Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1680,
+          300
+        ],
+        "parameters": {
+          "method": "PUT",
+          "url": "={{ $json.value.uploadMechanism['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest'].uploadUrl }}",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Content-Type",
+                "value": "image/jpeg"
+              }
+            ]
+          },
+          "sendBody": true,
+          "contentType": "binaryData",
+          "inputDataFieldName": "data",
+          "credentials": {
+            "linkedInOAuth2Api": {
+              "id": "linkedInOAuth2Api",
+              "name": "LinkedIn Thierry Bismuth"
+            }
+          }
+        },
+        "id": "7009b9dc-171f-4315-8af7-a36a71632fd5"
+      },
+      {
+        "name": "🔵 Publier LinkedIn + Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1920,
+          160
+        ],
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.linkedin.com/v2/ugcPosts",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "X-Restli-Protocol-Version",
+                "value": "2.0.0"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify({\n  author: 'urn:li:person:me',\n  lifecycleState: 'PUBLISHED',\n  specificContent: {\n    'com.linkedin.ugc.ShareContent': {\n      shareCommentary: { text: $('📝 Parser JSON').item.json.linkedin_post },\n      shareMediaCategory: 'IMAGE',\n      media: [{\n        status: 'READY',\n        description: { text: 'Multi-Potentiel' },\n        media: $('🔗 LI - Init Upload').item.json.value.asset,\n        title: { text: 'Multi-Potentiel' }\n      }]\n    }\n  },\n  visibility: { 'com.linkedin.ugc.MemberNetworkVisibility': 'PUBLIC' }\n}) }}",
+          "credentials": {
+            "linkedInOAuth2Api": {
+              "id": "linkedInOAuth2Api",
+              "name": "LinkedIn Thierry Bismuth"
+            }
+          }
+        },
+        "id": "284799c7-28ec-4986-9a5a-3cc818d168cf"
+      }
+    ],
+    "connections": {
+      "🗓️ Lun-Mer-Ven 9h": {
+        "main": [
+          [
+            {
+              "node": "🎯 Cible du jour",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "🎯 Cible du jour": {
+        "main": [
+          [
+            {
+              "node": "🤖 Claude - Génère les posts",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "🤖 Claude - Génère les posts": {
+        "main": [
+          [
+            {
+              "node": "📝 Parser JSON",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "📝 Parser JSON": {
+        "main": [
+          [
+            {
+              "node": "🎨 DALL-E - Génère image",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "🎨 DALL-E - Génère image": {
+        "main": [
+          [
+            {
+              "node": "⬇️ Download Image",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "⬇️ Download Image": {
+        "main": [
+          [
+            {
+              "node": "🔗 LI - Init Upload",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "🔗 LI - Init Upload": {
+        "main": [
+          [
+            {
+              "node": "📤 LI - Upload Image",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "📤 LI - Upload Image": {
+        "main": [
+          [
+            {
+              "node": "🔵 Publier LinkedIn + Image",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "📱 WhatsApp - Caption Instagram",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "executionOrder": "v1",
+      "callerPolicy": "workflowsFromSameOwner",
+      "availableInMCP": false
+    },
+    "staticData": {
+      "node:🗓️ Lun-Mer-Ven 9h": {
+        "recurrenceRules": []
+      }
+    },
+    "meta": null,
+    "pinData": {},
+    "versionId": "fbf048e8-a494-4d85-ba04-3f9e2dd79cda",
+    "activeVersionId": "fbf048e8-a494-4d85-ba04-3f9e2dd79cda",
+    "versionCounter": 24,
+    "triggerCount": 1,
+    "shared": [
+      {
+        "updatedAt": "2026-04-01T10:15:39.136Z",
+        "createdAt": "2026-04-01T10:15:39.136Z",
+        "role": "workflow:owner",
+        "workflowId": "E7Yv4uGQpOizOwA3",
+        "projectId": "xEdrTfRJSnEHJQTO",
+        "project": {
+          "updatedAt": "2025-02-09T20:19:36.867Z",
+          "createdAt": "2025-02-09T20:19:34.873Z",
+          "id": "xEdrTfRJSnEHJQTO",
+          "name": "thierry   <thierry@odyssee-rh.fr>",
+          "type": "personal",
+          "icon": null,
+          "description": null,
+          "projectRelations": [
+            {
+              "updatedAt": "2025-02-09T20:19:34.873Z",
+              "createdAt": "2025-02-09T20:19:34.873Z",
+              "userId": "7e44ae70-8376-4e4e-b941-bf15e522a0e5",
+              "projectId": "xEdrTfRJSnEHJQTO",
+              "user": {
+                "updatedAt": "2026-04-01T06:48:26.000Z",
+                "createdAt": "2025-02-09T20:19:32.942Z",
+                "id": "7e44ae70-8376-4e4e-b941-bf15e522a0e5",
+                "email": "thierry@odyssee-rh.fr",
+                "firstName": "thierry",
+                "lastName": " ",
+                "personalizationAnswers": null,
+                "settings": {
+                  "userActivated": true,
+                  "easyAIWorkflowOnboarded": true,
+                  "firstSuccessfulWorkflowId": "nTPTRDKWIHVLIw5q",
+                  "userActivatedAt": 1739440922617,
+                  "npsSurvey": {
+                    "waitingForResponse": true,
+                    "ignoredCount": 2,
+                    "lastShownAt": 1774889514943
+                  }
+                },
+                "disabled": false,
+                "mfaEnabled": false,
+                "lastActiveAt": "2026-03-31",
+                "isPending": false
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "tags": [],
+    "activeVersion": {
+      "updatedAt": "2026-04-01T16:43:07.703Z",
+      "createdAt": "2026-04-01T16:43:07.703Z",
+      "versionId": "fbf048e8-a494-4d85-ba04-3f9e2dd79cda",
+      "workflowId": "E7Yv4uGQpOizOwA3",
+      "nodes": [
+        {
+          "parameters": {
+            "rule": {
+              "interval": [
+                {
+                  "field": "cronExpression",
+                  "expression": "0 9 * * 1,3,5"
+                }
+              ]
+            }
+          },
+          "name": "🗓️ Lun-Mer-Ven 9h",
+          "type": "n8n-nodes-base.scheduleTrigger",
+          "typeVersion": 1.1,
+          "position": [
+            0,
+            300
+          ],
+          "id": "76663204-dd60-400b-92c5-9fcd21aa18d9"
+        },
+        {
+          "parameters": {
+            "jsCode": "const day = new Date().getDay();\nconst config = {\n  1: { cible: 'enseigne', label: '🏢 Franchiseurs', url: 'https://www.thierrybismuth.com/reseaucommercialmultipotentiel' },\n  3: { cible: 'candidat', label: '🙋 Candidats Multi-Potentiel', url: 'https://www.thierrybismuth.com/rejoindremulti-potentiel' },\n  5: { cible: 'enseigne', label: '🏢 Franchiseurs', url: 'https://www.thierrybismuth.com/reseaucommercialmultipotentiel' }\n};\nconst conf = config[day] || config[1];\nreturn [{ json: conf }];"
+          },
+          "name": "🎯 Cible du jour",
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            240,
+            300
+          ],
+          "id": "3861e35f-b770-4e47-ae36-4efcfa498a5b"
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://api.anthropic.com/v1/messages",
+            "sendHeaders": true,
+            "headerParameters": {
+              "parameters": [
+                {
+                  "name": "x-api-key",
+                  "value": "<<ANTHROPIC_API_KEY>>"
+                },
+                {
+                  "name": "anthropic-version",
+                  "value": "2023-06-01"
+                }
+              ]
+            },
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{ JSON.stringify({\n  model: 'claude-haiku-4-5-20251001',\n  max_tokens: 1500,\n  messages: [{\n    role: 'user',\n    content: (() => {\n      const anglesEnseignes = [\n        \"Angle COMPLÉMENTARITÉ : Multi-Potentiel ne remplace pas ce qui existe déjà (franchisés, commerciaux internes, flux entrants). Il vient couvrir les zones géographiques vides ou les verticales non exploitées. C'est du chiffre additionnel, pas une réorganisation.\",\n        \"Angle TEST DE MARCHÉ : identifier un marché ne suffit pas. Avant d'investir 20 ou 50k€ dans une équipe commerciale, Multi-Potentiel permet de tester la demande terrain réelle — sans engagement structurel. On structure ensuite si ça tient.\",\n        \"Angle AGILITÉ / SCALE-UP : belle traction mais impossible d'être partout. L'idée : garder le cœur en interne, externaliser les territoires périphériques via Multi-Potentiel. Découpage par région, par clientèle, par gamme produit — selon les priorités.\",\n        \"Angle URGENCE CONCURRENTIELLE : la fenêtre d'opportunité est courte. La concurrence, les banques, le marché n'attendent pas. Multi-Potentiel comme accélérateur commercial immédiat — sans les délais et les coûts d'un recrutement classique.\"\n      ];\n      const anglesCandidats = [\n        \"Angle DIVERSIFICATION : représenter une seule enseigne, c'est mettre tous ses œufs dans le même panier. Multi-Potentiel permet de combiner plusieurs réseaux et de lisser les aléas d'un seul marché.\",\n        \"Angle FILET DE SÉCURITÉ : entreprendre sans tout risquer. La mensualité Multi-Potentiel donne accès à un portefeuille multi-marques, des outils, une communauté — un investissement de départ amorti dès les premières missions.\",\n        \"Angle VITESSE DE DÉMARRAGE : inutile d'attendre d'avoir le réseau parfait pour se lancer. Multi-Potentiel donne accès immédiatement à plusieurs enseignes et clientèles — on construit son activité en marchant.\",\n        \"Angle LIBERTÉ CHOISIE : ni salarié, ni franchisé mono-enseigne. Un statut d'indépendant multi-cartes qui conserve la liberté de choisir ses enseignes, ses territoires, son rythme.\"\n      ];\n      const idx = new Date().getDay() % 4;\n      const angles = $json.cible === 'enseigne' ? anglesEnseignes : anglesCandidats;\n      const angleChoisi = angles[idx];\n      return 'Tu es rédacteur pour un média spécialisé franchise et entrepreneuriat. Tu écris des posts LinkedIn et Instagram avec un angle éditorial : tu informes, tu questionnes, tu illustres une réalité du terrain. Pas de discours commercial, pas de superlatifs. Ton factuel, humain, légèrement journalistique.\\n\\nCible : ' + $json.label + '\\nURL : ' + $json.url + '\\nActualité franchise du moment (utilise comme contexte si pertinent) : ' + $json.actu_franchise + '\\n\\nANGLE ÉDITORIAL DU JOUR (base-toi sur cet angle en priorité) :\\n' + angleChoisi + '\\n\\nContexte Multi-Potentiel de Thierry Bismuth :\\nMulti-Potentiel est un réseau multi-enseignes dont les membres représentent plusieurs marques ou réseaux commerciaux simultanément (franchiseurs, réseaux de services, de distribution, partenaires commerciaux).\\n\\nRÈGLE ABSOLUE : ne jamais dénigrer la mono-franchise ni le modèle franchisé classique. Multi-Potentiel est une alternative complémentaire, pas un concurrent.\\n\\nSTYLE : accroche sous forme de question ou constat de terrain, 2-3 paragraphes courts, pas de liste à puces, pas de mot type découvrez ou révolutionnaire. Emojis discrets (2-3 max).\\n\\nCTA sobre en fin de post :\\n📞 06 10 70 30 90\\n📧 thierry@thierrybismuth.com\\n🔗 ' + $json.url + '\\n\\nRéponds UNIQUEMENT avec un JSON valide, sans markdown ni backticks :\\n{\"linkedin_post\": \"[post LinkedIn avec hashtags]\", \"instagram_caption\": \"[version courte Instagram avec hashtags]\"}';\n    })()\n  }]\n}) }}"
+          },
+          "name": "🤖 Claude - Génère les posts",
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            480,
+            300
+          ],
+          "id": "56a54ab7-f5d0-44bc-8780-930d32c0f863"
+        },
+        {
+          "parameters": {
+            "jsCode": "const text = $json.content[0].text.trim();\nlet parsed;\ntry {\n  parsed = JSON.parse(text);\n} catch(e) {\n  const match = text.match(/\\{[\\s\\S]*\\}/);\n  parsed = match ? JSON.parse(match[0]) : { linkedin_post: text, instagram_caption: text };\n}\nreturn [{ json: parsed }];"
+          },
+          "name": "📝 Parser JSON",
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            720,
+            300
+          ],
+          "id": "82302f0d-8d99-4d9a-b37a-5c83277262c5"
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://graph.facebook.com/v22.0/821774277688343/messages",
+            "sendHeaders": true,
+            "headerParameters": {
+              "parameters": [
+                {
+                  "name": "Authorization",
+                  "value": "Bearer <<META_WA_TOKEN>>"
+                },
+                {
+                  "name": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            },
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{ JSON.stringify({ messaging_product: 'whatsapp', to: '33610703090', type: 'text', text: { body: '📲 POST INSTAGRAM du jour :\\n\\n' + $json.instagram_caption } }) }}"
+          },
+          "name": "📱 WhatsApp - Caption Instagram",
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            1920,
+            440
+          ],
+          "id": "76155610-d9db-4039-b690-41993e09f48d"
+        },
+        {
+          "name": "🎨 DALL-E - Génère image",
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            960,
+            300
+          ],
+          "parameters": {
+            "method": "POST",
+            "url": "https://api.openai.com/v1/images/generations",
+            "sendHeaders": true,
+            "headerParameters": {
+              "parameters": [
+                {
+                  "name": "Authorization",
+                  "value": "Bearer <<OPENAI_API_KEY>>"
+                },
+                {
+                  "name": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            },
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{ JSON.stringify({\n  model: 'dall-e-3',\n  prompt: 'Professional LinkedIn post visual for a French franchise consulting brand called Multi-Potentiel. Topic: ' + $('📝 Parser JSON').item.json.linkedin_post.substring(0, 100) + '. Style: clean, modern, professional, minimalist. Colors: navy blue, off-white, terracotta. No text in the image. Photorealistic business scene.',\n  n: 1,\n  size: '1792x1024',\n  quality: 'standard'\n}) }}"
+          },
+          "id": "50ab44f1-0c08-4906-939b-233ccd18c681"
+        },
+        {
+          "name": "⬇️ Download Image",
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            1200,
+            300
+          ],
+          "parameters": {
+            "method": "GET",
+            "url": "={{ $json.data[0].url }}",
+            "options": {
+              "response": {
+                "response": {
+                  "responseFormat": "file"
+                }
+              }
+            }
+          },
+          "id": "1b5167ec-b5ab-4534-bb6b-110ca7f7c708"
+        },
+        {
+          "name": "🔗 LI - Init Upload",
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            1440,
+            300
+          ],
+          "parameters": {
+            "method": "POST",
+            "url": "https://api.linkedin.com/v2/assets?action=registerUpload",
+            "sendHeaders": true,
+            "headerParameters": {
+              "parameters": [
+                {
+                  "name": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            },
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{ JSON.stringify({ registerUploadRequest: { recipes: [\"urn:li:digitalmediaRecipe:feedshare-image\"], owner: \"urn:li:person:me\", serviceRelationships: [{ relationshipType: \"OWNER\", identifier: \"urn:li:userGeneratedContent\" }] } }) }}",
+            "credentials": {
+              "linkedInOAuth2Api": {
+                "id": "linkedInOAuth2Api",
+                "name": "LinkedIn Thierry Bismuth"
+              }
+            }
+          },
+          "id": "ba19047f-141f-4378-8b24-dae614d7063f"
+        },
+        {
+          "name": "📤 LI - Upload Image",
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            1680,
+            300
+          ],
+          "parameters": {
+            "method": "PUT",
+            "url": "={{ $json.value.uploadMechanism['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest'].uploadUrl }}",
+            "sendHeaders": true,
+            "headerParameters": {
+              "parameters": [
+                {
+                  "name": "Content-Type",
+                  "value": "image/jpeg"
+                }
+              ]
+            },
+            "sendBody": true,
+            "contentType": "binaryData",
+            "inputDataFieldName": "data",
+            "credentials": {
+              "linkedInOAuth2Api": {
+                "id": "linkedInOAuth2Api",
+                "name": "LinkedIn Thierry Bismuth"
+              }
+            }
+          },
+          "id": "7009b9dc-171f-4315-8af7-a36a71632fd5"
+        },
+        {
+          "name": "🔵 Publier LinkedIn + Image",
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            1920,
+            160
+          ],
+          "parameters": {
+            "method": "POST",
+            "url": "https://api.linkedin.com/v2/ugcPosts",
+            "sendHeaders": true,
+            "headerParameters": {
+              "parameters": [
+                {
+                  "name": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "name": "X-Restli-Protocol-Version",
+                  "value": "2.0.0"
+                }
+              ]
+            },
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{ JSON.stringify({\n  author: 'urn:li:person:me',\n  lifecycleState: 'PUBLISHED',\n  specificContent: {\n    'com.linkedin.ugc.ShareContent': {\n      shareCommentary: { text: $('📝 Parser JSON').item.json.linkedin_post },\n      shareMediaCategory: 'IMAGE',\n      media: [{\n        status: 'READY',\n        description: { text: 'Multi-Potentiel' },\n        media: $('🔗 LI - Init Upload').item.json.value.asset,\n        title: { text: 'Multi-Potentiel' }\n      }]\n    }\n  },\n  visibility: { 'com.linkedin.ugc.MemberNetworkVisibility': 'PUBLIC' }\n}) }}",
+            "credentials": {
+              "linkedInOAuth2Api": {
+                "id": "linkedInOAuth2Api",
+                "name": "LinkedIn Thierry Bismuth"
+              }
+            }
+          },
+          "id": "284799c7-28ec-4986-9a5a-3cc818d168cf"
+        }
+      ],
+      "connections": {
+        "🗓️ Lun-Mer-Ven 9h": {
+          "main": [
+            [
+              {
+                "node": "🎯 Cible du jour",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "🎯 Cible du jour": {
+          "main": [
+            [
+              {
+                "node": "🤖 Claude - Génère les posts",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "🤖 Claude - Génère les posts": {
+          "main": [
+            [
+              {
+                "node": "📝 Parser JSON",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "📝 Parser JSON": {
+          "main": [
+            [
+              {
+                "node": "🎨 DALL-E - Génère image",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "🎨 DALL-E - Génère image": {
+          "main": [
+            [
+              {
+                "node": "⬇️ Download Image",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "⬇️ Download Image": {
+          "main": [
+            [
+              {
+                "node": "🔗 LI - Init Upload",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "🔗 LI - Init Upload": {
+          "main": [
+            [
+              {
+                "node": "📤 LI - Upload Image",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "📤 LI - Upload Image": {
+          "main": [
+            [
+              {
+                "node": "🔵 Publier LinkedIn + Image",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "📱 WhatsApp - Caption Instagram",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "authors": "thierry  ",
+      "name": null,
+      "description": null
+    }
+  }
+}
