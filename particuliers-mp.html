@@ -201,6 +201,10 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
   .cta { padding:50px 24px; }
   .logos-bar { gap:28px; padding:24px; }
 }
+
+.ens-gallery { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:24px; }
+.ens-gallery img { width:100%; height:auto; display:block; border-radius:2px; }
+@media(max-width:600px){ .ens-gallery { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -261,6 +265,11 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
 
   <div class="sep"></div>
 
+  
+<div class="ens-gallery">
+  <img src="https://thierrybismuth.github.io/pagesweb-thierry-/logos/enseignes/ens-kw-site.jpg" alt="Keller Williams site">
+  <img src="https://thierrybismuth.github.io/pagesweb-thierry-/logos/enseignes/ens-kw-chiffres.jpg" alt="Keller Williams chiffres">
+</div>
   <!-- APC -->
   <div class="enseigne enseigne-apc">
     <div class="ens-color">
