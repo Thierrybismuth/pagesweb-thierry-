@@ -249,6 +249,28 @@ input:focus,select:focus{outline:none;border-color:var(--gm);box-shadow:0 0 0 3p
     </div>
   </div>
 
+  <hr class="div">
+  <div class="stag or">🧱 Murs &amp; Planchers — BAT-EN-102 / BAT-EN-103</div>
+  <div style="font-size:12px;color:var(--tl);margin-bottom:14px">Surface des façades et du plancher estimées automatiquement à partir de la surface et de la hauteur saisies.</div>
+  <div class="fg">
+    <div class="fi"><label class="lbl">Isolation des murs (façades) existante</label>
+      <select id="isomurs">
+        <option value="aucune">Aucune — bardage métallique / béton nu</option>
+        <option value="insuffisante">Insuffisante (R &lt; 2 m².K/W)</option>
+        <option value="correcte">Déjà correcte (R ≥ 3 m².K/W)</option>
+        <option value="inconnue">Non renseigné</option>
+      </select>
+    </div>
+    <div class="fi"><label class="lbl">Isolation du plancher bas existante</label>
+      <select id="isoplancher">
+        <option value="aucune">Aucune — dalle béton sur terre-plein</option>
+        <option value="insuffisante">Insuffisante (R &lt; 1 m².K/W)</option>
+        <option value="correcte">Déjà correcte (R ≥ 2 m².K/W)</option>
+        <option value="inconnue">Non renseigné</option>
+      </select>
+    </div>
+  </div>
+
   <div class="bgrp"><button class="btn btn-p" onclick="go(2)">Étape suivante →</button></div>
 </div>
 
@@ -526,6 +548,8 @@ function collectData(){
     clos:document.querySelector('input[name="clos"]:checked')?.value||'oui',
     ttoiture:document.getElementById('ttoiture').value,
     isoexist:document.getElementById('isoexist').value,
+    isomurs:document.getElementById('isomurs').value,
+    isoplancher:document.getElementById('isoplancher').value,
     tecl:document.getElementById('tecl').value,
     nblum:parseInt(document.getElementById('nblum').value)||0,
     tled:document.getElementById('tled').value,
@@ -596,7 +620,32 @@ function computeFiches(d){
     note:en101_ok?d.surf+' m² × '+(d.ttoiture==='terrasse'?zc.en.ter:zc.en.ver)+' kWhc/m² (zone '+d.zon+', '+{terrasse:'terrasse',versants:'versants',shed:'shed'}[d.ttoiture]+'). Hypothèse : ΔR = 4 m².K/W (isolation R≈0→R≥4). Durée conventionnelle 30 ans. Travaux par professionnel RGE qualifié QUALIBAT 7131.':d.isoexist==='correcte'?'Isolation déjà correcte (R ≥ 4) — non éligible.':!en101_surf?'Surface < 1000 m².':'Renseignez le type de toiture et l\'état de l\'isolation existante.',
     prod:'Isolants CEE compatibles : laine de roche (Rockwool/Isovent), PIR (Kingspan/Recticel) — pose par artisan QUALIBAT 7131'};
 
-  // ── BAT-TH-127 (Régulation chauffage) ──
+  // ── BAT-EN-102 (Isolation murs) ──
+  // Estimation périmètre = 4 × √surface (hypothèse bâtiment carré)
+  var perim=Math.round(4*Math.sqrt(d.surf));
+  var surf_murs=Math.round(perim*d.haut);
+  var en102_iso=d.isomurs==='aucune'||d.isomurs==='insuffisante';
+  var en102_ok=en102_iso&&d.surf>=500&&d.exist==='oui'&&d.haut>0&&d.isomurs!=='inconnue';
+  var ZC_murs={H1:175,H2:145,H3:95};
+  var kwh_en102=0;
+  if(en102_ok&&surf_murs>0)kwh_en102=Math.round(surf_murs*(ZC_murs[d.zon]||145));
+  var f4b={ref:'BAT-EN-102',name:'Isolation des murs (façades)',desc:'isolation thermique des parois verticales extérieures — estimée sur '+surf_murs+' m² de façades (périmètre ~'+perim+' m × hauteur '+d.haut+' m)',icon:'🧱',status:en102_ok?'el':'ne',kwh:kwh_en102,
+    conds:[{ok:en102_iso,t:'Isolation murs insuffisante — '+{aucune:'aucune isolation',insuffisante:'R<2 m².K/W',correcte:'déjà correcte (R≥3)',inconnue:'non renseignée'}[d.isomurs]},{ok:d.surf>=500,t:'Surface ≥ 500 m² — '+d.surf+' m²'},{ok:d.haut>0,t:'Hauteur renseignée — '+d.haut+' m'},{ok:d.exist==='oui',t:'Bâtiment existant > 2 ans'}],
+    note:en102_ok?surf_murs+' m² de façades estimés (√'+d.surf+' m² × 4 × '+d.haut+' m) × '+(ZC_murs[d.zon]||145)+' kWhc/m² (zone '+d.zon+'). ΔR = 3 m².K/W. Durée 30 ans. RGE QUALIBAT 7132.':d.isomurs==='correcte'?'Murs déjà isolés (R≥3) — non éligible.':d.isomurs==='inconnue'?'Précisez l\'état de l\'isolation des murs.':'Surface < 500 m².',
+    prod:'ITE (Isolation Thermique par l\'Extérieur) — laine de roche bardage ou enduit isolant · QUALIBAT 7132'};
+
+  // ── BAT-EN-103 (Isolation planchers bas) ──
+  var en103_iso=d.isoplancher==='aucune'||d.isoplancher==='insuffisante';
+  var en103_ok=en103_iso&&d.surf>=500&&d.exist==='oui'&&d.isoplancher!=='inconnue';
+  var ZC_plan={H1:110,H2:88,H3:58};
+  var kwh_en103=0;
+  if(en103_ok)kwh_en103=Math.round(d.surf*(ZC_plan[d.zon]||88));
+  var f4c={ref:'BAT-EN-103',name:'Isolation du plancher bas',desc:'isolation thermique de la dalle sur terre-plein ou vide sanitaire — surface estimée à '+d.surf+' m²',icon:'⬛',status:en103_ok?'el':'ne',kwh:kwh_en103,
+    conds:[{ok:en103_iso,t:'Plancher non isolé ou insuffisant — '+{aucune:'dalle béton nue',insuffisante:'R<1 m².K/W',correcte:'déjà isolé (R≥2)',inconnue:'non renseigné'}[d.isoplancher]},{ok:d.surf>=500,t:'Surface ≥ 500 m² — '+d.surf+' m²'},{ok:d.exist==='oui',t:'Bâtiment existant > 2 ans'}],
+    note:en103_ok?d.surf+' m² × '+(ZC_plan[d.zon]||88)+' kWhc/m² (zone '+d.zon+'). ΔR = 2 m².K/W. Durée 30 ans. Travaux par professionnel RGE.':d.isoplancher==='correcte'?'Plancher déjà isolé — non éligible.':d.isoplancher==='inconnue'?'Précisez l\'état de l\'isolation du plancher.':'Surface < 500 m².',
+    prod:'Isolation sous dalle — PSE (polystyrène expansé) ou PIR · pose par professionnel RGE'};
+
+
   var th127_chauf=d.tchauf!=='aucun';
   var th127_reg=d.regchauf==='aucune'||d.regchauf==='thermostat';
   var th127_ok=th127_chauf&&th127_reg&&d.pchauf>0&&d.exist==='oui';
@@ -636,7 +685,7 @@ function computeFiches(d){
     note:h_ok?'Économie 10–12% sur conso froid. '+d.nbcent+' centrale(s), '+d.pfroid+' kW. Durée 14 ans. Partenaire CEE EDF.':!d.hasfr?'Aucune installation frigorifique.':d.hpex==='oui'?'HP flottante déjà en place.':'Puissance froid manquante.',
     prod:'FREE 6200 HPF — 6 étages, RS485+TCP/IP, économie 15–20% conso froid · QUALIBAT RGE'};
 
-  return[f1,f2,f3,f4,f5,f6,f7,f8];
+  return[f1,f2,f3,f4,f4b,f4c,f5,f6,f7,f8];
 }
 
 function sendEmail(d,fiches,tot){
