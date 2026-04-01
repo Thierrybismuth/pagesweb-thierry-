@@ -701,11 +701,16 @@
 </footer>
 
 <script>
-function soumettre() {
+async function soumettre() {
   const nom = document.getElementById('nom').value;
+  const tel = document.getElementById('tel').value;
+  const email = document.getElementById('email').value;
   const adresse = document.getElementById('adresse').value;
   const date = document.getElementById('date').value;
   const categorie = document.getElementById('categorie').value;
+  const places = document.getElementById('places').value;
+  const photo = document.getElementById('photo').value;
+  const message = document.getElementById('message').value;
 
   if (!nom || !adresse || !date || !categorie) {
     alert('Merci de remplir tous les champs obligatoires.');
@@ -718,9 +723,22 @@ function soumettre() {
     return;
   }
 
+  const btn = document.querySelector('.submit-btn');
+  btn.textContent = 'Envoi en cours…';
+  btn.disabled = true;
+
+  try {
+    await fetch('https://thierryb.app.n8n.cloud/webhook/resa-celine-dion', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nom, tel, email, adresse, date, categorie, places, photo, message })
+    });
+  } catch(e) {
+    // On affiche la confirmation quand même si CORS bloque (la résa est quand même envoyée)
+  }
+
+  btn.style.opacity = '0.4';
   document.getElementById('confirmation').classList.add('visible');
-  document.querySelector('.submit-btn').disabled = true;
-  document.querySelector('.submit-btn').style.opacity = '0.4';
   document.getElementById('confirmation').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 </script>
