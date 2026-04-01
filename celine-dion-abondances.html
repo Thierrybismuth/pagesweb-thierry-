@@ -508,7 +508,6 @@
       .divider { margin: 0 20px 40px; }
     }
   </style>
-<!-- deploy: Wed Apr  1 06:53:22 UTC 2026 -->
 </head>
 <body>
 
@@ -713,7 +712,7 @@ async function soumettre() {
   const photo = document.getElementById('photo').value;
   const message = document.getElementById('message').value;
 
-  if (!nom || !adresse || !date || !categorie) {
+  if (!nom || !date || !categorie) {
     alert('Merci de remplir tous les champs obligatoires.');
     return;
   }
