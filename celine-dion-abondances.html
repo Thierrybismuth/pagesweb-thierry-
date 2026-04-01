@@ -717,12 +717,6 @@ async function soumettre() {
     return;
   }
 
-  const adresseLower = adresse.toLowerCase();
-  if (!adresseLower.includes('abondances')) {
-    alert('⚠️ Adresse non reconnue. Cette offre est réservée aux résidents de la rue des Abondances.');
-    return;
-  }
-
   const btn = document.querySelector('.submit-btn');
   btn.textContent = 'Envoi en cours…';
   btn.disabled = true;
