@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulateur CEE — Les Artisans Verts</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --g1:#0c5228; --g2:#16803c; --g3:#22c55e; --g4:#dcfce7;
+  --b1:#1e3a8a; --b2:#2563eb; --b3:#3b82f6; --b4:#dbeafe;
+  --warn:#d97706; --warn-bg:#fef3c7;
+  --err:#dc2626; --err-bg:#fee2e2;
+  --bg:#f8fafb; --card:#fff; --border:#e2e8f0;
+  --text:#0f172a; --text2:#475569; --text3:#94a3b8;
+  --radius:12px; --shadow:0 2px 14px rgba(0,0,0,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,var(--g1) 0%,#1a6e35 55%,var(--b1) 100%);
+  padding:0 28px;height:60px;display:flex;align-items:center;
+  justify-content:space-between;position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 20px rgba(0,0,0,.28)
+}
+.logo{display:flex;align-items:center;gap:12px;color:#fff}
+.logo-icon{width:38px;height:38px;background:#fff;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.logo-text .brand{font-size:17px;font-weight:800;letter-spacing:-.3px}
+.logo-text .sub{font-size:10.5px;font-weight:500;opacity:.7;letter-spacing:.5px;text-transform:uppercase}
+.header-right{display:flex;align-items:center;gap:10px}
+.header-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:7px;padding:5px 12px;color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:400px 1fr;min-height:calc(100vh - 60px)}
+
+/* SIDEBAR */
+.form-sidebar{background:var(--card);border-right:1px solid var(--border);overflow-y:auto;height:calc(100vh - 60px);position:sticky;top:60px}
+
+.section{border-bottom:1px solid var(--border);padding:18px 22px}
+.section-hd{display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.section-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.section-icon.g{background:var(--g4)} .section-icon.b{background:var(--b4)} .section-icon.o{background:var(--warn-bg)}
+.section-title{font-size:13.5px;font-weight:700;color:var(--text)}
+
+.fields{display:flex;flex-direction:column;gap:11px}
+.field{display:flex;flex-direction:column;gap:4px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+
+label{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.45px}
+
+input[type=text],input[type=number],select{
+  border:1.5px solid var(--border);border-radius:8px;padding:8px 11px;
+  font-size:13.5px;font-family:inherit;color:var(--text);background:var(--bg);
+  transition:border-color .15s,box-shadow .15s;width:100%
+}
+input:focus,select:focus{outline:none;border-color:var(--g2);box-shadow:0 0 0 3px rgba(22,128,60,.11)}
+
+.radios{display:flex;gap:7px;flex-wrap:wrap}
+.rbtn{flex:1;min-width:70px;text-align:center;cursor:pointer}
+.rbtn input{display:none}
+.rbtn span{
+  display:block;padding:6px 9px;border:1.5px solid var(--border);border-radius:7px;
+  font-size:11.5px;font-weight:700;color:var(--text2);transition:all .15s;white-space:nowrap
+}
+.rbtn input:checked+span{border-color:var(--g2);background:var(--g4);color:var(--g1)}
+
+.trow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tlabel{font-size:13px;font-weight:600;color:var(--text)}
+.toggle{position:relative;width:42px;height:23px;flex-shrink:0}
+.toggle input{display:none}
+.t-track{width:100%;height:100%;background:var(--border);border-radius:12px;cursor:pointer;transition:background .2s;display:block}
+.t-thumb{position:absolute;top:2.5px;left:2.5px;width:18px;height:18px;background:#fff;border-radius:50%;transition:left .2s;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.toggle input:checked~.t-track{background:var(--g2)}
+.toggle input:checked~.t-thumb{left:21.5px}
+
+.hidden{display:none!important}
+
+/* FOOTER BAR */
+.footer-bar{padding:18px 22px;background:var(--bg);border-top:1px solid var(--border)}
+.btn-calc{
+  width:100%;background:linear-gradient(135deg,var(--g2),var(--b1));color:#fff;
+  border:none;border-radius:10px;padding:13px 22px;font-size:14.5px;font-weight:800;
+  cursor:pointer;font-family:inherit;transition:opacity .15s,transform .1s;letter-spacing:-.2px
+}
+.btn-calc:hover{opacity:.9;transform:translateY(-1px)}
+.btn-calc:active{transform:none}
+
+/* RESULTS */
+.results-panel{padding:24px 28px;overflow-y:auto;height:calc(100vh - 60px)}
+
+.empty-state{text-align:center;padding:70px 28px;color:var(--text3)}
+.empty-icon{font-size:60px;margin-bottom:14px}
+.empty-title{font-size:17px;font-weight:700;color:var(--text2);margin-bottom:7px}
+.empty-sub{font-size:13px;line-height:1.65}
+
+.res-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:20px}
+.res-title{font-size:20px;font-weight:800;color:var(--text)}
+.res-sub{font-size:12.5px;color:var(--text2);margin-top:3px;line-height:1.4}
+
+.total-badge{
+  background:linear-gradient(135deg,var(--g1),var(--b1));color:#fff;
+  padding:13px 20px;border-radius:13px;text-align:center;flex-shrink:0;min-width:130px
+}
+.total-badge .val{font-size:26px;font-weight:800;line-height:1}
+.total-badge .unit{font-size:10px;font-weight:700;opacity:.75;margin-top:3px;letter-spacing:.5px;text-transform:uppercase}
+
+.alert{
+  padding:11px 15px;border-radius:10px;font-size:12.5px;line-height:1.5;
+  margin-bottom:12px;display:flex;gap:9px;align-items:flex-start
+}
+.alert.warn{background:var(--warn-bg);color:#92400e;border-left:3px solid var(--warn)}
+.alert.err{background:var(--err-bg);color:#991b1b;border-left:3px solid var(--err)}
+.alert.info{background:var(--b4);color:#1e40af;border-left:3px solid var(--b2)}
+.alert.ok{background:var(--g4);color:var(--g1);border-left:3px solid var(--g2)}
+.alert-ico{font-size:15px;flex-shrink:0;margin-top:1px}
+.alert strong{font-weight:700;display:block;margin-bottom:1px}
+
+.cards{display:flex;flex-direction:column;gap:15px}
+
+.cee-card{
+  background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s
+}
+.cee-card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.1)}
+.cee-card.eligible{border-color:var(--g3)}
+.cee-card.suppressed{border-color:var(--err);opacity:.8}
+.cee-card.ineligible{opacity:.55}
+
+.card-hd{display:flex;align-items:center;gap:13px;padding:15px 18px;border-bottom:1px solid var(--border)}
+.card-ico{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0}
+.card-ico.g{background:var(--g4)} .card-ico.b{background:var(--b4)} .card-ico.r{background:var(--err-bg)} .card-ico.gr{background:#f1f5f9}
+.card-name{font-size:14px;font-weight:700}
+.card-ref{font-size:10.5px;font-weight:700;color:var(--text3);letter-spacing:.4px;text-transform:uppercase;margin-top:2px}
+.card-tag{
+  margin-left:auto;padding:4px 10px;border-radius:20px;
+  font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;flex-shrink:0
+}
+.card-tag.eligible{background:var(--g4);color:var(--g1)}
+.card-tag.ineligible{background:#f1f5f9;color:var(--text3)}
+.card-tag.suppressed{background:var(--err-bg);color:var(--err)}
+
+.card-body{padding:15px 18px}
+
+.crit-list{display:flex;flex-direction:column;gap:6px;margin-bottom:13px}
+.crit{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--text2)}
+.ck{font-size:13px;flex-shrink:0}
+.ck.ok{color:var(--g2)} .ck.ko{color:var(--err)} .ck.warn{color:var(--warn)}
+
+.est-box{
+  background:var(--g4);border-radius:9px;padding:12px 15px;
+  display:flex;align-items:center;justify-content:space-between
+}
+.est-box.blue{background:var(--b4)}
+.est-label{font-size:10.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.4px}
+.est-unit{font-size:10.5px;color:var(--text3);font-weight:500;margin-top:2px}
+.est-val{font-size:26px;font-weight:800;color:var(--g1);line-height:1}
+.est-val.blue{color:var(--b1)}
+
+.savings-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}
+.sv-item{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 13px}
+.sv-label{font-size:10.5px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.sv-val{font-size:17px;font-weight:800;color:var(--g1);margin-top:3px}
+.sv-val.blue{color:var(--b1)}
+
+.product-tag{
+  display:inline-flex;align-items:center;gap:5px;background:var(--bg);
+  border:1px solid var(--border);border-radius:6px;padding:4px 9px;
+  font-size:11px;font-weight:600;color:var(--text2);margin-top:10px;line-height:1.4
+}
+
+.divider{height:1px;background:var(--border);margin:13px 0}
+
+.info-note{
+  margin-top:10px;padding:9px 12px;background:#f8fafc;border-radius:8px;
+  font-size:12px;color:var(--text2);line-height:1.5
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🌿</div>
+    <div class="logo-text">
+      <div class="brand">Les Artisans Verts</div>
+      <div class="sub">Simulateur CEE · Outil commercial</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-badge">⚡ Éligibilité CEE</div>
+  </div>
+</header>
+
+<div class="layout">
+
+<!-- ═══════════════════════ FORMULAIRE ═══════════════════════ -->
+<div class="form-sidebar">
+
+  <!-- Client -->
+  <div class="section">
+    <div class="section-hd">
+      <div class="section-icon g">📋</div>
+      <div class="section-title">Identification client</div>
+    </div>
+    <div class="fields">
+      <div class="field">
+        <label>Nom de l'entreprise / site</label>
+        <input type="text" id="client_nom" placeholder="Ex : Entrepôt Martin SAS">
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label>Commercial</label>
+          <input type="text" id="commercial" placeholder="Votre prénom">
+        </div>
+        <div class="field">
+          <label>Date</label>
+          <input type="text" id="date_v" placeholder="—">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bâtiment -->
+  <div class="section">
+    <div class="section-hd">
+      <div class="section-icon b">🏭</div>
+      <div class="section-title">Bâtiment</div>
+    </div>
+    <div class="fields">
+      <div class="field">
+        <label>Type d'activité</label>
+        <select id="activite" onchange="onChange()">
+          <option value="">— Sélectionner —</option>
+          <option value="industrie">Industrie · Fabrication · Production</option>
+          <option value="entrepot_log">Entrepôt logistique · Stockage pur</option>
+          <option value="commerce_sup">Commerce ≥ 400 m²</option>
+          <option value="commerce_inf">Commerce &lt; 400 m²</option>
+          <option value="sante">Santé · Médical</option>
+          <option value="bureau">Bureaux</option>
+          <option value="hotellerie">Hôtellerie · Restauration</option>
+          <option value="enseignement">Enseignement</option>
+          <option value="autre">Autre tertiaire</option>
+        </select>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label>Surface au sol (m²)</label>
+          <input type="number" id="surface" placeholder="2 500" oninput="onChange()">
+        </div>
+        <div class="field">
+          <label>Hauteur plafond (m)</label>
+          <input type="number" id="hauteur" placeholder="8" step="0.5" oninput="onChange()">
+        </div>
+      </div>
+      <div class="field">
+        <label>Zone climatique</label>
+        <div class="radios">
+          <label class="rbtn"><input type="radio" name="zone" value="H1" onchange="onChange()"><span>H1 · Nord-Est</span></label>
+          <label class="rbtn"><input type="radio" name="zone" value="H2" checked onchange="onChange()"><span>H2 · Centre</span></label>
+          <label class="rbtn"><input type="radio" name="zone" value="H3" onchange="onChange()"><span>H3 · Sud</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Bâtiment existant &gt; 2 ans</label>
+        <div class="radios">
+          <label class="rbtn"><input type="radio" name="bati_age" value="oui" checked onchange="onChange()"><span>✓ Oui</span></label>
+          <label class="rbtn"><input type="radio" name="bati_age" value="non" onchange="onChange()"><span>✗ Non</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Local complètement clos</label>
+        <div class="radios">
+          <label class="rbtn"><input type="radio" name="clos" value="oui" checked onchange="onChange()"><span>✓ Oui</span></label>
+          <label class="rbtn"><input type="radio" name="clos" value="non" onchange="onChange()"><span>✗ Non</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chauffage -->
+  <div class="section">
+    <div class="section-hd">
+      <div class="section-icon o">🌡️</div>
+      <div class="section-title">Chauffage</div>
+    </div>
+    <div class="fields">
+      <div class="field">
+        <label>Type de chauffage</label>
+        <select id="chauf_type" onchange="onChaufChange()">
+          <option value="aucun">Pas de chauffage</option>
+          <option value="convectif">Convectif (aérothermie, générateur air chaud)</option>
+          <option value="radiatif">Radiatif (cassettes, panneaux rayonnants)</option>
+          <option value="mixte">Mixte convectif + radiatif</option>
+        </select>
+      </div>
+      <div id="chauf_fields" class="hidden">
+        <div class="fields">
+          <div class="row2">
+            <div class="field">
+              <label>Puissance totale (kW)</label>
+              <input type="number" id="chauf_kw" placeholder="150" oninput="onChange()">
+            </div>
+            <div class="field" id="pct_conv_wrap" style="display:none">
+              <label>% Convectif</label>
+              <input type="number" id="pct_conv" value="50" min="0" max="100" oninput="onChange()">
+            </div>
+          </div>
+          <div class="field">
+            <label>Consigne température ≥ 15°C</label>
+            <div class="radios">
+              <label class="rbtn"><input type="radio" name="temp15" value="oui" checked onchange="onChange()"><span>✓ Oui</span></label>
+              <label class="rbtn"><input type="radio" name="temp15" value="non" onchange="onChange()"><span>✗ Non</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Froid -->
+  <div class="section">
+    <div class="section-hd">
+      <div class="section-icon b">❄️</div>
+      <div class="section-title">Froid commercial</div>
+    </div>
+    <div class="fields">
+      <div class="trow">
+        <span class="tlabel">Groupe(s) froid présent(s)</span>
+        <label class="toggle">
+          <input type="checkbox" id="has_froid" onchange="onFroidChange()">
+          <span class="t-track"></span><span class="t-thumb"></span>
+        </label>
+      </div>
+      <div id="froid_fields" class="hidden">
+        <div class="fields">
+          <div class="row2">
+            <div class="field">
+              <label>Puissance moteur (kW)</label>
+              <input type="number" id="froid_kw" placeholder="45" oninput="onChange()">
+            </div>
+            <div class="field">
+              <label>Type de site</label>
+              <select id="froid_type" onchange="onChange()">
+                <option value="magasin">Magasin / Commerce</option>
+                <option value="plateforme">Plateforme logistique</option>
+                <option value="industrie">Industrie alimentaire</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Régulation HP flottante déjà installée</label>
+            <div class="radios">
+              <label class="rbtn"><input type="radio" name="hp_exist" value="oui" onchange="onChange()"><span>✓ Oui</span></label>
+              <label class="rbtn"><input type="radio" name="hp_exist" value="non" checked onchange="onChange()"><span>✗ Non</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Éclairage -->
+  <div class="section">
+    <div class="section-hd">
+      <div class="section-icon g">💡</div>
+      <div class="section-title">Éclairage actuel</div>
+    </div>
+    <div class="fields">
+      <div class="field">
+        <label>Type d'éclairage existant</label>
+        <select id="eclairage_type" onchange="onChange()">
+          <option value="fluorescent">Fluorescent / Néon / Fluo compact</option>
+          <option value="halogene">Halogène (exclu CEE)</option>
+          <option value="sodium">Sodium / Mercure / HPS / HM</option>
+          <option value="led">LED (déjà remplacé)</option>
+          <option value="mixte">Mixte</option>
+        </select>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label>Nb de points lumineux</label>
+          <input type="number" id="nb_lum" placeholder="80" oninput="onChange()">
+        </div>
+        <div class="field">
+          <label>Puissance unit. (W)</label>
+          <input type="number" id="pu_lum" placeholder="400" oninput="onChange()">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <button class="btn-calc" onclick="calculate()">⚡ Calculer l'éligibilité CEE</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════ RÉSULTATS ═══════════════════════ -->
+<div class="results-panel" id="results-panel">
+
+  <div id="empty-state" class="empty-state">
+    <div class="empty-icon">🌿</div>
+    <div class="empty-title">Renseignez les données du site</div>
+    <div class="empty-sub">Complétez le formulaire ci-contre puis cliquez sur<br><strong>Calculer l'éligibilité CEE</strong> pour obtenir la simulation.</div>
+  </div>
+
+  <div id="res-content" class="hidden">
+    <div class="res-header">
+      <div>
+        <div class="res-title" id="res-title">Simulation CEE</div>
+        <div class="res-sub" id="res-sub">—</div>
+      </div>
+      <div class="total-badge">
+        <div class="val" id="total-kwh">—</div>
+        <div class="unit">kWh cumac estimés</div>
+      </div>
+    </div>
+
+    <div id="alerts"></div>
+    <div class="cards" id="cards"></div>
+  </div>
+
+</div>
+</div>
+
+<script>
+function radio(name){const e=document.querySelector(`input[name="${name}"]:checked`);return e?e.value:null}
+function num(id){return parseFloat(document.getElementById(id).value)||0}
+function str(id){return document.getElementById(id).value}
+
+function onChange(){
+  if(!document.getElementById('res-content').classList.contains('hidden')) calculate();
+}
+
+function onChaufChange(){
+  const t=str('chauf_type');
+  document.getElementById('chauf_fields').classList.toggle('hidden',t==='aucun');
+  const pw=document.getElementById('pct_conv_wrap');
+  pw.style.display=(t==='mixte')?'flex':'none';
+  if(t==='mixte'){pw.style.flexDirection='column';}
+  onChange();
+}
+
+function onFroidChange(){
+  const h=document.getElementById('has_froid').checked;
+  document.getElementById('froid_fields').classList.toggle('hidden',!h);
+  onChange();
+}
+
+function fmt(n){
+  if(!n||n===0)return'—';
+  if(n>=1000000)return(n/1e6).toFixed(1)+' M';
+  if(n>=1000)return Math.round(n/1000)+' k';
+  return Math.round(n).toLocaleString('fr-FR');
+}
+
+function ck(ok){return`<span class="ck ${ok?'ok':'ko'}">${ok?'✓':'✗'}</span>`}
+function crit(ok,txt){return`<div class="crit">${ck(ok)}<span>${txt}</span></div>`}
+function critWarn(txt){return`<div class="crit"><span class="ck warn">⚠</span><span>${txt}</span></div>`}
+
+function calculate(){
+  const activite = str('activite');
+  const surface  = num('surface');
+  const hauteur  = num('hauteur');
+  const zone     = radio('zone')||'H2';
+  const batiAge  = radio('bati_age')==='oui';
+  const clos     = radio('clos')==='oui';
+
+  const chaufType = str('chauf_type');
+  const chaufKw   = num('chauf_kw');
+  const pctConv   = num('pct_conv')||50;
+  const temp15    = radio('temp15')==='oui';
+
+  const hasFroid  = document.getElementById('has_froid').checked;
+  const froidKw   = num('froid_kw');
+  const hpExist   = radio('hp_exist')==='oui';
+
+  const eclType   = str('eclairage_type');
+  const nbLum     = num('nb_lum');
+
+  const client = str('client_nom')||'Client';
+
+  document.getElementById('empty-state').classList.add('hidden');
+  document.getElementById('res-content').classList.remove('hidden');
+
+  document.getElementById('res-title').textContent=`Simulation CEE — ${client}`;
+  document.getElementById('res-sub').textContent=
+    `${activite||'?'} · ${surface||'?'} m² · ${hauteur||'?'} m · Zone ${zone}`;
+
+  const alertsEl=document.getElementById('alerts');
+  const cardsEl=document.getElementById('cards');
+  alertsEl.innerHTML=''; cardsEl.innerHTML='';
+
+  let totalKwh=0;
+  const cardHtmls=[];
+
+  /* ═══ 1. IND-BA-110 — DESTRATIFICATEURS ═══ */
+  const DESTR_COEFF={
+    H1:{convectif:7200,radiatif:2500},
+    H2:{convectif:8000,radiatif:2800},
+    H3:{convectif:8500,radiatif:3000}
+  };
+  const dHautOk  = hauteur>=5;
+  const dChaufOk = chaufType!=='aucun'&&chaufKw>0;
+  const dTempOk  = temp15;
+  const dClosOk  = clos;
+  const dActKo   = activite==='entrepot_log';
+  const dActOk   = !dActKo && ['industrie','sante','hotellerie','bureau','enseignement','commerce_sup','commerce_inf','autre'].includes(activite);
+  const dElig    = batiAge&&dHautOk&&dChaufOk&&dTempOk&&dClosOk&&dActOk;
+
+  let dKwh=0;
+  if(dElig&&chaufKw>0){
+    const c=DESTR_COEFF[zone];
+    if(chaufType==='convectif')     dKwh=chaufKw*c.convectif;
+    else if(chaufType==='radiatif') dKwh=chaufKw*c.radiatif;
+    else if(chaufType==='mixte'){
+      const pc=pctConv/100; const pr=1-pc;
+      dKwh=chaufKw*(pc*c.convectif+pr*c.radiatif);
+    }
+    totalKwh+=dKwh;
+  }
+  const nbDestr=surface>0?Math.ceil(surface/500):'—';
+
+  cardHtmls.push(buildCard({
+    icon:'🌀', iconCls:'g', title:'Système de destratification d\'air', ref:'IND-BA-110',
+    eligible:dElig, suppressed:false, kwh:dKwh, isBlue:false,
+    crits:`
+      ${crit(batiAge,'Bâtiment existant depuis plus de 2 ans')}
+      ${crit(dHautOk,`Hauteur ≥ 5 m (renseigné : ${hauteur||'?'} m)`)}
+      ${crit(dClosOk,'Local complètement clos et chauffé')}
+      ${crit(dChaufOk,`Chauffage présent avec puissance connue (${chaufKw||'?'} kW)`)}
+      ${crit(dTempOk,'Consigne chauffage ≥ 15°C en occupation')}
+      ${dActKo ? critWarn('Entrepôt logistique / stockage pur <strong>exclu</strong> de la fiche') : crit(dActOk,'Activité éligible (industrie, santé, commerce…)')}
+    `,
+    extra: dElig ? `
+      <div class="savings-grid">
+        <div class="sv-item"><div class="sv-label">Économies chauffage</div><div class="sv-val">20–30 %</div></div>
+        <div class="sv-item"><div class="sv-label">Appareils estimés</div><div class="sv-val">${nbDestr}</div></div>
+      </div>
+      <div class="product-tag">🔧 ONSEN-DS7 Teddington · ~410 W · CEE BAT-TH-142 + IND-BA-110</div>
+    ` : ''
+  }));
+
+  /* ═══ 2. BAT-TH-134 — HP FLOTTANTE ═══ */
+  const hpActOk=['commerce_sup','commerce_inf','hotellerie','industrie','plateforme'].includes(activite);
+  const hpElig = hasFroid&&froidKw>0&&!hpExist&&hpActOk&&batiAge;
+
+  let hpKwh=0, hpMinE=0, hpMaxE=0;
+  if(hpElig){
+    const annualCold=froidKw*3000;
+    hpKwh=Math.round(annualCold*0.11*14*0.85);
+    hpMinE=Math.round(annualCold*0.10*0.12);
+    hpMaxE=Math.round(annualCold*0.12*0.12);
+    totalKwh+=hpKwh;
+  }
+
+  cardHtmls.push(buildCard({
+    icon:'❄️', iconCls:'b', title:'Régulation Haute Pression Flottante', ref:'BAT-TH-134',
+    eligible:hpElig, suppressed:false, kwh:hpKwh, isBlue:true,
+    crits:`
+      ${crit(hasFroid&&froidKw>0,`Groupe froid présent (${froidKw||'?'} kW renseigné)`)}
+      ${crit(!hpExist,'Aucune régulation HP flottante existante')}
+      ${crit(hpActOk,'Activité éligible (commerce, industrie, hôtellerie…)')}
+      ${crit(batiAge,'Installation frigorifique existante en service normal')}
+    `,
+    extra: hpElig ? `
+      <div class="savings-grid">
+        <div class="sv-item"><div class="sv-label">Économies énergie</div><div class="sv-val blue">10–12 %</div></div>
+        <div class="sv-item"><div class="sv-label">Gain annuel estimé</div><div class="sv-val blue">~${fmt(hpMinE)}–${fmt(hpMaxE)} €</div></div>
+      </div>
+      <div class="product-tag">🔧 FREE 6200 HPF · Partenaire EDF · RGE Qualibat · Durée conventionnelle : 14 ans</div>
+    ` : ''
+  }));
+
+  /* ═══ 3. BAT-EQ-127 — LED (SUPPRIMÉE 23/02/2026) ═══ */
+  const lHautOk=hauteur>=4, lSurfOk=surface>=1000, lEclOk=eclType!=='led'&&eclType!=='halogene';
+  const lWouldElig=batiAge&&lHautOk&&lSurfOk&&lEclOk&&activite!=='';
+  const nbLedEst=surface>0?Math.ceil(surface/30):nbLum;
+  const coefLed=['sante','entrepot_log','commerce_sup'].includes(activite)?63:47;
+  const ledKwhRef=lWouldElig?nbLedEst*250*coefLed:0;
+
+  cardHtmls.push(buildCard({
+    icon:'💡', iconCls:'r', title:'Luminaire à modules LED', ref:'BAT-EQ-127',
+    eligible:false, suppressed:true, kwh:0, isBlue:false,
+    suppressedNote:`Cette fiche a été <strong>supprimée le 23 février 2026</strong> par arrêté ministériel (NOR: ECOR2605173A). Aucune nouvelle opération LED ne peut être engagée sur cette base depuis le 24/02/2026. Rapprochez-vous de Les Artisans Verts pour connaître les alternatives disponibles.`,
+    crits:`
+      ${crit(lHautOk,`Hauteur ≥ 4 m (${hauteur||'?'} m)`)}
+      ${crit(lSurfOk,`Surface ≥ 1 000 m² (${surface||'?'} m²)`)}
+      ${crit(lEclOk,'Éclairage existant non-LED (halogène exclu)')}
+      ${crit(batiAge,'Bâtiment tertiaire existant > 2 ans')}
+    `,
+    extra: lWouldElig ? `
+      <div class="info-note">
+        <strong>À titre indicatif uniquement</strong> — Si cette fiche était encore active, ce site aurait représenté
+        ~<strong>${fmt(ledKwhRef)} kWh cumac</strong> (${nbLedEst} luminaires UFO 250 W estimés pour ${surface} m²).
+      </div>
+    ` : ''
+  }));
+
+  /* ═══ ALERTS ═══ */
+  let aHtml=`
+    <div class="alert err">
+      <span class="alert-ico">🚫</span>
+      <div><strong>Fiche BAT-EQ-127 supprimée depuis le 24/02/2026</strong>
+      L'arrêté du 23/02/2026 supprime les fiches LED (BAT-EQ-127, BAR-EQ-110, IND-BA-116) du dispositif CEE. Aucune nouvelle opération LED n'est finançable sur ces bases.</div>
+    </div>
+  `;
+  if(dElig||hpElig){
+    const n=[dElig,hpElig].filter(Boolean).length;
+    aHtml+=`<div class="alert ok"><span class="alert-ico">✅</span><div>
+      <strong>${n} fiche${n>1?'s':''} active${n>1?'s':''} détectée${n>1?'s':''}</strong>
+      Ce site est potentiellement éligible à un financement CEE 100%. Sous réserve d'étude préalable et validation du dossier.
+    </div></div>`;
+  } else if(!activite){
+    aHtml+=`<div class="alert warn"><span class="alert-ico">⚠️</span><div>
+      <strong>Données incomplètes</strong> Sélectionnez un type d'activité et renseignez les dimensions pour obtenir une simulation.
+    </div></div>`;
+  } else {
+    aHtml+=`<div class="alert info"><span class="alert-ico">ℹ️</span><div>
+      <strong>Aucune fiche active détectée avec ces paramètres</strong>
+      Vérifiez la hauteur (≥5 m pour destratificateurs), le chauffage, et la présence d'un groupe froid.
+    </div></div>`;
+  }
+  alertsEl.innerHTML=aHtml;
+
+  cardsEl.innerHTML=cardHtmls.join('');
+  document.getElementById('total-kwh').textContent=totalKwh>0?fmt(totalKwh):'—';
+}
+
+function buildCard({icon,iconCls,title,ref,eligible,suppressed,kwh,isBlue,crits,extra,suppressedNote}){
+  const tagCls=suppressed?'suppressed':eligible?'eligible':'ineligible';
+  const tagTxt=suppressed?'Supprimée':eligible?'Éligible ✓':'Non éligible';
+  const cardCls=suppressed?'suppressed':eligible?'eligible':'ineligible';
+
+  return `
+  <div class="cee-card ${cardCls}">
+    <div class="card-hd">
+      <div class="card-ico ${iconCls}">${icon}</div>
+      <div><div class="card-name">${title}</div><div class="card-ref">${ref}</div></div>
+      <span class="card-tag ${tagCls}">${tagTxt}</span>
+    </div>
+    <div class="card-body">
+      ${suppressed?`<div class="alert err" style="margin-bottom:12px"><span class="alert-ico">🚫</span><div>${suppressedNote}</div></div>`:''}
+      <div class="crit-list">${crits}</div>
+      ${eligible&&kwh>0?`
+        <div class="divider"></div>
+        <div class="est-box ${isBlue?'blue':''}">
+          <div><div class="est-label">Estimation CEE</div><div class="est-unit">kWh cumac</div></div>
+          <div class="est-val ${isBlue?'blue':''}">${fmt(kwh)}</div>
+        </div>
+      `:''}
+      ${extra||''}
+    </div>
+  </div>`;
+}
+
+// Init
+document.getElementById('date_v').value=new Date().toLocaleDateString('fr-FR');
+</script>
+</body>
+</html>
