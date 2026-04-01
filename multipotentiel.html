@@ -26,7 +26,7 @@ html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans
 .hero { background: var(--creme); padding: 60px 40px 0; border-bottom: 4px solid var(--terra); }
 .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--terra); margin-bottom: 20px; }
 .hero-tag::before { content: ''; width: 24px; height: 2px; background: var(--terra); display: block; }
-.hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; line-height: 1.05; color: var(--texte); margin-bottom: 24px; }
+.hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; line-height: 1.12; color: var(--texte); margin-bottom: 24px; }
 .hero h1 em { font-style: italic; font-weight: 600; color: var(--terra); font-family: 'DM Sans', sans-serif; }
 .hero-lead { font-size: clamp(0.95rem, 1.5vw, 1.1rem); line-height: 1.75; color: var(--gris); max-width: 640px; margin-bottom: 40px; }
 .hero-stats { display: flex; flex-wrap: wrap; gap: 24px 40px; padding: 28px 0 40px; border-top: 1px solid var(--creme2); }
@@ -286,13 +286,6 @@ html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans
   </div>
 </section>
 
-<section class="cta">
-  <h2>Parlons de votre combinaison idéale.</h2>
-  <p>20 minutes pour identifier les enseignes qui correspondent à votre profil, votre territoire et votre façon d'entreprendre. Sans engagement.</p>
-  <a href="tel:0610703090" class="cta-btn" target="_top">Prendre contact</a>
-  <div class="cta-tel">ou écrivez à <a href="mailto:thierry@thierrybismuth.com">thierry@thierrybismuth.com</a></div>
-</section>
-
 <section class="contrat">
   <div class="contrat-tag">Documents officiels</div>
   <h2>Contrat d'adhésion Membre</h2>
@@ -302,6 +295,15 @@ html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans
     allow="autoplay">
   </iframe>
   <a class="contrat-dl" href="https://drive.google.com/uc?export=download&id=1ZvWNOzwfBpULxFn8rsL-xLwrksCcuuVh" target="_blank">Télécharger le contrat (PDF)</a>
+</section>
+
+<section class="cta">
+  <h2>Parlons de votre combinaison idéale.</h2>
+  <p>20 minutes pour identifier les enseignes qui correspondent à votre profil, votre territoire et votre façon d'entreprendre. Sans engagement.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:8px;">
+    <a href="tel:0610703090" class="cta-btn" target="_top">📞 06 10 70 30 90</a>
+    <a href="mailto:thierry@thierrybismuth.com" class="cta-btn" style="background:transparent;color:white;border:2px solid white;" target="_top">✉ thierry@thierrybismuth.com</a>
+  </div>
 </section>
 
 </body>
