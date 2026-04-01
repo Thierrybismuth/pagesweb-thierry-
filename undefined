@@ -3,334 +3,423 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simulateur CEE – Les Artisans Verts</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Jovan Milanovic — Opticien-Lunetier</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--gd:#0d3b1a;--gm:#2e7d32;--gl:#43a047;--gp:#e8f5e9;--gn:#f1f8f2;--bd:#0d47a1;--bm:#1565c0;--bp:#e3f2fd;--rd:#b71c1c;--rp:#ffebee;--od:#e65100;--op:#fff3e0;--bg:#f0f4f1;--tx:#1a2a1b;--tm:#4a5c4b;--tl:#7a8f7b;--br:#dee7df;--sh:0 2px 16px rgba(27,94,32,.10)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;font-size:15px}
-header{background:#fff;border-bottom:3px solid var(--gm);padding:0 32px;display:flex;align-items:center;gap:16px;height:66px;box-shadow:0 1px 6px rgba(27,94,32,.08);position:sticky;top:0;z-index:100}
-.lmark{width:40px;height:40px;flex-shrink:0}
-.lbrand{font-size:14px;font-weight:700;color:#1b5e20;line-height:1.1}
-.lsub{font-size:11px;color:var(--tl)}
-.hsep{width:1px;height:30px;background:var(--br);margin:0 4px}
-.htitle h1{font-size:17px;font-weight:700}
-.htitle p{font-size:12px;color:var(--tl)}
-.hbadge{background:var(--gp);color:#1b5e20;font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;border:1px solid rgba(46,125,50,.2);white-space:nowrap;margin-left:auto}
-.pwrap{background:#fff;border-bottom:1px solid var(--br);padding:0 32px}
-.pinner{max-width:900px;margin:0 auto;display:flex;align-items:center;padding:14px 0}
-.sdot{width:30px;height:30px;border-radius:50%;background:var(--br);color:var(--tl);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;transition:all .3s;flex-shrink:0}
-.sdot.active{background:var(--gm);color:#fff;box-shadow:0 0 0 4px rgba(46,125,50,.15)}
-.sdot.done{background:var(--gl);color:#fff}
-.sname{font-size:12px;font-weight:500;color:var(--tl);white-space:nowrap;margin-left:8px}
-.sname.active{color:#1b5e20;font-weight:700}
-.sline{flex:1;height:2px;background:var(--br);margin:0 10px;min-width:16px}
-.sline.done{background:var(--gl)}
-.wrap{max-width:900px;margin:0 auto;padding:28px 16px 60px}
-.al{border-radius:10px;padding:14px 18px;font-size:13px;display:flex;align-items:flex-start;gap:12px;margin-bottom:20px;line-height:1.5}
-.al i{font-size:18px;flex-shrink:0;margin-top:-1px}
-.al-d{background:var(--rp);border-left:4px solid var(--rd);color:var(--rd)}
-.al-w{background:var(--op);border-left:4px solid var(--od);color:#6d2600}
-.al-s{background:var(--gp);border-left:4px solid var(--gm);color:#1b5e20}
-.al-i{background:var(--bp);border-left:4px solid var(--bm);color:var(--bd)}
-.card{background:#fff;border-radius:14px;box-shadow:var(--sh);padding:32px;margin-bottom:20px;border:1px solid rgba(0,0,0,.04)}
-.sh2{font-size:20px;font-weight:700;margin-bottom:4px}
-.sp{font-size:13px;color:var(--tl);margin-bottom:24px}
-.stag{display:inline-flex;align-items:center;gap:6px;background:var(--gn);color:#1b5e20;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:16px;border:1px solid rgba(46,125,50,.2)}
-.stag.bl{background:var(--bp);color:var(--bd);border-color:rgba(21,101,192,.2)}
-.stag.or{background:var(--op);color:var(--od);border-color:rgba(230,81,0,.2)}
-.div{border:none;border-top:1px solid var(--br);margin:22px 0}
-.fg{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.fg.c3{grid-template-columns:1fr 1fr 1fr}
-.fi{display:flex;flex-direction:column;gap:6px}
-.fi.full{grid-column:1/-1}
-.lbl{font-size:12px;font-weight:600;color:var(--tm);letter-spacing:.3px;text-transform:uppercase}
-.req{color:var(--rd)}
-.hlp{font-size:11px;color:var(--tl);margin-top:3px}
-input[type=text],input[type=number],input[type=email],input[type=tel],input[type=date],select{border:1.5px solid var(--br);border-radius:8px;padding:10px 14px;font-size:14px;font-family:'Outfit',sans-serif;color:var(--tx);background:#fff;transition:border-color .2s,box-shadow .2s;width:100%}
-input:focus,select:focus{outline:none;border-color:var(--gm);box-shadow:0 0 0 3px rgba(46,125,50,.12)}
-.zbrow{display:flex;gap:8px;flex-wrap:wrap}
-.zb{padding:9px 18px;border:2px solid var(--br);border-radius:8px;background:#fff;cursor:pointer;font-size:13px;font-weight:600;font-family:'Outfit',sans-serif;color:var(--tm);transition:all .2s}
-.zb:hover{border-color:var(--gm);color:#1b5e20}
-.zb.s{border-color:var(--gm);background:var(--gp);color:#1b5e20}
-.pg{display:flex;gap:10px;flex-wrap:wrap}
-.pl{padding:9px 20px;border:2px solid var(--br);border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;font-family:'Outfit',sans-serif;transition:all .2s;user-select:none;display:flex;align-items:center;gap:8px;color:var(--tm)}
-.pl:hover{border-color:var(--gm)}
-.pl input[type=radio]{accent-color:var(--gm);width:15px;height:15px}
-.pl.s{border-color:var(--gm);background:var(--gp);color:#1b5e20;font-weight:600}
-.btn{padding:12px 28px;border-radius:8px;border:none;font-size:14px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
-.btn-p{background:var(--gm);color:#fff}
-.btn-p:hover{background:#1b5e20;transform:translateY(-1px);box-shadow:0 4px 12px rgba(46,125,50,.3)}
-.btn-g{background:transparent;color:var(--gm);border:2px solid var(--gm)}
-.btn-g:hover{background:var(--gp)}
-.bgrp{display:flex;gap:12px;justify-content:flex-end;margin-top:28px;padding-top:20px;border-top:1px solid var(--br)}
-.ss{display:none}
-.ss.active{display:block}
-#res{display:none}
-.sban{background:linear-gradient(135deg,#0d3b1a 0%,#0d47a1 100%);color:#fff;border-radius:16px;padding:28px 32px;margin-bottom:24px;display:flex;align-items:center;gap:32px;position:relative;overflow:hidden}
-.sban::before{content:'';position:absolute;right:-30px;top:-30px;width:200px;height:200px;background:rgba(255,255,255,.04);border-radius:50%}
-.tblk{flex-shrink:0;text-align:center}
-.tlbl{font-size:11px;opacity:.7;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
-.tval{font-size:48px;font-weight:800;line-height:1;letter-spacing:-1px}
-.tunit{font-size:13px;opacity:.7;margin-top:2px}
-.ssep{width:1px;height:80px;background:rgba(255,255,255,.2)}
-.sright{flex:1}
-.si{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:13px}
-.si:last-child{border-bottom:none}
-.sikwh{font-weight:700;font-size:14px}
-.sdsc{font-size:11px;opacity:.55;margin-top:12px}
-.rbar{background:#fff;border-radius:10px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;border:1px solid var(--br)}
-.rcl{font-weight:700;font-size:15px;color:#1b5e20}
-.rmt{font-size:12px;color:var(--tl)}
-.ract{display:flex;gap:8px}
-.fc{background:#fff;border-radius:12px;border:2px solid var(--br);margin-bottom:14px;overflow:hidden}
-.fc.el{border-color:var(--gm)}
-.fc.sp{border-color:var(--rd)}
-.fh{display:flex;align-items:center;gap:14px;padding:18px 22px;cursor:pointer;transition:background .15s}
-.fh:hover{background:#fafafa}
-.fc.el .fh{background:var(--gn)}
-.fc.sp .fh{background:var(--rp)}
-.fref{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:800;letter-spacing:.5px;white-space:nowrap;flex-shrink:0}
-.fc.el .fref{background:var(--gm);color:#fff}
-.fc.sp .fref{background:var(--rd);color:#fff}
-.fc:not(.el):not(.sp) .fref{background:var(--br);color:var(--tl)}
-.fnm{font-size:15px;font-weight:700}
-.fdsc{font-size:11px;color:var(--tl);margin-top:2px;font-style:italic}
-.fst{font-size:12px;margin-top:3px}
-.fc.el .fst{color:var(--gm)}
-.fc.sp .fst{color:var(--rd)}
-.fc:not(.el):not(.sp) .fst{color:var(--tl)}
-.fkwh{text-align:right;flex-shrink:0}
-.kwn{font-size:22px;font-weight:800;color:var(--bd);line-height:1}
-.kwu{font-size:10px;color:var(--tl);text-transform:uppercase;letter-spacing:.5px}
-.kweur{font-size:13px;font-weight:700;color:var(--gm);margin-top:3px}
-.fbody{padding:20px 22px;border-top:1px solid var(--br);display:none}
-.cl{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-.cl li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--tm);padding:6px 10px;border-radius:6px;background:#f8f9f8}
-.ci{flex-shrink:0;font-size:14px}
-.cl li.ok{background:var(--gn);color:#1b5e20}
-.cl li.fail{background:var(--rp);color:var(--rd)}
-.fnote{font-size:12px;color:var(--tl);line-height:1.6;margin-bottom:12px}
-.pbdg{display:flex;align-items:flex-start;gap:10px;background:var(--bp);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--bd)}
-.tsup{display:inline-block;background:var(--rd);color:#fff;font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;letter-spacing:.5px;vertical-align:middle;margin-left:6px;text-transform:uppercase}
-.pfc{background:#fff;border-radius:14px;border:2px solid var(--gm);margin-bottom:20px;overflow:hidden}
-.pfh{background:var(--gp);padding:18px 24px;border-bottom:1px solid rgba(46,125,50,.2)}
-.pfh h3{font-size:16px;font-weight:700;color:#1b5e20}
-.pfh p{font-size:12px;color:var(--gl)}
-.pfb{padding:24px}
-.cftxt{background:var(--gn);border-radius:8px;padding:14px 16px;font-size:12px;color:#1b5e20;line-height:1.6;margin:16px 0;border-left:3px solid var(--gm)}
-.sigrow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;padding-top:20px;border-top:1px dashed var(--br)}
-.sigbox{border:1.5px dashed var(--br);border-radius:8px;padding:16px;min-height:80px;background:#fafafa;display:flex;align-items:flex-end;font-size:11px;color:var(--tl)}
-.nsgrd{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px}
-.nsi{border-radius:12px;padding:20px;text-align:center}
-.nsemoji{font-size:28px;margin-bottom:10px}
-.nstitle{font-size:13px;font-weight:700;margin-bottom:6px}
-.nssub{font-size:12px;color:var(--tl);margin-bottom:14px;line-height:1.4}
-.alink{display:inline-block;padding:8px 16px;border-radius:7px;font-size:12px;font-weight:700;font-family:'Outfit',sans-serif;text-decoration:none;cursor:pointer;border:none}
-.ag{background:var(--gm);color:#fff}
-.ab{background:var(--bm);color:#fff}
-.ap{background:#7b1fa2;color:#fff}
-.loading{position:fixed;inset:0;background:rgba(255,255,255,.9);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;gap:16px}
-.spinner{width:48px;height:48px;border:4px solid var(--br);border-top-color:var(--gm);border-radius:50%;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.loading p{font-size:15px;font-weight:600;color:var(--gm)}
-@media print{.no-print{display:none!important}header{position:relative}.pwrap{display:none}#form-card{display:none!important}#res{display:block!important}body{background:#fff}.sban{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-@media(max-width:640px){header{padding:0 16px}.wrap{padding:16px 12px 60px}.card{padding:20px 16px}.fg{grid-template-columns:1fr}.fg.c3{grid-template-columns:1fr}.sban{flex-direction:column;gap:16px}.ssep{width:100%;height:1px}.nsgrd{grid-template-columns:1fr}.sigrow{grid-template-columns:1fr}.pwrap{display:none}.hbadge{display:none}}
+  :root {
+    --off-white: #f7f5f0;
+    --navy: #1a2e44;
+    --terracotta: #c8873a;
+    --light-navy: #2c4a6e;
+    --muted: #8a9ab0;
+    --border: #ddd8cf;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--off-white);
+    font-family: 'Outfit', sans-serif;
+    color: var(--navy);
+    min-height: 100vh;
+  }
+
+  .top-bar {
+    background: var(--navy);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .top-bar .brand {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--off-white);
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    opacity: 0.85;
+  }
+  .top-bar .badge {
+    background: var(--terracotta);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 2px;
+  }
+
+  .hero {
+    background: var(--navy);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -60px;
+    top: -60px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 60px solid rgba(200,135,58,0.08);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+  }
+  .avatar-ring {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid var(--terracotta);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: rgba(200,135,58,0.12);
+  }
+  .avatar-initials {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--terracotta);
+    font-weight: 300;
+  }
+  .hero-text h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--off-white);
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+  }
+  .hero-text h1 span {
+    color: var(--terracotta);
+  }
+  .hero-text .subtitle {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  .contacts-strip {
+    background: #14253a;
+    padding: 16px 40px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--off-white);
+    opacity: 0.82;
+    font-size: 0.84rem;
+  }
+  .contact-item .icon {
+    color: var(--terracotta);
+    font-size: 1rem;
+  }
+  .contact-item a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .contact-item a:hover { color: var(--terracotta); }
+
+  .main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 50px 40px 80px;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 50px;
+    align-items: start;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--navy);
+    letter-spacing: 0.06em;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--terracotta);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 18px;
+    background: var(--terracotta);
+    border-radius: 2px;
+  }
+
+  .profil-text {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: #3a4f66;
+    font-weight: 300;
+  }
+
+  .exp-block { margin-bottom: 28px; }
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+  }
+  .exp-title { font-weight: 600; font-size: 0.95rem; color: var(--navy); }
+  .exp-company {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--terracotta);
+    font-style: italic;
+  }
+  .exp-date { font-size: 0.78rem; color: var(--muted); font-weight: 400; white-space: nowrap; margin-top: 2px; }
+  .exp-location { font-size: 0.78rem; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 4px; }
+  .exp-desc { font-size: 0.86rem; line-height: 1.7; color: #4a5f76; font-weight: 300; }
+  .exp-divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+  .formation-block { margin-bottom: 20px; }
+  .formation-title { font-weight: 600; font-size: 0.93rem; color: var(--navy); }
+  .formation-school { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--terracotta); font-style: italic; }
+  .formation-date { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+  .formation-mention {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 0.73rem;
+    background: rgba(200,135,58,0.12);
+    color: var(--terracotta);
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  .sidebar-section { margin-bottom: 36px; }
+
+  .skills-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-pill {
+    background: var(--navy);
+    color: var(--off-white);
+    font-size: 0.75rem;
+    font-weight: 400;
+    padding: 5px 12px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+  .skill-pill.secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--navy);
+  }
+
+  .langue-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    color: var(--navy);
+  }
+  .langue-dots { display: flex; gap: 4px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+  .dot.filled { background: var(--terracotta); }
+
+  .outil-tag {
+    display: inline-block;
+    background: rgba(26,46,68,0.07);
+    color: var(--navy);
+    font-size: 0.76rem;
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin: 3px 3px 3px 0;
+    font-weight: 500;
+  }
+
+  .hobby-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.84rem;
+    color: #4a5f76;
+    margin-bottom: 6px;
+    font-weight: 300;
+  }
+  .hobby-item::before { content: '→'; color: var(--terracotta); font-size: 0.8rem; }
+
+  .note-block {
+    margin-top: 40px;
+    border: 1px dashed var(--border);
+    border-radius: 4px;
+    padding: 20px 24px;
+    background: rgba(200,135,58,0.04);
+  }
+  .note-block .note-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--terracotta);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .note-block p { font-size: 0.84rem; line-height: 1.7; color: #4a5f76; font-weight: 300; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  footer .brand-footer { font-family: 'Cormorant Garamond', serif; color: var(--navy); font-size: 0.9rem; }
+
+  @media (max-width: 720px) {
+    .main { grid-template-columns: 1fr; padding: 30px 20px 60px; }
+    .hero { padding: 40px 20px; }
+    .hero-text h1 { font-size: 2.2rem; }
+    .contacts-strip { padding: 12px 20px; gap: 16px; }
+    .top-bar { padding: 12px 20px; }
+  }
 </style>
 </head>
 <body>
-<header>
-  <svg class="lmark" viewBox="0 0 44 44" fill="none">
-    <polygon points="22,3 41,13.5 41,30.5 22,41 3,30.5 3,13.5" fill="#1b5e20"/>
-    <text x="22" y="17" text-anchor="middle" fill="#fff" font-size="5.5" font-family="sans-serif" font-weight="700">LES</text>
-    <text x="22" y="25" text-anchor="middle" fill="#fff" font-size="6" font-family="sans-serif" font-weight="800">ARTISANS</text>
-    <text x="22" y="33" text-anchor="middle" fill="#fff" font-size="6" font-family="sans-serif" font-weight="800">VERTS</text>
-  </svg>
-  <div><div class="lbrand">Les Artisans Verts</div><div class="lsub">6 rue Eugène Barbier — 92400 Courbevoie</div></div>
-  <div class="hsep"></div>
-  <div class="htitle"><h1>Simulateur d'Éligibilité CEE</h1><p>Outil commercial — remplissage en présence du client</p></div>
-  <div class="hbadge no-print">⚡ Partenaire CEE EDF</div>
-</header>
-<div class="pwrap no-print" id="pwrap">
-  <div class="pinner">
-    <div style="display:flex;align-items:center;gap:8px"><div class="sdot active" id="d1">1</div><span class="sname active" id="l1">Bâtiment</span></div>
-    <div class="sline" id="ln1"></div>
-    <div style="display:flex;align-items:center;gap:8px"><div class="sdot" id="d2">2</div><span class="sname" id="l2">Éclairage</span></div>
-    <div class="sline" id="ln2"></div>
-    <div style="display:flex;align-items:center;gap:8px"><div class="sdot" id="d3">3</div><span class="sname" id="l3">Chauffage &amp; Froid</span></div>
-    <div class="sline" id="ln3"></div>
-    <div style="display:flex;align-items:center;gap:8px"><div class="sdot" id="d4">4</div><span class="sname" id="l4">Résultats</span></div>
+
+<div class="top-bar">
+  <div class="brand">ODYSKILLS · Franchise & Recrutement</div>
+  <div class="badge">Dossier Candidat</div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="avatar-ring"><span class="avatar-initials">JM</span></div>
+    <div class="hero-text">
+      <h1>Jovan <span>Milanovic</span></h1>
+      <div class="subtitle">Opticien · Lunetier · Disponible</div>
+    </div>
   </div>
 </div>
-<div class="loading" id="loading" style="display:none"><div class="spinner"></div><p>Calcul de l'éligibilité en cours…</p></div>
-<div class="wrap">
-<div class="card" id="form-card">
-<div class="ss active" id="s1">
-  <h2 class="sh2">🏢 Identification du site</h2>
-  <p class="sp">Informations générales — ces données servent à l'ensemble des fiches CEE</p>
-  <div class="fg">
-    <div class="fi full"><label class="lbl">Nom / raison sociale <span class="req">*</span></label><input type="text" id="nom" placeholder="Ex: Entrepôt Dupont Logistique SA"></div>
-    <div class="fi full"><label class="lbl">Secteur d'activité <span class="req">*</span></label>
-      <select id="sec"><option value="">— Sélectionner —</option><option value="industrie">🏭 Industrie / Production</option><option value="entrepot">📦 Entrepôt / Plateforme logistique</option><option value="commerce_grand">🛒 Commerce ≥ 400 m²</option><option value="commerce_petit">🛍️ Commerce &lt; 400 m²</option><option value="sante">🏥 Santé</option><option value="bureaux">💼 Bureaux / Restauration</option><option value="hotel">🏨 Hôtellerie</option><option value="enseignement">🎓 Enseignement</option></select>
-    </div>
-    <div class="fi"><label class="lbl">Surface totale au sol <span class="req">*</span></label><input type="number" id="surf" placeholder="Ex: 10000" min="0"><span class="hlp">m² — utilisée pour toutes les fiches</span></div>
-    <div class="fi"><label class="lbl">Hauteur sous plafond <span class="req">*</span></label><input type="number" id="haut" placeholder="Ex: 10" min="0" step="0.5"><span class="hlp">mètres</span></div>
-    <div class="fi full"><label class="lbl">Zone climatique</label>
-      <div class="zbrow">
-        <button class="zb s" onclick="setZ(this,'H1')" type="button">🌧️ H1 — Nord</button>
-        <button class="zb" onclick="setZ(this,'H2')" type="button">🌤️ H2 — Centre / ÎdF</button>
-        <button class="zb" onclick="setZ(this,'H3')" type="button">☀️ H3 — Sud / PACA</button>
+
+<div class="contacts-strip">
+  <div class="contact-item"><span class="icon">📍</span><span>Vitry-sur-Seine (94)</span></div>
+  <div class="contact-item"><span class="icon">📞</span><a href="tel:0783687733">07 83 68 77 33</a></div>
+  <div class="contact-item"><span class="icon">✉️</span><a href="mailto:milanovicj01@gmail.com">milanovicj01@gmail.com</a></div>
+</div>
+
+<div class="main">
+  <div>
+    <section style="margin-bottom: 40px;">
+      <div class="section-title">Profil</div>
+      <p class="profil-text">Six années d'immersion dans la sphère optique, dont trois ans d'expérience professionnelle salarié. Maîtrise solide des principes et technologies optiques — de la conception à la résolution de problèmes opto-mécaniques. Profil orienté client, avec un goût prononcé pour la vente conseil et la gestion d'atelier. Cherche à se stabiliser géographiquement dans le sud du Val-de-Marne.</p>
+    </section>
+
+    <section style="margin-bottom: 40px;">
+      <div class="section-title">Expérience professionnelle</div>
+      <div class="exp-block">
+        <div class="exp-header">
+          <div><div class="exp-company">Optical Center</div><div class="exp-title">Opticien-Lunetier</div></div>
+          <div class="exp-date">Sept. 2022 — Mai 2025</div>
+        </div>
+        <div class="exp-location">📍 La Courneuve</div>
+        <p class="exp-desc">Vente conseil, gestion d'atelier, montage de verres et montures, suivi clientèle. Leadership et résolution de problèmes au quotidien au sein d'un magasin à fort volume. Développement de compétences commerciales et techniques en autonomie croissante.</p>
       </div>
-      <input type="hidden" id="zon" value="H1">
-    </div>
-    <div class="fi"><label class="lbl">Bâtiment existant &gt; 2 ans ?</label>
-      <div class="pg"><label class="pl s" id="pe-o"><input type="radio" name="exist" value="oui" checked> ✅ Oui</label><label class="pl" id="pe-n"><input type="radio" name="exist" value="non"> ❌ Non (neuf)</label></div>
-    </div>
-    <div class="fi"><label class="lbl">Local complètement clos ?</label>
-      <div class="pg"><label class="pl s" id="pc-o"><input type="radio" name="clos" value="oui" checked> ✅ Oui</label><label class="pl" id="pc-n"><input type="radio" name="clos" value="non"> ❌ Non / Semi-ouvert</label></div>
-    </div>
-  </div>
-  <hr class="div">
-  <div class="stag or">🏗️ Toiture — BAT-EN-101</div>
-  <div class="fg">
-    <div class="fi"><label class="lbl">Type de toiture</label>
-      <select id="ttoiture"><option value="terrasse">Toiture terrasse (plate)</option><option value="versants">Toiture à versants</option><option value="shed">Shed / dents de scie</option><option value="inconnue">Non renseigné</option></select>
-    </div>
-    <div class="fi"><label class="lbl">Isolation toiture existante</label>
-      <select id="isoexist"><option value="aucune">Aucune isolation (dalle béton nue)</option><option value="insuffisante">Insuffisante (R &lt; 2 m².K/W)</option><option value="correcte">Déjà correcte (R ≥ 4 m².K/W)</option><option value="inconnue">Non renseigné</option></select>
-    </div>
-  </div>
-  <div class="bgrp"><button class="btn btn-p" onclick="go(2)">Étape suivante →</button></div>
-</div>
-<div class="ss" id="s2">
-  <h2 class="sh2">💡 Éclairage</h2>
-  <p class="sp">Installations lumineuses intérieures et extérieures</p>
-  <div class="stag">💡 Éclairage intérieur — BAT-EQ-127 &amp; BAT-EQ-133</div>
-  <div class="al al-d"><i>⛔</i><div><strong>BAT-EQ-127 supprimée le 24/02/2026.</strong> La fiche <strong>BAT-EQ-133</strong> (LED + détecteurs de présence / gradation) reste active.</div></div>
-  <div class="fg">
-    <div class="fi"><label class="lbl">Type d'éclairage intérieur actuel</label>
-      <select id="tecl"><option value="tube_fluo">Tubes fluorescents / néons</option><option value="sodium">Sodium HP / vapeur de mercure</option><option value="mixte">Mixte</option><option value="halogene">Halogènes</option><option value="led_ancien">LEDs existantes</option></select>
-    </div>
-    <div class="fi"><label class="lbl">Nombre de luminaires intérieurs</label><input type="number" id="nblum" placeholder="Ex: 300" min="0"><span class="hlp">Recommandé : 1 LED / 30 m²</span></div>
-    <div class="fi"><label class="lbl">Type de LED envisagé</label>
-      <select id="tled"><option value="ufo">Rond suspendu — UFO POWER 250 (Thaleos)</option><option value="lineaire">Tube linéaire — LINEAR POWER 250 (Thaleos)</option></select>
-    </div>
-    <div class="fi"><label class="lbl">Détecteurs présence/luminosité à installer ?</label>
-      <select id="detecteurs"><option value="oui_nouveau">Oui — prévus avec les luminaires</option><option value="deja">Déjà en place</option><option value="non">Non prévus</option></select>
-      <span class="hlp">Requis pour BAT-EQ-133 (remplaçant de BAT-EQ-127)</span>
-    </div>
-    <div class="fi"><label class="lbl">Nacelle disponible côté client ?</label>
-      <div class="pg"><label class="pl" id="pnac-o"><input type="radio" name="nac" value="oui"> ✅ Oui</label><label class="pl s" id="pnac-n"><input type="radio" name="nac" value="non" checked> ❌ Non</label></div>
-    </div>
-  </div>
-  <hr class="div">
-  <div class="stag">🔦 Éclairage extérieur — RES-EC-104</div>
-  <div class="fi" style="margin-bottom:16px"><label class="lbl">Éclairage extérieur présent (parking, quais, voiries) ?</label>
-    <div class="pg"><label class="pl" id="pext-o" onclick="showExt('oui')"><input type="radio" name="extlum" value="oui"> ✅ Oui</label><label class="pl s" id="pext-n" onclick="showExt('non')"><input type="radio" name="extlum" value="non" checked> ❌ Non</label></div>
-  </div>
-  <div id="extdets" style="display:none">
-    <div class="fg">
-      <div class="fi"><label class="lbl">Type d'éclairage extérieur actuel</label>
-        <select id="teclext"><option value="sodium">Sodium HP (orange)</option><option value="mercure">Vapeur de mercure</option><option value="halogene">Halogènes / iodures</option><option value="led_ancien">LEDs (déjà remplacé)</option></select>
+      <div class="exp-divider"></div>
+      <div class="exp-block">
+        <div class="exp-header">
+          <div><div class="exp-company">Optical Center</div><div class="exp-title">Apprenti Opticien</div></div>
+          <div class="exp-date">Sept. 2020 — Sept. 2022</div>
+        </div>
+        <div class="exp-location">📍 La Courneuve</div>
+        <p class="exp-desc">Formation en alternance : acquisition des fondamentaux métier (optique, montage, relation client), en parallèle du BTS Optique. Montée en compétences progressive sur l'ensemble des actes du poste.</p>
       </div>
-      <div class="fi"><label class="lbl">Nombre de points d'éclairage extérieur</label><input type="number" id="nbext" placeholder="Ex: 40" min="0"></div>
+    </section>
+
+    <section>
+      <div class="section-title">Formation</div>
+      <div class="formation-block">
+        <div class="formation-title">BTS Optique</div>
+        <div class="formation-school">AEPO — Paris</div>
+        <div class="formation-date">Sept. 2020 — Juin 2022</div>
+      </div>
+      <div class="exp-divider" style="margin: 16px 0;"></div>
+      <div class="formation-block">
+        <div class="formation-title">Bac Pro Optique</div>
+        <div class="formation-school">Lycée André Sabatier — Bobigny</div>
+        <div class="formation-date">Sept. 2018 — Juil. 2020</div>
+        <span class="formation-mention">Mention Bien</span>
+      </div>
+    </section>
+
+    <div class="note-block">
+      <div class="note-label">Note de présentation</div>
+      <p>Jovan est basé à Vitry-sur-Seine et recherche activement un poste de proximité. Profil fidèle (5 ans dans la même enseigne), opérationnel immédiatement. Son plurilinguisme (français, anglais, serbe, croate) constitue un atout réel dans une zone de clientèle diverse.</p>
     </div>
   </div>
-  <div class="bgrp"><button class="btn btn-g" onclick="go(1)">← Retour</button><button class="btn btn-p" onclick="go(3)">Étape suivante →</button></div>
-</div>
-<div class="ss" id="s3">
-  <h2 class="sh2">🌡️ Chauffage, Ventilation &amp; Froid</h2>
-  <p class="sp">Systèmes thermiques et frigorifiques du site</p>
-  <div class="stag">🔥 Chauffage — IND-BA-110 &amp; BAT-TH-127</div>
-  <div class="fg">
-    <div class="fi full"><label class="lbl">Type de système de chauffage</label>
-      <select id="tchauf"><option value="convectif">Convectif — aérothermie, souffleur, CTA, rooftop</option><option value="radiatif">Radiatif — cassettes, panneaux / tubes radiants</option><option value="mixte">Mixte — convectif + radiatif</option><option value="aucun">Aucun chauffage</option></select>
-    </div>
-    <div class="fi"><label class="lbl">Puissance nominale totale (kW)</label><input type="number" id="pchauf" placeholder="Ex: 200" min="0"><span class="hlp">Somme de tous les équipements</span></div>
-    <div class="fi"><label class="lbl">Consigne température (°C)</label><input type="number" id="temp" value="18" min="0" max="30"><span class="hlp">≥ 15°C requis pour IND-BA-110</span></div>
-    <div class="fi full"><label class="lbl">Régulation / programmation chauffage existante</label>
-      <select id="regchauf"><option value="aucune">Aucune — pas de programmation</option><option value="thermostat">Thermostat simple (on/off)</option><option value="prog_partielle">Programmation partielle</option><option value="gtb">GTB / GTC complète déjà en place</option></select>
-      <span class="hlp">Pour BAT-TH-127 : régulation avancée avec sonde extérieure + programmation horaire</span>
-    </div>
-  </div>
-  <hr class="div">
-  <div class="stag bl">🌀 Ventilation — BAT-TH-142</div>
-  <div class="fi" style="margin-bottom:16px"><label class="lbl">Système de ventilation mécanique (VMC/CTA) présent ?</label>
-    <div class="pg"><label class="pl" id="pvmc-o" onclick="showVMC('oui')"><input type="radio" name="vmc" value="oui"> ✅ Oui</label><label class="pl s" id="pvmc-n" onclick="showVMC('non')"><input type="radio" name="vmc" value="non" checked> ❌ Non</label></div>
-  </div>
-  <div id="vmcdets" style="display:none">
-    <div class="fg">
-      <div class="fi"><label class="lbl">Puissance totale moteurs VMC/CTA (kW)</label><input type="number" id="pvmc" placeholder="Ex: 15" min="0"></div>
-      <div class="fi"><label class="lbl">Variateurs de vitesse déjà installés ?</label>
-        <select id="varideja"><option value="non">Non — pas de variateurs</option><option value="partiel">Partiellement</option><option value="oui">Oui — déjà en place</option></select>
+
+  <div>
+    <div class="sidebar-section">
+      <div class="section-title" style="font-size:1.1rem;">Compétences métier</div>
+      <div class="skills-list">
+        <span class="skill-pill">Relation client</span>
+        <span class="skill-pill">Vente conseil</span>
+        <span class="skill-pill">Montage</span>
+        <span class="skill-pill">Tiers payant</span>
+        <span class="skill-pill">Négociation</span>
+        <span class="skill-pill secondary">Gestion d'atelier</span>
+        <span class="skill-pill secondary">Leadership</span>
       </div>
     </div>
-  </div>
-  <hr class="div">
-  <div class="stag bl">❄️ Froid commercial — BAT-TH-134</div>
-  <div class="fi" style="margin-bottom:16px"><label class="lbl">Installation frigorifique présente sur le site ?</label>
-    <div class="pg"><label class="pl" id="pf-o" onclick="showFroid('oui')"><input type="radio" name="froid" value="oui"> ✅ Oui</label><label class="pl s" id="pf-n" onclick="showFroid('non')"><input type="radio" name="froid" value="non" checked> ❌ Non</label></div>
-  </div>
-  <div id="fdets" style="display:none">
-    <div class="fg">
-      <div class="fi"><label class="lbl">Type de froid</label><select id="tfroid"><option value="positif">Positif (+)</option><option value="negatif">Négatif (-)</option><option value="mixte">Mixte</option></select></div>
-      <div class="fi"><label class="lbl">Puissance électrique groupe froid (kW)</label><input type="number" id="pfroid" placeholder="Ex: 30" min="0"></div>
-      <div class="fi"><label class="lbl">Nombre de centrales frigorifiques</label><input type="number" id="nbcent" value="1" min="1"></div>
-      <div class="fi"><label class="lbl">HP flottante déjà installée ?</label><select id="hpex"><option value="non">Non — aucune</option><option value="oui">Oui — déjà en place</option></select></div>
+
+    <div class="sidebar-section">
+      <div class="section-title" style="font-size:1.1rem;">Outils métier</div>
+      <div>
+        <span class="outil-tag">Optimum Classic</span>
+        <span class="outil-tag">Optimum Live</span>
+        <span class="outil-tag">MyEasyOptic</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-title" style="font-size:1.1rem;">Langues</div>
+      <div class="langue-item"><span>Français</span><div class="langue-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span></div></div>
+      <div class="langue-item"><span>Anglais</span><div class="langue-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span></div></div>
+      <div class="langue-item"><span>Serbe</span><div class="langue-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span></div></div>
+      <div class="langue-item"><span>Croate</span><div class="langue-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span></div></div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-title" style="font-size:1.1rem;">Centres d'intérêt</div>
+      <div class="hobby-item">Design</div>
+      <div class="hobby-item">Marketing</div>
+      <div class="hobby-item">Sciences sociales</div>
+    </div>
+
+    <div style="background: var(--navy); border-radius: 4px; padding: 20px; color: var(--off-white);">
+      <div style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.12em; color: var(--terracotta); margin-bottom:10px;">Contact recruteur</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; margin-bottom:4px;">Thierry Bismuth</div>
+      <div style="font-size:0.78rem; opacity:0.7; line-height:1.8;">ODYSKILLS · Multi-Potentiel<br>06 10 70 30 90<br>thierry@thierrybismuth.com</div>
     </div>
   </div>
-  <div class="bgrp"><button class="btn btn-g" onclick="go(2)">← Retour</button><button class="btn btn-p" onclick="valider()">⚡ Valider et calculer l'éligibilité CEE</button></div>
 </div>
-</div>
-<div id="res">
-  <div class="sban">
-    <div class="tblk"><div class="tlbl">Volume CEE estimé</div><div class="tval" id="rtot">—</div><div class="tunit">kWh cumac</div><div id="rtot-eur" style="font-size:22px;font-weight:700;margin-top:6px;color:#a5d6a7"></div></div>
-    <div class="ssep"></div>
-    <div class="sright"><div id="rsitems"></div><div class="sdsc">⚠️ Estimation indicative · Valeur kWhc : 0,006 € (marché CEE5 moyen) — sous réserve validation technique</div></div>
-  </div>
-  <div class="rbar">
-    <div><div class="rcl" id="rcl">—</div><div class="rmt" id="rmt">—</div></div>
-    <div class="ract no-print">
-      <button class="btn btn-g" onclick="window.print()" style="padding:8px 16px;font-size:12px">🖨️ Imprimer</button>
-      <button class="btn btn-g" onclick="modif()" style="padding:8px 16px;font-size:12px">✏️ Modifier</button>
-      <button class="btn btn-g" onclick="restart()" style="padding:8px 16px;font-size:12px;color:var(--rd);border-color:var(--rd)">🗑️ Nouveau client</button>
-    </div>
-  </div>
-  <div id="rfiches"></div>
-  <div class="card no-print">
-    <h2 class="sh2" style="font-size:18px;margin-bottom:4px">📋 Prochaines étapes</h2>
-    <div class="nsgrd">
-      <div class="nsi" style="background:var(--gn)"><div class="nsemoji">📝</div><div class="nstitle" style="color:#1b5e20">Formulaire de pré-étude</div><div class="nssub">À faire signer avant tout démarrage</div><button class="alink ag" onclick="scrollForms()">Voir ↓</button></div>
-      <div class="nsi" style="background:var(--bp)"><div class="nsemoji">📞</div><div class="nstitle" style="color:var(--bd)">Les Artisans Verts</div><div class="nssub">01 87 66 27 08<br>contact@artisansverts.energy</div><a class="alink ab" href="tel:0187662708">Appeler</a></div>
-      <div class="nsi" style="background:#f3e5f5"><div class="nsemoji">✉️</div><div class="nstitle" style="color:#6a1b9a">Envoyer le dossier</div><div class="nssub">Transmettre au bureau d'études LAV</div><a class="alink ap" href="mailto:contact@artisansverts.energy">Email</a></div>
-    </div>
-  </div>
-  <div id="rforms"></div>
-</div>
-</div>
-<script>
-var step=1,zon='H1',VKWH=0.006;
-var WEBHOOK='https://thierryb.app.n8n.cloud/webhook/5df73b8d-5d5d-4140-9806-71849445d79b';
-var SL={industrie:'Industrie / Production',entrepot:'Entrepôt / Plateforme logistique',commerce_grand:'Commerce ≥ 400 m²',commerce_petit:'Commerce < 400 m²',sante:'Santé',bureaux:'Bureaux / Restauration',hotel:'Hôtellerie',enseignement:'Enseignement'};
-function go(n){document.getElementById('s'+step).classList.remove('active');document.getElementById('s'+n).classList.add('active');for(var i=1;i<=4;i++){var d=document.getElementById('d'+i),l=document.getElementById('l'+i),ln=document.getElementById('ln'+i);if(i<n){d.className='sdot done';d.textContent='✓';if(ln)ln.classList.add('done');}else if(i===n){d.className='sdot active';d.textContent=i;if(l)l.className='sname active';}else{d.className='sdot';d.textContent=i;if(l)l.className='sname';}}step=n;window.scrollTo({top:0,behavior:'smooth'});}
-function setZ(b,z){document.querySelectorAll('.zb').forEach(function(x){x.classList.remove('s')});b.classList.add('s');zon=z;document.getElementById('zon').value=z;}
-function showExt(v){document.getElementById('pext-o').classList.toggle('s',v==='oui');document.getElementById('pext-n').classList.toggle('s',v==='non');document.getElementById('extdets').style.display=v==='oui'?'block':'none';}
-function showVMC(v){document.getElementById('pvmc-o').classList.toggle('s',v==='oui');document.getElementById('pvmc-n').classList.toggle('s',v==='non');document.getElementById('vmcdets').style.display=v==='oui'?'block':'none';}
-function showFroid(v){document.getElementById('pf-o').classList.toggle('s',v==='oui');document.getElementById('pf-n').classList.toggle('s',v==='non');document.getElementById('fdets').style.display=v==='oui'?'block':'none';}
-function modif(){document.getElementById('res').style.display='none';document.getElementById('form-card').style.display='block';document.getElementById('pwrap').style.display='block';var cur=step;step=1;document.getElementById('s'+cur).classList.remove('active');document.getElementById('s1').classList.add('active');for(var i=1;i<=4;i++){var d=document.getElementById('d'+i),l=document.getElementById('l'+i),ln=document.getElementById('ln'+i);d.className=i===1?'sdot active':'sdot';d.textContent=i;if(l)l.className=i===1?'sname active':'sname';if(ln)ln.classList.remove('done');}window.scrollTo({top:0,behavior:'smooth'});}
-function restart(){if(!confirm('Effacer toutes les données et recommencer ?'))return;document.querySelectorAll('#form-card input[type=text],#form-card input[type=number],#form-card input[type=email],#form-card input[type=tel]').forEach(function(i){i.value=i.defaultValue||'';});document.querySelectorAll('#form-card select').forEach(function(s){s.selectedIndex=0;});document.querySelectorAll('.pl').forEach(function(p){p.classList.remove('s');var r=p.querySelector('input[type=radio]');if(r&&r.defaultChecked)p.classList.add('s');});zon='H1';document.getElementById('zon').value='H1';document.querySelectorAll('.zb').forEach(function(b,i){b.classList.toggle('s',i===0);});['extdets','vmcdets','fdets'].forEach(function(id){document.getElementById(id).style.display='none';});document.getElementById('res').style.display='none';document.getElementById('form-card').style.display='block';document.getElementById('pwrap').style.display='block';step=1;document.getElementById('s1').classList.add('active');for(var i=2;i<=3;i++)document.getElementById('s'+i).classList.remove('active');for(var i=1;i<=4;i++){var d=document.getElementById('d'+i),l=document.getElementById('l'+i),ln=document.getElementById('ln'+i);d.className=i===1?'sdot active':'sdot';d.textContent=i;if(l)l.className=i===1?'sname active':'sname';if(ln)ln.classList.remove('done');}window.scrollTo({top:0,behavior:'smooth'});}
-function scrollForms(){document.getElementById('rforms').scrollIntoView({behavior:'smooth'});}
-document.querySelectorAll('.pl').forEach(function(lbl){lbl.addEventListener('click',function(){var r=this.querySelector('input[type=radio]');if(!r)return;var nm=r.name;document.querySelectorAll('input[name="'+nm+'"]').forEach(function(x){x.closest('.pl')&&x.closest('.pl').classList.remove('s')});this.classList.add('s');});});
-function fmtE(kwh){var e=Math.round(kwh*VKWH);if(e>=1000000)return(e/1000000).toFixed(2)+' M€';if(e>=1000)return Math.round(e/1000)+' k€';return e.toLocaleString('fr-FR')+' €';}
-function fmt(v){if(!v||v===0)return'—';if(v>=1000000)return(v/1000000).toFixed(2)+' M';if(v>=1000)return Math.round(v/1000)+' k';return v.toLocaleString('fr-FR');}
-function valider(){document.getElementById('loading').style.display='flex';var data=collectData();var fiches=computeFiches(data);var tot=fiches.filter(function(f){return f.kwh>0;}).reduce(function(a,f){return a+f.kwh;},0);sendEmail(data,fiches,tot);setTimeout(function(){renderResults(data,fiches,tot);document.getElementById('loading').style.display='none';},1200);}
-function collectData(){return{nom:document.getElementById('nom').value||'Client',sec:document.getElementById('sec').value,surf:parseFloat(document.getElementById('surf').value)||0,haut:parseFloat(document.getElementById('haut').value)||0,zon:zon,exist:document.querySelector('input[name="exist"]:checked')?.value||'oui',clos:document.querySelector('input[name="clos"]:checked')?.value||'oui',ttoiture:document.getElementById('ttoiture').value,isoexist:document.getElementById('isoexist').value,tecl:document.getElementById('tecl').value,nblum:parseInt(document.getElementById('nblum').value)||0,tled:document.getElementById('tled').value,detecteurs:document.getElementById('detecteurs').value,nac:document.querySelector('input[name="nac"]:checked')?.value||'non',hasext:document.querySelector('input[name="extlum"]:checked')?.value==='oui',teclext:document.getElementById('teclext').value,nbext:parseInt(document.getElementById('nbext').value)||0,tchauf:document.getElementById('tchauf').value,pchauf:parseFloat(document.getElementById('pchauf').value)||0,temp:parseFloat(document.getElementById('temp').value)||18,regchauf:document.getElementById('regchauf').value,hasvmc:document.querySelector('input[name="vmc"]:checked')?.value==='oui',pvmc:parseFloat(document.getElementById('pvmc').value)||0,varideja:document.getElementById('varideja').value,hasfr:document.querySelector('input[name="froid"]:checked')?.value==='oui',pfroid:parseFloat(document.getElementById('pfroid').value)||0,hpex:document.getElementById('hpex').value,nbcent:parseInt(document.getElementById('nbcent').value)||1};}
-function computeFiches(d){var ZC={H1:{c:7200,r:2500,en:{ter:320,ver:350},th127:{c:450,r:300},vmc:4800,ext:58},H2:{c:8000,r:2800,en:{ter:260,ver:290},th127:{c:380,r:250},vmc:4200,ext:50},H3:{c:8500,r:3000,en:{ter:170,ver:200},th127:{c:260,r:170},vmc:3200,ext:38}};var zc=ZC[d.zon]||ZC.H2;var nl=d.nblum>0?d.nblum:Math.ceil(d.surf/30);var ck={sante:63,entrepot:63,industrie:63,commerce_grand:63,hotel:67,enseignement:39,bureaux:53,commerce_petit:53};var kwh_led_th=Math.round(nl*250*(ck[d.sec]||53));var f1={ref:'BAT-EQ-127',name:'Luminaires à modules LED',desc:'remplacement éclairage par LEDs haute performance (sans détecteurs)',icon:'💡',status:'sp',kwh:0,conds:[{ok:false,t:'FICHE SUPPRIMÉE le 24/02/2026 — nouvelles opérations exclues'},{ok:d.surf>=1000,t:'Surface ≥ 1000 m² — '+d.surf+' m²'},{ok:d.haut>=4,t:'Hauteur ≥ 4 m — '+d.haut+' m'},{ok:['entrepot','industrie','commerce_grand','sante'].indexOf(d.sec)>=0,t:'Secteur éligible — '+(SL[d.sec]||'?')}],note:'Supprimée le 24/02/2026. Volume théorique si antérieur : '+fmt(kwh_led_th)+' kWhc. Voir BAT-EQ-133 (avec détecteurs) qui reste active.',prod:d.tled==='lineaire'?'LINEAR POWER 250 (Thaleos) — 250W, 185 lm/W, IP65':'UFO POWER 250 (Thaleos) — 250W, 185 lm/W, IP65'};var eq133_sec=['entrepot','industrie','commerce_grand','sante','hotel','bureaux','enseignement'].indexOf(d.sec)>=0;var eq133_ecl=d.tecl!=='led_ancien';var eq133_det=d.detecteurs==='oui_nouveau';var eq133_surf=d.surf>=500;var eq133_ok=eq133_sec&&eq133_ecl&&eq133_det&&eq133_surf&&d.exist==='oui';var kwh_eq133=0;if(eq133_ok){var coeff133={entrepot:45,industrie:45,commerce_grand:55,commerce_petit:48,sante:50,bureaux:42,hotel:52,enseignement:36};kwh_eq133=Math.round(nl*(coeff133[d.sec]||45));}var f2={ref:'BAT-EQ-133',name:'Luminaires LED + détection présence/luminosité',desc:'remplacement avec pilotage par détecteurs de présence et capteurs de lumière du jour',icon:'💡',status:eq133_ok?'el':'ne',kwh:kwh_eq133,conds:[{ok:eq133_surf,t:'Surface ≥ 500 m² — '+d.surf+' m²'},{ok:eq133_ecl,t:'Éclairage actuel non-LED'},{ok:eq133_det,t:'Détecteurs de présence + gradation prévus'},{ok:eq133_sec,t:'Secteur éligible — '+(SL[d.sec]||'?')},{ok:d.exist==='oui',t:'Bâtiment existant > 2 ans'}],note:eq133_ok?'Fiche active. '+nl+' luminaires × '+(({entrepot:45,industrie:45,commerce_grand:55,sante:50,bureaux:42,hotel:52,enseignement:36})[d.sec]||45)+' kWhc. Détecteurs DALI requis.':'Manque : '+(!eq133_det?'détecteurs de présence + gradation requis':!eq133_ecl?'éclairage déjà en LED':!eq133_surf?'surface < 500 m²':'voir conditions'),prod:d.tled==='lineaire'?'LINEAR POWER 250 + détecteurs DALI — 250W, IP65':'UFO POWER 250 + détecteurs DALI — 250W, IP65'};var ec104_ok=d.hasext&&d.teclext!=='led_ancien'&&d.nbext>0&&d.exist==='oui';var kwh_ec104=0;if(ec104_ok)kwh_ec104=Math.round(d.nbext*zc.ext);var f3={ref:'RES-EC-104',name:'Éclairage extérieur LED',desc:'remplacement des luminaires extérieurs (parking, quais, voiries) par des LEDs',icon:'🔦',status:ec104_ok?'el':'ne',kwh:kwh_ec104,conds:[{ok:d.hasext,t:'Éclairage extérieur présent'},{ok:d.hasext&&d.teclext!=='led_ancien',t:'Luminaires non-LED'},{ok:d.nbext>0,t:d.nbext+' luminaires'},{ok:d.exist==='oui',t:'Bâtiment existant'}],note:ec104_ok?d.nbext+' pts × '+zc.ext+' kWhc (zone '+d.zon+'). Durée 20 ans.':'Aucun éclairage extérieur ou déjà en LED.',prod:'Projecteurs LED IP65 IK10 — conforme RES-EC-104 · Garantie 5 ans'};var en101_iso=d.isoexist==='aucune'||d.isoexist==='insuffisante';var en101_surf=d.surf>=1000;var en101_ok=en101_surf&&en101_iso&&d.exist==='oui'&&d.ttoiture!=='inconnue';var kwh_en101=0;if(en101_ok)kwh_en101=Math.round(d.surf*(d.ttoiture==='terrasse'?zc.en.ter:zc.en.ver));var f4={ref:'BAT-EN-101',name:'Isolation de la toiture',desc:'isolation thermique de la toiture (sarking, laine de roche, PIR…) — fiche #1 en volume sur grands bâtiments',icon:'🏗️',status:en101_ok?'el':'ne',kwh:kwh_en101,conds:[{ok:en101_surf,t:'Surface ≥ 1000 m² — '+d.surf+' m²'},{ok:en101_iso,t:'Isolation insuffisante — '+({aucune:'aucune',insuffisante:'R<2 m².K/W',correcte:'déjà R≥4',inconnue:'?'})[d.isoexist]},{ok:d.ttoiture!=='inconnue',t:'Type toiture — '+({terrasse:'terrasse',versants:'versants',shed:'shed',inconnue:'?'})[d.ttoiture]},{ok:d.exist==='oui',t:'Bâtiment existant'}],note:en101_ok?d.surf+' m² × '+(d.ttoiture==='terrasse'?zc.en.ter:zc.en.ver)+' kWhc/m² (zone '+d.zon+'). ΔR=4 m².K/W. Durée 30 ans. RGE QUALIBAT 7131.':d.isoexist==='correcte'?'Isolation déjà correcte.':!en101_surf?'Surface < 1000 m².':'Renseignez type toiture et isolation.',prod:'Laine de roche (Rockwool/Isovent), PIR (Kingspan/Recticel) — QUALIBAT 7131'};var th127_ok=d.tchauf!=='aucun'&&(d.regchauf==='aucune'||d.regchauf==='thermostat')&&d.pchauf>0&&d.exist==='oui';var kwh_th127=0;if(th127_ok){var cth=d.tchauf==='convectif'?zc.th127.c:d.tchauf==='radiatif'?zc.th127.r:Math.round((zc.th127.c+zc.th127.r)/2);kwh_th127=Math.round(d.pchauf*cth);}var f5={ref:'BAT-TH-127',name:'Régulation et programmation du chauffage',desc:'régulation avancée avec sonde extérieure, horloge et programmation par zones',icon:'⚙️',status:th127_ok?'el':'ne',kwh:kwh_th127,conds:[{ok:d.tchauf!=='aucun',t:'Chauffage présent — '+d.tchauf},{ok:d.regchauf==='aucune'||d.regchauf==='thermostat',t:'Régulation insuffisante — '+({aucune:'aucune',thermostat:'thermostat simple',prog_partielle:'partielle',gtb:'GTB'})[d.regchauf]},{ok:d.pchauf>0,t:'Puissance : '+d.pchauf+' kW'},{ok:d.exist==='oui',t:'Bâtiment existant'}],note:th127_ok?d.pchauf+' kW × '+(d.tchauf==='convectif'?zc.th127.c:d.tchauf==='radiatif'?zc.th127.r:Math.round((zc.th127.c+zc.th127.r)/2))+' kWhc/kW. Sonde extérieure + prog. hebdo. Durée 15 ans.':d.regchauf==='gtb'?'GTB déjà en place.':!d.tchauf||d.tchauf==='aucun'?'Aucun chauffage.':'Puissance manquante.',prod:'Siemens RVS / Honeywell — sonde ext. + vanne 3 voies + thermostat programmable'};var th142_ok=d.hasvmc&&d.pvmc>0&&d.varideja==='non'&&d.exist==='oui';var kwh_th142=0;if(th142_ok)kwh_th142=Math.round(d.pvmc*zc.vmc);var f6={ref:'BAT-TH-142',name:'Variateurs de vitesse sur ventilateurs',desc:'variateurs de fréquence sur moteurs VMC/CTA pour adapter le débit aux besoins réels',icon:'🌀',status:th142_ok?'el':'ne',kwh:kwh_th142,conds:[{ok:d.hasvmc,t:'VMC/CTA présente'},{ok:d.hasvmc&&d.varideja==='non',t:'Pas de variateurs — '+d.varideja},{ok:d.pvmc>0,t:'Puissance moteurs : '+d.pvmc+' kW'},{ok:d.exist==='oui',t:'Bâtiment existant'}],note:th142_ok?d.pvmc+' kW × '+zc.vmc+' kWhc/kW. Économie 30–50% conso ventilation. Durée 15 ans.':!d.hasvmc?'Aucune VMC.':d.varideja==='oui'?'Variateurs déjà en place.':'Puissance VMC manquante.',prod:'Variateurs Schneider ATV / Danfoss FC — CEE, électricien qualifié'};var d_ok=d.sec==='industrie'&&d.haut>=5&&d.clos==='oui'&&d.tchauf!=='aucun'&&d.temp>=15&&d.exist==='oui';var kwh_ind=0;if(d_ok&&d.pchauf>0){var zcc=ZC[d.zon]||ZC.H2;if(d.tchauf==='convectif')kwh_ind=Math.round(d.pchauf*zcc.c);else if(d.tchauf==='radiatif')kwh_ind=Math.round(d.pchauf*zcc.r);else kwh_ind=Math.round(d.pchauf*0.5*zcc.c+d.pchauf*0.5*zcc.r);}var f7={ref:'IND-BA-110',name:'Destratificateurs d\'air',desc:'brassage de l\'air chaud sous plafond pour 20–30% d\'économies chauffage (industrie uniquement)',icon:'🌪️',status:d_ok?'el':'ne',kwh:kwh_ind,conds:[{ok:d.sec==='industrie',t:'Bâtiment industriel — '+(SL[d.sec]||'?')+(d.sec==='entrepot'?' ⚠️ Entrepôts EXCLUS':'')},{ok:d.haut>=5,t:'Hauteur ≥ 5 m — '+d.haut+' m'},{ok:d.clos==='oui',t:'Local clos'},{ok:d.tchauf!=='aucun',t:'Chauffage — '+d.tchauf},{ok:d.temp>=15,t:'Consigne ≥ 15°C — '+d.temp+'°C'},{ok:d.exist==='oui',t:'Bâtiment existant'}],note:d_ok?'Zone '+d.zon+' — '+d.tchauf+'. '+d.pchauf+' kW. Durée 15 ans. Étude OPQIBI requise.':'⚠️ Entrepôts logistiques EXCLUS. Industriel uniquement.',prod:'ONSEN-DS7 (Teddington) — 6500 m³/h, 410W, IP54'};var h_ok=d.hasfr&&d.hpex==='non'&&d.pfroid>0&&d.exist==='oui';var kwh_hp=0;if(h_ok)kwh_hp=Math.round(d.pfroid*2000*0.8*0.11*10.5);var f8={ref:'BAT-TH-134',name:'Haute Pression Flottante',desc:'régulation pression condensation selon T° extérieure — 10–12% économies sur conso froid',icon:'❄️',status:h_ok?'el':'ne',kwh:kwh_hp,conds:[{ok:d.hasfr,t:'Installation frigorifique présente'},{ok:d.hasfr&&d.hpex==='non',t:'Pas de HP flottante existante'},{ok:d.hasfr&&d.pfroid>0,t:'Puissance froid : '+d.pfroid+' kW'},{ok:d.exist==='oui',t:'Bâtiment existant'}],note:h_ok?d.nbcent+' centrale(s) × '+d.pfroid+' kW. Durée 14 ans. Partenaire EDF.':!d.hasfr?'Aucune installation frigorifique.':d.hpex==='oui'?'HP déjà en place.':'Puissance manquante.',prod:'FREE 6200 HPF — RS485+TCP/IP, 15–20% économies · QUALIBAT RGE'};return[f1,f2,f3,f4,f5,f6,f7,f8];}
-function sendEmail(d,fiches,tot){var eligible=fiches.filter(function(f){return f.status==='el';});var date=new Date().toLocaleDateString('fr-FR');var rows=eligible.map(function(f){return'<tr><td style="padding:8px 12px;border-bottom:1px solid #eee">'+f.ref+'</td><td style="padding:8px 12px;border-bottom:1px solid #eee">'+f.name+'</td><td style="padding:8px 12px;border-bottom:1px solid #eee;font-weight:700;color:#1565c0">'+fmt(f.kwh)+' kWhc</td><td style="padding:8px 12px;border-bottom:1px solid #eee;font-weight:700;color:#2e7d32">≈ '+fmtE(f.kwh)+'</td></tr>';}).join('');var html='<div style="font-family:sans-serif;max-width:600px"><div style="background:#1b5e20;color:white;padding:20px 24px;border-radius:8px 8px 0 0"><h2 style="margin:0">🏗️ Nouveau lead CEE — Les Artisans Verts</h2><p style="margin:6px 0 0;opacity:.8">Simulateur complété le '+date+'</p></div><div style="background:#fff;border:1px solid #eee;padding:24px"><h3 style="margin-top:0;color:#1b5e20">📋 Client</h3><table style="width:100%;border-collapse:collapse;font-size:14px"><tr><td style="padding:6px 12px;color:#666;width:40%">Raison sociale</td><td style="padding:6px 12px;font-weight:700">'+d.nom+'</td></tr><tr style="background:#f9f9f9"><td style="padding:6px 12px;color:#666">Secteur</td><td style="padding:6px 12px">'+(SL[d.sec]||d.sec)+'</td></tr><tr><td style="padding:6px 12px;color:#666">Surface</td><td style="padding:6px 12px">'+d.surf+' m²</td></tr><tr style="background:#f9f9f9"><td style="padding:6px 12px;color:#666">Hauteur</td><td style="padding:6px 12px">'+d.haut+' m</td></tr><tr><td style="padding:6px 12px;color:#666">Zone</td><td style="padding:6px 12px">'+d.zon+'</td></tr><tr style="background:#f9f9f9"><td style="padding:6px 12px;color:#666">Toiture</td><td style="padding:6px 12px">'+({terrasse:'Terrasse',versants:'Versants',shed:'Shed',inconnue:'?'})[d.ttoiture]+' / '+({aucune:'sans isolation',insuffisante:'R<2',correcte:'R≥4',inconnue:'?'})[d.isoexist]+'</td></tr><tr><td style="padding:6px 12px;color:#666">Chauffage</td><td style="padding:6px 12px">'+d.tchauf+' '+d.pchauf+' kW</td></tr><tr style="background:#f9f9f9"><td style="padding:6px 12px;color:#666">Froid</td><td style="padding:6px 12px">'+(d.hasfr?d.pfroid+' kW':'Non')+'</td></tr><tr><td style="padding:6px 12px;color:#666">VMC</td><td style="padding:6px 12px">'+(d.hasvmc?d.pvmc+' kW':'Non')+'</td></tr></table>'+(eligible.length>0?'<h3 style="color:#1b5e20;margin-top:20px">⚡ Fiches éligibles</h3><table style="width:100%;border-collapse:collapse;font-size:14px"><thead><tr style="background:#e8f5e9"><th style="padding:8px 12px;text-align:left">Fiche</th><th style="padding:8px 12px;text-align:left">Intitulé</th><th style="padding:8px 12px;text-align:left">kWhc</th><th style="padding:8px 12px;text-align:left">€</th></tr></thead><tbody>'+rows+'</tbody></table><div style="background:#e8f5e9;border-left:4px solid #2e7d32;padding:14px;margin-top:14px"><strong>Total : '+fmt(tot)+' kWhc ≈ '+fmtE(tot)+'</strong><br><small style="color:#666">0,006 €/kWhc — estimation indicative</small></div>':'<div style="background:#fff3e0;padding:14px">Aucune fiche éligible.</div>')+'</div></div>';try{fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mail:'thierry@thierrybismuth.com',subject:'🏗️ Lead CEE — '+d.nom+' — '+fmt(tot)+' kWhc ≈ '+fmtE(tot),message:html})}).catch(function(){});}catch(e){}}
-function renderResults(d,fiches,tot){document.getElementById('rtot').textContent=tot>0?fmt(tot):'—';document.getElementById('rtot-eur').textContent=tot>0?'≈ '+fmtE(tot):'';var sit='';fiches.forEach(function(f){if(f.kwh>0)sit+='<div class="si"><span>'+f.icon+' '+f.ref+' — '+f.name+'</span><span class="sikwh">'+fmt(f.kwh)+' kWhc &nbsp;<span style="opacity:.7;font-size:12px">≈ '+fmtE(f.kwh)+'</span></span></div>';});if(!sit)sit='<div style="opacity:.6;font-size:13px">Aucune fiche éligible</div>';document.getElementById('rsitems').innerHTML=sit;document.getElementById('rcl').textContent=d.nom;document.getElementById('rmt').textContent=(SL[d.sec]||'?')+' · '+d.surf+' m² · H='+d.haut+'m · Zone '+d.zon;var fhtml='';fiches.forEach(function(f){fhtml+=renderF(f);});document.getElementById('rfiches').innerHTML=fhtml;renderForms(fiches,d);document.getElementById('form-card').style.display='none';document.getElementById('pwrap').style.display='none';document.getElementById('res').style.display='block';document.getElementById('d4').className='sdot active';var l4=document.getElementById('l4');if(l4)l4.className='sname active';window.scrollTo({top:0,behavior:'smooth'});}
-function renderF(f){var stlbl=f.status==='el'?'✅ ÉLIGIBLE':f.status==='sp'?'⛔ SUPPRIMÉE':'❌ Non éligible';var cl=f.status==='el'?'el':f.status==='sp'?'sp':'';var ch=(f.conds||[]).map(function(c){return'<li class="'+(c.ok?'ok':'fail')+'"><span class="ci">'+(c.ok?'✓':'✗')+'</span><span>'+c.t+'</span></li>';}).join('');var kh=f.kwh>0?'<div class="fkwh"><div class="kwn">'+fmt(f.kwh)+'</div><div class="kwu">kWh cumac</div><div class="kweur">≈ '+fmtE(f.kwh)+'</div></div>':'';var ph=f.prod?'<div class="pbdg"><span>📦</span><span><strong>Produit :</strong> '+f.prod+'</span></div>':'';var sup=f.status==='sp'?'<span class="tsup">Supprimée</span>':'';return'<div class="fc '+cl+'"><div class="fh" onclick="tb(\'fb-'+f.ref+'\',this)"><span class="fref">'+f.ref+'</span><div style="flex:1"><div class="fnm">'+f.icon+' '+f.name+sup+'</div>'+(f.desc?'<div class="fdsc">('+f.desc+')</div>':'')+'<div class="fst">'+stlbl+'</div></div>'+kh+'<span style="color:var(--tl);font-size:12px;flex-shrink:0;margin-left:8px">▼</span></div><div class="fbody" id="fb-'+f.ref+'"><ul class="cl">'+ch+'</ul><p class="fnote">'+f.note+'</p>'+ph+'</div></div>';}
-function tb(id,hdr){var el=document.getElementById(id);var tog=hdr.querySelector('span:last-child');var open=el.style.display==='block';el.style.display=open?'none':'block';tog.textContent=open?'▼':'▲';}
-function renderForms(fiches,d){var html='';var eligible=fiches.filter(function(f){return f.status==='el';});if(eligible.length===0){html='<div class="card"><div class="al al-w"><i>💡</i><div><strong>Aucun formulaire.</strong> Contactez LAV : 01 87 66 27 08</div></div></div>';document.getElementById('rforms').innerHTML=html;return;}eligible.forEach(function(f){var bcolor=f.ref.startsWith('IND')||f.ref==='BAT-TH-134'?'var(--bm)':'var(--gm)';var bgc=f.ref.startsWith('IND')||f.ref==='BAT-TH-134'?'var(--bp)':'var(--gp)';html+='<div class="pfc" style="border-color:'+bcolor+'"><div class="pfh" style="background:'+bgc+';border-color:rgba(0,0,0,.1)"><h3 style="color:#1b5e20">📝 Demande d\'éligibilité — '+f.ref+'</h3><p style="color:var(--tl)">'+f.name+' · À signer avant toute intervention</p></div><div class="pfb"><div class="fg"><div class="fi"><label class="lbl">Site bénéficiaire</label><input type="text" value="'+d.nom+'"></div><div class="fi"><label class="lbl">Adresse</label><input type="text"></div><div class="fi"><label class="lbl">Code postal</label><input type="text" placeholder="75000"></div><div class="fi"><label class="lbl">Ville</label><input type="text"></div><div class="fi"><label class="lbl">Contact / Fonction</label><input type="text"></div><div class="fi"><label class="lbl">Téléphone</label><input type="tel"></div><div class="fi"><label class="lbl">Email</label><input type="email"></div><div class="fi"><label class="lbl">SIRET</label><input type="text" placeholder="14 chiffres"></div>';if(f.ref==='IND-BA-110'||f.ref==='BAT-TH-142'){html+='<div class="fi"><label class="lbl">Hauteur (m)</label><input type="number" value="'+d.haut+'"></div><div class="fi"><label class="lbl">Puissance chauffage (kW)</label><input type="number" value="'+d.pchauf+'"></div>';}if(f.ref==='BAT-TH-134'){html+='<div class="fi"><label class="lbl">Puissance froid (kW)</label><input type="number" value="'+d.pfroid+'"></div><div class="fi"><label class="lbl">Nb centrales</label><input type="number" value="'+d.nbcent+'"></div>';}if(f.ref==='BAT-EN-101'){html+='<div class="fi"><label class="lbl">Surface toiture (m²)</label><input type="number" value="'+d.surf+'"></div><div class="fi"><label class="lbl">Type de toiture</label><input type="text" value="'+({terrasse:'Terrasse',versants:'Versants',shed:'Shed'})[d.ttoiture]+'"></div>';}if(f.ref==='BAT-TH-127'){html+='<div class="fi"><label class="lbl">Puissance chauffage (kW)</label><input type="number" value="'+d.pchauf+'"></div><div class="fi"><label class="lbl">Régulation actuelle</label><input type="text" value="'+({aucune:'Aucune',thermostat:'Thermostat simple',prog_partielle:'Partielle',gtb:'GTB'})[d.regchauf]+'"></div>';}if(f.ref==='BAT-EQ-133'||f.ref==='RES-EC-104'){html+='<div class="fi"><label class="lbl">Nb luminaires</label><input type="number" value="'+(f.ref==='RES-EC-104'?d.nbext:d.nblum||Math.ceil(d.surf/30))+'"></div><div class="fi"><label class="lbl">Nacelle dispo</label><select><option '+(d.nac==='non'?'selected':'')+'>Non</option><option '+(d.nac==='oui'?'selected':'')+'>Oui</option></select></div>';}html+='<div class="fi"><label class="lbl">Date de visite souhaitée</label><input type="date"></div><div class="fi full"><label class="lbl">Créneaux</label><input type="text" placeholder="Ex: Mardi matin"></div></div><div class="cftxt">Je confirme mon intérêt et autorise <strong>Les Artisans Verts</strong> à réaliser une étude pour la fiche <strong>'+f.ref+'</strong>.</div><div class="sigrow"><div><label class="lbl" style="margin-bottom:8px;display:block">Fait à / Le</label><input type="text" placeholder="Ville"><input type="date" style="margin-top:8px"></div><div><label class="lbl" style="margin-bottom:8px;display:block">Signature</label><div class="sigbox">Signature client</div></div></div><div style="margin-top:12px;padding:10px 14px;background:#f5f5f5;border-radius:8px;font-size:11px;color:var(--tl)">Les Artisans Verts · 01 87 66 27 08 · contact@artisansverts.energy · QUALIBAT RGE</div></div></div>';});document.getElementById('rforms').innerHTML=html;}
-</script>
+
+<footer>
+  <div>Dossier préparé par <strong class="brand-footer">ODYSKILLS</strong> — Avril 2026</div>
+  <div>Confidentiel · Usage interne client</div>
+</footer>
+
 </body>
 </html>
