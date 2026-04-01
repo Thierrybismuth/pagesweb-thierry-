@@ -119,6 +119,10 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
   .tarif-box { grid-template-columns:1fr; }
   .tarif-ou { padding:12px; }
 }
+
+.ens-gallery { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:24px; }
+.ens-gallery img { width:100%; height:auto; display:block; border-radius:2px; }
+@media(max-width:600px){ .ens-gallery { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -227,6 +231,11 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
   </div>
 
   <div class="sep"></div>
+  
+<div class="ens-gallery">
+  <img src="https://thierrybismuth.github.io/pagesweb-thierry-/logos/enseignes/ens-perdus-concept.jpg" alt="PerDus vente colis perdus">
+  <img src="https://thierrybismuth.github.io/pagesweb-thierry-/logos/enseignes/ens-perdus-modele.jpg" alt="PerDus modèle économique">
+</div>
   <!-- RECOMMERCER -->
   <div class="enseigne enseigne-recomer">
     <div class="ens-color">
@@ -266,6 +275,10 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
 
   <div class="sep"></div>
 
+  
+<div class="ens-gallery">
+  <img src="https://thierrybismuth.github.io/pagesweb-thierry-/logos/enseignes/ens-recommercer-concept.jpg" alt="RecommerCer concept">
+</div>
   <!-- APC -->
   <div class="enseigne enseigne-apc">
     <div class="ens-color">
