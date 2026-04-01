@@ -695,7 +695,7 @@ function renderResults(d,fiches,tot){
 }
 
 function renderF(f){
-  var stlbl=f.status==='el'?'✅ ÉLIGIBLE':f.status==='sp'?'⛔ SUPPRIMÉE — nouvelles opérations exclues':'❌ Non éligible selon les critères saisis';
+  var firstFail=(f.conds||[]).find(function(c){return!c.ok;});var stlbl=f.status==='el'?'✅ ÉLIGIBLE':f.status==='sp'?'⛔ SUPPRIMÉE — nouvelles opérations exclues':'❌ '+(firstFail?firstFail.t:'Critère non rempli');
   var cl=f.status==='el'?'el':f.status==='sp'?'sp':'';
   var ch=(f.conds||[]).map(function(c){return'<li class="'+(c.ok?'ok':'fail')+'"><span class="ci">'+(c.ok?'✓':'✗')+'</span><span>'+c.t+'</span></li>';}).join('');
   var kh=f.kwh>0?'<div class="fkwh"><div class="kwn">'+fmt(f.kwh)+'</div><div class="kwu">kWh cumac</div><div class="kweur">≈ '+fmtE(f.kwh)+'</div></div>':'';
