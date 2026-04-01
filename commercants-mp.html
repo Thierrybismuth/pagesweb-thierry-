@@ -123,6 +123,12 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
 .ens-gallery { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:24px; }
 .ens-gallery img { width:100%; height:auto; display:block; border-radius:2px; }
 @media(max-width:600px){ .ens-gallery { grid-template-columns:1fr; } }
+
+/* SLIDE GALLERIES */
+.ens-gallery { display:grid; grid-template-columns: repeat(2, 1fr); gap:4px; margin:20px 0; }
+.ens-gallery img { width:100%; height:180px; object-fit:cover; border-radius:2px; }
+@media(max-width:680px){ .ens-gallery { grid-template-columns:1fr; } .ens-gallery img { height:160px; } }
+
 </style>
 </head>
 <body>
@@ -171,7 +177,8 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
           <div class="tarif-label">HT/mois · 12 mois<br>recrutement garanti</div>
         </div>
       </div>
-      <div class="ens-steps">
+      <div <div class="ens-gallery"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/convok/slide1.jpg" alt="ConvoK"></div>
+      class="ens-steps">
         <div class="ens-step">
           <div class="ens-step-icon">📋</div>
           <div class="ens-step-text"><strong>Vous recueillez le cahier des charges</strong> — poste, profil, contraintes du client.</div>
@@ -208,7 +215,8 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
       <div class="ens-tag">Vente · Colis perdus · Flux clients · Événementiel</div>
       <h2 class="ens-h2">Votre commerçant veut attirer du monde ?<br><em>Organisez une vente de colis perdus chez lui.</em></h2>
       <p class="ens-pitch">PerDus vous livre le stock et le stand. En 2 jours, votre commerçant génère un flux hors du commun dans sa boutique — et vous vendez entre 50 et 400 kg de marchandise à 8€ de marge par kilo.</p>
-      <div class="ens-steps">
+      <div <div class="ens-gallery"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/perdus/slide1.jpg" alt="PerDus"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/perdus/slide2.jpg" alt="PerDus"></div>
+      class="ens-steps">
         <div class="ens-step">
           <div class="ens-step-icon">📦</div>
           <div class="ens-step-text"><strong>Vous organisez l'événement :</strong> un petit espace ou devant la boutique. PerDus livre le stock et le stand, et s'occupe de la communication sur les réseaux sociaux.</div>
@@ -251,7 +259,8 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
       <div class="context-box">
         Le commerce mue. Certains secteurs sont en croissance, d'autres ont raté le virage du web, du télétravail, des réseaux sociaux, de l'IA. Votre commerçant a un local, des clients, un banquier, une entreprise — <strong>aidons-le à changer de métier sans perdre son entreprise.</strong>
       </div>
-      <div class="ens-steps">
+      <div <div class="ens-gallery"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/recommercer/slide1.jpg" alt="RecommerCer"></div>
+      class="ens-steps">
         <div class="ens-step">
           <div class="ens-step-icon">📝</div>
           <div class="ens-step-text"><strong>Étape 1 — Vous recueillez les contraintes :</strong> surface et config du local, type de clientèle, souhaits du commerçant.</div>
