@@ -65,6 +65,7 @@
   </div>
 </div>
 <script>
+// Categorie "chez-moi" regroupe toiles ET deco
 const products = [
   { id:"oracle", name:"L'Oracle de Mani", price:"25 EUR", category:"outil", themes:["clarte","puissance"], budget:["-30","30-100"], pour:["moi","offrir"], symbol:"Introspection guidee", description:"Un outil de questionnement pour explorer ce qui se passe vraiment en soi et trouver ses propres reponses.", url:"https://www.mani-univers.com/product-page/l-oracle-de-mani" },
   { id:"migraines", name:"Migraines - Outil de resolution", price:"25 EUR", category:"outil", themes:["clarte","mental"], budget:["-30","30-100"], pour:["moi","offrir"], symbol:"Maitrise du corps", description:"Un protocole concret pour reprendre la maitrise de son corps face aux migraines recurrentes.", url:"https://www.mani-univers.com/product-page/migraines-outil-de-r%C3%A9solution" },
@@ -74,40 +75,38 @@ const products = [
   { id:"inspiration", name:"Talisman Inspiration", price:"75 EUR", category:"bijou", themes:["creativite","puissance"], budget:["30-100"], pour:["moi","offrir"], symbol:"Elan creatif", description:"Pour debloquer l'inspiration et retrouver l'envie de creer, d'agir, de faire.", url:"https://www.mani-univers.com/product-page/talisman-inspiration" },
   { id:"feminin-sacre", name:"Talisman Feminin Sacre", price:"80 EUR", category:"bijou", themes:["puissance","amour"], budget:["30-100"], pour:["moi","offrir"], symbol:"Puissance feminine", description:"Reconnexion a la puissance interieure, aux cycles et a la force douce qui vit en soi.", url:"https://www.mani-univers.com/product-page/talisman-f%C3%A9minin-sacr%C3%A9" },
   { id:"love", name:"Talisman Love", price:"130 EUR", category:"bijou", themes:["amour","confiance"], budget:["100-300"], pour:["moi","offrir"], symbol:"Amour de soi", description:"Quartz rose naturel, piece unique modulable (collier, bracelet, bijou de taille). Pour s'ouvrir a l'amour et a soi-meme.", url:"https://www.mani-univers.com/product-page/talisman-love" },
-  { id:"tigres-petit", name:"Les Tigres - petits formats", price:"150-200 EUR", category:"toile", themes:["confiance","clarte"], budget:["100-300"], pour:["moi","offrir"], symbol:"Resilience et force", description:"Toiles peintes a la main. Le tigre, symbole de celui qui revient — plus fort, plus sage, plus entier.", url:"https://www.mani-univers.com/product-page/n-11-les-tigres" },
-  { id:"cube", name:"Le Cube", price:"250 EUR", category:"deco", themes:["creativite","puissance"], budget:["100-300"], pour:["moi"], symbol:"Depassement de soi", description:"Objet unique fait main par Margaux. La preuve qu'on peut creer quelque chose de beau au-dela de ses competences initiales.", url:"https://www.mani-univers.com/product-page/le-cube" },
-  { id:"tigres-moyen", name:"Les Tigres - formats moyens", price:"250-450 EUR", category:"toile", themes:["confiance","puissance"], budget:["300+"], pour:["moi","offrir"], symbol:"Puissance assumee", description:"Pieces uniques de la serie Les Tigres. Pour ancrer un symbole fort dans son espace de vie.", url:"https://www.mani-univers.com/product-page/n-4-les-tigres" },
-  { id:"tigres-grand", name:"Les Tigres - grands formats", price:"450-750 EUR", category:"toile", themes:["confiance","puissance"], budget:["300+"], pour:["moi"], symbol:"Transformation visible", description:"Oeuvres majeures — pour ceux qui veulent que leur chemin parcouru soit visible, present, lumineux.", url:"https://www.mani-univers.com/product-page/n-1-les-tigres" },
-  { id:"table", name:"La Table", price:"850 EUR", category:"deco", themes:["creativite","mental"], budget:["300+"], pour:["moi"], symbol:"Creation et ancrage", description:"Table mosaique entierement faite a la main. Une piece qui incarne la lenteur choisie et la capacite a depasser ses limites.", url:"https://www.mani-univers.com/product-page/la-table" }
+  { id:"tigres-petit", name:"Les Tigres - petits formats", price:"150-200 EUR", category:"chez-moi", themes:["confiance","clarte"], budget:["100-300"], pour:["moi","offrir"], symbol:"Resilience et force", description:"Toiles peintes a la main. Le tigre, symbole de celui qui revient — plus fort, plus sage, plus entier.", url:"https://www.mani-univers.com/product-page/n-11-les-tigres" },
+  { id:"cube", name:"Le Cube", price:"250 EUR", category:"chez-moi", themes:["creativite","puissance"], budget:["100-300"], pour:["moi"], symbol:"Depassement de soi", description:"Objet unique fait main par Margaux. La preuve qu'on peut creer quelque chose de beau au-dela de ses competences initiales.", url:"https://www.mani-univers.com/product-page/le-cube" },
+  { id:"tigres-moyen", name:"Les Tigres - formats moyens", price:"250-450 EUR", category:"chez-moi", themes:["confiance","puissance"], budget:["300+"], pour:["moi","offrir"], symbol:"Puissance assumee", description:"Pieces uniques de la serie Les Tigres. Pour ancrer un symbole fort dans son espace de vie.", url:"https://www.mani-univers.com/product-page/n-4-les-tigres" },
+  { id:"tigres-grand", name:"Les Tigres - grands formats", price:"450-750 EUR", category:"chez-moi", themes:["confiance","puissance"], budget:["300+"], pour:["moi"], symbol:"Transformation visible", description:"Oeuvres majeures — pour ceux qui veulent que leur chemin parcouru soit visible, present, lumineux.", url:"https://www.mani-univers.com/product-page/n-1-les-tigres" },
+  { id:"table", name:"La Table", price:"850 EUR", category:"chez-moi", themes:["creativite","mental"], budget:["300+"], pour:["moi"], symbol:"Creation et ancrage", description:"Table mosaique entierement faite a la main. Une piece qui incarne la lenteur choisie et la capacite a depasser ses limites.", url:"https://www.mani-univers.com/product-page/la-table" }
 ];
 
-// Budget order for fallback (ascending)
 const BUDGET_ORDER = ["-30", "30-100", "100-300", "300+"];
 
 const questions = [
   { text:"En ce moment, vous cherchez plutot a...", key:"theme", opts:[
-    { v:"clarte", l:"Retrouver de la clarte", s:"calmer mon mental" },
-    { v:"confiance", l:"Reprendre confiance en moi", s:"me sentir a ma place" },
-    { v:"creativite", l:"Nourrir ma creativite", s:"m'inspirer, creer" },
-    { v:"amour", l:"Renforcer mes liens", s:"amour, relations, soi" },
-    { v:"puissance", l:"Reconnecter avec ma puissance", s:"feminin sacre, force interieure" },
-    { v:"mental", l:"Ancrer quelque chose de concret", s:"un objet porteur de sens" }
+    { v:"clarte",     l:"Retrouver de la clarte",          s:"calmer mon mental" },
+    { v:"confiance",  l:"Reprendre confiance en moi",      s:"me sentir a ma place" },
+    { v:"creativite", l:"Nourrir ma creativite",           s:"m'inspirer, creer" },
+    { v:"amour",      l:"Renforcer mes liens",             s:"amour, relations, soi" },
+    { v:"puissance",  l:"Reconnecter avec ma puissance",   s:"feminin sacre, force interieure" },
+    { v:"mental",     l:"Ancrer quelque chose de concret", s:"un objet porteur de sens" }
   ]},
   { text:"C'est pour...", key:"pour", opts:[
-    { v:"moi", l:"Pour moi", s:"je me fais plaisir" },
+    { v:"moi",    l:"Pour moi",    s:"je me fais plaisir" },
     { v:"offrir", l:"Pour offrir", s:"un cadeau porteur de sens" }
   ]},
   { text:"Comment voulez-vous le vivre ?", key:"categorie", opts:[
-    { v:"bijou", l:"Je le porte sur moi", s:"bracelet, collier, talisman" },
-    { v:"toile", l:"Je l'accroche chez moi", s:"toile, oeuvre d'art" },
-    { v:"deco", l:"Je l'installe dans mon espace", s:"meuble, objet deco fait main" },
-    { v:"outil", l:"Je l'utilise comme outil", s:"oracle, guide, protocole" }
+    { v:"bijou",   l:"Je le porte sur moi",        s:"bracelet, collier, talisman" },
+    { v:"chez-moi",l:"Je l'installe chez moi",     s:"toile, meuble, objet deco fait main" },
+    { v:"outil",   l:"Je l'utilise comme outil",   s:"oracle, guide, protocole" }
   ]},
   { text:"Votre enveloppe ?", key:"budget", opts:[
-    { v:"-30", l:"Moins de 30 EUR" },
-    { v:"30-100", l:"Entre 30 et 100 EUR" },
+    { v:"-30",     l:"Moins de 30 EUR" },
+    { v:"30-100",  l:"Entre 30 et 100 EUR" },
     { v:"100-300", l:"Entre 100 et 300 EUR" },
-    { v:"300+", l:"300 EUR et plus" }
+    { v:"300+",    l:"300 EUR et plus" }
   ]}
 ];
 
@@ -138,7 +137,7 @@ function nextStep(){
   else showResult();
 }
 
-function scoreP(p, ignorebudget){
+function scoreP(p){
   let s=0;
   if(answers.theme && p.themes.includes(answers.theme)) s+=3;
   if(answers.pour && p.pour.includes(answers.pour)) s+=2;
@@ -148,25 +147,16 @@ function scoreP(p, ignorebudget){
 
 function showResult(){
   const b = answers.budget;
-  // 1. Filter: products strictly within budget
   let pool = products.filter(p => p.budget.includes(b));
-  
-  // 2. If no match (e.g. budget -30 but only 25EUR items available), expand to nearest budget up
   if(pool.length === 0){
     const idx = BUDGET_ORDER.indexOf(b);
-    // Try next budgets up first (closest)
-    for(let i = idx+1; i < BUDGET_ORDER.length; i++){
+    for(let i=idx+1;i<BUDGET_ORDER.length;i++){
       pool = products.filter(p => p.budget.includes(BUDGET_ORDER[i]));
-      if(pool.length > 0) break;
+      if(pool.length>0) break;
     }
   }
-  
-  // 3. If still nothing (shouldn't happen), use all products
-  if(pool.length === 0) pool = products;
-  
-  // 4. Score within pool by theme/pour/categorie
-  const best = pool.map(p=>({...p, score:scoreP(p)})).sort((a,b)=>b.score-a.score)[0];
-  
+  if(pool.length===0) pool=products;
+  const best=pool.map(p=>({...p,score:scoreP(p)})).sort((a,b)=>b.score-a.score)[0];
   document.getElementById('res-symbol').textContent='✦ '+best.symbol;
   document.getElementById('res-name').textContent=best.name;
   document.getElementById('res-price').textContent=best.price;
