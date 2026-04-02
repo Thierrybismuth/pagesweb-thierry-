@@ -32,6 +32,8 @@ Repo : Thierrybismuth/pagesweb-thierry-
 2. Questions de découverte → activation des enseignes pertinentes
 3. Argumentaire client visible
 4. Pastille consultant masquée (commission + arguments complémentaires)
+5. CTA à la fin de chaque bloc enseigne → email automatique à thierry@thierrybismuth.com + CC consultant + test@[enseigne].fr
+6. Saisie nom + email consultant en début de formulaire
 
 ---
 
@@ -64,15 +66,123 @@ Repo : Thierrybismuth/pagesweb-thierry-
 - 5 ans et plus → ✅ levier fort
 
 **Q5b — Votre mensualité de crédit est de combien ?**
-→ Permet d'estimer l'assurance (~0,3% à 0,5% du capital) et l'économie potentielle
+→ Simulation automatique : taux assurance 0,4% (modifiable si client connaît son taux), économie estimée 40%
+→ Formule : (mensualité × mois restants) × 0,4% × 40% = économie annuelle
 
 **Q6 — Votre logement date d'avant 2000 ?**
 - Non → ❌ Sortie LAV
-- Oui / Je ne sais pas → Q7
+- Oui / Je ne sais pas → Q6b
 
-**Q7 — Votre facture énergétique vous pèse ou vous avez des problèmes de confort thermique ?**
-- Non → ❌ Sortie LAV
-- Oui → ✅ LAV activé
+**Q6b — Type de chauffage ?**
+→ Fioul / Gaz / Électrique / Pompe à chaleur / Bois
+(Fioul et électrique = dossiers les plus rentables)
+
+**Q6c — Type de logement ?**
+→ Maison individuelle / Appartement
+(LAV travaille principalement sur les maisons)
+
+**Q6d — Propriétaire occupant ou bailleur ?**
+→ Occupant = aides maximales / Bailleur = aides réduites, contrainte loyer 3 ans
+
+**Q6e — Tranche de revenus du foyer ?**
+→ Très modeste / Modeste / Intermédiaire / Supérieur
+(Détermine le niveau MaPrimeRénov')
+
+**Q6f — Déjà bénéficié d'une aide à la rénovation ?**
+→ Oui / Non
+
+**Q6g — Surface du logement ?**
+→ Champ numérique (m²)
+
+**Q6h — Montant de votre facture d'énergie ?**
+→ Champ numérique + pastille : "Ce montant est pour : 1 mois · 2 mois · 1 an"
+→ Simulation automatique selon type de chauffage :
+  - Isolation seule : -25 à -30%
+  - Pompe à chaleur (remplacement fioul/gaz) : -50 à -70%
+  - Combiné : jusqu'à -75%
+→ ✅ LAV activé
+
+---
+
+## ARGUMENTAIRES CIBLE 1 — PARTICULIERS
+
+### KW — Profil ACHETEUR
+
+**Punchline :** *"Avec KW, vous avez un interlocuteur et une équipe de 30."*
+
+📌 Pastille consultant :
+> **L'écosystème** — Le BC KW fédère sous un même toit l'agent immobilier, un courtier crédit, un courtier travaux et des partenaires déménagement. Vous n'avez pas à chercher ces intervenants vous-même après la signature — ils sont déjà dans le réseau.
+>
+> **La puissance collective** — Un BC KW réunit entre 20 et 50 négociateurs. Dès que votre recherche est enregistrée, tous les collègues du BC cherchent en parallèle — dont certains ont des biens en off market pas encore sur les portails publics.
+>
+> **L'argument clé face à une agence classique** — Une petite agence ou un réseau physique a 4 ou 5 négociateurs. KW en a 30 sur le même secteur qui travaillent pour vous dès le premier jour.
+
+**CTA :** "Je veux être mis en contact avec un conseiller KW" → email thierry@thierrybismuth.com + CC consultant + test@kw.fr
+
+💰 Commission consultant : 8% de la commission KW en cas de vente signée
+
+---
+
+### KW — Profil VENDEUR
+*(Arguments à compléter)*
+
+---
+
+### APC — Assurément Pas Cher
+
+**ARG 1 — Les banques jouent contre vous**
+*Punchline :* *"Votre banque baisse ses taux de crédit et se rattrape sur votre assurance. 90% des emprunteurs ne le voient pas."*
+
+📌 Pastille consultant :
+> Les banques compriment leurs marges sur le crédit pour attirer les clients, et compensent discrètement en gonflant le coût de l'assurance emprunteur. C'est légal, discret, et très efficace. La grande majorité des emprunteurs ne regarde jamais cette ligne sur leur relevé.
+
+**ARG 2 — La loi vous protège, les garanties aussi**
+*Punchline :* *"La loi Lemoine (2022) interdit strictement toute perte de protection. Vous changez d'assurance, vous gardez au minimum les mêmes garanties — souvent meilleures."*
+
+📌 Pastille consultant :
+> Depuis 2022, tout emprunteur peut résilier son assurance à tout moment. La loi impose que la nouvelle assurance soit équivalente ou supérieure en garanties. APC travaille exclusivement avec des assureurs de premier plan : AXA, Generali, Allianz. Aucun risque, aucune perte de couverture.
+
+**ARG 3 — Un humain qui s'occupe de tout**
+*Punchline :* *"Pas de plateforme à remplir seul. Un interlocuteur qui gère tout pour vous."*
+
+📌 Pastille consultant :
+> La plupart des solutions du marché sont 100% digitales — le client uploade ses documents seul, suit sa procédure à distance, sans personne pour répondre à ses questions. APC c'est l'inverse : un interlocuteur humain dédié qui pilote le dossier de A à Z.
+
+**CTA :** "Je veux qu'on analyse mon assurance" → email thierry@thierrybismuth.com + CC consultant + test@apc.fr
+
+💰 Commission consultant : ~500€ par contrat renégocié
+
+---
+
+### LAV — Les Artisans Verts
+
+**ARG 1 — 10 ans et 6 000 chantiers**
+*Punchline :* *"6 000 chantiers réalisés. Pas une promesse — un bilan."*
+
+📌 Pastille consultant :
+> LAV existe depuis 10 ans. 6 000 chantiers à son actif, des particuliers mais aussi de grands industriels et des bâtiments publics. Si les grandes entreprises leur font confiance pour leurs entrepôts et usines, c'est que la qualité est au rendez-vous.
+
+**ARG 2 — Tout en interne, rien de délégué**
+*Punchline :* *"LAV commercialise, achète le matériel, pose et gère les aides. Un seul interlocuteur, aucune sous-traitance."*
+
+📌 Pastille consultant :
+> Beaucoup d'acteurs de la rénovation énergétique délèguent la pose à des artisans locaux qu'ils ne contrôlent pas. LAV maîtrise toute la chaîne — de l'achat du matériel à la relation avec les organismes CEE. Zéro intermédiaire inconnu.
+
+**ARG 3 — Zéro reste à charge garanti, sans fausse promesse**
+*Punchline :* *"Le devis est toujours à zéro reste à charge. Pas d'option cachée, pas de surprise."*
+
+📌 Pastille consultant :
+> LAV s'engage sur un devis à zéro reste à charge avant tout démarrage. Si le client souhaite des options supplémentaires hors CEE, elles sont chiffrées séparément et clairement. Jamais incluses en douce dans le devis de base.
+
+**ARG 4 — Et si le client veut aller plus loin ?**
+*Punchline :* *"Des conditions de crédit négociées avec les grandes banques, impossibles à obtenir seul."*
+
+📌 Pastille consultant :
+> Pour les travaux hors CEE ou les aménagements complémentaires, LAV a des accords cadres avec de grandes banques. Des taux et conditions qu'un particulier ne peut pas obtenir en direct.
+
+**CTA :** "Je veux un diagnostic gratuit" → email thierry@thierrybismuth.com + CC consultant + test@lav.fr
+
+💰 Commission consultant : 7% du montant du chantier (entre 1 000€ et 2 000€ selon habitation)
 
 ---
 
@@ -89,9 +199,11 @@ Repo : Thierrybismuth/pagesweb-thierry-
 ---
 
 ## Prochaines étapes
-1. ✅ Arborescence Particuliers — VALIDÉE (sauf argumentaires)
-2. 🔲 Arborescence Commerçants
-3. 🔲 Arborescence Grandes Entreprises
-4. 🔲 Argumentaires client par enseigne
-5. 🔲 Pastilles consultant (commission + arguments)
-6. 🔲 Conception visuelle (artifact puis GitHub Pages)
+1. ✅ Arborescence Particuliers — VALIDÉE
+2. ✅ Argumentaires KW acheteur — VALIDÉS
+3. 🔲 Argumentaires KW vendeur — EN ATTENTE
+4. ✅ Argumentaires APC — VALIDÉS
+5. ✅ Argumentaires LAV — VALIDÉS
+6. 🔲 Arborescence + Argumentaires Commerçants
+7. 🔲 Arborescence + Argumentaires Grandes Entreprises
+8. 🔲 Conception visuelle (artifact puis GitHub Pages)
