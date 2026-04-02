@@ -170,18 +170,35 @@ C1 Surface (m²) · C2 Autorisation restauration + extraction · C3 Type client�
 
 ### ARGUMENTAIRES CIBLE 2
 
-#### RecommerCer *(punchlines à rédiger)*
-**ARG 1** — Vous avez déjà l'entreprise, le local, les clients, le banquier. Changer de métier ne repart pas de zéro.
-**ARG 2** — Des concepts qui explosent cherchent des emplacements comme le vôtre (King Marcel, Basilic & Co, Petits-fils, Rapid Pare-Brise...)
-**ARG 3** — Agir tant qu'il reste un an de trésorerie et l'envie.
-**ARG 4** — Donnez 5 critères. On revient en 8 jours avec 5 enseignes. Sans engagement.
+#### RecommerCer — Arguments (VALIDÉS)
 
-#### ConvoK *(VALIDÉS)*
+**ARG 1** — *"Membre du Collège des Experts de la Fédération Française de la Franchise. Pas un courtier — un expert reconnu."*
+📌 RecommerCer n'est pas un agrégateur de fiches enseignes. Structure reconnue par la FFF, qui audite et analyse chaque enseigne partenaire avant de la proposer.
+
+**ARG 2** — *"500 enseignes sérieuses, toutes auditées. Pas une liste — une sélection."*
+📌 Chaque enseigne du réseau a été analysée : solidité financière, modèle économique, conditions franchisé. Rien n'est proposé au hasard.
+
+**ARG 3** — *"On soumet votre localisation aux enseignes. Vous choisissez parmi les meilleures propositions."*
+📌 Notre équipe contacte directement les enseignes partenaires avec votre profil et votre localisation. Vous recevez les 3 à 5 meilleures propositions adaptées à vos critères.
+
+**ARG 4** — *"Notre intervention est gratuite. C'est l'enseigne qui paie — pas vous."*
+📌 RecommerCer est rémunéré par les enseignes, pas par le commerçant. Zéro risque financier pour explorer les options.
+
+**ARG 5** — *"On négocie avec l'enseigne, on monte le financement, on recrute si besoin, on booste l'ouverture."*
+📌 Accompagnement jusqu'à l'ouverture : négociation des conditions, adaptation du point de vente, financement, recrutement via ConvoK, coup de boost flux clients via PerDus.
+
+**CTA :** "Je veux que vous contactiez des enseignes pour mon profil" → thierry@thierrybismuth.com + CC consultant + test@recommercer.fr
+→ 💰 12% du droit d'entrée
+
+---
+
+#### ConvoK — Arguments (VALIDÉS)
+
 **ARG 1** — *"50% des patrons galent à recruter. Presque aucun ne veut payer un cabinet. Résultat : le poste reste vide des mois."*
 📌 Cabinets : 15-25% du salaire annuel = 6 000€ pour un poste à 40K€.
 
 **ARG 2** — *"LinkedIn et Indeed vous donnent des CV. ConvoK vous met des candidats en face de vous."*
-📌 Sourcing massif, relances mail/SMS/WhatsApp, convocations — sans que le patron leve le petit doigt.
+📌 Sourcing massif, relances mail/SMS/WhatsApp, convocations — sans que le patron lève le petit doigt.
 
 **ARG 3** — *"3 critères. 4 à 6 candidats en 8 jours. Vous ne payez que si vous recrutez."*
 📌 1h30–2h d'entretiens café. Forfait 2 000€ à l'embauche uniquement.
@@ -191,7 +208,8 @@ C1 Surface (m²) · C2 Autorisation restauration + extraction · C3 Type client�
 📌 Mention : *"ConvoK est une prestation simple et transparente. Ce formulaire tient lieu de document contractuel."*
 → thierry@thierrybismuth.com + CC consultant + test@convok.fr → 💰 1 000€/recrutement
 
-#### PerDus *(VALIDÉS)*
+#### PerDus — Arguments (VALIDÉS)
+
 **ARG 1** — *"8–10% du commerce = internet. 5% de ces colis ne sont jamais livrés. Stock énorme, disponible."*
 📌 Amazon, La Poste, grands transporteurs. Le commerçant ne risque rien.
 
@@ -218,27 +236,15 @@ C1 Surface (m²) · C2 Autorisation restauration + extraction · C3 Type client�
 - Non → ✅ ConvoK (anticipation)
 → Dans les deux cas → Q2
 
-**Q2 — Gérez-vous des bâtiments de grande surface ?**
-*(entrepôts, usines, hôtels, hôpitaux, gymnases, bâtiments publics ≥ 5 000 m²)*
+**Q2 — Gérez-vous des bâtiments de grande surface (≥ 5 000 m²) ?**
 - Non → Q3
 - Oui → ✅ LAV CEE activé → Q2b
 
 **Q2b — Questions LAV CEE :**
-1. Type d'activité
-2. Surface (m²)
-3. Hauteur sous plafond (m)
-4. Bâtiment chauffé ? + puissance (kW)
-5. Groupes froids ? + puissance (kW)
-6. HP flottante / régulation en place ?
-7. Bâtiment isolé ? (toiture, façade, sol)
-8. Type d'éclairage (LED / néon / halo / mixte)
-9. Propriétaire ou locataire des murs ?
-📌 Locataire non rédhibitoire si accord propriétaire — éclairage et régulation possibles même sans toucher l'enveloppe.
-
-→ Q3
+1. Type d'activité · 2. Surface (m²) · 3. Hauteur sous plafond · 4. Chauffé ? + puissance · 5. Groupes froids ? + puissance · 6. HP flottante / régulation · 7. Isolé ? · 8. Éclairage (LED/néon/halo/mixte) · 9. Propriétaire ou locataire ?
+📌 Locataire non rédhibitoire si accord propriétaire.
 
 **Q3 — Accueillez-vous du public régulièrement ou ponctuellement ?**
-*(hôtel, salle de concert, salon pro, restaurant, cantine, CHR...)*
 - Non → ❌ Fin
 - Oui → Q3b
 
@@ -250,49 +256,36 @@ C1 Surface (m²) · C2 Autorisation restauration + extraction · C3 Type client�
 
 ### ARGUMENTAIRES CIBLE 3
 
-#### ConvoK Grands Comptes *(VALIDÉS)*
-
+#### ConvoK Grands Comptes (VALIDÉS)
 **ARG 1** — *"Vos RH gèrent les dossiers. Personne ne gère les candidats."*
-📌 Postes ouverts, CVs qui s'accumulent, candidats qui disparaissent. ConvoK livre 4–6 candidats qualifiés en 8 jours.
+📌 ConvoK livre 4–6 candidats qualifiés en 8 jours. Postes récurrents uniquement (pas C-levels).
 
-**ARG 2** — *"-80% vs un cabinet de chasse. ConvoK à 2 000€ forfait. Même résultat, sans le ticket d'entrée."*
-📌 S'adresse aux postes récurrents (terrain, logistique, commercial, technique) — pas aux C-levels.
+**ARG 2** — *"-80% vs un cabinet de chasse. ConvoK à 2 000€ forfait."*
 
-**ARG 3** — Identique TPE : 3 critères, 8 jours, paiement à l'embauche.
+**ARG 3** — Identique TPE.
 
 → thierry@thierrybismuth.com + CC consultant + test@convok.fr → 💰 50% du CA
 
----
-
-#### LAV CEE Grandes Surfaces *(VALIDÉS)*
-
-**ARG 1** — *"Depuis 2026, les CEE sont prioritairement fléchés vers le tertiaire. C'est une fenêtre courte — et massive."*
-📌 Depuis 2005, 90% des fonds CEE allaient aux particuliers. À partir de 2026, priorité au tertiaire. Fenêtre à saisir maintenant.
+#### LAV CEE Grandes Surfaces (VALIDÉS)
+**ARG 1** — *"Depuis 2026, les CEE sont prioritairement fléchés vers le tertiaire. Fenêtre courte — et massive."*
+📌 Depuis 2005, 90% des fonds CEE aux particuliers. À partir de 2026, priorité au tertiaire.
 
 **ARG 2** — *"Technique ET administrative. Les deux ensemble, c'est rare. LAV les a."*
-📌 Deux mondes séparés : ceux qui font les travaux (mais ne maîtrisent pas les CEE) et ceux qui maîtrisent les CEE (mais sur petits chantiers particuliers). LAV a les deux depuis 10 ans, sur grandes surfaces, milliers de chantiers valorisés. Une des très rares entreprises en France dans ce cas.
+📌 Une des très rares entreprises en France avec double compétence — 10 ans, grandes surfaces, milliers de chantiers valorisés.
 
-**ARG 3** — *"Bureau d'études, travaux, contrôle, relation délégataires CEE. Rien n'est sous-traité."*
-📌 Toute la chaîne internalisée : bureau d'études, exécution, contrôle a posteriori, relation délégataires. Zéro intermédiaire.
+**ARG 3** — *"Bureau d'études, travaux, contrôle, délégataires CEE. Rien n'est sous-traité."*
 
-**ARG 4** — *"Le devis est toujours à zéro reste à charge. Quitte à ne pas tout faire — jamais de surprise."*
-📌 LAV s'engage sur zéro reste à charge même à marge nulle. Options supplémentaires en devis séparé.
+**ARG 4** — *"Devis toujours à zéro reste à charge. Options en devis séparé."*
 
-**CTA :** "Je veux un audit gratuit de mon bâtiment" → thierry@thierrybismuth.com + CC consultant + test@lav.fr
-→ 💰 8% du chantier (souvent >100 000€)
+**CTA :** Audit gratuit → thierry@thierrybismuth.com + CC consultant + test@lav.fr → 💰 8% du chantier (>100K€)
 
----
+#### Re-uz (VALIDÉS)
+**ARG 1** — *"Un verre à 0,30€ + 1€ de consigne. Ils le rendent ou le gardent. Dans les deux cas vous gagnez."*
+📌 Marge doublée + marque chez le client.
 
-#### Re-uz *(VALIDÉS)*
+**ARG 2** — *"Leader européen des Ecocups. Ils gèrent tout — vous encaissez."*
 
-**ARG 1** — *"Un verre à 0,30€ + 1€ de consigne. Soit ils le rendent, soit ils le gardent. Dans les deux cas vous gagnez."*
-📌 Verre acheté 0,30€, siglé à votre marque. Client rend → 1€ récupéré, marge doublée. Client garde → 0,70€ net + votre marque part chez lui.
-
-**ARG 2** — *"Re-uz est le leader européen des Ecocups. Ils gèrent tout — vous encaissez."*
-📌 Fourniture verres siglés, logistique, suivi. Économies sur jetables, bilan CO₂ amélioré, marque renforcée.
-
-**CTA :** "Je veux être contacté par Re-uz" → thierry@thierrybismuth.com + CC consultant + test@re-uz.fr
-→ 💰 8% du CA Re-uz généré
+**CTA :** thierry@thierrybismuth.com + CC consultant + test@re-uz.fr → 💰 8% du CA Re-uz
 
 ---
 
@@ -305,8 +298,7 @@ C1 Surface (m²) · C2 Autorisation restauration + extraction · C3 Type client�
 ## Prochaines étapes
 1. ✅ Cible 1 Particuliers — arborescence + KW acheteur + APC + LAV
 2. 🔲 KW vendeur — en attente infos terrain
-3. 🔲 Punchlines RecommerCer — à rédiger
-4. ✅ Cible 2 Commerçants — arborescence + ConvoK + PerDus + RecommerCer (args)
-5. ✅ Cible 3 Grandes Entreprises — arborescence + ConvoK + LAV CEE + Re-uz
-6. 🔲 Conception visuelle (artifact puis GitHub Pages)
-7. 🔲 Stratégie globale MP + prospection amont
+3. ✅ Cible 2 Commerçants — arborescence + RecommerCer + ConvoK + PerDus
+4. ✅ Cible 3 Grandes Entreprises — arborescence + ConvoK + LAV CEE + Re-uz
+5. 🔲 Conception visuelle (artifact puis GitHub Pages)
+6. 🔲 Stratégie globale MP + prospection amont
