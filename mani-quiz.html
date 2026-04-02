@@ -8,25 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    min-height: 100vh;
-    background: #f5f0eb;
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 24px 16px;
-  }
-  .card {
-    background: #fdfaf6;
-    border: 1px solid #e0d9d0;
-    border-radius: 4px;
-    width: 100%;
-    max-width: 560px;
-    padding: 48px 40px;
-    box-shadow: 0 8px 40px rgba(100,80,60,0.08);
-  }
+  body { min-height: 100vh; background: #f5f0eb; font-family: 'Cormorant Garamond', Georgia, serif; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 16px; }
+  .card { background: #fdfaf6; border: 1px solid #e0d9d0; border-radius: 4px; width: 100%; max-width: 560px; padding: 48px 40px; box-shadow: 0 8px 40px rgba(100,80,60,0.08); }
   @media (max-width: 480px) { .card { padding: 36px 24px; } }
   .logo { height: 52px; object-fit: contain; display: block; margin: 0 auto 36px; }
   .divider { width: 40px; height: 1px; background: #c4a882; margin: 16px auto 20px; }
@@ -34,19 +17,16 @@
   .intro-tagline { font-size: 18px; font-style: italic; color: #6a5848; text-align: center; line-height: 1.6; margin-bottom: 36px; }
   .progress { display: flex; gap: 7px; justify-content: center; margin-bottom: 32px; }
   .dot { width: 7px; height: 7px; border-radius: 50%; background: #d4ccc4; transition: background 0.3s; }
-  .dot.done { background: #8b6340; }
-  .dot.active { background: #2a1f14; }
+  .dot.done { background: #8b6340; } .dot.active { background: #2a1f14; }
   .step-label { font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #b8a898; text-align: center; margin-bottom: 14px; }
   .question { font-size: 26px; font-weight: 400; color: #2a1f14; text-align: center; line-height: 1.35; margin-bottom: 28px; }
   .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
   .opt { border: 1.5px solid #e0d5c8; background: transparent; border-radius: 3px; padding: 14px 18px; cursor: pointer; text-align: left; transition: all 0.18s; width: 100%; }
-  .opt:hover { border-color: #c4a882; background: #fdf7f0; }
-  .opt.selected { border-color: #8b6340; background: #fdf4ec; }
+  .opt:hover { border-color: #c4a882; background: #fdf7f0; } .opt.selected { border-color: #8b6340; background: #fdf4ec; }
   .opt-label { font-family: 'Jost', sans-serif; font-size: 15px; color: #2a1f14; display: block; }
   .opt-sub { font-family: 'Jost', sans-serif; font-size: 12px; color: #9a8878; font-style: italic; display: block; margin-top: 2px; }
   .btn-primary { width: 100%; background: #2a1f14; color: #f5f0eb; border: none; border-radius: 3px; padding: 16px; font-family: 'Jost', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
-  .btn-primary:hover { background: #8b6340; }
-  .btn-primary:disabled { background: #d4ccc4; cursor: not-allowed; }
+  .btn-primary:hover { background: #8b6340; } .btn-primary:disabled { background: #d4ccc4; cursor: not-allowed; }
   .result-symbol { font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #8b6340; text-align: center; margin-bottom: 8px; }
   .result-name { font-size: 34px; font-weight: 300; color: #2a1f14; text-align: center; margin-bottom: 4px; }
   .result-price { font-family: 'Jost', sans-serif; font-size: 16px; color: #9a8878; text-align: center; margin-bottom: 24px; }
@@ -55,13 +35,12 @@
   .btn-cta:hover { background: #2a1f14; }
   .btn-reset { width: 100%; background: transparent; color: #9a8878; border: 1px solid #e0d5c8; border-radius: 3px; padding: 14px; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
   .btn-reset:hover { border-color: #9a8878; color: #2a1f14; }
-  .screen { display: none; }
-  .screen.active { display: block; }
+  .screen { display: none; } .screen.active { display: block; }
 </style>
 </head>
 <body>
 <div class="card">
-  <img src="https://static.wixstatic.com/media/d28b94_10ce5546a68d4bef8fb0ee187f6ff008~mv2.jpg" alt="Mani Univers" class="logo" onerror="this.style.display='none'">
+  <img src="https://static.wixstatic.com/media/d28b94_10ce5546a68d4bef8fb0ee187f6ff008~mv2.jpg" alt="Mani" class="logo" onerror="this.style.display='none'">
   <div id="screen-intro" class="screen active">
     <p class="intro-title">Trouvez votre talisman</p>
     <div class="divider"></div>
@@ -87,20 +66,24 @@
 </div>
 <script>
 const products = [
-  { id:"clear-mind", name:"Talisman Clear Mind", price:"70EUR", category:"bijou", themes:["clarte","mental"], budget:["30-100"], pour:["moi","offrir"], symbol:"Clarte mentale", description:"Morganite et bois naturel assembles a la main. Pour apaiser le mental qui tourne en boucle et retrouver la legerete.", url:"https://www.mani-univers.com/product-page/talisman-clear-mind" },
-  { id:"love", name:"Talisman Love", price:"130EUR", category:"bijou", themes:["amour","relations"], budget:["100-300"], pour:["moi","offrir"], symbol:"Amour de soi", description:"Quartz rose naturel, piece unique modulable (collier, bracelet, bijou de taille). Pour s'ouvrir a l'amour et a soi-meme.", url:"https://www.mani-univers.com/product-page/talisman-love" },
-  { id:"temperance", name:"Talisman Temperance", price:"65EUR", category:"bijou", themes:["clarte","confiance"], budget:["30-100"], pour:["moi","offrir"], symbol:"Equilibre et maitrise", description:"Pour trouver l'espace entre intensite et douceur. Un talisman pour ceux qui vivent tout a fond.", url:"https://www.mani-univers.com/product-page/talisman-temperance" },
-  { id:"inspiration", name:"Talisman Inspiration", price:"75EUR", category:"bijou", themes:["creativite","puissance"], budget:["30-100"], pour:["moi","offrir"], symbol:"Elan creatif", description:"Pour debloquer l'inspiration et retrouver l'envie de creer, d'agir, de faire.", url:"https://www.mani-univers.com/product-page/talisman-inspiration" },
-  { id:"feminin-sacre", name:"Talisman Feminin Sacre", price:"80EUR", category:"bijou", themes:["puissance","amour"], budget:["30-100"], pour:["moi","offrir"], symbol:"Puissance feminine", description:"Reconnexion a la puissance interieure, aux cycles et a la force douce qui vit en soi.", url:"https://www.mani-univers.com/product-page/talisman-f%C3%A9minin-sacr%C3%A9" },
-  { id:"authentique", name:"Talisman Authentique", price:"70EUR", category:"bijou", themes:["confiance","creativite"], budget:["30-100"], pour:["moi","offrir"], symbol:"Alignement et verite", description:"Pour arreter de jouer un role et vivre en accord total avec soi-meme.", url:"https://www.mani-univers.com/product-page/talisman-authentique" },
-  { id:"tigres-petit", name:"Les Tigres - petits formats", price:"150-200EUR", category:"toile", themes:["confiance","clarte"], budget:["100-300"], pour:["moi","offrir"], symbol:"Resilience et force", description:"Toiles peintes a la main. Le tigre, symbole de celui qui revient - plus fort, plus sage, plus entier.", url:"https://www.mani-univers.com/product-page/n-11-les-tigres" },
-  { id:"tigres-moyen", name:"Les Tigres - formats moyens", price:"250-450EUR", category:"toile", themes:["confiance","puissance"], budget:["300+"], pour:["moi","offrir"], symbol:"Puissance assumee", description:"Pieces uniques de la serie Les Tigres. Pour ancrer un symbole fort dans son espace de vie.", url:"https://www.mani-univers.com/product-page/n-4-les-tigres" },
-  { id:"tigres-grand", name:"Les Tigres - grands formats", price:"450-750EUR", category:"toile", themes:["confiance","puissance"], budget:["300+"], pour:["moi"], symbol:"Transformation visible", description:"Oeuvres majeures - pour ceux qui veulent que leur chemin parcouru soit visible, present, lumineux.", url:"https://www.mani-univers.com/product-page/n-1-les-tigres" },
-  { id:"cube", name:"Le Cube", price:"250EUR", category:"deco", themes:["creativite","puissance"], budget:["100-300"], pour:["moi"], symbol:"Depassement de soi", description:"Objet unique fait main par Margaux. La preuve qu'on peut creer quelque chose de beau au-dela de ses competences initiales.", url:"https://www.mani-univers.com/product-page/le-cube" },
-  { id:"table", name:"La Table", price:"850EUR", category:"deco", themes:["creativite","mental"], budget:["300+"], pour:["moi"], symbol:"Creation et ancrage", description:"Table mosaique entierement faite a la main. Une piece qui incarne la lenteur choisie et la capacite a depasser ses limites.", url:"https://www.mani-univers.com/product-page/la-table" },
-  { id:"oracle", name:"L'Oracle de Mani", price:"25EUR", category:"outil", themes:["clarte","puissance"], budget:["-30","30-100"], pour:["moi","offrir"], symbol:"Introspection guidee", description:"Un outil de questionnement pour explorer ce qui se passe vraiment en soi et trouver ses propres reponses.", url:"https://www.mani-univers.com/product-page/l-oracle-de-mani" },
-  { id:"migraines", name:"Migraines - Outil de resolution", price:"25EUR", category:"outil", themes:["clarte","mental"], budget:["-30","30-100"], pour:["moi","offrir"], symbol:"Maitrise du corps", description:"Un protocole concret pour reprendre la maitrise de son corps face aux migraines recurrentes.", url:"https://www.mani-univers.com/product-page/migraines-outil-de-r%C3%A9solution" }
+  { id:"oracle", name:"L'Oracle de Mani", price:"25 EUR", category:"outil", themes:["clarte","puissance"], budget:["-30","30-100"], pour:["moi","offrir"], symbol:"Introspection guidee", description:"Un outil de questionnement pour explorer ce qui se passe vraiment en soi et trouver ses propres reponses.", url:"https://www.mani-univers.com/product-page/l-oracle-de-mani" },
+  { id:"migraines", name:"Migraines - Outil de resolution", price:"25 EUR", category:"outil", themes:["clarte","mental"], budget:["-30","30-100"], pour:["moi","offrir"], symbol:"Maitrise du corps", description:"Un protocole concret pour reprendre la maitrise de son corps face aux migraines recurrentes.", url:"https://www.mani-univers.com/product-page/migraines-outil-de-r%C3%A9solution" },
+  { id:"temperance", name:"Talisman Temperance", price:"65 EUR", category:"bijou", themes:["clarte","confiance"], budget:["30-100"], pour:["moi","offrir"], symbol:"Equilibre et maitrise", description:"Pour trouver l'espace entre intensite et douceur. Un talisman pour ceux qui vivent tout a fond.", url:"https://www.mani-univers.com/product-page/talisman-temperance" },
+  { id:"clear-mind", name:"Talisman Clear Mind", price:"70 EUR", category:"bijou", themes:["clarte","mental"], budget:["30-100"], pour:["moi","offrir"], symbol:"Clarte mentale", description:"Morganite et bois naturel assembles a la main. Pour apaiser le mental qui tourne en boucle et retrouver la legerete.", url:"https://www.mani-univers.com/product-page/talisman-clear-mind" },
+  { id:"authentique", name:"Talisman Authentique", price:"70 EUR", category:"bijou", themes:["confiance","creativite"], budget:["30-100"], pour:["moi","offrir"], symbol:"Alignement et verite", description:"Pour arreter de jouer un role et vivre en accord total avec soi-meme.", url:"https://www.mani-univers.com/product-page/talisman-authentique" },
+  { id:"inspiration", name:"Talisman Inspiration", price:"75 EUR", category:"bijou", themes:["creativite","puissance"], budget:["30-100"], pour:["moi","offrir"], symbol:"Elan creatif", description:"Pour debloquer l'inspiration et retrouver l'envie de creer, d'agir, de faire.", url:"https://www.mani-univers.com/product-page/talisman-inspiration" },
+  { id:"feminin-sacre", name:"Talisman Feminin Sacre", price:"80 EUR", category:"bijou", themes:["puissance","amour"], budget:["30-100"], pour:["moi","offrir"], symbol:"Puissance feminine", description:"Reconnexion a la puissance interieure, aux cycles et a la force douce qui vit en soi.", url:"https://www.mani-univers.com/product-page/talisman-f%C3%A9minin-sacr%C3%A9" },
+  { id:"love", name:"Talisman Love", price:"130 EUR", category:"bijou", themes:["amour","confiance"], budget:["100-300"], pour:["moi","offrir"], symbol:"Amour de soi", description:"Quartz rose naturel, piece unique modulable (collier, bracelet, bijou de taille). Pour s'ouvrir a l'amour et a soi-meme.", url:"https://www.mani-univers.com/product-page/talisman-love" },
+  { id:"tigres-petit", name:"Les Tigres - petits formats", price:"150-200 EUR", category:"toile", themes:["confiance","clarte"], budget:["100-300"], pour:["moi","offrir"], symbol:"Resilience et force", description:"Toiles peintes a la main. Le tigre, symbole de celui qui revient — plus fort, plus sage, plus entier.", url:"https://www.mani-univers.com/product-page/n-11-les-tigres" },
+  { id:"cube", name:"Le Cube", price:"250 EUR", category:"deco", themes:["creativite","puissance"], budget:["100-300"], pour:["moi"], symbol:"Depassement de soi", description:"Objet unique fait main par Margaux. La preuve qu'on peut creer quelque chose de beau au-dela de ses competences initiales.", url:"https://www.mani-univers.com/product-page/le-cube" },
+  { id:"tigres-moyen", name:"Les Tigres - formats moyens", price:"250-450 EUR", category:"toile", themes:["confiance","puissance"], budget:["300+"], pour:["moi","offrir"], symbol:"Puissance assumee", description:"Pieces uniques de la serie Les Tigres. Pour ancrer un symbole fort dans son espace de vie.", url:"https://www.mani-univers.com/product-page/n-4-les-tigres" },
+  { id:"tigres-grand", name:"Les Tigres - grands formats", price:"450-750 EUR", category:"toile", themes:["confiance","puissance"], budget:["300+"], pour:["moi"], symbol:"Transformation visible", description:"Oeuvres majeures — pour ceux qui veulent que leur chemin parcouru soit visible, present, lumineux.", url:"https://www.mani-univers.com/product-page/n-1-les-tigres" },
+  { id:"table", name:"La Table", price:"850 EUR", category:"deco", themes:["creativite","mental"], budget:["300+"], pour:["moi"], symbol:"Creation et ancrage", description:"Table mosaique entierement faite a la main. Une piece qui incarne la lenteur choisie et la capacite a depasser ses limites.", url:"https://www.mani-univers.com/product-page/la-table" }
 ];
+
+// Budget order for fallback (ascending)
+const BUDGET_ORDER = ["-30", "30-100", "100-300", "300+"];
+
 const questions = [
   { text:"En ce moment, vous cherchez plutot a...", key:"theme", opts:[
     { v:"clarte", l:"Retrouver de la clarte", s:"calmer mon mental" },
@@ -121,15 +104,18 @@ const questions = [
     { v:"outil", l:"Je l'utilise comme outil", s:"oracle, guide, protocole" }
   ]},
   { text:"Votre enveloppe ?", key:"budget", opts:[
-    { v:"-30", l:"Moins de 30 euros" },
-    { v:"30-100", l:"Entre 30 et 100 euros" },
-    { v:"100-300", l:"Entre 100 et 300 euros" },
-    { v:"300+", l:"300 euros et plus" }
+    { v:"-30", l:"Moins de 30 EUR" },
+    { v:"30-100", l:"Entre 30 et 100 EUR" },
+    { v:"100-300", l:"Entre 100 et 300 EUR" },
+    { v:"300+", l:"300 EUR et plus" }
   ]}
 ];
+
 let step=0, answers={}, selected=null;
+
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
 function startQuiz(){step=0;answers={};selected=null;renderQuestion();show('screen-quiz');}
+
 function renderQuestion(){
   const q=questions[step];
   document.getElementById('progress').innerHTML=questions.map((_,i)=>`<div class="dot${i<step?' done':i===step?' active':''}"></div>`).join('');
@@ -141,7 +127,9 @@ function renderQuestion(){
   btn.textContent=step<questions.length-1?'Suivant':'Voir ma recommandation';
   selected=null;
 }
+
 function selectOpt(v,el){document.querySelectorAll('.opt').forEach(b=>b.classList.remove('selected'));el.classList.add('selected');selected=v;document.getElementById('btn-next').disabled=false;}
+
 function nextStep(){
   if(!selected)return;
   answers[questions[step].key]=selected;
@@ -149,23 +137,44 @@ function nextStep(){
   if(step<questions.length)renderQuestion();
   else showResult();
 }
-function scoreP(p){
+
+function scoreP(p, ignorebudget){
   let s=0;
-  if(answers.theme&&p.themes.includes(answers.theme))s+=3;
-  if(answers.pour&&p.pour.includes(answers.pour))s+=2;
-  if(answers.categorie&&p.category===answers.categorie)s+=4;
-  if(answers.budget&&p.budget.includes(answers.budget))s+=3;
+  if(answers.theme && p.themes.includes(answers.theme)) s+=3;
+  if(answers.pour && p.pour.includes(answers.pour)) s+=2;
+  if(answers.categorie && p.category===answers.categorie) s+=4;
   return s;
 }
+
 function showResult(){
-  const best=products.map(p=>({...p,score:scoreP(p)})).sort((a,b)=>b.score-a.score)[0];
-  document.getElementById('res-symbol').textContent='+ '+best.symbol;
+  const b = answers.budget;
+  // 1. Filter: products strictly within budget
+  let pool = products.filter(p => p.budget.includes(b));
+  
+  // 2. If no match (e.g. budget -30 but only 25EUR items available), expand to nearest budget up
+  if(pool.length === 0){
+    const idx = BUDGET_ORDER.indexOf(b);
+    // Try next budgets up first (closest)
+    for(let i = idx+1; i < BUDGET_ORDER.length; i++){
+      pool = products.filter(p => p.budget.includes(BUDGET_ORDER[i]));
+      if(pool.length > 0) break;
+    }
+  }
+  
+  // 3. If still nothing (shouldn't happen), use all products
+  if(pool.length === 0) pool = products;
+  
+  // 4. Score within pool by theme/pour/categorie
+  const best = pool.map(p=>({...p, score:scoreP(p)})).sort((a,b)=>b.score-a.score)[0];
+  
+  document.getElementById('res-symbol').textContent='✦ '+best.symbol;
   document.getElementById('res-name').textContent=best.name;
   document.getElementById('res-price').textContent=best.price;
   document.getElementById('res-desc').textContent=best.description;
   document.getElementById('res-cta').href=best.url;
   show('screen-result');
 }
+
 function resetQuiz(){step=0;answers={};selected=null;show('screen-intro');}
 </script>
 </body>
