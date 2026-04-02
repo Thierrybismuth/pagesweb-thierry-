@@ -33,12 +33,30 @@ header{background:#fff;border-bottom:3px solid var(--gm);padding:0 32px;display:
 .al-w{background:var(--op);border-left:4px solid var(--od);color:#6d2600}
 .al-s{background:var(--gp);border-left:4px solid var(--gm);color:#1b5e20}
 .al-i{background:var(--bp);border-left:4px solid var(--bm);color:var(--bd)}
+/* INFO ACCORDION */
+.info-wrap{background:#fff;border-radius:14px;box-shadow:var(--sh);margin-bottom:24px;border:1px solid rgba(0,0,0,.04);overflow:hidden}
+.info-header{padding:16px 24px;display:flex;align-items:center;gap:12px;cursor:pointer;background:linear-gradient(135deg,#0d3b1a,#0d47a1);color:#fff}
+.info-header h3{font-size:15px;font-weight:700;flex:1}
+.info-header p{font-size:12px;opacity:.7}
+.info-toggle{font-size:12px;opacity:.7}
+.info-body{display:none;padding:0}
+.info-body.open{display:block}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--br)}
+.info-card{padding:20px 24px;border-right:1px solid var(--br);border-bottom:1px solid var(--br)}
+.info-card:nth-child(2n){border-right:none}
+.info-card:nth-last-child(-n+2){border-bottom:none}
+.info-card h4{font-size:13px;font-weight:700;color:var(--gm);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.info-card p{font-size:12px;color:var(--tm);line-height:1.6}
+.info-card ul{font-size:12px;color:var(--tm);line-height:1.7;padding-left:14px}
+.info-badge{display:inline-block;background:var(--gp);color:var(--gm);font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;margin-top:8px}
+/* CARD */
 .card{background:#fff;border-radius:14px;box-shadow:var(--sh);padding:32px;margin-bottom:20px;border:1px solid rgba(0,0,0,.04)}
 .sh2{font-size:20px;font-weight:700;margin-bottom:4px}
 .sp{font-size:13px;color:var(--tl);margin-bottom:24px}
 .stag{display:inline-flex;align-items:center;gap:6px;background:var(--gn);color:#1b5e20;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:16px;border:1px solid rgba(46,125,50,.2)}
 .stag.bl{background:var(--bp);color:var(--bd);border-color:rgba(21,101,192,.2)}
 .stag.or{background:var(--op);color:var(--od);border-color:rgba(230,81,0,.2)}
+.stag.pu{background:#f3e5f5;color:#6a1b9a;border-color:rgba(106,27,154,.2)}
 .div{border:none;border-top:1px solid var(--br);margin:22px 0}
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .fg.c3{grid-template-columns:1fr 1fr 1fr}
@@ -64,9 +82,13 @@ input:focus,select:focus{outline:none;border-color:var(--gm);box-shadow:0 0 0 3p
 .btn-g{background:transparent;color:var(--gm);border:2px solid var(--gm)}
 .btn-g:hover{background:var(--gp)}
 .bgrp{display:flex;gap:12px;justify-content:flex-end;margin-top:28px;padding-top:20px;border-top:1px solid var(--br)}
+/* Conditionnal sections */
+.cond-section{display:none}
+.cond-section.show{display:block}
 .ss{display:none}
 .ss.active{display:block}
 #res{display:none}
+/* RESULTS */
 .sban{background:linear-gradient(135deg,#0d3b1a 0%,#0d47a1 100%);color:#fff;border-radius:16px;padding:28px 32px;margin-bottom:24px;display:flex;align-items:center;gap:32px;position:relative;overflow:hidden}
 .sban::before{content:'';position:absolute;right:-30px;top:-30px;width:200px;height:200px;background:rgba(255,255,255,.04);border-radius:50%}
 .tblk{flex-shrink:0;text-align:center}
@@ -113,6 +135,7 @@ input:focus,select:focus{outline:none;border-color:var(--gm);box-shadow:0 0 0 3p
 .fnote{font-size:12px;color:var(--tl);line-height:1.6;margin-bottom:12px}
 .pbdg{display:flex;align-items:flex-start;gap:10px;background:var(--bp);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--bd)}
 .tsup{display:inline-block;background:var(--rd);color:#fff;font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;letter-spacing:.5px;vertical-align:middle;margin-left:6px;text-transform:uppercase}
+/* PRE FORMS */
 .pfc{background:#fff;border-radius:14px;border:2px solid var(--gm);margin-bottom:20px;overflow:hidden}
 .pfh{background:var(--gp);padding:18px 24px;border-bottom:1px solid rgba(46,125,50,.2)}
 .pfh h3{font-size:16px;font-weight:700;color:#1b5e20}
@@ -121,6 +144,7 @@ input:focus,select:focus{outline:none;border-color:var(--gm);box-shadow:0 0 0 3p
 .cftxt{background:var(--gn);border-radius:8px;padding:14px 16px;font-size:12px;color:#1b5e20;line-height:1.6;margin:16px 0;border-left:3px solid var(--gm)}
 .sigrow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;padding-top:20px;border-top:1px dashed var(--br)}
 .sigbox{border:1.5px dashed var(--br);border-radius:8px;padding:16px;min-height:80px;background:#fafafa;display:flex;align-items:flex-end;font-size:11px;color:var(--tl)}
+/* NEXT STEPS */
 .nsgrd{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px}
 .nsi{border-radius:12px;padding:20px;text-align:center}
 .nsemoji{font-size:28px;margin-bottom:10px}
@@ -130,20 +154,16 @@ input:focus,select:focus{outline:none;border-color:var(--gm);box-shadow:0 0 0 3p
 .ag{background:var(--gm);color:#fff}
 .ab{background:var(--bm);color:#fff}
 .ap{background:#7b1fa2;color:#fff}
-.condblock{margin-bottom:18px;padding:16px;background:#fafafa;border-radius:10px;border:1px solid var(--br)}
-.condblock.show{display:block}
-.condblock.hide{display:none}
-/* Loading overlay */
+/* LOADING */
 .loading{position:fixed;inset:0;background:rgba(255,255,255,.9);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;gap:16px}
 .spinner{width:48px;height:48px;border:4px solid var(--br);border-top-color:var(--gm);border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading p{font-size:15px;font-weight:600;color:var(--gm)}
 @media print{.no-print{display:none!important}header{position:relative}.pwrap{display:none}#form-card{display:none!important}#res{display:block!important}body{background:#fff}.sban{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-@media(max-width:640px){header{padding:0 16px}.wrap{padding:16px 12px 60px}.card{padding:20px 16px}.fg{grid-template-columns:1fr}.fg.c3{grid-template-columns:1fr}.sban{flex-direction:column;gap:16px}.ssep{width:100%;height:1px}.nsgrd{grid-template-columns:1fr}.sigrow{grid-template-columns:1fr}.pwrap{display:none}.hbadge{display:none}}
+@media(max-width:640px){header{padding:0 16px}.wrap{padding:16px 12px 60px}.card{padding:20px 16px}.fg{grid-template-columns:1fr}.fg.c3{grid-template-columns:1fr}.sban{flex-direction:column;gap:16px}.ssep{width:100%;height:1px}.nsgrd{grid-template-columns:1fr}.sigrow{grid-template-columns:1fr}.pwrap{display:none}.hbadge{display:none}.info-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
 <header>
   <svg class="lmark" viewBox="0 0 44 44" fill="none">
     <polygon points="22,3 41,13.5 41,30.5 22,41 3,30.5 3,13.5" fill="#1b5e20"/>
@@ -151,15 +171,9 @@ input:focus,select:focus{outline:none;border-color:var(--gm);box-shadow:0 0 0 3p
     <text x="22" y="25" text-anchor="middle" fill="#fff" font-size="6" font-family="sans-serif" font-weight="800">ARTISANS</text>
     <text x="22" y="33" text-anchor="middle" fill="#fff" font-size="6" font-family="sans-serif" font-weight="800">VERTS</text>
   </svg>
-  <div>
-    <div class="lbrand">Les Artisans Verts</div>
-    <div class="lsub">6 rue Eugène Barbier — 92400 Courbevoie</div>
-  </div>
+  <div><div class="lbrand">Les Artisans Verts</div><div class="lsub">6 rue Eugène Barbier — 92400 Courbevoie</div></div>
   <div class="hsep"></div>
-  <div class="htitle">
-    <h1>Simulateur d'Éligibilité CEE</h1>
-    <p>Outil commercial — remplissage en présence du client</p>
-  </div>
+  <div class="htitle"><h1>Simulateur d'Éligibilité CEE</h1><p>Outil commercial — remplissage en présence du client</p></div>
   <div class="hbadge no-print">⚡ Partenaire CEE EDF</div>
 </header>
 
@@ -175,24 +189,72 @@ input:focus,select:focus{outline:none;border-color:var(--gm);box-shadow:0 0 0 3p
   </div>
 </div>
 
-<!-- Loading overlay -->
-<div class="loading" id="loading" style="display:none">
-  <div class="spinner"></div>
-  <p>Calcul de l'éligibilité en cours…</p>
-</div>
+<div class="loading" id="loading" style="display:none"><div class="spinner"></div><p>Calcul de l'éligibilité en cours…</p></div>
 
 <div class="wrap">
+
+<!-- ══════ INFO ACCORDION ══════ -->
+<div class="info-wrap no-print">
+  <div class="info-header" onclick="toggleInfo()">
+    <div>
+      <h3>💡 Les Certificats d'Économies d'Énergie (CEE) — Ce qu'il faut savoir</h3>
+      <p>Cliquez pour afficher les informations sur le dispositif</p>
+    </div>
+    <span class="info-toggle" id="info-tog">▼ Afficher</span>
+  </div>
+  <div class="info-body" id="info-body">
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>📋 Qu'est-ce que les CEE ?</h4>
+        <p>Les Certificats d'Économies d'Énergie obligent les fournisseurs d'énergie (EDF, TotalEnergies…) à financer des travaux de rénovation chez leurs clients. Résultat : les travaux sont <strong>financés à 100%</strong> pour le bénéficiaire, sans avance de trésorerie.</p>
+        <span class="info-badge">Financement 100% sous conditions</span>
+      </div>
+      <div class="info-card">
+        <h4>📅 La 5ème période (CEE5) : 2022–2026</h4>
+        <p>Nous sommes dans la <strong>5ème période CEE</strong>, avec un objectif de 3 100 TWhc. Le volume d'économies à générer est historiquement élevé, ce qui maintient des valorisations attractives pour les bénéficiaires. Valeur de marché actuelle : <strong>environ 6 €/MWhc</strong>.</p>
+        <span class="info-badge">Valeur actuelle ≈ 6 €/MWhc</span>
+      </div>
+      <div class="info-card">
+        <h4>🏢 Bâtiment tertiaire : le Décret Tertiaire</h4>
+        <p>Le <strong>Décret Tertiaire (DEET)</strong> impose aux bâtiments ≥ 1 000 m² une réduction de consommation énergétique de <strong>-40% en 2030, -50% en 2040, -60% en 2050</strong> vs. une année de référence. Les travaux CEE contribuent directement à ces objectifs déclarés sur OPERAT.</p>
+        <ul><li>Obligation depuis 2021</li><li>Déclaration annuelle sur OPERAT</li><li>Sanctions jusqu'à 7 500 € pour les personnes morales</li></ul>
+      </div>
+      <div class="info-card">
+        <h4>🔄 Rénovation globale : le bonus volume</h4>
+        <p>Cumuler plusieurs fiches CEE sur un même site génère un <strong>effet levier</strong> : chaque opération est éligible indépendamment. Sur un entrepôt de 10 000 m², il est courant d'atteindre <strong>3 à 5 M kWhc</strong> en combinant isolation, éclairage, chauffage et froid.</p>
+        <ul><li>Pas de plafond de cumul sur un site</li><li>Opérations réalisées par des artisans RGE</li><li>Durée conventionnelle : 10 à 30 ans selon la fiche</li></ul>
+      </div>
+      <div class="info-card">
+        <h4>⚠️ Points d'attention 2026</h4>
+        <p>L'arrêté du <strong>23/02/2026</strong> a supprimé les fiches <strong>BAT-EQ-127, BAR-EQ-110 et IND-BA-116</strong> (LED sans détecteurs) pour toute nouvelle opération. La fiche BAT-EQ-133 (LED + détecteurs) reste active. Les autres fiches sont inchangées.</p>
+        <span class="info-badge" style="background:var(--rp);color:var(--rd)">BAT-EQ-127 supprimée le 24/02/2026</span>
+      </div>
+      <div class="info-card">
+        <h4>✅ Comment ça se passe concrètement ?</h4>
+        <ol style="font-size:12px;color:var(--tm);line-height:1.8;padding-left:14px">
+          <li>Ce simulateur identifie les fiches éligibles</li>
+          <li>Le client signe la demande de pré-étude</li>
+          <li>L'étude technique est réalisée par un expert</li>
+          <li>Les travaux sont effectués par artisans RGE</li>
+          <li>Le dossier CEE est déposé auprès du ministère</li>
+          <li>Le financement est versé avant ou après travaux</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ FORM CARD ══════ -->
 <div class="card" id="form-card">
 
-<!-- ══════════ STEP 1 — Bâtiment ══════════ -->
+<!-- STEP 1 -->
 <div class="ss active" id="s1">
   <h2 class="sh2">🏢 Identification du site</h2>
   <p class="sp">Informations générales — ces données servent à l'ensemble des fiches CEE</p>
-
   <div class="fg">
     <div class="fi full"><label class="lbl">Nom / raison sociale <span class="req">*</span></label><input type="text" id="nom" placeholder="Ex: Entrepôt Dupont Logistique SA"></div>
     <div class="fi full"><label class="lbl">Secteur d'activité <span class="req">*</span></label>
-      <select id="sec">
+      <select id="sec" onchange="updateCondSections()">
         <option value="">— Sélectionner —</option>
         <option value="industrie">🏭 Industrie / Production (ateliers, halls de fabrication)</option>
         <option value="entrepot">📦 Entrepôt / Plateforme logistique</option>
@@ -215,190 +277,190 @@ input:focus,select:focus{outline:none;border-color:var(--gm);box-shadow:0 0 0 3p
       <input type="hidden" id="zon" value="H1">
     </div>
     <div class="fi"><label class="lbl">Bâtiment existant &gt; 2 ans ?</label>
-      <div class="pg">
-        <label class="pl s" id="pe-o"><input type="radio" name="exist" value="oui" checked> ✅ Oui</label>
-        <label class="pl" id="pe-n"><input type="radio" name="exist" value="non"> ❌ Non (neuf)</label>
-      </div>
+      <div class="pg"><label class="pl s" id="pe-o"><input type="radio" name="exist" value="oui" checked> ✅ Oui</label><label class="pl" id="pe-n"><input type="radio" name="exist" value="non"> ❌ Non (neuf)</label></div>
     </div>
     <div class="fi"><label class="lbl">Local complètement clos ?</label>
-      <div class="pg">
-        <label class="pl s" id="pc-o"><input type="radio" name="clos" value="oui" checked> ✅ Oui</label>
-        <label class="pl" id="pc-n"><input type="radio" name="clos" value="non"> ❌ Non / Semi-ouvert</label>
-      </div>
+      <div class="pg"><label class="pl s" id="pc-o"><input type="radio" name="clos" value="oui" checked> ✅ Oui</label><label class="pl" id="pc-n"><input type="radio" name="clos" value="non"> ❌ Non / Semi-ouvert</label></div>
     </div>
   </div>
-
   <hr class="div">
-  <div class="stag or">🏗️ Toiture — BAT-EN-101</div>
+  <div class="stag or">🏗️ Isolation — BAT-EN-101 / 102 / 103</div>
   <div class="fg">
     <div class="fi"><label class="lbl">Type de toiture</label>
-      <select id="ttoiture">
-        <option value="terrasse">Toiture terrasse (plate)</option>
-        <option value="versants">Toiture à versants / pente inclinée</option>
-        <option value="shed">Shed / en dents de scie</option>
-        <option value="inconnue">Non renseigné</option>
-      </select>
+      <select id="ttoiture"><option value="terrasse">Toiture terrasse (plate)</option><option value="versants">Versants inclinés</option><option value="shed">Shed / dents de scie</option><option value="inconnue">Non renseigné</option></select>
     </div>
     <div class="fi"><label class="lbl">Isolation toiture existante</label>
-      <select id="isoexist">
-        <option value="aucune">Aucune isolation (dalle béton nue)</option>
-        <option value="insuffisante">Insuffisante (R &lt; 2 m².K/W)</option>
-        <option value="correcte">Déjà correcte (R ≥ 4 m².K/W)</option>
-        <option value="inconnue">Non renseigné</option>
-      </select>
+      <select id="isoexist"><option value="aucune">Aucune (dalle béton nue)</option><option value="insuffisante">Insuffisante (R &lt; 2 m².K/W)</option><option value="correcte">Déjà correcte (R ≥ 4 m².K/W)</option><option value="inconnue">Non renseigné</option></select>
+    </div>
+    <div class="fi"><label class="lbl">Isolation des murs (façades)</label>
+      <select id="isomurs"><option value="aucune">Aucune (bardage / béton nu)</option><option value="insuffisante">Insuffisante (R &lt; 2 m².K/W)</option><option value="correcte">Déjà correcte (R ≥ 3 m².K/W)</option><option value="inconnue">Non renseigné</option></select>
+    </div>
+    <div class="fi"><label class="lbl">Isolation du plancher bas</label>
+      <select id="isoplancher"><option value="aucune">Aucune (dalle sur terre-plein)</option><option value="insuffisante">Insuffisante (R &lt; 1 m².K/W)</option><option value="correcte">Déjà isolé (R ≥ 2 m².K/W)</option><option value="inconnue">Non renseigné</option></select>
     </div>
   </div>
-
-  <hr class="div">
-  <div class="stag or">🧱 Murs &amp; Planchers — BAT-EN-102 / BAT-EN-103</div>
-  <div style="font-size:12px;color:var(--tl);margin-bottom:14px">Surface des façades et du plancher estimées automatiquement à partir de la surface et de la hauteur saisies.</div>
-  <div class="fg">
-    <div class="fi"><label class="lbl">Isolation des murs (façades) existante</label>
-      <select id="isomurs">
-        <option value="aucune">Aucune — bardage métallique / béton nu</option>
-        <option value="insuffisante">Insuffisante (R &lt; 2 m².K/W)</option>
-        <option value="correcte">Déjà correcte (R ≥ 3 m².K/W)</option>
-        <option value="inconnue">Non renseigné</option>
-      </select>
-    </div>
-    <div class="fi"><label class="lbl">Isolation du plancher bas existante</label>
-      <select id="isoplancher">
-        <option value="aucune">Aucune — dalle béton sur terre-plein</option>
-        <option value="insuffisante">Insuffisante (R &lt; 1 m².K/W)</option>
-        <option value="correcte">Déjà correcte (R ≥ 2 m².K/W)</option>
-        <option value="inconnue">Non renseigné</option>
-      </select>
+  <!-- PORTES SECTIONNELLES — visible si entrepôt/industrie -->
+  <div class="cond-section" id="cs-portes">
+    <hr class="div">
+    <div class="stag or">🚪 Portes sectionnelles — BAT-EN-104</div>
+    <p style="font-size:12px;color:var(--tl);margin-bottom:14px">Portes de quai, portes industrielles, portes sectionnelles de grande dimension.</p>
+    <div class="fg">
+      <div class="fi"><label class="lbl">Portes sectionnelles non isolées présentes ?</label>
+        <div class="pg"><label class="pl" id="pp-o" onclick="showPortes('oui')"><input type="radio" name="portes" value="oui"> ✅ Oui</label><label class="pl s" id="pp-n" onclick="showPortes('non')"><input type="radio" name="portes" value="non" checked> ❌ Non</label></div>
+      </div>
+      <div class="fi" id="portes-nb" style="display:none"><label class="lbl">Nombre de portes sectionnelles</label><input type="number" id="nbportes" placeholder="Ex: 8" min="0"></div>
     </div>
   </div>
-
   <div class="bgrp"><button class="btn btn-p" onclick="go(2)">Étape suivante →</button></div>
 </div>
 
-<!-- ══════════ STEP 2 — Éclairage ══════════ -->
+<!-- STEP 2 -->
 <div class="ss" id="s2">
   <h2 class="sh2">💡 Éclairage</h2>
   <p class="sp">Installations lumineuses intérieures et extérieures</p>
-
   <div class="stag">💡 Éclairage intérieur — BAT-EQ-127 &amp; BAT-EQ-133</div>
-  <div class="al al-d"><i>⛔</i><div><strong>BAT-EQ-127 supprimée le 24/02/2026.</strong> Les opérations LED simples ne sont plus éligibles CEE. La fiche <strong>BAT-EQ-133</strong> (LED + détecteurs de présence / gradation) reste active.</div></div>
-
+  <div class="al al-d"><i>⛔</i><div><strong>BAT-EQ-127 supprimée le 24/02/2026.</strong> La fiche <strong>BAT-EQ-133</strong> (LED + détecteurs présence/gradation) reste active.</div></div>
   <div class="fg">
     <div class="fi"><label class="lbl">Type d'éclairage intérieur actuel</label>
-      <select id="tecl">
-        <option value="tube_fluo">Tubes fluorescents / néons</option>
-        <option value="sodium">Sodium HP / vapeur de mercure</option>
-        <option value="mixte">Mixte</option>
-        <option value="halogene">Halogènes</option>
-        <option value="led_ancien">LEDs existantes</option>
-      </select>
+      <select id="tecl"><option value="tube_fluo">Tubes fluorescents / néons</option><option value="sodium">Sodium HP / vapeur de mercure</option><option value="mixte">Mixte</option><option value="halogene">Halogènes</option><option value="led_ancien">LEDs existantes</option></select>
     </div>
     <div class="fi"><label class="lbl">Nombre de luminaires intérieurs</label><input type="number" id="nblum" placeholder="Ex: 300" min="0"><span class="hlp">Recommandé : 1 LED / 30 m²</span></div>
     <div class="fi"><label class="lbl">Type de LED envisagé</label>
-      <select id="tled">
-        <option value="ufo">Rond suspendu — UFO POWER 250 (Thaleos)</option>
-        <option value="lineaire">Tube linéaire — LINEAR POWER 250 (Thaleos)</option>
-      </select>
+      <select id="tled"><option value="ufo">Rond suspendu — UFO POWER 250 (Thaleos)</option><option value="lineaire">Tube linéaire — LINEAR POWER 250 (Thaleos)</option></select>
     </div>
     <div class="fi"><label class="lbl">Détecteurs présence/luminosité à installer ?</label>
-      <select id="detecteurs">
-        <option value="oui_nouveau">Oui — prévus avec les luminaires</option>
-        <option value="deja">Déjà en place</option>
-        <option value="non">Non prévus</option>
-      </select>
-      <span class="hlp">Requis pour BAT-EQ-133 (remplaçant de BAT-EQ-127)</span>
+      <select id="detecteurs"><option value="oui_nouveau">Oui — prévus avec les luminaires</option><option value="deja">Déjà en place</option><option value="non">Non prévus</option></select>
+      <span class="hlp">Requis pour BAT-EQ-133</span>
     </div>
     <div class="fi"><label class="lbl">Nacelle disponible côté client ?</label>
-      <div class="pg">
-        <label class="pl" id="pnac-o"><input type="radio" name="nac" value="oui"> ✅ Oui</label>
-        <label class="pl s" id="pnac-n"><input type="radio" name="nac" value="non" checked> ❌ Non</label>
-      </div>
+      <div class="pg"><label class="pl" id="pnac-o"><input type="radio" name="nac" value="oui"> ✅ Oui</label><label class="pl s" id="pnac-n"><input type="radio" name="nac" value="non" checked> ❌ Non</label></div>
     </div>
   </div>
-
   <hr class="div">
   <div class="stag">🔦 Éclairage extérieur — RES-EC-104</div>
   <div class="fi" style="margin-bottom:16px"><label class="lbl">Éclairage extérieur présent (parking, quais, voiries) ?</label>
-    <div class="pg">
-      <label class="pl" id="pext-o" onclick="showExt('oui')"><input type="radio" name="extlum" value="oui"> ✅ Oui</label>
-      <label class="pl s" id="pext-n" onclick="showExt('non')"><input type="radio" name="extlum" value="non" checked> ❌ Non</label>
-    </div>
+    <div class="pg"><label class="pl" id="pext-o" onclick="showExt('oui')"><input type="radio" name="extlum" value="oui"> ✅ Oui</label><label class="pl s" id="pext-n" onclick="showExt('non')"><input type="radio" name="extlum" value="non" checked> ❌ Non</label></div>
   </div>
   <div id="extdets" style="display:none">
     <div class="fg">
       <div class="fi"><label class="lbl">Type d'éclairage extérieur actuel</label>
-        <select id="teclext">
-          <option value="sodium">Sodium HP (orange)</option>
-          <option value="mercure">Vapeur de mercure</option>
-          <option value="halogene">Halogènes / iodures</option>
-          <option value="led_ancien">LEDs (déjà remplacé)</option>
-        </select>
+        <select id="teclext"><option value="sodium">Sodium HP (orange)</option><option value="mercure">Vapeur de mercure</option><option value="halogene">Halogènes / iodures</option><option value="led_ancien">LEDs (déjà remplacé)</option></select>
       </div>
       <div class="fi"><label class="lbl">Nombre de points d'éclairage extérieur</label><input type="number" id="nbext" placeholder="Ex: 40" min="0"></div>
     </div>
   </div>
-
-  <div class="bgrp">
-    <button class="btn btn-g" onclick="go(1)">← Retour</button>
-    <button class="btn btn-p" onclick="go(3)">Étape suivante →</button>
-  </div>
+  <div class="bgrp"><button class="btn btn-g" onclick="go(1)">← Retour</button><button class="btn btn-p" onclick="go(3)">Étape suivante →</button></div>
 </div>
 
-<!-- ══════════ STEP 3 — Chauffage, VMC, Froid ══════════ -->
+<!-- STEP 3 -->
 <div class="ss" id="s3">
   <h2 class="sh2">🌡️ Chauffage, Ventilation &amp; Froid</h2>
-  <p class="sp">Systèmes thermiques et frigorifiques du site</p>
+  <p class="sp">Systèmes thermiques et frigorifiques — les sections apparaissent selon la configuration de votre site</p>
 
+  <!-- CHAUFFAGE -->
   <div class="stag">🔥 Chauffage — IND-BA-110 &amp; BAT-TH-127</div>
   <div class="fg">
     <div class="fi full"><label class="lbl">Type de système de chauffage</label>
-      <select id="tchauf">
+      <select id="tchauf" onchange="updateCondSections()">
         <option value="convectif">Convectif — aérothermie, souffleur, CTA, rooftop</option>
         <option value="radiatif">Radiatif — cassettes, panneaux / tubes radiants</option>
         <option value="mixte">Mixte — convectif + radiatif</option>
+        <option value="chaudiere_gaz">Chaudière gaz (remplacement PAC envisagé)</option>
+        <option value="chaudiere_fioul">Chaudière fioul (remplacement PAC envisagé)</option>
         <option value="aucun">Aucun chauffage</option>
       </select>
     </div>
-    <div class="fi"><label class="lbl">Puissance nominale totale (kW)</label><input type="number" id="pchauf" placeholder="Ex: 200" min="0"><span class="hlp">Somme de tous les équipements</span></div>
-    <div class="fi"><label class="lbl">Consigne température (°C)</label><input type="number" id="temp" value="18" min="0" max="30"><span class="hlp">≥ 15°C requis pour IND-BA-110</span></div>
+    <div class="fi" id="fi-pchauf"><label class="lbl">Puissance nominale totale (kW)</label><input type="number" id="pchauf" placeholder="Ex: 200" min="0"><span class="hlp">Somme de tous les équipements</span></div>
+    <div class="fi" id="fi-temp"><label class="lbl">Consigne température (°C)</label><input type="number" id="temp" value="18" min="0" max="30"><span class="hlp">≥ 15°C requis pour IND-BA-110</span></div>
     <div class="fi full"><label class="lbl">Régulation / programmation chauffage existante</label>
-      <select id="regchauf">
+      <select id="regchauf" onchange="updateCondSections()">
         <option value="aucune">Aucune — pas de programmation</option>
         <option value="thermostat">Thermostat simple (on/off)</option>
-        <option value="prog_partielle">Programmation partielle (horaires basiques)</option>
+        <option value="prog_partielle">Programmation partielle</option>
         <option value="gtb">GTB / GTC complète déjà en place</option>
       </select>
-      <span class="hlp">Pour BAT-TH-127 : régulation avancée avec sonde extérieure + programmation horaire</span>
+      <span class="hlp">Pour BAT-TH-127 : régulation avancée avec sonde extérieure</span>
     </div>
   </div>
 
-  <hr class="div">
-  <div class="stag bl">🌀 Ventilation — BAT-TH-142</div>
-  <div class="fi" style="margin-bottom:16px"><label class="lbl">Système de ventilation mécanique (VMC/CTA) présent ?</label>
-    <div class="pg">
-      <label class="pl" id="pvmc-o" onclick="showVMC('oui')"><input type="radio" name="vmc" value="oui"> ✅ Oui</label>
-      <label class="pl s" id="pvmc-n" onclick="showVMC('non')"><input type="radio" name="vmc" value="non" checked> ❌ Non</label>
+  <!-- GTB — visible si chauffage présent et pas de GTB -->
+  <div class="cond-section" id="cs-gtb">
+    <hr class="div">
+    <div class="stag pu">🖥️ GTB / Gestion Technique du Bâtiment — BAT-TH-116</div>
+    <p style="font-size:12px;color:var(--tl);margin-bottom:14px">Pilotage centralisé du chauffage, éclairage et ventilation. Économies de 10 à 30% sur les consommations gérées.</p>
+    <div class="fg">
+      <div class="fi"><label class="lbl">Superficie concernée par la GTB</label><input type="number" id="surf-gtb" placeholder="Ex: 5000" min="0"><span class="hlp">m² — si différent de la surface totale</span></div>
+      <div class="fi"><label class="lbl">Équipements à piloter par la GTB</label>
+        <select id="gtb-equip">
+          <option value="chauf_ecl_vmc">Chauffage + Éclairage + VMC</option>
+          <option value="chauf_ecl">Chauffage + Éclairage</option>
+          <option value="chauf_vmc">Chauffage + VMC</option>
+          <option value="chauf">Chauffage seul</option>
+        </select>
+      </div>
     </div>
   </div>
-  <div id="vmcdets" style="display:none">
+
+  <!-- PAC — visible si chaudière gaz/fioul -->
+  <div class="cond-section" id="cs-pac">
+    <hr class="div">
+    <div class="stag bl">🌡️ Pompe à Chaleur air/eau — BAT-TH-113</div>
+    <p style="font-size:12px;color:var(--tl);margin-bottom:14px">Remplacement de la chaudière gaz ou fioul par une PAC air/eau. COP ≥ 3. Éligible en remplacement d'une installation existante.</p>
     <div class="fg">
-      <div class="fi"><label class="lbl">Puissance totale moteurs VMC/CTA (kW)</label><input type="number" id="pvmc" placeholder="Ex: 15" min="0"></div>
-      <div class="fi"><label class="lbl">Variateurs de vitesse déjà installés ?</label>
-        <select id="varideja">
-          <option value="non">Non — pas de variateurs</option>
-          <option value="partiel">Partiellement</option>
-          <option value="oui">Oui — déjà en place</option>
+      <div class="fi"><label class="lbl">Puissance chaudière à remplacer (kW)</label><input type="number" id="p-chaud-remp" placeholder="Ex: 100" min="0"><span class="hlp">Puissance nominale de la chaudière actuelle</span></div>
+      <div class="fi"><label class="lbl">Usage principal de la chaleur</label>
+        <select id="pac-usage">
+          <option value="chauf">Chauffage seul</option>
+          <option value="chauf_ecs">Chauffage + ECS</option>
+          <option value="ecs">ECS seul</option>
         </select>
       </div>
     </div>
   </div>
 
   <hr class="div">
+  <!-- VMC -->
+  <div class="stag bl">🌀 Ventilation — BAT-TH-142</div>
+  <div class="fi" style="margin-bottom:16px"><label class="lbl">Système de ventilation mécanique (VMC/CTA) présent ?</label>
+    <div class="pg"><label class="pl" id="pvmc-o" onclick="showVMC('oui')"><input type="radio" name="vmc" value="oui"> ✅ Oui</label><label class="pl s" id="pvmc-n" onclick="showVMC('non')"><input type="radio" name="vmc" value="non" checked> ❌ Non</label></div>
+  </div>
+  <div id="vmcdets" style="display:none">
+    <div class="fg">
+      <div class="fi"><label class="lbl">Puissance totale moteurs VMC/CTA (kW)</label><input type="number" id="pvmc" placeholder="Ex: 15" min="0"></div>
+      <div class="fi"><label class="lbl">Variateurs déjà installés ?</label>
+        <select id="varideja"><option value="non">Non — pas de variateurs</option><option value="partiel">Partiellement</option><option value="oui">Oui — déjà en place</option></select>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOTEURS INDUSTRIELS — visible si industrie -->
+  <div class="cond-section" id="cs-moteurs">
+    <hr class="div">
+    <div class="stag or">⚙️ Variateurs moteurs industriels — IND-UT-117</div>
+    <p style="font-size:12px;color:var(--tl);margin-bottom:14px">Variateurs de fréquence sur les moteurs de process industriels (compresseurs, pompes, convoyeurs, machines). Différent des variateurs VMC.</p>
+    <div class="fi" style="margin-bottom:16px"><label class="lbl">Moteurs de process industriels présents (hors VMC) ?</label>
+      <div class="pg"><label class="pl" id="pmot-o" onclick="showMoteurs('oui')"><input type="radio" name="moteurs" value="oui"> ✅ Oui</label><label class="pl s" id="pmot-n" onclick="showMoteurs('non')"><input type="radio" name="moteurs" value="non" checked> ❌ Non</label></div>
+    </div>
+    <div id="moteurdets" style="display:none">
+      <div class="fg">
+        <div class="fi"><label class="lbl">Puissance totale moteurs process (kW)</label><input type="number" id="pmoteurs" placeholder="Ex: 200" min="0"><span class="hlp">Somme des moteurs sans variateurs</span></div>
+        <div class="fi"><label class="lbl">Type de machines concernées</label>
+          <select id="typemot">
+            <option value="compresseur">Compresseurs d'air</option>
+            <option value="pompe">Pompes de process</option>
+            <option value="convoyeur">Convoyeurs / Malaxeurs</option>
+            <option value="mixte">Mixte</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div">
+  <!-- FROID -->
   <div class="stag bl">❄️ Froid commercial — BAT-TH-134</div>
   <div class="fi" style="margin-bottom:16px"><label class="lbl">Installation frigorifique présente sur le site ?</label>
-    <div class="pg">
-      <label class="pl" id="pf-o" onclick="showFroid('oui')"><input type="radio" name="froid" value="oui"> ✅ Oui</label>
-      <label class="pl s" id="pf-n" onclick="showFroid('non')"><input type="radio" name="froid" value="non" checked> ❌ Non</label>
-    </div>
+    <div class="pg"><label class="pl" id="pf-o" onclick="showFroid('oui')"><input type="radio" name="froid" value="oui"> ✅ Oui</label><label class="pl s" id="pf-n" onclick="showFroid('non')"><input type="radio" name="froid" value="non" checked> ❌ Non</label></div>
   </div>
   <div id="fdets" style="display:none">
     <div class="fg">
@@ -411,33 +473,39 @@ input:focus,select:focus{outline:none;border-color:var(--gm);box-shadow:0 0 0 3p
         <select id="hpex"><option value="non">Non — aucune</option><option value="oui">Oui — déjà en place</option></select>
       </div>
     </div>
+    <!-- RÉCUPÉRATION CHALEUR — visible si froid présent et chauffage présent -->
+    <div class="cond-section" id="cs-recup">
+      <hr class="div">
+      <div class="stag pu">♻️ Récupération de chaleur sur groupe froid — BAT-TH-156</div>
+      <p style="font-size:12px;color:var(--tl);margin-bottom:14px">Récupération de la chaleur fatale rejetée par le condenseur du groupe froid pour préchauffer l'eau chaude sanitaire ou le chauffage. Économie 15–30% sur conso ECS/chauffage.</p>
+      <div class="fi" style="margin-bottom:12px"><label class="lbl">Besoin en chaleur (chauffage ou ECS) sur le site ?</label>
+        <div class="pg"><label class="pl" id="prec-o" onclick="showRecup('oui')"><input type="radio" name="recup" value="oui"> ✅ Oui</label><label class="pl s" id="prec-n" onclick="showRecup('non')"><input type="radio" name="recup" value="non" checked> ❌ Non</label></div>
+      </div>
+      <div id="recupdets" style="display:none">
+        <div class="fg">
+          <div class="fi"><label class="lbl">Récupération de chaleur déjà en place ?</label>
+            <select id="recup-exist"><option value="non">Non — aucune récupération</option><option value="oui">Oui — déjà installée</option></select>
+          </div>
+          <div class="fi"><label class="lbl">Destination de la chaleur récupérée</label>
+            <select id="recup-dest"><option value="ecs">Eau Chaude Sanitaire (ECS)</option><option value="chauf">Chauffage / plancher chauffant</option><option value="process">Process industriel</option><option value="mixte">Mixte</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="bgrp">
-    <button class="btn btn-g" onclick="go(2)">← Retour</button>
-    <button class="btn btn-p" onclick="valider()">⚡ Valider et calculer l'éligibilité CEE</button>
-  </div>
+  <div class="bgrp"><button class="btn btn-g" onclick="go(2)">← Retour</button><button class="btn btn-p" onclick="valider()">⚡ Valider et calculer l'éligibilité CEE</button></div>
 </div>
 
 </div><!-- /form-card -->
 
-<!-- ══════════ RESULTS ══════════ -->
+<!-- ══════ RESULTS ══════ -->
 <div id="res">
-
   <div class="sban">
-    <div class="tblk">
-      <div class="tlbl">Volume CEE estimé</div>
-      <div class="tval" id="rtot">—</div>
-      <div class="tunit">kWh cumac</div>
-      <div id="rtot-eur" style="font-size:22px;font-weight:700;margin-top:6px;color:#a5d6a7"></div>
-    </div>
+    <div class="tblk"><div class="tlbl">Volume CEE estimé</div><div class="tval" id="rtot">—</div><div class="tunit">kWh cumac</div><div id="rtot-eur" style="font-size:22px;font-weight:700;margin-top:6px;color:#a5d6a7"></div></div>
     <div class="ssep"></div>
-    <div class="sright">
-      <div id="rsitems"></div>
-      <div class="sdsc">⚠️ Estimation indicative · Valeur kWhc retenue : <strong>0,006 €</strong> (marché CEE5 moyen) — sous réserve validation technique sur site</div>
-    </div>
+    <div class="sright"><div id="rsitems"></div><div class="sdsc">⚠️ Estimation indicative · Valeur kWhc : 0,006 € (CEE5 moyen) — sous réserve validation technique</div></div>
   </div>
-
   <div class="rbar">
     <div><div class="rcl" id="rcl">—</div><div class="rmt" id="rmt">—</div></div>
     <div class="ract no-print">
@@ -446,20 +514,16 @@ input:focus,select:focus{outline:none;border-color:var(--gm);box-shadow:0 0 0 3p
       <button class="btn btn-g" onclick="restart()" style="padding:8px 16px;font-size:12px;color:var(--rd);border-color:var(--rd)">🗑️ Nouveau client</button>
     </div>
   </div>
-
   <div id="rfiches"></div>
-
   <div class="card no-print">
     <h2 class="sh2" style="font-size:18px;margin-bottom:4px">📋 Prochaines étapes</h2>
     <div class="nsgrd">
-      <div class="nsi" style="background:var(--gn)"><div class="nsemoji">📝</div><div class="nstitle" style="color:#1b5e20">Formulaire de pré-étude</div><div class="nssub">À faire signer par le client avant tout démarrage</div><button class="alink ag" onclick="scrollForms()">Voir le formulaire ↓</button></div>
-      <div class="nsi" style="background:var(--bp)"><div class="nsemoji">📞</div><div class="nstitle" style="color:var(--bd)">Les Artisans Verts</div><div class="nssub">01 87 66 27 08<br>contact@artisansverts.energy</div><a class="alink ab" href="tel:0187662708">Appeler maintenant</a></div>
-      <div class="nsi" style="background:#f3e5f5"><div class="nsemoji">✉️</div><div class="nstitle" style="color:#6a1b9a">Envoyer le dossier</div><div class="nssub">Transmettre au bureau d'études LAV</div><a class="alink ap" href="mailto:thierry@thierrybismuth.com">Envoyer par email</a></div>
+      <div class="nsi" style="background:var(--gn)"><div class="nsemoji">📝</div><div class="nstitle" style="color:#1b5e20">Formulaire de pré-étude</div><div class="nssub">À faire signer avant tout démarrage</div><button class="alink ag" onclick="scrollForms()">Voir ↓</button></div>
+      <div class="nsi" style="background:var(--bp)"><div class="nsemoji">📞</div><div class="nstitle" style="color:var(--bd)">Les Artisans Verts</div><div class="nssub">01 87 66 27 08<br>contact@artisansverts.energy</div><a class="alink ab" href="tel:0187662708">Appeler</a></div>
+      <div class="nsi" style="background:#f3e5f5"><div class="nsemoji">✉️</div><div class="nstitle" style="color:#6a1b9a">Envoyer le dossier</div><div class="nssub">Transmettre au bureau d'études LAV</div><a class="alink ap" href="mailto:thierry@thierrybismuth.com">Email</a></div>
     </div>
   </div>
-
   <div id="rforms"></div>
-
 </div>
 </div><!-- /wrap -->
 
@@ -471,18 +535,41 @@ var SL={industrie:'Industrie / Production',entrepot:'Entrepôt / Plateforme logi
 function go(n){
   document.getElementById('s'+step).classList.remove('active');
   document.getElementById('s'+n).classList.add('active');
-  for(var i=1;i<=4;i++){
-    var d=document.getElementById('d'+i),l=document.getElementById('l'+i),ln=document.getElementById('ln'+i);
-    if(i<n){d.className='sdot done';d.textContent='✓';if(ln)ln.classList.add('done');}
-    else if(i===n){d.className='sdot active';d.textContent=i;if(l)l.className='sname active';}
-    else{d.className='sdot';d.textContent=i;if(l)l.className='sname';}
-  }
+  for(var i=1;i<=4;i++){var d=document.getElementById('d'+i),l=document.getElementById('l'+i),ln=document.getElementById('ln'+i);if(i<n){d.className='sdot done';d.textContent='✓';if(ln)ln.classList.add('done');}else if(i===n){d.className='sdot active';d.textContent=i;if(l)l.className='sname active';}else{d.className='sdot';d.textContent=i;if(l)l.className='sname';}}
   step=n;window.scrollTo({top:0,behavior:'smooth'});
 }
 function setZ(b,z){document.querySelectorAll('.zb').forEach(function(x){x.classList.remove('s')});b.classList.add('s');zon=z;document.getElementById('zon').value=z;}
 function showExt(v){document.getElementById('pext-o').classList.toggle('s',v==='oui');document.getElementById('pext-n').classList.toggle('s',v==='non');document.getElementById('extdets').style.display=v==='oui'?'block':'none';}
 function showVMC(v){document.getElementById('pvmc-o').classList.toggle('s',v==='oui');document.getElementById('pvmc-n').classList.toggle('s',v==='non');document.getElementById('vmcdets').style.display=v==='oui'?'block':'none';}
-function showFroid(v){document.getElementById('pf-o').classList.toggle('s',v==='oui');document.getElementById('pf-n').classList.toggle('s',v==='non');document.getElementById('fdets').style.display=v==='oui'?'block':'none';}
+function showFroid(v){document.getElementById('pf-o').classList.toggle('s',v==='oui');document.getElementById('pf-n').classList.toggle('s',v==='non');document.getElementById('fdets').style.display=v==='oui'?'block':'none';updateCondSections();}
+function showPortes(v){document.getElementById('pp-o').classList.toggle('s',v==='oui');document.getElementById('pp-n').classList.toggle('s',v==='non');document.getElementById('portes-nb').style.display=v==='oui'?'flex':'none';}
+function showMoteurs(v){document.getElementById('pmot-o').classList.toggle('s',v==='oui');document.getElementById('pmot-n').classList.toggle('s',v==='non');document.getElementById('moteurdets').style.display=v==='oui'?'block':'none';}
+function showRecup(v){document.getElementById('prec-o').classList.toggle('s',v==='oui');document.getElementById('prec-n').classList.toggle('s',v==='non');document.getElementById('recupdets').style.display=v==='oui'?'block':'none';}
+
+function updateCondSections(){
+  var sec=document.getElementById('sec').value;
+  var tchauf=document.getElementById('tchauf').value;
+  var regchauf=document.getElementById('regchauf').value;
+  var hasfr=document.querySelector('input[name="froid"]:checked')&&document.querySelector('input[name="froid"]:checked').value==='oui';
+  // Portes sectionnelles → entrepôt/industrie
+  document.getElementById('cs-portes').classList.toggle('show',sec==='entrepot'||sec==='industrie');
+  // GTB → chauffage présent + pas déjà GTB
+  var chaufPr=tchauf!=='aucun';
+  document.getElementById('cs-gtb').classList.toggle('show',chaufPr&&regchauf!=='gtb');
+  // PAC → chaudière gaz/fioul
+  document.getElementById('cs-pac').classList.toggle('show',tchauf==='chaudiere_gaz'||tchauf==='chaudiere_fioul');
+  // Moteurs industriels → industrie
+  document.getElementById('cs-moteurs').classList.toggle('show',sec==='industrie');
+  // Récup chaleur → froid présent + chauffage présent
+  document.getElementById('cs-recup').classList.toggle('show',hasfr&&chaufPr);
+}
+
+function toggleInfo(){
+  var b=document.getElementById('info-body');var t=document.getElementById('info-tog');
+  var open=b.classList.toggle('open');
+  t.textContent=open?'▲ Masquer':'▼ Afficher';
+}
+
 function modif(){
   document.getElementById('res').style.display='none';
   document.getElementById('form-card').style.display='block';
@@ -500,41 +587,30 @@ function restart(){
   document.querySelectorAll('.pl').forEach(function(p){p.classList.remove('s');var r=p.querySelector('input[type=radio]');if(r&&r.defaultChecked)p.classList.add('s');});
   zon='H1';document.getElementById('zon').value='H1';
   document.querySelectorAll('.zb').forEach(function(b,i){b.classList.toggle('s',i===0);});
-  ['extdets','vmcdets','fdets'].forEach(function(id){document.getElementById(id).style.display='none';});
+  ['extdets','vmcdets','fdets','moteurdets','recupdets'].forEach(function(id){document.getElementById(id).style.display='none';});
+  document.getElementById('portes-nb').style.display='none';
   document.getElementById('res').style.display='none';
   document.getElementById('form-card').style.display='block';
   document.getElementById('pwrap').style.display='block';
   step=1;document.getElementById('s1').classList.add('active');
   for(var i=2;i<=3;i++)document.getElementById('s'+i).classList.remove('active');
   for(var i=1;i<=4;i++){var d=document.getElementById('d'+i),l=document.getElementById('l'+i),ln=document.getElementById('ln'+i);d.className=i===1?'sdot active':'sdot';d.textContent=i;if(l)l.className=i===1?'sname active':'sname';if(ln)ln.classList.remove('done');}
+  document.querySelectorAll('.cond-section').forEach(function(x){x.classList.remove('show');});
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function scrollForms(){document.getElementById('rforms').scrollIntoView({behavior:'smooth'});}
-document.querySelectorAll('.pl').forEach(function(lbl){
-  lbl.addEventListener('click',function(){
-    var r=this.querySelector('input[type=radio]');if(!r)return;
-    var nm=r.name;
-    document.querySelectorAll('input[name="'+nm+'"]').forEach(function(x){x.closest('.pl')&&x.closest('.pl').classList.remove('s')});
-    this.classList.add('s');
-  });
-});
+document.querySelectorAll('.pl').forEach(function(lbl){lbl.addEventListener('click',function(){var r=this.querySelector('input[type=radio]');if(!r)return;var nm=r.name;document.querySelectorAll('input[name="'+nm+'"]').forEach(function(x){x.closest('.pl')&&x.closest('.pl').classList.remove('s')});this.classList.add('s');});});
+
 function fmtE(kwh){var e=Math.round(kwh*VKWH);if(e>=1000000)return(e/1000000).toFixed(2)+' M€';if(e>=1000)return Math.round(e/1000)+' k€';return e.toLocaleString('fr-FR')+' €';}
 function fmt(v){if(!v||v===0)return'—';if(v>=1000000)return(v/1000000).toFixed(2)+' M';if(v>=1000)return Math.round(v/1000)+' k';return v.toLocaleString('fr-FR');}
 
 function valider(){
-  // Show loading
   document.getElementById('loading').style.display='flex';
-  // Collect data & compute
   var data=collectData();
   var fiches=computeFiches(data);
   var tot=fiches.filter(function(f){return f.kwh>0;}).reduce(function(a,f){return a+f.kwh;},0);
-  // Send email silently
   sendEmail(data,fiches,tot);
-  // Show results after short delay
-  setTimeout(function(){
-    renderResults(data,fiches,tot);
-    document.getElementById('loading').style.display='none';
-  },1200);
+  setTimeout(function(){renderResults(data,fiches,tot);document.getElementById('loading').style.display='none';},1200);
 }
 
 function collectData(){
@@ -550,6 +626,8 @@ function collectData(){
     isoexist:document.getElementById('isoexist').value,
     isomurs:document.getElementById('isomurs').value,
     isoplancher:document.getElementById('isoplancher').value,
+    hasportes:document.querySelector('input[name="portes"]:checked')?.value==='oui',
+    nbportes:parseInt(document.getElementById('nbportes').value)||0,
     tecl:document.getElementById('tecl').value,
     nblum:parseInt(document.getElementById('nblum').value)||0,
     tled:document.getElementById('tled').value,
@@ -562,165 +640,176 @@ function collectData(){
     pchauf:parseFloat(document.getElementById('pchauf').value)||0,
     temp:parseFloat(document.getElementById('temp').value)||18,
     regchauf:document.getElementById('regchauf').value,
+    surf_gtb:parseFloat(document.getElementById('surf-gtb').value)||0,
+    gtb_equip:document.getElementById('gtb-equip').value,
+    p_chaud_remp:parseFloat(document.getElementById('p-chaud-remp').value)||0,
+    pac_usage:document.getElementById('pac-usage').value,
     hasvmc:document.querySelector('input[name="vmc"]:checked')?.value==='oui',
     pvmc:parseFloat(document.getElementById('pvmc').value)||0,
     varideja:document.getElementById('varideja').value,
+    hasmot:document.querySelector('input[name="moteurs"]:checked')?.value==='oui',
+    pmoteurs:parseFloat(document.getElementById('pmoteurs').value)||0,
+    typemot:document.getElementById('typemot').value,
     hasfr:document.querySelector('input[name="froid"]:checked')?.value==='oui',
     pfroid:parseFloat(document.getElementById('pfroid').value)||0,
     hpex:document.getElementById('hpex').value,
-    nbcent:parseInt(document.getElementById('nbcent').value)||1
+    nbcent:parseInt(document.getElementById('nbcent').value)||1,
+    hasrecup:document.querySelector('input[name="recup"]:checked')?.value==='oui',
+    recup_exist:document.getElementById('recup-exist').value,
+    recup_dest:document.getElementById('recup-dest').value
   };
 }
 
 function computeFiches(d){
-  var ZC={H1:{c:7200,r:2500,en:{ter:320,ver:350},th127:{c:450,r:300},vmc:4800,ext:58},
-          H2:{c:8000,r:2800,en:{ter:260,ver:290},th127:{c:380,r:250},vmc:4200,ext:50},
-          H3:{c:8500,r:3000,en:{ter:170,ver:200},th127:{c:260,r:170},vmc:3200,ext:38}};
+  var ZC={
+    H1:{c:7200,r:2500,en:{ter:320,ver:350},murs:175,plan:110,th127:{c:450,r:300},vmc:4800,ext:58,gtb:155,pac:800,mot:6000,recup:1800,portes:5500},
+    H2:{c:8000,r:2800,en:{ter:260,ver:290},murs:145,plan:88,th127:{c:380,r:250},vmc:4200,ext:50,gtb:130,pac:700,mot:6500,recup:1600,portes:4500},
+    H3:{c:8500,r:3000,en:{ter:170,ver:200},murs:95,plan:58,th127:{c:260,r:170},vmc:3200,ext:38,gtb:85,pac:500,mot:7000,recup:1300,portes:3000}
+  };
   var zc=ZC[d.zon]||ZC.H2;
   var nl=d.nblum>0?d.nblum:Math.ceil(d.surf/30);
+  var surfGtb=d.surf_gtb>0?d.surf_gtb:d.surf;
 
-  // ── BAT-EQ-127 (SUPPRIMÉE) ──
+  // BAT-EQ-127 (SUPPRIMÉE)
   var ck={sante:63,entrepot:63,industrie:63,commerce_grand:63,hotel:67,enseignement:39,bureaux:53,commerce_petit:53};
   var kwh_led_th=Math.round(nl*250*(ck[d.sec]||53));
-  var f1={ref:'BAT-EQ-127',name:'Luminaires à modules LED',desc:'remplacement de l\'éclairage existant par des LEDs haute performance (sans détecteurs)',icon:'💡',status:'sp',kwh:0,
-    conds:[{ok:false,t:'FICHE SUPPRIMÉE le 24/02/2026 — nouvelles opérations exclues'},{ok:d.surf>=1000,t:'Surface ≥ 1000 m² — '+d.surf+' m² saisi'},{ok:d.haut>=4,t:'Hauteur ≥ 4 m — '+d.haut+' m'},{ok:['entrepot','industrie','commerce_grand','sante'].indexOf(d.sec)>=0,t:'Secteur éligible — '+(SL[d.sec]||'?')}],
-    note:'Supprimée pour toute nouvelle opération depuis le 24/02/2026 (arrêté du 23/02/2026). Volume théorique si antérieur : '+fmt(kwh_led_th)+' kWhc. Voir BAT-EQ-133 (avec détecteurs) qui reste active.',
-    prod:d.tled==='lineaire'?'LINEAR POWER 250 (Thaleos) — 250W, 185 lm/W, IP65, IK08':'UFO POWER 250 (Thaleos) — 250W, 185 lm/W, IP65, IK08'};
+  var f1={ref:'BAT-EQ-127',name:'Luminaires LED (sans détecteurs)',desc:'remplacement éclairage par LEDs haute performance — supprimée pour nouvelles opérations',icon:'💡',status:'sp',kwh:0,
+    conds:[{ok:false,t:'FICHE SUPPRIMÉE le 24/02/2026 — nouvelles opérations exclues'},{ok:d.surf>=1000,t:'Surface ≥ 1000 m² — '+d.surf+' m²'},{ok:d.haut>=4,t:'Hauteur ≥ 4 m — '+d.haut+' m'}],
+    note:'Supprimée le 24/02/2026. Volume théorique si antérieur : '+fmt(kwh_led_th)+' kWhc. Voir BAT-EQ-133 (avec détecteurs) qui reste active.',
+    prod:d.tled==='lineaire'?'LINEAR POWER 250 (Thaleos) — 250W, 185 lm/W, IP65':'UFO POWER 250 (Thaleos) — 250W, 185 lm/W, IP65'};
 
-  // ── BAT-EQ-133 (LED + détecteurs) ──
+  // BAT-EQ-133
   var eq133_sec=['entrepot','industrie','commerce_grand','sante','hotel','bureaux','enseignement'].indexOf(d.sec)>=0;
-  var eq133_ecl=d.tecl!=='led_ancien';
-  var eq133_det=d.detecteurs==='oui_nouveau';
-  var eq133_surf=d.surf>=500;
-  var eq133_ok=eq133_sec&&eq133_ecl&&eq133_det&&eq133_surf&&d.exist==='oui';
+  var eq133_ok=eq133_sec&&d.tecl!=='led_ancien'&&d.detecteurs==='oui_nouveau'&&d.surf>=500&&d.exist==='oui';
   var kwh_eq133=0;
-  if(eq133_ok){var coeff133={entrepot:45,industrie:45,commerce_grand:55,commerce_petit:48,sante:50,bureaux:42,hotel:52,enseignement:36};kwh_eq133=Math.round(nl*(coeff133[d.sec]||45));}
-  var f2={ref:'BAT-EQ-133',name:'Luminaires LED + détection présence/luminosité',desc:'remplacement des luminaires avec pilotage par détecteurs de présence et capteurs de lumière du jour',icon:'💡',status:eq133_ok?'el':'ne',kwh:kwh_eq133,
-    conds:[{ok:eq133_surf,t:'Surface ≥ 500 m² — '+d.surf+' m²'},{ok:eq133_ecl,t:'Éclairage actuel non-LED remplaçable'},{ok:eq133_det,t:'Détecteurs de présence + gradation lumière du jour prévus'},{ok:eq133_sec,t:'Secteur éligible — '+(SL[d.sec]||'?')},{ok:d.exist==='oui',t:'Bâtiment existant > 2 ans'}],
-    note:eq133_ok?'Fiche active (non supprimée). Détecteurs de présence + capteur lumière du jour requis. '+nl+' luminaires × coefficient '+( {entrepot:45,industrie:45,commerce_grand:55,sante:50,bureaux:42,hotel:52,enseignement:36}[d.sec]||45)+' kWhc. Nacelle : '+(d.nac==='oui'?'fournie par le client':'à prévoir par LAV')+'.':'Manque : '+((!eq133_det)?'prévoir les détecteurs de présence + gradation (requis pour cette fiche)':(!eq133_ecl)?'éclairage actuel déjà en LED':(!eq133_surf)?'surface < 500 m²':'voir conditions ci-dessus'),
-    prod:d.tled==='lineaire'?'LINEAR POWER 250 (Thaleos) + détecteurs DALI — 250W, 185 lm/W, IP65':'UFO POWER 250 (Thaleos) + détecteurs DALI — 250W, 185 lm/W, IP65'};
+  if(eq133_ok){var c133={entrepot:45,industrie:45,commerce_grand:55,sante:50,bureaux:42,hotel:52,enseignement:36};kwh_eq133=Math.round(nl*(c133[d.sec]||45));}
+  var f2={ref:'BAT-EQ-133',name:'Luminaires LED + détection présence/luminosité',desc:'remplacement avec pilotage par détecteurs de présence et capteurs de lumière du jour (fiche active)',icon:'💡',status:eq133_ok?'el':'ne',kwh:kwh_eq133,
+    conds:[{ok:d.surf>=500,t:'Surface ≥ 500 m² — '+d.surf+' m²'},{ok:d.tecl!=='led_ancien',t:'Éclairage actuel non-LED'},{ok:d.detecteurs==='oui_nouveau',t:'Détecteurs présence + gradation prévus'},{ok:eq133_sec,t:'Secteur éligible — '+(SL[d.sec]||'?')},{ok:d.exist==='oui',t:'Bâtiment existant > 2 ans'}],
+    note:eq133_ok?'Fiche active. '+nl+' luminaires × '+({entrepot:45,industrie:45,commerce_grand:55,sante:50,bureaux:42,hotel:52,enseignement:36}[d.sec]||45)+' kWhc. Détecteurs DALI requis.':'Manque : '+(!d.detecteurs||d.detecteurs==='non'?'détecteurs de présence + gradation requis':d.tecl==='led_ancien'?'éclairage déjà en LED':!eq133_sec?'secteur non éligible':'voir conditions'),
+    prod:d.tled==='lineaire'?'LINEAR POWER 250 + détecteurs DALI — 250W, IP65':'UFO POWER 250 + détecteurs DALI — 250W, IP65'};
 
-  // ── RES-EC-104 (Éclairage extérieur) ──
+  // RES-EC-104
   var ec104_ok=d.hasext&&d.teclext!=='led_ancien'&&d.nbext>0&&d.exist==='oui';
-  var kwh_ec104=0;
-  if(ec104_ok)kwh_ec104=Math.round(d.nbext*zc.ext);
-  var f3={ref:'RES-EC-104',name:'Éclairage extérieur LED',desc:'remplacement des luminaires d\'éclairage extérieur (parking, quais, voiries) par des LEDs',icon:'🔦',status:ec104_ok?'el':'ne',kwh:kwh_ec104,
-    conds:[{ok:d.hasext,t:'Éclairage extérieur présent sur le site'},{ok:d.hasext&&d.teclext!=='led_ancien',t:'Luminaires actuels non-LED (remplacement requis)'},{ok:d.nbext>0,t:'Nombre de points : '+d.nbext+' luminaires'},{ok:d.exist==='oui',t:'Bâtiment existant > 2 ans'}],
-    note:ec104_ok?d.nbext+' points lumineux × '+zc.ext+' kWhc (zone '+d.zon+'). Fiche indépendante de BAT-EQ-127. Durée conventionnelle 20 ans.':'Aucun éclairage extérieur déclaré ou déjà en LED.',
-    prod:'Projecteurs LED extérieurs IP65 IK10 — conforme RES-EC-104 · Garantie 5 ans · Partenaire CEE EDF'};
+  var kwh_ec104=ec104_ok?Math.round(d.nbext*zc.ext):0;
+  var f3={ref:'RES-EC-104',name:'Éclairage extérieur LED',desc:'remplacement des luminaires extérieurs (parking, quais, voiries) par des LEDs',icon:'🔦',status:ec104_ok?'el':'ne',kwh:kwh_ec104,
+    conds:[{ok:d.hasext,t:'Éclairage extérieur présent'},{ok:d.hasext&&d.teclext!=='led_ancien',t:'Luminaires actuels non-LED'},{ok:d.nbext>0,t:d.nbext+' luminaires'},{ok:d.exist==='oui',t:'Bâtiment existant'}],
+    note:ec104_ok?d.nbext+' pts × '+zc.ext+' kWhc (zone '+d.zon+'). Durée 20 ans.':'Aucun éclairage extérieur ou déjà en LED.',
+    prod:'Projecteurs LED IP65 IK10 — conforme RES-EC-104 · Garantie 5 ans'};
 
-  // ── BAT-EN-101 (Isolation toiture) ──
+  // BAT-EN-101 toiture
   var en101_iso=d.isoexist==='aucune'||d.isoexist==='insuffisante';
-  var en101_surf=d.surf>=1000;
-  var en101_ok=en101_surf&&en101_iso&&d.exist==='oui'&&d.ttoiture!=='inconnue';
-  var kwh_en101=0;
-  if(en101_ok&&d.surf>0){var cfen=d.ttoiture==='terrasse'?zc.en.ter:zc.en.ver;kwh_en101=Math.round(d.surf*cfen);}
-  var f4={ref:'BAT-EN-101',name:'Isolation de la toiture',desc:'isolation thermique par l\'extérieur ou l\'intérieur de la toiture (sarking, laine de roche, PIR…)',icon:'🏗️',status:en101_ok?'el':'ne',kwh:kwh_en101,
-    conds:[{ok:en101_surf,t:'Surface ≥ 1000 m² — '+d.surf+' m²'},{ok:en101_iso,t:'Isolation actuelle insuffisante — '+{aucune:'aucune isolation',insuffisante:'R < 2 m².K/W',correcte:'déjà correcte (R ≥ 4)',inconnue:'non renseignée'}[d.isoexist]},{ok:d.ttoiture!=='inconnue',t:'Type de toiture renseigné — '+{terrasse:'terrasse plate',versants:'versants inclinés',shed:'shed/dents de scie',inconnue:'?'}[d.ttoiture]},{ok:d.exist==='oui',t:'Bâtiment existant > 2 ans'}],
-    note:en101_ok?d.surf+' m² × '+(d.ttoiture==='terrasse'?zc.en.ter:zc.en.ver)+' kWhc/m² (zone '+d.zon+', '+{terrasse:'terrasse',versants:'versants',shed:'shed'}[d.ttoiture]+'). Hypothèse : ΔR = 4 m².K/W (isolation R≈0→R≥4). Durée conventionnelle 30 ans. Travaux par professionnel RGE qualifié QUALIBAT 7131.':d.isoexist==='correcte'?'Isolation déjà correcte (R ≥ 4) — non éligible.':!en101_surf?'Surface < 1000 m².':'Renseignez le type de toiture et l\'état de l\'isolation existante.',
-    prod:'Isolants CEE compatibles : laine de roche (Rockwool/Isovent), PIR (Kingspan/Recticel) — pose par artisan QUALIBAT 7131'};
+  var en101_ok=d.surf>=1000&&en101_iso&&d.exist==='oui'&&d.ttoiture!=='inconnue';
+  var kwh_en101=en101_ok?Math.round(d.surf*(d.ttoiture==='terrasse'?zc.en.ter:zc.en.ver)):0;
+  var f4={ref:'BAT-EN-101',name:'Isolation de la toiture',desc:'isolation thermique toiture (sarking, laine de roche, PIR) — fiche #1 en volume sur grands bâtiments',icon:'🏗️',status:en101_ok?'el':'ne',kwh:kwh_en101,
+    conds:[{ok:d.surf>=1000,t:'Surface ≥ 1000 m² — '+d.surf+' m²'},{ok:en101_iso,t:'Isolation insuffisante — '+({aucune:'aucune',insuffisante:'R<2 m².K/W',correcte:'déjà R≥4',inconnue:'?'})[d.isoexist]},{ok:d.ttoiture!=='inconnue',t:'Type toiture — '+({terrasse:'terrasse',versants:'versants',shed:'shed',inconnue:'?'})[d.ttoiture]},{ok:d.exist==='oui',t:'Bâtiment existant'}],
+    note:en101_ok?d.surf+' m² × '+(d.ttoiture==='terrasse'?zc.en.ter:zc.en.ver)+' kWhc/m² (zone '+d.zon+'). ΔR=4 m².K/W. Durée 30 ans. RGE QUALIBAT 7131.':d.isoexist==='correcte'?'Isolation déjà correcte.':!d.surf||d.surf<1000?'Surface < 1000 m².':'Renseignez type toiture et isolation.',
+    prod:'Laine de roche (Rockwool/Isovent), PIR (Kingspan/Recticel) — QUALIBAT 7131'};
 
-  // ── BAT-EN-102 (Isolation murs) ──
-  // Estimation périmètre = 4 × √surface (hypothèse bâtiment carré)
+  // BAT-EN-102 murs
   var perim=Math.round(4*Math.sqrt(d.surf));
   var surf_murs=Math.round(perim*d.haut);
   var en102_iso=d.isomurs==='aucune'||d.isomurs==='insuffisante';
   var en102_ok=en102_iso&&d.surf>=500&&d.exist==='oui'&&d.haut>0&&d.isomurs!=='inconnue';
-  var ZC_murs={H1:175,H2:145,H3:95};
-  var kwh_en102=0;
-  if(en102_ok&&surf_murs>0)kwh_en102=Math.round(surf_murs*(ZC_murs[d.zon]||145));
-  var f4b={ref:'BAT-EN-102',name:'Isolation des murs (façades)',desc:'isolation thermique des parois verticales extérieures — estimée sur '+surf_murs+' m² de façades (périmètre ~'+perim+' m × hauteur '+d.haut+' m)',icon:'🧱',status:en102_ok?'el':'ne',kwh:kwh_en102,
-    conds:[{ok:en102_iso,t:'Isolation murs insuffisante — '+{aucune:'aucune isolation',insuffisante:'R<2 m².K/W',correcte:'déjà correcte (R≥3)',inconnue:'non renseignée'}[d.isomurs]},{ok:d.surf>=500,t:'Surface ≥ 500 m² — '+d.surf+' m²'},{ok:d.haut>0,t:'Hauteur renseignée — '+d.haut+' m'},{ok:d.exist==='oui',t:'Bâtiment existant > 2 ans'}],
-    note:en102_ok?surf_murs+' m² de façades estimés (√'+d.surf+' m² × 4 × '+d.haut+' m) × '+(ZC_murs[d.zon]||145)+' kWhc/m² (zone '+d.zon+'). ΔR = 3 m².K/W. Durée 30 ans. RGE QUALIBAT 7132.':d.isomurs==='correcte'?'Murs déjà isolés (R≥3) — non éligible.':d.isomurs==='inconnue'?'Précisez l\'état de l\'isolation des murs.':'Surface < 500 m².',
-    prod:'ITE (Isolation Thermique par l\'Extérieur) — laine de roche bardage ou enduit isolant · QUALIBAT 7132'};
+  var kwh_en102=en102_ok?Math.round(surf_murs*zc.murs):0;
+  var f4b={ref:'BAT-EN-102',name:'Isolation des murs (façades)',desc:'isolation thermique des parois verticales extérieures — estimée sur '+surf_murs+' m² de façades',icon:'🧱',status:en102_ok?'el':'ne',kwh:kwh_en102,
+    conds:[{ok:en102_iso,t:'Murs insuffisamment isolés — '+({aucune:'aucune',insuffisante:'R<2 m².K/W',correcte:'déjà R≥3',inconnue:'?'})[d.isomurs]},{ok:d.surf>=500,t:'Surface ≥ 500 m² — '+d.surf+' m²'},{ok:d.haut>0,t:'Hauteur renseignée — '+d.haut+' m'},{ok:d.exist==='oui',t:'Bâtiment existant'}],
+    note:en102_ok?surf_murs+' m² façades (est. : périmètre '+perim+' m × '+d.haut+' m) × '+zc.murs+' kWhc/m² (zone '+d.zon+'). ΔR=3 m².K/W. Durée 30 ans. RGE QUALIBAT 7132.':d.isomurs==='correcte'?'Murs déjà isolés.':'Renseignez l\'isolation des murs.',
+    prod:'ITE (Isolation Thermique Extérieure) — laine de roche bardage · QUALIBAT 7132'};
 
-  // ── BAT-EN-103 (Isolation planchers bas) ──
+  // BAT-EN-103 planchers
   var en103_iso=d.isoplancher==='aucune'||d.isoplancher==='insuffisante';
   var en103_ok=en103_iso&&d.surf>=500&&d.exist==='oui'&&d.isoplancher!=='inconnue';
-  var ZC_plan={H1:110,H2:88,H3:58};
-  var kwh_en103=0;
-  if(en103_ok)kwh_en103=Math.round(d.surf*(ZC_plan[d.zon]||88));
-  var f4c={ref:'BAT-EN-103',name:'Isolation du plancher bas',desc:'isolation thermique de la dalle sur terre-plein ou vide sanitaire — surface estimée à '+d.surf+' m²',icon:'⬛',status:en103_ok?'el':'ne',kwh:kwh_en103,
-    conds:[{ok:en103_iso,t:'Plancher non isolé ou insuffisant — '+{aucune:'dalle béton nue',insuffisante:'R<1 m².K/W',correcte:'déjà isolé (R≥2)',inconnue:'non renseigné'}[d.isoplancher]},{ok:d.surf>=500,t:'Surface ≥ 500 m² — '+d.surf+' m²'},{ok:d.exist==='oui',t:'Bâtiment existant > 2 ans'}],
-    note:en103_ok?d.surf+' m² × '+(ZC_plan[d.zon]||88)+' kWhc/m² (zone '+d.zon+'). ΔR = 2 m².K/W. Durée 30 ans. Travaux par professionnel RGE.':d.isoplancher==='correcte'?'Plancher déjà isolé — non éligible.':d.isoplancher==='inconnue'?'Précisez l\'état de l\'isolation du plancher.':'Surface < 500 m².',
-    prod:'Isolation sous dalle — PSE (polystyrène expansé) ou PIR · pose par professionnel RGE'};
+  var kwh_en103=en103_ok?Math.round(d.surf*zc.plan):0;
+  var f4c={ref:'BAT-EN-103',name:'Isolation du plancher bas',desc:'isolation thermique de la dalle sur terre-plein — surface estimée à '+d.surf+' m²',icon:'⬛',status:en103_ok?'el':'ne',kwh:kwh_en103,
+    conds:[{ok:en103_iso,t:'Plancher insuffisamment isolé — '+({aucune:'dalle béton nue',insuffisante:'R<1 m².K/W',correcte:'déjà isolé R≥2',inconnue:'?'})[d.isoplancher]},{ok:d.surf>=500,t:'Surface ≥ 500 m²'},{ok:d.exist==='oui',t:'Bâtiment existant'}],
+    note:en103_ok?d.surf+' m² × '+zc.plan+' kWhc/m² (zone '+d.zon+'). ΔR=2 m².K/W. Durée 30 ans.':d.isoplancher==='correcte'?'Plancher déjà isolé.':'Renseignez l\'isolation du plancher.',
+    prod:'PSE ou PIR sous dalle — pose par professionnel RGE'};
 
+  // BAT-EN-104 portes sectionnelles
+  var en104_ok=d.hasportes&&d.nbportes>0&&(d.sec==='entrepot'||d.sec==='industrie')&&d.exist==='oui';
+  var kwh_en104=en104_ok?Math.round(d.nbportes*zc.portes):0;
+  var f4d={ref:'BAT-EN-104',name:'Menuiseries et portes sectionnelles isolantes',desc:'remplacement des portes de quai et portes sectionnelles industrielles par des modèles isolés (Ud ≤ 1,5 W/m².K)',icon:'🚪',status:en104_ok?'el':'ne',kwh:kwh_en104,
+    conds:[{ok:d.sec==='entrepot'||d.sec==='industrie',t:'Secteur entrepôt ou industrie — '+(SL[d.sec]||'?')},{ok:d.hasportes,t:'Portes sectionnelles non isolées présentes'},{ok:d.nbportes>0,t:d.nbportes+' porte(s) à remplacer'},{ok:d.exist==='oui',t:'Bâtiment existant'}],
+    note:en104_ok?d.nbportes+' porte(s) × '+zc.portes+' kWhc/unité (zone '+d.zon+'). Ud ≤ 1,5 W/m².K requis. Durée 20 ans. Pose par menuisier qualifié RGE.':'Aucune porte sectionnelle à remplacer ou secteur non éligible.',
+    prod:'Portes sectionnelles isolées — panneaux sandwich 40mm · Certification CEE · Ud ≤ 1,5 W/m².K'};
 
-  var th127_chauf=d.tchauf!=='aucun';
-  var th127_reg=d.regchauf==='aucune'||d.regchauf==='thermostat';
-  var th127_ok=th127_chauf&&th127_reg&&d.pchauf>0&&d.exist==='oui';
-  var kwh_th127=0;
-  if(th127_ok&&d.pchauf>0){var cth=d.tchauf==='convectif'?zc.th127.c:d.tchauf==='radiatif'?zc.th127.r:Math.round((zc.th127.c+zc.th127.r)/2);kwh_th127=Math.round(d.pchauf*cth);}
-  var f5={ref:'BAT-TH-127',name:'Régulation et programmation du chauffage',desc:'installation d\'une régulation avancée avec sonde extérieure, horloge et programmation par zones',icon:'⚙️',status:th127_ok?'el':'ne',kwh:kwh_th127,
-    conds:[{ok:th127_chauf,t:'Chauffage présent — '+d.tchauf},{ok:th127_reg,t:'Régulation actuelle insuffisante — '+{aucune:'aucune',thermostat:'thermostat simple',prog_partielle:'partielle',gtb:'GTB complète'}[d.regchauf]},{ok:d.pchauf>0,t:'Puissance chauffage : '+d.pchauf+' kW'},{ok:d.exist==='oui',t:'Bâtiment existant > 2 ans'}],
-    note:th127_ok?d.pchauf+' kW × '+( d.tchauf==='convectif'?zc.th127.c:d.tchauf==='radiatif'?zc.th127.r:Math.round((zc.th127.c+zc.th127.r)/2))+' kWhc/kW (zone '+d.zon+'). Régulation avec sonde température extérieure + programmation hebdomadaire + robinets thermostatiques. Durée 15 ans.':d.regchauf==='gtb'?'GTB/GTC complète déjà en place — non éligible.':!th127_chauf?'Aucun chauffage déclaré.':'Puissance chauffage manquante.',
-    prod:'Régulateurs Siemens RVS / Honeywell — sonde extérieure + vanne 3 voies + thermostat programmable'};
+  // BAT-TH-127
+  var th127_ok=d.tchauf!=='aucun'&&d.tchauf!=='chaudiere_gaz'&&d.tchauf!=='chaudiere_fioul'&&(d.regchauf==='aucune'||d.regchauf==='thermostat')&&d.pchauf>0&&d.exist==='oui';
+  var cth=d.tchauf==='convectif'?zc.th127.c:d.tchauf==='radiatif'?zc.th127.r:Math.round((zc.th127.c+zc.th127.r)/2);
+  var kwh_th127=th127_ok?Math.round(d.pchauf*cth):0;
+  var f5={ref:'BAT-TH-127',name:'Régulation et programmation du chauffage',desc:'régulation avancée avec sonde extérieure, horloge et programmation par zones',icon:'⚙️',status:th127_ok?'el':'ne',kwh:kwh_th127,
+    conds:[{ok:d.tchauf!=='aucun',t:'Chauffage présent — '+d.tchauf},{ok:d.regchauf==='aucune'||d.regchauf==='thermostat',t:'Régulation insuffisante — '+({aucune:'aucune',thermostat:'thermostat simple',prog_partielle:'partielle',gtb:'GTB'})[d.regchauf]},{ok:d.pchauf>0,t:'Puissance : '+d.pchauf+' kW'},{ok:d.exist==='oui',t:'Bâtiment existant'}],
+    note:th127_ok?d.pchauf+' kW × '+cth+' kWhc/kW. Sonde ext. + prog. hebdo. Durée 15 ans.':d.regchauf==='gtb'?'GTB déjà en place.':d.tchauf==='aucun'?'Aucun chauffage.':'Voir conditions.',
+    prod:'Siemens RVS / Honeywell — sonde ext. + vanne 3 voies + thermostat programmable'};
 
-  // ── BAT-TH-142 (Variateurs VMC) ──
+  // BAT-TH-116 GTB
+  var gtb_ok=d.tchauf!=='aucun'&&d.regchauf!=='gtb'&&surfGtb>=1000&&d.exist==='oui';
+  var kwh_gtb=gtb_ok?Math.round(surfGtb*zc.gtb):0;
+  var gtbDesc={chauf_ecl_vmc:'chauffage + éclairage + VMC',chauf_ecl:'chauffage + éclairage',chauf_vmc:'chauffage + VMC',chauf:'chauffage seul'};
+  var f5b={ref:'BAT-TH-116',name:'Gestion Technique du Bâtiment (GTB)',desc:'pilotage centralisé et automatisé des systèmes énergétiques du bâtiment — économies 10–30% sur les consommations pilotées',icon:'🖥️',status:gtb_ok?'el':'ne',kwh:kwh_gtb,
+    conds:[{ok:d.tchauf!=='aucun',t:'Chauffage présent à piloter'},{ok:d.regchauf!=='gtb',t:'Pas de GTB existante — '+({aucune:'aucune programmation',thermostat:'thermostat simple',prog_partielle:'partielle',gtb:'GTB complète'})[d.regchauf]},{ok:surfGtb>=1000,t:'Surface ≥ 1000 m² — '+surfGtb+' m²'},{ok:d.exist==='oui',t:'Bâtiment existant'}],
+    note:gtb_ok?surfGtb+' m² × '+zc.gtb+' kWhc/m² (zone '+d.zon+'). Équipements pilotés : '+(gtbDesc[d.gtb_equip]||'mixte')+'. Durée 10 ans. Prestataire avec qualification GTB.':'GTB déjà en place ou chauffage absent.',
+    prod:'Automate KNX / BACnet — supervision cloud + programmation horaire + régulation météo'};
+
+  // BAT-TH-113 PAC air/eau
+  var pac_ok=(d.tchauf==='chaudiere_gaz'||d.tchauf==='chaudiere_fioul')&&d.p_chaud_remp>0&&d.exist==='oui';
+  var kwh_pac=pac_ok?Math.round(d.p_chaud_remp*zc.pac):0;
+  var f5c={ref:'BAT-TH-113',name:'Pompe à Chaleur air/eau',desc:'remplacement de la chaudière gaz ou fioul par une PAC air/eau à haute performance (COP ≥ 3,4)',icon:'🌡️',status:pac_ok?'el':'ne',kwh:kwh_pac,
+    conds:[{ok:d.tchauf==='chaudiere_gaz'||d.tchauf==='chaudiere_fioul',t:'Chaudière gaz/fioul à remplacer — '+d.tchauf},{ok:d.p_chaud_remp>0,t:'Puissance : '+d.p_chaud_remp+' kW'},{ok:d.exist==='oui',t:'Bâtiment existant'}],
+    note:pac_ok?d.p_chaud_remp+' kW × '+zc.pac+' kWhc/kW (zone '+d.zon+'). COP ≥ 3,4 requis. Usage : '+(d.pac_usage||'chauffage')+'. Durée 20 ans. Installation par chauffagiste RGE.':'Système de chauffage existant non éligible (chaudière gaz/fioul requis).',
+    prod:'PAC air/eau inverter — COP ≥ 3,4 · QUALIBAT 5711 · installation par chauffagiste RGE'};
+
+  // BAT-TH-142 VMC variateurs
   var th142_ok=d.hasvmc&&d.pvmc>0&&d.varideja==='non'&&d.exist==='oui';
-  var kwh_th142=0;
-  if(th142_ok)kwh_th142=Math.round(d.pvmc*zc.vmc);
-  var f6={ref:'BAT-TH-142',name:'Variateurs de vitesse sur ventilateurs',desc:'installation de variateurs de fréquence sur les moteurs de ventilation/CTA pour adapter le débit aux besoins',icon:'🌀',status:th142_ok?'el':'ne',kwh:kwh_th142,
-    conds:[{ok:d.hasvmc,t:'VMC/CTA mécanique présente sur le site'},{ok:d.hasvmc&&d.varideja==='non',t:'Pas de variateurs déjà en place — '+(d.varideja==='oui'?'déjà installés':d.varideja==='partiel'?'partiellement installés':'aucun')},{ok:d.pvmc>0,t:'Puissance moteurs VMC : '+d.pvmc+' kW'},{ok:d.exist==='oui',t:'Bâtiment existant > 2 ans'}],
-    note:th142_ok?d.pvmc+' kW × '+zc.vmc+' kWhc/kW (zone '+d.zon+'). Variateurs de fréquence sur moteurs de ventilation. Économie estimée 30–50% sur conso ventilation. Durée 15 ans.':!d.hasvmc?'Aucune VMC/CTA déclarée.':d.varideja==='oui'?'Variateurs déjà en place — non éligible.':d.varideja==='partiel'?'Éligible pour les moteurs non encore équipés — renseignez la puissance restante.':'Puissance moteurs VMC manquante.',
-    prod:'Variateurs Schneider ATV / Danfoss FC — économiseurs d\'énergie CEE, installation par électricien qualifié'};
+  var kwh_th142=th142_ok?Math.round(d.pvmc*zc.vmc):0;
+  var f6={ref:'BAT-TH-142',name:'Variateurs de vitesse sur ventilateurs',desc:'variateurs de fréquence sur moteurs VMC/CTA pour adapter le débit aux besoins réels',icon:'🌀',status:th142_ok?'el':'ne',kwh:kwh_th142,
+    conds:[{ok:d.hasvmc,t:'VMC/CTA présente'},{ok:d.hasvmc&&d.varideja==='non',t:'Pas de variateurs — '+d.varideja},{ok:d.pvmc>0,t:'Puissance : '+d.pvmc+' kW'},{ok:d.exist==='oui',t:'Bâtiment existant'}],
+    note:th142_ok?d.pvmc+' kW × '+zc.vmc+' kWhc/kW. Économie 30–50% conso ventilation. Durée 15 ans.':!d.hasvmc?'Aucune VMC.':d.varideja==='oui'?'Variateurs déjà en place.':'Puissance VMC manquante.',
+    prod:'Variateurs Schneider ATV / Danfoss FC — électricien qualifié'};
 
-  // ── IND-BA-110 (Destratificateurs) ──
-  var d_sec=d.sec==='industrie';
-  var d_haut=d.haut>=5,d_clos=d.clos==='oui',d_chauf=d.tchauf!=='aucun',d_temp=d.temp>=15,d_ex=d.exist==='oui';
-  var d_ok=d_sec&&d_haut&&d_clos&&d_chauf&&d_temp&&d_ex;
+  // IND-UT-117 moteurs industriels
+  var ind117_ok=d.sec==='industrie'&&d.hasmot&&d.pmoteurs>0&&d.exist==='oui';
+  var kwh_ind117=ind117_ok?Math.round(d.pmoteurs*zc.mot):0;
+  var f6b={ref:'IND-UT-117',name:'Variateurs sur moteurs industriels de process',desc:'installation de variateurs de fréquence sur les moteurs de process (compresseurs, pompes, convoyeurs) hors VMC',icon:'⚙️',status:ind117_ok?'el':'ne',kwh:kwh_ind117,
+    conds:[{ok:d.sec==='industrie',t:'Bâtiment industriel — '+(SL[d.sec]||'?')},{ok:d.hasmot,t:'Moteurs de process présents'},{ok:d.pmoteurs>0,t:'Puissance moteurs : '+d.pmoteurs+' kW'},{ok:d.exist==='oui',t:'Bâtiment existant'}],
+    note:ind117_ok?d.pmoteurs+' kW × '+zc.mot+' kWhc/kW (zone '+d.zon+'). Type : '+(d.typemot||'mixte')+'. Économie 20–40% sur conso moteurs. Durée 10 ans.':'Secteur industrie requis + moteurs de process non équipés.',
+    prod:'Variateurs de fréquence industriels — Schneider Altivar / ABB ACS · électricien qualifié'};
+
+  // IND-BA-110 destratificateurs
+  var d_ok=d.sec==='industrie'&&d.haut>=5&&d.clos==='oui'&&d.tchauf!=='aucun'&&d.temp>=15&&d.exist==='oui';
+  var zcc=ZC[d.zon]||ZC.H2;
   var kwh_ind=0;
-  if(d_ok&&d.pchauf>0){var zcc=ZC[d.zon]||ZC.H2;if(d.tchauf==='convectif')kwh_ind=Math.round(d.pchauf*zcc.c);else if(d.tchauf==='radiatif')kwh_ind=Math.round(d.pchauf*zcc.r);else kwh_ind=Math.round(d.pchauf*0.5*zcc.c+d.pchauf*0.5*zcc.r);}
-  var f7={ref:'IND-BA-110',name:'Destratificateurs d\'air',desc:'brassage de l\'air chaud accumulé sous plafond vers le sol pour récupérer 20–30% des pertes chauffage',icon:'🌪️',status:d_ok?'el':'ne',kwh:kwh_ind,
-    conds:[{ok:d_sec,t:'Bâtiment industriel (halls, ateliers) — '+(SL[d.sec]||'?')+(d.sec==='entrepot'?' ⚠️ Entrepôts logistiques EXCLUS':'')},{ok:d_haut,t:'Hauteur ≥ 5 m — '+d.haut+' m'},{ok:d_clos,t:'Local complètement clos'},{ok:d_chauf,t:'Chauffage présent — '+d.tchauf},{ok:d_temp,t:'Consigne ≥ 15°C — '+d.temp+'°C'},{ok:d_ex,t:'Bâtiment existant > 2 ans'}],
-    note:d_ok?'Zone '+d.zon+' — système '+d.tchauf+'. '+d.pchauf+' kW installés. Durée 15 ans. Installation par professionnel avec étude de dimensionnement OPQIBI.':!d_sec?'❌ Les entrepôts logistiques sont EXCLUS de IND-BA-110. Fiche applicable uniquement aux bâtiments industriels (ateliers, halls de fabrication).':'Vérifiez les conditions.',
-    prod:'ONSEN-DS7 (Teddington France) — 6500 m³/h, 410W, IP54, conforme IND-BA-110 + BAT-TH-142'};
+  if(d_ok&&d.pchauf>0){if(d.tchauf==='convectif')kwh_ind=Math.round(d.pchauf*zcc.c);else if(d.tchauf==='radiatif')kwh_ind=Math.round(d.pchauf*zcc.r);else kwh_ind=Math.round(d.pchauf*0.5*zcc.c+d.pchauf*0.5*zcc.r);}
+  var f7={ref:'IND-BA-110',name:'Destratificateurs d\'air',desc:'brassage de l\'air chaud sous plafond pour 20–30% d\'économies chauffage (industrie uniquement)',icon:'🌪️',status:d_ok?'el':'ne',kwh:kwh_ind,
+    conds:[{ok:d.sec==='industrie',t:'Bâtiment industriel — '+(SL[d.sec]||'?')+(d.sec==='entrepot'?' ⚠️ Entrepôts EXCLUS':'')},{ok:d.haut>=5,t:'Hauteur ≥ 5 m — '+d.haut+' m'},{ok:d.clos==='oui',t:'Local clos'},{ok:d.tchauf!=='aucun',t:'Chauffage — '+d.tchauf},{ok:d.temp>=15,t:'Consigne ≥ 15°C — '+d.temp+'°C'},{ok:d.exist==='oui',t:'Bâtiment existant'}],
+    note:d_ok?'Zone '+d.zon+' — '+d.tchauf+'. '+d.pchauf+' kW. Durée 15 ans. Étude OPQIBI requise.':'⚠️ Entrepôts logistiques EXCLUS. Industriel (ateliers, halls de fabrication) uniquement.',
+    prod:'ONSEN-DS7 (Teddington) — 6500 m³/h, 410W, IP54'};
 
-  // ── BAT-TH-134 (HP Flottante) ──
+  // BAT-TH-134 HP flottante
   var h_ok=d.hasfr&&d.hpex==='non'&&d.pfroid>0&&d.exist==='oui';
-  var kwh_hp=0;
-  if(h_ok)kwh_hp=Math.round(d.pfroid*2000*0.8*0.11*10.5);
-  var f8={ref:'BAT-TH-134',name:'Haute Pression Flottante',desc:'régulation de la pression de condensation du groupe froid selon la température extérieure pour réduire la consommation',icon:'❄️',status:h_ok?'el':'ne',kwh:kwh_hp,
-    conds:[{ok:d.hasfr,t:'Installation frigorifique présente'},{ok:d.hasfr&&d.hpex==='non',t:'Pas de HP flottante existante'},{ok:d.hasfr&&d.pfroid>0,t:'Puissance froid : '+d.pfroid+' kW'},{ok:d.exist==='oui',t:'Bâtiment existant'}],
-    note:h_ok?'Économie 10–12% sur conso froid. '+d.nbcent+' centrale(s), '+d.pfroid+' kW. Durée 14 ans. Partenaire CEE EDF.':!d.hasfr?'Aucune installation frigorifique.':d.hpex==='oui'?'HP flottante déjà en place.':'Puissance froid manquante.',
-    prod:'FREE 6200 HPF — 6 étages, RS485+TCP/IP, économie 15–20% conso froid · QUALIBAT RGE'};
+  var kwh_hp=h_ok?Math.round(d.pfroid*2000*0.8*0.11*10.5):0;
+  var f8={ref:'BAT-TH-134',name:'Haute Pression Flottante',desc:'régulation pression condensation selon T° extérieure — 10–12% économies sur conso froid',icon:'❄️',status:h_ok?'el':'ne',kwh:kwh_hp,
+    conds:[{ok:d.hasfr,t:'Installation frigorifique présente'},{ok:d.hasfr&&d.hpex==='non',t:'Pas de HP flottante existante'},{ok:d.hasfr&&d.pfroid>0,t:'Puissance : '+d.pfroid+' kW'},{ok:d.exist==='oui',t:'Bâtiment existant'}],
+    note:h_ok?d.nbcent+' centrale(s) × '+d.pfroid+' kW. Durée 14 ans. Partenaire EDF.':!d.hasfr?'Aucune installation frigorifique.':d.hpex==='oui'?'HP flottante déjà en place.':'Puissance manquante.',
+    prod:'FREE 6200 HPF — RS485+TCP/IP, 15–20% économies · QUALIBAT RGE'};
 
-  return[f1,f2,f3,f4,f4b,f4c,f5,f6,f7,f8];
+  // BAT-TH-156 récupération chaleur froid
+  var rec_ok=d.hasfr&&d.hasrecup&&d.recup_exist==='non'&&d.pfroid>0&&d.tchauf!=='aucun'&&d.exist==='oui';
+  var kwh_rec=rec_ok?Math.round(d.pfroid*zc.recup):0;
+  var f8b={ref:'BAT-TH-156',name:'Récupération de chaleur sur groupe froid',desc:'récupération de la chaleur fatale du condenseur pour préchauffer l\'ECS ou le chauffage — 15–30% économies',icon:'♻️',status:rec_ok?'el':'ne',kwh:kwh_rec,
+    conds:[{ok:d.hasfr,t:'Installation frigorifique présente'},{ok:d.tchauf!=='aucun',t:'Besoin de chaleur présent sur le site'},{ok:d.hasfr&&d.hasrecup,t:'Besoin de récupération déclaré'},{ok:d.hasfr&&d.recup_exist==='non',t:'Pas de récupération existante'},{ok:d.pfroid>0,t:'Puissance froid : '+d.pfroid+' kW'},{ok:d.exist==='oui',t:'Bâtiment existant'}],
+    note:rec_ok?d.pfroid+' kW groupe froid × '+zc.recup+' kWhc/kW (zone '+d.zon+'). Destination : '+(d.recup_dest||'ECS')+'. Durée 15 ans. COP récupération ≥ 3,0.':'Conditions : froid présent + besoin chaleur + pas de récupération existante.',
+    prod:'Échangeur condenseur + récupérateur ECS — installation par frigoriste qualifié RGE'};
+
+  return[f1,f2,f3,f4,f4b,f4c,f4d,f5,f5b,f5c,f6,f6b,f7,f8,f8b];
 }
 
 function sendEmail(d,fiches,tot){
   var eligible=fiches.filter(function(f){return f.status==='el';});
   var date=new Date().toLocaleDateString('fr-FR');
   var rows=eligible.map(function(f){return'<tr><td style="padding:8px 12px;border-bottom:1px solid #eee">'+f.ref+'</td><td style="padding:8px 12px;border-bottom:1px solid #eee">'+f.name+'</td><td style="padding:8px 12px;border-bottom:1px solid #eee;font-weight:700;color:#1565c0">'+fmt(f.kwh)+' kWhc</td><td style="padding:8px 12px;border-bottom:1px solid #eee;font-weight:700;color:#2e7d32">≈ '+fmtE(f.kwh)+'</td></tr>';}).join('');
-  var html='<div style="font-family:sans-serif;max-width:600px"><div style="background:#1b5e20;color:white;padding:20px 24px;border-radius:8px 8px 0 0"><h2 style="margin:0">🏗️ Nouveau lead CEE — Les Artisans Verts</h2><p style="margin:6px 0 0;opacity:.8">Simulateur complété le '+date+'</p></div>'
-    +'<div style="background:#fff;border:1px solid #eee;padding:24px">'
-    +'<h3 style="margin-top:0;color:#1b5e20">📋 Informations client</h3>'
-    +'<table style="width:100%;border-collapse:collapse;font-size:14px">'
-    +'<tr><td style="padding:6px 12px;color:#666;width:40%">Raison sociale</td><td style="padding:6px 12px;font-weight:700">'+d.nom+'</td></tr>'
-    +'<tr style="background:#f9f9f9"><td style="padding:6px 12px;color:#666">Secteur</td><td style="padding:6px 12px">'+(SL[d.sec]||d.sec)+'</td></tr>'
-    +'<tr><td style="padding:6px 12px;color:#666">Surface</td><td style="padding:6px 12px">'+d.surf+' m²</td></tr>'
-    +'<tr style="background:#f9f9f9"><td style="padding:6px 12px;color:#666">Hauteur</td><td style="padding:6px 12px">'+d.haut+' m</td></tr>'
-    +'<tr><td style="padding:6px 12px;color:#666">Zone climatique</td><td style="padding:6px 12px">'+d.zon+'</td></tr>'
-    +'<tr style="background:#f9f9f9"><td style="padding:6px 12px;color:#666">Toiture</td><td style="padding:6px 12px">'+{terrasse:'Terrasse plate',versants:'Versants inclinés',shed:'Shed',inconnue:'?'}[d.ttoiture]+' — '+{aucune:'aucune isolation',insuffisante:'R < 2 m².K/W',correcte:'correcte (R ≥ 4)',inconnue:'?'}[d.isoexist]+'</td></tr>'
-    +'<tr><td style="padding:6px 12px;color:#666">Chauffage</td><td style="padding:6px 12px">'+d.tchauf+' — '+d.pchauf+' kW</td></tr>'
-    +'<tr style="background:#f9f9f9"><td style="padding:6px 12px;color:#666">Froid</td><td style="padding:6px 12px">'+(d.hasfr?d.pfroid+' kW, '+d.nbcent+' centrale(s)':'Non')+'</td></tr>'
-    +'<tr><td style="padding:6px 12px;color:#666">VMC</td><td style="padding:6px 12px">'+(d.hasvmc?d.pvmc+' kW':'Non')+'</td></tr>'
-    +'<tr style="background:#f9f9f9"><td style="padding:6px 12px;color:#666">Éclairage ext.</td><td style="padding:6px 12px">'+(d.hasext?d.nbext+' points — '+d.teclext:'Non')+'</td></tr>'
-    +'</table>'
-    +(eligible.length>0?'<h3 style="color:#1b5e20;margin-top:24px">⚡ Fiches CEE éligibles</h3>'
-    +'<table style="width:100%;border-collapse:collapse;font-size:14px"><thead><tr style="background:#e8f5e9"><th style="padding:10px 12px;text-align:left">Fiche</th><th style="padding:10px 12px;text-align:left">Intitulé</th><th style="padding:10px 12px;text-align:left">kWhc</th><th style="padding:10px 12px;text-align:left">Valorisation €</th></tr></thead><tbody>'+rows+'</tbody></table>'
-    +'<div style="background:#e8f5e9;border-left:4px solid #2e7d32;padding:16px;margin-top:16px;border-radius:0 8px 8px 0">'
-    +'<strong>Total estimé : '+fmt(tot)+' kWhc ≈ '+fmtE(tot)+'</strong><br><small style="color:#666">Valeur kWhc : 0,006 € (marché CEE5 moyen) — estimation indicative</small></div>'
-    :'<div style="background:#fff3e0;padding:16px;border-radius:8px;color:#6d2600">Aucune fiche éligible selon les données saisies.</div>')
-    +'</div></div>';
-
-  try{
-    fetch(WEBHOOK,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({mail:'thierry@thierrybismuth.com',subject:'🏗️ Lead CEE — '+d.nom+' — '+fmt(tot)+' kWhc ≈ '+fmtE(tot),message:html})
-    }).catch(function(){});
-  }catch(e){}
+  var html='<div style="font-family:sans-serif;max-width:600px"><div style="background:#1b5e20;color:white;padding:20px 24px;border-radius:8px 8px 0 0"><h2 style="margin:0">🏗️ Nouveau lead CEE — Les Artisans Verts</h2><p style="margin:6px 0 0;opacity:.8">Simulateur complété le '+date+'</p></div><div style="background:#fff;border:1px solid #eee;padding:24px"><h3 style="margin-top:0;color:#1b5e20">📋 Client</h3><table style="width:100%;border-collapse:collapse;font-size:14px"><tr><td style="padding:6px 12px;color:#666;width:40%">Raison sociale</td><td style="padding:6px 12px;font-weight:700">'+d.nom+'</td></tr><tr style="background:#f9f9f9"><td style="padding:6px 12px;color:#666">Secteur</td><td style="padding:6px 12px">'+(SL[d.sec]||d.sec)+'</td></tr><tr><td style="padding:6px 12px;color:#666">Surface</td><td style="padding:6px 12px">'+d.surf+' m²</td></tr><tr style="background:#f9f9f9"><td style="padding:6px 12px;color:#666">Hauteur</td><td style="padding:6px 12px">'+d.haut+' m</td></tr><tr><td style="padding:6px 12px;color:#666">Zone</td><td style="padding:6px 12px">'+d.zon+'</td></tr><tr style="background:#f9f9f9"><td style="padding:6px 12px;color:#666">Chauffage</td><td style="padding:6px 12px">'+d.tchauf+' '+d.pchauf+' kW</td></tr><tr><td style="padding:6px 12px;color:#666">Froid</td><td style="padding:6px 12px">'+(d.hasfr?d.pfroid+' kW':'Non')+'</td></tr><tr style="background:#f9f9f9"><td style="padding:6px 12px;color:#666">VMC</td><td style="padding:6px 12px">'+(d.hasvmc?d.pvmc+' kW':'Non')+'</td></tr></table>'+(eligible.length>0?'<h3 style="color:#1b5e20;margin-top:20px">⚡ Fiches éligibles ('+eligible.length+')</h3><table style="width:100%;border-collapse:collapse;font-size:14px"><thead><tr style="background:#e8f5e9"><th style="padding:8px 12px;text-align:left">Fiche</th><th style="padding:8px 12px;text-align:left">Intitulé</th><th style="padding:8px 12px;text-align:left">kWhc</th><th style="padding:8px 12px;text-align:left">€</th></tr></thead><tbody>'+rows+'</tbody></table><div style="background:#e8f5e9;border-left:4px solid #2e7d32;padding:14px;margin-top:14px"><strong>Total : '+fmt(tot)+' kWhc ≈ '+fmtE(tot)+'</strong><br><small style="color:#666">0,006 €/kWhc — estimation indicative</small></div>':'<div style="background:#fff3e0;padding:14px">Aucune fiche éligible.</div>')+'</div></div>';
+  try{fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mail:'thierry@thierrybismuth.com',subject:'🏗️ Lead CEE — '+d.nom+' — '+fmt(tot)+' kWhc ≈ '+fmtE(tot),message:html})}).catch(function(){});}catch(e){}
 }
 
 function renderResults(d,fiches,tot){
@@ -728,10 +817,10 @@ function renderResults(d,fiches,tot){
   document.getElementById('rtot-eur').textContent=tot>0?'≈ '+fmtE(tot):'';
   var sit='';
   fiches.forEach(function(f){if(f.kwh>0)sit+='<div class="si"><span>'+f.icon+' '+f.ref+' — '+f.name+'</span><span class="sikwh">'+fmt(f.kwh)+' kWhc &nbsp;<span style="opacity:.7;font-size:12px">≈ '+fmtE(f.kwh)+'</span></span></div>';});
-  if(!sit)sit='<div style="opacity:.6;font-size:13px">Aucune fiche éligible — voir le détail ci-dessous</div>';
+  if(!sit)sit='<div style="opacity:.6;font-size:13px">Aucune fiche éligible</div>';
   document.getElementById('rsitems').innerHTML=sit;
   document.getElementById('rcl').textContent=d.nom;
-  document.getElementById('rmt').textContent=(SL[d.sec]||'?')+' · '+d.surf+' m² · H = '+d.haut+' m · Zone '+d.zon;
+  document.getElementById('rmt').textContent=(SL[d.sec]||'?')+' · '+d.surf+' m² · H='+d.haut+'m · Zone '+d.zon;
   var fhtml='';fiches.forEach(function(f){fhtml+=renderF(f);});
   document.getElementById('rfiches').innerHTML=fhtml;
   renderForms(fiches,d);
@@ -744,7 +833,8 @@ function renderResults(d,fiches,tot){
 }
 
 function renderF(f){
-  var firstFail=(f.conds||[]).find(function(c){return!c.ok;});var stlbl=f.status==='el'?'✅ ÉLIGIBLE':f.status==='sp'?'⛔ SUPPRIMÉE — nouvelles opérations exclues':'❌ '+(firstFail?firstFail.t:'Critère non rempli');
+  var firstFail=(f.conds||[]).find(function(c){return!c.ok;});
+  var stlbl=f.status==='el'?'✅ ÉLIGIBLE':f.status==='sp'?'⛔ SUPPRIMÉE — nouvelles opérations exclues':'❌ '+(firstFail?firstFail.t:'Critère non rempli');
   var cl=f.status==='el'?'el':f.status==='sp'?'sp':'';
   var ch=(f.conds||[]).map(function(c){return'<li class="'+(c.ok?'ok':'fail')+'"><span class="ci">'+(c.ok?'✓':'✗')+'</span><span>'+c.t+'</span></li>';}).join('');
   var kh=f.kwh>0?'<div class="fkwh"><div class="kwn">'+fmt(f.kwh)+'</div><div class="kwu">kWh cumac</div><div class="kweur">≈ '+fmtE(f.kwh)+'</div></div>':'';
@@ -753,59 +843,35 @@ function renderF(f){
   return'<div class="fc '+cl+'"><div class="fh" onclick="tb(\'fb-'+f.ref+'\',this)"><span class="fref">'+f.ref+'</span><div style="flex:1"><div class="fnm">'+f.icon+' '+f.name+sup+'</div>'+(f.desc?'<div class="fdsc">('+f.desc+')</div>':'')+'<div class="fst">'+stlbl+'</div></div>'+kh+'<span style="color:var(--tl);font-size:12px;flex-shrink:0;margin-left:8px">▼</span></div><div class="fbody" id="fb-'+f.ref+'"><ul class="cl">'+ch+'</ul><p class="fnote">'+f.note+'</p>'+ph+'</div></div>';
 }
 
-function tb(id,hdr){
-  var el=document.getElementById(id);var tog=hdr.querySelector('span:last-child');
-  var open=el.style.display==='block';el.style.display=open?'none':'block';tog.textContent=open?'▼':'▲';
-}
+function tb(id,hdr){var el=document.getElementById(id);var tog=hdr.querySelector('span:last-child');var open=el.style.display==='block';el.style.display=open?'none':'block';tog.textContent=open?'▼':'▲';}
 
 function renderForms(fiches,d){
   var html='';
   var eligible=fiches.filter(function(f){return f.status==='el';});
-  if(eligible.length===0){
-    html='<div class="card"><div class="al al-w"><i>💡</i><div><strong>Aucun formulaire généré.</strong><br>Aucune fiche active éligible. Contactez Les Artisans Verts : <strong>01 87 66 27 08</strong> pour un audit complet.</div></div></div>';
-    document.getElementById('rforms').innerHTML=html;return;
-  }
+  if(eligible.length===0){html='<div class="card"><div class="al al-w"><i>💡</i><div><strong>Aucun formulaire.</strong> Contactez LAV : 01 87 66 27 08</div></div></div>';document.getElementById('rforms').innerHTML=html;return;}
   eligible.forEach(function(f){
-    var bcolor=f.ref.startsWith('IND')||f.ref==='BAT-TH-134'?'var(--bm)':'var(--gm)';
-    var bgc=f.ref.startsWith('IND')||f.ref==='BAT-TH-134'?'var(--bp)':'var(--gp)';
-    html+='<div class="pfc" style="border-color:'+bcolor+'"><div class="pfh" style="background:'+bgc+';border-color:rgba(0,0,0,.1)">';
-    html+='<h3 style="color:#1b5e20">📝 Demande d\'éligibilité — '+f.ref+'</h3>';
-    html+='<p style="color:var(--tl)">'+f.name+' · À signer par le client avant toute intervention</p></div>';
-    html+='<div class="pfb"><div class="fg">';
+    var bcolor=f.ref.startsWith('IND')||f.ref==='BAT-TH-134'||f.ref==='BAT-TH-156'?'var(--bm)':'var(--gm)';
+    var bgc=f.ref.startsWith('IND')||f.ref==='BAT-TH-134'||f.ref==='BAT-TH-156'?'var(--bp)':'var(--gp)';
+    html+='<div class="pfc" style="border-color:'+bcolor+'"><div class="pfh" style="background:'+bgc+';border-color:rgba(0,0,0,.1)"><h3 style="color:#1b5e20">📝 Demande d\'éligibilité — '+f.ref+'</h3><p style="color:var(--tl)">'+f.name+' · À signer par le client avant toute intervention</p></div><div class="pfb"><div class="fg">';
     html+='<div class="fi"><label class="lbl">Site bénéficiaire</label><input type="text" value="'+d.nom+'"></div>';
-    html+='<div class="fi"><label class="lbl">Adresse</label><input type="text" placeholder="Rue, numéro"></div>';
+    html+='<div class="fi"><label class="lbl">Adresse</label><input type="text"></div>';
     html+='<div class="fi"><label class="lbl">Code postal</label><input type="text" placeholder="75000"></div>';
     html+='<div class="fi"><label class="lbl">Ville</label><input type="text"></div>';
     html+='<div class="fi"><label class="lbl">Contact / Fonction</label><input type="text"></div>';
     html+='<div class="fi"><label class="lbl">Téléphone</label><input type="tel"></div>';
     html+='<div class="fi"><label class="lbl">Email</label><input type="email"></div>';
     html+='<div class="fi"><label class="lbl">SIRET</label><input type="text" placeholder="14 chiffres"></div>';
-    if(f.ref==='IND-BA-110'||f.ref==='BAT-TH-142'){
-      html+='<div class="fi"><label class="lbl">Hauteur bâtiment (m)</label><input type="number" value="'+d.haut+'"></div>';
-      html+='<div class="fi"><label class="lbl">Puissance chauffage (kW)</label><input type="number" value="'+d.pchauf+'"></div>';
-    }
-    if(f.ref==='BAT-TH-134'){
-      html+='<div class="fi"><label class="lbl">Puissance froid installée (kW)</label><input type="number" value="'+d.pfroid+'"></div>';
-      html+='<div class="fi"><label class="lbl">Nb centrales frigorifiques</label><input type="number" value="'+d.nbcent+'"></div>';
-    }
-    if(f.ref==='BAT-EN-101'){
-      html+='<div class="fi"><label class="lbl">Surface de toiture (m²)</label><input type="number" value="'+d.surf+'"></div>';
-      html+='<div class="fi"><label class="lbl">Type de toiture</label><input type="text" value="'+{terrasse:'Terrasse plate',versants:'Versants inclinés',shed:'Shed'}[d.ttoiture]+'"></div>';
-    }
-    if(f.ref==='BAT-TH-127'){
-      html+='<div class="fi"><label class="lbl">Puissance chauffage (kW)</label><input type="number" value="'+d.pchauf+'"></div>';
-      html+='<div class="fi"><label class="lbl">Régulation actuelle</label><input type="text" value="'+{aucune:'Aucune',thermostat:'Thermostat simple',prog_partielle:'Partielle',gtb:'GTB'}[d.regchauf]+'"></div>';
-    }
-    if(f.ref==='BAT-EQ-133'||f.ref==='BAT-EQ-127'||f.ref==='RES-EC-104'){
-      html+='<div class="fi"><label class="lbl">Nb luminaires concernés</label><input type="number" value="'+(f.ref==='RES-EC-104'?d.nbext:d.nblum||Math.ceil(d.surf/30))+'"></div>';
-      html+='<div class="fi"><label class="lbl">Nacelle disponible</label><select><option '+(d.nac==='non'?'selected':'')+'>Non</option><option '+(d.nac==='oui'?'selected':'')+'>Oui</option></select></div>';
-    }
-    html+='<div class="fi"><label class="lbl">Date de visite souhaitée</label><input type="date"></div>';
-    html+='<div class="fi full"><label class="lbl">Créneaux de disponibilités</label><input type="text" placeholder="Ex: Mardi et jeudi matin"></div>';
-    html+='</div>';
-    html+='<div class="cftxt">Je confirme mon intérêt et autorise <strong>Les Artisans Verts</strong> à réaliser une étude technique et administrative en vue des travaux liés à la fiche <strong>'+f.ref+' — '+f.name+'</strong>.</div>';
-    html+='<div class="sigrow"><div><label class="lbl" style="margin-bottom:8px;display:block">Fait à / Le</label><input type="text" placeholder="Ville"><input type="date" style="margin-top:8px"></div><div><label class="lbl" style="margin-bottom:8px;display:block">Signature et cachet</label><div class="sigbox">Signature client</div></div></div>';
-    html+='<div style="margin-top:14px;padding:10px 14px;background:#f5f5f5;border-radius:8px;font-size:11px;color:var(--tl)">📎 Les Artisans Verts · 01 87 66 27 08 · contact@artisansverts.energy · Partenaire CEE EDF · QUALIBAT RGE</div>';
+    if(f.ref==='IND-BA-110'||f.ref==='BAT-TH-142'){html+='<div class="fi"><label class="lbl">Hauteur (m)</label><input type="number" value="'+d.haut+'"></div><div class="fi"><label class="lbl">Puissance chauffage (kW)</label><input type="number" value="'+d.pchauf+'"></div>';}
+    if(f.ref==='BAT-TH-134'||f.ref==='BAT-TH-156'){html+='<div class="fi"><label class="lbl">Puissance froid (kW)</label><input type="number" value="'+d.pfroid+'"></div><div class="fi"><label class="lbl">Nb centrales</label><input type="number" value="'+d.nbcent+'"></div>';}
+    if(f.ref==='BAT-EN-101'||f.ref==='BAT-EN-102'||f.ref==='BAT-EN-103'||f.ref==='BAT-EN-104'){html+='<div class="fi"><label class="lbl">Surface concernée (m²)</label><input type="number" value="'+d.surf+'"></div><div class="fi"><label class="lbl">Type</label><input type="text" value="'+({terrasse:'Toiture terrasse',versants:'Versants inclinés',shed:'Shed'}[d.ttoiture]||f.name)+'"></div>';}
+    if(f.ref==='BAT-TH-127'||f.ref==='BAT-TH-116'){html+='<div class="fi"><label class="lbl">Puissance chauffage (kW)</label><input type="number" value="'+d.pchauf+'"></div><div class="fi"><label class="lbl">Régulation actuelle</label><input type="text" value="'+({aucune:'Aucune',thermostat:'Thermostat simple',prog_partielle:'Partielle',gtb:'GTB'})[d.regchauf]+'"></div>';}
+    if(f.ref==='BAT-TH-113'){html+='<div class="fi"><label class="lbl">Puissance chaudière à remplacer (kW)</label><input type="number" value="'+d.p_chaud_remp+'"></div><div class="fi"><label class="lbl">Type chaudière actuelle</label><input type="text" value="'+d.tchauf+'"></div>';}
+    if(f.ref==='IND-UT-117'){html+='<div class="fi"><label class="lbl">Puissance moteurs process (kW)</label><input type="number" value="'+d.pmoteurs+'"></div><div class="fi"><label class="lbl">Type machines</label><input type="text" value="'+d.typemot+'"></div>';}
+    if(f.ref==='BAT-EQ-133'||f.ref==='RES-EC-104'){html+='<div class="fi"><label class="lbl">Nb luminaires</label><input type="number" value="'+(f.ref==='RES-EC-104'?d.nbext:d.nblum||Math.ceil(d.surf/30))+'"></div><div class="fi"><label class="lbl">Nacelle dispo</label><select><option '+(d.nac==='non'?'selected':'')+'>Non</option><option '+(d.nac==='oui'?'selected':'')+'>Oui</option></select></div>';}
+    html+='<div class="fi"><label class="lbl">Date de visite souhaitée</label><input type="date"></div><div class="fi full"><label class="lbl">Créneaux de disponibilités</label><input type="text" placeholder="Ex: Mardi matin"></div></div>';
+    html+='<div class="cftxt">Je confirme mon intérêt et autorise <strong>Les Artisans Verts</strong> à réaliser une étude pour la fiche <strong>'+f.ref+' — '+f.name+'</strong>.</div>';
+    html+='<div class="sigrow"><div><label class="lbl" style="margin-bottom:8px;display:block">Fait à / Le</label><input type="text" placeholder="Ville"><input type="date" style="margin-top:8px"></div><div><label class="lbl" style="margin-bottom:8px;display:block">Signature</label><div class="sigbox">Signature client</div></div></div>';
+    html+='<div style="margin-top:12px;padding:10px 14px;background:#f5f5f5;border-radius:8px;font-size:11px;color:var(--tl)">Les Artisans Verts · 01 87 66 27 08 · contact@artisansverts.energy · QUALIBAT RGE</div>';
     html+='</div></div>';
   });
   html+='<div style="text-align:center;padding:24px 0 8px"><button class="btn btn-p" onclick="restart()" style="font-size:15px;padding:14px 36px">➕ Nouveau client / Nouvelle simulation</button></div>';
