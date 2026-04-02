@@ -117,7 +117,7 @@ Repo : Thierrybismuth/pagesweb-thierry-
 >
 > **L'argument clé face à une agence classique** — Une petite agence ou un réseau physique a 4 ou 5 négociateurs. KW en a 30 sur le même secteur qui travaillent pour vous dès le premier jour.
 
-**CTA :** "Je veux être mis en contact avec un conseiller KW" → email thierry@thierrybismuth.com + CC consultant + test@kw.fr
+**CTA :** "Je veux être mis en contact avec un conseiller KW" → thierry@thierrybismuth.com + CC consultant + test@kw.fr
 
 💰 Commission consultant : 8% de la commission KW en cas de vente signée
 
@@ -148,7 +148,7 @@ Repo : Thierrybismuth/pagesweb-thierry-
 📌 Pastille consultant :
 > La plupart des solutions du marché sont 100% digitales — le client uploade ses documents seul, suit sa procédure à distance, sans personne pour répondre à ses questions. APC c'est l'inverse : un interlocuteur humain dédié qui pilote le dossier de A à Z.
 
-**CTA :** "Je veux qu'on analyse mon assurance" → email thierry@thierrybismuth.com + CC consultant + test@apc.fr
+**CTA :** "Je veux qu'on analyse mon assurance" → thierry@thierrybismuth.com + CC consultant + test@apc.fr
 
 💰 Commission consultant : ~500€ par contrat renégocié
 
@@ -180,7 +180,7 @@ Repo : Thierrybismuth/pagesweb-thierry-
 📌 Pastille consultant :
 > Pour les travaux hors CEE ou les aménagements complémentaires, LAV a des accords cadres avec de grandes banques. Des taux et conditions qu'un particulier ne peut pas obtenir en direct.
 
-**CTA :** "Je veux un diagnostic gratuit" → email thierry@thierrybismuth.com + CC consultant + test@lav.fr
+**CTA :** "Je veux un diagnostic gratuit" → thierry@thierrybismuth.com + CC consultant + test@lav.fr
 
 💰 Commission consultant : 7% du montant du chantier (entre 1 000€ et 2 000€ selon habitation)
 
@@ -257,8 +257,73 @@ Restauration (King Marcel, Basilic & Co, Berliner...) · Services à la personne
 
 *Punchlines à rédiger — prochain échange*
 
-#### ConvoK — Arguments (À CONSTRUIRE)
-#### PerDus — Arguments (À CONSTRUIRE)
+---
+
+#### ConvoK — Arguments (VALIDÉS)
+
+**ARG 1 — Le marché se contredit**
+*Punchline :* *"50% des patrons galent à recruter. Presque aucun ne veut payer un cabinet. Résultat : le poste reste vide pendant des mois."*
+
+📌 Pastille consultant :
+> Les prestataires classiques facturent 15 à 25% du salaire annuel — soit 6 000€ pour un poste à 40 000€. Le patron refuse, le poste reste ouvert, le business en souffre. C'est le cercle vicieux que ConvoK casse.
+
+**ARG 2 — La valeur d'un partenaire, c'est pas les CV**
+*Punchline :* *"LinkedIn et Indeed vous donnent des CV. ConvoK vous met des candidats en face de vous."*
+
+📌 Pastille consultant :
+> Les CVs, le patron peut en trouver seul. Ce qu'il ne sait pas faire c'est contacter massivement, relancer par mail, SMS, WhatsApp, et convoquer ceux qui méritent d'être vus. C'est exactement ce que fait ConvoK — sans qu'il lève le petit doigt.
+
+**ARG 3 — Simple, rapide, sans risque**
+*Punchline :* *"3 critères de votre part. 4 à 6 candidats devant vous en 8 jours. Vous ne payez que si vous recrutez."*
+
+📌 Pastille consultant :
+> Le patron donne : métier, localisation, 1 ou 2 critères libres. ConvoK fait le reste — sourcing, contacts, convocations. En 8 jours : 1h30 à 2h d'entretiens café. Forfait unique 2 000€, uniquement à l'embauche.
+
+**CTA ConvoK — si le client dit oui :**
+1. Intitulé du poste
+2. Localisation
+3. Critères complémentaires (champ libre)
+4. Date souhaitée pour les entretiens
+5. Email du client (reçoit copie du formulaire)
+
+📌 Mention contractuelle : *"ConvoK est une prestation simple et transparente. Ce cahier des charges et ce formulaire tiennent lieu de document contractuel entre les parties."*
+
+→ Email automatique : thierry@thierrybismuth.com + CC consultant + test@convok.fr
+
+💰 Commission consultant : 50% du CA soit 1 000€ par recrutement signé
+
+---
+
+#### PerDus — Arguments (VALIDÉS)
+
+**ARG 1 — Un marché colossal dont personne ne parle**
+*Punchline :* *"8 à 10% du commerce se fait sur internet. 5% de ces colis ne sont jamais livrés. C'est un stock énorme — et il est disponible."*
+
+📌 Pastille consultant :
+> Ces colis sont rachetés à l'aveugle auprès d'Amazon, La Poste et des grands transporteurs. PerDus les acquiert, les trie et organise leur vente en boutique. Le commerçant n'achète rien, ne stocke rien, ne risque rien.
+
+**ARG 2 — 48h qui changent la visibilité de votre magasin**
+*Punchline :* *"Une semaine de communication gratuite autour de chez vous. 2 jours de flux inhabituel dans votre boutique."*
+
+📌 Pastille consultant :
+> PerDus organise tout en amont : réseaux sociaux + distribution de flyers dans les rues. Le commerçant remet lui-même des flyers à ses clients la semaine précédente. Le jour J : stand installé dans le magasin ou devant (si mairie OK), 25 à 100 kg de marchandise selon l'espace, 25 à 100 visiteurs supplémentaires.
+
+**ARG 3 — Trois bénéfices directs pour le commerçant**
+*Punchline :* *"Une campagne comm' gratuite. Des nouveaux clients qui découvrent votre boutique. Et certains repartent avec un produit à vous."*
+
+📌 Pastille consultant :
+> 1. Communication offerte autour du magasin en amont de l'événement
+> 2. Chaque visiteur venu pour les colis peut repartir avec un produit du commerçant
+> 3. Des habitants qui n'avaient jamais poussé la porte découvrent le commerce
+
+**CTA PerDus — si le client dit oui :**
+1. Surface disponible (m²) + intérieur / extérieur / les deux
+2. Date souhaitée pour l'événement
+3. Email du client (reçoit confirmation + logistique)
+
+→ Email automatique : thierry@thierrybismuth.com + CC consultant + test@perdus.fr
+
+💰 Commission consultant : 8€/kg vendu — 100kg = 800€, 400kg = 3 200€
 
 ---
 
@@ -283,8 +348,8 @@ Restauration (King Marcel, Basilic & Co, Berliner...) · Services à la personne
 6. ✅ Arborescence Commerçants — VALIDÉE
 7. ✅ Critères RecommerCer (C1–C7) — VALIDÉS
 8. 🔲 Punchlines RecommerCer — À rédiger
-9. 🔲 Argumentaires ConvoK (commerçants)
-10. 🔲 Argumentaires PerDus
+9. ✅ Argumentaires ConvoK (commerçants) — VALIDÉS
+10. ✅ Argumentaires PerDus — VALIDÉS
 11. 🔲 Arborescence + Argumentaires Grandes Entreprises
 12. 🔲 Conception visuelle (artifact puis GitHub Pages)
 13. 🔲 Stratégie globale MP + prospection amont
