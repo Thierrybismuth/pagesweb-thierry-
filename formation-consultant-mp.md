@@ -46,60 +46,40 @@ Repo : Thierrybismuth/pagesweb-thierry-
 - Oui → Q3
 
 **Q2 — Êtes-vous en cours d'achat immobilier ?**
-- Non → ❌ SORTIE (aucune enseigne applicable)
-- Oui → ✅ KW activé (profil acheteur)
+- Non → ❌ SORTIE
+- Oui → ✅ KW activé (acheteur)
 
 **Q3 — Avez-vous un projet de vente en réflexion ?**
-- Oui → ✅ KW activé (profil vendeur) → puis Q4
+- Oui → ✅ KW activé (vendeur) → Q4
 - Non → Q4
 
 **Q4 — Avez-vous un crédit immobilier en cours ?**
-- Non → ❌ Sortie APC → aller Q6 (LAV)
+- Non → Q6 (LAV)
 - Oui → Q5
 
 **Q5 — Votre assurance emprunteur a été souscrite via votre banque ?**
-- Non → ❌ Sortie APC → aller Q6 (LAV)
-- Oui / Je ne sais pas → ✅ APC activé → Q5a + Q5b
+- Non → Q6 (LAV)
+- Oui / Je ne sais pas → ✅ APC activé
 
-**Q5a — Il vous reste combien d'années sur votre crédit ?**
-- Moins de 5 ans → potentiel limité
-- 5 ans et plus → ✅ levier fort
+**Q5a — Années restantes sur le crédit ?**
+- < 5 ans → potentiel limité
+- ≥ 5 ans → levier fort
 
-**Q5b — Votre mensualité de crédit est de combien ?**
-→ Simulation automatique : taux assurance 0,4% (modifiable si client connaît son taux), économie estimée 40%
-→ Formule : (mensualité × mois restants) × 0,4% × 40% = économie annuelle
+**Q5b — Mensualité de crédit ?**
+→ Simulation : taux assurance 0,4% (modifiable), économie estimée 40%
 
-**Q6 — Votre logement date d'avant 2000 ?**
+**Q6 — Logement d'avant 2000 ?**
 - Non → ❌ Sortie LAV
-- Oui / Je ne sais pas → Q6b
+- Oui / NSP → Q6b
 
-**Q6b — Type de chauffage ?**
-→ Fioul / Gaz / Électrique / Pompe à chaleur / Bois
-(Fioul et électrique = dossiers les plus rentables)
-
-**Q6c — Type de logement ?**
-→ Maison individuelle / Appartement
-(LAV travaille principalement sur les maisons)
-
+**Q6b — Type de chauffage ?** Fioul / Gaz / Électrique / PAC / Bois
+**Q6c — Type de logement ?** Maison / Appartement
 **Q6d — Propriétaire occupant ou bailleur ?**
-→ Occupant = aides maximales / Bailleur = aides réduites, contrainte loyer 3 ans
-
-**Q6e — Tranche de revenus du foyer ?**
-→ Très modeste / Modeste / Intermédiaire / Supérieur
-(Détermine le niveau MaPrimeRénov')
-
-**Q6f — Déjà bénéficié d'une aide à la rénovation ?**
-→ Oui / Non
-
-**Q6g — Surface du logement ?**
-→ Champ numérique (m²)
-
-**Q6h — Montant de votre facture d'énergie ?**
-→ Champ numérique + pastille : "Ce montant est pour : 1 mois · 2 mois · 1 an"
-→ Simulation automatique selon type de chauffage :
-  - Isolation seule : -25 à -30%
-  - Pompe à chaleur (remplacement fioul/gaz) : -50 à -70%
-  - Combiné : jusqu'à -75%
+**Q6e — Tranche de revenus ?** Très modeste / Modeste / Intermédiaire / Supérieur
+**Q6f — Déjà bénéficié d'une aide rénovation ?**
+**Q6g — Surface (m²) ?**
+**Q6h — Facture d'énergie ?** + pastille : 1 mois / 2 mois / 1 an
+→ Simulation : isolation -25/30%, PAC -50/70%, combiné -75%
 → ✅ LAV activé
 
 ---
@@ -111,78 +91,51 @@ Repo : Thierrybismuth/pagesweb-thierry-
 **Punchline :** *"Avec KW, vous avez un interlocuteur et une équipe de 30."*
 
 📌 Pastille consultant :
-> **L'écosystème** — Le BC KW fédère sous un même toit l'agent immobilier, un courtier crédit, un courtier travaux et des partenaires déménagement. Vous n'avez pas à chercher ces intervenants vous-même après la signature — ils sont déjà dans le réseau.
+> **L'écosystème** — Le BC KW fédère agent immobilier, courtier crédit, courtier travaux et partenaires déménagement. Vous n'avez pas à chercher ces intervenants vous-même.
 >
-> **La puissance collective** — Un BC KW réunit entre 20 et 50 négociateurs. Dès que votre recherche est enregistrée, tous les collègues du BC cherchent en parallèle — dont certains ont des biens en off market pas encore sur les portails publics.
+> **La puissance collective** — Un BC KW réunit 20 à 50 négociateurs. Dès votre recherche enregistrée, ils cherchent en parallèle — dont certains ont des biens en off market.
 >
-> **L'argument clé face à une agence classique** — Une petite agence ou un réseau physique a 4 ou 5 négociateurs. KW en a 30 sur le même secteur qui travaillent pour vous dès le premier jour.
+> **Face à une agence classique** — 4 ou 5 négociateurs vs 30 qui travaillent pour vous dès le premier jour.
 
 **CTA :** "Je veux être mis en contact avec un conseiller KW" → thierry@thierrybismuth.com + CC consultant + test@kw.fr
+→ 💰 8% de la commission KW
 
-💰 Commission consultant : 8% de la commission KW en cas de vente signée
-
----
-
-### KW — Profil VENDEUR
-*(Arguments à compléter — en attente d'informations terrain)*
+### KW — Profil VENDEUR *(en attente infos terrain)*
 
 ---
 
 ### APC — Assurément Pas Cher
 
-**ARG 1 — Les banques jouent contre vous**
-*Punchline :* *"Votre banque baisse ses taux de crédit et se rattrape sur votre assurance. 90% des emprunteurs ne le voient pas."*
+**ARG 1** — *"Votre banque baisse ses taux de crédit et se rattrape sur votre assurance. 90% des emprunteurs ne le voient pas."*
+📌 Les banques gonflent discrètement l'assurance emprunteur pour compenser leurs marges réduites sur le crédit.
 
-📌 Pastille consultant :
-> Les banques compriment leurs marges sur le crédit pour attirer les clients, et compensent discrètement en gonflant le coût de l'assurance emprunteur. C'est légal, discret, et très efficace. La grande majorité des emprunteurs ne regarde jamais cette ligne sur leur relevé.
+**ARG 2** — *"La loi Lemoine (2022) interdit toute perte de protection. Vous changez d'assurance, vous gardez les mêmes garanties — souvent meilleures."*
+📌 APC travaille avec AXA, Generali, Allianz. Résiliation possible à tout moment depuis 2022.
 
-**ARG 2 — La loi vous protège, les garanties aussi**
-*Punchline :* *"La loi Lemoine (2022) interdit strictement toute perte de protection. Vous changez d'assurance, vous gardez au minimum les mêmes garanties — souvent meilleures."*
-
-📌 Pastille consultant :
-> Depuis 2022, tout emprunteur peut résilier son assurance à tout moment. La loi impose que la nouvelle assurance soit équivalente ou supérieure en garanties. APC travaille exclusivement avec des assureurs de premier plan : AXA, Generali, Allianz. Aucun risque, aucune perte de couverture.
-
-**ARG 3 — Un humain qui s'occupe de tout**
-*Punchline :* *"Pas de plateforme à remplir seul. Un interlocuteur qui gère tout pour vous."*
-
-📌 Pastille consultant :
-> La plupart des solutions du marché sont 100% digitales — le client uploade ses documents seul, suit sa procédure à distance, sans personne pour répondre à ses questions. APC c'est l'inverse : un interlocuteur humain dédié qui pilote le dossier de A à Z.
+**ARG 3** — *"Pas de plateforme à remplir seul. Un interlocuteur qui gère tout pour vous."*
+📌 Contre les solutions 100% digitales sans accompagnement humain.
 
 **CTA :** "Je veux qu'on analyse mon assurance" → thierry@thierrybismuth.com + CC consultant + test@apc.fr
-
-💰 Commission consultant : ~500€ par contrat renégocié
+→ 💰 ~500€ par contrat renégocié
 
 ---
 
 ### LAV — Les Artisans Verts
 
-**ARG 1 — 10 ans et 6 000 chantiers**
-*Punchline :* *"6 000 chantiers réalisés. Pas une promesse — un bilan."*
+**ARG 1** — *"6 000 chantiers réalisés. Pas une promesse — un bilan."*
+📌 10 ans d'existence, particuliers + grands industriels + bâtiments publics.
 
-📌 Pastille consultant :
-> LAV existe depuis 10 ans. 6 000 chantiers à son actif, des particuliers mais aussi de grands industriels et des bâtiments publics. Si les grandes entreprises leur font confiance pour leurs entrepôts et usines, c'est que la qualité est au rendez-vous.
+**ARG 2** — *"LAV commercialise, achète le matériel, pose et gère les aides. Un seul interlocuteur, aucune sous-traitance."*
+📌 Maîtrise de toute la chaîne, zéro intermédiaire inconnu.
 
-**ARG 2 — Tout en interne, rien de délégué**
-*Punchline :* *"LAV commercialise, achète le matériel, pose et gère les aides. Un seul interlocuteur, aucune sous-traitance."*
+**ARG 3** — *"Le devis est toujours à zéro reste à charge. Pas d'option cachée, pas de surprise."*
+📌 Options supplémentaires chiffrées séparément, jamais incluses en douce.
 
-📌 Pastille consultant :
-> Beaucoup d'acteurs de la rénovation énergétique délèguent la pose à des artisans locaux qu'ils ne contrôlent pas. LAV maîtrise toute la chaîne — de l'achat du matériel à la relation avec les organismes CEE. Zéro intermédiaire inconnu.
-
-**ARG 3 — Zéro reste à charge garanti, sans fausse promesse**
-*Punchline :* *"Le devis est toujours à zéro reste à charge. Pas d'option cachée, pas de surprise."*
-
-📌 Pastille consultant :
-> LAV s'engage sur un devis à zéro reste à charge avant tout démarrage. Si le client souhaite des options supplémentaires hors CEE, elles sont chiffrées séparément et clairement. Jamais incluses en douce dans le devis de base.
-
-**ARG 4 — Et si le client veut aller plus loin ?**
-*Punchline :* *"Des conditions de crédit négociées avec les grandes banques, impossibles à obtenir seul."*
-
-📌 Pastille consultant :
-> Pour les travaux hors CEE ou les aménagements complémentaires, LAV a des accords cadres avec de grandes banques. Des taux et conditions qu'un particulier ne peut pas obtenir en direct.
+**ARG 4** — *"Des conditions de crédit négociées avec les grandes banques, impossibles à obtenir seul."*
+📌 Accords cadres bancaires pour travaux hors CEE.
 
 **CTA :** "Je veux un diagnostic gratuit" → thierry@thierrybismuth.com + CC consultant + test@lav.fr
-
-💰 Commission consultant : 7% du montant du chantier (entre 1 000€ et 2 000€ selon habitation)
+→ 💰 7% du chantier (1 000€ à 2 000€ selon habitation)
 
 ---
 
@@ -190,146 +143,156 @@ Repo : Thierrybismuth/pagesweb-thierry-
 
 ### Arborescence validée
 
-**Q1 — Votre activité rencontre-t-elle des difficultés en ce moment ?**
-- Non → Q2
+**Q1 — Votre activité rencontre-t-elle des difficultés ?**
 - Oui → Q1b
+- Non → Q2
 
-**Q1b — Envisagez-vous une reconversion vers une nouvelle activité ?**
-- Oui → ✅ RecommerCer activé → Critères C1 à C7
+**Q1b — Envisagez-vous une reconversion ?**
+- Oui → ✅ RecommerCer → C1 à C7
 - Non → Q3
 
 **Q2 — Comptez-vous embaucher prochainement ?**
+- Oui → ✅ ConvoK → Q3
 - Non → Q3
-- Oui → ✅ ConvoK activé → Q3
 
-**Q3 — Souhaiteriez-vous attirer plus de clients dans votre établissement ?**
+**Q3 — Souhaiteriez-vous attirer plus de clients ?**
+- Oui → Q3b
+- Non → ❌ Fin
+
+**Q3b — Avez-vous un espace disponible devant ou dans votre commerce ?**
+- Oui → ✅ PerDus
+- Non → ❌ Fin
+
+### Critères RecommerCer (C1–C7)
+C1 Surface (m²) · C2 Autorisation restauration + extraction · C3 Type clientèle actuelle · C4 Produit/service/les deux · C5 Univers souhaités · C6 Budget (<10K / 10-30K / 30-50K / >50K€) · C7 Horizon (trimestre/semestre/année/2 ans)
+
+---
+
+### ARGUMENTAIRES CIBLE 2
+
+#### RecommerCer *(punchlines à rédiger)*
+**ARG 1** — Vous avez déjà l'entreprise, le local, les clients, le banquier. Changer de métier ne repart pas de zéro.
+**ARG 2** — Des concepts qui explosent cherchent des emplacements comme le vôtre (King Marcel, Basilic & Co, Petits-fils, Rapid Pare-Brise...)
+**ARG 3** — Agir tant qu'il reste un an de trésorerie et l'envie.
+**ARG 4** — Donnez 5 critères. On revient en 8 jours avec 5 enseignes. Sans engagement.
+
+#### ConvoK *(VALIDÉS)*
+**ARG 1** — *"50% des patrons galent à recruter. Presque aucun ne veut payer un cabinet. Résultat : le poste reste vide des mois."*
+📌 Cabinets : 15-25% du salaire annuel = 6 000€ pour un poste à 40K€.
+
+**ARG 2** — *"LinkedIn et Indeed vous donnent des CV. ConvoK vous met des candidats en face de vous."*
+📌 Sourcing massif, relances mail/SMS/WhatsApp, convocations — sans que le patron leve le petit doigt.
+
+**ARG 3** — *"3 critères. 4 à 6 candidats en 8 jours. Vous ne payez que si vous recrutez."*
+📌 1h30–2h d'entretiens café. Forfait 2 000€ à l'embauche uniquement.
+
+**CTA ConvoK — si oui :**
+1. Intitulé du poste · 2. Localisation · 3. Critères libres · 4. Date souhaitée · 5. Email client
+📌 Mention : *"ConvoK est une prestation simple et transparente. Ce formulaire tient lieu de document contractuel."*
+→ thierry@thierrybismuth.com + CC consultant + test@convok.fr → 💰 1 000€/recrutement
+
+#### PerDus *(VALIDÉS)*
+**ARG 1** — *"8–10% du commerce = internet. 5% de ces colis ne sont jamais livrés. Stock énorme, disponible."*
+📌 Amazon, La Poste, grands transporteurs. Le commerçant ne risque rien.
+
+**ARG 2** — *"Une semaine de comm' gratuite. 2 jours de flux inhabituel dans votre boutique."*
+📌 Réseaux sociaux + flyers rue + flyers clientèle. Stand 25–100 kg selon espace.
+
+**ARG 3** — *"Comm' gratuite. Nouveaux clients. Certains repartent avec un produit à vous."*
+
+**CTA PerDus — si oui :** Surface (m² + int/ext) · Date · Email
+→ thierry@thierrybismuth.com + CC consultant + test@perdus.fr → 💰 8€/kg (100kg=800€, 400kg=3 200€)
+
+---
+
+## CIBLE 3 — GRANDES ENTREPRISES
+
+### Arborescence validée
+
+**Q1 — Prévoyez-vous des recrutements dans l'année ?**
+- Oui → Q1b
+- Non → Q2
+
+**Q1b — En avez-vous actuellement en cours ?**
+- Oui → ✅ ConvoK (urgence)
+- Non → ✅ ConvoK (anticipation)
+→ Dans les deux cas → Q2
+
+**Q2 — Gérez-vous des bâtiments de grande surface ?**
+*(entrepôts, usines, hôtels, hôpitaux, gymnases, bâtiments publics ≥ 5 000 m²)*
+- Non → Q3
+- Oui → ✅ LAV CEE activé → Q2b
+
+**Q2b — Questions LAV CEE :**
+1. Type d'activité
+2. Surface (m²)
+3. Hauteur sous plafond (m)
+4. Bâtiment chauffé ? + puissance (kW)
+5. Groupes froids ? + puissance (kW)
+6. HP flottante / régulation en place ?
+7. Bâtiment isolé ? (toiture, façade, sol)
+8. Type d'éclairage (LED / néon / halo / mixte)
+9. Propriétaire ou locataire des murs ?
+📌 Locataire non rédhibitoire si accord propriétaire — éclairage et régulation possibles même sans toucher l'enveloppe.
+
+→ Q3
+
+**Q3 — Accueillez-vous du public régulièrement ou ponctuellement ?**
+*(hôtel, salle de concert, salon pro, restaurant, cantine, CHR...)*
 - Non → ❌ Fin
 - Oui → Q3b
 
-**Q3b — Avez-vous un espace disponible, même petit, devant ou dans votre commerce ?**
+**Q3b — Servez-vous plus de 100 couverts ou 100 verres par jour ?**
 - Non → ❌ Fin
-- Oui → ✅ PerDus activé
+- Oui → ✅ Re-uz activé
 
 ---
 
-### Critères RecommerCer (si intéressé par la reconversion)
+### ARGUMENTAIRES CIBLE 3
 
-**C1 — Surface du local (m²)**
-→ Champ numérique
+#### ConvoK Grands Comptes *(VALIDÉS)*
 
-**C2 — Autorisation restauration avec extraction ?**
-→ Oui / Non / Je ne sais pas
+**ARG 1** — *"Vos RH gèrent les dossiers. Personne ne gère les candidats."*
+📌 Postes ouverts, CVs qui s'accumulent, candidats qui disparaissent. ConvoK livre 4–6 candidats qualifiés en 8 jours.
 
-**C3 — Type de clientèle actuelle sur laquelle capitaliser**
-→ Champ libre (ex : familles, bureaux, seniors, étudiants, artisans, professions libérales...)
+**ARG 2** — *"-80% vs un cabinet de chasse. ConvoK à 2 000€ forfait. Même résultat, sans le ticket d'entrée."*
+📌 S'adresse aux postes récurrents (terrain, logistique, commercial, technique) — pas aux C-levels.
 
-**C4 — Produit, service ou les deux ?**
-→ Produit / Service / Les deux
+**ARG 3** — Identique TPE : 3 critères, 8 jours, paiement à l'embauche.
 
-**C5 — Univers qui vous attirent spontanément ?**
-→ Champ libre avec exemples suggérés :
-Restauration (King Marcel, Basilic & Co, Berliner...) · Services à la personne (Petits-fils, Assistia...) · Auto (Rapid Pare-Brise, Uni Pare-Brise...) · Bien-être / Santé · Boulangerie nouvelle génération (Mariette, Augustin...) · Bâtiment / Rénovation (Wittox, Rénovert...)
-
-**C6 — Budget de reconversion**
-→ Moins de 10 000€ / 10 000 à 30 000€ / 30 000 à 50 000€ / Plus de 50 000€
-📌 Pastille explicative : *Ce budget couvre le matériel, le droit d'entrée enseigne, la décoration et le stock de démarrage.*
-
-**C7 — Horizon envisagé pour la reconversion**
-→ Prochain trimestre / Prochain semestre / Dans l'année / Dans 2 ans
+→ thierry@thierrybismuth.com + CC consultant + test@convok.fr → 💰 50% du CA
 
 ---
 
-### ARGUMENTAIRES CIBLE 2 — COMMERÇANTS
+#### LAV CEE Grandes Surfaces *(VALIDÉS)*
 
-#### RecommerCer — Arguments (VALIDÉS, punchlines à rédiger)
+**ARG 1** — *"Depuis 2026, les CEE sont prioritairement fléchés vers le tertiaire. C'est une fenêtre courte — et massive."*
+📌 Depuis 2005, 90% des fonds CEE allaient aux particuliers. À partir de 2026, priorité au tertiaire. Fenêtre à saisir maintenant.
 
-**ARG 1 — Vous avez déjà tout ce qu'il faut**
-> Vous avez une entreprise, un local, des clients qui vous connaissent, un expert-comptable, un banquier. Changer d'univers métier ne repart pas de zéro — ça s'appuie sur tout ce que vous avez déjà construit.
+**ARG 2** — *"Technique ET administrative. Les deux ensemble, c'est rare. LAV les a."*
+📌 Deux mondes séparés : ceux qui font les travaux (mais ne maîtrisent pas les CEE) et ceux qui maîtrisent les CEE (mais sur petits chantiers particuliers). LAV a les deux depuis 10 ans, sur grandes surfaces, milliers de chantiers valorisés. Une des très rares entreprises en France dans ce cas.
 
-**ARG 2 — Des business qui cartonnent dont vous n'avez jamais entendu parler**
-> Il y a des enseignes, des marques, des concepts qui explosent en ce moment — et qui cherchent des emplacements comme le vôtre. King Marcel, Basilic & Co, Berliner, Petits-fils, Rapid Pare-Brise, Assistia... Des secteurs entiers en croissance à deux chiffres que vous ne voyez pas forcément depuis votre comptoir.
+**ARG 3** — *"Bureau d'études, travaux, contrôle, relation délégataires CEE. Rien n'est sous-traité."*
+📌 Toute la chaîne internalisée : bureau d'études, exécution, contrôle a posteriori, relation délégataires. Zéro intermédiaire.
 
-**ARG 3 — Agir tant qu'il est encore temps**
-> Pour sauver une entreprise ou la transformer, il faut s'y prendre tant qu'il reste encore un an de trésorerie et l'envie. Trop tôt vaut mieux que trop tard.
+**ARG 4** — *"Le devis est toujours à zéro reste à charge. Quitte à ne pas tout faire — jamais de surprise."*
+📌 LAV s'engage sur zéro reste à charge même à marge nulle. Options supplémentaires en devis séparé.
 
-**ARG 4 — La proposition RecommerCer**
-> Donnez-nous 5 critères. On revient vers vous dans 8 jours avec 5 enseignes sélectionnées pour votre profil. Vous regardez, sans engagement. Si l'une vous intéresse, on creuse ensemble.
-
-*Punchlines à rédiger — prochain échange*
-
----
-
-#### ConvoK — Arguments (VALIDÉS)
-
-**ARG 1 — Le marché se contredit**
-*Punchline :* *"50% des patrons galent à recruter. Presque aucun ne veut payer un cabinet. Résultat : le poste reste vide pendant des mois."*
-
-📌 Pastille consultant :
-> Les prestataires classiques facturent 15 à 25% du salaire annuel — soit 6 000€ pour un poste à 40 000€. Le patron refuse, le poste reste ouvert, le business en souffre. C'est le cercle vicieux que ConvoK casse.
-
-**ARG 2 — La valeur d'un partenaire, c'est pas les CV**
-*Punchline :* *"LinkedIn et Indeed vous donnent des CV. ConvoK vous met des candidats en face de vous."*
-
-📌 Pastille consultant :
-> Les CVs, le patron peut en trouver seul. Ce qu'il ne sait pas faire c'est contacter massivement, relancer par mail, SMS, WhatsApp, et convoquer ceux qui méritent d'être vus. C'est exactement ce que fait ConvoK — sans qu'il lève le petit doigt.
-
-**ARG 3 — Simple, rapide, sans risque**
-*Punchline :* *"3 critères de votre part. 4 à 6 candidats devant vous en 8 jours. Vous ne payez que si vous recrutez."*
-
-📌 Pastille consultant :
-> Le patron donne : métier, localisation, 1 ou 2 critères libres. ConvoK fait le reste — sourcing, contacts, convocations. En 8 jours : 1h30 à 2h d'entretiens café. Forfait unique 2 000€, uniquement à l'embauche.
-
-**CTA ConvoK — si le client dit oui :**
-1. Intitulé du poste
-2. Localisation
-3. Critères complémentaires (champ libre)
-4. Date souhaitée pour les entretiens
-5. Email du client (reçoit copie du formulaire)
-
-📌 Mention contractuelle : *"ConvoK est une prestation simple et transparente. Ce cahier des charges et ce formulaire tiennent lieu de document contractuel entre les parties."*
-
-→ Email automatique : thierry@thierrybismuth.com + CC consultant + test@convok.fr
-
-💰 Commission consultant : 50% du CA soit 1 000€ par recrutement signé
+**CTA :** "Je veux un audit gratuit de mon bâtiment" → thierry@thierrybismuth.com + CC consultant + test@lav.fr
+→ 💰 8% du chantier (souvent >100 000€)
 
 ---
 
-#### PerDus — Arguments (VALIDÉS)
+#### Re-uz *(VALIDÉS)*
 
-**ARG 1 — Un marché colossal dont personne ne parle**
-*Punchline :* *"8 à 10% du commerce se fait sur internet. 5% de ces colis ne sont jamais livrés. C'est un stock énorme — et il est disponible."*
+**ARG 1** — *"Un verre à 0,30€ + 1€ de consigne. Soit ils le rendent, soit ils le gardent. Dans les deux cas vous gagnez."*
+📌 Verre acheté 0,30€, siglé à votre marque. Client rend → 1€ récupéré, marge doublée. Client garde → 0,70€ net + votre marque part chez lui.
 
-📌 Pastille consultant :
-> Ces colis sont rachetés à l'aveugle auprès d'Amazon, La Poste et des grands transporteurs. PerDus les acquiert, les trie et organise leur vente en boutique. Le commerçant n'achète rien, ne stocke rien, ne risque rien.
+**ARG 2** — *"Re-uz est le leader européen des Ecocups. Ils gèrent tout — vous encaissez."*
+📌 Fourniture verres siglés, logistique, suivi. Économies sur jetables, bilan CO₂ amélioré, marque renforcée.
 
-**ARG 2 — 48h qui changent la visibilité de votre magasin**
-*Punchline :* *"Une semaine de communication gratuite autour de chez vous. 2 jours de flux inhabituel dans votre boutique."*
-
-📌 Pastille consultant :
-> PerDus organise tout en amont : réseaux sociaux + distribution de flyers dans les rues. Le commerçant remet lui-même des flyers à ses clients la semaine précédente. Le jour J : stand installé dans le magasin ou devant (si mairie OK), 25 à 100 kg de marchandise selon l'espace, 25 à 100 visiteurs supplémentaires.
-
-**ARG 3 — Trois bénéfices directs pour le commerçant**
-*Punchline :* *"Une campagne comm' gratuite. Des nouveaux clients qui découvrent votre boutique. Et certains repartent avec un produit à vous."*
-
-📌 Pastille consultant :
-> 1. Communication offerte autour du magasin en amont de l'événement
-> 2. Chaque visiteur venu pour les colis peut repartir avec un produit du commerçant
-> 3. Des habitants qui n'avaient jamais poussé la porte découvrent le commerce
-
-**CTA PerDus — si le client dit oui :**
-1. Surface disponible (m²) + intérieur / extérieur / les deux
-2. Date souhaitée pour l'événement
-3. Email du client (reçoit confirmation + logistique)
-
-→ Email automatique : thierry@thierrybismuth.com + CC consultant + test@perdus.fr
-
-💰 Commission consultant : 8€/kg vendu — 100kg = 800€, 400kg = 3 200€
-
----
-
-## CIBLE 3 — GRANDES ENTREPRISES (À CONSTRUIRE)
-
-### Enseignes : ConvoK · LAV (CEE) · Re-uz
+**CTA :** "Je veux être contacté par Re-uz" → thierry@thierrybismuth.com + CC consultant + test@re-uz.fr
+→ 💰 8% du CA Re-uz généré
 
 ---
 
@@ -340,16 +303,10 @@ Restauration (King Marcel, Basilic & Co, Berliner...) · Services à la personne
 ---
 
 ## Prochaines étapes
-1. ✅ Arborescence Particuliers — VALIDÉE
-2. ✅ Argumentaires KW acheteur — VALIDÉS
-3. 🔲 Argumentaires KW vendeur — EN ATTENTE (infos terrain)
-4. ✅ Argumentaires APC — VALIDÉS
-5. ✅ Argumentaires LAV — VALIDÉS
-6. ✅ Arborescence Commerçants — VALIDÉE
-7. ✅ Critères RecommerCer (C1–C7) — VALIDÉS
-8. 🔲 Punchlines RecommerCer — À rédiger
-9. ✅ Argumentaires ConvoK (commerçants) — VALIDÉS
-10. ✅ Argumentaires PerDus — VALIDÉS
-11. 🔲 Arborescence + Argumentaires Grandes Entreprises
-12. 🔲 Conception visuelle (artifact puis GitHub Pages)
-13. 🔲 Stratégie globale MP + prospection amont
+1. ✅ Cible 1 Particuliers — arborescence + KW acheteur + APC + LAV
+2. 🔲 KW vendeur — en attente infos terrain
+3. 🔲 Punchlines RecommerCer — à rédiger
+4. ✅ Cible 2 Commerçants — arborescence + ConvoK + PerDus + RecommerCer (args)
+5. ✅ Cible 3 Grandes Entreprises — arborescence + ConvoK + LAV CEE + Re-uz
+6. 🔲 Conception visuelle (artifact puis GitHub Pages)
+7. 🔲 Stratégie globale MP + prospection amont
