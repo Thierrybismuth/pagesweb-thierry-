@@ -124,7 +124,7 @@ Repo : Thierrybismuth/pagesweb-thierry-
 ---
 
 ### KW — Profil VENDEUR
-*(Arguments à compléter)*
+*(Arguments à compléter — en attente d'informations terrain)*
 
 ---
 
@@ -186,9 +186,79 @@ Repo : Thierrybismuth/pagesweb-thierry-
 
 ---
 
-## CIBLE 2 — COMMERÇANTS (À CONSTRUIRE)
+## CIBLE 2 — COMMERÇANTS / ARTISANS / RESTAURATEURS / TPE
 
-### Enseignes : ConvoK · PerDus · RecommerCer
+### Arborescence validée
+
+**Q1 — Votre activité rencontre-t-elle des difficultés en ce moment ?**
+- Non → Q2
+- Oui → Q1b
+
+**Q1b — Envisagez-vous une reconversion vers une nouvelle activité ?**
+- Oui → ✅ RecommerCer activé → Critères C1 à C7
+- Non → Q3
+
+**Q2 — Comptez-vous embaucher prochainement ?**
+- Non → Q3
+- Oui → ✅ ConvoK activé → Q3
+
+**Q3 — Souhaiteriez-vous attirer plus de clients dans votre établissement ?**
+- Non → ❌ Fin
+- Oui → Q3b
+
+**Q3b — Avez-vous un espace disponible, même petit, devant ou dans votre commerce ?**
+- Non → ❌ Fin
+- Oui → ✅ PerDus activé
+
+---
+
+### Critères RecommerCer (si intéressé par la reconversion)
+
+**C1 — Surface du local (m²)**
+→ Champ numérique
+
+**C2 — Autorisation restauration avec extraction ?**
+→ Oui / Non / Je ne sais pas
+
+**C3 — Type de clientèle actuelle sur laquelle capitaliser**
+→ Champ libre (ex : familles, bureaux, seniors, étudiants, artisans, professions libérales...)
+
+**C4 — Produit, service ou les deux ?**
+→ Produit / Service / Les deux
+
+**C5 — Univers qui vous attirent spontanément ?**
+→ Champ libre avec exemples suggérés :
+Restauration (King Marcel, Basilic & Co, Berliner...) · Services à la personne (Petits-fils, Assistia...) · Auto (Rapid Pare-Brise, Uni Pare-Brise...) · Bien-être / Santé · Boulangerie nouvelle génération (Mariette, Augustin...) · Bâtiment / Rénovation (Wittox, Rénovert...)
+
+**C6 — Budget de reconversion**
+→ Moins de 10 000€ / 10 000 à 30 000€ / 30 000 à 50 000€ / Plus de 50 000€
+📌 Pastille explicative : *Ce budget couvre le matériel, le droit d'entrée enseigne, la décoration et le stock de démarrage.*
+
+**C7 — Horizon envisagé pour la reconversion**
+→ Prochain trimestre / Prochain semestre / Dans l'année / Dans 2 ans
+
+---
+
+### ARGUMENTAIRES CIBLE 2 — COMMERÇANTS
+
+#### RecommerCer — Arguments (VALIDÉS, punchlines à rédiger)
+
+**ARG 1 — Vous avez déjà tout ce qu'il faut**
+> Vous avez une entreprise, un local, des clients qui vous connaissent, un expert-comptable, un banquier. Changer d'univers métier ne repart pas de zéro — ça s'appuie sur tout ce que vous avez déjà construit.
+
+**ARG 2 — Des business qui cartonnent dont vous n'avez jamais entendu parler**
+> Il y a des enseignes, des marques, des concepts qui explosent en ce moment — et qui cherchent des emplacements comme le vôtre. King Marcel, Basilic & Co, Berliner, Petits-fils, Rapid Pare-Brise, Assistia... Des secteurs entiers en croissance à deux chiffres que vous ne voyez pas forcément depuis votre comptoir.
+
+**ARG 3 — Agir tant qu'il est encore temps**
+> Pour sauver une entreprise ou la transformer, il faut s'y prendre tant qu'il reste encore un an de trésorerie et l'envie. Trop tôt vaut mieux que trop tard.
+
+**ARG 4 — La proposition RecommerCer**
+> Donnez-nous 5 critères. On revient vers vous dans 8 jours avec 5 enseignes sélectionnées pour votre profil. Vous regardez, sans engagement. Si l'une vous intéresse, on creuse ensemble.
+
+*Punchlines à rédiger — prochain échange*
+
+#### ConvoK — Arguments (À CONSTRUIRE)
+#### PerDus — Arguments (À CONSTRUIRE)
 
 ---
 
@@ -198,12 +268,23 @@ Repo : Thierrybismuth/pagesweb-thierry-
 
 ---
 
+## À FAIRE après la grille complète
+- Stratégie globale de présentation de Multi-Potentiel
+- Démarches de prospection avant même le premier RDV
+
+---
+
 ## Prochaines étapes
 1. ✅ Arborescence Particuliers — VALIDÉE
 2. ✅ Argumentaires KW acheteur — VALIDÉS
-3. 🔲 Argumentaires KW vendeur — EN ATTENTE
+3. 🔲 Argumentaires KW vendeur — EN ATTENTE (infos terrain)
 4. ✅ Argumentaires APC — VALIDÉS
 5. ✅ Argumentaires LAV — VALIDÉS
-6. 🔲 Arborescence + Argumentaires Commerçants
-7. 🔲 Arborescence + Argumentaires Grandes Entreprises
-8. 🔲 Conception visuelle (artifact puis GitHub Pages)
+6. ✅ Arborescence Commerçants — VALIDÉE
+7. ✅ Critères RecommerCer (C1–C7) — VALIDÉS
+8. 🔲 Punchlines RecommerCer — À rédiger
+9. 🔲 Argumentaires ConvoK (commerçants)
+10. 🔲 Argumentaires PerDus
+11. 🔲 Arborescence + Argumentaires Grandes Entreprises
+12. 🔲 Conception visuelle (artifact puis GitHub Pages)
+13. 🔲 Stratégie globale MP + prospection amont
