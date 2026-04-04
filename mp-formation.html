@@ -1,0 +1,2286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formation Consultant – Multi-Potentiel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --terra: #c8873a;
+    --terra-dark: #c85a20;
+    --navy: #1a2e44;
+    --navy-light: #2d4a63;
+    --slate: #3a5f7a;
+    --slate-light: #5b8aaa;
+    --cream: #f7f5f0;
+    --cream-dark: #ede9e0;
+    --text: #2a2a2a;
+    --text-muted: #6b7280;
+    --success: #16a34a;
+    --sidebar-w: 270px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ─── SIDEBAR ─── */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: var(--sidebar-w);
+    background: var(--navy);
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-logo {
+    padding: 28px 24px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .sidebar-logo .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+
+  .sidebar-logo .sub {
+    font-size: 0.72rem;
+    color: var(--terra);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 4px;
+  }
+
+  .sidebar-badge {
+    display: inline-block;
+    margin-top: 8px;
+    background: var(--terra);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+
+  .nav-section {
+    padding: 18px 0 6px 24px;
+    font-size: 0.67rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 24px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.65);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    border-left: 3px solid transparent;
+    text-decoration: none;
+  }
+
+  .nav-item:hover { background: rgba(255,255,255,0.05); color: #fff; }
+  .nav-item.active { background: rgba(200,135,58,0.15); color: #fff; border-left-color: var(--terra); }
+
+  .nav-item .nav-icon {
+    width: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  .nav-item.active .nav-icon { opacity: 1; }
+
+  .nav-sub {
+    padding: 6px 24px 6px 54px;
+    font-size: 0.76rem;
+    color: rgba(255,255,255,0.45);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+    display: block;
+  }
+  .nav-sub:hover { color: rgba(255,255,255,0.8); }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding: 20px 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* ─── MAIN ─── */
+  #main {
+    margin-left: var(--sidebar-w);
+    min-height: 100vh;
+  }
+
+  /* ─── TOP BAR ─── */
+  .topbar {
+    position: sticky;
+    top: 0;
+    background: var(--cream);
+    border-bottom: 1px solid var(--cream-dark);
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+  }
+
+  .topbar-breadcrumb {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .topbar-breadcrumb span { color: var(--navy); font-weight: 500; }
+
+  .progress-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .progress-track {
+    width: 140px;
+    height: 4px;
+    background: var(--cream-dark);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--terra), var(--terra-dark));
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    display: none;
+    padding: 48px 48px 80px;
+    max-width: 1100px;
+  }
+
+  .section.active { display: block; }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, var(--slate) 100%);
+    padding: 64px 48px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(200,135,58,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--terra);
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.75);
+    max-width: 580px;
+    line-height: 1.7;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .hero-stat { }
+  .hero-stat .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--terra);
+    line-height: 1;
+  }
+  .hero-stat .label {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.55);
+    margin-top: 4px;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    margin-bottom: 36px;
+  }
+
+  .section-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--terra);
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+
+  .section-desc {
+    margin-top: 12px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 640px;
+    line-height: 1.7;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    height: 1px;
+    background: var(--cream-dark);
+    margin: 40px 0;
+  }
+
+  /* ─── CARDS ─── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 28px;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-radius: 10px;
+    padding: 24px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .card:hover {
+    box-shadow: 0 6px 24px rgba(26,46,68,0.08);
+    transform: translateY(-2px);
+  }
+
+  .card-icon {
+    width: 42px; height: 42px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+  }
+
+  .card-icon.terra { background: rgba(200,135,58,0.12); }
+  .card-icon.navy { background: rgba(26,46,68,0.08); }
+  .card-icon.slate { background: rgba(58,95,122,0.1); }
+  .card-icon.green { background: rgba(22,163,74,0.1); }
+
+  .card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ─── ENSEIGNE CARD ─── */
+  .enseigne-card {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 48px;
+    box-shadow: 0 2px 12px rgba(26,46,68,0.04);
+  }
+
+  .enseigne-header {
+    background: var(--navy);
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .enseigne-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .enseigne-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(200,135,58,0.2);
+    color: var(--terra);
+  }
+
+  .enseigne-body {
+    padding: 32px;
+  }
+
+  .enseigne-visual {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 28px;
+    border: 1px solid var(--cream-dark);
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  @media (max-width: 700px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  .info-block {
+    margin-bottom: 20px;
+  }
+
+  .info-block h4 {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--terra);
+    margin-bottom: 8px;
+  }
+
+  .info-block p, .info-block ul {
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  .info-block ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .info-block ul li::before {
+    content: '→';
+    color: var(--terra);
+    margin-right: 8px;
+    font-weight: 600;
+  }
+
+  .pitch-box {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    border-radius: 8px;
+    padding: 20px 24px;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .pitch-box .pitch-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--terra);
+    margin-bottom: 8px;
+  }
+
+  .pitch-box p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    font-style: italic;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .com-highlight {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(22,163,74,0.07);
+    border: 1px solid rgba(22,163,74,0.2);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+
+  .com-highlight .com-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--success);
+    line-height: 1;
+  }
+
+  .com-highlight .com-detail {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .com-highlight .com-detail strong {
+    color: var(--text);
+    display: block;
+    font-size: 0.88rem;
+  }
+
+  .objection-list {
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 16px;
+  }
+
+  .objection {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+
+  .objection:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+  .objection .q {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .objection .q::before {
+    content: '❓ ';
+    font-size: 0.8rem;
+  }
+
+  .objection .a {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .objection .a::before {
+    content: '💡 ';
+    font-size: 0.8rem;
+  }
+
+  /* ─── PROFIL TABLE ─── */
+  .profil-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+    margin-top: 20px;
+  }
+
+  .profil-table th {
+    background: var(--navy);
+    color: #fff;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .profil-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--cream-dark);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .profil-table tr:hover td { background: rgba(200,135,58,0.04); }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  .tag.green { background: rgba(22,163,74,0.1); color: var(--success); }
+  .tag.terra { background: rgba(200,135,58,0.12); color: #a06020; }
+  .tag.blue { background: rgba(58,95,122,0.12); color: var(--slate); }
+
+  /* ─── CALLOUT ─── */
+  .callout {
+    border-left: 4px solid var(--terra);
+    background: rgba(200,135,58,0.06);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 20px 0;
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+
+  .callout strong { color: var(--navy); }
+
+  /* ─── ECON TABLE ─── */
+  .econ-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .econ-card {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .econ-card .month {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .econ-card .amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .econ-card .amount.highlight { color: var(--terra-dark); }
+
+  .econ-card .note {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  /* ─── CHECKLIST ─── */
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--cream-dark);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .checklist li:last-child { border-bottom: none; }
+
+  .checklist li .check-icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(22,163,74,0.12);
+    color: var(--success);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+
+  /* ─── TABS ─── */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 2px solid var(--cream-dark);
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    padding: 10px 20px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    border: none;
+    background: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.18s;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .tab-btn.active {
+    color: var(--navy);
+    border-bottom-color: var(--terra);
+    font-weight: 600;
+  }
+
+  .tab-btn:hover:not(.active) { color: var(--navy); }
+
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  /* ─── ALERT ─── */
+  .alert {
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .alert-navy { background: rgba(26,46,68,0.06); border: 1px solid rgba(26,46,68,0.12); color: var(--navy); }
+  .alert-terra { background: rgba(200,135,58,0.08); border: 1px solid rgba(200,135,58,0.25); color: #8a4a10; }
+  .alert-green { background: rgba(22,163,74,0.07); border: 1px solid rgba(22,163,74,0.2); color: #14532d; }
+
+  .alert-icon { font-size: 1.1rem; margin-top: 1px; flex-shrink: 0; }
+
+  /* ─── STEP ─── */
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+  }
+
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  /* ─── PRINT BUTTON ─── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 6px;
+    font-size: 0.83rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    font-family: 'Outfit', sans-serif;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--terra);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--terra-dark); }
+
+  .btn-secondary {
+    background: var(--cream-dark);
+    color: var(--navy);
+  }
+  .btn-secondary:hover { background: #ddd; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    :root { --sidebar-w: 0px; }
+    #sidebar { display: none; }
+    #main { margin-left: 0; }
+    .hero h1 { font-size: 2.2rem; }
+    .section { padding: 32px 24px 60px; }
+    .topbar { padding: 12px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<nav id="sidebar">
+  <div class="sidebar-logo">
+    <div class="brand">Multi-Potentiel</div>
+    <div class="sub">Formation Consultants</div>
+    <span class="sidebar-badge">Kit Complet</span>
+  </div>
+
+  <div class="nav-section">Navigation</div>
+
+  <a class="nav-item active" onclick="showSection('accueil')">
+    <span class="nav-icon">🏠</span> Accueil
+  </a>
+
+  <div class="nav-section">Modules</div>
+
+  <a class="nav-item" onclick="showSection('marche')">
+    <span class="nav-icon">📊</span> Module 1 · Le Marché
+  </a>
+
+  <a class="nav-item" onclick="showSection('concept')">
+    <span class="nav-icon">💡</span> Module 2 · Le Concept MP
+  </a>
+
+  <a class="nav-item" onclick="showSection('enseignes')">
+    <span class="nav-icon">🏪</span> Module 3 · Les Enseignes
+  </a>
+
+  <a class="nav-sub" onclick="showSection('enseignes'); scrollToEnseigne('anacours')">Anacours</a>
+  <a class="nav-sub" onclick="showSection('enseignes'); scrollToEnseigne('helen')">Helen Doron</a>
+  <a class="nav-sub" onclick="showSection('enseignes'); scrollToEnseigne('smartduck')">Smart Duck</a>
+  <a class="nav-sub" onclick="showSection('enseignes'); scrollToEnseigne('sosbrico')">SOS Bricolage</a>
+  <a class="nav-sub" onclick="showSection('enseignes'); scrollToEnseigne('kw')">Keller Williams</a>
+  <a class="nav-sub" onclick="showSection('enseignes'); scrollToEnseigne('lav')">Les Artisans Verts</a>
+  <a class="nav-sub" onclick="showSection('enseignes'); scrollToEnseigne('apc')">APC</a>
+  <a class="nav-sub" onclick="showSection('enseignes'); scrollToEnseigne('reuz')">Re-uz</a>
+  <a class="nav-sub" onclick="showSection('enseignes'); scrollToEnseigne('perdus')">Perdus</a>
+  <a class="nav-sub" onclick="showSection('enseignes'); scrollToEnseigne('convok')">ConvoK</a>
+  <a class="nav-sub" onclick="showSection('enseignes'); scrollToEnseigne('recommercer')">ReCOmmerCer</a>
+
+  <a class="nav-item" onclick="showSection('strategies')">
+    <span class="nav-icon">🎯</span> Module 4 · Stratégies
+  </a>
+
+  <a class="nav-item" onclick="showSection('econ')">
+    <span class="nav-icon">💶</span> Module 5 · Économie
+  </a>
+
+  <a class="nav-item" onclick="showSection('portage')">
+    <span class="nav-icon">🛡️</span> Module 6 · Portage
+  </a>
+
+  <a class="nav-item" onclick="showSection('ressources')">
+    <span class="nav-icon">🔗</span> Ressources
+  </a>
+
+  <div class="sidebar-footer">
+    Thierry Bismuth · 06 10 70 30 90<br>
+    thierry@thierrybismuth.com
+  </div>
+</nav>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<main id="main">
+  <div class="topbar">
+    <div class="topbar-breadcrumb">Formation <span id="breadcrumb-section">· Accueil</span></div>
+    <div class="progress-bar-wrap">
+      <span id="progress-label">0 / 7 modules</span>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- ═══ ACCUEIL ═══ -->
+  <section id="sec-accueil" class="section active">
+    <div class="hero">
+      <div class="hero-eyebrow">Kit de Formation · 2026</div>
+      <h1>Bienvenue dans<br>Multi-Potentiel</h1>
+      <p>Tout ce que vous devez savoir pour représenter nos enseignes, comprendre les marchés et convaincre vos prospects. Formation complète, structurée en 7 modules.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num">11</div>
+          <div class="label">Enseignes disponibles</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">7</div>
+          <div class="label">Modules de formation</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">1</div>
+          <div class="label">Contrat unique</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">0 €</div>
+          <div class="label">Trésorerie à risquer</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" style="display:block; padding-top: 36px; padding-left:0; padding-right:0;">
+      <div class="section-header">
+        <div class="section-eyebrow">À savoir dès le départ</div>
+        <h2 class="section-title">Votre rôle de Consultant Multi-Potentiel</h2>
+        <p class="section-desc">En rejoignant Multi-Potentiel, vous représentez plusieurs enseignes sous un seul contrat. Vous êtes l'interlocuteur local pour des réseaux qui ne peuvent pas gérer de présence terrain eux-mêmes.</p>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon terra">🎯</div>
+          <h3>Prospection & Réseau</h3>
+          <p>Vous activez votre carnet d'adresses ou prospectez en direct sur les cibles fournies. Pas de cold-calling à l'aveugle — vous savez exactement à qui vous parlez et pourquoi.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon navy">💼</div>
+          <h3>Multi-Mandats</h3>
+          <p>1 client rencontré peut générer 2, 3 ou 4 factures selon ses besoins. Un commerçant peut avoir besoin de LAV, d'APC et de ConvoK simultanément.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon slate">🛡️</div>
+          <h3>Zéro Risque de Stock</h3>
+          <p>Vous ne portez aucun stock, aucune dette. Votre rôle est de mettre en contact, qualifier et accompagner jusqu'à la signature. Les experts de chaque enseigne prennent le relais.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon green">📈</div>
+          <h3>Commissions Cumulées</h3>
+          <p>Vos revenus s'additionnent enseigne par enseigne. Dès le 3e mois d'activité réelle, le modèle économique devient cohérent et scalable.</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="alert alert-terra">
+        <span class="alert-icon">⚠️</span>
+        <div><strong>Ce que vous n'êtes PAS</strong> : un agent commercial classique mono-enseigne, un franchisé (pas d'investissement lourd), un employé (vous êtes indépendant). Vous êtes un entrepreneur multi-mandats avec un filet de sécurité.</div>
+      </div>
+
+      <div class="alert alert-green">
+        <span class="alert-icon">✅</span>
+        <div><strong>Ce que vous êtes</strong> : un apporteur d'affaires qualifié, formé sur plusieurs enseignes complémentaires, capable de diagnostiquer les besoins d'un client et de lui proposer la solution adaptée — ou les solutions, au pluriel.</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--navy); margin-bottom:16px;">Comment utiliser cette formation</h3>
+      <ol class="steps">
+        <li><span class="step-num">1</span><div>Lisez <strong>Module 1 (Marché)</strong> — c'est le contexte que vous utiliserez en réunion d'info pour ancrer votre discours dans la réalité.</div></li>
+        <li><span class="step-num">2</span><div>Lisez <strong>Module 2 (Concept MP)</strong> — maîtrisez l'argumentaire sur pourquoi Multi-Potentiel est unique.</div></li>
+        <li><span class="step-num">3</span><div>Choisissez vos <strong>2 à 3 enseignes prioritaires</strong> (celles qui correspondent à votre réseau) et apprenez-les en détail dans Module 3.</div></li>
+        <li><span class="step-num">4</span><div>Consultez <strong>Module 4 (Stratégies)</strong> pour savoir quelle enseigne proposer à quel type de prospect.</div></li>
+        <li><span class="step-num">5</span><div>Maîtrisez le <strong>Module 5 (Économie)</strong> pour répondre à la question clé : "Je peux gagner combien ?"</div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ═══ MARCHÉ ═══ -->
+  <section id="sec-marche" class="section">
+    <div class="section-header">
+      <div class="section-eyebrow">Module 1</div>
+      <h2 class="section-title">Comprendre le Marché</h2>
+      <p class="section-desc">Ce contexte marché est votre "introduction" lors des réunions d'info. Il justifie pourquoi l'entrepreneuriat est une option réelle et sérieuse aujourd'hui.</p>
+    </div>
+
+    <div class="callout">
+      <strong>Pourquoi ça compte :</strong> Vos prospects sont souvent des salariés ou anciens salariés conditionnés par le modèle CDI. Ces chiffres créent une rupture cognitive qui ouvre la conversation.
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showTab(this, 'tab-actifs')">Actifs en France</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-cdi')">Réalité du CDI</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-tendances')">Tendances</button>
+      <button class="tab-btn" onclick="showTab(this, 'tab-chiffres')">Auto-entrepreneurs</button>
+    </div>
+
+    <div id="tab-actifs" class="tab-pane active">
+      <div class="two-col">
+        <div>
+          <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--navy); margin-bottom:16px;">Sur ~30 millions d'actifs occupés</h4>
+          <div class="info-block">
+            <h4>Répartition</h4>
+            <ul>
+              <li><strong>Secteur privé (salariés) :</strong> ≈ 21 millions → <span class="tag blue">70%</span></li>
+              <li><strong>Fonction publique :</strong> ≈ 5,9 millions → <span class="tag navy" style="background:rgba(26,46,68,0.1);color:var(--navy)">20%</span></li>
+              <li><strong>Indépendants :</strong> ≈ 3 à 4 millions → <span class="tag terra">10%</span></li>
+            </ul>
+          </div>
+          <div class="callout">
+            <strong>Le message clé :</strong> "Seulement 10% d'indépendants aujourd'hui. En 2030, ce sera 20-25%. Vous avez une fenêtre."
+          </div>
+        </div>
+        <div>
+          <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--navy); margin-bottom:16px;">1 actif sur 5 dirige une entreprise</h4>
+          <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.7; margin-bottom:16px;">En 2025, la France compte 5,2 millions d'entreprises. Les créations sont passées de 691 000 en 2018 à 1 165 000 en 2025. <strong>72% sont des primo-entrepreneurs.</strong> 44% sont des femmes.</p>
+          <div class="alert alert-green">
+            <span class="alert-icon">📈</span>
+            <div>Le marché de la création grossit de 70% en 7 ans. Ce n'est pas une mode, c'est une transformation structurelle.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-cdi" class="tab-pane">
+      <div class="pitch-box">
+        <div class="pitch-label">Argument choc à utiliser en réunion</div>
+        <p>"Le CDI représente 85-90% des salariés en stock… mais seulement 9% des contrats signés chaque année. Le marché réel est massivement court-termiste."</p>
+      </div>
+      <div class="two-col">
+        <div>
+          <div class="info-block">
+            <h4>En stock (les salariés qui existent)</h4>
+            <ul>
+              <li>CDI : <strong>85-90%</strong> des 21 millions</li>
+              <li>CDD + intérim : <strong>10-15%</strong></li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="info-block">
+            <h4>En flux (contrats signés chaque année)</h4>
+            <ul>
+              <li>Intérim : <strong>20,3 millions</strong></li>
+              <li>CDD : <strong>21,5 millions</strong></li>
+              <li>CDI : <strong>4,2 millions</strong> = seulement 9% !</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>Conclusion à tirer :</strong> Les employeurs reprennent toujours les mêmes personnes pour faire le même travail. Pourquoi ne pas faire pareil — mais pour vous-même, avec le même niveau d'expertise ?
+      </div>
+    </div>
+
+    <div id="tab-tendances" class="tab-pane">
+      <div class="info-block">
+        <h4>L'évolution générationnelle</h4>
+        <p style="font-size:0.88rem; line-height:1.7; color:var(--text-muted);">On est passé du modèle linéaire (Études → CDI → Retraite) à la <strong>Génération de Slashers</strong> : alternance emplois & entrepreneuriat, cumul de revenus simultanés, revenus passifs, projets entrepreneuriaux parallèles.</p>
+      </div>
+      <div class="two-col">
+        <div>
+          <div class="info-block">
+            <h4>Faits clés 2025</h4>
+            <ul>
+              <li>20% des moins de 30 ans ont une double activité</li>
+              <li>35% construisent une architecture multi-revenus</li>
+              <li>70 000 chauffeurs VTC (Uber, depuis 2011)</li>
+              <li>100 000 livreurs (Deliveroo, depuis 2013)</li>
+              <li>200 000 personnes tirent un revenu des RS</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="info-block">
+            <h4>Moteurs de la décision d'entreprendre</h4>
+            <ul>
+              <li>Liberté / autonomie (pas de hiérarchie)</li>
+              <li>Changer de métier (renouveau)</li>
+              <li>Rémunération et capitalisation</li>
+              <li>Créer son propre emploi</li>
+              <li>Porté par une idée ou une rencontre</li>
+              <li>Suite logique / accomplissement</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-chiffres" class="tab-pane">
+      <div class="info-block">
+        <h4>Top 5 secteurs auto-entrepreneurs (2024 · Source URSSAF)</h4>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="profil-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Secteur</th>
+              <th>Métiers typiques</th>
+              <th>AE actifs</th>
+              <th>% total</th>
+              <th>Tendance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1</strong></td>
+              <td><strong>Services aux entreprises</strong></td>
+              <td>Conseil, coaching, formation, graphiste, dev web</td>
+              <td>600 000</td>
+              <td>20,6%</td>
+              <td><span class="tag green">+14,3%</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Commerce</td>
+              <td>Vente en ligne, dropshipping, e-commerce</td>
+              <td>450 000</td>
+              <td>15,4%</td>
+              <td><span class="tag green">+6%</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>BTP / Artisanat</td>
+              <td>Plombier, électricien, peintre, menuisier</td>
+              <td>380 000</td>
+              <td>13%</td>
+              <td><span class="tag terra">stable</span></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Transport & Livraison</td>
+              <td>VTC, livreurs Uber Eats/Deliveroo</td>
+              <td>320 000</td>
+              <td>11%</td>
+              <td><span class="tag green">+14,5%</span></td>
+            </tr>
+            <tr>
+              <td><strong>5</strong></td>
+              <td><strong>Services aux particuliers</strong></td>
+              <td>Ménage, garde d'enfants, jardinage, bien-être</td>
+              <td>280 000</td>
+              <td>9,6%</td>
+              <td><span class="tag green">+13,5%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout" style="margin-top:20px;">
+        <strong>85% des entrepreneurs ne sont pas chauffeurs ou livreurs.</strong> Le cliché "Uber = entrepreneuriat" est faux. La majorité exercent des métiers de service à forte valeur ajoutée.
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONCEPT MP ═══ -->
+  <section id="sec-concept" class="section">
+    <div class="section-header">
+      <div class="section-eyebrow">Module 2</div>
+      <h2 class="section-title">Le Concept Multi-Potentiel</h2>
+      <p class="section-desc">Ce qu'est MP, pourquoi ça n'existe nulle part ailleurs, et comment l'expliquer en 60 secondes.</p>
+    </div>
+
+    <div class="pitch-box">
+      <div class="pitch-label">Le pitch en 30 secondes</div>
+      <p>"Multi-Potentiel est le réseau des entrepreneurs multi-mandats. Vous représentez plusieurs enseignes sous un seul contrat, une seule formation, un seul outil. 1 client peut générer 2, 3 ou 4 factures. C'est nouveau, c'est unique, et ça n'existait pas avant."</p>
+    </div>
+
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/formation/page-56.jpg" alt="Partenaires Multi-Potentiel au 1er avril 2026" class="enseigne-visual" style="margin-top:20px;">
+
+    <div class="two-col" style="margin-top:28px;">
+      <div>
+        <div class="info-block">
+          <h4>Pourquoi ça n'existait pas</h4>
+          <p>Certains réseaux intéressants ne peuvent pas gérer d'interlocuteurs locaux. Multi-Potentiel est la structure qui les représente sur le terrain, avec un consultant formé et professionnel.</p>
+        </div>
+        <div class="info-block">
+          <h4>Ce qui rend MP unique</h4>
+          <ul>
+            <li>1 seul contrat de partenariat = des offres différentes</li>
+            <li>1 seule formation initiale commune</li>
+            <li>1 seule réunion par semaine</li>
+            <li>1 seul outil CRM/support</li>
+            <li>Fichiers prospects fournis par enseigne</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="info-block">
+          <h4>C'est fait pour vous si…</h4>
+          <ul>
+            <li>Vous voulez tester avant de vous spécialiser</li>
+            <li>Vous voulez rester ultra diversifié / agile</li>
+            <li>Vous voulez compléter une activité existante</li>
+            <li>Vous avez un réseau mais pas de produit à vendre</li>
+            <li>Vous voulez plusieurs flux de revenus simultanés</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>L'argument sécurité</h4>
+          <p>Choisir une seule enseigne, c'est risquer que le marché ne vous plaise plus, que l'enseigne s'use ou que l'emplacement s'étiole. Plusieurs enseignes = plusieurs filets.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--navy); margin-bottom:20px;">La logique "Capitaliser"</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon terra">🏪</div>
+        <h3>1 client = Des factures</h3>
+        <p>Un commerçant peut avoir besoin de LAV (CEE), APC (assurance prêt), ConvoK (recrutement) et ReCOmmerCer (diversification). Un seul RDV, 4 commissions potentielles.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon navy">👤</div>
+        <h3>1 réseau = Des stratégies</h3>
+        <p>Votre carnet d'adresses détermine vos 2-3 enseignes prioritaires. Ce n'est pas un catalogue — c'est une sélection intelligente selon vos contacts naturels.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon green">🔄</div>
+        <h3>1 quotidien = Des expériences</h3>
+        <p>Vos journées ne se ressemblent pas. Vous visitez un entrepôt pour LAV le matin, vous appelez une RH pour ConvoK l'après-midi. C'est un métier complet et varié.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ENSEIGNES ═══ -->
+  <section id="sec-enseignes" class="section">
+    <div class="section-header">
+      <div class="section-eyebrow">Module 3</div>
+      <h2 class="section-title">Les Enseignes en Détail</h2>
+      <p class="section-desc">Pour chaque enseigne : le concept, le pitch de vente, les arguments clés, les cibles, la commission et les objections à traiter.</p>
+    </div>
+
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/formation/page-38.jpg" alt="12 business disponibles" class="enseigne-visual">
+
+    <!-- ─── ANACOURS ─── -->
+    <div class="enseigne-card" id="enseigne-anacours">
+      <div class="enseigne-header">
+        <h2>Anacours</h2>
+        <span class="enseigne-tag">Soutien Scolaire</span>
+      </div>
+      <div class="enseigne-body">
+        <img src="https://thierrybismuth.github.io/pagesweb-thierry-/formation/page-40.jpg" alt="Anacours" class="enseigne-visual">
+        <div class="two-col">
+          <div>
+            <div class="pitch-box">
+              <div class="pitch-label">Pitch 30 secondes</div>
+              <p>"Anacours, c'est le leader du soutien scolaire à domicile. 30 ans d'existence, 50 centres en France. Vous gérez un réseau de profs, l'enseigne vous amène les familles. Crédit d'impôt 50% pour les clients — la moitié du coût est remboursée. Apport 20 000 €."</p>
+            </div>
+            <div class="com-highlight">
+              <div class="com-amount">20 K€</div>
+              <div class="com-detail">
+                <strong>Apport minimum</strong>
+                Modèle léger — pas de local requis
+              </div>
+            </div>
+            <div class="info-block">
+              <h4>Arguments clés</h4>
+              <ul>
+                <li>Secteur en croissance constante</li>
+                <li>Crédit d'impôt 50% = argument commercial fort</li>
+                <li>12% des élèves prennent des cours particuliers</li>
+                <li>Marché local captif (ex : 20 000 élèves à Aix)</li>
+                <li>Pas de local, pas de salariés au départ</li>
+                <li>L'enseigne apporte une large part des clients et profs</li>
+                <li>Back office simplifié</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="info-block">
+              <h4>Profil client idéal</h4>
+              <ul>
+                <li>Parents d'enfants scolarisés (réseau naturel)</li>
+                <li>Anciens enseignants ou tuteurs</li>
+                <li>Profil relationnel fort (clients + profs)</li>
+                <li>Personnes cherchant un modèle léger sans local</li>
+              </ul>
+            </div>
+            <div class="info-block">
+              <h4>Ce qu'on ne fait pas</h4>
+              <ul>
+                <li>On n'enseigne pas soi-même</li>
+                <li>On gère les relations clients et profs</li>
+                <li>L'enseigne gère la plateforme et la compta</li>
+              </ul>
+            </div>
+            <div class="objection-list">
+              <div class="objection">
+                <div class="q">"Je n'ai pas de compétences pédagogiques"</div>
+                <div class="a">Vous n'enseignez pas — vous gérez le réseau de profs fourni par l'enseigne.</div>
+              </div>
+              <div class="objection">
+                <div class="q">"20 000 € c'est beaucoup"</div>
+                <div class="a">C'est l'investissement le plus bas de notre panel. Pas de local, pas de stock. La structure amortit très vite.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="callout">
+          <strong>Pour recevoir la note d'info complète :</strong> SMS au 06 10 70 30 90 — Thierry Bismuth
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── HELEN DORON ─── -->
+    <div class="enseigne-card" id="enseigne-helen">
+      <div class="enseigne-header">
+        <h2>Helen Doron English</h2>
+        <span class="enseigne-tag">Anglais Enfants</span>
+      </div>
+      <div class="enseigne-body">
+        <img src="https://thierrybismuth.github.io/pagesweb-thierry-/formation/page-41.jpg" alt="Helen Doron English" class="enseigne-visual">
+        <div class="two-col">
+          <div>
+            <div class="pitch-box">
+              <div class="pitch-label">Pitch 30 secondes</div>
+              <p>"Helen Doron, c'est la méthode d'anglais par immersion numéro un pour les enfants, de 3 mois à 19 ans. Présente dans 40 pays. Clientèle fidèle sur plusieurs années. Le bilinguisme est une priorité absolue pour les parents aujourd'hui. Apport 30 000 €."</p>
+            </div>
+            <div class="com-highlight">
+              <div class="com-amount">30 K€</div>
+              <div class="com-detail">
+                <strong>Apport minimum</strong>
+                Méthode exclusive brevetée
+              </div>
+            </div>
+            <div class="info-block">
+              <h4>Arguments clés</h4>
+              <ul>
+                <li>Réseau international (40 pays)</li>
+                <li>Méthode brevetée — différenciation forte</li>
+                <li>Fidélisation sur 15 ans (de 3 mois à 19 ans)</li>
+                <li>Marché en expansion — bilinguisme plébiscité</li>
+                <li>Cours en petits groupes = rentabilité rapide</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="info-block">
+              <h4>Profil client idéal</h4>
+              <ul>
+                <li>Parents de jeunes enfants (réseau de crèche/école)</li>
+                <li>Enseignants reconvertis</li>
+                <li>Personnes passionnées par l'éducation</li>
+                <li>Profil pédagogue / organisateur</li>
+              </ul>
+            </div>
+            <div class="objection-list">
+              <div class="objection">
+                <div class="q">"Je ne parle pas anglais couramment"</div>
+                <div class="a">La méthode est très structurée. L'enseigne forme les enseignants. Vous êtes chef d'entreprise, pas prof.</div>
+              </div>
+              <div class="objection">
+                <div class="q">"Il y a beaucoup de concurrence anglais"</div>
+                <div class="a">La méthode immersive brevétée est unique. Pas comparable aux cours classiques ou aux applis.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── SMART DUCK ─── -->
+    <div class="enseigne-card" id="enseigne-smartduck">
+      <div class="enseigne-header">
+        <h2>Smart Duck</h2>
+        <span class="enseigne-tag">Épilation Laser</span>
+      </div>
+      <div class="enseigne-body">
+        <img src="https://thierrybismuth.github.io/pagesweb-thierry-/formation/page-42.jpg" alt="Smart Duck concept" class="enseigne-visual">
+        <img src="https://thierrybismuth.github.io/pagesweb-thierry-/formation/page-43.jpg" alt="Smart Duck croissance" class="enseigne-visual">
+        <div class="two-col">
+          <div>
+            <div class="pitch-box">
+              <div class="pitch-label">Pitch 30 secondes</div>
+              <p>"Smart Duck veut être le FREE de l'épilation laser : même qualité que les centres médicaux, 25% moins cher. 17 centres en 10 mois, objectif 80 fin 2026. Le modèle atteint la rentabilité avec 1 nouveau client par jour. C'est le réseau qui accélère le plus vite en France."</p>
+            </div>
+            <div class="com-highlight">
+              <div class="com-amount">80–120 K€</div>
+              <div class="com-detail">
+                <strong>Investissement total</strong>
+                Apport personnel : 25–35 K€
+              </div>
+            </div>
+            <div class="info-block">
+              <h4>Arguments clés</h4>
+              <ul>
+                <li>Premier réseau non-médical d'épilation laser en France</li>
+                <li>Positionnement prix disruptif (25% moins cher)</li>
+                <li>Modèle économique "hyper sexy" : peu de staff, pas de stock</li>
+                <li>Rentabilité au 1er nouveau client/jour</li>
+                <li>30 ouvertures prévues S1 2026</li>
+                <li>Forte demande — marché en explosion</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="info-block">
+              <h4>Le modèle en chiffres</h4>
+              <ul>
+                <li>80–120 K€ : investissement total</li>
+                <li>25–35 K€ : apport minimum</li>
+                <li>15 K€ HT : charges mensuelles avec 2 ETP</li>
+                <li>3-4 cabines, 1 appareil laser au démarrage</li>
+                <li>Au-delà du point mort : rentabilité "explose"</li>
+              </ul>
+            </div>
+            <div class="info-block">
+              <h4>Profil idéal</h4>
+              <ul>
+                <li>Profil commercial ou esthétique</li>
+                <li>Apport 25-35 K€ disponible</li>
+                <li>Vision locale forte</li>
+                <li>Attrait pour la beauté/bien-être</li>
+              </ul>
+            </div>
+            <div class="objection-list">
+              <div class="objection">
+                <div class="q">"Je n'ai pas de formation esthétique"</div>
+                <div class="a">L'enseigne forme les praticiens. Vous êtes franchisé-gérant, pas esthéticienne.</div>
+              </div>
+              <div class="objection">
+                <div class="q">"C'est risqué comme nouveau concept"</div>
+                <div class="a">17 centres en 10 mois prouvent la demande. Le risque d'attendre est supérieur au risque d'agir.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── SOS BRICOLAGE ─── -->
+    <div class="enseigne-card" id="enseigne-sosbrico">
+      <div class="enseigne-header">
+        <h2>SOS Bricolage</h2>
+        <span class="enseigne-tag">Services à Domicile</span>
+      </div>
+      <div class="enseigne-body">
+        <img src="https://thierrybismuth.github.io/pagesweb-thierry-/formation/page-45.jpg" alt="SOS Bricolage" class="enseigne-visual">
+        <div class="two-col">
+          <div>
+            <div class="pitch-box">
+              <div class="pitch-label">Pitch 30 secondes</div>
+              <p>"SOS Bricolage, c'est la franchise de petits travaux à domicile — montage, réparation, installation. 15 000 € pour démarrer, 120 € par mois. Le réseau vous envoie les leads. Activité non délocalisable, secteur porté par le vieillissement. Idéal comme side project."</p>
+            </div>
+            <div class="com-highlight">
+              <div class="com-amount">15 K€</div>
+              <div class="com-detail">
+                <strong>+ 120 €/mois</strong>
+                Budget de démarrage le plus faible
+              </div>
+            </div>
+            <div class="info-block">
+              <h4>Arguments clés</h4>
+              <ul>
+                <li>Investissement minimal — le plus accessible</li>
+                <li>Idéal comme "side project" complémentaire</li>
+                <li>Leads nationaux fournis par le réseau</li>
+                <li>Activité récurrente et fidélisable</li>
+                <li>Pas de concurrence digitale possible</li>
+                <li>Marché porté par le vieillissement + urbanisation</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="info-block">
+              <h4>Profil idéal</h4>
+              <ul>
+                <li>Profil manuel ou ayant confiance en son réseau local</li>
+                <li>Cherche un complément de revenus</li>
+                <li>Peu de temps à consacrer (side project)</li>
+                <li>Secteur géographique défini</li>
+              </ul>
+            </div>
+            <div class="objection-list">
+              <div class="objection">
+                <div class="q">"Je ne suis pas bricoleur"</div>
+                <div class="a">Vous gérez des artisans partenaires — vous n'exécutez pas les travaux vous-même à grande échelle.</div>
+              </div>
+              <div class="objection">
+                <div class="q">"120€/mois sans CA, c'est une charge"</div>
+                <div class="a">La charge n'arrive qu'après les premiers revenus dans le modèle MP (redevances offertes 2 mois).</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── KELLER WILLIAMS ─── -->
+    <div class="enseigne-card" id="enseigne-kw">
+      <div class="enseigne-header">
+        <h2>Keller Williams</h2>
+        <span class="enseigne-tag">Immobilier</span>
+      </div>
+      <div class="enseigne-body">
+        <img src="https://thierrybismuth.github.io/pagesweb-thierry-/formation/page-46.jpg" alt="Keller Williams" class="enseigne-visual">
+        <div class="two-col">
+          <div>
+            <div class="pitch-box">
+              <div class="pitch-label">Pitch 30 secondes</div>
+              <p>"KW, c'est la plus grande franchise immobilière du monde. Présente dans 61 pays, +163 000 membres. En France : 30 Market Centers, 1 500 membres. 58% des Français sont propriétaires. Sur 100 contacts, votre réseau génère 1 transaction par mois."</p>
+            </div>
+            <div class="com-highlight">
+              <div class="com-amount">7–12 K€</div>
+              <div class="com-detail">
+                <strong>Par vente moyenne (400 K€)</strong>
+                63% dès la 1ère vente, 90% dès la 7ème
+              </div>
+            </div>
+            <div class="info-block">
+              <h4>Calcul de commission</h4>
+              <ul>
+                <li>Prix moyen de vente : 400 K€</li>
+                <li>Commission agence : 3%</li>
+                <li>Votre part dès le départ : 63% → <strong>7 560 €</strong></li>
+                <li>Votre part dès la 7ème vente : 90% → <strong>10 800 €</strong></li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="info-block">
+              <h4>Arguments marché</h4>
+              <ul>
+                <li>58% des Français propriétaires → on vend/achète tous les 10 ans</li>
+                <li>Sur 100 contacts : 1 transaction par mois en moyenne</li>
+                <li>Marché 2024 : 800 000 ventes (stable vs 2010-2020)</li>
+                <li>Formation continue + accompagnement KW</li>
+                <li>Technologie avancée fournie</li>
+              </ul>
+            </div>
+            <div class="objection-list">
+              <div class="objection">
+                <div class="q">"Je n'ai pas d'expérience immobilière"</div>
+                <div class="a">KW est connu pour ses formations parmi les meilleures du secteur. Vous démarrez avec un mentor.</div>
+              </div>
+              <div class="objection">
+                <div class="q">"Le marché immobilier est en crise"</div>
+                <div class="a">800 000 ventes en 2024 = niveau identique à la moyenne 2010-2020. Ce n'est pas une crise, c'est une normalisation.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── LES ARTISANS VERTS ─── -->
+    <div class="enseigne-card" id="enseigne-lav">
+      <div class="enseigne-header">
+        <h2>Les Artisans Verts (LAV)</h2>
+        <span class="enseigne-tag">Rénovation Énergétique · CEE</span>
+      </div>
+      <div class="enseigne-body">
+        <img src="https://thierrybismuth.github.io/pagesweb-thierry-/formation/page-58.jpg" alt="Les Artisans Verts" class="enseigne-visual">
+        <div class="two-col">
+          <div>
+            <div class="pitch-box">
+              <div class="pitch-label">Pitch 30 secondes</div>
+              <p>"Les Artisans Verts, c'est la rénovation énergétique des professionnels. Vous visitez des entrepôts, relevez quelques infos (surface, hauteur, chauffage). LAV se charge du reste : bureau d'études, travaux, CEE. La signature est à 0€ pour le client. Commission : 7% du chantier."</p>
+            </div>
+            <div class="com-highlight">
+              <div class="com-amount">7%</div>
+              <div class="com-detail">
+                <strong>Du chantier global</strong>
+                Simulation : entrepôt standard = 42 K€ de com
+              </div>
+            </div>
+            <div class="info-block">
+              <h4>Simulation d'un chantier entrepôt</h4>
+              <ul>
+                <li>Isolation toiture (CEE financé) : 100 K€</li>
+                <li>Système de chauffage (CEE) : 100 K€</li>
+                <li>Relamping LED : 80 K€</li>
+                <li><strong>Chantier global : 600 K€</strong></li>
+                <li><strong>Commission consultant : 42 000 €</strong></li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="info-block">
+              <h4>Arguments marché</h4>
+              <ul>
+                <li>40 milliards € disponibles pour travaux de rénovation</li>
+                <li>5 milliards € de CEE payés en 2024</li>
+                <li>Obligations réglementaires croissantes (2026+)</li>
+                <li>4 000 chantiers réalisés — 10 ans d'expérience enseigne</li>
+                <li>La signature client est à 0 € — pas de frein financier</li>
+              </ul>
+            </div>
+            <div class="info-block">
+              <h4>Profil idéal</h4>
+              <ul>
+                <li>Réseau d'entreprises : industrie, logistique, GMS</li>
+                <li>Profil commercial terrain</li>
+                <li>Appétence RSE / développement durable</li>
+                <li>Réseau agriculteurs, bâtiments publics, hôpitaux</li>
+              </ul>
+            </div>
+            <div class="objection-list">
+              <div class="objection">
+                <div class="q">"Je n'y connais rien en travaux"</div>
+                <div class="a">Pas besoin. Vous relevez 5 infos basiques (surface, hauteur, type de chauffage). LAV fait le reste.</div>
+              </div>
+              <div class="objection">
+                <div class="q">"42 000 € ça semble énorme"</div>
+                <div class="a">Un seul entrepôt standard suffit. Et les chantiers se répètent — un client satisfait en recommande d'autres.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── APC ─── -->
+    <div class="enseigne-card" id="enseigne-apc">
+      <div class="enseigne-header">
+        <h2>APC – Assurément Pas Cher</h2>
+        <span class="enseigne-tag">Assurance Emprunteur</span>
+      </div>
+      <div class="enseigne-body">
+        <img src="https://thierrybismuth.github.io/pagesweb-thierry-/formation/page-60.jpg" alt="APC Assurément Pas Cher" class="enseigne-visual">
+        <div class="two-col">
+          <div>
+            <div class="pitch-box">
+              <div class="pitch-label">Pitch 30 secondes</div>
+              <p>"APC change l'assurance emprunteur bancaire contre un contrat équivalent chez un grand assureur, 30 à 50% moins cher. 1 Français sur 3 a un crédit immobilier. 80% ont encore l'assurance de leur banque. 1 couple = 500 € de commission. Et eux économisent le prix d'une voiture."</p>
+            </div>
+            <div class="com-highlight">
+              <div class="com-amount">500 €</div>
+              <div class="com-detail">
+                <strong>Par couple (simulation)</strong>
+                2 × 400 € × 65% de commission
+              </div>
+            </div>
+            <div class="info-block">
+              <h4>Arguments marché</h4>
+              <ul>
+                <li>1 Français sur 3 a un crédit immobilier en cours</li>
+                <li>80% ont l'assurance de leur banque (trop chère)</li>
+                <li>Économie possible : 30 à 50% (soit 20 000 € sur 20 ans)</li>
+                <li>Loi Lemoine (2022) : changeable à tout moment</li>
+                <li>La concurrence est 100% en ligne — APC est humaine</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="info-block">
+              <h4>Profil idéal</h4>
+              <ul>
+                <li>Tout porteur de crédit immobilier</li>
+                <li>Réseau de particuliers ou professionnels</li>
+                <li>Personnes ayant récemment acheté un bien</li>
+                <li>Agents immobiliers KW (synergies naturelles)</li>
+              </ul>
+            </div>
+            <div class="info-block">
+              <h4>Ce que vous faites concrètement</h4>
+              <ul>
+                <li>Identifiez un porteur de crédit</li>
+                <li>Lui posez 3 questions (montant, durée, banque)</li>
+                <li>Transmettez à APC qui gère le dossier</li>
+                <li>Touchez 65% des frais à la signature</li>
+              </ul>
+            </div>
+            <div class="objection-list">
+              <div class="objection">
+                <div class="q">"Je n'ai pas de formation en assurance"</div>
+                <div class="a">APC gère tout le dossier technique. Vous faites la mise en contact et APC négocie, compare et conclut.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="callout">
+          <strong>Synergie KW + APC :</strong> Si vous faites de l'immobilier avec KW, chaque acheteur est un prospect APC naturel. Commission double sur le même contact.
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── RE-UZ ─── -->
+    <div class="enseigne-card" id="enseigne-reuz">
+      <div class="enseigne-header">
+        <h2>Re-uz</h2>
+        <span class="enseigne-tag">Économie Circulaire</span>
+      </div>
+      <div class="enseigne-body">
+        <img src="https://thierrybismuth.github.io/pagesweb-thierry-/formation/page-62.jpg" alt="Re-uz" class="enseigne-visual">
+        <div class="two-col">
+          <div>
+            <div class="pitch-box">
+              <div class="pitch-label">Pitch 30 secondes</div>
+              <p>"Re-uz loue des contenants réutilisables aux événements et entreprises. Festivals, salles de concerts, parcs loisirs, cuisines d'entreprise. Marché de la seconde main × 3 en 5 ans. Positionnement RSE fort. Commission : 8% du CA. Zéro prospection active réalisée à ce jour — marché vierge."</p>
+            </div>
+            <div class="com-highlight">
+              <div class="com-amount">8%</div>
+              <div class="com-detail">
+                <strong>Du CA généré</strong>
+                Marché vierge — 0 prospection faite à ce jour
+              </div>
+            </div>
+            <div class="info-block">
+              <h4>Arguments clés</h4>
+              <ul>
+                <li>Tendance de fond — marché × 3 en 5 ans</li>
+                <li>Concept très différenciant, peu de concurrence structurée</li>
+                <li>RSE = atout pour aides et partenariats</li>
+                <li>Clients : Disneyland, Futuroscope, Tour de France, OL…</li>
+                <li>371 tonnes de déchets évitées en 2024</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="info-block">
+              <h4>Profil idéal</h4>
+              <ul>
+                <li>Réseau événementiel (festivals, salles, mairies)</li>
+                <li>Profil sensible à l'environnement / RSE</li>
+                <li>Réseau grandes entreprises (cuisine collective)</li>
+                <li>Associations et fédérations sportives</li>
+              </ul>
+            </div>
+            <div class="objection-list">
+              <div class="objection">
+                <div class="q">"C'est un marché de niche"</div>
+                <div class="a">La réglementation pousse les événements vers le réutilisable. En 2025, c'est une obligation légale pour de nombreux formats. Ce n'est plus une niche.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── PERDUS ─── -->
+    <div class="enseigne-card" id="enseigne-perdus">
+      <div class="enseigne-header">
+        <h2>Perdus</h2>
+        <span class="enseigne-tag">Colis Non Livrés</span>
+      </div>
+      <div class="enseigne-body">
+        <img src="https://thierrybismuth.github.io/pagesweb-thierry-/formation/page-63.jpg" alt="Perdus colis" class="enseigne-visual">
+        <div class="two-col">
+          <div>
+            <div class="pitch-box">
+              <div class="pitch-label">Pitch 30 secondes</div>
+              <p>"Perdus, c'est la revente de colis non livrés. Vous commandez du stock au kilo, vous vendez en centre commercial ou marché pendant 2-3 jours. L'enseigne fournit stand, stock et avance de trésorerie. Vous payez après avoir vendu. Exemple : 400 kg vendus en 3 jours = 2 900 € de marge nette."</p>
+            </div>
+            <div class="com-highlight">
+              <div class="com-amount">2 900 €</div>
+              <div class="com-detail">
+                <strong>Sur 3 jours de vente</strong>
+                Simulation : 400 kg à 20€/kg, coût 12€/kg
+              </div>
+            </div>
+            <div class="info-block">
+              <h4>Le modèle en détail</h4>
+              <ul>
+                <li>Achat : 12 €/kg (stock + stand + livraison + formation inclus)</li>
+                <li>Vente : 20 €/kg → 8 € de marge brute/kg</li>
+                <li>Exemple : 400 kg × 8 € = 3 200 € − 300 € stand = <strong>2 900 €</strong></li>
+                <li>Zéro engagement à long terme</li>
+                <li>Paiement après vente (avance de trésorerie enseigne)</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="info-block">
+              <h4>Profil idéal</h4>
+              <ul>
+                <li>Personnes cherchant une activité complémentaire ponctuelle</li>
+                <li>Profil commerçant / vendeur</li>
+                <li>Accès à des emplacements (marchés, centres co, foires)</li>
+                <li>Personnes à l'aise avec les RS (communication pré-vente)</li>
+              </ul>
+            </div>
+            <div class="info-block">
+              <h4>Ce que l'enseigne apporte</h4>
+              <ul>
+                <li>Le stock (colis non livrés triés)</li>
+                <li>Le stand (matériel)</li>
+                <li>La livraison sur place</li>
+                <li>L'avance de trésorerie</li>
+                <li>La communication RS en amont</li>
+              </ul>
+            </div>
+            <div class="objection-list">
+              <div class="objection">
+                <div class="q">"Qu'est-ce qu'il y a dans les colis ?"</div>
+                <div class="a">Des produits d'e-commerce variés. C'est l'aspect ludique et impulsif qui attire les acheteurs — exactement comme les "mystery boxes" en ligne.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── CONVOK ─── -->
+    <div class="enseigne-card" id="enseigne-convok">
+      <div class="enseigne-header">
+        <h2>ConvoK</h2>
+        <span class="enseigne-tag">Recrutement IA</span>
+      </div>
+      <div class="enseigne-body">
+        <img src="https://thierrybismuth.github.io/pagesweb-thierry-/formation/page-65.jpg" alt="ConvoK recrutement" class="enseigne-visual">
+        <div class="two-col">
+          <div>
+            <div class="pitch-box">
+              <div class="pitch-label">Pitch 30 secondes</div>
+              <p>"ConvoK fait le travail d'un chasseur de têtes en un jour. Vous avez un poste à pourvoir ? On appelle les 30 meilleurs CVs et on vous convoque 3 à 6 candidats sous 8 jours. Si vous ne recrutez pas, vous ne payez rien. Si oui : 2 000 € HT ou 300 €/mois. Votre com : 50%."</p>
+            </div>
+            <div class="com-highlight">
+              <div class="com-amount">1 000 €</div>
+              <div class="com-detail">
+                <strong>Par recrutement</strong>
+                50% de 2 000 € HT · 1 jour de travail
+              </div>
+            </div>
+            <div class="info-block">
+              <h4>L'offre en détail</h4>
+              <ul>
+                <li>Appel des 30 meilleurs CVs du marché</li>
+                <li>Convocation de 3 à 6 candidats sous 8 jours</li>
+                <li>Si pas de recrutement → stop, 0 facture</li>
+                <li>Si recrutement : 2 000 € HT (ou 300 €/mois × 12)</li>
+                <li>Tout est automatisé sauf le jour J et les appels entrants</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="info-block">
+              <h4>Profil idéal</h4>
+              <ul>
+                <li>Tous types de recrutement : PME, TPE, professions libérales</li>
+                <li>RH en entreprise cherchant à externaliser</li>
+                <li>Dirigeants de PME qui recrutent régulièrement</li>
+                <li>Cabinets comptables (prospects naturels)</li>
+              </ul>
+            </div>
+            <div class="info-block">
+              <h4>Ce qui est automatisé (par ConvoK)</h4>
+              <ul>
+                <li>Tri des CVs via IA</li>
+                <li>Qualification téléphonique initiale</li>
+                <li>Planification des convocations</li>
+                <li>Relances et suivi candidat</li>
+              </ul>
+            </div>
+            <div class="objection-list">
+              <div class="objection">
+                <div class="q">"Pourquoi ne pas passer par Indeed ou Linkedin?"</div>
+                <div class="a">Ces outils mettent une offre en ligne et attendent. ConvoK va chercher activement. Et le recruteur humain local est irremplaçable pour la qualité de la convocation.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── RECOMMERCER ─── -->
+    <div class="enseigne-card" id="enseigne-recommercer">
+      <div class="enseigne-header">
+        <h2>ReCOmmerCer</h2>
+        <span class="enseigne-tag">Reconversion de Commerçants</span>
+      </div>
+      <div class="enseigne-body">
+        <img src="https://thierrybismuth.github.io/pagesweb-thierry-/formation/page-66.jpg" alt="ReCOmmerCer" class="enseigne-visual">
+        <div class="two-col">
+          <div>
+            <div class="pitch-box">
+              <div class="pitch-label">Pitch 30 secondes</div>
+              <p>"ReCOmmerCer consiste à visiter les commerces de votre ville qui veulent survivre ou se reconvertir. Vous les orientez vers une franchise adaptée. L'enseigne contacte les franchisors pour eux, envoie la doc. Si ça aboutit, vous touchez 50% × 25% des droits d'entrée."</p>
+            </div>
+            <div class="com-highlight">
+              <div class="com-amount">2 500 €</div>
+              <div class="com-detail">
+                <strong>Exemple ADA (20 K€ droits)</strong>
+                50% × 25% × 20 000 €
+              </div>
+            </div>
+            <div class="info-block">
+              <h4>Votre mission concrète</h4>
+              <ul>
+                <li>Visiter les commerces locaux (centre-ville)</li>
+                <li>Identifier ceux qui veulent pivoter ou se renforcer</li>
+                <li>Définir avec eux leurs univers et aspirations</li>
+                <li>Transmettre à ReCOmmerCer qui gère tout le matching</li>
+                <li>Toucher 50% × 25% des droits d'entrée à signature</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="info-block">
+              <h4>Profil idéal</h4>
+              <ul>
+                <li>Personnes qui aiment visiter les commerces</li>
+                <li>Profil relationnel / terrain</li>
+                <li>Réseau de commerçants locaux</li>
+                <li>Peut se combiner avec ConvoK, APC, Perdus (dépôt)</li>
+              </ul>
+            </div>
+            <div class="info-block">
+              <h4>Alternative possible</h4>
+              <ul>
+                <li>Même approche chez les particuliers-entrepreneurs</li>
+                <li>Chez l'entrepreneur en diversification</li>
+              </ul>
+            </div>
+            <div class="objection-list">
+              <div class="objection">
+                <div class="q">"Je ne connais pas les franchises"</div>
+                <div class="a">Vous avez accès à tout le portefeuille Multi-Potentiel + tous les réseaux affiliés. C'est ReCOmmerCer qui fait le matching, pas vous.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STRATÉGIES ═══ -->
+  <section id="sec-strategies" class="section">
+    <div class="section-header">
+      <div class="section-eyebrow">Module 4</div>
+      <h2 class="section-title">Stratégies par Profil</h2>
+      <p class="section-desc">Quelle enseigne proposer à quel type de contact ? Ce module vous aide à construire votre portfolio personnel d'enseignes selon votre réseau naturel.</p>
+    </div>
+
+    <div class="callout">
+      <strong>La règle d'or :</strong> Choisissez d'abord votre réseau, puis les enseignes. Pas l'inverse. À qui dites-vous "tu" ? C'est là que commence votre activité.
+    </div>
+
+    <div style="overflow-x:auto; margin-top:28px;">
+      <table class="profil-table">
+        <thead>
+          <tr>
+            <th>Votre réseau naturel</th>
+            <th>Enseignes prioritaires</th>
+            <th>Argument d'entrée</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>J'aime visiter les commerces</strong></td>
+            <td>
+              <span class="tag terra">ConvoK</span>
+              <span class="tag blue">ReCOmmerCer</span>
+              <span class="tag terra">APC</span>
+              <span class="tag blue">Perdus (dépôt)</span>
+            </td>
+            <td>"Tu recrutes ? Je peux t'amener des candidats sous 8 jours." + "Tu as un crédit pro ? Je peux t'économiser 20 K€."</td>
+          </tr>
+          <tr>
+            <td><strong>Réseau de particuliers</strong></td>
+            <td>
+              <span class="tag green">KW</span>
+              <span class="tag terra">APC</span>
+              <span class="tag blue">ReCOmmerCer</span>
+            </td>
+            <td>"Tu connais quelqu'un qui vend/achète ?" + "Tu rembourses encore un crédit ? Je peux te faire économiser."</td>
+          </tr>
+          <tr>
+            <td><strong>Réseau de grandes entreprises</strong></td>
+            <td>
+              <span class="tag blue">ConvoK</span>
+              <span class="tag green">Re-uz</span>
+              <span class="tag terra">LAV</span>
+            </td>
+            <td>"Votre politique RSE vous oblige à réduire vos déchets événementiels — Re-uz est la solution." + "Votre entrepôt est éligible à 40 K€ de travaux à 0€."</td>
+          </tr>
+          <tr>
+            <td><strong>Parents / famille avec enfants</strong></td>
+            <td>
+              <span class="tag terra">Anacours</span>
+              <span class="tag blue">Helen Doron</span>
+            </td>
+            <td>"Ton fils/ta fille a des difficultés scolaires ? Le crédit d'impôt rembourse 50% du coût."</td>
+          </tr>
+          <tr>
+            <td><strong>Profil mode / esthétique / beauté</strong></td>
+            <td>
+              <span class="tag green">Smart Duck</span>
+            </td>
+            <td>"Le FREE de l'épilation laser — 17 centres en 10 mois, objectif 80 fin 2026. La place de ta ville est peut-être encore libre."</td>
+          </tr>
+          <tr>
+            <td><strong>Réseau artisans / BTP / PME locales</strong></td>
+            <td>
+              <span class="tag terra">LAV</span>
+              <span class="tag blue">SOS Bricolage</span>
+              <span class="tag terra">ConvoK</span>
+            </td>
+            <td>"Tes clients ont des entrepôts ou bureaux ? LAV peut leur financer des travaux à 0€ via les CEE."</td>
+          </tr>
+          <tr>
+            <td><strong>Side project / activité ponctuelle</strong></td>
+            <td>
+              <span class="tag blue">Perdus</span>
+              <span class="tag terra">SOS Bricolage</span>
+            </td>
+            <td>Activités événementielles et hebdomadaires, sans engagement long terme, idéales en complément.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--navy); margin-bottom:20px;">Combiner les enseignes intelligemment</h3>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon terra">🏠 + 💳</div>
+        <h3>KW + APC</h3>
+        <p>Chaque acquéreur immobilier est un prospect APC. Une vente KW génère automatiquement une opportunité APC. Commission double sur le même contact.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon navy">🏪 + 💼</div>
+        <h3>ReCOmmerCer + ConvoK</h3>
+        <p>Un commerçant qui veut pivoter a souvent un besoin de recrutement dans son nouveau projet. Deux commissions, un seul rendez-vous.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon slate">🏭 + 🌿</div>
+        <h3>LAV + Re-uz</h3>
+        <p>Les grandes entreprises et sites logistiques sont clients des deux. LAV pour les travaux, Re-uz pour la politique déchets. Approche RSE complète.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon green">📦 + 🛒</div>
+        <h3>Perdus + ReCOmmerCer</h3>
+        <p>Un commerçant peut accueillir une vente Perdus pour attirer du trafic en magasin, et être simultanément prospect ReCOmmerCer pour diversifier.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ÉCON ═══ -->
+  <section id="sec-econ" class="section">
+    <div class="section-header">
+      <div class="section-eyebrow">Module 5</div>
+      <h2 class="section-title">Modèle Économique Consultant</h2>
+      <p class="section-desc">Combien pouvez-vous gagner ? Quels sont les coûts réels ? Comment fonctionne la montée en puissance sur 12 mois ?</p>
+    </div>
+
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/formation/page-68.jpg" alt="Modèle économique année 1" class="enseigne-visual">
+
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--navy); margin:28px 0 16px;">Projection sur 12 mois (hypothèse conservative)</h3>
+
+    <div class="econ-grid">
+      <div class="econ-card">
+        <div class="month">Mois 1–2</div>
+        <div class="amount">0 €</div>
+        <div class="note">Phase prospection<br>Redevances offertes</div>
+      </div>
+      <div class="econ-card">
+        <div class="month">Mois 3</div>
+        <div class="amount">750 €</div>
+        <div class="note">Premiers CA<br>Après partage Jump + redevance</div>
+      </div>
+      <div class="econ-card">
+        <div class="month">Mois 5</div>
+        <div class="amount">2 750 €</div>
+        <div class="note">Montée en puissance<br>Réseau activé</div>
+      </div>
+      <div class="econ-card">
+        <div class="month">Mois 7</div>
+        <div class="amount">4 600 €</div>
+        <div class="note">Rythme de croisière</div>
+      </div>
+      <div class="econ-card">
+        <div class="month">Mois 10</div>
+        <div class="amount">7 400 €</div>
+        <div class="note">Portefeuille constitué</div>
+      </div>
+      <div class="econ-card">
+        <div class="month highlight">Mois 12</div>
+        <div class="amount highlight">9 400 €</div>
+        <div class="note">Commissions nettes mois</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:24px;">
+      <strong>Structure des coûts :</strong> Redevance Multi-Potentiel offertes 2 mois → 200€/mois → 300€/mois. Jump portage : 3 mois à –50% puis tarif standard. <strong>Aucune sortie de trésorerie : vos coûts ne se soustraient qu'à vos revenus.</strong>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--navy); margin-bottom:20px;">Tableau de commissions par enseigne</h3>
+
+    <div style="overflow-x:auto;">
+      <table class="profil-table">
+        <thead>
+          <tr>
+            <th>Enseigne</th>
+            <th>Commission</th>
+            <th>Exemple concret</th>
+            <th>Fréquence potentielle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>LAV</strong></td>
+            <td>7% du chantier</td>
+            <td>1 entrepôt = 42 000 €</td>
+            <td><span class="tag terra">Exceptionnel / gros</span></td>
+          </tr>
+          <tr>
+            <td><strong>ConvoK</strong></td>
+            <td>50% de 2 000 €</td>
+            <td>1 recrutement = 1 000 €</td>
+            <td><span class="tag green">Hebdomadaire</span></td>
+          </tr>
+          <tr>
+            <td><strong>KW</strong></td>
+            <td>63% → 90% de 3%</td>
+            <td>1 vente 400 K€ = 7–12 K€</td>
+            <td><span class="tag blue">Mensuel</span></td>
+          </tr>
+          <tr>
+            <td><strong>APC</strong></td>
+            <td>65% des frais</td>
+            <td>1 couple = 500 €</td>
+            <td><span class="tag green">Hebdomadaire</span></td>
+          </tr>
+          <tr>
+            <td><strong>Re-uz</strong></td>
+            <td>8% du CA</td>
+            <td>1 festival = variable</td>
+            <td><span class="tag blue">Mensuel</span></td>
+          </tr>
+          <tr>
+            <td><strong>Perdus</strong></td>
+            <td>8 €/kg marge</td>
+            <td>3 jours = 2 900 € nets</td>
+            <td><span class="tag terra">Événementiel</span></td>
+          </tr>
+          <tr>
+            <td><strong>ReCOmmerCer</strong></td>
+            <td>50% × 25% droits d'entrée</td>
+            <td>Dossier ADA = 2 500 €</td>
+            <td><span class="tag blue">Mensuel</span></td>
+          </tr>
+          <tr>
+            <td><strong>Smart Duck</strong></td>
+            <td>Franchisé (pas com)</td>
+            <td>Rentabilité dès 1 client/jour</td>
+            <td><span class="tag green">Récurrent</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ PORTAGE ═══ -->
+  <section id="sec-portage" class="section">
+    <div class="section-header">
+      <div class="section-eyebrow">Module 6</div>
+      <h2 class="section-title">Le Portage Salarial (Jump)</h2>
+      <p class="section-desc">Le statut recommandé pour les consultants Multi-Potentiel qui démarrent. Liberté d'indépendant + protection du salarié.</p>
+    </div>
+
+    <div class="pitch-box">
+      <div class="pitch-label">Pourquoi le portage pour démarrer</div>
+      <p>"Le portage salarial vous permet de démarrer votre activité sans créer de société, en conservant tous les avantages sociaux du salarié (chômage, retraite, mutuelle, CPF). Vous êtes libre dans votre développement mais protégé."</p>
+    </div>
+
+    <div class="two-col" style="margin-top:24px;">
+      <div>
+        <div class="info-block">
+          <h4>Ce que vous conservez avec Jump</h4>
+          <ul>
+            <li>Chômage ARE : minimum 57% des salaires bruts pendant 18 à 24 mois</li>
+            <li>Retraite régime général AGIRC-ARRCO au taux plein</li>
+            <li>Santé : arrêts maladie min 50% des 3 derniers salaires bruts</li>
+            <li>Formation CPF comme salarié classique</li>
+            <li>Séparation patrimoine pro & perso</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Ce que vous évitez de payer</h4>
+          <ul>
+            <li>Création & fermeture de société (2 000 €)</li>
+            <li>Expert-comptable (200 €/mois)</li>
+            <li>Compte pro (20 €/mois)</li>
+            <li>CFE (300 à 2 500 €/an)</li>
+            <li>RC Pro (40 €/mois)</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="info-block">
+          <h4>Les frais déductibles avec Jump</h4>
+          <ul>
+            <li>Repas : ~250 €/mois déductibles</li>
+            <li>Frais logement télétravail : ~250 €/mois</li>
+            <li>Déplacements (km, transport) : ~400 €/mois</li>
+            <li>Internet, téléphone, logiciels : ~100 €/mois</li>
+            <li>+ Chèques culture 250 €/mois 100% défiscalisés</li>
+            <li><strong>Moyenne clients Jump : 600 €/mois de frais pros</strong></li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Le tarif Jump</h4>
+          <ul>
+            <li>À partir de 99 €/mois avec engagement</li>
+            <li>149 €/mois sans engagement</li>
+            <li>Économie moyenne : 300 €/mois vs société classique</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="alert alert-navy">
+      <span class="alert-icon">💡</span>
+      <div><strong>Lissage de salaire :</strong> Avec Jump, vous pouvez facturer en une fois et lisser sur plusieurs mois. Exemple : 16 000 € facturés en 4 mois = 72% de restitution nette vs 57% en 1 mois. Gain de 20% sur la durée.</div>
+    </div>
+
+    <div style="margin-top:28px;">
+      <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--navy); margin-bottom:16px;">Liens utiles Jump</h4>
+      <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));">
+        <a href="https://app.join-jump.com/sign-up?fastTrack=open?utm_source=partner&utm_medium=multipotentiel" target="_blank" class="btn btn-primary" style="justify-content:center;">Créer son compte Jump (gratuit)</a>
+        <a href="https://comparateur.join-jump.com/?utm_source=partner&utm_medium=multipotentiel" target="_blank" class="btn btn-secondary" style="justify-content:center;">Comparateur de statuts</a>
+        <a href="https://www.join-jump.com/simulation-salaire-portage-salarial?utm_source=partner&utm_medium=multipotentiel" target="_blank" class="btn btn-secondary" style="justify-content:center;">Simulateur de salaire</a>
+        <a href="https://calendly.com/leonard-jump/jump-rdv-optimisation?utm_source=partner&utm_medium=multipotentiel" target="_blank" class="btn btn-secondary" style="justify-content:center;">RDV groupe Jump (quotidien)</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ RESSOURCES ═══ -->
+  <section id="sec-ressources" class="section">
+    <div class="section-header">
+      <div class="section-eyebrow">Ressources</div>
+      <h2 class="section-title">Liens & Contacts Utiles</h2>
+      <p class="section-desc">Tout ce dont vous avez besoin pour travailler au quotidien.</p>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="info-block">
+          <h4>Contact Thierry Bismuth</h4>
+          <ul>
+            <li>📞 06 10 70 30 90</li>
+            <li>✉️ thierry@thierrybismuth.com</li>
+            <li>🌐 thierrybismuth.com</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Adresse bureau (réunions)</h4>
+          <ul>
+            <li>22 bd de Stalingrad</li>
+            <li>92320 Châtillon</li>
+            <li>Sonner ODYSSÉE RH — 4ème étage</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Outil de découverte consultant</h4>
+          <ul>
+            <li><a href="https://thierrybismuth.github.io/pagesweb-thierry-/mp-decouverte.html" target="_blank" style="color:var(--terra);">Formulaire mp-decouverte.html</a></li>
+            <li>Utilisez cet outil lors de vos premiers entretiens candidats</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="info-block">
+          <h4>Pour les notes d'info enseignes</h4>
+          <p style="font-size:0.88rem; color:var(--text-muted);">Pour recevoir les DIP (documents d'information précontractuelle) de chaque enseigne, envoyez un SMS au 06 10 70 30 90 avec le nom de l'enseigne et le contact prospect.</p>
+        </div>
+        <div class="info-block">
+          <h4>Checklist avant premier RDV</h4>
+          <ul class="checklist">
+            <li><span class="check-icon">✓</span>Connaître le pitch 30 secondes de vos 2-3 enseignes prioritaires</li>
+            <li><span class="check-icon">✓</span>Avoir téléchargé les visuels de présentation</li>
+            <li><span class="check-icon">✓</span>Connaître votre propre statut (portage / indépendant)</li>
+            <li><span class="check-icon">✓</span>Préparer 2-3 questions sur le profil du prospect</li>
+            <li><span class="check-icon">✓</span>Avoir le lien vers mp-decouverte.html</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="alert alert-terra">
+      <span class="alert-icon">📋</span>
+      <div><strong>Rappel légal :</strong> Le document de formation ne remplace pas la signature du contrat de partenariat enseigne. Tout consultant actif doit avoir signé son contrat Multi-Potentiel avant toute démarche commerciale au nom d'une enseigne.</div>
+    </div>
+  </section>
+</main>
+
+<script>
+  const SECTIONS = ['accueil','marche','concept','enseignes','strategies','econ','portage','ressources'];
+  let visited = new Set(['accueil']);
+
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const sec = document.getElementById('sec-'+id);
+    if (sec) sec.classList.add('active');
+    visited.add(id);
+    updateProgress();
+    updateBreadcrumb(id);
+    window.scrollTo(0, 0);
+  }
+
+  function scrollToEnseigne(id) {
+    setTimeout(() => {
+      const el = document.getElementById('enseigne-'+id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  function updateProgress() {
+    const pct = Math.round((visited.size / SECTIONS.length) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = visited.size + ' / ' + SECTIONS.length + ' modules';
+  }
+
+  const LABELS = {
+    accueil: '· Accueil', marche: '· Module 1 Marché',
+    concept: '· Module 2 Concept', enseignes: '· Module 3 Enseignes',
+    strategies: '· Module 4 Stratégies', econ: '· Module 5 Économie',
+    portage: '· Module 6 Portage', ressources: '· Ressources'
+  };
+
+  function updateBreadcrumb(id) {
+    document.getElementById('breadcrumb-section').textContent = LABELS[id] || '';
+  }
+
+  function showTab(btn, tabId) {
+    const parent = btn.closest('section') || document.body;
+    parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    parent.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const tab = document.getElementById(tabId);
+    if (tab) tab.classList.add('active');
+  }
+</script>
+</body>
+</html>
