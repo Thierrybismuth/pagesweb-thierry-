@@ -758,11 +758,59 @@
   }
   .btn-secondary:hover { background: #ddd; }
 
+  /* ─── MOBILE NAV ─── */
+  #mobile-bar {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--navy);
+    z-index: 200;
+    padding: 0;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.2);
+  }
+
+  #mobile-bar .mob-scroll {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0;
+  }
+
+  #mobile-bar .mob-scroll::-webkit-scrollbar { display: none; }
+
+  #mobile-bar .mob-btn {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 10px 16px 12px;
+    font-size: 0.62rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: 'Outfit', sans-serif;
+    border-top: 2px solid transparent;
+    transition: all 0.18s;
+    white-space: nowrap;
+  }
+
+  #mobile-bar .mob-btn .mob-icon { font-size: 1.2rem; }
+  #mobile-bar .mob-btn.active { color: #fff; border-top-color: var(--terra); }
+  #mobile-bar .mob-btn:hover { color: rgba(255,255,255,0.85); }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
     :root { --sidebar-w: 0px; }
     #sidebar { display: none; }
-    #main { margin-left: 0; }
+    #mobile-bar { display: block; }
+    #main { margin-left: 0; padding-bottom: 70px; }
     .hero h1 { font-size: 2.2rem; }
     .section { padding: 32px 24px 60px; }
     .topbar { padding: 12px 24px; }
@@ -2234,6 +2282,36 @@
   </section>
 </main>
 
+<!-- ═══ MOBILE BOTTOM NAV ═══ -->
+<div id="mobile-bar">
+  <div class="mob-scroll">
+    <button class="mob-btn active" onclick="showSection('accueil')" id="mob-accueil">
+      <span class="mob-icon">🏠</span>Accueil
+    </button>
+    <button class="mob-btn" onclick="showSection('marche')" id="mob-marche">
+      <span class="mob-icon">📊</span>Marché
+    </button>
+    <button class="mob-btn" onclick="showSection('concept')" id="mob-concept">
+      <span class="mob-icon">💡</span>Concept
+    </button>
+    <button class="mob-btn" onclick="showSection('enseignes')" id="mob-enseignes">
+      <span class="mob-icon">🏪</span>Enseignes
+    </button>
+    <button class="mob-btn" onclick="showSection('strategies')" id="mob-strategies">
+      <span class="mob-icon">🎯</span>Stratégies
+    </button>
+    <button class="mob-btn" onclick="showSection('econ')" id="mob-econ">
+      <span class="mob-icon">💶</span>Économie
+    </button>
+    <button class="mob-btn" onclick="showSection('portage')" id="mob-portage">
+      <span class="mob-icon">🛡️</span>Portage
+    </button>
+    <button class="mob-btn" onclick="showSection('ressources')" id="mob-ressources">
+      <span class="mob-icon">🔗</span>Ressources
+    </button>
+  </div>
+</div>
+
 <script>
   const SECTIONS = ['accueil','marche','concept','enseignes','strategies','econ','portage','ressources'];
   let visited = new Set(['accueil']);
@@ -2241,8 +2319,14 @@
   function showSection(id) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.querySelectorAll('.mob-btn').forEach(b => b.classList.remove('active'));
     const sec = document.getElementById('sec-'+id);
     if (sec) sec.classList.add('active');
+    const mob = document.getElementById('mob-'+id);
+    if (mob) {
+      mob.classList.add('active');
+      mob.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
     visited.add(id);
     updateProgress();
     updateBreadcrumb(id);
