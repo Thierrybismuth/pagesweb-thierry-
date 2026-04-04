@@ -526,8 +526,24 @@ function updateForm(key,field,val){
 }
 
 function submitCTA(key){
+  const e=ENSEIGNES[key];
+  const fields=state.ctaForms[key]||{};
+  const fieldLines=e.ctaFields.map(f=>'<b>'+f.label+'</b> : '+(fields[f.id]||'—')).join('<br>');
+  const subject='[Multi-Potentiel] Demande '+e.name+' — '+state.consultant.nom;
+  const message='<h2>Demande '+e.name+' ('+e.subtitle+')</h2>'
+    +'<p><b>Consultant :</b> '+state.consultant.nom+' ('+state.consultant.email+')</p>'
+    +(fieldLines?'<hr><p>'+fieldLines+'</p>':'')
+    +'<hr><p style="color:#888;font-size:12px">Envoyé depuis l\'outil découverte Multi-Potentiel</p>';
   const box=document.getElementById('cta-'+key);
-  box.innerHTML=`<div class="cta-success"><div style="font-size:18px;margin-bottom:4px">✅</div><div style="font-weight:700;font-size:13px;color:#2e7d32">Demande enregistrée</div><div style="font-size:11px;color:#666;margin-top:4px">Envoyé à thierry@thierrybismuth.com · ${state.consultant.email} · ${ENSEIGNES[key].email}</div></div>`;
+  box.innerHTML='<div class="cta-success"><div style="font-size:18px;margin-bottom:4px">⏳</div><div style="font-weight:700;font-size:13px;color:#1565c0">Envoi en cours...</div></div>';
+  fetch('https://thierryb.app.n8n.cloud/webhook/5df73b8d-5d5d-4140-9806-71849445d79b',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({mail:'thierry@thierrybismuth.com',subject:subject,message:message})
+  }).then(()=>{
+    box.innerHTML='<div class="cta-success"><div style="font-size:18px;margin-bottom:4px">✅</div><div style="font-weight:700;font-size:13px;color:#2e7d32">Demande envoyée</div><div style="font-size:11px;color:#666;margin-top:4px">Email envoyé à thierry@thierrybismuth.com</div></div>';
+  }).catch(()=>{
+    box.innerHTML='<div class="cta-success" style="background:#fff3e0"><div style="font-size:18px;margin-bottom:4px">⚠️</div><div style="font-weight:700;font-size:13px;color:#e65100">Erreur d\'envoi</div><div style="font-size:11px;color:#666;margin-top:4px">Vérifiez votre connexion et réessayez.</div></div>';
+  });
 }
 
 function reset(){
