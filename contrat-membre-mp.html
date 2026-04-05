@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contrat d'adhésion Membre – Multi-Potentiel</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: #fef9f0; color: #1a1a2e; }
+  .header { padding: 40px 40px 24px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .header-tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #fb8c00; margin-bottom: 10px; }
+  .header h1 { font-family: 'Syne', sans-serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; color: #1a1a2e; margin-bottom: 8px; }
+  .header p { font-size: 0.9rem; color: #6b7280; max-width: 560px; line-height: 1.6; }
+  .frame-wrap { padding: 32px 40px; }
+  iframe { width: 100%; height: 900px; border: none; border-top: 3px solid #1a1a2e; display: block; }
+  .footer-bar { padding: 24px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; background: #1a1a2e; }
+  .footer-bar a { display: inline-flex; align-items: center; gap: 8px; background: #c8873a; color: white; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; padding: 12px 28px; text-decoration: none; border-radius: 3px; }
+  .footer-bar span { font-size: 12px; color: rgba(255,255,255,0.5); }
+  @media(max-width:600px) { .header, .frame-wrap, .footer-bar { padding-left: 20px; padding-right: 20px; } iframe { height: 600px; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-tag">Documents officiels</div>
+  <h1>Contrat d'adhésion Membre</h1>
+  <p>Ce document régit les conditions de votre participation au réseau Multi-Potentiel en tant que Membre représentant. Lisez-le avant de vous engager.</p>
+</div>
+
+<div class="frame-wrap">
+  <iframe src="https://drive.google.com/file/d/1ZvWNOzwfBpULxFn8rsL-xLwrksCcuuVh/preview" allow="autoplay"></iframe>
+</div>
+
+<div class="footer-bar">
+  <span>ODYSKILLS — Multi-Potentiel | thierry@thierrybismuth.com</span>
+  <a href="https://drive.google.com/uc?export=download&id=1ZvWNOzwfBpULxFn8rsL-xLwrksCcuuVh" target="_blank">↓ Télécharger le contrat (PDF)</a>
+</div>
+
+<script>
+function sendHeight() {
+  var h = document.documentElement.scrollHeight || document.body.scrollHeight;
+  window.parent.postMessage({ iframeHeight: h }, '*');
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+setTimeout(sendHeight, 400);
+setTimeout(sendHeight, 1200);
+</script>
+</body>
+</html>
