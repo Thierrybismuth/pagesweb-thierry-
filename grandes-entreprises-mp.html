@@ -212,12 +212,12 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
 }
 
 .ens-gallery { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:24px; }
-.ens-gallery img { width:100%; height:auto; display:block; border-radius:2px; }
+.ens-gallery img { width:100%; height:160px; object-fit:cover; border-radius:2px; object-position:top; }
 @media(max-width:600px){ .ens-gallery { grid-template-columns:1fr; } }
 
 /* SLIDE GALLERIES */
 .ens-gallery { display:grid; grid-template-columns: repeat(2, 1fr); gap:4px; margin:20px 0; }
-.ens-gallery img { width:100%; height:180px; object-fit:cover; border-radius:2px; }
+.ens-gallery img { width:100%; height:160px; object-fit:cover; border-radius:2px; object-position:top; }
 @media(max-width:680px){ .ens-gallery { grid-template-columns:1fr; } .ens-gallery img { height:160px; } }
 
 </style>
@@ -241,7 +241,7 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
   <span class="logos-bar-title">Vos enseignes</span>
   
   
-  <img src="https://drive.usercontent.google.com/download?id=1YoXUxZQJ6-zNCr-dFQMDVBz9gGa5kcBX&export=view" alt="Re-uz">
+  <span style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:white;letter-spacing:2px;">ConvoK</span>
 </div>
 
 <!-- ENSEIGNES -->
@@ -250,7 +250,7 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
   <!-- CONVOK -->
   <div class="enseigne enseigne-convok">
     <div class="ens-color">
-      <img src="https://drive.usercontent.google.com/download?id=1wOGPaDJQKob9_fKTb0yhH-z0oDswzyXz&export=view" alt="ConvoK" style="height:48px;object-fit:contain;filter:brightness(0) invert(1);display:block;">
+      <span style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;color:white;letter-spacing:2px;">ARTISANS<br>VERTS</span>
       <div class="ens-gain">
         <div class="ens-gain-num">-80%</div>
         <div class="ens-gain-label">vs un cabinet de chasse classique</div>
@@ -264,19 +264,19 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
       </div>
       
       <div class="ens-gallery"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/convok/slide1.jpg" alt="ConvoK"></div>
-      <div class="ens-steps">
-        <div class="ens-step">
+      <ul class="ens-steps">
+        <li class="ens-step">
           <div class="ens-step-icon">🎯</div>
           <div class="ens-step-text"><strong>Votre client a un poste ouvert.</strong> Il cherche une solution moins chère et plus rapide qu'un cabinet traditionnel.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">🤖</div>
           <div class="ens-step-text"><strong>ConvoK prend le relais.</strong> IA + recrutement humain — sourcing, qualification, shortlist — livré rapidement.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">✅</div>
-          <div class="ens-step-text"><strong>Votre client embauche.</strong> Sans payer le prix d'un chasseur de tête. Vous avez rendu un vrai service.</div>
-        </div>
+          <div class="ens-step-text"><strong>Votre client embauche.</strong> Sans payer le prix d'un chasseur de tête. Vous avez rendu un vrai service.</li>
+      </ul>
       </div>
       <div class="commission">💰 Commission sur chaque mission de recrutement signée via votre mise en relation.</div>
     </div>
@@ -287,7 +287,7 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
   <!-- LAV GRANDS BÂTIMENTS -->
   <div class="enseigne enseigne-lav">
     <div class="ens-color">
-      <img src="https://drive.usercontent.google.com/download?id=1E_TPZh30ghod4aIo4fJyUGzNIr9WgMFA&export=view" alt="LAV" style="height:48px;object-fit:contain;filter:brightness(0) invert(1);display:block;">
+      <span style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;color:white;letter-spacing:1px;">Re-uz</span>
       <div class="ens-gain">
         <div class="ens-gain-num">8%</div>
         <div class="ens-gain-label">d'un chantier souvent &gt; 100 000€</div>
@@ -311,19 +311,19 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
       </div>
       
       <div class="ens-gallery"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/lav/slide1.jpg" alt="LAV"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/lav/slide2.jpg" alt="LAV"></div>
-      <div class="ens-steps">
-        <div class="ens-step">
+      <ul class="ens-steps">
+        <li class="ens-step">
           <div class="ens-step-icon">🏭</div>
           <div class="ens-step-text"><strong>Votre client a de la surface.</strong> Isolation, chauffage, éclairage, récupération de chaleur, destratification, chambres froides...</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">📋</div>
           <div class="ens-step-text"><strong>LAV monte le dossier CEE.</strong> Audit, chiffrage, financement — le client ne dépense rien ou presque.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">🔨</div>
-          <div class="ens-step-text"><strong>Les travaux sont réalisés.</strong> Reste à charge : <strong>0€</strong> dans la plupart des cas. Votre client rénove, économise, et ne sort pas un euro.</div>
-        </div>
+          <div class="ens-step-text"><strong>Les travaux sont réalisés.</strong> Reste à charge : <strong>0€</strong> dans la plupart des cas. Votre client rénove, économise, et ne sort pas un euro.</li>
+      </ul>
       </div>
       <div class="commission">💰 Vous touchez <strong>8% du chantier</strong> — dont la valorisation dépasse presque toujours <strong>100 000€</strong>.</div>
     </div>
@@ -334,7 +334,7 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
   <!-- RE-UZ -->
   <div class="enseigne enseigne-reuz">
     <div class="ens-color">
-      <img src="https://drive.usercontent.google.com/download?id=1YoXUxZQJ6-zNCr-dFQMDVBz9gGa5kcBX&export=view" alt="Re-uz" style="height:48px;object-fit:contain;filter:brightness(0) invert(1);display:block;">
+      <span style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:white;letter-spacing:2px;">ConvoK</span>
       <div class="ens-gain">
         <div class="ens-gain-num">8%</div>
         <div class="ens-gain-label">du CA Re-uz généré</div>
@@ -357,19 +357,19 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
       </div>
       
       <div class="ens-gallery"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/re-uz/slide1.jpg" alt="Re-uz"></div>
-      <div class="ens-steps">
-        <div class="ens-step">
+      <ul class="ens-steps">
+        <li class="ens-step">
           <div class="ens-step-icon">🏟️</div>
           <div class="ens-step-text"><strong>Votre client est un lieu public ou un organisateur d'événements.</strong> Il utilise encore des gobelets jetables.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">🤝</div>
           <div class="ens-step-text"><strong>Vous le mettez en relation avec Re-uz.</strong> Un spécialiste lui présente la solution — économies chiffrées, logistique incluse.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">♻️</div>
-          <div class="ens-step-text"><strong>Re-uz prend en charge tout le système de consigne.</strong> Votre client économise des dizaines de milliers d'euros et améliore son bilan CO₂.</div>
-        </div>
+          <div class="ens-step-text"><strong>Re-uz prend en charge tout le système de consigne.</strong> Votre client économise des dizaines de milliers d'euros et améliore son bilan CO₂.</li>
+      </ul>
       </div>
       <div class="commission">💰 Vous touchez <strong>8% du CA Re-uz</strong> — et selon le nombre de visiteurs et la récurrence, ça monte vite. 🙂</div>
     </div>
