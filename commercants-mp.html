@@ -121,12 +121,12 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
 }
 
 .ens-gallery { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:24px; }
-.ens-gallery img { width:100%; height:auto; display:block; border-radius:2px; }
+.ens-gallery img { width:100%; height:160px; object-fit:cover; border-radius:2px; object-position:top; }
 @media(max-width:600px){ .ens-gallery { grid-template-columns:1fr; } }
 
 /* SLIDE GALLERIES */
 .ens-gallery { display:grid; grid-template-columns: repeat(2, 1fr); gap:4px; margin:20px 0; }
-.ens-gallery img { width:100%; height:180px; object-fit:cover; border-radius:2px; }
+.ens-gallery img { width:100%; height:160px; object-fit:cover; border-radius:2px; object-position:top; }
 @media(max-width:680px){ .ens-gallery { grid-template-columns:1fr; } .ens-gallery img { height:160px; } }
 
 </style>
@@ -156,7 +156,7 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
   <!-- CONVOK -->
   <div class="enseigne enseigne-convok">
     <div class="ens-color">
-      <img src="https://drive.usercontent.google.com/download?id=1YoXUxZQJ6-zNCr-dFQMDVBz9gGa5kcBX&export=view" alt="ConvoK" style="height:48px;object-fit:contain;filter:brightness(0) invert(1);display:block;">
+      <span style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:white;letter-spacing:2px;">ConvoK</span>
       <div class="ens-gain">
         <div class="ens-gain-num">1 000€</div>
         <div class="ens-gain-label">pour ½ journée de travail</div>
@@ -178,23 +178,23 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
         </div>
       </div>
       <div class="ens-gallery"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/convok/slide1.jpg" alt="ConvoK"></div>
-      <div class="ens-steps">
-        <div class="ens-step">
+      <ul class="ens-steps">
+        <li class="ens-step">
           <div class="ens-step-icon">📋</div>
           <div class="ens-step-text"><strong>Vous recueillez le cahier des charges</strong> — poste, profil, contraintes du client.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">🤖</div>
           <div class="ens-step-text"><strong>ConvoK automatise tout :</strong> recherche de CVs, mails, SMS, convocations, rappels. Sous 8 jours, 3 à 6 candidats sont convoqués.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">🤝</div>
           <div class="ens-step-text"><strong>Vous êtes présent 8 jours après</strong> pour rencontrer les candidats avec votre client. À la marge : quelques appels de candidats impatients.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">🛑</div>
-          <div class="ens-step-text"><strong>Il ne recrute pas ? Stop.</strong> Aucun frais. Il recrute ? La facture est émise.</div>
-        </div>
+          <div class="ens-step-text"><strong>Il ne recrute pas ? Stop.</strong> Aucun frais. Il recrute ? La facture est émise.</li>
+      </ul>
       </div>
       <div class="commission">💰 <strong>50% du CA vous revient</strong> — soit <strong>1 000€ pour une demi-journée de travail</strong>.</div>
     </div>
@@ -205,7 +205,7 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
   <!-- PERDUS -->
   <div class="enseigne enseigne-perdus">
     <div class="ens-color">
-      <img src="https://drive.usercontent.google.com/download?id=19wg3VgLmFicTKqocUWuk_poH0b0VQxhD&export=view" alt="PerDus" style="height:48px;object-fit:contain;filter:brightness(0) invert(1);display:block;">
+      <span style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:white;letter-spacing:2px;">PerDus</span>
       <div class="ens-gain">
         <div class="ens-gain-num">800€</div>
         <div class="ens-gain-label">pour 2 jours d'événement</div>
@@ -216,23 +216,23 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
       <h2 class="ens-h2">Votre commerçant veut attirer du monde ?<br><em>Organisez une vente de colis perdus chez lui.</em></h2>
       <p class="ens-pitch">PerDus vous livre le stock et le stand. En 2 jours, votre commerçant génère un flux hors du commun dans sa boutique — et vous vendez entre 50 et 400 kg de marchandise à 8€ de marge par kilo.</p>
       <div class="ens-gallery"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/perdus/slide1.jpg" alt="PerDus"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/perdus/slide2.jpg" alt="PerDus"></div>
-      <div class="ens-steps">
-        <div class="ens-step">
+      <ul class="ens-steps">
+        <li class="ens-step">
           <div class="ens-step-icon">📦</div>
           <div class="ens-step-text"><strong>Vous organisez l'événement :</strong> un petit espace ou devant la boutique. PerDus livre le stock et le stand, et s'occupe de la communication sur les réseaux sociaux.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">📣</div>
           <div class="ens-step-text"><strong>La semaine précédente :</strong> votre commerçant distribue des flyers à ses clients. Vous flayez dans la rue pour attirer le maximum de monde.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">🛍️</div>
           <div class="ens-step-text"><strong>Le jour J :</strong> les clients viennent découvrir le concept. Vous vendez entre 50 et 400 kg en 2 jours selon l'emplacement et la communication réalisée.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">🏪</div>
-          <div class="ens-step-text"><strong>Votre commerçant est gagnant :</strong> il a généré un flux inhabituel dans sa boutique — et certains visiteurs deviendront ses clients.</div>
-        </div>
+          <div class="ens-step-text"><strong>Votre commerçant est gagnant :</strong> il a généré un flux inhabituel dans sa boutique — et certains visiteurs deviendront ses clients.</li>
+      </ul>
       </div>
       <div class="commission">💰 <strong>8€ de marge par kilo vendu</strong> — 100 kg = <strong>800€</strong>, 400 kg = <strong>3 200€</strong> pour 2 jours de terrain.</div>
     </div>
@@ -247,7 +247,7 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
   <!-- RECOMMERCER -->
   <div class="enseigne enseigne-recomer">
     <div class="ens-color">
-      <img src="https://drive.usercontent.google.com/download?id=1edqdeqQSnPNfGOcRWRurxNEfNsUCjguA&export=view" alt="RecommerCe" style="height:48px;object-fit:contain;filter:brightness(0) invert(1);display:block;">
+      <span style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;color:white;letter-spacing:1px;">ReCOmmerCer</span>
       <div class="ens-gain">
         <div class="ens-gain-num">12%</div>
         <div class="ens-gain-label">du droit d'entrée (10K–30K€)</div>
@@ -260,23 +260,23 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
         Le commerce mue. Certains secteurs sont en croissance, d'autres ont raté le virage du web, du télétravail, des réseaux sociaux, de l'IA. Votre commerçant a un local, des clients, un banquier, une entreprise — <strong>aidons-le à changer de métier sans perdre son entreprise.</strong>
       </div>
       <div class="ens-gallery"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/recommercer/slide1.jpg" alt="RecommerCer"></div>
-      <div class="ens-steps">
-        <div class="ens-step">
+      <ul class="ens-steps">
+        <li class="ens-step">
           <div class="ens-step-icon">📝</div>
           <div class="ens-step-text"><strong>Étape 1 — Vous recueillez les contraintes :</strong> surface et config du local, type de clientèle, souhaits du commerçant.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">🔍</div>
           <div class="ens-step-text"><strong>Étape 2 — RecommerCer contacte les 2 000 enseignes</strong> du commerce organisé compatibles avec le profil.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">📂</div>
           <div class="ens-step-text"><strong>Étape 3 — Vous revenez vers votre commerçant</strong> avec 3 à 6 enseignes intéressées par son emplacement.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">✅</div>
-          <div class="ens-step-text"><strong>Étape 4 — Si une enseigne lui plaît,</strong> elle l'appelle et l'accompagne dans toute sa conversion.</div>
-        </div>
+          <div class="ens-step-text"><strong>Étape 4 — Si une enseigne lui plaît,</strong> elle l'appelle et l'accompagne dans toute sa conversion.</li>
+      </ul>
       </div>
       <div class="commission">💰 Vous touchez <strong>12% du droit d'entrée</strong> — entre <strong>1 200€ et 3 600€</strong>. Et accessoirement, vous avez sauvé un commerçant.</div>
     </div>
@@ -291,7 +291,7 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
   <!-- APC -->
   <div class="enseigne enseigne-apc">
     <div class="ens-color">
-      <img src="https://drive.usercontent.google.com/download?id=1YoXUxZQJ6-zNCr-dFQMDVBz9gGa5kcBX&export=view" alt="APC" style="height:48px;object-fit:contain;filter:brightness(0) invert(1);display:block;">
+      <span style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:white;letter-spacing:2px;">ConvoK</span>
       <div class="ens-gain">
         <div class="ens-gain-num">~500€</div>
         <div class="ens-gain-label">par crédit renégocié</div>
@@ -301,19 +301,19 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
       <div class="ens-tag">Assurance emprunteur · Pro &amp; Perso · Économies immédiates</div>
       <h2 class="ens-h2">Votre commerçant est endetté<br><em>comme tout le monde — et paie trop cher.</em></h2>
       <p class="ens-pitch">Crédit professionnel ou personnel, peu importe : s'il a un emprunt immobilier, il paie très probablement son assurance trop cher. En 10 minutes, APC peut lui faire économiser plusieurs milliers d'euros.</p>
-      <div class="ens-steps">
-        <div class="ens-step">
+      <ul class="ens-steps">
+        <li class="ens-step">
           <div class="ens-step-icon">💳</div>
           <div class="ens-step-text"><strong>Votre commerçant a un crédit</strong> — pro ou perso. C'est votre point d'entrée.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">📞</div>
           <div class="ens-step-text"><strong>APC l'appelle de votre part.</strong> Analyse gratuite, sans engagement, en 10 minutes.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">✅</div>
-          <div class="ens-step-text"><strong>Il obtient une assurance équivalente</strong> auprès d'un assureur de premier plan — et économise entre <strong>1 000€ et 20 000€</strong> sur la durée.</div>
-        </div>
+          <div class="ens-step-text"><strong>Il obtient une assurance équivalente</strong> auprès d'un assureur de premier plan — et économise entre <strong>1 000€ et 20 000€</strong> sur la durée.</li>
+      </ul>
       </div>
       <div class="commission">💰 Vous touchez en moyenne <strong>500€ par crédit renégocié</strong>.</div>
     </div>
