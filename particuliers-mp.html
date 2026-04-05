@@ -203,12 +203,12 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
 }
 
 .ens-gallery { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:24px; }
-.ens-gallery img { width:100%; height:auto; display:block; border-radius:2px; }
+.ens-gallery img { width:100%; height:160px; object-fit:cover; border-radius:2px; object-position:top; }
 @media(max-width:600px){ .ens-gallery { grid-template-columns:1fr; } }
 
 /* SLIDE GALLERIES */
 .ens-gallery { display:grid; grid-template-columns: repeat(2, 1fr); gap:4px; margin:20px 0; }
-.ens-gallery img { width:100%; height:180px; object-fit:cover; border-radius:2px; }
+.ens-gallery img { width:100%; height:160px; object-fit:cover; border-radius:2px; object-position:top; }
 @media(max-width:680px){ .ens-gallery { grid-template-columns:1fr; } .ens-gallery img { height:160px; } }
 
 </style>
@@ -230,9 +230,9 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
 <!-- BARRE LOGOS -->
 <div class="logos-bar">
   <span class="logos-bar-title">Vos enseignes</span>
-  <img src="https://drive.usercontent.google.com/download?id=1WKj31YxBQbxfa_XomYJFKgFwzm5uKFbd&export=view" alt="KW" style="height:36px;object-fit:contain;opacity:0.8;">
-  <img src="https://drive.usercontent.google.com/download?id=1ce63vs8Tw4bZE215CGcu9EB0ymOa1vAU&export=view" alt="APC" style="height:36px;object-fit:contain;opacity:0.8;">
-  <img src="https://drive.usercontent.google.com/download?id=1wOGPaDJQKob9_fKTb0yhH-z0oDswzyXz&export=view" alt="LAV" style="height:36px;object-fit:contain;opacity:0.8;">
+  <span style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:white;letter-spacing:3px;">kw</span>
+  <span style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:white;letter-spacing:2px;">APC</span>
+  <span style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;color:white;letter-spacing:2px;">ARTISANS<br>VERTS</span>
 </div>
 
 <!-- ENSEIGNES -->
@@ -241,7 +241,7 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
   <!-- KW -->
   <div class="enseigne enseigne-kw">
     <div class="ens-color">
-      <img src="https://drive.usercontent.google.com/download?id=1WKj31YxBQbxfa_XomYJFKgFwzm5uKFbd&export=view" alt="KW" style="height:48px;object-fit:contain;filter:brightness(0) invert(1);display:block;">
+      <span style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:white;letter-spacing:3px;">kw</span>
       <div class="ens-gain">
         <div class="ens-gain-num">8%</div>
         <div class="ens-gain-label">de la commission KW</div>
@@ -252,19 +252,19 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
       <h2 class="ens-h2">Chaque mois, 1% de vos contacts<br><em>vend ou achète un bien.</em></h2>
       <p class="ens-pitch">Keller Williams est le n°1 mondial de l'immobilier. Vos contacts sont propriétaires — certains y pensent sans oser le dire. Vous n'avez pas besoin d'être agent : juste d'avoir la bonne conversation.</p>
       <div class="ens-gallery"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/kw/slide1.jpg" alt="KW"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/kw/slide2.jpg" alt="KW"></div>
-      <div class="ens-steps">
-        <div class="ens-step">
+      <ul class="ens-steps">
+        <li class="ens-step">
           <div class="ens-step-icon">💬</div>
           <div class="ens-step-text"><strong>Bavardez.</strong> Identifiez un vendeur dans votre entourage, professionnel ou personnel.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">📋</div>
           <div class="ens-step-text"><strong>Proposez une estimation gratuite.</strong> KW s'en charge. Vous faites juste la mise en relation.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">🍽️</div>
-          <div class="ens-step-text"><strong>Invitez votre contact à déjeuner.</strong> Le deal se fait. Vous touchez votre commission.</div>
-        </div>
+          <div class="ens-step-text"><strong>Invitez votre contact à déjeuner.</strong> Le deal se fait. Vous touchez votre commission.</li>
+      </ul>
       </div>
       <div class="commission">💰 Vous touchez <strong>8% de la commission KW</strong> en cas de vente signée.</div>
     </div>
@@ -280,7 +280,7 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
   <!-- APC -->
   <div class="enseigne enseigne-apc">
     <div class="ens-color">
-      <img src="https://drive.usercontent.google.com/download?id=1ce63vs8Tw4bZE215CGcu9EB0ymOa1vAU&export=view" alt="APC" style="height:48px;object-fit:contain;filter:brightness(0) invert(1);display:block;">
+      <span style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:white;letter-spacing:2px;">APC</span>
       <div class="ens-gain">
         <div class="ens-gain-num">~500€</div>
         <div class="ens-gain-label">par crédit renégocié</div>
@@ -291,19 +291,19 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
       <h2 class="ens-h2">80% des propriétaires<br><em>paient trop cher leur assurance.</em></h2>
       <p class="ens-pitch">58% des ménages français sont propriétaires. Parmi eux, la grande majorité a conservé l'assurance emprunteur de sa banque — et paie de 30% à 60% trop cher. Vous pouvez leur faire économiser le prix d'une voiture, en 10 minutes.</p>
       <div class="ens-gallery"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/apc/slide1.jpg" alt="APC"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/apc/slide2.jpg" alt="APC"></div>
-      <div class="ens-steps">
-        <div class="ens-step">
+      <ul class="ens-steps">
+        <li class="ens-step">
           <div class="ens-step-icon">🏠</div>
           <div class="ens-step-text"><strong>Vos contacts propriétaires ont un crédit immobilier.</strong> C'est votre point d'entrée.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">📞</div>
           <div class="ens-step-text"><strong>Assurément Pas Cher les appelle de votre part.</strong> Analyse gratuite, sans engagement.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">✅</div>
-          <div class="ens-step-text"><strong>Ils obtiennent une assurance équivalente</strong> auprès d'un assureur de premier plan — et économisent entre <strong>1 000€ et 20 000€</strong> sur la durée de leur contrat.</div>
-        </div>
+          <div class="ens-step-text"><strong>Ils obtiennent une assurance équivalente</strong> auprès d'un assureur de premier plan — et économisent entre <strong>1 000€ et 20 000€</strong> sur la durée de leur contrat.</li>
+      </ul>
       </div>
       <div class="commission">💰 Vous touchez en moyenne <strong>500€ par crédit</strong> — et vos amis vous doivent un déjeuner.</div>
     </div>
@@ -314,7 +314,7 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
   <!-- ARTISANS VERTS -->
   <div class="enseigne enseigne-av">
     <div class="ens-color">
-      <img src="https://drive.usercontent.google.com/download?id=1wOGPaDJQKob9_fKTb0yhH-z0oDswzyXz&export=view" alt="LAV" style="height:48px;object-fit:contain;filter:brightness(0) invert(1);display:block;">
+      <span style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;color:white;letter-spacing:2px;">ARTISANS<br>VERTS</span>
       <div class="ens-gain">
         <div class="ens-gain-num">7%</div>
         <div class="ens-gain-label">du montant du chantier</div>
@@ -326,19 +326,19 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
       <p class="ens-pitch">Vos contacts propriétaires veulent baisser leur facture d'électricité mais ne passent pas à l'acte — souvent parce qu'ils croient que c'est trop cher. Les Artisans Verts organisent des travaux 100% financés par MaPrimeRénov' et les CEE. Votre rôle : signaler le contact.</p>
       
       <div class="ens-gallery"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/lav/slide1.jpg" alt="LAV"><img src="https://thierrybismuth.github.io/pagesweb-thierry-/images/lav/slide2.jpg" alt="LAV"></div>
-      <div class="ens-steps">
-        <div class="ens-step">
+      <ul class="ens-steps">
+        <li class="ens-step">
           <div class="ens-step-icon">🏡</div>
           <div class="ens-step-text"><strong>Votre contact est propriétaire</strong> et parle de sa facture d'énergie ou de confort thermique.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">📲</div>
           <div class="ens-step-text"><strong>Les Artisans Verts l'appellent de votre part.</strong> Diagnostic gratuit, dossier de financement inclus.</div>
-        </div>
-        <div class="ens-step">
+        </li>
+        <li class="ens-step">
           <div class="ens-step-icon">🔨</div>
-          <div class="ens-step-text"><strong>Les travaux sont financés à 100%</strong> — isolation, pompe à chaleur, fenêtres. Zéro reste à charge.</div>
-        </div>
+          <div class="ens-step-text"><strong>Les travaux sont financés à 100%</strong> — isolation, pompe à chaleur, fenêtres. Zéro reste à charge.</li>
+      </ul>
       </div>
       <div class="commission">💰 Vous touchez <strong>7% du chantier</strong>, soit entre <strong>1 000€ et 2 000€</strong> selon l'habitation.</div>
     </div>
