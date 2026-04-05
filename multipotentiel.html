@@ -329,5 +329,16 @@ html, body { width: 100%; background: var(--blanc); font-family: 'DM Sans', sans
 </section>
 
 
+<script>
+function sendHeight() {
+  var h = document.documentElement.scrollHeight || document.body.scrollHeight;
+  window.parent.postMessage({ iframeHeight: h }, '*');
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+setTimeout(sendHeight, 400);
+setTimeout(sendHeight, 1200);
+</script>
+
 </body>
 </html>
