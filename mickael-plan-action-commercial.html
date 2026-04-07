@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mickaël Cneude — Plan d'action commercial ADA Nîmes</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2e44;
+    --terra: #c8733a;
+    --gold: #d4a854;
+    --off-white: #f7f5f0;
+    --light-gray: #e8e4dc;
+    --text: #2c2c2c;
+    --muted: #6b6b6b;
+    --green: #3a7a5a;
+    --red: #c0392b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--off-white);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* COVER */
+  .cover {
+    background: var(--navy);
+    color: white;
+    padding: 60px 60px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(200,115,58,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: var(--terra);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+  }
+  .cover h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .cover h1 span { color: var(--gold); font-style: italic; }
+  .cover-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 300;
+    margin-bottom: 40px;
+    max-width: 560px;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 28px;
+  }
+  .cover-meta-item { font-size: 13px; }
+  .cover-meta-item strong { display: block; color: var(--gold); font-weight: 500; margin-bottom: 2px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* MAIN */
+  .main { max-width: 900px; margin: 0 auto; padding: 50px 40px 80px; }
+
+  /* INTRO BOX */
+  .intro-box {
+    background: white;
+    border-left: 4px solid var(--terra);
+    padding: 28px 32px;
+    margin-bottom: 48px;
+    border-radius: 0 6px 6px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .intro-box h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .intro-box p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .intro-box p + p { margin-top: 10px; }
+
+  /* CONTEXT STRIP */
+  .context-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .context-card {
+    background: var(--navy);
+    color: white;
+    padding: 22px 20px;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .context-card .big { font-family: 'Cormorant Garamond', serif; font-size: 30px; color: var(--gold); font-weight: 700; line-height: 1; }
+  .context-card .label { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 6px; line-height: 1.4; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .section-line {
+    width: 48px; height: 3px;
+    background: var(--terra);
+    margin-bottom: 32px;
+  }
+
+  /* LEVER CARDS */
+  .lever {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .lever-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px 28px 20px;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  .lever-num {
+    min-width: 42px; height: 42px;
+    background: var(--navy);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 700;
+  }
+  .lever-title-group { flex: 1; }
+  .lever-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .lever-subtitle { font-size: 12px; color: var(--muted); }
+  .lever-badge {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 12px;
+    white-space: nowrap;
+  }
+  .badge-thierry { background: rgba(200,115,58,0.12); color: var(--terra); border: 1px solid rgba(200,115,58,0.3); }
+  .badge-add { background: rgba(58,120,90,0.10); color: var(--green); border: 1px solid rgba(58,120,90,0.3); }
+
+  .lever-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .lever-col { padding: 20px 28px; }
+  .lever-col:first-child { border-right: 1px solid var(--light-gray); }
+  .lever-col-title {
+    font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 10px;
+  }
+  .lever-col p { font-size: 13px; color: var(--text); line-height: 1.65; }
+  .lever-col ul { font-size: 13px; color: var(--text); padding-left: 16px; line-height: 1.8; }
+  .lever-col ul li::marker { color: var(--terra); }
+
+  .lever-data {
+    background: rgba(26,46,68,0.03);
+    border-top: 1px solid var(--light-gray);
+    padding: 14px 28px;
+    display: flex; gap: 32px; flex-wrap: wrap; align-items: center;
+  }
+  .data-item { font-size: 12px; }
+  .data-item strong { color: var(--navy); font-weight: 600; }
+  .data-item span { color: var(--muted); }
+
+  .lever-impact {
+    background: var(--navy);
+    padding: 14px 28px;
+    display: flex; gap: 24px; align-items: center;
+  }
+  .impact-label { font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+  .impact-numbers { display: flex; gap: 20px; }
+  .impact-year { text-align: center; }
+  .impact-year .yr { font-size: 10px; color: rgba(255,255,255,0.4); }
+  .impact-year .val { font-size: 15px; font-weight: 600; color: var(--gold); }
+
+  /* PROJECTION TABLE */
+  .projection { margin-top: 56px; }
+  table.proj-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    font-size: 13px;
+  }
+  .proj-table th {
+    background: var(--navy);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  .proj-table th:not(:first-child) { text-align: right; }
+  .proj-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  .proj-table td:not(:first-child) { text-align: right; }
+  .proj-table tr:nth-child(even) td { background: rgba(26,46,68,0.025); }
+  .proj-table tr.subtotal td { font-weight: 600; color: var(--terra); background: rgba(200,115,58,0.05) !important; }
+  .proj-table tr.total td { 
+    font-weight: 700; background: var(--navy) !important; color: white;
+    font-size: 14px;
+  }
+  .proj-table tr.total td:first-child { border-radius: 0; }
+  .proj-table .growth { color: var(--green); font-weight: 600; }
+  .proj-table .growth-high { color: var(--terra); font-weight: 700; }
+
+  /* PROFILE BOX */
+  .profile-box {
+    background: linear-gradient(135deg, var(--navy) 0%, #243d58 100%);
+    color: white;
+    border-radius: 8px;
+    padding: 32px 36px;
+    margin: 48px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .profile-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .profile-box ul { list-style: none; padding: 0; }
+  .profile-box ul li {
+    font-size: 13px; color: rgba(255,255,255,0.85);
+    padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; gap: 8px;
+  }
+  .profile-box ul li::before { content: '→'; color: var(--terra); font-weight: 700; }
+
+  /* FOOTER */
+  .doc-footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
+    padding: 20px 60px;
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex; gap: 20px;
+    margin-bottom: 24px;
+    font-size: 12px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+
+  @media (max-width: 700px) {
+    .cover { padding: 36px 24px; }
+    .cover h1 { font-size: 28px; }
+    .main { padding: 32px 20px 60px; }
+    .context-strip { grid-template-columns: 1fr; }
+    .lever-body { grid-template-columns: 1fr; }
+    .lever-col:first-child { border-right: none; border-bottom: 1px solid var(--light-gray); }
+    .profile-box { grid-template-columns: 1fr; }
+    .cover-meta { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-badge">Document confidentiel — Dossier de candidature à la reprise</div>
+  <h1>Mickaël Cneude<br><span>Plan d'action commercial</span><br>ADA Nîmes & Alès</h1>
+  <p class="cover-sub">
+    Démonstration du potentiel de croissance commerciale — objectif <strong style="color:var(--gold)">+15 à +20 % par an sur 3 ans</strong><br>
+    Document à destination de Sébastien Gallo et de la tête de réseau ADA
+  </p>
+  <div class="cover-meta">
+    <div class="cover-meta-item"><strong>Repreneur</strong>Mickaël Cneude</div>
+    <div class="cover-meta-item"><strong>Enseigne</strong>ADA — SAS Gard Mobilités</div>
+    <div class="cover-meta-item"><strong>Agences</strong>Nîmes + Alès (30)</div>
+    <div class="cover-meta-item"><strong>Base CA reprise</strong>1 645 082 € (2025 assaini)</div>
+    <div class="cover-meta-item"><strong>Accompagnement</strong>Thierry Bismuth — ODYSKILLS</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- INTRO -->
+  <div class="intro-box">
+    <h2>Pourquoi Mickaël Cneude, malgré un apport plus limité ?</h2>
+    <p>
+      D'autres candidats peuvent présenter un apport plus solide. Ce document démontre que <strong>la vraie valeur d'un repreneur ADA ne réside pas dans ses fonds propres, mais dans sa capacité à faire croître le chiffre d'affaires.</strong> Un apport plus faible remboursé sur 7 ans pèse moins lourd dans l'équation qu'un CA en croissance de 15 à 20 % par an.
+    </p>
+    <p>
+      Mickaël Cneude est un commercial BtoB terrain confirmé : 7 ans chez Marsh & McLennan avec +20 % de croissance annuelle prouvée sur son portefeuille, un réseau personnel immédiat dans le transport et la logistique, et une connaissance directe d'ADA en tant qu'ancien client. Les 8 leviers ci-dessous sont son plan concret, chiffré, activable dès la première semaine.
+    </p>
+  </div>
+
+  <!-- CONTEXT CARDS -->
+  <div class="context-strip">
+    <div class="context-card">
+      <div class="big">3</div>
+      <div class="label">concurrents directs disparus à Nîmes depuis 2023<br>(LowCost Rent, Apex, Europcar KM Delta)</div>
+    </div>
+    <div class="context-card">
+      <div class="big">+13 %</div>
+      <div class="label">hausse du tourisme à Nîmes en 2025 — 10,4 M de touristes dans le Gard</div>
+    </div>
+    <div class="context-card">
+      <div class="big">+20 %</div>
+      <div class="label">croissance/an prouvée de Mickaël chez Marsh & McLennan sur 7 ans</div>
+    </div>
+  </div>
+
+  <!-- LEVIERS TITLE -->
+  <div class="section-title">Les 8 leviers commerciaux</div>
+  <div class="section-line"></div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><span class="lever-badge badge-thierry">★ Idée Mickaël</span> <span style="color:var(--muted);font-size:12px">Levier identifié et porté par le repreneur</span></div>
+    <div class="legend-item"><span class="lever-badge badge-add">+ Complémentaire</span> <span style="color:var(--muted);font-size:12px">Levier additionnel recommandé</span></div>
+  </div>
+
+  <!-- LEVIER 1 -->
+  <div class="lever">
+    <div class="lever-header">
+      <div class="lever-num">1</div>
+      <div class="lever-title-group">
+        <div class="lever-title">Réactivation des clients perdus — le « reset » propriétaire</div>
+        <div class="lever-subtitle">Particuliers & entreprises — Nîmes + Alès</div>
+      </div>
+      <span class="lever-badge badge-thierry">★ Idée Mickaël</span>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <div class="lever-col-title">Mécanique</div>
+        <p>Dans toute prestation de service, entre <strong>5 et 10 % des clients</strong> sont totalement ou partiellement insatisfaits — non par incompétence de l'exploitant, mais par simple perception subjective du service. Un changement de propriétaire est la seule occasion naturelle de repartir d'une page blanche avec ces clients.</p>
+        <p style="margin-top:10px">Mickaël contactera <strong>l'intégralité des clients actifs et dormants</strong> d'ADA Nîmes pour se présenter, écouter leurs retours et proposer une offre de bienvenue. Aucun historique négatif ne sera opposé : il arrive sans passif.</p>
+      </div>
+      <div class="lever-col">
+        <div class="lever-col-title">Plan d'action</div>
+        <ul>
+          <li>Récupération de la base clients complète (actifs + dormants sur 3 ans)</li>
+          <li>Appel téléphonique personnalisé à <em>chaque</em> client sur les 60 premiers jours</li>
+          <li>Offre « bienvenue nouveau gestionnaire » : -15 % sur première location</li>
+          <li>Suivi CRM des relances et conversions</li>
+        </ul>
+      </div>
+    </div>
+    <div class="lever-data">
+      <div class="data-item"><strong>À compléter avec Sébastien</strong> <span>— nombre exact de clients actifs et base dormante</span></div>
+      <div class="data-item"><strong>Hypothèse de travail</strong> <span>— 700 clients actifs / 400 dormants identifiables → 5 à 10 % réactivés</span></div>
+    </div>
+    <div class="lever-impact">
+      <span class="impact-label">CA additionnel estimé</span>
+      <div class="impact-numbers">
+        <div class="impact-year"><div class="yr">An 1</div><div class="val">+20–35 k€</div></div>
+        <div class="impact-year"><div class="yr">An 2</div><div class="val">+40 k€</div></div>
+        <div class="impact-year"><div class="yr">An 3</div><div class="val">+55 k€</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVIER 2 -->
+  <div class="lever">
+    <div class="lever-header">
+      <div class="lever-num">2</div>
+      <div class="lever-title-group">
+        <div class="lever-title">BTP — prospection des petites entreprises oubliées</div>
+        <div class="lever-subtitle">Entreprises 1–9 salariés — Nîmes Métropole + Alès Agglomération</div>
+      </div>
+      <span class="lever-badge badge-thierry">★ Idée Mickaël</span>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <div class="lever-col-title">Contexte de marché</div>
+        <p>La crise du BTP a modifié les usages : <strong>les entreprises ne s'engagent plus sur de la LLD</strong>. Elles ont besoin de camions et utilitaires à chaque nouveau chantier, de façon ponctuelle et flexible. Ce sont précisément les conditions de la location courte durée.</p>
+        <p style="margin-top:10px">Les grosses entreprises de BTP sont approchées par tous les loueurs. Les <strong>TPE de 1 à 9 salariés</strong> — qui représentent <strong>95,8 % des 381 000 entreprises BTP françaises</strong> — sont systématiquement ignorées de la prospection commerciale. C'est là que réside le gisement.</p>
+      </div>
+      <div class="lever-col">
+        <div class="lever-col-title">Plan d'action</div>
+        <ul>
+          <li>Extraction base : toutes les entreprises BTP sur Nîmes Métropole + Alès Agglo</li>
+          <li>Estimation : ~1 850 entreprises BTP sur les deux zones</li>
+          <li>Objectif : contacter 100 % des TPE sur 18 mois (phoning + visite terrain)</li>
+          <li>Offre dédiée BTP : tarif camion benne à la semaine sans engagement</li>
+          <li>Cible de conversion : 5 % = ~90 nouveaux comptes actifs</li>
+        </ul>
+      </div>
+    </div>
+    <div class="lever-data">
+      <div class="data-item"><strong>~1 200 entreprises BTP</strong> <span>sur Nîmes Métropole (estimé)</span></div>
+      <div class="data-item"><strong>~650 entreprises BTP</strong> <span>sur Alès et bassin cévenol</span></div>
+      <div class="data-item"><strong>95,8 % de TPE</strong> <span>dans le secteur en France (source FFB 2024)</span></div>
+    </div>
+    <div class="lever-impact">
+      <span class="impact-label">CA additionnel estimé</span>
+      <div class="impact-numbers">
+        <div class="impact-year"><div class="yr">An 1</div><div class="val">+25 k€</div></div>
+        <div class="impact-year"><div class="yr">An 2</div><div class="val">+50 k€</div></div>
+        <div class="impact-year"><div class="yr">An 3</div><div class="val">+70 k€</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVIER 3 -->
+  <div class="lever">
+    <div class="lever-header">
+      <div class="lever-num">3</div>
+      <div class="lever-title-group">
+        <div class="lever-title">Transport & logistique — le réseau personnel de Mickaël</div>
+        <div class="lever-subtitle">Transporteurs, déménageurs, coursiers — Gard + Vaucluse</div>
+      </div>
+      <span class="lever-badge badge-thierry">★ Idée Mickaël</span>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <div class="lever-col-title">Avantage différenciant</div>
+        <p>Mickaël a travaillé 20 ans dans le transport (WFS, Loomis, Ziegler, Gondrand). Il connaît personnellement des dizaines de dirigeants de PME transport dans le Gard et le Vaucluse. <strong>Ce levier est activable dès le jour 1 sans prospection froide.</strong></p>
+        <p style="margin-top:10px">La hausse des prix des carburants et le contexte économique contraint empêchent les transporteurs de renouveler leur flotte. À chaque nouveau client ou contrat supplémentaire, <strong>ils ont besoin d'un véhicule immédiatement, sans engagement long terme.</strong></p>
+      </div>
+      <div class="lever-col">
+        <div class="lever-col-title">Plan d'action</div>
+        <ul>
+          <li>Appels directs aux contacts perso dans les 15 premiers jours (liste déjà constituée)</li>
+          <li>Offre transporteur : tarif camion ou fourgon à la semaine avec fidelisation mensuelle</li>
+          <li>Prospection élargie : tous les transporteurs du Gard (base Kompass / CCI)</li>
+          <li>Partenariat déménageurs : besoin ponctuel, fidélité naturelle si le service est bon</li>
+        </ul>
+      </div>
+    </div>
+    <div class="lever-data">
+      <div class="data-item"><strong>Réseau perso immédiat</strong> <span>~50 contacts qualifiés sans démarchage</span></div>
+      <div class="data-item"><strong>~400 entreprises transport</strong> <span>dans le Gard (source Kompass)</span></div>
+      <div class="data-item"><strong>CA moyen par client transport</strong> <span>estimé 600–1 200 €/an</span></div>
+    </div>
+    <div class="lever-impact">
+      <span class="impact-label">CA additionnel estimé</span>
+      <div class="impact-numbers">
+        <div class="impact-year"><div class="yr">An 1</div><div class="val">+70 k€</div></div>
+        <div class="impact-year"><div class="yr">An 2</div><div class="val">+85 k€</div></div>
+        <div class="impact-year"><div class="yr">An 3</div><div class="val">+95 k€</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVIER 4 -->
+  <div class="lever">
+    <div class="lever-header">
+      <div class="lever-num">4</div>
+      <div class="lever-title-group">
+        <div class="lever-title">Hôtels — partenariats prescription avec commission</div>
+        <div class="lever-subtitle">Hôtels classés — Nîmes + Alès</div>
+      </div>
+      <span class="lever-badge badge-thierry">★ Idée Mickaël</span>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <div class="lever-col-title">Contexte</div>
+        <p>Nîmes enregistre <strong>403 133 nuitées</strong> entre janvier et avril 2025 seulement (+13 % vs 2024). La saison estivale, les deux Ferias (758 995 personnes), le Festival de Nîmes (160 000 spectateurs) et le tournoi de tennis (21 940 nuitées à lui seul) génèrent des flux massifs de voyageurs qui ont besoin de mobilité.</p>
+        <p style="margin-top:10px"><strong>Aucun loueur de la place ne travaille systématiquement avec les hôtels.</strong> Mickaël va démarcher chaque hôtel individuellement, proposer un flyer en chambre et au comptoir, avec <strong>une commission reversée à l'hôtel</strong> sur chaque location.</p>
+      </div>
+      <div class="lever-col">
+        <div class="lever-col-title">Plan d'action</div>
+        <ul>
+          <li>Cartographie complète : tous les hôtels de Nîmes + Alès</li>
+          <li>Visite physique de chaque hôtel (pas de phoning seul)</li>
+          <li>Proposition : flyer ADA en chambre + affiche comptoir + commission 5–8 %</li>
+          <li>Contrat cadre simple, signable en 5 minutes</li>
+          <li>Relance trimestrielle + bilan de recommandations partagé</li>
+          <li>Objectif : 20 partenariats signés en an 1</li>
+        </ul>
+      </div>
+    </div>
+    <div class="lever-data">
+      <div class="data-item"><strong>~28 hôtels</strong> <span>sur Nîmes et agglomération</span></div>
+      <div class="data-item"><strong>~6–8 hôtels</strong> <span>sur Alès et bassin</span></div>
+      <div class="data-item"><strong>10,4 M de touristes</strong> <span>dans le Gard en 2024 (+4 % vs 2023)</span></div>
+    </div>
+    <div class="lever-impact">
+      <span class="impact-label">CA additionnel estimé</span>
+      <div class="impact-numbers">
+        <div class="impact-year"><div class="yr">An 1</div><div class="val">+30 k€</div></div>
+        <div class="impact-year"><div class="yr">An 2</div><div class="val">+55 k€</div></div>
+        <div class="impact-year"><div class="yr">An 3</div><div class="val">+75 k€</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVIER 5 -->
+  <div class="lever">
+    <div class="lever-header">
+      <div class="lever-num">5</div>
+      <div class="lever-title-group">
+        <div class="lever-title">Airbnb & conciergeries — le guide bons plans Nîmes</div>
+        <div class="lever-subtitle">Locations courte durée — Nîmes + Alès + agglomérations</div>
+      </div>
+      <span class="lever-badge badge-thierry">★ Idée Mickaël</span>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <div class="lever-col-title">Concept</div>
+        <p>Mickaël va produire un <strong>guide imprimé « Les bons plans de Nîmes »</strong> : visites, restaurants, sorties, excursions — tout ce qui nécessite un moyen de transport. Ce guide, distribué gratuitement par les hôtes Airbnb avec leur kit d'accueil, intègre naturellement une <strong>offre ADA avec QR code.</strong></p>
+        <p style="margin-top:10px">Le coût du guide est de 2 à 3 € l'unité. Le levier clé : les <strong>conciergeries Airbnb de Nîmes</strong> gèrent des dizaines à centaines de logements — un seul accord avec une conciergerie = des centaines de guides distribués.</p>
+      </div>
+      <div class="lever-col">
+        <div class="lever-col-title">Plan d'action</div>
+        <ul>
+          <li>Production du guide bons plans Nîmes (format A5, 12 pages, print à la demande)</li>
+          <li>Contact des 5–8 conciergeries Airbnb identifiées sur Nîmes</li>
+          <li>Contact direct des hôtes les mieux notés (top 200 sur la plateforme)</li>
+          <li>Même démarche sur Alès : guide spécifique Cévennes</li>
+          <li>QR code trackable par logement pour mesurer la conversion</li>
+        </ul>
+      </div>
+    </div>
+    <div class="lever-data">
+      <div class="data-item"><strong>~1 200–1 500 logements Airbnb</strong> <span>sur Nîmes et agglomération</span></div>
+      <div class="data-item"><strong>~200 logements</strong> <span>sur Alès</span></div>
+      <div class="data-item"><strong>5–8 conciergeries</strong> <span>identifiables sur Nîmes (point d'entrée mutualisé)</span></div>
+      <div class="data-item"><strong>Taux d'occupation</strong> <span>59 % en moyenne (source AirDNA)</span></div>
+    </div>
+    <div class="lever-impact">
+      <span class="impact-label">CA additionnel estimé</span>
+      <div class="impact-numbers">
+        <div class="impact-year"><div class="yr">An 1</div><div class="val">+35 k€</div></div>
+        <div class="impact-year"><div class="yr">An 2</div><div class="val">+50 k€</div></div>
+        <div class="impact-year"><div class="yr">An 3</div><div class="val">+65 k€</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVIER 6 -->
+  <div class="lever">
+    <div class="lever-header">
+      <div class="lever-num">6</div>
+      <div class="lever-title-group">
+        <div class="lever-title">Événementiel — partenariats avec les organisateurs</div>
+        <div class="lever-subtitle">Grands événements Nîmes — ~15 événements majeurs/an</div>
+      </div>
+      <span class="lever-badge badge-thierry">★ Idée Mickaël</span>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <div class="lever-col-title">Opportunité</div>
+        <p>Le tournoi de tennis <strong>UTS Bastide Médical de Nîmes</strong>, qui s'est tenu la semaine dernière dans les Arènes, a généré <strong>21 940 nuitées à lui seul</strong>. Les arènes affichaient complet. Aucun partenariat avec un loueur de voitures n'était visible lors de la réservation des places.</p>
+        <p style="margin-top:10px">C'est un gisement non exploité pour chacun des grands événements nîmois — Ferias, Festival, Jeudis de Nîmes, Salon de l'Habitat, Foire de Nîmes, Nimagine. Le principe : <strong>être présent dans l'e-mail de confirmation de billet</strong>, avant que le voyageur ne pense à Booking.</p>
+      </div>
+      <div class="lever-col">
+        <div class="lever-col-title">Plan d'action + calendrier</div>
+        <ul>
+          <li>Feria de la Pentecôte (~100 000 personnes)</li>
+          <li>Festival de Nîmes (160 000 spectateurs)</li>
+          <li>Ferias des Vendanges (276 885 touristes)</li>
+          <li>Tournoi de tennis UTS (21 940 nuitées)</li>
+          <li>Salon de l'Habitat Nîmes (sept. 2026)</li>
+          <li>Foire de Nîmes (30 000 visiteurs — fév.)</li>
+          <li>Nimagine salon créateurs (nov.)</li>
+          <li>Jeudis de Nîmes (25–28 000/semaine)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="lever-data">
+      <div class="data-item"><strong>758 995 personnes</strong> <span>sur les 2 Ferias (dont 276 885 touristes)</span></div>
+      <div class="data-item"><strong>160 000 spectateurs</strong> <span>au Festival de Nîmes</span></div>
+      <div class="data-item"><strong>+13 %</strong> <span>hausse fréquentation touristique Nîmes jan–avr 2025</span></div>
+    </div>
+    <div class="lever-impact">
+      <span class="impact-label">CA additionnel estimé</span>
+      <div class="impact-numbers">
+        <div class="impact-year"><div class="yr">An 1</div><div class="val">+55 k€</div></div>
+        <div class="impact-year"><div class="yr">An 2</div><div class="val">+80 k€</div></div>
+        <div class="impact-year"><div class="yr">An 3</div><div class="val">+100 k€</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVIER 7 -->
+  <div class="lever">
+    <div class="lever-header">
+      <div class="lever-num">7</div>
+      <div class="lever-title-group">
+        <div class="lever-title">Salons professionnels — approche exposants en amont</div>
+        <div class="lever-subtitle">Parc Expo Nîmes + Parc Expo Montpellier — ~15 à 18 salons/an dans le rayon</div>
+      </div>
+      <span class="lever-badge badge-thierry">★ Idée Mickaël</span>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <div class="lever-col-title">Concept</div>
+        <p>Les exposants des salons professionnels ont systématiquement besoin d'un véhicule pour venir, monter leur stand, et repartir. Aujourd'hui, ils réservent sur Booking par défaut. <strong>L'objectif est de les contacter avant qu'ils ne pensent à réserver</strong>, en utilisant la liste publique des exposants des éditions précédentes.</p>
+        <p style="margin-top:10px">Mickaël est un commercial BtoB terrain : contacter 50 exposants par salon, c'est dans ses cordes. Sur 15 salons/an = <strong>750 contacts qualifiés/an</strong>, tous avec un besoin avéré.</p>
+      </div>
+      <div class="lever-col">
+        <div class="lever-col-title">Plan d'action + salons cibles</div>
+        <ul>
+          <li><strong>Foire de Nîmes</strong> (fév. — 30 000 visiteurs, 9 000 m²)</li>
+          <li><strong>Salon de l'Habitat Nîmes</strong> (sept. 2026)</li>
+          <li><strong>Nimagine</strong> — salon créateurs (nov., 9 jours)</li>
+          <li><strong>Salon des Vins Bio Montpellier</strong> (janv. — 1 500 exposants)</li>
+          <li><strong>SIMMO + Habitat Montpellier</strong> (mars)</li>
+          <li>+ tous salons régionaux dans rayon 80 km</li>
+          <li>Base exposants N-1 extraite, phoning 2 mois avant chaque salon</li>
+        </ul>
+      </div>
+    </div>
+    <div class="lever-data">
+      <div class="data-item"><strong>~15–18 salons/an</strong> <span>dans le rayon Nîmes–Montpellier</span></div>
+      <div class="data-item"><strong>~200–400 exposants/salon</strong> <span>soit ~4 500 contacts/an</span></div>
+      <div class="data-item"><strong>Conversion cible</strong> <span>2 % = ~90 nouveaux clients exposants/an</span></div>
+    </div>
+    <div class="lever-impact">
+      <span class="impact-label">CA additionnel estimé</span>
+      <div class="impact-numbers">
+        <div class="impact-year"><div class="yr">An 1</div><div class="val">+35 k€</div></div>
+        <div class="impact-year"><div class="yr">An 2</div><div class="val">+55 k€</div></div>
+        <div class="impact-year"><div class="yr">An 3</div><div class="val">+75 k€</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVIER 8 -->
+  <div class="lever">
+    <div class="lever-header">
+      <div class="lever-num">8</div>
+      <div class="lever-title-group">
+        <div class="lever-title">Voitures sans permis — la niche non adressée</div>
+        <div class="lever-subtitle">Particuliers — Gard</div>
+      </div>
+      <span class="lever-badge badge-thierry">★ Idée Mickaël</span>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <div class="lever-col-title">Marché sous-servi</div>
+        <p>En France, <strong>54 692 permis ont été invalidés en 2023</strong> pour solde de points nul (source ONISR), auxquels s'ajoutent les suspensions judiciaires. Ramené au Gard (~1 % de la population nationale), cela représente <strong>500 à 700 conducteurs par an</strong> se retrouvant sans permis dans le département.</p>
+        <p style="margin-top:10px">La demande de VSP en location est quasi nulle sur le marché — <strong>aucun loueur de la région ne propose ce service</strong>. La pénurie d'offre permet de pratiquer des prix premium, équivalents ou supérieurs à une voiture thermique classique.</p>
+      </div>
+      <div class="lever-col">
+        <div class="lever-col-title">Plan d'action</div>
+        <ul>
+          <li>Intégration de 2 à 3 VSP lors du renouvellement naturel du parc</li>
+          <li>Communication ciblée : auto-écoles, avocat spécialiste permis, prévention routière</li>
+          <li>Référencement Google « location voiture sans permis Nîmes »</li>
+          <li>Tarif : 600–900 €/mois (pas de concurrence = prix libre)</li>
+        </ul>
+        <p style="margin-top: 10px; font-size: 12px; color: var(--muted)"><em>Levier de niche : contribue à la diversification sans peser sur l'exploitation principale.</em></p>
+      </div>
+    </div>
+    <div class="lever-data">
+      <div class="data-item"><strong>~600 invalidations/an</strong> <span>estimées dans le Gard (extrapolation ONISR 2023)</span></div>
+      <div class="data-item"><strong>Pénurie d'offre</strong> <span>→ prix premium, aucun concurrent direct sur la location VSP</span></div>
+    </div>
+    <div class="lever-impact">
+      <span class="impact-label">CA additionnel estimé</span>
+      <div class="impact-numbers">
+        <div class="impact-year"><div class="yr">An 1</div><div class="val">+18 k€</div></div>
+        <div class="impact-year"><div class="yr">An 2</div><div class="val">+25 k€</div></div>
+        <div class="impact-year"><div class="yr">An 3</div><div class="val">+30 k€</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVIERS COMPLEMENTAIRES -->
+  <div class="lever">
+    <div class="lever-header">
+      <div class="lever-num" style="background:var(--green)">+</div>
+      <div class="lever-title-group">
+        <div class="lever-title">Leviers complémentaires — à activer en parallèle</div>
+        <div class="lever-subtitle">Pôle Mécanique Alès · Clientèle institutionnelle · Assureurs / véhicules de remplacement</div>
+      </div>
+      <span class="lever-badge badge-add">+ Complémentaire</span>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <div class="lever-col-title">Déjà identifiés dans l'analyse</div>
+        <ul>
+          <li><strong>Pôle Mécanique d'Alès</strong> (90 ha, entreprises nationales) — sollicite déjà l'agence sans démarche. Un partenariat formalisé = levier immédiat</li>
+          <li><strong>Clientèle institutionnelle</strong> (~100 k€/an existants : CHU, mairie, préfecture) — à développer et sécuriser par contrats cadres annuels</li>
+          <li><strong>Gare Nîmes Pont du Gard</strong> — panneau publicitaire exclusif déjà obtenu. Développer partenariats hôtels pour service dominical</li>
+        </ul>
+      </div>
+      <div class="lever-col">
+        <div class="lever-col-title">Levier additionnel suggéré</div>
+        <ul>
+          <li><strong>Conventions assureurs / experts sinistres</strong> : chaque sinistre automobile génère un besoin de véhicule de remplacement. Approcher les cabinets d'expertise et mutuelles locales (Gard Mutuelle, MAIF, MACIF) pour des conventions de remplacement. Ce levier est récurrent et contractuel.</li>
+          <li><strong>Centre des Congrès h2 Nîmes</strong> (ouverture 2025–2026) : se positionner comme partenaire mobilité officiel dès l'inauguration</li>
+        </ul>
+      </div>
+    </div>
+    <div class="lever-impact">
+      <span class="impact-label">CA additionnel estimé</span>
+      <div class="impact-numbers">
+        <div class="impact-year"><div class="yr">An 1</div><div class="val">+60 k€</div></div>
+        <div class="impact-year"><div class="yr">An 2</div><div class="val">+90 k€</div></div>
+        <div class="impact-year"><div class="yr">An 3</div><div class="val">+120 k€</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTION -->
+  <div class="projection">
+    <div class="section-title">Projection de chiffre d'affaires 2026–2028</div>
+    <div class="section-line"></div>
+
+    <table class="proj-table">
+      <thead>
+        <tr>
+          <th>Levier</th>
+          <th>An 1 (2026)</th>
+          <th>An 2 (2027)</th>
+          <th>An 3 (2028)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Clients perdus réactivés ★</td><td>+28 000 €</td><td>+40 000 €</td><td>+55 000 €</td></tr>
+        <tr><td>BTP — TPE prospecté ★</td><td>+25 000 €</td><td>+50 000 €</td><td>+70 000 €</td></tr>
+        <tr><td>Transport (réseau Mickaël) ★</td><td>+70 000 €</td><td>+85 000 €</td><td>+95 000 €</td></tr>
+        <tr><td>Hôtels — commission prescription ★</td><td>+30 000 €</td><td>+55 000 €</td><td>+75 000 €</td></tr>
+        <tr><td>Airbnb + conciergeries ★</td><td>+35 000 €</td><td>+50 000 €</td><td>+65 000 €</td></tr>
+        <tr><td>Grands événements — partenariats ★</td><td>+55 000 €</td><td>+80 000 €</td><td>+100 000 €</td></tr>
+        <tr><td>Salons pro — exposants ★</td><td>+35 000 €</td><td>+55 000 €</td><td>+75 000 €</td></tr>
+        <tr><td>VSP (niche) ★</td><td>+18 000 €</td><td>+25 000 €</td><td>+30 000 €</td></tr>
+        <tr><td>Leviers existants renforcés +</td><td>+60 000 €</td><td>+90 000 €</td><td>+120 000 €</td></tr>
+        <tr class="subtotal">
+          <td>Total CA additionnel généré</td>
+          <td>+356 000 €</td>
+          <td>+530 000 €</td>
+          <td>+685 000 €</td>
+        </tr>
+        <tr class="total">
+          <td><strong>CA total projeté</strong></td>
+          <td><strong>2 001 000 €</strong></td>
+          <td><strong>2 175 000 €</strong></td>
+          <td><strong>2 330 000 €</strong></td>
+        </tr>
+        <tr>
+          <td style="font-size:12px;color:var(--muted)">Croissance vs base 1 645 082 €</td>
+          <td class="growth-high">+21,6 %</td>
+          <td class="growth">+8,7 %</td>
+          <td class="growth">+7,1 %</td>
+        </tr>
+        <tr>
+          <td style="font-size:12px;color:var(--muted)">Croissance cumulée vs 2025</td>
+          <td class="growth">+21,6 %</td>
+          <td class="growth">+32,2 %</td>
+          <td class="growth-high">+41,6 %</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:11px;color:var(--muted);margin-top:12px;font-style:italic">
+      ★ = Levier identifié et porté par Mickaël Cneude. Projections fondées sur des hypothèses de conversion conservatrices (2–5 % selon les leviers). 
+      Ces chiffres constituent des objectifs commerciaux, non une garantie de résultat. La réalisation dépend de l'exécution du plan d'action.
+    </p>
+  </div>
+
+  <!-- PROFIL BOX -->
+  <div class="profile-box">
+    <div>
+      <h3>Pourquoi ces chiffres sont crédibles</h3>
+      <ul>
+        <li>+20 %/an prouvé chez Marsh & McLennan pendant 7 ans sur un portefeuille BtoB similaire</li>
+        <li>Réseau transport personnel immédiatement mobilisable (~50 contacts qualifiés jour 1)</li>
+        <li>Expert assurance flotte : il comprend les besoins de remplacement sinistre</li>
+        <li>Profil terrain : habitué à la prospection physique (Alliance Intérim, Gondrand)</li>
+        <li>Ancien client ADA : crédibilité naturelle dans la relation enseigne</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Ce que les autres candidats ne peuvent pas apporter</h3>
+      <ul>
+        <li>Un réseau personnel de 50+ dirigeants transport activable en semaine 1</li>
+        <li>Une expertise assurance flotte pour capter les sinistres (conventions assureurs)</li>
+        <li>Un ADN commercial BtoB terrain — pas un manager qui attend que les clients viennent</li>
+        <li>Une vision événementielle structurée sur les 15 grands événements nîmois</li>
+        <li>La conviction entrepreneuriale de l'ex-indépendant qui revient à son terrain</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  Document confidentiel — Préparé dans le cadre du dossier de reprise ADA Nîmes par Thierry Bismuth | ODYSKILLS<br>
+  thierry@thierrybismuth.com · 06 10 70 30 90 · thierrybismuth.com
+</div>
+
+</body>
+</html>
