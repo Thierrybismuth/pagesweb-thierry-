@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rejoindre Re-uz — Consultant Indépendant</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1a0f;
+    --paper: #f4f0e8;
+    --green: #2d5a3d;
+    --green-light: #4a8a60;
+    --green-pale: #d4e8da;
+    --terracotta: #c8622a;
+    --sand: #e8dfc8;
+    --muted: #6b7a6b;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--green);
+    color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 350px; height: 350px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--terracotta);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 36px;
+  }
+
+  .hero-eyebrow {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(38px, 6vw, 72px);
+    line-height: 1.1;
+    max-width: 800px;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: #a8d8b5;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 300;
+    max-width: 560px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    margin-bottom: 52px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    color: white;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 6px;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 48px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-scroll::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+  }
+
+  /* ── SECTION GÉNÉRIQUE ── */
+  section {
+    padding: 96px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 46px);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    max-width: 700px;
+  }
+
+  .lead {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 620px;
+    line-height: 1.75;
+    margin-bottom: 48px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid #d8d0c0;
+    margin: 0;
+  }
+
+  /* ── RE-UZ PRÉSENTATION ── */
+  .reuz-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 48px;
+  }
+
+  .reuz-card {
+    background: var(--green);
+    color: white;
+    padding: 40px;
+    border-radius: 4px;
+  }
+
+  .reuz-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  .reuz-card p {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .reuz-card-light {
+    background: var(--sand);
+    color: var(--ink);
+    padding: 40px;
+    border-radius: 4px;
+  }
+
+  .reuz-card-light h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 16px;
+    color: var(--green);
+  }
+
+  .reuz-card-light p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #555;
+  }
+
+  /* ── CIBLES ── */
+  .cibles-section {
+    background: var(--ink);
+    color: white;
+    max-width: 100%;
+    padding: 96px 48px;
+  }
+
+  .cibles-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .cibles-section .section-label { color: #a8d8b5; }
+  .cibles-section h2 { color: white; max-width: 100%; }
+  .cibles-section .lead { color: rgba(255,255,255,0.6); }
+
+  .cibles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .cible-item {
+    background: rgba(255,255,255,0.04);
+    padding: 32px;
+    border-top: 3px solid transparent;
+    transition: all 0.25s ease;
+  }
+
+  .cible-item:hover {
+    background: rgba(255,255,255,0.07);
+    border-top-color: var(--terracotta);
+  }
+
+  .cible-item.priority {
+    border-top-color: #a8d8b5;
+  }
+
+  .cible-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .cible-item h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: white;
+  }
+
+  .cible-item p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+
+  .priority-tag {
+    display: inline-block;
+    background: #2d5a3d;
+    color: #a8d8b5;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 12px;
+  }
+
+  /* ── RÉMUNÉRATION ── */
+  .remun-section {
+    background: var(--paper);
+  }
+
+  .remun-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 48px;
+  }
+
+  .remun-card {
+    border: 1px solid #d0c8b8;
+    padding: 40px;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .remun-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--green);
+  }
+
+  .remun-card.featured::before {
+    background: var(--terracotta);
+  }
+
+  .remun-percent {
+    font-family: 'DM Serif Display', serif;
+    font-size: 64px;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .remun-card.featured .remun-percent {
+    color: var(--terracotta);
+  }
+
+  .remun-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .remun-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .remun-tag {
+    display: inline-block;
+    background: #fde8d0;
+    color: var(--terracotta);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  .remun-objective {
+    margin-top: 40px;
+    background: var(--green-pale);
+    padding: 32px 40px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .remun-objective .big {
+    font-family: 'DM Serif Display', serif;
+    font-size: 52px;
+    color: var(--green);
+    white-space: nowrap;
+  }
+
+  .remun-objective p {
+    font-size: 15px;
+    color: var(--green);
+    line-height: 1.65;
+  }
+
+  /* ── ONBOARDING ── */
+  .onboarding-section {
+    background: var(--sand);
+    max-width: 100%;
+    padding: 96px 48px;
+  }
+
+  .onboarding-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .onboarding-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .step {
+    background: white;
+    padding: 36px 28px;
+  }
+
+  .step-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    color: #d0c8b8;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .step h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+
+  .step p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── PROFIL ── */
+  .profil-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    margin-top: 48px;
+    align-items: start;
+  }
+
+  .profil-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .profil-list li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .profil-list li::before {
+    content: '✓';
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--green);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    margin-top: 1px;
+  }
+
+  .profil-highlight {
+    background: var(--green);
+    color: white;
+    padding: 40px;
+    border-radius: 4px;
+  }
+
+  .profil-highlight h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .profil-highlight p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 16px;
+  }
+
+  /* ── VILLES ── */
+  .villes-section {
+    background: white;
+    max-width: 100%;
+    padding: 96px 48px;
+    border-top: 1px solid #d8d0c0;
+    border-bottom: 1px solid #d8d0c0;
+  }
+
+  .villes-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .villes-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+
+  .ville-card {
+    border: 1px solid #d8d0c0;
+    padding: 24px 20px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .ville-card:hover {
+    background: var(--green);
+    color: white;
+    border-color: var(--green);
+  }
+
+  .ville-card:hover .ville-name { color: white; }
+  .ville-card:hover .ville-region { color: rgba(255,255,255,0.6); }
+
+  .ville-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--green);
+    display: block;
+    margin-bottom: 4px;
+    transition: color 0.2s;
+  }
+
+  .ville-region {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+
+  .villes-note {
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--terracotta);
+    color: white;
+    max-width: 100%;
+    padding: 96px 48px;
+    text-align: center;
+  }
+
+  .cta-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cta-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    max-width: 100%;
+    margin: 0 auto 20px;
+    color: white;
+  }
+
+  .cta-section p {
+    font-size: 17px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: white;
+    color: var(--terracotta);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 16px 40px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .cta-btn:hover {
+    background: var(--ink);
+    color: white;
+  }
+
+  .cta-contact {
+    margin-top: 28px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .cta-contact a {
+    color: white;
+    text-decoration: underline;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.4);
+    padding: 32px 48px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  footer a { color: rgba(255,255,255,0.4); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge { animation: fadeUp 0.5s ease both; }
+  .hero-eyebrow { animation: fadeUp 0.5s 0.1s ease both; }
+  .hero h1 { animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-sub { animation: fadeUp 0.6s 0.35s ease both; }
+  .hero-stats { animation: fadeUp 0.6s 0.5s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    section, .cibles-section, .onboarding-section, .villes-section, .cta-section { padding: 64px 24px; }
+    .hero { padding: 64px 24px; }
+    .reuz-grid, .remun-cards, .profil-grid { grid-template-columns: 1fr; }
+    .cibles-grid { grid-template-columns: 1fr 1fr; }
+    .onboarding-steps { grid-template-columns: 1fr 1fr; }
+    .villes-grid { grid-template-columns: repeat(3, 1fr); }
+    .hero-stats { gap: 28px; }
+    footer { flex-direction: column; text-align: center; }
+  }
+
+  @media (max-width: 600px) {
+    .cibles-grid { grid-template-columns: 1fr; }
+    .onboarding-steps { grid-template-columns: 1fr; }
+    .villes-grid { grid-template-columns: repeat(2, 1fr); }
+    .remun-objective { flex-direction: column; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <span class="hero-badge">🌿 6 postes ouverts — Avril 2026</span>
+  <p class="hero-eyebrow">Re-uz × Multi-Potentiel</p>
+  <h1>Développez un marché<br><em>qui n'attend que vous.</em></h1>
+  <p class="hero-sub">Re-uz déploie son premier réseau de consultants indépendants en France. Vous apportez votre terrain, votre réseau local, votre énergie de chasseur. Ils apportent la structure, les outils et un modèle de rémunération récurrent.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">6</span>
+      <span class="stat-label">villes — phase 1</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">300K€</span>
+      <span class="stat-label">CA cible / an / consultant</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">12 %</span>
+      <span class="stat-label">sur les contrats de service</span>
+    </div>
+  </div>
+  <span class="hero-scroll">Découvrir l'opportunité</span>
+</header>
+
+<!-- ══ QUI EST RE-UZ ══ -->
+<section>
+  <p class="section-label">L'entreprise</p>
+  <h2>Re-uz : le leader de la consigne réutilisable en France</h2>
+  <p class="lead">Re-uz conçoit, loue et entretient des contenants réutilisables — gobelets, cups bière, vaisselle — pour les entreprises, événements et collectivités. Un modèle service complet, de la livraison au lavage.</p>
+  <div class="reuz-grid">
+    <div class="reuz-card">
+      <h3>Un modèle service, pas un simple produit</h3>
+      <p>Re-uz ne vend pas des gobelets : ils les mettent à disposition, les récupèrent, les lavent dans leurs propres centres de lavage et les redistribuent. Contrats d'abonnement sur 48 mois. Un modèle récurrent, prévisible, solide.</p>
+    </div>
+    <div class="reuz-card">
+      <h3>Un timing réglementaire idéal</h3>
+      <p>Les gobelets jetables sont progressivement interdits par la loi. Ce n'est plus une tendance RSE optionnelle : c'est une obligation qui pousse l'ensemble du marché vers les solutions réutilisables. Le marché vient à vous.</p>
+    </div>
+    <div class="reuz-card-light">
+      <h3>Des références qui parlent</h3>
+      <p>Burger King, grandes enseignes de restauration, sièges sociaux, stades, festivals... Re-uz équipe déjà les acteurs les plus exigeants. Vous arrivez avec une solution éprouvée, pas un prototype.</p>
+    </div>
+    <div class="reuz-card-light">
+      <h3>Un marché vaste et peu prospecté</h3>
+      <p>Malgré une activité solide, l'immense majorité des clients potentiels n'ont jamais été contactés. Vous n'arrivez pas sur un marché saturé : vous ouvrez un territoire.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ══ CIBLES ══ -->
+<div class="cibles-section">
+  <div class="cibles-inner">
+    <p class="section-label">Vos marchés</p>
+    <h2>Une cible large — une priorité claire</h2>
+    <p class="lead">Tous les acteurs qui servent des boissons ou de la restauration sont des clients potentiels. Si vous avez déjà un réseau dans l'un de ces univers, vous partez avec une longueur d'avance — mais ce n'est pas un prérequis.</p>
+    <div class="cibles-grid">
+
+      <div class="cible-item priority">
+        <span class="priority-tag">✓ Fort potentiel</span>
+        <div class="cible-icon">☕</div>
+        <h4>Cafés, Hôtels, Restaurants</h4>
+        <p>L'Eco-cup pour toutes les boissons chaudes et froides. La BeerUp pour la bière pression. Deux produits taillés pour ce marché, fort potentiel de closing rapide.</p>
+      </div>
+
+      <div class="cible-item priority">
+        <span class="priority-tag">✓ Fort potentiel</span>
+        <div class="cible-icon">🍺</div>
+        <h4>Bars & brasseries</h4>
+        <p>La solution BeerUp est spécifiquement conçue pour le service de bière en gobelet réutilisable. Parfait pour tous les établissements avec bière pression ou service en terrasse.</p>
+      </div>
+
+      <div class="cible-item">
+        <div class="cible-icon">🏢</div>
+        <h4>Sièges sociaux & entreprises</h4>
+        <p>Budget RSE disponible, machines à boissons à équiper, cantines à moderniser. Un interlocuteur RH, RSE ou facility manager. Tickets élevés, contrats longs.</p>
+      </div>
+
+      <div class="cible-item">
+        <div class="cible-icon">🎪</div>
+        <h4>Événements & festivals</h4>
+        <p>Concerts, festivals, événements sportifs, marchés. La réglementation impose le réutilisable. Commandes ponctuelles mais volumineuses.</p>
+      </div>
+
+      <div class="cible-item">
+        <div class="cible-icon">🍽️</div>
+        <h4>Restauration collective</h4>
+        <p>Cantines d'entreprises, établissements scolaires, centres hospitaliers. Des acteurs déjà sensibles aux enjeux RSE, des volumes importants, des décisions centralisées.</p>
+      </div>
+
+      <div class="cible-item">
+        <div class="cible-icon">🏟️</div>
+        <h4>Stades & salles de spectacle</h4>
+        <p>Obligation réglementaire renforcée pour les grands rassemblements. Des volumes exceptionnels lors des événements, des gestionnaires de site réactifs sur ce sujet.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ RÉMUNÉRATION ══ -->
+<section class="remun-section">
+  <p class="section-label">Votre rémunération</p>
+  <h2>Variable, attractif, et récurrent dès le 1er contrat signé</h2>
+  <p class="lead">Vous êtes rémunéré sur tout ce que vous signez — et sur les abonnements aussi longtemps que vous êtes partenaire du réseau.</p>
+  <div class="remun-cards">
+    <div class="remun-card">
+      <div class="remun-percent">8 %</div>
+      <h3>Sur chaque vente</h3>
+      <p>8 % du chiffre d'affaires généré sur chaque nouveau client, dès la signature du bon de commande.</p>
+    </div>
+    <div class="remun-card featured">
+      <div class="remun-percent">12 %</div>
+      <h3>Sur les contrats de service</h3>
+      <p>12 % du chiffre d'affaires généré sur les contrats de location-entretien signés.</p>
+    </div>
+  </div>
+  <div class="remun-objective">
+    <span class="big">300–700K€</span>
+    <p>C'est la fourchette de chiffre d'affaires développé par an ciblée pour chaque consultant du réseau, en fonction de l'activité et du territoire. Un potentiel de revenus solide pour un vrai acteur terrain.</p>
+  </div>
+</section>
+
+<!-- ══ ONBOARDING ══ -->
+<div class="onboarding-section">
+  <div class="onboarding-inner">
+    <p class="section-label">Votre démarrage</p>
+    <h2>Opérationnel en 3 jours. Accompagné sur la durée.</h2>
+    <p class="lead">Pas de démarrage dans le vide. Re-uz vous donne les armes avant même votre premier rendez-vous.</p>
+    <div class="onboarding-steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h4>Formation Re-uz Academy</h4>
+        <p>3 jours de formation initiale sur les produits, les techniques de vente, les outils CRM et les arguments terrain. Modules e-learning Zoho Learn disponibles en continu.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h4>CRM & liste prospects</h4>
+        <p>Accès CRM exclusif à votre secteur géographique. Une liste de prospects qualifiés construite sur l'identification des potentiels de marché de votre zone.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h4>Supports marketing</h4>
+        <p>Tous les supports de vente, présentations, argumentaires produits et outils de communication fournis et prêts à l'emploi.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h4>Animation hebdomadaire</h4>
+        <p>3 sessions d'une heure par semaine avec l'équipe Re-uz : vente, techniques, produits, dossiers en cours. Ligne WhatsApp ouverte en permanence pour vos questions terrain.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROFIL ══ -->
+<section>
+  <p class="section-label">Le profil recherché</p>
+  <h2>Un chasseur avec un réseau. Le reste, on vous le donne.</h2>
+  <div class="profil-grid">
+    <ul class="profil-list">
+      <li>Vous aimez aller chercher les clients, pas attendre qu'ils viennent à vous</li>
+      <li>Vous avez un réseau local dans un secteur ou un autre — et vous savez vous en servir</li>
+      <li>Vous savez travailler en autonomie et gérer votre agenda sans qu'on vous tienne la main</li>
+      <li>Vous cherchez une activité sur le long terme, pas un coup ponctuel</li>
+      <li>Vous êtes à l'aise avec les cycles de vente BtoB (rendez-vous, proposition, relance, closing)</li>
+      <li>Vous souhaitez exercer en indépendant — à temps plein ou en complément d'une activité existante</li>
+    </ul>
+    <div class="profil-highlight">
+      <h3>Un atout, pas une condition</h3>
+      <p>Si vous avez déjà un réseau dans l'univers café-hôtel-restaurant, vous partez avec une longueur d'avance. Mais ce n'est pas ce qui décide. Ce qui compte : savoir aller vers les gens, connaître son territoire, être à l'aise dans une relation BtoB.</p>
+      <p>Un rendez-vous technique difficile ? Un expert Re-uz peut vous rejoindre en visio. Vous n'êtes jamais seul face à une question complexe.</p>
+      <p>Et surtout : vous restez totalement libre. Vous organisez votre activité à votre rythme, en exclusivité ou en complément de ce que vous faites déjà. C'est votre business, vous en êtes le patron.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VILLES ══ -->
+<div class="villes-section">
+  <div class="villes-inner">
+    <p class="section-label">Phase 1 — 6 territoires</p>
+    <h2>Les villes ouvertes au recrutement dès maintenant</h2>
+    <p class="lead">Un seul consultant par zone géographique. Premier arrivé, premier servi sur son territoire.</p>
+    <div class="villes-grid">
+      <div class="ville-card">
+        <span class="ville-name">Lille</span>
+        <span class="ville-region">Hauts-de-France</span>
+      </div>
+      <div class="ville-card">
+        <span class="ville-name">Paris</span>
+        <span class="ville-region">Île-de-France</span>
+      </div>
+      <div class="ville-card">
+        <span class="ville-name">Lyon</span>
+        <span class="ville-region">Auvergne-Rhône-Alpes</span>
+      </div>
+      <div class="ville-card">
+        <span class="ville-name">Marseille</span>
+        <span class="ville-region">Provence-Alpes-Côte d'Azur</span>
+      </div>
+      <div class="ville-card">
+        <span class="ville-name">Rennes</span>
+        <span class="ville-region">Bretagne</span>
+      </div>
+      <div class="ville-card">
+        <span class="ville-name">Bordeaux</span>
+        <span class="ville-region">Nouvelle-Aquitaine</span>
+      </div>
+    </div>
+    <p class="villes-note">D'autres territoires ouvriront progressivement jusqu'à 15 zones couvertes sur toute la France métropolitaine.</p>
+  </div>
+</div>
+
+<!-- ══ CTA ══ -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <h2>Votre territoire vous attend.</h2>
+    <p>Les places sont limitées à 1 consultant par zone. Si votre ville vous intéresse, prenons 20 minutes pour en parler.</p>
+    <a href="mailto:thierrybismuth@gmail.com?subject=Candidature Re-uz — [votre ville]" class="cta-btn">Postuler pour ma ville →</a>
+    <p class="cta-contact">Thierry Bismuth — <a href="tel:+33610703090">06 10 70 30 90</a> · <a href="mailto:thierrybismuth@gmail.com">thierrybismuth@gmail.com</a></p>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <span>Re-uz × ODYSKILLS / Multi-Potentiel — 2026</span>
+  <span>Document de présentation — Recrutement réseau commercial</span>
+</footer>
+
+</body>
+</html>
