@@ -115,7 +115,7 @@
   - Simulation : 500 verres/jour × 10% gardés × 0,70€ consigne × 250 jours = **8 750€/an nets additionnels**
   - Zéro casse, verres brandés CHR (pas des brasseurs)
 - **Commission membre :** 8 à 12% du CA Re-uz
-- **Page détaillée :** reuz-candidats.html
+- **Page détaillée :** reuz-consultant.html
 - **Groupe :** Service Direct
 
 #### ConvoK (aussi dans commerçants)
@@ -146,7 +146,7 @@
 - **Offre :** Ecocups réutilisables pour événements, lieux publics, stades, festivals
 - **Cible :** Organisateurs d'événements, lieux recevant du public
 - **Commission :** 8% du CA Re-uz
-- **Page détaillée :** reuz-candidats.html
+- **Page détaillée :** reuz-consultant.html
 - **Groupe :** Service Direct
 
 ---
@@ -209,7 +209,7 @@
 | `grandes-entreprises-mp.html` | Sous-page grandes entreprises |
 | `mp-formation.html` | Formation consultants membres |
 | `mp-decouverte.html` | Simulateur commercial |
-| `reuz-candidats.html` | Page Re-uz détaillée |
+| `reuz-consultant.html` | Page Re-uz détaillée |
 | `contrat-enseigne-mp.html` | Contrat enseigne (Art.6 : profil custom 3 500€, remplacement 1 500€) |
 | `contrat-membre-mp.html` | Contrat adhésion membre |
 
