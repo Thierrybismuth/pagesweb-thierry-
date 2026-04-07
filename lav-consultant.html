@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Les Artisans Verts — CEE · Consultant Multi-Potentiel</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#061a0a;--paper:#f2f7f3;--green:#1a5a2e;--green-light:#2a8a48;--green-pale:#d0ecd8;--lime:#5a9a3a;--sand:#e0e8d8;--muted:#4a6050;--white:#fff;--gold:#c8913a;--blue:#1a3a7a;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.6;}
+.nav-retour{padding:14px 40px;background:var(--ink);display:flex;align-items:center;gap:12px;}
+.nav-retour a{font-size:.78rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.nav-retour a:hover{color:var(--lime);}
+.nav-retour a::before{content:'←';}
+.nav-sep{color:rgba(255,255,255,.2);}
+.nav-current{font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--lime);font-weight:500;}
+.hero{background:var(--green);color:var(--white);min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 48px;position:relative;overflow:hidden;}
+.hero::before{content:'🏭';position:absolute;right:60px;top:50%;transform:translateY(-50%);font-size:16rem;opacity:.05;line-height:1;}
+.hero-badge{display:inline-block;background:var(--lime);color:#fff;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px;border-radius:2px;margin-bottom:32px;}
+.hero-eyebrow{font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:18px;}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(36px,6vw,68px);line-height:1.1;max-width:820px;margin-bottom:24px;}
+.hero h1 em{font-style:italic;color:#a0d8b0;}
+.hero-sub{font-size:18px;font-weight:300;max-width:560px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:48px;}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap;}
+.stat-num{font-family:'DM Serif Display',serif;font-size:42px;color:#fff;line-height:1;}
+.stat-label{font-size:12px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-top:6px;}
+.bande{background:var(--lime);padding:0 40px;display:flex;align-items:stretch;}
+.bande-item{flex:1;padding:28px 24px;border-right:1px solid rgba(255,255,255,.2);display:flex;flex-direction:column;gap:4px;}
+.bande-item:last-child{border-right:none;}
+.bande-num{font-family:'DM Serif Display',serif;font-size:2rem;color:#fff;line-height:1;}
+.bande-label{font-size:.75rem;color:rgba(255,255,255,.9);letter-spacing:.05em;line-height:1.4;}
+section{padding:88px 48px;max-width:1100px;margin:0 auto;}
+.section-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green-light);margin-bottom:16px;}
+h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,46px);line-height:1.15;margin-bottom:24px;max-width:700px;}
+.lead{font-size:18px;font-weight:300;color:var(--muted);max-width:620px;line-height:1.75;margin-bottom:48px;}
+.divider{border:none;border-top:1px solid #c0d8c8;margin:0;}
+.produits-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px;}
+.produit-card{background:var(--green);color:#fff;padding:36px 32px;border-radius:4px;}
+.produit-card h3{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-bottom:12px;}
+.produit-card p{font-size:.9rem;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:16px;}
+.produit-badge{display:inline-block;background:var(--lime);color:#fff;font-size:.75rem;font-weight:600;padding:4px 12px;letter-spacing:.08em;}
+.cee-box{background:var(--blue);color:#fff;padding:28px 32px;margin-top:32px;border-left:4px solid var(--lime);}
+.cee-box h3{font-family:'DM Serif Display',serif;font-size:1.1rem;margin-bottom:8px;}
+.cee-box p{font-size:.88rem;color:rgba(255,255,255,.8);line-height:1.7;}
+.timeline{display:flex;flex-direction:column;}
+.tl-item{display:grid;grid-template-columns:56px 1fr;position:relative;}
+.tl-item::before{content:'';position:absolute;left:27px;top:56px;bottom:0;width:2px;background:#c0d8c8;}
+.tl-item:last-child::before{display:none;}
+.tl-dot{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;position:relative;z-index:1;margin-bottom:24px;}
+.tl-item:nth-child(1) .tl-dot{background:var(--green-light);}
+.tl-item:nth-child(2) .tl-dot{background:var(--blue);}
+.tl-item:nth-child(3) .tl-dot{background:var(--lime);}
+.tl-item:nth-child(4) .tl-dot{background:var(--green);}
+.tl-item:nth-child(5) .tl-dot{background:var(--gold);}
+.tl-body{padding:8px 0 32px 24px;}
+.tl-step{font-size:9px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.tl-title{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--ink);margin-bottom:8px;}
+.tl-text{font-size:.9rem;color:var(--muted);line-height:1.7;max-width:540px;}
+.tl-tip{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:.8rem;color:var(--green);font-weight:500;background:var(--green-pale);padding:5px 12px;}
+.commission{padding:88px 48px;background:var(--ink);color:#fff;max-width:100%;}
+.commission-inner{max-width:1100px;margin:0 auto;}
+.commission h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,46px);color:#fff;margin-bottom:40px;line-height:1.2;}
+.commission h2 em{font-style:italic;color:var(--lime);}
+.commission-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:36px;}
+.comm-bloc{background:rgba(255,255,255,.06);padding:32px 28px;border-top:3px solid transparent;}
+.comm-bloc:nth-child(1){border-color:var(--green-light);}
+.comm-bloc:nth-child(2){border-color:var(--lime);}
+.comm-num{font-family:'DM Serif Display',serif;font-size:3.2rem;color:#fff;line-height:1;margin-bottom:8px;}
+.comm-num span{font-size:1.4rem;color:var(--lime);}
+.comm-label{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.6;}
+.comm-exemple{background:var(--green);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;}
+.comm-ex-tag{font-family:'DM Serif Display',serif;font-size:1.8rem;color:#fff;white-space:nowrap;}
+.comm-ex-text{font-size:.88rem;color:rgba(255,255,255,.85);line-height:1.6;}
+.atouts-section{background:var(--white);max-width:100%;padding:88px 48px;}
+.atouts-inner{max-width:1100px;margin:0 auto;}
+.atouts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;}
+.atout{background:#eef5f0;padding:28px 24px;border-top:3px solid transparent;}
+.atout:nth-child(1){border-color:var(--green);}
+.atout:nth-child(2){border-color:var(--lime);}
+.atout:nth-child(3){border-color:var(--blue);}
+.atout:nth-child(4){border-color:var(--gold);}
+.atout:nth-child(5){border-color:var(--green-light);}
+.atout:nth-child(6){border-color:var(--green);}
+.atout-icon{font-size:1.6rem;margin-bottom:12px;display:block;}
+.atout-title{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--ink);margin-bottom:6px;}
+.atout-text{font-size:.82rem;color:var(--muted);line-height:1.65;}
+.cta{padding:88px 48px;background:var(--green);text-align:center;}
+.cta h2{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3vw,2.6rem);color:#fff;margin-bottom:16px;line-height:1.15;}
+.cta p{font-size:1rem;color:rgba(255,255,255,.85);max-width:480px;margin:0 auto 36px;line-height:1.7;}
+.cta-btn{display:inline-block;background:#fff;color:var(--green);font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:16px 40px;text-decoration:none;margin-bottom:16px;}
+.cta-btn:hover{background:var(--lime);color:#fff;}
+.cta-tel{font-size:.85rem;color:rgba(255,255,255,.75);}
+.cta-tel a{color:#fff;text-decoration:underline;}
+.footer-mp{padding:20px 40px;background:var(--ink);display:flex;align-items:center;justify-content:space-between;}
+.footer-mp-logo{font-size:.85rem;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.1em;}
+.footer-mp-logo span{color:var(--lime);}
+.footer-mp-back{font-size:.78rem;color:rgba(255,255,255,.4);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;}
+.footer-mp-back:hover{color:var(--lime);}
+@media(max-width:768px){.hero,.commission,.atouts-section,.cta{padding:60px 24px;}section{padding:60px 24px;}.bande{flex-wrap:wrap;}.bande-item{min-width:50%;}.atouts,.commission-grid,.produits-grid{grid-template-columns:1fr;}.comm-exemple{grid-template-columns:1fr;}.hero-stats{gap:28px;}}
+</style>
+</head>
+<body>
+<script>
+function sendHeight(){window.parent.postMessage({type:'setHeight',height:document.body.scrollHeight},'*');}
+window.addEventListener('load',sendHeight);window.addEventListener('resize',sendHeight);
+</script>
+<nav class="nav-retour">
+  <a href="multipotentiel.html" target="_top">Réseau Multi-Potentiel</a>
+  <span class="nav-sep">/</span>
+  <span class="nav-current">Les Artisans Verts — CEE</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">Partenaire Énergie · Grandes Entreprises</div>
+  <div class="hero-eyebrow">920 000 bâtiments assujettis au Décret Tertiaire</div>
+  <h1>Les travaux sont obligatoires.<br>Le client ne paie rien.<br><em>Vous touchez 7%.</em></h1>
+  <p class="hero-sub">Les Artisans Verts financent à 100% la rénovation énergétique des bâtiments tertiaires via les Certificats d'Économies d'Énergie (CEE). Votre rôle : identifier les bâtiments éligibles et faire signer le devis gratuit.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">7%</span><span class="stat-label">Votre commission</span></div>
+    <div class="stat"><span class="stat-num">0€</span><span class="stat-label">Pour le client</span></div>
+    <div class="stat"><span class="stat-num">8 ans</span><span class="stat-label">D'expérience LAV</span></div>
+    <div class="stat"><span class="stat-num">920 000</span><span class="stat-label">Locaux éligibles FR</span></div>
+  </div>
+</section>
+
+<div class="bande">
+  <div class="bande-item"><div class="bande-num">7%</div><div class="bande-label">Du CA chantier — financé par les fournisseurs d'énergie (pollueurs)</div></div>
+  <div class="bande-item"><div class="bande-num">2,8k€</div><div class="bande-label">Sur un chantier de 40 000€ — 1 entrepôt de taille moyenne</div></div>
+  <div class="bande-item"><div class="bande-num">11k€</div><div class="bande-label">Sur 4 chantiers/mois — objectif réaliste dès le 3e mois (après vote P6)</div></div>
+  <div class="bande-item"><div class="bande-num">30 min</div><div class="bande-label">Pour un relevé d'éligibilité — votre principale action terrain</div></div>
+</div>
+
+<section>
+  <div class="section-label">Le mécanisme CEE</div>
+  <h2>Les pollueurs financent<br>la rénovation. Le client paie 0€.</h2>
+  <p class="lead">Depuis 2005, les fournisseurs d'énergie (EDF, Engie...) sont obligés par la loi de financer des économies d'énergie. Sinon : pénalités. Résultat : ils paient les travaux. Le client ne débourse rien.</p>
+
+  <div class="cee-box">
+    <h3>📋 Le Décret Tertiaire oblige tous les propriétaires à agir</h3>
+    <p>Réduction de 40% de la consommation d'ici 2030, -50% d'ici 2040, -60% d'ici 2050. Tous les bâtiments tertiaires de plus de 1 000 m² sont concernés : usines, entrepôts, bureaux, commerces, hôtels, restaurants, écoles, hôpitaux.</p>
+  </div>
+
+  <div class="produits-grid" style="margin-top:48px">
+    <div class="produit-card">
+      <h3>💡 LEDs Intérieur</h3>
+      <p>Remplacement des éclairages existants par des LEDs avec détecteurs de présence. Confort incomparable, économies immédiates sur la facture.</p>
+      <div class="produit-badge">Entre 20 et 40k€ · 100% financé</div>
+    </div>
+    <div class="produit-card">
+      <h3>🌀 Destratificateurs d'air</h3>
+      <p>Fixés en hauteur, ils renvoient l'air chaud au sol. 20 à 30% d'économies sur le chauffage. Effet visible dès le premier mois.</p>
+      <div class="produit-badge">Entre 20 et 40k€ · 100% financé</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section style="padding-top:0">
+  <div class="section-label">Votre rôle terrain</div>
+  <h2>Vous identifiez.<br>LAV audite, installe, encaisse.</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">🚶</div>
+      <div class="tl-body">
+        <div class="tl-step">Étape 1</div>
+        <div class="tl-title">Prospection terrain</div>
+        <div class="tl-text">Vous visitez des bâtiments tertiaires — entrepôts, zones industrielles, commerces de grande surface, bâtiments communaux. Sans rendez-vous. 8 visites en 4h de terrain.</div>
+        <div class="tl-tip">« Je viens faire un relevé d'informations pour voir si vous êtes éligible à des travaux financés intégralement par les pollueurs. »</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">📋</div>
+      <div class="tl-body">
+        <div class="tl-step">Étape 2</div>
+        <div class="tl-title">Relevé d'éligibilité (30 min)</div>
+        <div class="tl-text">Vous remplissez un formulaire simple sur place : type de local, surface, hauteur, nombre de luminaires, système de chauffage. LAV vous a formé à faire ça en 30 minutes.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🔍</div>
+      <div class="tl-body">
+        <div class="tl-step">Étape 3</div>
+        <div class="tl-title">LAV audite et produit le devis sous 72h</div>
+        <div class="tl-text">LAV analyse vos informations, produit un devis gratuit à 0€ pour le client dans les 72h. Vous n'intervenez pas dans cette phase technique.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">✍️</div>
+      <div class="tl-body">
+        <div class="tl-step">Étape 4</div>
+        <div class="tl-title">Vous revenez faire signer</div>
+        <div class="tl-text">Vous présentez le devis à 0€ au dirigeant. La décision est simple pour lui : des économies immédiates, aucun investissement, installation sous 15 jours.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">💰</div>
+      <div class="tl-body">
+        <div class="tl-step">Étape 5</div>
+        <div class="tl-title">LAV installe · Vous touchez 7%</div>
+        <div class="tl-text">LAV réalise les travaux sous 15 jours. Dès encaissement, vous recevez 7% du CA. Avances possibles sur les gros chantiers. Pendant ce temps, vous prospectez d'autres bâtiments.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="commission">
+  <div class="commission-inner">
+    <div class="section-label" style="color:var(--lime)">Ce que ça représente</div>
+    <h2>7% du CA chantier.<br><em>Dès le 3e mois, 4 chantiers.</em></h2>
+    <div class="commission-grid">
+      <div class="comm-bloc">
+        <div class="comm-num">2 800<span>€</span></div>
+        <div class="comm-label">Sur un chantier de 40 000€ (entrepôt standard 10 000 m²)</div>
+      </div>
+      <div class="comm-bloc">
+        <div class="comm-num">11 200<span>€</span></div>
+        <div class="comm-label">Sur 4 chantiers par mois — objectif réaliste au 3e mois d'activité</div>
+      </div>
+    </div>
+    <div class="comm-exemple">
+      <div class="comm-ex-tag">Après vote P6</div>
+      <div class="comm-ex-text">
+        La nouvelle fiche rénovation globale tertiaire est en cours de vote. Le même chantier passera de <strong style="color:#fff">70 000€ à 280 000€</strong> de valeur estimée — multipliant vos commissions par 4.<br>
+        <span style="opacity:.7">8 ans d'expérience LAV · RGE Qualibat · Partenaire Économies d'Énergie d'EDF · Accréditation COFRAC</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="atouts-section">
+  <div class="atouts-inner">
+    <div class="section-label">Pourquoi Les Artisans Verts</div>
+    <h2>Un mécanisme d'État inscrit<br>dans une trajectoire longue.</h2>
+    <div class="atouts">
+      <div class="atout"><span class="atout-icon">📜</span><div class="atout-title">Obligation légale durable</div><div class="atout-text">Le dispositif CEE existe depuis 2005. La 6e période court jusqu'en 2030. Ce n'est pas une subvention ponctuelle — c'est un mécanisme réglementaire permanent.</div></div>
+      <div class="atout"><span class="atout-icon">🏗️</span><div class="atout-title">920 000 locaux éligibles</div><div class="atout-text">920 000 bâtiments tertiaires identifiés en France, assujettis au Décret Tertiaire. Un gisement gigantesque encore largement inexploré.</div></div>
+      <div class="atout"><span class="atout-icon">🔧</span><div class="atout-title">Vous ne faites pas les travaux</div><div class="atout-text">Pas d'études, pas de devis, pas de chantier, pas de facturation. LAV gère tout le volet technique. Vous faites du commercial terrain, point.</div></div>
+      <div class="atout"><span class="atout-icon">🤝</span><div class="atout-title">LAV : 8 ans, COFRAC, EDF</div><div class="atout-text">LAV est Qualibat RGE, partenaire Économies d'Énergie d'EDF, accrédité COFRAC. Une structure complète avec équipes d'installation partout en France.</div></div>
+      <div class="atout"><span class="atout-icon">📈</span><div class="atout-title">Revenu scalable par territoire</div><div class="atout-text">Votre zone exclusive grandit avec vous. À 12 mois, 80% de vos chantiers viennent de recommandations de clients satisfaits.</div></div>
+      <div class="atout"><span class="atout-icon">🚀</span><div class="atout-title">Pack démarrage fourni</div><div class="atout-text">Formation initiale, accompagnement terrain, matériel de démo, base de prospection, présence sur le site web LAV. Tout est inclus.</div></div>
+    </div>
+  </div>
+</div>
+
+<section class="cta">
+  <h2>LAV correspond à votre profil ?</h2>
+  <p>Vous aimez le terrain et les entreprises ? Parlons 20 minutes pour valider votre zone géographique.</p>
+  <a href="tel:0610703090" class="cta-btn" target="_top">Parler à Thierry</a>
+  <div class="cta-tel">ou <a href="mailto:thierry@thierrybismuth.com">thierry@thierrybismuth.com</a></div>
+</section>
+
+<div class="footer-mp">
+  <div class="footer-mp-logo">MULTI-<span>POTENTIEL</span> · ODYSKILLS</div>
+  <a href="multipotentiel.html" class="footer-mp-back" target="_top">← Voir tous les partenaires</a>
+</div>
+</body>
+</html>
