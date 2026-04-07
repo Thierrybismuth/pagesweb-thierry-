@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Réunion d'information entrepreneuriat</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; font-family: 'Outfit', sans-serif; color: #fff; overflow-x: hidden; }
+
+  /* Header */
+  .header {
+    background: #1e3d52;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .header h1 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .slide-counter {
+    font-size: 0.85rem;
+    color: #7ab5a8;
+    font-weight: 500;
+  }
+
+  /* Slideshow container */
+  .slideshow {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 16px 16px;
+  }
+
+  /* Slide */
+  .slide {
+    display: none;
+    animation: fadeIn 0.25s ease;
+  }
+  .slide.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  .slide img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+
+  /* Navigation */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 20px 16px 24px;
+  }
+  .nav-btn {
+    background: #c8733a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    min-width: 120px;
+  }
+  .nav-btn:hover { background: #e87848; }
+  .nav-btn:active { transform: scale(0.97); }
+  .nav-btn:disabled { background: #444; cursor: default; }
+
+  /* Progress bar */
+  .progress-bar {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #c8733a;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  /* Thumbnails strip */
+  .thumbnails {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 12px 16px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    scrollbar-width: thin;
+    scrollbar-color: #c8733a #222;
+  }
+  .thumbnails::-webkit-scrollbar { height: 4px; }
+  .thumbnails::-webkit-scrollbar-track { background: #222; }
+  .thumbnails::-webkit-scrollbar-thumb { background: #c8733a; border-radius: 2px; }
+
+  .thumb {
+    flex-shrink: 0;
+    width: 100px;
+    cursor: pointer;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: border-color 0.2s, transform 0.15s;
+    opacity: 0.6;
+  }
+  .thumb:hover { opacity: 1; transform: scale(1.05); }
+  .thumb.active { border-color: #c8733a; opacity: 1; }
+  .thumb img { width: 100%; height: auto; display: block; }
+
+  /* Keyboard hint */
+  .hint {
+    text-align: center;
+    color: #555;
+    font-size: 0.75rem;
+    padding-bottom: 20px;
+  }
+
+  /* Fullscreen */
+  .fullscreen-btn {
+    background: transparent;
+    border: 1px solid #3a5f7a;
+    color: #7ab5a8;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .fullscreen-btn:hover { background: #1e3d52; }
+
+  /* sendHeight for Wix */
+  @media (max-width: 768px) {
+    .nav-btn { padding: 10px 18px; font-size: 0.9rem; min-width: 90px; }
+    .thumb { width: 70px; }
+    .header h1 { font-size: 0.85rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Réunion d'information entrepreneuriat</h1>
+  <div class="header-right">
+    <span class="slide-counter" id="counter">1 / 61</span>
+    <button class="fullscreen-btn" onclick="toggleFullscreen()">⛶ Plein écran</button>
+  </div>
+</div>
+
+<div class="progress-bar">
+  <div class="progress-fill" id="progress" style="width:1.6%"></div>
+</div>
+
+<div class="slideshow" id="slideshow">
+  <div class="slide active" data-index="0">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_01.jpg" alt="Slide 1" loading="eager">
+  </div>
+  <div class="slide " data-index="1">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_02.jpg" alt="Slide 2" loading="eager">
+  </div>
+  <div class="slide " data-index="2">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_03.jpg" alt="Slide 3" loading="eager">
+  </div>
+  <div class="slide " data-index="3">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_04.jpg" alt="Slide 4" loading="lazy">
+  </div>
+  <div class="slide " data-index="4">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_05.jpg" alt="Slide 5" loading="lazy">
+  </div>
+  <div class="slide " data-index="5">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_06.jpg" alt="Slide 6" loading="lazy">
+  </div>
+  <div class="slide " data-index="6">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_07.jpg" alt="Slide 7" loading="lazy">
+  </div>
+  <div class="slide " data-index="7">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_08.jpg" alt="Slide 8" loading="lazy">
+  </div>
+  <div class="slide " data-index="8">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_09.jpg" alt="Slide 9" loading="lazy">
+  </div>
+  <div class="slide " data-index="9">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_10.jpg" alt="Slide 10" loading="lazy">
+  </div>
+  <div class="slide " data-index="10">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_11.jpg" alt="Slide 11" loading="lazy">
+  </div>
+  <div class="slide " data-index="11">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_12.jpg" alt="Slide 12" loading="lazy">
+  </div>
+  <div class="slide " data-index="12">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_13.jpg" alt="Slide 13" loading="lazy">
+  </div>
+  <div class="slide " data-index="13">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_14.jpg" alt="Slide 14" loading="lazy">
+  </div>
+  <div class="slide " data-index="14">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_15.jpg" alt="Slide 15" loading="lazy">
+  </div>
+  <div class="slide " data-index="15">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_16.jpg" alt="Slide 16" loading="lazy">
+  </div>
+  <div class="slide " data-index="16">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_17.jpg" alt="Slide 17" loading="lazy">
+  </div>
+  <div class="slide " data-index="17">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_18.jpg" alt="Slide 18" loading="lazy">
+  </div>
+  <div class="slide " data-index="18">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_19.jpg" alt="Slide 19" loading="lazy">
+  </div>
+  <div class="slide " data-index="19">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_20.jpg" alt="Slide 20" loading="lazy">
+  </div>
+  <div class="slide " data-index="20">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_21.jpg" alt="Slide 21" loading="lazy">
+  </div>
+  <div class="slide " data-index="21">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_22.jpg" alt="Slide 22" loading="lazy">
+  </div>
+  <div class="slide " data-index="22">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_23.jpg" alt="Slide 23" loading="lazy">
+  </div>
+  <div class="slide " data-index="23">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_24.jpg" alt="Slide 24" loading="lazy">
+  </div>
+  <div class="slide " data-index="24">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_25.jpg" alt="Slide 25" loading="lazy">
+  </div>
+  <div class="slide " data-index="25">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_26.jpg" alt="Slide 26" loading="lazy">
+  </div>
+  <div class="slide " data-index="26">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_27.jpg" alt="Slide 27" loading="lazy">
+  </div>
+  <div class="slide " data-index="27">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_28.jpg" alt="Slide 28" loading="lazy">
+  </div>
+  <div class="slide " data-index="28">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_29.jpg" alt="Slide 29" loading="lazy">
+  </div>
+  <div class="slide " data-index="29">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_30.jpg" alt="Slide 30" loading="lazy">
+  </div>
+  <div class="slide " data-index="30">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_31.jpg" alt="Slide 31" loading="lazy">
+  </div>
+  <div class="slide " data-index="31">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_32.jpg" alt="Slide 32" loading="lazy">
+  </div>
+  <div class="slide " data-index="32">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_33.jpg" alt="Slide 33" loading="lazy">
+  </div>
+  <div class="slide " data-index="33">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_34.jpg" alt="Slide 34" loading="lazy">
+  </div>
+  <div class="slide " data-index="34">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_35.jpg" alt="Slide 35" loading="lazy">
+  </div>
+  <div class="slide " data-index="35">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_36.jpg" alt="Slide 36" loading="lazy">
+  </div>
+  <div class="slide " data-index="36">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_37.jpg" alt="Slide 37" loading="lazy">
+  </div>
+  <div class="slide " data-index="37">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_38.jpg" alt="Slide 38" loading="lazy">
+  </div>
+  <div class="slide " data-index="38">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_40.jpg" alt="Slide 39" loading="lazy">
+  </div>
+  <div class="slide " data-index="39">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_41.jpg" alt="Slide 40" loading="lazy">
+  </div>
+  <div class="slide " data-index="40">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_42.jpg" alt="Slide 41" loading="lazy">
+  </div>
+  <div class="slide " data-index="41">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_43.jpg" alt="Slide 42" loading="lazy">
+  </div>
+  <div class="slide " data-index="42">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_44.jpg" alt="Slide 43" loading="lazy">
+  </div>
+  <div class="slide " data-index="43">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_45.jpg" alt="Slide 44" loading="lazy">
+  </div>
+  <div class="slide " data-index="44">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_46.jpg" alt="Slide 45" loading="lazy">
+  </div>
+  <div class="slide " data-index="45">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_47.jpg" alt="Slide 46" loading="lazy">
+  </div>
+  <div class="slide " data-index="46">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_50.jpg" alt="Slide 47" loading="lazy">
+  </div>
+  <div class="slide " data-index="47">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_51.jpg" alt="Slide 48" loading="lazy">
+  </div>
+  <div class="slide " data-index="48">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_52.jpg" alt="Slide 49" loading="lazy">
+  </div>
+  <div class="slide " data-index="49">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_53.jpg" alt="Slide 50" loading="lazy">
+  </div>
+  <div class="slide " data-index="50">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_54.jpg" alt="Slide 51" loading="lazy">
+  </div>
+  <div class="slide " data-index="51">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_55.jpg" alt="Slide 52" loading="lazy">
+  </div>
+  <div class="slide " data-index="52">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_56.jpg" alt="Slide 53" loading="lazy">
+  </div>
+  <div class="slide " data-index="53">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_57.jpg" alt="Slide 54" loading="lazy">
+  </div>
+  <div class="slide " data-index="54">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_58.jpg" alt="Slide 55" loading="lazy">
+  </div>
+  <div class="slide " data-index="55">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_59.jpg" alt="Slide 56" loading="lazy">
+  </div>
+  <div class="slide " data-index="56">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_60.jpg" alt="Slide 57" loading="lazy">
+  </div>
+  <div class="slide " data-index="57">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_61.jpg" alt="Slide 58" loading="lazy">
+  </div>
+  <div class="slide " data-index="58">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_62.jpg" alt="Slide 59" loading="lazy">
+  </div>
+  <div class="slide " data-index="59">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_63.jpg" alt="Slide 60" loading="lazy">
+  </div>
+  <div class="slide " data-index="60">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_64.jpg" alt="Slide 61" loading="lazy">
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>← Précédent</button>
+  <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+</div>
+
+<div class="thumbnails" id="thumbnails">
+  <div class="thumb active" onclick="goToSlide(0)" id="thumb-0">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_01.jpg" alt="Slide 1" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(1)" id="thumb-1">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_02.jpg" alt="Slide 2" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(2)" id="thumb-2">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_03.jpg" alt="Slide 3" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(3)" id="thumb-3">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_04.jpg" alt="Slide 4" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(4)" id="thumb-4">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_05.jpg" alt="Slide 5" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(5)" id="thumb-5">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_06.jpg" alt="Slide 6" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(6)" id="thumb-6">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_07.jpg" alt="Slide 7" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(7)" id="thumb-7">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_08.jpg" alt="Slide 8" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(8)" id="thumb-8">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_09.jpg" alt="Slide 9" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(9)" id="thumb-9">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_10.jpg" alt="Slide 10" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(10)" id="thumb-10">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_11.jpg" alt="Slide 11" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(11)" id="thumb-11">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_12.jpg" alt="Slide 12" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(12)" id="thumb-12">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_13.jpg" alt="Slide 13" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(13)" id="thumb-13">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_14.jpg" alt="Slide 14" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(14)" id="thumb-14">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_15.jpg" alt="Slide 15" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(15)" id="thumb-15">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_16.jpg" alt="Slide 16" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(16)" id="thumb-16">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_17.jpg" alt="Slide 17" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(17)" id="thumb-17">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_18.jpg" alt="Slide 18" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(18)" id="thumb-18">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_19.jpg" alt="Slide 19" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(19)" id="thumb-19">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_20.jpg" alt="Slide 20" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(20)" id="thumb-20">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_21.jpg" alt="Slide 21" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(21)" id="thumb-21">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_22.jpg" alt="Slide 22" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(22)" id="thumb-22">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_23.jpg" alt="Slide 23" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(23)" id="thumb-23">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_24.jpg" alt="Slide 24" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(24)" id="thumb-24">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_25.jpg" alt="Slide 25" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(25)" id="thumb-25">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_26.jpg" alt="Slide 26" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(26)" id="thumb-26">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_27.jpg" alt="Slide 27" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(27)" id="thumb-27">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_28.jpg" alt="Slide 28" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(28)" id="thumb-28">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_29.jpg" alt="Slide 29" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(29)" id="thumb-29">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_30.jpg" alt="Slide 30" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(30)" id="thumb-30">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_31.jpg" alt="Slide 31" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(31)" id="thumb-31">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_32.jpg" alt="Slide 32" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(32)" id="thumb-32">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_33.jpg" alt="Slide 33" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(33)" id="thumb-33">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_34.jpg" alt="Slide 34" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(34)" id="thumb-34">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_35.jpg" alt="Slide 35" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(35)" id="thumb-35">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_36.jpg" alt="Slide 36" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(36)" id="thumb-36">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_37.jpg" alt="Slide 37" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(37)" id="thumb-37">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_38.jpg" alt="Slide 38" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(38)" id="thumb-38">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_40.jpg" alt="Slide 39" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(39)" id="thumb-39">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_41.jpg" alt="Slide 40" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(40)" id="thumb-40">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_42.jpg" alt="Slide 41" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(41)" id="thumb-41">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_43.jpg" alt="Slide 42" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(42)" id="thumb-42">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_44.jpg" alt="Slide 43" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(43)" id="thumb-43">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_45.jpg" alt="Slide 44" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(44)" id="thumb-44">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_46.jpg" alt="Slide 45" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(45)" id="thumb-45">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_47.jpg" alt="Slide 46" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(46)" id="thumb-46">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_50.jpg" alt="Slide 47" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(47)" id="thumb-47">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_51.jpg" alt="Slide 48" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(48)" id="thumb-48">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_52.jpg" alt="Slide 49" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(49)" id="thumb-49">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_53.jpg" alt="Slide 50" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(50)" id="thumb-50">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_54.jpg" alt="Slide 51" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(51)" id="thumb-51">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_55.jpg" alt="Slide 52" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(52)" id="thumb-52">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_56.jpg" alt="Slide 53" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(53)" id="thumb-53">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_57.jpg" alt="Slide 54" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(54)" id="thumb-54">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_58.jpg" alt="Slide 55" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(55)" id="thumb-55">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_59.jpg" alt="Slide 56" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(56)" id="thumb-56">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_60.jpg" alt="Slide 57" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(57)" id="thumb-57">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_61.jpg" alt="Slide 58" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(58)" id="thumb-58">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_62.jpg" alt="Slide 59" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(59)" id="thumb-59">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_63.jpg" alt="Slide 60" loading="lazy">
+  </div>
+  <div class="thumb " onclick="goToSlide(60)" id="thumb-60">
+    <img src="https://thierrybismuth.github.io/pagesweb-thierry-/slides-reunion/slide_64.jpg" alt="Slide 61" loading="lazy">
+  </div>
+</div>
+
+<p class="hint">← → Touches clavier pour naviguer</p>
+
+<script>
+  const TOTAL = 61;
+  let current = 0;
+
+  function updateUI() {
+    document.querySelectorAll('.slide').forEach((s, i) => s.classList.toggle('active', i === current));
+    document.querySelectorAll('.thumb').forEach((t, i) => {
+      t.classList.toggle('active', i === current);
+      if (i === current) t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    });
+    document.getElementById('counter').textContent = `${current + 1} / ${TOTAL}`;
+    document.getElementById('progress').style.width = `${((current + 1) / TOTAL) * 100}%`;
+    document.getElementById('prevBtn').disabled = current === 0;
+    document.getElementById('nextBtn').disabled = current === TOTAL - 1;
+    sendHeight();
+  }
+
+  function changeSlide(dir) {
+    current = Math.max(0, Math.min(TOTAL - 1, current + dir));
+    updateUI();
+  }
+
+  function goToSlide(idx) {
+    current = idx;
+    updateUI();
+    document.getElementById('slideshow').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+  });
+
+  // Touch/swipe support
+  let touchX = null;
+  document.getElementById('slideshow').addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+  document.getElementById('slideshow').addEventListener('touchend', e => {
+    if (!touchX) return;
+    const diff = touchX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) changeSlide(diff > 0 ? 1 : -1);
+    touchX = null;
+  });
+
+  function sendHeight() {
+    const h = document.body.scrollHeight;
+    window.parent.postMessage({ type: 'iframeHeight', height: h }, '*');
+  }
+
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  }
+
+  window.addEventListener('resize', sendHeight);
+  sendHeight();
+</script>
+</body>
+</html>
