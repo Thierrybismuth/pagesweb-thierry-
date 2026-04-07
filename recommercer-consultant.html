@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReCOmmerCer — Reconversion Commerce · Consultant Multi-Potentiel</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a1a10;--paper:#f3f7f4;--green:#1a5c3a;--green-light:#2a8a58;--green-pale:#d4ead8;--teal:#1a6a5a;--sand:#e0dcc8;--muted:#5a7060;--white:#fff;--gold:#c8913a;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.6;}
+.nav-retour{padding:14px 40px;background:var(--green);display:flex;align-items:center;gap:12px;}
+.nav-retour a{font-size:.78rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.nav-retour a:hover{color:var(--gold);}
+.nav-retour a::before{content:'←';}
+.nav-sep{color:rgba(255,255,255,.2);}
+.nav-current{font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:500;}
+.hero{background:var(--green);color:var(--white);min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 48px;position:relative;overflow:hidden;}
+.hero::before{content:'🏪';position:absolute;right:60px;top:50%;transform:translateY(-50%);font-size:16rem;opacity:.06;line-height:1;}
+.hero-badge{display:inline-block;background:var(--gold);color:#fff;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px;border-radius:2px;margin-bottom:32px;}
+.hero-eyebrow{font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:18px;}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(36px,6vw,68px);line-height:1.1;max-width:820px;margin-bottom:24px;}
+.hero h1 em{font-style:italic;color:#a8d8b8;}
+.hero-sub{font-size:18px;font-weight:300;max-width:560px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:48px;}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap;}
+.stat-num{font-family:'DM Serif Display',serif;font-size:42px;color:#fff;line-height:1;}
+.stat-label{font-size:12px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-top:6px;}
+.bande{background:var(--gold);padding:0 40px;display:flex;align-items:stretch;}
+.bande-item{flex:1;padding:28px 24px;border-right:1px solid rgba(255,255,255,.2);display:flex;flex-direction:column;gap:4px;}
+.bande-item:last-child{border-right:none;}
+.bande-num{font-family:'DM Serif Display',serif;font-size:2rem;color:#fff;line-height:1;}
+.bande-label{font-size:.75rem;color:rgba(255,255,255,.85);letter-spacing:.05em;line-height:1.4;}
+section{padding:88px 48px;max-width:1100px;margin:0 auto;}
+.section-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green-light);margin-bottom:16px;}
+h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,46px);line-height:1.15;margin-bottom:24px;max-width:700px;}
+.lead{font-size:18px;font-weight:300;color:var(--muted);max-width:620px;line-height:1.75;margin-bottom:48px;}
+.divider{border:none;border-top:1px solid #c8d8c0;margin:0;}
+.timeline{display:flex;flex-direction:column;}
+.tl-item{display:grid;grid-template-columns:56px 1fr;position:relative;}
+.tl-item::before{content:'';position:absolute;left:27px;top:56px;bottom:0;width:2px;background:#d0e0d0;}
+.tl-item:last-child::before{display:none;}
+.tl-dot{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;position:relative;z-index:1;margin-bottom:24px;}
+.tl-item:nth-child(1) .tl-dot{background:var(--green-light);}
+.tl-item:nth-child(2) .tl-dot{background:var(--gold);}
+.tl-item:nth-child(3) .tl-dot{background:var(--teal);}
+.tl-item:nth-child(4) .tl-dot{background:#2a6a9a;}
+.tl-item:nth-child(5) .tl-dot{background:var(--green);}
+.tl-body{padding:8px 0 32px 24px;}
+.tl-step{font-size:9px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.tl-title{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--ink);margin-bottom:8px;}
+.tl-text{font-size:.9rem;color:var(--muted);line-height:1.7;max-width:540px;}
+.tl-tip{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:.8rem;color:var(--green);font-weight:500;background:var(--green-pale);padding:5px 12px;}
+.enseignes-box{background:var(--green-pale);border-left:4px solid var(--green-light);padding:24px 28px;margin-top:32px;border-radius:2px;}
+.enseignes-box strong{color:var(--green);font-weight:600;}
+.enseignes-box p{font-size:.9rem;color:var(--muted);line-height:1.7;margin-top:8px;}
+.commission{padding:88px 48px;background:var(--green);color:#fff;max-width:100%;}
+.commission-inner{max-width:1100px;margin:0 auto;}
+.commission h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,46px);color:#fff;margin-bottom:40px;line-height:1.2;}
+.commission h2 em{font-style:italic;color:var(--gold);}
+.commission-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:36px;}
+.comm-bloc{background:rgba(255,255,255,.08);padding:32px 28px;border-top:3px solid transparent;}
+.comm-bloc:nth-child(1){border-color:var(--green-pale);}
+.comm-bloc:nth-child(2){border-color:var(--gold);}
+.comm-num{font-family:'DM Serif Display',serif;font-size:3.2rem;color:#fff;line-height:1;margin-bottom:8px;}
+.comm-num span{font-size:1.4rem;color:var(--gold);}
+.comm-label{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.6;}
+.comm-exemple{background:var(--gold);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;}
+.comm-ex-tag{font-family:'DM Serif Display',serif;font-size:1.8rem;color:#fff;white-space:nowrap;}
+.comm-ex-text{font-size:.88rem;color:rgba(255,255,255,.85);line-height:1.6;}
+.atouts-section{background:var(--white);max-width:100%;padding:88px 48px;}
+.atouts-inner{max-width:1100px;margin:0 auto;}
+.atouts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;}
+.atout{background:#f0f5f0;padding:28px 24px;border-top:3px solid transparent;}
+.atout:nth-child(1){border-color:var(--green);}
+.atout:nth-child(2){border-color:var(--gold);}
+.atout:nth-child(3){border-color:var(--teal);}
+.atout:nth-child(4){border-color:var(--green-light);}
+.atout:nth-child(5){border-color:var(--gold);}
+.atout:nth-child(6){border-color:var(--green);}
+.atout-icon{font-size:1.6rem;margin-bottom:12px;display:block;}
+.atout-title{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--ink);margin-bottom:6px;}
+.atout-text{font-size:.82rem;color:var(--muted);line-height:1.65;}
+.cta{padding:88px 48px;background:var(--green);text-align:center;}
+.cta h2{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3vw,2.6rem);color:#fff;margin-bottom:16px;line-height:1.15;}
+.cta p{font-size:1rem;color:rgba(255,255,255,.85);max-width:480px;margin:0 auto 36px;line-height:1.7;}
+.cta-btn{display:inline-block;background:#fff;color:var(--green);font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:16px 40px;text-decoration:none;margin-bottom:16px;}
+.cta-btn:hover{background:var(--gold);color:#fff;}
+.cta-tel{font-size:.85rem;color:rgba(255,255,255,.75);}
+.cta-tel a{color:#fff;text-decoration:underline;}
+.footer-mp{padding:20px 40px;background:var(--ink);display:flex;align-items:center;justify-content:space-between;}
+.footer-mp-logo{font-size:.85rem;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.1em;}
+.footer-mp-logo span{color:var(--gold);}
+.footer-mp-back{font-size:.78rem;color:rgba(255,255,255,.4);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;}
+.footer-mp-back:hover{color:var(--gold);}
+@media(max-width:768px){.hero,.commission,.atouts-section,.cta{padding:60px 24px;}section{padding:60px 24px;}.bande{flex-wrap:wrap;}.bande-item{min-width:50%;}.atouts,.commission-grid{grid-template-columns:1fr;}.comm-exemple{grid-template-columns:1fr;}.hero-stats{gap:28px;}}
+</style>
+</head>
+<body>
+<script>
+function sendHeight(){window.parent.postMessage({type:'setHeight',height:document.body.scrollHeight},'*');}
+window.addEventListener('load',sendHeight);window.addEventListener('resize',sendHeight);
+</script>
+<nav class="nav-retour">
+  <a href="multipotentiel.html" target="_top">Réseau Multi-Potentiel</a>
+  <span class="nav-sep">/</span>
+  <span class="nav-current">ReCOmmerCer</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">Partenaire Reconversion · Commerçants</div>
+  <div class="hero-eyebrow">Votre commerçant cherche une sortie ou une évolution ?</div>
+  <h1>Son commerce décline.<br>Il ne sait pas<br><em>vers quoi pivoter.</em></h1>
+  <p class="hero-sub">ReCOmmerCer identifie pour lui la meilleure enseigne à rejoindre ou le meilleur concept à adopter — parmi 2 000 acteurs du commerce organisé. Vous faites la mise en relation. Vous touchez 12% du droit d'entrée.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">12%</span><span class="stat-label">Du droit d'entrée</span></div>
+    <div class="stat"><span class="stat-num">2 000</span><span class="stat-label">Enseignes contactables</span></div>
+    <div class="stat"><span class="stat-num">1 sem.</span><span class="stat-label">Retour avec propositions</span></div>
+    <div class="stat"><span class="stat-num">3 600€</span><span class="stat-label">Commission max</span></div>
+  </div>
+</section>
+
+<div class="bande">
+  <div class="bande-item"><div class="bande-num">12%</div><div class="bande-label">Du droit d'entrée enseigne, versé à la signature du contrat</div></div>
+  <div class="bande-item"><div class="bande-num">1 200€</div><div class="bande-label">Commission minimum sur un droit d'entrée de 10 000€</div></div>
+  <div class="bande-item"><div class="bande-num">3 600€</div><div class="bande-label">Commission maximum sur un droit d'entrée de 30 000€</div></div>
+  <div class="bande-item"><div class="bande-num">~2 000</div><div class="bande-label">Enseignes du commerce organisé que ReCOmmerCer peut solliciter</div></div>
+</div>
+
+<section>
+  <div class="section-label">Comment ça marche</div>
+  <h2>Un commerçant qui veut changer.<br>ReCOmmerCer lui trouve la voie.</h2>
+  <p class="lead">Votre rôle : identifier un commerçant dont l'activité décline, qui cherche à se reconvertir, ou qui veut diversifier. ReCOmmerCer fait le matching avec les meilleures enseignes disponibles sur sa zone.</p>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">🏪</div>
+      <div class="tl-body">
+        <div class="tl-step">Étape 1</div>
+        <div class="tl-title">Identifiez le commerçant concerné</div>
+        <div class="tl-text">Commerce en difficulté, commerçant qui parle de fermer, d'évoluer ou de changer d'activité. Un déjeuner de réseau, une conversation terrain — les signaux sont partout.</div>
+        <div class="tl-tip">« Et si on regardait ensemble ce qui existe comme enseigne sur votre zone, qui collerait à votre local ? »</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">📋</div>
+      <div class="tl-body">
+        <div class="tl-step">Étape 2</div>
+        <div class="tl-title">Recueil des contraintes</div>
+        <div class="tl-text">Vous collectez les informations clés : surface, localisation, secteur souhaité ou exclu, budget disponible, situation personnelle. ReCOmmerCer construit le profil de recherche.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🔍</div>
+      <div class="tl-body">
+        <div class="tl-step">Étape 3</div>
+        <div class="tl-title">ReCOmmerCer contacte les enseignes</div>
+        <div class="tl-text">Si une enseigne référencée correspond directement, elle est proposée en priorité. Sinon, ReCOmmerCer contacte les 2 000 acteurs du commerce organisé et revient sous une semaine avec 3 à 6 enseignes intéressées.</div>
+
+        <div class="enseignes-box">
+          <strong>Exemples d'enseignes référencées :</strong>
+          <p>Anacours (soutien scolaire), Hélène Doron (anglais enfants), Keller Williams (immobilier), Smart Duck, Skinial (détatouage)... et potentiellement 2 000 autres selon le profil du commerçant.</p>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🤝</div>
+      <div class="tl-body">
+        <div class="tl-step">Étape 4</div>
+        <div class="tl-title">L'enseigne prend le relais</div>
+        <div class="tl-text">L'enseigne choisie contacte directement le commerçant, l'accompagne dans la conversion et signe le contrat. Vous n'intervenez plus dans la négociation.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">💰</div>
+      <div class="tl-body">
+        <div class="tl-step">Étape 5</div>
+        <div class="tl-title">Commission à la signature</div>
+        <div class="tl-text">Dès que le contrat est signé entre le commerçant et l'enseigne, ReCOmmerCer vous verse 12% du droit d'entrée. Entre 1 200€ et 3 600€ selon l'enseigne.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<div class="commission">
+  <div class="commission-inner">
+    <div class="section-label" style="color:#a8d8b8">Ce que ça représente</div>
+    <h2>12% du droit d'entrée.<br><em>Versé à la signature.</em></h2>
+    <div class="commission-grid">
+      <div class="comm-bloc">
+        <div class="comm-num">1 200<span>€</span></div>
+        <div class="comm-label">Sur un droit d'entrée de 10 000€ HT — enseigne légère ou concept accessible</div>
+      </div>
+      <div class="comm-bloc">
+        <div class="comm-num">3 600<span>€</span></div>
+        <div class="comm-label">Sur un droit d'entrée de 30 000€ HT — réseau structuré avec forte marque</div>
+      </div>
+    </div>
+    <div class="comm-exemple">
+      <div class="comm-ex-tag">2 dossiers/mois</div>
+      <div class="comm-ex-text">
+        Deux reconversions signées par mois génèrent entre <strong style="color:#fff">2 400€ et 7 200€ de commissions</strong> selon les droits d'entrée.<br>
+        <span style="opacity:.7">Et chaque commerçant reconverti satisfait parle de vous à son réseau de commerçants.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="atouts-section">
+  <div class="atouts-inner">
+    <div class="section-label">Pourquoi ReCOmmerCer</div>
+    <h2>Le commerce de centre-ville se transforme.<br>Beaucoup cherchent une sortie.</h2>
+    <div class="atouts">
+      <div class="atout"><span class="atout-icon">🔄</span><div class="atout-title">2 000 enseignes à portée</div><div class="atout-text">ReCOmmerCer peut solliciter l'ensemble du commerce organisé français. Pour chaque profil, une solution existe quelque part.</div></div>
+      <div class="atout"><span class="atout-icon">⚡</span><div class="atout-title">Retour en 1 semaine</div><div class="atout-text">Une semaine pour identifier 3 à 6 enseignes intéressées. Un délai court qui montre la réactivité du service au commerçant.</div></div>
+      <div class="atout"><span class="atout-icon">🏪</span><div class="atout-title">Tous types de commerce</div><div class="atout-text">Immobilier indépendant, esthétique, alimentaire, services... Chaque profil a des enseignes correspondantes dans le réseau ReCOmmerCer.</div></div>
+      <div class="atout"><span class="atout-icon">💡</span><div class="atout-title">Service à forte valeur perçue</div><div class="atout-text">Vous aidez un commerçant à résoudre un vrai problème — son avenir professionnel. La valeur perçue est forte, la relation de confiance aussi.</div></div>
+      <div class="atout"><span class="atout-icon">🤝</span><div class="atout-title">L'enseigne gère la vente</div><div class="atout-text">Vous faites la mise en relation. C'est l'enseigne qui convainc et signe. Votre rôle commercial est limité à l'identification et à l'introduction.</div></div>
+      <div class="atout"><span class="atout-icon">📈</span><div class="atout-title">Marché structurel</div><div class="atout-text">La transformation du commerce de proximité est une tendance de fond. Les besoins de reconversion ne manqueront pas dans les prochaines années.</div></div>
+    </div>
+  </div>
+</div>
+
+<section class="cta">
+  <h2>ReCOmmerCer correspond à votre terrain ?</h2>
+  <p>Vous connaissez des commerçants en recherche d'évolution ? Parlons 20 minutes de votre réseau.</p>
+  <a href="tel:0610703090" class="cta-btn" target="_top">Parler à Thierry</a>
+  <div class="cta-tel">ou <a href="mailto:thierry@thierrybismuth.com">thierry@thierrybismuth.com</a></div>
+</section>
+
+<div class="footer-mp">
+  <div class="footer-mp-logo">MULTI-<span>POTENTIEL</span> · ODYSKILLS</div>
+  <a href="multipotentiel.html" class="footer-mp-back" target="_top">← Voir tous les partenaires</a>
+</div>
+</body>
+</html>
