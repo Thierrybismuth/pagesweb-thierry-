@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PerDus — Colis Perdus · Consultant Multi-Potentiel</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a0f00;--paper:#faf5ef;--orange:#c8500a;--orange-light:#e07030;--orange-pale:#fde8d8;--dark:#2a1500;--sand:#e8d8c0;--muted:#7a6550;--white:#fff;--yellow:#f5c842;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.6;}
+.nav-retour{padding:14px 40px;background:var(--dark);display:flex;align-items:center;gap:12px;}
+.nav-retour a{font-size:.78rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.nav-retour a:hover{color:var(--yellow);}
+.nav-retour a::before{content:'←';}
+.nav-sep{color:rgba(255,255,255,.2);}
+.nav-current{font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--yellow);font-weight:500;}
+.hero{background:var(--dark);color:var(--white);min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 48px;position:relative;overflow:hidden;}
+.hero::before{content:'📦';position:absolute;right:60px;top:50%;transform:translateY(-50%);font-size:18rem;opacity:.05;line-height:1;}
+.hero-badge{display:inline-block;background:var(--orange);color:#fff;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px;border-radius:2px;margin-bottom:32px;}
+.hero-eyebrow{font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:18px;}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(36px,6vw,68px);line-height:1.1;max-width:820px;margin-bottom:24px;}
+.hero h1 em{font-style:italic;color:var(--yellow);}
+.hero-sub{font-size:18px;font-weight:300;max-width:560px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:48px;}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap;}
+.stat-num{font-family:'DM Serif Display',serif;font-size:42px;color:#fff;line-height:1;}
+.stat-label{font-size:12px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-top:6px;}
+.bande{background:var(--orange);padding:0 40px;display:flex;align-items:stretch;}
+.bande-item{flex:1;padding:28px 24px;border-right:1px solid rgba(255,255,255,.2);display:flex;flex-direction:column;gap:4px;}
+.bande-item:last-child{border-right:none;}
+.bande-num{font-family:'DM Serif Display',serif;font-size:2rem;color:#fff;line-height:1;}
+.bande-label{font-size:.75rem;color:rgba(255,255,255,.85);letter-spacing:.05em;line-height:1.4;}
+section{padding:88px 48px;max-width:1100px;margin:0 auto;}
+.section-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;}
+h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,46px);line-height:1.15;margin-bottom:24px;max-width:700px;}
+.lead{font-size:18px;font-weight:300;color:var(--muted);max-width:620px;line-height:1.75;margin-bottom:48px;}
+.divider{border:none;border-top:1px solid #d8c8b0;margin:0;}
+.timeline{display:flex;flex-direction:column;}
+.tl-item{display:grid;grid-template-columns:56px 1fr;position:relative;}
+.tl-item::before{content:'';position:absolute;left:27px;top:56px;bottom:0;width:2px;background:#e8d8c0;}
+.tl-item:last-child::before{display:none;}
+.tl-dot{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;position:relative;z-index:1;margin-bottom:24px;}
+.tl-item:nth-child(1) .tl-dot{background:var(--orange);}
+.tl-item:nth-child(2) .tl-dot{background:#c8a020;}
+.tl-item:nth-child(3) .tl-dot{background:#1a7a4a;}
+.tl-item:nth-child(4) .tl-dot{background:var(--orange-light);}
+.tl-body{padding:8px 0 32px 24px;}
+.tl-step{font-size:9px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.tl-title{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--ink);margin-bottom:8px;}
+.tl-text{font-size:.9rem;color:var(--muted);line-height:1.7;max-width:540px;}
+.tl-tip{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:.8rem;color:var(--orange);font-weight:500;background:var(--orange-pale);padding:5px 12px;}
+.commission{padding:88px 48px;background:var(--dark);color:#fff;max-width:100%;}
+.commission-inner{max-width:1100px;margin:0 auto;}
+.commission h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,46px);color:#fff;margin-bottom:40px;line-height:1.2;}
+.commission h2 em{font-style:italic;color:var(--yellow);}
+.commission-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:36px;}
+.comm-bloc{background:rgba(255,255,255,.06);padding:32px 28px;border-top:3px solid transparent;}
+.comm-bloc:nth-child(1){border-color:var(--orange);}
+.comm-bloc:nth-child(2){border-color:var(--yellow);}
+.comm-num{font-family:'DM Serif Display',serif;font-size:3.2rem;color:#fff;line-height:1;margin-bottom:8px;}
+.comm-num span{font-size:1.4rem;color:var(--yellow);}
+.comm-label{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.6;}
+.comm-exemple{background:var(--orange);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;}
+.comm-ex-tag{font-family:'DM Serif Display',serif;font-size:1.8rem;color:#fff;white-space:nowrap;}
+.comm-ex-text{font-size:.88rem;color:rgba(255,255,255,.85);line-height:1.6;}
+.atouts-section{background:var(--white);max-width:100%;padding:88px 48px;}
+.atouts-inner{max-width:1100px;margin:0 auto;}
+.atouts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;}
+.atout{background:#f5f0e8;padding:28px 24px;border-top:3px solid transparent;}
+.atout:nth-child(1){border-color:var(--orange);}
+.atout:nth-child(2){border-color:var(--yellow);}
+.atout:nth-child(3){border-color:#1a7a4a;}
+.atout:nth-child(4){border-color:var(--orange-light);}
+.atout:nth-child(5){border-color:var(--dark);}
+.atout:nth-child(6){border-color:var(--orange);}
+.atout-icon{font-size:1.6rem;margin-bottom:12px;display:block;}
+.atout-title{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--ink);margin-bottom:6px;}
+.atout-text{font-size:.82rem;color:var(--muted);line-height:1.65;}
+.cta{padding:88px 48px;background:var(--orange);text-align:center;}
+.cta h2{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3vw,2.6rem);color:#fff;margin-bottom:16px;line-height:1.15;}
+.cta p{font-size:1rem;color:rgba(255,255,255,.9);max-width:480px;margin:0 auto 36px;line-height:1.7;}
+.cta-btn{display:inline-block;background:#fff;color:var(--orange);font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:16px 40px;text-decoration:none;margin-bottom:16px;}
+.cta-btn:hover{background:var(--dark);color:#fff;}
+.cta-tel{font-size:.85rem;color:rgba(255,255,255,.8);}
+.cta-tel a{color:#fff;text-decoration:underline;}
+.footer-mp{padding:20px 40px;background:var(--dark);display:flex;align-items:center;justify-content:space-between;}
+.footer-mp-logo{font-size:.85rem;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.1em;}
+.footer-mp-logo span{color:var(--yellow);}
+.footer-mp-back{font-size:.78rem;color:rgba(255,255,255,.4);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;}
+.footer-mp-back:hover{color:var(--yellow);}
+@media(max-width:768px){.hero,.commission,.atouts-section,.cta{padding:60px 24px;}section{padding:60px 24px;}.bande{flex-wrap:wrap;}.bande-item{min-width:50%;}.atouts,.commission-grid{grid-template-columns:1fr;}.comm-exemple{grid-template-columns:1fr;}.hero-stats{gap:28px;}}
+</style>
+</head>
+<body>
+<script>
+function sendHeight(){window.parent.postMessage({type:'setHeight',height:document.body.scrollHeight},'*');}
+window.addEventListener('load',sendHeight);window.addEventListener('resize',sendHeight);
+</script>
+<nav class="nav-retour">
+  <a href="multipotentiel.html" target="_top">Réseau Multi-Potentiel</a>
+  <span class="nav-sep">/</span>
+  <span class="nav-current">PerDus — Colis Perdus</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">Partenaire Commerce · Terrain</div>
+  <div class="hero-eyebrow">Votre commerçant a un local et des clients ?</div>
+  <h1>Un local.<br>Deux jours.<br><em>Jusqu'à 3 200€.</em></h1>
+  <p class="hero-sub">PerDus organise des ventes événementielles de colis perdus chez des commerçants. Vous trouvez le local. PerDus livre le stock, le stand, la communication. Vous touchez 8€/kg.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">8€/kg</span><span class="stat-label">Votre commission</span></div>
+    <div class="stat"><span class="stat-num">50-400 kg</span><span class="stat-label">Par événement</span></div>
+    <div class="stat"><span class="stat-num">2 jours</span><span class="stat-label">Durée de l'événement</span></div>
+    <div class="stat"><span class="stat-num">0€</span><span class="stat-label">Invest du commerçant</span></div>
+  </div>
+</section>
+
+<div class="bande">
+  <div class="bande-item"><div class="bande-num">8€/kg</div><div class="bande-label">Votre marge nette par kilo de colis vendu lors de l'événement</div></div>
+  <div class="bande-item"><div class="bande-num">800€</div><div class="bande-label">Minimum garanti sur 100 kg — soit 2 jours de vente légère</div></div>
+  <div class="bande-item"><div class="bande-num">3 200€</div><div class="bande-label">Potentiel sur 400 kg — un bon local avec flux client établi</div></div>
+  <div class="bande-item"><div class="bande-num">0€</div><div class="bande-label">Investissement du commerçant — PerDus apporte tout le stock</div></div>
+</div>
+
+<section>
+  <div class="section-label">Comment ça marche</div>
+  <h2>Vous ouvrez la porte.<br>PerDus fait l'événement.</h2>
+  <p class="lead">Votre mission : trouver un commerçant avec un local disponible et un minimum de flux clients. PerDus se charge de tout le reste — stock, stand, communication réseaux.</p>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">🏪</div>
+      <div class="tl-body">
+        <div class="tl-step">Étape 1</div>
+        <div class="tl-title">Identifiez le bon commerçant</div>
+        <div class="tl-text">Local disponible le week-end ou en semaine, un minimum de passage, un commerçant ouvert à une animation commerciale dans son espace. Boulangeries, fleuristes, petites surfaces, garages, associations, salles polyvalentes...</div>
+        <div class="tl-tip">« Et si vous animiez votre local avec une vente de colis perdus ? Aucun investissement, et ça attire du monde. »</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">📦</div>
+      <div class="tl-body">
+        <div class="tl-step">Étape 2</div>
+        <div class="tl-title">PerDus livre stock, stand et comm</div>
+        <div class="tl-text">PerDus apporte les colis perdus (invendus logistique), installe le stand, prépare les visuels et la communication réseaux. Le commerçant n'investit rien. Vous non plus.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🎉</div>
+      <div class="tl-body">
+        <div class="tl-step">Étape 3</div>
+        <div class="tl-title">2 jours de vente événementielle</div>
+        <div class="tl-text">Les clients viennent, ouvrent les colis en live, découvrent le contenu. Une expérience d'achat ludique qui génère du trafic et de la fidélisation pour le commerçant.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">💰</div>
+      <div class="tl-body">
+        <div class="tl-step">Étape 4</div>
+        <div class="tl-title">Décompte et paiement</div>
+        <div class="tl-text">À la fin de l'événement, décompte des kilos vendus. PerDus vous verse 8€ par kg. Sur 100 kg : 800€. Sur 400 kg : 3 200€ pour deux jours.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<div class="commission">
+  <div class="commission-inner">
+    <div class="section-label" style="color:var(--yellow)">Ce que ça représente</div>
+    <h2>8€/kg.<br><em>Calculez votre événement.</em></h2>
+    <div class="commission-grid">
+      <div class="comm-bloc">
+        <div class="comm-num">800<span>€</span></div>
+        <div class="comm-label">Sur 100 kg vendus — un local modeste avec peu de flux. Minimum réaliste.</div>
+      </div>
+      <div class="comm-bloc">
+        <div class="comm-num">3 200<span>€</span></div>
+        <div class="comm-label">Sur 400 kg vendus — un bon local avec flux client établi, bon emplacement.</div>
+      </div>
+    </div>
+    <div class="comm-exemple">
+      <div class="comm-ex-tag">2 événements/mois</div>
+      <div class="comm-ex-text">
+        Deux événements par mois avec des locaux corrects représentent <strong style="color:#fff">3 000€ à 6 000€ de commissions</strong> pour 4 jours de présence.<br>
+        <span style="opacity:.7">Et le commerçant satisfait vous recommande à son réseau de commerçants.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="atouts-section">
+  <div class="atouts-inner">
+    <div class="section-label">Pourquoi PerDus</div>
+    <h2>Un concept qui se vend<br>tout seul au commerçant.</h2>
+    <div class="atouts">
+      <div class="atout"><span class="atout-icon">🎁</span><div class="atout-title">Zéro risque commerçant</div><div class="atout-text">Le commerçant ne dépense rien, ne stocke rien. Il prête juste son espace et bénéficie du trafic supplémentaire généré par l'événement.</div></div>
+      <div class="atout"><span class="atout-icon">📱</span><div class="atout-title">Communication prise en charge</div><div class="atout-text">PerDus gère les visuels et la communication réseaux sociaux. Le commerçant n'a rien à préparer. L'événement attire ses propres clients.</div></div>
+      <div class="atout"><span class="atout-icon">🏪</span><div class="atout-title">Tout commerçant avec local</div><div class="atout-text">Boulangerie, fleuriste, garage, salle polyvalente, espace associatif, grande surface... Si il y a un local et du passage, PerDus peut opérer.</div></div>
+      <div class="atout"><span class="atout-icon">🔄</span><div class="atout-title">Client qui recommande</div><div class="atout-text">Un commerçant satisfait de l'animation parle à ses voisins commerçants. Un seul bon événement peut en générer trois autres par bouche-à-oreille.</div></div>
+      <div class="atout"><span class="atout-icon">📅</span><div class="atout-title">Événements récurrents</div><div class="atout-text">Un commerçant qui fait une bonne expérience voudra renouveler. Vous pouvez construire un portefeuille de locaux récurrents sur votre zone.</div></div>
+      <div class="atout"><span class="atout-icon">⚡</span><div class="atout-title">Décision rapide</div><div class="atout-text">Aucun investissement, aucun risque côté commerçant — le cycle de décision est court. Proposition aujourd'hui, accord possible dans la semaine.</div></div>
+    </div>
+  </div>
+</div>
+
+<section class="cta">
+  <h2>PerDus correspond à votre terrain ?</h2>
+  <p>Vous êtes à l'aise pour aller voir des commerçants ? Parlons 20 minutes pour valider votre zone.</p>
+  <a href="tel:0610703090" class="cta-btn" target="_top">Parler à Thierry</a>
+  <div class="cta-tel">ou <a href="mailto:thierry@thierrybismuth.com">thierry@thierrybismuth.com</a></div>
+</section>
+
+<div class="footer-mp">
+  <div class="footer-mp-logo">MULTI-<span>POTENTIEL</span> · ODYSKILLS</div>
+  <a href="multipotentiel.html" class="footer-mp-back" target="_top">← Voir tous les partenaires</a>
+</div>
+</body>
+</html>
