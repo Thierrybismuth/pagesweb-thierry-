@@ -152,7 +152,7 @@
     <div class="result-block">
       <div class="result-row"><span class="result-label">Valeur brute estimée</span><span class="result-val" id="r-brut"></span></div>
       <div class="result-row"><span class="result-label">Après 90% de vente réaliste</span><span class="result-val" id="r-vendu"></span></div>
-      <div class="result-row"><span class="result-label">Après commission Whatnot (&#8722;15%)</span><span class="result-val" id="r-whatnot"></span></div>
+      <div class="result-row"><span class="result-label">Après commission Whatnot (&#8722;10%)</span><span class="result-val" id="r-whatnot"></span></div>
       <div class="result-row"><span class="result-label">Ta part (50%)</span><span class="result-val big" id="r-part"></span></div>
     </div>
     <div class="net-box">
@@ -278,7 +278,7 @@ function submitContact(){
   var avg=(7*ff+12*mid+20*prem)/100;
   var tb=0,tp=0;
   ITEMS.forEach(function(it){tp+=qty[it.key];tb+=avg*it.coeff*qty[it.key];});
-  var nc=Math.round(tb*0.9*0.85*0.5);
+  var nc=Math.round(tb*0.9*0.90*0.5);
 
   var msg='<h2>Nouveau lead simulateur Mani Univers</h2>'
     +'<p><strong>Prénom :</strong> '+prenom+'</p>'
@@ -316,7 +316,7 @@ function renderResults(){
   var avg=(7*ff+12*mid+20*prem)/100;
   var tb=0,tp=0;
   ITEMS.forEach(function(it){tp+=qty[it.key];tb+=avg*it.coeff*qty[it.key];});
-  var tv=tb*0.9,aw=tv*0.85,nc=aw*0.5,pr=Math.round(tp*0.1);
+  var tv=tb*0.9,aw=tv*0.90,nc=aw*0.5,pr=Math.round(tp*0.1);
   document.getElementById('tags').innerHTML=ITEMS.filter(function(i){return qty[i.key]>0;}).map(function(i){return '<div class="tag">'+i.emoji+' '+qty[i.key]+' '+i.label+'</div>';}).join('');
   document.getElementById('recap-line').innerHTML='<strong>'+tp+' pièces</strong> au total &middot; '+ff+'% fast / '+mid+'% mid / '+prem+'% premium';
   document.getElementById('r-brut').textContent=fmt(tb);
