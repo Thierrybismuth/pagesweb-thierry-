@@ -187,7 +187,7 @@ var ITEMS=[
   {key:"accessoires",label:"Accessoires",emoji:"&#128092;",coeff:0.7}
 ];
 var step="intro";
-var qty={tshirts:5,pantalons:5,jupes:5,robes:5,chemisiers:5,vestes:5,chaussures:5,accessoires:5};
+var qty={tshirts:10,pantalons:10,jupes:10,robes:10,chemisiers:10,vestes:10,chaussures:10,accessoires:10};
 function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById(id).classList.add('active');}
 function renderProgress(){
   var el=document.getElementById('progress');
@@ -263,7 +263,7 @@ function submitForm(){
   s.innerHTML='&#127881; <strong>Merci '+p+' !</strong><br/>Margaux te rappelle très vite pour organiser ta vente.<br/><span style="opacity:0.7">Potentiel estimé : <strong>'+fmt(window._nc)+'</strong></span>';
 }
 function restart(){
-  qty={tshirts:5,pantalons:5,jupes:5,robes:5,chemisiers:5,vestes:5,chaussures:5,accessoires:5};
+  qty={tshirts:10,pantalons:10,jupes:10,robes:10,chemisiers:10,vestes:10,chaussures:10,accessoires:10};
   step="intro";
   document.getElementById('cta-form').style.display='block';
   document.getElementById('cta-success').style.display='none';
