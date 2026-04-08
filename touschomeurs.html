@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tous Chômeurs — Spectacle IA & Transformation des Métiers</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--noir:#0d0d0d;--blanc:#fff;--jaune:#f5c842;--rouge:#c8322a;--gris:#f2f0ec;--muted:#6b6b6b;--ink:#1a1a1a;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--blanc);color:var(--ink);font-size:16px;line-height:1.6;}
+
+.nav-retour{padding:14px 40px;background:var(--noir);display:flex;align-items:center;gap:12px;}
+.nav-retour a{font-size:.78rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.nav-retour a::before{content:'←';}
+.nav-retour a:hover{color:var(--jaune);}
+
+.hero{background:var(--noir);color:var(--blanc);min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 48px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#0d0d0d 0%,#1f0e00 60%,#0d0d0d 100%);opacity:.9;}
+.hero-content{position:relative;z-index:1;}
+.hero-overtitle{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--jaune);margin-bottom:24px;display:flex;align-items:center;gap:12px;}
+.hero-overtitle::before{content:'';display:block;width:32px;height:2px;background:var(--jaune);}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(52px,9vw,110px);line-height:.95;letter-spacing:-.02em;color:var(--blanc);margin-bottom:32px;}
+.hero h1 span{color:var(--jaune);}
+.hero-tagline{font-size:clamp(16px,2vw,22px);font-weight:300;color:rgba(255,255,255,.65);max-width:580px;line-height:1.65;margin-bottom:40px;}
+.hero-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:56px;}
+.pill{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.65);font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:7px 16px;border-radius:2px;}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap;}
+.stat-num{font-family:'DM Serif Display',serif;font-size:42px;color:var(--blanc);line-height:1;}
+.stat-label{font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;margin-top:4px;}
+
+.bande{background:var(--jaune);padding:0 48px;display:flex;align-items:stretch;}
+.bande-item{flex:1;padding:22px 20px;border-right:1px solid rgba(0,0,0,.12);}
+.bande-item:last-child{border-right:none;}
+.bande-titre{font-family:'DM Serif Display',serif;font-size:1.05rem;color:var(--noir);margin-bottom:4px;}
+.bande-sub{font-size:.78rem;color:rgba(0,0,0,.55);line-height:1.5;}
+
+section{padding:88px 48px;max-width:1100px;margin:0 auto;}
+.section-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--rouge);margin-bottom:16px;}
+h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,46px);line-height:1.15;margin-bottom:24px;max-width:700px;}
+.lead{font-size:18px;font-weight:300;color:var(--muted);max-width:620px;line-height:1.75;margin-bottom:48px;}
+
+/* CIBLES */
+.cibles{background:var(--noir);padding:88px 48px;max-width:100%;}
+.cibles-inner{max-width:1100px;margin:0 auto;}
+.cibles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:40px;}
+.cible{background:rgba(255,255,255,.05);padding:28px 24px;border-top:3px solid rgba(255,255,255,.1);}
+.cible:hover{background:rgba(255,255,255,.08);border-top-color:var(--jaune);}
+.cible-icon{font-size:1.6rem;margin-bottom:14px;}
+.cible-titre{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--blanc);margin-bottom:6px;}
+.cible-desc{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.6;}
+
+/* CONTENU */
+.contenu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:40px;}
+.contenu-card{background:var(--gris);padding:36px 32px;}
+.contenu-card h3{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--ink);margin-bottom:12px;}
+.contenu-card p{font-size:.9rem;color:var(--muted);line-height:1.75;}
+.contenu-card.dark{background:var(--noir);color:var(--blanc);}
+.contenu-card.dark h3{color:var(--jaune);}
+.contenu-card.dark p{color:rgba(255,255,255,.7);}
+.contenu-card ul{list-style:none;margin-top:12px;}
+.contenu-card ul li{font-size:.88rem;color:var(--muted);padding:6px 0;border-bottom:1px solid rgba(0,0,0,.06);display:flex;gap:10px;}
+.contenu-card ul li::before{content:'→';color:var(--rouge);flex-shrink:0;}
+.contenu-card.dark ul li{color:rgba(255,255,255,.7);border-bottom-color:rgba(255,255,255,.08);}
+.contenu-card.dark ul li::before{color:var(--jaune);}
+
+/* ILS L'ONT VU */
+.ils-section{background:var(--gris);padding:72px 48px;max-width:100%;}
+.ils-inner{max-width:1100px;margin:0 auto;}
+.ils-list{display:flex;flex-wrap:wrap;gap:16px;margin-top:36px;}
+.ils-tag{background:var(--blanc);border:1px solid #ddd;color:var(--muted);font-size:.78rem;font-weight:500;letter-spacing:.08em;padding:8px 18px;border-radius:2px;}
+
+/* TARIFS */
+.tarifs{background:var(--blanc);padding:88px 48px;max-width:100%;}
+.tarifs-inner{max-width:1100px;margin:0 auto;}
+.tarifs-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin-top:40px;}
+.tarif-card{background:var(--gris);padding:32px 28px;border-top:4px solid transparent;}
+.tarif-card:nth-child(1){border-top-color:var(--jaune);}
+.tarif-card:nth-child(2){border-top-color:var(--rouge);}
+.tarif-card:nth-child(3){border-top-color:var(--noir);}
+.tarif-num{font-family:'DM Serif Display',serif;font-size:2.8rem;color:var(--ink);line-height:1;margin-bottom:8px;}
+.tarif-unit{font-size:.8rem;color:var(--muted);margin-bottom:12px;}
+.tarif-label{font-size:.88rem;color:var(--muted);line-height:1.65;}
+
+/* FORMULAIRE */
+.form-section{background:var(--noir);padding:88px 48px;max-width:100%;}
+.form-inner{max-width:700px;margin:0 auto;}
+.form-section h2{color:var(--blanc);}
+.form-section .section-label{color:var(--jaune);}
+.form-section .lead{color:rgba(255,255,255,.55);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;}
+.form-grid .full{grid-column:1/-1;}
+label{display:block;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:6px;}
+input,textarea,select{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:var(--blanc);font-family:'DM Sans',sans-serif;font-size:.9rem;padding:12px 16px;border-radius:2px;outline:none;transition:border-color .2s;}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,.25);}
+input:focus,textarea:focus{border-color:var(--jaune);}
+textarea{min-height:120px;resize:vertical;}
+.btn-submit{display:inline-block;margin-top:24px;background:var(--jaune);color:var(--noir);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:16px 40px;border:none;cursor:pointer;border-radius:2px;width:100%;}
+.btn-submit:hover{background:#e0b530;}
+
+.footer-tc{padding:20px 48px;background:#050505;display:flex;align-items:center;justify-content:space-between;}
+.footer-tc-logo{font-family:'DM Serif Display',serif;font-size:1rem;color:rgba(255,255,255,.3);}
+.footer-tc-logo span{color:var(--jaune);}
+.footer-tc-back{font-size:.75rem;color:rgba(255,255,255,.3);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;}
+.footer-tc-back:hover{color:var(--jaune);}
+
+@media(max-width:768px){
+  .hero{padding:60px 24px;}
+  .bande{flex-direction:column;}
+  .bande-item{border-right:none;border-bottom:1px solid rgba(0,0,0,.1);}
+  section,.cibles,.ils-section,.tarifs,.form-section{padding:60px 24px;}
+  .cibles-grid,.contenu-grid,.tarifs-grid,.form-grid{grid-template-columns:1fr;}
+  .form-grid .full{grid-column:1;}
+  .hero-stats{gap:28px;}
+}
+</style>
+</head>
+<body>
+
+<script>
+function sendHeight(){var h=Math.max(document.body.scrollHeight,document.documentElement.scrollHeight);window.parent.postMessage({type:'setHeight',height:h},'*');window.parent.postMessage({iframeHeight:h},'*');}
+window.addEventListener('load',sendHeight);window.addEventListener('resize',sendHeight);
+setTimeout(sendHeight,300);setTimeout(sendHeight,800);setTimeout(sendHeight,2000);
+</script>
+
+<nav class="nav-retour">
+  <a href="accueil.html" target="_top">Thierry Bismuth</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-overtitle">Spectacle · Conférence · IA & Transformation</div>
+    <h1>TOUS<br><span>CHÔMEURS</span><br>?</h1>
+    <p class="hero-tagline">Plus drôle qu'une conférence.<br>Plus instructif qu'un spectacle.<br>En 1 heure, votre équipe réfléchit autrement à l'avenir de son métier.</p>
+    <div class="hero-pills">
+      <span class="pill">Réseaux de franchise</span>
+      <span class="pill">Grandes entreprises</span>
+      <span class="pill">Fédérations & syndicats</span>
+      <span class="pill">Salons professionnels</span>
+      <span class="pill">Universités & écoles</span>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">1h</div><div class="stat-label">Format spectacle</div></div>
+      <div><div class="stat-num">+30</div><div class="stat-label">min mini-conf offerte</div></div>
+      <div><div class="stat-num">2 000€</div><div class="stat-label">HT l'intervention</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BANDE -->
+<div class="bande">
+  <div class="bande-item"><div class="bande-titre">Commerce · Automobile · Santé</div><div class="bande-sub">Tous les secteurs abordés en scénettes</div></div>
+  <div class="bande-item"><div class="bande-titre">Arts · BtoB · Droit</div><div class="bande-sub">Des univers variés, une salle qui se retrouve</div></div>
+  <div class="bande-item"><div class="bande-titre">Services financiers · Métiers manuels</div><div class="bande-sub">Aucun secteur n'est épargné — avec humour</div></div>
+  <div class="bande-item"><div class="bande-titre">Option gratuite incluse</div><div class="bande-sub">30 min de mini-conférence adaptée à votre univers</div></div>
+</div>
+
+<!-- POUR QUI -->
+<div class="cibles">
+  <div class="cibles-inner">
+    <div class="section-label" style="color:var(--jaune)">Pour qui</div>
+    <h2 style="color:var(--blanc)">Intégrez l'IA et la transformation des métiers<br>à votre prochaine convention.</h2>
+    <div class="cibles-grid">
+      <div class="cible"><div class="cible-icon">🏢</div><div class="cible-titre">Réseau de franchise</div><div class="cible-desc">Convention annuelle, séminaire réseau, journée franchisés.</div></div>
+      <div class="cible"><div class="cible-icon">🏭</div><div class="cible-titre">Grande entreprise</div><div class="cible-desc">Séminaire RH, convention commerciale, journée managers.</div></div>
+      <div class="cible"><div class="cible-icon">🤝</div><div class="cible-titre">Fédération ou syndicat</div><div class="cible-desc">Assemblée générale, journée adhérents, congrès professionnel.</div></div>
+      <div class="cible"><div class="cible-icon">🎪</div><div class="cible-titre">Organisateur de salons</div><div class="cible-desc">Animation de salon, conférence plénière, séquence décalée.</div></div>
+      <div class="cible"><div class="cible-icon">🎓</div><div class="cible-titre">Université & école</div><div class="cible-desc">Cérémonie de remise de diplômes, journée étudiants, forum.</div></div>
+      <div class="cible"><div class="cible-icon">🌐</div><div class="cible-titre">Regroupement d'entrepreneurs</div><div class="cible-desc">Club d'affaires, réseau BNI, association professionnelle.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENU -->
+<section>
+  <div class="section-label">Le programme</div>
+  <h2>Ce qui se passe pendant l'heure.</h2>
+  <p class="lead">Des scénettes courtes, drôles et documentées. Chaque métier voit son futur possible — sans catastrophisme, avec beaucoup d'humour.</p>
+  <div class="contenu-grid">
+    <div class="contenu-card dark">
+      <h3>🎭 Le spectacle — 1h</h3>
+      <p>Des saynètes sur l'avenir des métiers dans tous les secteurs. Commerce, santé, droit, finance, artisanat, arts… Chaque scène interroge : qui restera ? qui disparaîtra ? qui se transformera ?</p>
+      <ul>
+        <li>Scénettes par univers professionnel</li>
+        <li>Interactivité avec la salle</li>
+        <li>Humour + fond documenté</li>
+        <li>Adaptable à votre secteur principal</li>
+      </ul>
+    </div>
+    <div class="contenu-card">
+      <h3>🎤 Mini-conférence — 30 min <span style="font-size:.75rem;color:var(--rouge);font-weight:600;">OFFERTE</span></h3>
+      <p>Une séquence de 30 minutes adaptée à votre univers, pour passer de l'humour à la stratégie concrète.</p>
+      <ul>
+        <li>Comment dessiner les changements dans votre secteur</li>
+        <li>Comment préparer les équipes à la transformation</li>
+        <li>Comment adapter les recrutements</li>
+      </ul>
+    </div>
+    <div class="contenu-card" style="grid-column:1/-1;background:#1a1a1a;color:white;">
+      <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:280px;">
+          <h3 style="color:var(--jaune);font-family:'DM Serif Display',serif;font-size:1.1rem;margin-bottom:8px;">📚 Option livre</h3>
+          <p style="color:rgba(255,255,255,.7);font-size:.88rem;line-height:1.7;">Le livre <strong style="color:white;">RECRUTER EST UN JEU D'ENFANT</strong> peut être offert par l'organisateur aux participants — <strong style="color:var(--jaune);">10€ / exemplaire</strong> (vs 20€ prix public).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ILS L'ONT VU -->
+<div class="ils-section">
+  <div class="ils-inner">
+    <div class="section-label">Ils l'ont déjà vu</div>
+    <h2>Entreprises, réseaux, salons, fédérations, universités.</h2>
+    <div class="ils-list">
+      <span class="ils-tag">Réseaux de franchises</span>
+      <span class="ils-tag">Safran</span>
+      <span class="ils-tag">Bernard</span>
+      <span class="ils-tag">Franchise Expo Paris</span>
+      <span class="ils-tag">APEC</span>
+      <span class="ils-tag">ANDRH Languedoc</span>
+      <span class="ils-tag">ANDRH Junior</span>
+      <span class="ils-tag">Écoles de commerce (EGC)</span>
+      <span class="ils-tag">Babichou</span>
+      <span class="ils-tag">Fédérations professionnelles</span>
+      <span class="ils-tag">Salons professionnels</span>
+      <span class="ils-tag">Associations d'entrepreneurs</span>
+    </div>
+  </div>
+</div>
+
+<!-- TARIFS -->
+<div class="tarifs">
+  <div class="tarifs-inner">
+    <div class="section-label">Tarifs</div>
+    <h2>Simple et transparent.</h2>
+    <div class="tarifs-grid">
+      <div class="tarif-card">
+        <div class="tarif-num">2 000€</div>
+        <div class="tarif-unit">HT · Intervention standard</div>
+        <div class="tarif-label">Spectacle 1h + mini-conférence 30 min offerte. Île-de-France. Frais de déplacement en province sur barème ACCOSS.</div>
+      </div>
+      <div class="tarif-card">
+        <div class="tarif-num">1 500€</div>
+        <div class="tarif-unit">HT · Par représentation supplémentaire</div>
+        <div class="tarif-label">En cas de représentations multiples sur un même événement (convention, journées répétées, plusieurs salles).</div>
+      </div>
+      <div class="tarif-card">
+        <div class="tarif-num">10€</div>
+        <div class="tarif-unit">/ exemplaire · Livre en option</div>
+        <div class="tarif-label">"RECRUTER EST UN JEU D'ENFANT" offert aux participants par l'organisateur. Prix public : 20€.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FORMULAIRE -->
+<div class="form-section">
+  <div class="form-inner">
+    <div class="section-label">Réservation</div>
+    <h2>Parlons de votre événement.</h2>
+    <p class="lead">Renseignez le formulaire, Thierry vous répond sous 24h.</p>
+
+    <form action="https://formsubmit.co/thierry@thierrybismuth.com" method="POST">
+      <input type="hidden" name="_subject" value="Tous Chômeurs — Demande d'intervention">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://thierrybismuth.github.io/pagesweb-thierry-/touschomeurs.html">
+
+      <div class="form-grid">
+        <div>
+          <label>Nom de l'entreprise</label>
+          <input type="text" name="entreprise" placeholder="Votre organisation" required>
+        </div>
+        <div>
+          <label>Prénom & Nom</label>
+          <input type="text" name="nom" placeholder="Prénom Nom" required>
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" placeholder="vous@entreprise.com" required>
+        </div>
+        <div>
+          <label>Poste</label>
+          <input type="text" name="poste" placeholder="Votre fonction">
+        </div>
+        <div>
+          <label>Téléphone</label>
+          <input type="tel" name="telephone" placeholder="06 XX XX XX XX">
+        </div>
+        <div>
+          <label>Date envisagée</label>
+          <input type="text" name="date" placeholder="Ex : juin 2025, à définir...">
+        </div>
+        <div class="full">
+          <label>Parlez-moi de votre événement</label>
+          <textarea name="message" placeholder="Type d'événement, nombre de participants, lieu, contexte..."></textarea>
+        </div>
+      </div>
+      <button type="submit" class="btn-submit">Envoyer ma demande →</button>
+    </form>
+  </div>
+</div>
+
+<!-- CTA QUESTION -->
+<div style="background:#1a1a2e;padding:56px 48px;text-align:center;">
+  <p style="font-size:.78rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px;">Une question ?</p>
+  <h2 style="font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,34px);color:#fff;margin-bottom:8px;line-height:1.2;">J'ai une question pour Thierry</h2>
+  <p style="font-size:.9rem;color:rgba(255,255,255,.45);margin-bottom:28px;">Appel, mail ou SMS — réponse rapide garantie.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
+    <a href="tel:0610703090" target="_top" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);color:#fff;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:13px 24px;text-decoration:none;border:1px solid rgba(255,255,255,.25);border-radius:2px;">📞 Appel</a>
+    <a href="mailto:thierry@thierrybismuth.com" target="_top" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);color:#fff;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:13px 24px;text-decoration:none;border:1px solid rgba(255,255,255,.25);border-radius:2px;">✉️ Mail</a>
+    <a href="sms:0610703090" target="_top" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);color:#fff;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:13px 24px;text-decoration:none;border:1px solid rgba(255,255,255,.25);border-radius:2px;">💬 SMS</a>
+  </div>
+</div>
+
+<div class="footer-tc">
+  <div class="footer-tc-logo">TOUS <span>CHÔMEURS</span></div>
+  <a href="accueil.html" target="_top" class="footer-tc-back">← Thierry Bismuth</a>
+</div>
+
+</body>
+</html>
