@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simulateur Whatnot — Mani Univers</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fdf8f3 0%, #f5eaf8 100%);
+      font-family: Georgia, serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+    }
+    #root { width: 100%; display: flex; justify-content: center; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    const ITEMS = [
+      { key: "tshirts",     label: "T-shirts",    emoji: "👕", coeff: 0.7 },
+      { key: "pantalons",   label: "Pantalons",   emoji: "👖", coeff: 1.5 },
+      { key: "jupes",       label: "Jupes",       emoji: "👗", coeff: 1.0 },
+      { key: "robes",       label: "Robes",       emoji: "👗", coeff: 1.5 },
+      { key: "chemisiers",  label: "Chemisiers",  emoji: "👔", coeff: 1.0 },
+      { key: "vestes",      label: "Vestes",      emoji: "🧥", coeff: 1.5 },
+      { key: "chaussures",  label: "Chaussures",  emoji: "👠", coeff: 1.5 },
+      { key: "accessoires", label: "Accessoires", emoji: "👜", coeff: 0.7 },
+    ];
+
+    const p = {
+      bg: "#fdf8f3", card: "#fff9f4",
+      purple: "#7c5fa0", purpleLight: "#e8dff5",
+      orange: "#e07d3c", orangeLight: "#fdecd8",
+      text: "#2d1f3d", muted: "#8a7a9a", border: "#e8d8f0",
+    };
+
+    function ProgressBar({ current }) {
+      return (
+        <div style={{ display:"flex", gap:6, justifyContent:"center", marginBottom:28 }}>
+          {ITEMS.map((item, i) => (
+            <div key={item.key} style={{
+              width: i === current ? 20 : 8, height: 8, borderRadius: 4,
+              background: i < current ? p.purple : i === current ? p.orange : p.border,
+              transition: "all 0.3s"
+            }} />
+          ))}
+        </div>
+      );
+    }
+
+    function App() {
+      const [step, setStep] = useState("intro");
+      const [qty, setQty] = useState({ tshirts:0, pantalons:0, jupes:0, robes:0, chemisiers:0, vestes:0, chaussures:0, accessoires:0 });
+      const [tiers, setTiers] = useState({ ff:40, mid:40, prem:20 });
+      const [contact, setContact] = useState({ prenom:"", tel:"", date:"" });
+      const [submitted, setSubmitted] = useState(false);
+
+      const idx = ITEMS.findIndex(i => i.key === step);
+      const item = ITEMS[idx];
+      const tierTotal = tiers.ff + tiers.mid + tiers.prem;
+      const tierOk = tierTotal === 100;
+
+      const next = () => {
+        if (step === "intro") { setStep(ITEMS[0].key); return; }
+        if (idx !== -1) { idx < ITEMS.length-1 ? setStep(ITEMS[idx+1].key) : setStep("tiers"); return; }
+        if (step === "tiers") setStep("results");
+      };
+      const back = () => {
+        if (step === "tiers") { setStep(ITEMS[ITEMS.length-1].key); return; }
+        if (idx > 0) { setStep(ITEMS[idx-1].key); return; }
+        if (idx === 0) { setStep("intro"); return; }
+        if (step === "results") setStep("tiers");
+      };
+
+      const avgPrice = (5*tiers.ff + 10*tiers.mid + 15*tiers.prem) / 100;
+      let totalBrut = 0, totalPieces = 0;
+      ITEMS.forEach(it => { totalPieces += qty[it.key]; totalBrut += avgPrice * it.coeff * qty[it.key]; });
+      const totalVendu   = totalBrut * 0.7;
+      const apresWhatnot = totalVendu * 0.8;
+      const netClient    = apresWhatnot * 0.5;
+      const piecesRest   = Math.round(totalPieces * 0.3);
+      const fmt = n => `${Math.round(n)} €`;
+
+      const card = {
+        background: p.card, borderRadius: 20,
+        boxShadow: "0 4px 32px rgba(124,95,160,0.12)",
+        padding: "36px 32px", maxWidth: 480, width: "100%",
+        border: `1px solid ${p.border}`
+      };
+      const logo = { textAlign:"center", marginBottom:8, fontSize:13, letterSpacing:3, color:p.muted, textTransform:"uppercase", fontFamily:"Arial,sans-serif" };
+      const title = { fontSize:26, fontWeight:"bold", color:p.text, textAlign:"center", marginBottom:8, lineHeight:1.3 };
+      const sub = { fontSize:14, color:p.muted, textAlign:"center", marginBottom:28, fontFamily:"Arial,sans-serif", lineHeight:1.5 };
+      const navRow = { display:"flex", gap:12, justifyContent:"center", marginTop:8 };
+      const primBtn = { background:p.purple, color:"#fff", border:"none", borderRadius:12, padding:"14px 32px", fontSize:15, fontWeight:"bold", cursor:"pointer", fontFamily:"Arial,sans-serif", letterSpacing:0.5 };
+      const secBtn = { background:"transparent", color:p.muted, border:`1px solid ${p.border}`, borderRadius:12, padding:"14px 24px", fontSize:14, cursor:"pointer", fontFamily:"Arial,sans-serif" };
+      const inputStyle = { width:"100%", border:`1.5px solid ${p.border}`, borderRadius:10, padding:"12px 14px", fontSize:14, fontFamily:"Arial,sans-serif", color:p.text, background:p.bg, outline:"none", marginBottom:10 };
+
+      /* ── INTRO ── */
+      if (step === "intro") return (
+        <div style={card}>
+          <div style={logo}>mani univers</div>
+          <h1 style={title}>Combien vaut ta garde-robe ? ✨</h1>
+          <p style={sub}>En quelques questions, découvre combien tu pourrais gagner en vendant tes vêtements sur Whatnot — avec Mani pour tout organiser.</p>
+          <div style={{ background:p.orangeLight, borderRadius:12, padding:"14px 16px", marginBottom:24, fontSize:13, color:p.text, fontFamily:"Arial,sans-serif", lineHeight:1.7 }}>
+            <strong>🎯 Pas besoin de tout compter.</strong><br/>
+            C'est un estimatif — une fourchette, pas une promesse.
+          </div>
+          <div style={navRow}>
+            <button style={primBtn} onClick={next}>Commencer l'estimation →</button>
+          </div>
+        </div>
+      );
+
+      /* ── ARTICLES ── */
+      if (item) return (
+        <div style={card}>
+          <div style={logo}>mani univers</div>
+          <ProgressBar current={idx} />
+          <p style={{ fontSize:12, color:p.orange, textAlign:"center", marginBottom:24, fontStyle:"italic", fontFamily:"Arial,sans-serif" }}>
+            Ordre de grandeur — pas besoin de compter précisément 😊
+          </p>
+          <div style={{ fontSize:22, color:p.text, textAlign:"center", marginBottom:20 }}>
+            {item.emoji} Combien de <strong>{item.label}</strong> ?
+          </div>
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:16, marginBottom:28 }}>
+            <button onClick={() => setQty(q => ({ ...q, [item.key]: Math.max(0, q[item.key]-1) }))}
+              style={{ width:44, height:44, borderRadius:"50%", border:`2px solid ${p.purple}`, background:p.purpleLight, color:p.purple, fontSize:22, fontWeight:"bold", cursor:"pointer" }}>−</button>
+            <div style={{ fontSize:42, fontWeight:"bold", color:p.text, minWidth:64, textAlign:"center" }}>{qty[item.key]}</div>
+            <button onClick={() => setQty(q => ({ ...q, [item.key]: q[item.key]+1 }))}
+              style={{ width:44, height:44, borderRadius:"50%", border:`2px solid ${p.orange}`, background:p.orangeLight, color:p.orange, fontSize:22, fontWeight:"bold", cursor:"pointer" }}>+</button>
+          </div>
+          <div style={navRow}>
+            <button style={secBtn} onClick={back}>← Retour</button>
+            <button style={primBtn} onClick={next}>Suivant →</button>
+          </div>
+        </div>
+      );
+
+      /* ── TIERS ── */
+      if (step === "tiers") return (
+        <div style={card}>
+          <div style={logo}>mani univers</div>
+          <h2 style={{ ...title, fontSize:20, marginBottom:6 }}>Ta garde-robe, globalement ?</h2>
+          <p style={sub}>Répartis en % — le total doit faire 100.</p>
+          <div style={{ display:"flex", flexDirection:"column", gap:14, marginBottom:12 }}>
+            {[
+              { key:"ff",  label:"Fast Fashion",  sub2:"Zara, H&M, Shein…",           color:p.orangeLight, price:"5 €/pièce" },
+              { key:"mid", label:"Intermédiaire", sub2:"Marques milieu de gamme",       color:"#f0f4ff",     price:"10 €/pièce" },
+              { key:"prem",label:"Premium",       sub2:"Créateurs, luxe accessible",    color:p.purpleLight, price:"15 €/pièce" },
+            ].map(t => (
+              <div key={t.key} style={{ background:t.color, borderRadius:12, padding:"14px 18px", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+                <div>
+                  <div style={{ fontSize:14, fontWeight:"bold", color:p.text, fontFamily:"Arial,sans-serif" }}>{t.label}</div>
+                  <div style={{ fontSize:12, color:p.muted, fontFamily:"Arial,sans-serif" }}>{t.sub2} · <em>{t.price}</em></div>
+                </div>
+                <div style={{ display:"flex", alignItems:"center", gap:4 }}>
+                  <input type="number" min={0} max={100}
+                    style={{ width:60, textAlign:"center", fontSize:20, fontWeight:"bold", color:p.text, border:`2px solid ${p.border}`, borderRadius:8, padding:"6px 4px", fontFamily:"Georgia,serif", background:"#fff", outline:"none" }}
+                    value={tiers[t.key]}
+                    onChange={e => { const v = Math.max(0, Math.min(100, parseInt(e.target.value)||0)); setTiers(prev => ({ ...prev, [t.key]:v })); }}
+                  />
+                  <span style={{ fontSize:16, color:p.muted }}>%</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign:"center", fontSize:13, color:tierOk?p.purple:p.orange, fontFamily:"Arial,sans-serif", marginBottom:16, fontWeight:"bold" }}>
+            Total : {tierTotal}% {tierOk ? "✓ parfait !" : `— il manque ${100-tierTotal}%`}
+          </div>
+          <div style={navRow}>
+            <button style={secBtn} onClick={back}>← Retour</button>
+            <button style={{ ...primBtn, opacity:tierOk?1:0.4, cursor:tierOk?"pointer":"not-allowed" }} onClick={() => tierOk && next()}>
+              Voir mon estimation →
+            </button>
+          </div>
+        </div>
+      );
+
+      /* ── RÉSULTATS ── */
+      if (step === "results") return (
+        <div style={card}>
+          <div style={logo}>mani univers</div>
+          <h2 style={{ ...title, fontSize:20, marginBottom:20 }}>Ton estimation 🎉</h2>
+
+          <div style={{ display:"flex", gap:8, marginBottom:14, flexWrap:"wrap" }}>
+            {ITEMS.filter(i => qty[i.key] > 0).map(i => (
+              <div key={i.key} style={{ background:p.purpleLight, borderRadius:8, padding:"5px 12px", fontSize:12, color:p.text, fontFamily:"Arial,sans-serif" }}>
+                {i.emoji} {qty[i.key]} {i.label}
+              </div>
+            ))}
+          </div>
+          <div style={{ fontSize:13, color:p.muted, fontFamily:"Arial,sans-serif", marginBottom:20 }}>
+            <strong>{totalPieces} pièces</strong> · {tiers.ff}% fast / {tiers.mid}% mid
