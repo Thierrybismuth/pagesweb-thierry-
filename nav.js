@@ -1,4 +1,7 @@
 (function() {
+  // Ne pas injecter le nav si la page est dans un iframe (ex: Wix)
+  if (window.self !== window.top) return;
+
   const BASE = 'https://thierrybismuth.github.io/pagesweb-thierry-/';
 
   const NAV_HTML = `
