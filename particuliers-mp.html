@@ -65,6 +65,7 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
 .enseigne {
   display:grid; grid-template-columns:320px 1fr;
   min-height:360px;
+  overflow:hidden;
 }
 .enseigne:nth-child(even) { direction:rtl; }
 .enseigne:nth-child(even) > * { direction:ltr; }
@@ -93,7 +94,7 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
 .ens-gain-label { font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.75); margin-top:4px; }
 
 /* Panneau contenu */
-.ens-content { background:var(--blanc); padding:48px 44px; }
+.ens-content { background:var(--blanc); padding:48px 44px; overflow:hidden; }
 .ens-tag {
   font-size:10px; letter-spacing:.3em; text-transform:uppercase;
   display:flex; align-items:center; gap:8px; margin-bottom:16px;
@@ -274,10 +275,7 @@ html, body { width:100%; background:var(--blanc); font-family:'DM Sans',sans-ser
   <div class="sep"></div>
 
   
-<div class="ens-gallery">
-  <img src="https://thierrybismuth.github.io/pagesweb-thierry-/logos/enseignes/ens-kw-site.jpg" alt="Keller Williams site">
-  <img src="https://thierrybismuth.github.io/pagesweb-thierry-/logos/enseignes/ens-kw-chiffres.jpg" alt="Keller Williams chiffres">
-</div>
+
   <!-- APC -->
   <div class="enseigne enseigne-apc">
     <div class="ens-color">
