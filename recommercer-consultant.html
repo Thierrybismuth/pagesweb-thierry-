@@ -93,6 +93,20 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,46px);line-heig
 .footer-mp-back{font-size:.78rem;color:rgba(255,255,255,.4);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;}
 .footer-mp-back:hover{color:var(--gold);}
 @media(max-width:768px){.hero,.commission,.atouts-section,.cta{padding:60px 24px;}section{padding:60px 24px;}.bande{flex-wrap:wrap;}.bande-item{min-width:50%;}.atouts,.commission-grid{grid-template-columns:1fr;}.comm-exemple{grid-template-columns:1fr;}.hero-stats{gap:28px;}}
+
+.cas-ecole { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
+.cas { background: var(--white); border: 1px solid #d0e0d0; border-radius: 4px; overflow: hidden; }
+.cas-header { background: var(--green); color: #fff; padding: 14px 20px; display: flex; align-items: center; gap: 12px; }
+.cas-header-icon { font-size: 1.3rem; }
+.cas-header-title { font-family: 'DM Serif Display', serif; font-size: 1rem; }
+.cas-header-sub { font-size: .75rem; color: rgba(255,255,255,.7); margin-top: 2px; }
+.cas-options { display: flex; flex-direction: column; gap: 0; }
+.cas-option { padding: 14px 20px; border-top: 1px solid #e8f0e8; display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; }
+.cas-option-icon { font-size: 1rem; margin-top: 2px; }
+.cas-option-text { font-size: .88rem; color: var(--muted); line-height: 1.6; }
+.cas-option-text strong { color: var(--ink); font-weight: 600; }
+.cas-option.cas-wildcard { background: var(--green-pale); }
+.cas-option.cas-wildcard .cas-option-text { color: var(--green); font-weight: 500; }
 </style>
 </head>
 <body>
@@ -179,6 +193,60 @@ document.querySelectorAll('img').forEach(function(img) {
         <div class="enseignes-box">
           <strong>Exemples d'enseignes référencées :</strong>
           <p>Anacours (soutien scolaire), Hélène Doron (anglais enfants), Keller Williams (immobilier), Smart Duck, Skinial (détatouage)... et potentiellement 2 000 autres selon le profil du commerçant.</p>
+        </div>
+
+        <div class="cas-ecole">
+
+          <!-- CAS 1 : AGENCE IMMOBILIÈRE -->
+          <div class="cas">
+            <div class="cas-header">
+              <div class="cas-header-icon">🏠</div>
+              <div>
+                <div class="cas-header-title">Agence immobilière indépendante</div>
+                <div class="cas-header-sub">Propriétaire cherchant une évolution ou un appui réseau</div>
+              </div>
+            </div>
+            <div class="cas-options">
+              <div class="cas-option">
+                <div class="cas-option-icon">→</div>
+                <div class="cas-option-text">Rejoindre <strong>Keller Williams</strong> pour bénéficier des outils, de la marque et des moyens du leader mondial de l'immobilier, tout en gardant son autonomie.</div>
+              </div>
+              <div class="cas-option">
+                <div class="cas-option-icon">→</div>
+                <div class="cas-option-text">Se reconvertir vers <strong>Anacours</strong> (soutien scolaire) — un marché complémentaire, avec une clientèle de familles déjà connue.</div>
+              </div>
+              <div class="cas-option cas-wildcard">
+                <div class="cas-option-icon">🔍</div>
+                <div class="cas-option-text">Ou <strong>tout autre chose</strong> — ReCOmmerCer contacte les 2 000 enseignes du commerce organisé et revient avec les meilleures options sous une semaine.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CAS 2 : PROFESSIONNEL DU BIEN-ÊTRE -->
+          <div class="cas">
+            <div class="cas-header">
+              <div class="cas-header-icon">💆</div>
+              <div>
+                <div class="cas-header-title">Professionnel du bien-être</div>
+                <div class="cas-header-sub">Coiffeur, esthéticienne, épilation, massage, onglerie…</div>
+              </div>
+            </div>
+            <div class="cas-options">
+              <div class="cas-option">
+                <div class="cas-option-icon">→</div>
+                <div class="cas-option-text">Ajouter l'activité <strong>Skinial</strong> (détatouage sans laser) à son offre existante — une demande grandissante, une formation rapide, des clients nouveaux attirés par le service.</div>
+              </div>
+              <div class="cas-option">
+                <div class="cas-option-icon">→</div>
+                <div class="cas-option-text">Se positionner sur le marché porteur de l'esthétique laser avec <strong>Smart Duck</strong> — un acteur en forte croissance dans un secteur premium.</div>
+              </div>
+              <div class="cas-option cas-wildcard">
+                <div class="cas-option-icon">🔍</div>
+                <div class="cas-option-text">Ou <strong>tout autre chose</strong> — ReCOmmerCer contacte les 2 000 enseignes du commerce organisé et revient avec les meilleures options sous une semaine.</div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
