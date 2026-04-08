@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Présentation Candidature – Emma SGB</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #FF6B35;
+    --dark: #1A1A2E;
+    --slate: #2E3A4E;
+    --cream: #FDF9F3;
+    --light: #F4F1EC;
+    --muted: #7A7A8A;
+    --green: #2D7A5F;
+    --green-light: rgba(45,122,95,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Inter', sans-serif;
+    color: var(--dark);
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--slate);
+    padding: 36px 48px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--orange), transparent);
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .badge-confidentiel {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,107,53,0.15);
+    border: 1px solid rgba(255,107,53,0.3);
+    color: var(--orange);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #fff;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+  .header h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--orange);
+  }
+  .header-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 10px;
+  }
+  .header-right {
+    text-align: right;
+  }
+  .pour-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 4px;
+  }
+  .pour-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--orange);
+  }
+  .pour-poste {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 2px;
+  }
+
+  /* ── ACCROCHE ── */
+  .accroche {
+    background: var(--orange);
+    padding: 18px 48px;
+  }
+  .accroche-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  /* ── BODY ── */
+  .body {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 44px 48px 56px;
+  }
+
+  /* ── PROFIL CARD ── */
+  .profil-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+  .profil-stat {
+    text-align: center;
+    padding: 16px 12px;
+    border-radius: 10px;
+    background: var(--light);
+  }
+  .profil-stat .val {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--dark);
+    line-height: 1;
+    display: block;
+  }
+  .profil-stat .val span {
+    font-size: 16px;
+    color: var(--orange);
+  }
+  .profil-stat .lbl {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  /* ── INTRO ── */
+  .intro-box {
+    background: var(--dark);
+    border-radius: 14px;
+    padding: 26px 30px;
+    color: #fff;
+    margin-bottom: 32px;
+  }
+  .intro-box .label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 10px;
+  }
+  .intro-box p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.8;
+  }
+
+  /* ── SECTION TITRE ── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    color: var(--dark);
+    margin-bottom: 16px;
+  }
+
+  /* ── MATCH CARDS ── */
+  .match-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px 26px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  .match-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: var(--green-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .match-content .match-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 5px;
+  }
+  .match-content .match-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .match-content p {
+    font-size: 13.5px;
+    color: #4A4A6A;
+    line-height: 1.7;
+  }
+  .match-highlight {
+    display: inline-block;
+    background: rgba(45,122,95,0.1);
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, var(--orange), transparent);
+    margin: 32px 0;
+    opacity: 0.25;
+  }
+
+  /* ── PLUS VALUES ── */
+  .plus-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .plus-item {
+    background: var(--light);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .plus-dot {
+    width: 8px; height: 8px;
+    background: var(--orange);
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .plus-text {
+    font-size: 13px;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+  .plus-text strong {
+    display: block;
+    font-size: 12px;
+    color: var(--dark);
+    margin-bottom: 2px;
+  }
+
+  /* ── AVIS RECRUTEUR ── */
+  .avis-box {
+    background: linear-gradient(135deg, var(--slate), var(--dark));
+    border-radius: 14px;
+    padding: 28px 32px;
+    color: #fff;
+    margin-bottom: 32px;
+    position: relative;
+  }
+  .avis-box::before {
+    content: '"';
+    position: absolute;
+    top: 16px; left: 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    color: var(--orange);
+    opacity: 0.3;
+    line-height: 1;
+  }
+  .avis-box .avis-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+  .avis-box p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.8;
+    font-style: italic;
+    padding-left: 8px;
+  }
+  .avis-sign {
+    margin-top: 16px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    padding-left: 8px;
+  }
+
+  /* ── CTA ── */
+  .cta-box {
+    background: var(--orange);
+    border-radius: 14px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .cta-text .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .cta-text .cta-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+  }
+  .cta-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+  }
+  .cta-links a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .cta-links a.primary {
+    background: #fff;
+    color: var(--dark);
+    font-weight: 600;
+  }
+  .cta-links a.secondary {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 48px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .footer-note {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .footer-brand {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--dark);
+    opacity: 0.4;
+    text-align: right;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-top">
+    <div>
+      <div class="badge-confidentiel">● Dossier candidature · Confidentiel</div>
+      <h1>Pourquoi vous devriez<br>la <em>recevoir en entretien</em></h1>
+      <div class="header-sub">Poste : Conseiller(ère) de vente – EMMA Sainte-Geneviève-des-Bois</div>
+    </div>
+    <div class="header-right">
+      <div class="pour-label">Préparé pour</div>
+      <div class="pour-name">Gilles</div>
+      <div class="pour-poste">Franchisé EMMA · SGB</div>
+    </div>
+  </div>
+</header>
+
+<!-- ACCROCHE -->
+<div class="accroche">
+  <div class="accroche-inner">
+    « Sur les 3 axes que vous m'avez donnés comme critères essentiels, elle les coche tous. Je vous explique pourquoi. »
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- PROFIL EN CHIFFRES -->
+  <div class="profil-card">
+    <div class="profil-stat">
+      <span class="val">15 <span>ans</span></span>
+      <div class="lbl">chez Conforama<br>même enseigne</div>
+    </div>
+    <div class="profil-stat">
+      <span class="val">48 <span>ans</span></span>
+      <div class="lbl">profil senior<br>disponible & motivé</div>
+    </div>
+    <div class="profil-stat">
+      <span class="val">N°1 <span>FR</span></span>
+      <div class="lbl">magasin livraison<br>literie en France</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-box">
+    <div class="label">Contexte</div>
+    <p>
+      Elle vient du <strong>premier magasin de livraison de literie de France</strong> chez Conforama.
+      Ce n'est pas une vendeuse généraliste — c'est une spécialiste de la literie avec 15 ans d'immersion dans un environnement à fort volume, exigeant sur les process, les chiffres et le suivi client.
+      Après 15 ans dans la même enseigne, elle cherche une évolution : rejoindre une boutique à taille humaine, en phase de lancement, avec de vraies responsabilités. <strong>EMMA correspond exactement à ce qu'elle recherche.</strong>
+    </p>
+  </div>
+
+  <!-- LES 3 MATCHS -->
+  <div class="section-title">Les 3 critères que vous m'avez donnés — cochés un par un</div>
+
+  <!-- MATCH 1 -->
+  <div class="match-card">
+    <div class="match-icon">📦</div>
+    <div class="match-content">
+      <div class="match-label">Critère n°1 · Approvisionnements & logistique</div>
+      <div class="match-title">Elle gère déjà les fournisseurs en direct</div>
+      <p>
+        Depuis 6 mois, suite au rapprochement BUT–Conforama, les chefs de rayon Conforama ont été mis en contact direct avec les fournisseurs et la logistique de livraison — exactement comme c'est déjà le cas chez BUT.
+        Elle a donc déjà la main sur cette partie du métier, et elle nous a confié que <strong>c'est la partie qui lui plaît le plus</strong>.
+      </p>
+      <span class="match-highlight">✓ Déjà en poste sur ce périmètre depuis 6 mois</span>
+    </div>
+  </div>
+
+  <!-- MATCH 2 -->
+  <div class="match-card">
+    <div class="match-icon">📊</div>
+    <div class="match-content">
+      <div class="match-label">Critère n°2 · Analyse des indicateurs</div>
+      <div class="match-title">Les chiffres font partie de son quotidien</div>
+      <p>
+        Chez Conforama — comme dans toutes les grandes enseignes — le suivi des statistiques d'entrée, des taux de transformation et des paniers moyens est structurel.
+        Elle a souligné elle-même que son rôle consiste à <strong>analyser les chiffres pour aider les vendeurs à progresser</strong>. Ce n'est pas une compétence théorique — c'est son outil de travail quotidien.
+      </p>
+      <span class="match-highlight">✓ KPIs & tableaux de bord : pratique quotidienne</span>
+    </div>
+  </div>
+
+  <!-- MATCH 3 -->
+  <div class="match-card">
+    <div class="match-icon">🤝</div>
+    <div class="match-content">
+      <div class="match-label">Critère n°3 · Service client post-achat & SAV</div>
+      <div class="match-title">15 ans de service client dans la literie</div>
+      <p>
+        Le suivi des livraisons, la satisfaction client à réception, la gestion du SAV — c'est son métier depuis le début.
+        Elle exerce dans le premier magasin de livraison de literie de France : le volume de SAV et de suivi post-achat y est structurellement élevé. Elle y a développé une vraie expertise relationnelle.
+      </p>
+      <span class="match-highlight">✓ 15 ans d'expérience terrain sur ce point précis</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PLUS VALUES -->
+  <div class="section-title">Ce qui fait la différence en plus</div>
+  <div class="plus-grid">
+    <div class="plus-item">
+      <div class="plus-dot"></div>
+      <div class="plus-text">
+        <strong>Connaissance du marché literie</strong>
+        Elle connaît les marques, les gammes, les arguments produit. Pas de courbe d'apprentissage sur l'univers.
+      </div>
+    </div>
+    <div class="plus-item">
+      <div class="plus-dot"></div>
+      <div class="plus-text">
+        <strong>Proximité géographique</strong>
+        Elle n'habite pas loin. Pas de contrainte de transport, disponibilité pour les ouvertures et fermetures.
+      </div>
+    </div>
+    <div class="plus-item">
+      <div class="plus-dot"></div>
+      <div class="plus-text">
+        <strong>Envie d'évolution réelle</strong>
+        Après 15 ans dans une grande enseigne, elle veut des responsabilités et de l'autonomie. L'ouverture d'une boutique EMMA est une opportunité pour elle, pas un repli.
+      </div>
+    </div>
+    <div class="plus-item">
+      <div class="plus-dot"></div>
+      <div class="plus-text">
+        <strong>Niveau de discours</strong>
+        Très bon niveau d'expression et de présentation. Peut aller face aux clients les plus exigeants — ce qui compte chez EMMA compte tenu de la clientèle large.
+      </div>
+    </div>
+  </div>
+
+  <!-- AVIS RECRUTEUR -->
+  <div class="avis-box">
+    <div class="avis-label">Mon avis de recruteur</div>
+    <p>
+      Ce profil sort de l'ordinaire parce qu'il conjugue une vraie expertise technique de la literie, une maturité professionnelle, et une vraie motivation de reconversion vers un projet plus humain.
+      Les candidats qui cochent les 3 critères opérationnels que vous m'avez donnés ET qui ont cette connaissance du secteur, c'est rare.
+      Je vous recommande de la recevoir — au pire vous passez 45 minutes, au mieux vous trouvez votre première recrue.
+    </p>
+    <div class="avis-sign">— Thierry Bismuth · ODYSKILLS Recrutement</div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <div class="cta-text">
+      <div class="cta-title">On en parle ?</div>
+      <div class="cta-sub">Je suis disponible à tout moment pour répondre à vos questions.</div>
+    </div>
+    <div class="cta-links">
+      <a href="tel:0610703090" class="primary">📞 06 10 70 30 90</a>
+      <a href="mailto:thierry@thierrybismuth.com" class="secondary">✉️ thierry@thierrybismuth.com</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-note">
+    Document confidentiel transmis dans le cadre d'une mission de recrutement ODYSKILLS.<br>
+    Merci de ne pas diffuser sans accord préalable.
+  </div>
+  <div class="footer-brand">ODYSKILLS<br>Recrutement</div>
+</footer>
+
+</body>
+</html>
