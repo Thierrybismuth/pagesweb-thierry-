@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche Candidat – Emma – Sainte-Geneviève-des-Bois</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --emma-orange: #FF6B35;
+    --emma-dark: #1A1A2E;
+    --emma-mid: #2D2D44;
+    --emma-light: #F7F4EF;
+    --emma-cream: #FDF9F3;
+    --emma-muted: #8B8BA0;
+    --emma-accent: #FFB347;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--emma-cream);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--emma-dark);
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--emma-dark);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,53,0.25) 0%, transparent 70%);
+  }
+
+  .header-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 40px 48px 36px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 24px;
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: var(--emma-orange);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+  }
+
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    color: var(--emma-orange);
+  }
+
+  .header-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 16px;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+  }
+
+  .meta-item .dot {
+    width: 6px; height: 6px;
+    background: var(--emma-orange);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .emma-logo-area {
+    text-align: right;
+  }
+
+  .emma-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    color: var(--emma-orange);
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  .emma-sub {
+    font-size: 10px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ── ORANGE STRIP ── */
+  .strip {
+    background: var(--emma-orange);
+    padding: 12px 48px;
+    max-width: 100%;
+  }
+  .strip-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .strip p {
+    font-size: 13px;
+    color: #fff;
+    font-weight: 500;
+  }
+  .strip .label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    border-right: 1px solid rgba(255,255,255,0.4);
+    padding-right: 16px;
+    white-space: nowrap;
+  }
+
+  /* ── BODY ── */
+  .body {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 48px 48px 64px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 40px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .section-num {
+    width: 32px; height: 32px;
+    background: var(--emma-dark);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--emma-dark);
+    line-height: 1.2;
+  }
+
+  /* ── COMPETENCY CARDS ── */
+  .competency-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    border-left: 4px solid var(--emma-orange);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    position: relative;
+  }
+
+  .comp-label {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--emma-orange);
+    background: rgba(255,107,53,0.1);
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .comp-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--emma-dark);
+    margin-bottom: 8px;
+  }
+
+  .comp-text {
+    font-size: 14px;
+    color: #4A4A6A;
+    line-height: 1.7;
+  }
+
+  .comp-tip {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: var(--emma-light);
+    border-radius: 6px;
+    font-size: 12.5px;
+    color: var(--emma-dark);
+    font-weight: 500;
+  }
+
+  .comp-tip::before {
+    content: '💬 ';
+  }
+
+  /* ── CONTEXT BOX ── */
+  .context-box {
+    background: var(--emma-dark);
+    border-radius: 14px;
+    padding: 28px 32px;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .context-box .cb-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--emma-orange);
+    margin-bottom: 12px;
+  }
+
+  .context-box h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #fff;
+  }
+
+  .context-box p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.75;
+  }
+
+  .panier-visual {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .panier-step {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 14px 20px;
+    text-align: center;
+    flex: 1;
+    min-width: 100px;
+  }
+
+  .panier-step .amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--emma-accent);
+    display: block;
+  }
+
+  .panier-step .desc {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  .arrow {
+    font-size: 20px;
+    color: var(--emma-orange);
+    flex-shrink: 0;
+  }
+
+  /* ── EMMA CONTEXT ── */
+  .emma-context {
+    background: rgba(255,107,53,0.06);
+    border: 1px solid rgba(255,107,53,0.2);
+    border-radius: 12px;
+    padding: 22px 26px;
+    margin-bottom: 16px;
+  }
+
+  .emma-context p {
+    font-size: 14px;
+    color: #3A3A5A;
+    line-height: 1.7;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, var(--emma-orange), transparent);
+    margin: 40px 0;
+    opacity: 0.3;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 48px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-left {
+    font-size: 11px;
+    color: var(--emma-muted);
+    line-height: 1.6;
+  }
+
+  .footer-right {
+    text-align: right;
+  }
+
+  .odyskills-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--emma-dark);
+    opacity: 0.5;
+  }
+
+  /* ── LOCATION BAND ── */
+  .location-band {
+    background: var(--emma-light);
+    border-top: 1px solid rgba(0,0,0,0.07);
+    padding: 16px 48px;
+  }
+  .location-band-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .location-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .location-pin {
+    width: 28px; height: 28px;
+    background: var(--emma-orange);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .location-text .city {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--emma-dark);
+  }
+  .location-text .dept {
+    font-size: 12px;
+    color: var(--emma-muted);
+  }
+  .location-stat {
+    font-size: 12px;
+    color: var(--emma-muted);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  @media print {
+    body { background: white; }
+    .competency-card { box-shadow: none; border: 1px solid #eee; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div>
+      <div class="header-badge">Fiche Candidat · Confidentiel</div>
+      <h1>Conseiller(ère) de vente<br><em>Spécialiste literie</em></h1>
+      <div class="header-meta">
+        <div class="meta-item"><span class="dot"></span> Sainte-Geneviève-des-Bois (91)</div>
+        <div class="meta-item"><span class="dot"></span> Poste en boutique – CDI</div>
+        <div class="meta-item"><span class="dot"></span> Franchise EMMA – The Sleep Company</div>
+      </div>
+    </div>
+    <div class="emma-logo-area">
+      <div class="emma-brand">emma</div>
+      <div class="emma-sub">The Sleep Company</div>
+    </div>
+  </div>
+</header>
+
+<!-- LOCATION BAND -->
+<div class="location-band">
+  <div class="location-band-inner">
+    <div class="location-info">
+      <div class="location-pin">📍</div>
+      <div class="location-text">
+        <div class="city">Sainte-Geneviève-des-Bois</div>
+        <div class="dept">Essonne (91) · Île-de-France · ~35 000 habitants</div>
+      </div>
+    </div>
+    <div class="location-stat">
+      Bassin de clientèle dense<br>
+      Ville résidentielle dynamique au sud de Paris
+    </div>
+  </div>
+</div>
+
+<!-- ORANGE STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span class="label">À lire avant l'entretien</span>
+    <p>Ce document vous prépare aux 3 axes que le franchisé évaluera en priorité. Valorisez vos expériences concrètes sur chacun d'eux.</p>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- EMMA CONTEXT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">L'enseigne</div>
+    </div>
+    <div class="emma-context">
+      <p>
+        <strong>EMMA – The Sleep Company</strong> est le leader mondial du sommeil, présent dans plus de 30 pays avec plus de 10 millions de dormeurs conquis.
+        En France, la marque déploie désormais un réseau physique de boutiques franchisées pour compléter son e-commerce. Son matelas Original a été plusieurs fois récompensé par l'UFC-Que Choisir.
+        <br><br>
+        Le magasin de Sainte-Geneviève-des-Bois, <strong>dont l'ouverture est prévue en juin 2026</strong>, proposera une <strong>gamme courte et maîtrisée</strong> : matelas (plusieurs niveaux de gamme), sommiers, surmatelas, oreillers et accessoires de literie.
+        Le flux client attendu est important dès l'ouverture — l'enjeu commercial principal sera la <strong>montée en gamme</strong> et la <strong>vente additionnelle</strong>.
+      </p>
+    </div>
+
+    <!-- POSITIONNEMENT APPLE -->
+    <div style="background:#fff; border-radius:12px; padding:24px 28px; border-left:4px solid var(--emma-dark); box-shadow:0 2px 12px rgba(0,0,0,0.06); margin-top:16px;">
+      <div style="display:inline-block; font-size:9px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--emma-dark); background:rgba(26,26,46,0.08); padding:3px 10px; border-radius:20px; margin-bottom:12px;">Le positionnement Emma</div>
+      <div style="font-family:'DM Serif Display', serif; font-size:17px; color:var(--emma-dark); margin-bottom:10px;">Emma, c'est un peu le Apple de la literie.</div>
+      <p style="font-size:14px; color:#4A4A6A; line-height:1.75;">
+        Grâce à un marketing digital très puissant et une forte présence sur les réseaux sociaux, Emma attire une clientèle <strong>exceptionnellement large</strong> — du client modeste qui fait l'effort de s'offrir le modèle qui lui fait envie, jusqu'au profil CSP+ qui pourrait se tourner vers une marque perçue comme plus luxueuse mais qui est séduit par l'univers de la marque.
+        <br><br>
+        C'est une spécificité rare dans la literie : la plupart des enseignes verticalisent leur clientèle par le prix. Emma, non.
+        <strong>L'acte de vente doit donc s'adapter à chaque profil</strong> — exactement comme dans un Apple Store, où l'on vend un iPhone entrée de gamme à celui qui fait un effort financier pour y accéder, et le modèle le plus premium au cadre sup qui pousse la même porte quelques minutes plus tard.
+      </p>
+    </div>
+
+    <!-- DEUX PROMESSES FORTES -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px;">
+      <div style="background:var(--emma-dark); border-radius:12px; padding:22px 24px; color:#fff;">
+        <div style="font-size:28px; margin-bottom:10px;">📦</div>
+        <div style="font-family:'DM Serif Display', serif; font-size:16px; color:#fff; margin-bottom:8px;">Emporter le jour même</div>
+        <p style="font-size:13px; color:rgba(255,255,255,0.7); line-height:1.6;">
+          Le client repart avec son matelas <strong style="color:#fff;">le jour de son passage en boutique</strong>, déjà emballé et prêt à transporter. Un argument de vente fort, rare dans la literie traditionnelle.
+        </p>
+      </div>
+      <div style="background:var(--emma-dark); border-radius:12px; padding:22px 24px; color:#fff;">
+        <div style="font-size:28px; margin-bottom:10px;">🌙</div>
+        <div style="font-family:'DM Serif Display', serif; font-size:16px; color:#fff; margin-bottom:8px;">100 nuits d'essai</div>
+        <p style="font-size:13px; color:rgba(255,255,255,0.7); line-height:1.6;">
+          Emma offre <strong style="color:#fff;">100 nuits d'essai gratuit</strong> avec retour et remboursement intégral si le client n'est pas satisfait. Une promesse qui lève les dernières objections à l'achat.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANIER MOYEN -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">La mécanique commerciale</div>
+    </div>
+    <div class="context-box">
+      <div class="cb-label">Comprendre le modèle de vente</div>
+      <h3>Du prix d'entrée au panier complet</h3>
+      <p>
+        Les clients arrivent en boutique avec un budget ou un modèle précis en tête. 
+        Votre rôle : les accompagner vers la meilleure solution pour leur sommeil — 
+        ce qui se traduit par un panier moyen significativement supérieur au prix d'appel initial, 
+        grâce à une montée en gamme matelas et aux ventes additionnelles (sommier, surmatelas, oreillers…).
+      </p>
+      <div class="panier-visual">
+        <div class="panier-step">
+          <span class="amount">~600€</span>
+          <div class="desc">Budget / modèle<br>d'entrée en boutique</div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="panier-step">
+          <span class="amount">+</span>
+          <div class="desc">Montée en gamme<br>+ sommier + accessoires</div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="panier-step">
+          <span class="amount">1 000–2 000€</span>
+          <div class="desc">Panier moyen<br>objectif</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3 COMPETENCES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">3 compétences à valoriser impérativement en entretien</div>
+    </div>
+
+    <!-- COMP 1 -->
+    <div class="competency-card">
+      <div class="comp-label">Compétence n°1</div>
+      <div class="comp-title">Gestion des approvisionnements & logistique</div>
+      <div class="comp-text">
+        Le franchisé attache une importance particulière à la rigueur opérationnelle. 
+        La gestion des stocks, le passage des commandes fournisseurs, le suivi logistique 
+        des livraisons et la maîtrise des niveaux d'approvisionnement font partie intégrante du quotidien du poste.
+        <br><br>
+        Toute expérience dans ce domaine — même partielle — est un vrai différenciateur.
+        Si vous avez géré des stocks, passé des commandes, utilisé un outil de gestion ou suivi des flux de marchandises, 
+        <strong>mentionnez-le avec des exemples chiffrés.</strong>
+      </div>
+      <div class="comp-tip">
+        En entretien : donnez un exemple concret d'une situation où votre rigueur logistique a évité une rupture de stock ou optimisé un approvisionnement.
+      </div>
+    </div>
+
+    <!-- COMP 2 -->
+    <div class="competency-card">
+      <div class="comp-label">Compétence n°2</div>
+      <div class="comp-title">Analyse des indicateurs de performance</div>
+      <div class="comp-text">
+        Le franchisé est orienté résultats et attend de son équipe une vraie capacité à lire 
+        et interpréter les chiffres : statistiques d'entrée (taux de conversion), 
+        performances de vente par référence, panier moyen, ratio de ventes additionnelles.
+        <br><br>
+        Une appétence pour les données commerciales et la capacité à en tirer des actions concrètes 
+        seront fortement valorisées.
+      </div>
+      <div class="comp-tip">
+        En entretien : montrez que vous avez déjà suivi des KPIs commerciaux, que vous savez lire un tableau de bord ou analyser vos propres résultats de vente.
+      </div>
+    </div>
+
+    <!-- COMP 3 -->
+    <div class="competency-card">
+      <div class="comp-label">Compétence n°3</div>
+      <div class="comp-title">Service client post-achat & SAV</div>
+      <div class="comp-text">
+        Chez EMMA, l'acte de vente ne s'arrête pas à la signature. 
+        Dès la commande passée, il faut assurer le suivi de livraison avec le client, 
+        s'assurer de sa satisfaction à réception, et gérer les éventuels retours ou SAV 
+        avec réactivité et professionnalisme.
+        <br><br>
+        Une expérience en service client — notamment dans un contexte de livraison de produits physiques — 
+        est un vrai atout à mettre en avant.
+      </div>
+      <div class="comp-tip">
+        En entretien : décrivez une situation où vous avez géré un client mécontent après-vente et l'avez transformé en client satisfait ou fidèle.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- OUVERTURE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Un contexte particulier : l'ouverture du magasin</div>
+    </div>
+    <div class="context-box" style="border-left: 4px solid var(--emma-accent);">
+      <div class="cb-label">⚡ Point d'attention majeur</div>
+      <h3>Prise de poste = lancement de boutique</h3>
+      <p>
+        La boutique de Sainte-Geneviève-des-Bois <strong>ouvre ses portes dans les prochaines semaines</strong> — 
+        vous intégrerez donc une équipe en phase de démarrage, avec tout ce que cela implique en termes d'énergie, d'adaptabilité et d'initiative.
+        <br><br>
+        Les <strong>mois de juin et juillet</strong> représentent traditionnellement un pic d'activité pour les boutiques EMMA à l'ouverture : 
+        fort flux de clients, opérations de communication locale, et rodage des process opérationnels (stocks, livraisons, SAV) en conditions réelles.
+      </p>
+      <div style="display:flex; gap:12px; margin-top:20px; flex-wrap:wrap;">
+        <div style="flex:1; min-width:140px; background:rgba(255,255,255,0.08); border-radius:10px; padding:14px 18px;">
+          <div style="font-size:22px; margin-bottom:6px;">🚀</div>
+          <div style="font-size:13px; font-weight:600; color:#fff; margin-bottom:4px;">Phase de lancement</div>
+          <div style="font-size:12px; color:rgba(255,255,255,0.55);">Juin 2026 · ouverture boutique</div>
+        </div>
+        <div style="flex:1; min-width:140px; background:rgba(255,255,255,0.08); border-radius:10px; padding:14px 18px;">
+          <div style="font-size:22px; margin-bottom:6px;">📈</div>
+          <div style="font-size:13px; font-weight:600; color:#fff; margin-bottom:4px;">Pic d'activité</div>
+          <div style="font-size:12px; color:rgba(255,255,255,0.55);">Juin–Juillet · fort flux clients attendu</div>
+        </div>
+        <div style="flex:1; min-width:140px; background:rgba(255,255,255,0.08); border-radius:10px; padding:14px 18px;">
+          <div style="font-size:22px; margin-bottom:6px;">⚙️</div>
+          <div style="font-size:13px; font-weight:600; color:#fff; margin-bottom:4px;">Rodage opérationnel</div>
+          <div style="font-size:12px; color:rgba(255,255,255,0.55);">Process, stocks, SAV · en conditions réelles</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- NOTE FINALE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Contexte & ambiance du poste</div>
+    </div>
+    <div class="emma-context">
+      <p>
+        Le franchisé — entrepreneur indépendant — est très impliqué dans le lancement de sa boutique et recherche un(e) collaborateur(trice) capable de démarrer avec lui dans un contexte d'ouverture exigeant.
+        <br><br>
+        La gamme étant volontairement courte et bien maîtrisée, la valeur ajoutée du poste reposera sur la <strong>qualité du conseil</strong>, la <strong>capacité à créer une relation de confiance</strong> avec chaque client et à proposer la solution la plus adaptée — pas nécessairement la moins chère.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA CONTACT -->
+<div style="max-width:820px; margin:0 auto; padding:0 48px 40px;">
+  <div style="background:var(--emma-orange); border-radius:14px; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;">
+    <div>
+      <div style="font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-bottom:8px;">Une question sur le poste ?</div>
+      <div style="font-family:'DM Serif Display', serif; font-size:20px; color:#fff; line-height:1.3;">Contactez-moi à tout moment,<br>je suis disponible pour vous répondre.</div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-end;">
+      <a href="tel:0610703090" style="display:flex; align-items:center; gap:10px; background:#fff; color:var(--emma-dark); text-decoration:none; padding:10px 20px; border-radius:8px; font-weight:600; font-size:14px;">
+        📞 06 10 70 30 90
+      </a>
+      <a href="/cdn-cgi/l/email-protection#02766a6b6770707b42766a6b6770707b606b716f77766a2c616d6f" style="display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.15); color:#fff; text-decoration:none; padding:10px 20px; border-radius:8px; font-weight:500; font-size:13px;">
+        ✉️ <span class="__cf_email__" data-cfemail="3c485455594e4e457c485455594e4e455e554f51494854125f5351">[email&#160;protected]</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-left">
+    Ce document est transmis à titre confidentiel dans le cadre d'un processus de recrutement piloté par ODYSKILLS.<br>
+    Merci de ne pas le diffuser sans accord préalable.
+  </div>
+  <div class="footer-right">
+    <div class="odyskills-tag">ODYSKILLS · Recrutement<
