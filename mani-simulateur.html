@@ -105,15 +105,15 @@
     <div class="tier-row">
       <div class="tier-item" style="background:#fdecd8">
         <div><div class="tier-name">Fast Fashion</div><div class="tier-sub">Zara, H&amp;M, Shein… · <em>7 &#8364;/pièce</em></div></div>
-        <div style="display:flex;align-items:center;gap:4px"><input class="tier-input" id="t-ff" type="number" min="0" max="100" value="40" oninput="updateTierTotal()"/><span style="font-size:16px;color:#8a7a9a">%</span></div>
+        <div style="display:flex;align-items:center;gap:4px"><input class="tier-input" id="t-ff" type="number" min="0" max="100" value="8" oninput="updateTierTotal()"/><span style="font-size:16px;color:#8a7a9a">%</span></div>
       </div>
       <div class="tier-item" style="background:#f0f4ff">
         <div><div class="tier-name">Intermédiaire</div><div class="tier-sub">Marques milieu de gamme · <em>12 &#8364;/pièce</em></div></div>
-        <div style="display:flex;align-items:center;gap:4px"><input class="tier-input" id="t-mid" type="number" min="0" max="100" value="40" oninput="updateTierTotal()"/><span style="font-size:16px;color:#8a7a9a">%</span></div>
+        <div style="display:flex;align-items:center;gap:4px"><input class="tier-input" id="t-mid" type="number" min="0" max="100" value="20" oninput="updateTierTotal()"/><span style="font-size:16px;color:#8a7a9a">%</span></div>
       </div>
       <div class="tier-item" style="background:#e8dff5">
         <div><div class="tier-name">Premium</div><div class="tier-sub">Créateurs, luxe accessible · <em>20 &#8364;/pièce</em></div></div>
-        <div style="display:flex;align-items:center;gap:4px"><input class="tier-input" id="t-prem" type="number" min="0" max="100" value="20" oninput="updateTierTotal()"/><span style="font-size:16px;color:#8a7a9a">%</span></div>
+        <div style="display:flex;align-items:center;gap:4px"><input class="tier-input" id="t-prem" type="number" min="0" max="100" value="60" oninput="updateTierTotal()"/><span style="font-size:16px;color:#8a7a9a">%</span></div>
       </div>
     </div>
     <div class="tier-total" id="tier-total-msg" style="color:#7c5fa0">Total : 100% &#10003; parfait !</div>
@@ -357,7 +357,7 @@ function restart(){
   ['co-prenom','co-tel','co-email'].forEach(function(id){document.getElementById(id).value='';});
   document.getElementById('co-dept').value='';
   document.getElementById('btn-contact-next').disabled=true;
-  document.getElementById('t-ff').value=40;document.getElementById('t-mid').value=40;document.getElementById('t-prem').value=20;
+  document.getElementById('t-ff').value=8;document.getElementById('t-mid').value=20;document.getElementById('t-prem').value=60;
   show('s-intro');
 }
 </script>
