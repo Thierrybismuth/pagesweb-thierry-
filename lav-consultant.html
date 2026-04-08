@@ -102,8 +102,29 @@ h2{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,46px);line-heig
 </head>
 <body>
 <script>
-function sendHeight(){window.parent.postMessage({type:'setHeight',height:document.body.scrollHeight},'*');}
-window.addEventListener('load',sendHeight);window.addEventListener('resize',sendHeight);
+function sendHeight() {
+  var h = Math.max(
+    document.body.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.scrollHeight,
+    document.documentElement.offsetHeight
+  );
+  window.parent.postMessage({ type: 'setHeight', height: h }, '*');
+  window.parent.postMessage({ iframeHeight: h }, '*');
+  window.parent.postMessage(h, '*');
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+setTimeout(sendHeight, 300);
+setTimeout(sendHeight, 800);
+setTimeout(sendHeight, 2000);
+setTimeout(sendHeight, 4000);
+if (window.MutationObserver) {
+  new MutationObserver(sendHeight).observe(document.body, { childList: true, subtree: true, attributes: true });
+}
+document.querySelectorAll('img').forEach(function(img) {
+  if (!img.complete) img.addEventListener('load', sendHeight);
+});
 </script>
 <nav class="nav-retour">
   <a href="multipotentiel.html" target="_top">Réseau Multi-Potentiel</a>
