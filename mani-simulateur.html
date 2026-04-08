@@ -89,15 +89,15 @@
     <p class="sub">Répartis en % — le total doit faire 100.</p>
     <div class="tier-row">
       <div class="tier-item" style="background:#fdecd8">
-        <div><div class="tier-name">Fast Fashion</div><div class="tier-sub">Zara, H&amp;M, Shein… · <em>5 &#8364;/pièce</em></div></div>
+        <div><div class="tier-name">Fast Fashion</div><div class="tier-sub">Zara, H&amp;M, Shein… · <em>7 &#8364;/pièce</em></div></div>
         <div style="display:flex;align-items:center;gap:4px"><input class="tier-input" id="t-ff" type="number" min="0" max="100" value="40" oninput="updateTierTotal()"/><span style="font-size:16px;color:#8a7a9a">%</span></div>
       </div>
       <div class="tier-item" style="background:#f0f4ff">
-        <div><div class="tier-name">Intermédiaire</div><div class="tier-sub">Marques milieu de gamme · <em>10 &#8364;/pièce</em></div></div>
+        <div><div class="tier-name">Intermédiaire</div><div class="tier-sub">Marques milieu de gamme · <em>12 &#8364;/pièce</em></div></div>
         <div style="display:flex;align-items:center;gap:4px"><input class="tier-input" id="t-mid" type="number" min="0" max="100" value="40" oninput="updateTierTotal()"/><span style="font-size:16px;color:#8a7a9a">%</span></div>
       </div>
       <div class="tier-item" style="background:#e8dff5">
-        <div><div class="tier-name">Premium</div><div class="tier-sub">Créateurs, luxe accessible · <em>15 &#8364;/pièce</em></div></div>
+        <div><div class="tier-name">Premium</div><div class="tier-sub">Créateurs, luxe accessible · <em>20 &#8364;/pièce</em></div></div>
         <div style="display:flex;align-items:center;gap:4px"><input class="tier-input" id="t-prem" type="number" min="0" max="100" value="20" oninput="updateTierTotal()"/><span style="font-size:16px;color:#8a7a9a">%</span></div>
       </div>
     </div>
@@ -213,7 +213,7 @@ function renderResults(){
   var ff=parseInt(document.getElementById('t-ff').value)||0;
   var mid=parseInt(document.getElementById('t-mid').value)||0;
   var prem=parseInt(document.getElementById('t-prem').value)||0;
-  var avg=(5*ff+10*mid+15*prem)/100;
+  var avg=(7*ff+12*mid+20*prem)/100;
   var tb=0,tp=0;
   ITEMS.forEach(function(it){tp+=qty[it.key];tb+=avg*it.coeff*qty[it.key];});
   var tv=tb*0.7,aw=tv*0.8,nc=aw*0.5,pr=Math.round(tp*0.3);
