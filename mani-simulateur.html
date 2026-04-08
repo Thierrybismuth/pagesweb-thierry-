@@ -124,6 +124,11 @@
       <div class="net-amount" id="r-net"></div>
       <div class="net-sub" id="r-pieces"></div>
     </div>
+    <div id="tip-copine" style="display:none;background:#fff3e0;border:1.5px solid #e07d3c;border-radius:14px;padding:16px 18px;margin-bottom:16px;font-size:13px;color:#2d1f3d;font-family:Arial,sans-serif;line-height:1.7;">
+      <div style="font-weight:bold;color:#e07d3c;margin-bottom:6px;">&#128161; Conseil pour toi</div>
+      Avec moins de 50 pièces, l'organisation d'une vente solo pourrait te sembler un peu légère au regard de la journée que ça représente.<br/><br/>
+      <strong>Bonne idée :</strong> réunis-toi avec une copine, ta maman ou ta fille pour faire une vente commune — chacune apporte son stock et on passe une super journée ensemble !
+    </div>
     <div class="service-box">
       <div class="service-title">Ce que Mani prend en charge pour toi</div>
       &#128663; Déplacement, transport et hébergement<br/>
@@ -221,6 +226,12 @@ function renderResults(){
   document.getElementById('r-net').textContent=fmt(nc);
   document.getElementById('r-pieces').textContent='+ tu gardes ~'+pr+' pièces non vendues (30% du stock)';
   window._nc=nc;
+  var tip=document.getElementById('tip-copine');
+  if(tp<50){
+    tip.style.display='block';
+  } else {
+    tip.style.display='none';
+  }
 }
 function checkForm(){var ok=document.getElementById('c-prenom').value.trim()&&document.getElementById('c-tel').value.trim();document.getElementById('btn-confirm').disabled=!ok;}
 function submitForm(){
