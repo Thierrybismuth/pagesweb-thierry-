@@ -1,204 +1,244 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Simulateur Whatnot — Mani Univers</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #fdf8f3 0%, #f5eaf8 100%);
-      font-family: Georgia, serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 24px 16px;
-    }
-    #root { width: 100%; display: flex; justify-content: center; }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{min-height:100vh;background:linear-gradient(135deg,#fdf8f3 0%,#f5eaf8 100%);font-family:Georgia,serif;display:flex;flex-direction:column;align-items:center;padding:24px 16px;}
+    .card{background:#fff9f4;border-radius:20px;box-shadow:0 4px 32px rgba(124,95,160,0.12);padding:36px 32px;max-width:480px;width:100%;border:1px solid #e8d8f0;}
+    .logo{text-align:center;margin-bottom:8px;font-size:13px;letter-spacing:3px;color:#8a7a9a;text-transform:uppercase;font-family:Arial,sans-serif;}
+    h1{font-size:26px;color:#2d1f3d;text-align:center;margin-bottom:8px;line-height:1.3;}
+    h2{font-size:20px;color:#2d1f3d;text-align:center;margin-bottom:6px;line-height:1.3;}
+    .sub{font-size:14px;color:#8a7a9a;text-align:center;margin-bottom:28px;font-family:Arial,sans-serif;line-height:1.5;}
+    .hint-box{background:#fdecd8;border-radius:12px;padding:14px 16px;margin-bottom:24px;font-size:13px;color:#2d1f3d;font-family:Arial,sans-serif;line-height:1.7;}
+    .nav{display:flex;gap:12px;justify-content:center;margin-top:8px;}
+    .btn-primary{background:#7c5fa0;color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:bold;cursor:pointer;font-family:Arial,sans-serif;}
+    .btn-secondary{background:transparent;color:#8a7a9a;border:1px solid #e8d8f0;border-radius:12px;padding:14px 24px;font-size:14px;cursor:pointer;font-family:Arial,sans-serif;}
+    .btn-primary:hover{background:#6a4f8e;}
+    .progress{display:flex;gap:6px;justify-content:center;margin-bottom:28px;}
+    .dot{height:8px;border-radius:4px;transition:all 0.3s;}
+    .qty-row{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:28px;}
+    .qty-label{font-size:22px;color:#2d1f3d;text-align:center;margin-bottom:20px;}
+    .btn-circle{width:44px;height:44px;border-radius:50%;font-size:22px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;}
+    .btn-minus{border:2px solid #7c5fa0;background:#e8dff5;color:#7c5fa0;}
+    .btn-plus{border:2px solid #e07d3c;background:#fdecd8;color:#e07d3c;}
+    .qty-num{font-size:42px;font-weight:bold;color:#2d1f3d;min-width:64px;text-align:center;}
+    .tier-row{display:flex;flex-direction:column;gap:14px;margin-bottom:12px;}
+    .tier-item{border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;}
+    .tier-name{font-size:14px;font-weight:bold;color:#2d1f3d;font-family:Arial,sans-serif;}
+    .tier-sub{font-size:12px;color:#8a7a9a;font-family:Arial,sans-serif;}
+    .tier-input{width:60px;text-align:center;font-size:20px;font-weight:bold;color:#2d1f3d;border:2px solid #e8d8f0;border-radius:8px;padding:6px 4px;font-family:Georgia,serif;background:#fff;outline:none;}
+    .tier-total{text-align:center;font-size:13px;font-family:Arial,sans-serif;margin-bottom:16px;font-weight:bold;}
+    .result-block{background:#e8dff5;border-radius:14px;padding:20px 22px;margin-bottom:16px;}
+    .result-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #e8d8f0;}
+    .result-row:last-child{border-bottom:none;}
+    .result-label{font-size:13px;color:#8a7a9a;font-family:Arial,sans-serif;}
+    .result-val{font-size:14px;color:#2d1f3d;font-family:Georgia,serif;}
+    .result-val.big{font-size:22px;font-weight:bold;color:#7c5fa0;}
+    .net-box{background:#e07d3c;border-radius:14px;padding:22px;text-align:center;margin-bottom:16px;}
+    .net-label{font-size:13px;color:#fff;opacity:0.85;font-family:Arial,sans-serif;margin-bottom:4px;}
+    .net-amount{font-size:44px;font-weight:bold;color:#fff;font-family:Georgia,serif;}
+    .net-sub{font-size:12px;color:#fff;opacity:0.85;font-family:Arial,sans-serif;margin-top:6px;}
+    .service-box{background:#f5eaf8;border-radius:14px;padding:16px 18px;margin-bottom:16px;font-size:13px;color:#2d1f3d;font-family:Arial,sans-serif;line-height:1.8;}
+    .service-title{font-size:13px;font-weight:bold;color:#7c5fa0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;}
+    .cta-box{background:#fff9f4;border:2px solid #7c5fa0;border-radius:16px;padding:22px;margin-top:16px;}
+    .cta-title{font-size:16px;font-weight:bold;color:#2d1f3d;text-align:center;margin-bottom:16px;}
+    .cta-input{width:100%;border:1.5px solid #e8d8f0;border-radius:10px;padding:12px 14px;font-size:14px;font-family:Arial,sans-serif;color:#2d1f3d;background:#fdf8f3;outline:none;margin-bottom:10px;display:block;}
+    .btn-confirm{width:100%;background:#e07d3c;color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:bold;cursor:pointer;font-family:Arial,sans-serif;margin-top:4px;}
+    .btn-confirm:disabled{background:#ccc;cursor:not-allowed;}
+    .success-box{background:#e8f5e9;border-radius:12px;padding:16px;text-align:center;color:#2e7d32;font-family:Arial,sans-serif;font-size:14px;line-height:1.7;}
+    .tags{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+    .tag{background:#e8dff5;border-radius:8px;padding:5px 12px;font-size:12px;color:#2d1f3d;font-family:Arial,sans-serif;}
+    .screen{display:none;}
+    .screen.active{display:block;}
+    .hint-italic{font-size:12px;color:#e07d3c;text-align:center;margin-bottom:24px;font-style:italic;font-family:Arial,sans-serif;}
   </style>
 </head>
 <body>
-  <div id="root"></div>
+<div class="card">
 
-  <script type="text/babel">
-    const { useState } = React;
+  <div id="s-intro" class="screen active">
+    <div class="logo">mani univers</div>
+    <h1>Combien vaut ta garde-robe ?&#x2728;</h1>
+    <p class="sub">En quelques questions, découvre combien tu pourrais gagner en vendant tes vêtements sur Whatnot — avec Mani pour tout organiser.</p>
+    <div class="hint-box"><strong>&#127919; Pas besoin de tout compter.</strong><br/>C'est un estimatif — une fourchette, pas une promesse.</div>
+    <div class="nav"><button class="btn-primary" onclick="goNext()">Commencer l'estimation &#8594;</button></div>
+  </div>
 
-    const ITEMS = [
-      { key: "tshirts",     label: "T-shirts",    emoji: "👕", coeff: 0.7 },
-      { key: "pantalons",   label: "Pantalons",   emoji: "👖", coeff: 1.5 },
-      { key: "jupes",       label: "Jupes",       emoji: "👗", coeff: 1.0 },
-      { key: "robes",       label: "Robes",       emoji: "👗", coeff: 1.5 },
-      { key: "chemisiers",  label: "Chemisiers",  emoji: "👔", coeff: 1.0 },
-      { key: "vestes",      label: "Vestes",      emoji: "🧥", coeff: 1.5 },
-      { key: "chaussures",  label: "Chaussures",  emoji: "👠", coeff: 1.5 },
-      { key: "accessoires", label: "Accessoires", emoji: "👜", coeff: 0.7 },
-    ];
+  <div id="s-items" class="screen">
+    <div class="logo">mani univers</div>
+    <div class="progress" id="progress"></div>
+    <p class="hint-italic">Ordre de grandeur — pas besoin de compter précisément &#128522;</p>
+    <div class="qty-label" id="item-label"></div>
+    <div class="qty-row">
+      <button class="btn-circle btn-minus" onclick="changeQty(-1)">&#8722;</button>
+      <div class="qty-num" id="qty-display">0</div>
+      <button class="btn-circle btn-plus" onclick="changeQty(1)">&#43;</button>
+    </div>
+    <div class="nav">
+      <button class="btn-secondary" onclick="goBack()">&#8592; Retour</button>
+      <button class="btn-primary" onclick="goNext()">Suivant &#8594;</button>
+    </div>
+  </div>
 
-    const p = {
-      bg: "#fdf8f3", card: "#fff9f4",
-      purple: "#7c5fa0", purpleLight: "#e8dff5",
-      orange: "#e07d3c", orangeLight: "#fdecd8",
-      text: "#2d1f3d", muted: "#8a7a9a", border: "#e8d8f0",
-    };
+  <div id="s-tiers" class="screen">
+    <div class="logo">mani univers</div>
+    <h2>Ta garde-robe, globalement ?</h2>
+    <p class="sub">Répartis en % — le total doit faire 100.</p>
+    <div class="tier-row">
+      <div class="tier-item" style="background:#fdecd8">
+        <div><div class="tier-name">Fast Fashion</div><div class="tier-sub">Zara, H&amp;M, Shein… · <em>5 &#8364;/pièce</em></div></div>
+        <div style="display:flex;align-items:center;gap:4px"><input class="tier-input" id="t-ff" type="number" min="0" max="100" value="40" oninput="updateTierTotal()"/><span style="font-size:16px;color:#8a7a9a">%</span></div>
+      </div>
+      <div class="tier-item" style="background:#f0f4ff">
+        <div><div class="tier-name">Intermédiaire</div><div class="tier-sub">Marques milieu de gamme · <em>10 &#8364;/pièce</em></div></div>
+        <div style="display:flex;align-items:center;gap:4px"><input class="tier-input" id="t-mid" type="number" min="0" max="100" value="40" oninput="updateTierTotal()"/><span style="font-size:16px;color:#8a7a9a">%</span></div>
+      </div>
+      <div class="tier-item" style="background:#e8dff5">
+        <div><div class="tier-name">Premium</div><div class="tier-sub">Créateurs, luxe accessible · <em>15 &#8364;/pièce</em></div></div>
+        <div style="display:flex;align-items:center;gap:4px"><input class="tier-input" id="t-prem" type="number" min="0" max="100" value="20" oninput="updateTierTotal()"/><span style="font-size:16px;color:#8a7a9a">%</span></div>
+      </div>
+    </div>
+    <div class="tier-total" id="tier-total-msg" style="color:#7c5fa0">Total : 100% &#10003; parfait !</div>
+    <div class="nav">
+      <button class="btn-secondary" onclick="goBack()">&#8592; Retour</button>
+      <button class="btn-primary" id="btn-tiers-next" onclick="goNext()">Voir mon estimation &#8594;</button>
+    </div>
+  </div>
 
-    function ProgressBar({ current }) {
-      return (
-        <div style={{ display:"flex", gap:6, justifyContent:"center", marginBottom:28 }}>
-          {ITEMS.map((item, i) => (
-            <div key={item.key} style={{
-              width: i === current ? 20 : 8, height: 8, borderRadius: 4,
-              background: i < current ? p.purple : i === current ? p.orange : p.border,
-              transition: "all 0.3s"
-            }} />
-          ))}
-        </div>
-      );
-    }
+  <div id="s-results" class="screen">
+    <div class="logo">mani univers</div>
+    <h2 style="margin-bottom:20px">Ton estimation &#127881;</h2>
+    <div class="tags" id="tags"></div>
+    <div style="font-size:13px;color:#8a7a9a;font-family:Arial,sans-serif;margin-bottom:20px" id="recap-line"></div>
+    <div class="result-block">
+      <div class="result-row"><span class="result-label">Valeur brute estimée</span><span class="result-val" id="r-brut"></span></div>
+      <div class="result-row"><span class="result-label">Après 70% de vente réaliste</span><span class="result-val" id="r-vendu"></span></div>
+      <div class="result-row"><span class="result-label">Après commission Whatnot (&#8722;20%)</span><span class="result-val" id="r-whatnot"></span></div>
+      <div class="result-row"><span class="result-label">Ta part (50%)</span><span class="result-val big" id="r-part"></span></div>
+    </div>
+    <div class="net-box">
+      <div class="net-label">Dans ta poche</div>
+      <div class="net-amount" id="r-net"></div>
+      <div class="net-sub" id="r-pieces"></div>
+    </div>
+    <div class="service-box">
+      <div class="service-title">Ce que Mani prend en charge pour toi</div>
+      &#128663; Déplacement, transport et hébergement<br/>
+      &#128227; Communication en amont sur ses réseaux &amp; abonnés Whatnot<br/>
+      &#127914; Organisation de la vente, mise en place des stands<br/>
+      &#129309; Journée entière ensemble — vente depuis son compte<br/>
+      &#128230; Mise en boîte, expédition &amp; logistique relais colis
+    </div>
+    <div class="cta-box">
+      <div class="cta-title">Tu veux qu'on se rappelle ? &#128222;</div>
+      <div id="cta-form">
+        <input class="cta-input" id="c-prenom" placeholder="Ton prénom" oninput="checkForm()"/>
+        <input class="cta-input" id="c-tel" placeholder="Ton numéro de téléphone" oninput="checkForm()"/>
+        <input class="cta-input" id="c-date" placeholder="Date souhaitée (ex : juin 2025)"/>
+        <button class="btn-confirm" id="btn-confirm" onclick="submitForm()" disabled>Confirmer ma demande &#10024;</button>
+      </div>
+      <div id="cta-success" style="display:none" class="success-box"></div>
+    </div>
+    <div style="text-align:center;margin-top:16px">
+      <button class="btn-secondary" style="font-size:12px" onclick="restart()">Recommencer &#8635;</button>
+    </div>
+  </div>
 
-    function App() {
-      const [step, setStep] = useState("intro");
-      const [qty, setQty] = useState({ tshirts:0, pantalons:0, jupes:0, robes:0, chemisiers:0, vestes:0, chaussures:0, accessoires:0 });
-      const [tiers, setTiers] = useState({ ff:40, mid:40, prem:20 });
-      const [contact, setContact] = useState({ prenom:"", tel:"", date:"" });
-      const [submitted, setSubmitted] = useState(false);
-
-      const idx = ITEMS.findIndex(i => i.key === step);
-      const item = ITEMS[idx];
-      const tierTotal = tiers.ff + tiers.mid + tiers.prem;
-      const tierOk = tierTotal === 100;
-
-      const next = () => {
-        if (step === "intro") { setStep(ITEMS[0].key); return; }
-        if (idx !== -1) { idx < ITEMS.length-1 ? setStep(ITEMS[idx+1].key) : setStep("tiers"); return; }
-        if (step === "tiers") setStep("results");
-      };
-      const back = () => {
-        if (step === "tiers") { setStep(ITEMS[ITEMS.length-1].key); return; }
-        if (idx > 0) { setStep(ITEMS[idx-1].key); return; }
-        if (idx === 0) { setStep("intro"); return; }
-        if (step === "results") setStep("tiers");
-      };
-
-      const avgPrice = (5*tiers.ff + 10*tiers.mid + 15*tiers.prem) / 100;
-      let totalBrut = 0, totalPieces = 0;
-      ITEMS.forEach(it => { totalPieces += qty[it.key]; totalBrut += avgPrice * it.coeff * qty[it.key]; });
-      const totalVendu   = totalBrut * 0.7;
-      const apresWhatnot = totalVendu * 0.8;
-      const netClient    = apresWhatnot * 0.5;
-      const piecesRest   = Math.round(totalPieces * 0.3);
-      const fmt = n => `${Math.round(n)} €`;
-
-      const card = {
-        background: p.card, borderRadius: 20,
-        boxShadow: "0 4px 32px rgba(124,95,160,0.12)",
-        padding: "36px 32px", maxWidth: 480, width: "100%",
-        border: `1px solid ${p.border}`
-      };
-      const logo = { textAlign:"center", marginBottom:8, fontSize:13, letterSpacing:3, color:p.muted, textTransform:"uppercase", fontFamily:"Arial,sans-serif" };
-      const title = { fontSize:26, fontWeight:"bold", color:p.text, textAlign:"center", marginBottom:8, lineHeight:1.3 };
-      const sub = { fontSize:14, color:p.muted, textAlign:"center", marginBottom:28, fontFamily:"Arial,sans-serif", lineHeight:1.5 };
-      const navRow = { display:"flex", gap:12, justifyContent:"center", marginTop:8 };
-      const primBtn = { background:p.purple, color:"#fff", border:"none", borderRadius:12, padding:"14px 32px", fontSize:15, fontWeight:"bold", cursor:"pointer", fontFamily:"Arial,sans-serif", letterSpacing:0.5 };
-      const secBtn = { background:"transparent", color:p.muted, border:`1px solid ${p.border}`, borderRadius:12, padding:"14px 24px", fontSize:14, cursor:"pointer", fontFamily:"Arial,sans-serif" };
-      const inputStyle = { width:"100%", border:`1.5px solid ${p.border}`, borderRadius:10, padding:"12px 14px", fontSize:14, fontFamily:"Arial,sans-serif", color:p.text, background:p.bg, outline:"none", marginBottom:10 };
-
-      /* ── INTRO ── */
-      if (step === "intro") return (
-        <div style={card}>
-          <div style={logo}>mani univers</div>
-          <h1 style={title}>Combien vaut ta garde-robe ? ✨</h1>
-          <p style={sub}>En quelques questions, découvre combien tu pourrais gagner en vendant tes vêtements sur Whatnot — avec Mani pour tout organiser.</p>
-          <div style={{ background:p.orangeLight, borderRadius:12, padding:"14px 16px", marginBottom:24, fontSize:13, color:p.text, fontFamily:"Arial,sans-serif", lineHeight:1.7 }}>
-            <strong>🎯 Pas besoin de tout compter.</strong><br/>
-            C'est un estimatif — une fourchette, pas une promesse.
-          </div>
-          <div style={navRow}>
-            <button style={primBtn} onClick={next}>Commencer l'estimation →</button>
-          </div>
-        </div>
-      );
-
-      /* ── ARTICLES ── */
-      if (item) return (
-        <div style={card}>
-          <div style={logo}>mani univers</div>
-          <ProgressBar current={idx} />
-          <p style={{ fontSize:12, color:p.orange, textAlign:"center", marginBottom:24, fontStyle:"italic", fontFamily:"Arial,sans-serif" }}>
-            Ordre de grandeur — pas besoin de compter précisément 😊
-          </p>
-          <div style={{ fontSize:22, color:p.text, textAlign:"center", marginBottom:20 }}>
-            {item.emoji} Combien de <strong>{item.label}</strong> ?
-          </div>
-          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:16, marginBottom:28 }}>
-            <button onClick={() => setQty(q => ({ ...q, [item.key]: Math.max(0, q[item.key]-1) }))}
-              style={{ width:44, height:44, borderRadius:"50%", border:`2px solid ${p.purple}`, background:p.purpleLight, color:p.purple, fontSize:22, fontWeight:"bold", cursor:"pointer" }}>−</button>
-            <div style={{ fontSize:42, fontWeight:"bold", color:p.text, minWidth:64, textAlign:"center" }}>{qty[item.key]}</div>
-            <button onClick={() => setQty(q => ({ ...q, [item.key]: q[item.key]+1 }))}
-              style={{ width:44, height:44, borderRadius:"50%", border:`2px solid ${p.orange}`, background:p.orangeLight, color:p.orange, fontSize:22, fontWeight:"bold", cursor:"pointer" }}>+</button>
-          </div>
-          <div style={navRow}>
-            <button style={secBtn} onClick={back}>← Retour</button>
-            <button style={primBtn} onClick={next}>Suivant →</button>
-          </div>
-        </div>
-      );
-
-      /* ── TIERS ── */
-      if (step === "tiers") return (
-        <div style={card}>
-          <div style={logo}>mani univers</div>
-          <h2 style={{ ...title, fontSize:20, marginBottom:6 }}>Ta garde-robe, globalement ?</h2>
-          <p style={sub}>Répartis en % — le total doit faire 100.</p>
-          <div style={{ display:"flex", flexDirection:"column", gap:14, marginBottom:12 }}>
-            {[
-              { key:"ff",  label:"Fast Fashion",  sub2:"Zara, H&M, Shein…",           color:p.orangeLight, price:"5 €/pièce" },
-              { key:"mid", label:"Intermédiaire", sub2:"Marques milieu de gamme",       color:"#f0f4ff",     price:"10 €/pièce" },
-              { key:"prem",label:"Premium",       sub2:"Créateurs, luxe accessible",    color:p.purpleLight, price:"15 €/pièce" },
-            ].map(t => (
-              <div key={t.key} style={{ background:t.color, borderRadius:12, padding:"14px 18px", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
-                <div>
-                  <div style={{ fontSize:14, fontWeight:"bold", color:p.text, fontFamily:"Arial,sans-serif" }}>{t.label}</div>
-                  <div style={{ fontSize:12, color:p.muted, fontFamily:"Arial,sans-serif" }}>{t.sub2} · <em>{t.price}</em></div>
-                </div>
-                <div style={{ display:"flex", alignItems:"center", gap:4 }}>
-                  <input type="number" min={0} max={100}
-                    style={{ width:60, textAlign:"center", fontSize:20, fontWeight:"bold", color:p.text, border:`2px solid ${p.border}`, borderRadius:8, padding:"6px 4px", fontFamily:"Georgia,serif", background:"#fff", outline:"none" }}
-                    value={tiers[t.key]}
-                    onChange={e => { const v = Math.max(0, Math.min(100, parseInt(e.target.value)||0)); setTiers(prev => ({ ...prev, [t.key]:v })); }}
-                  />
-                  <span style={{ fontSize:16, color:p.muted }}>%</span>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div style={{ textAlign:"center", fontSize:13, color:tierOk?p.purple:p.orange, fontFamily:"Arial,sans-serif", marginBottom:16, fontWeight:"bold" }}>
-            Total : {tierTotal}% {tierOk ? "✓ parfait !" : `— il manque ${100-tierTotal}%`}
-          </div>
-          <div style={navRow}>
-            <button style={secBtn} onClick={back}>← Retour</button>
-            <button style={{ ...primBtn, opacity:tierOk?1:0.4, cursor:tierOk?"pointer":"not-allowed" }} onClick={() => tierOk && next()}>
-              Voir mon estimation →
-            </button>
-          </div>
-        </div>
-      );
-
-      /* ── RÉSULTATS ── */
-      if (step === "results") return (
-        <div style={card}>
-          <div style={logo}>mani univers</div>
-          <h2 style={{ ...title, fontSize:20, marginBottom:20 }}>Ton estimation 🎉</h2>
-
-          <div style={{ display:"flex", gap:8, marginBottom:14, flexWrap:"wrap" }}>
-            {ITEMS.filter(i => qty[i.key] > 0).map(i => (
-              <div key={i.key} style={{ background:p.purpleLight, borderRadius:8, padding:"5px 12px", fontSize:12, color:p.text, fontFamily:"Arial,sans-serif" }}>
-                {i.emoji} {qty[i.key]} {i.label}
-              </div>
-            ))}
-          </div>
-          <div style={{ fontSize:13, color:p.muted, fontFamily:"Arial,sans-serif", marginBottom:20 }}>
-            <strong>{totalPieces} pièces</strong> · {tiers.ff}% fast / {tiers.mid}% mid
+</div>
+<script>
+var ITEMS=[
+  {key:"tshirts",label:"T-shirts",emoji:"&#128085;",coeff:0.7},
+  {key:"pantalons",label:"Pantalons",emoji:"&#128086;",coeff:1.5},
+  {key:"jupes",label:"Jupes",emoji:"&#128087;",coeff:1.0},
+  {key:"robes",label:"Robes",emoji:"&#128087;",coeff:1.5},
+  {key:"chemisiers",label:"Chemisiers",emoji:"&#128084;",coeff:1.0},
+  {key:"vestes",label:"Vestes",emoji:"&#129405;",coeff:1.5},
+  {key:"chaussures",label:"Chaussures",emoji:"&#128096;",coeff:1.5},
+  {key:"accessoires",label:"Accessoires",emoji:"&#128092;",coeff:0.7}
+];
+var step="intro";
+var qty={tshirts:0,pantalons:0,jupes:0,robes:0,chemisiers:0,vestes:0,chaussures:0,accessoires:0};
+function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById(id).classList.add('active');}
+function renderProgress(){
+  var el=document.getElementById('progress');
+  el.innerHTML=ITEMS.map(function(_,i){
+    var cur=(step===i),done=(typeof step==='number'&&i<step);
+    return '<div class="dot" style="width:'+(cur?20:8)+'px;background:'+(done?'#7c5fa0':cur?'#e07d3c':'#e8d8f0')+'"></div>';
+  }).join('');
+}
+function renderItem(){
+  var item=ITEMS[step];
+  document.getElementById('item-label').innerHTML=item.emoji+' Combien de <strong>'+item.label+'</strong>&nbsp;?';
+  document.getElementById('qty-display').textContent=qty[item.key];
+  renderProgress();
+}
+function changeQty(d){var k=ITEMS[step].key;qty[k]=Math.max(0,qty[k]+d);document.getElementById('qty-display').textContent=qty[k];}
+function goNext(){
+  if(step==="intro"){step=0;show('s-items');renderItem();return;}
+  if(typeof step==='number'){
+    if(step<ITEMS.length-1){step++;renderItem();}
+    else{step="tiers";show('s-tiers');updateTierTotal();}
+    return;
+  }
+  if(step==="tiers"){if(getTierTotal()!==100)return;step="results";show('s-results');renderResults();}
+}
+function goBack(){
+  if(step==="tiers"){step=ITEMS.length-1;show('s-items');renderItem();return;}
+  if(typeof step==='number'){
+    if(step>0){step--;renderItem();}else{step="intro";show('s-intro');}
+    return;
+  }
+  if(step==="results"){step="tiers";show('s-tiers');updateTierTotal();}
+}
+function getTierTotal(){
+  return (parseInt(document.getElementById('t-ff').value)||0)+(parseInt(document.getElementById('t-mid').value)||0)+(parseInt(document.getElementById('t-prem').value)||0);
+}
+function updateTierTotal(){
+  var tot=getTierTotal(),ok=(tot===100);
+  var el=document.getElementById('tier-total-msg');
+  el.textContent='Total : '+tot+'% '+(ok?'✓ parfait !':'— il manque '+(100-tot)+'%');
+  el.style.color=ok?'#7c5fa0':'#e07d3c';
+  document.getElementById('btn-tiers-next').style.opacity=ok?'1':'0.4';
+}
+function fmt(n){return Math.round(n)+' \u20ac';}
+function renderResults(){
+  var ff=parseInt(document.getElementById('t-ff').value)||0;
+  var mid=parseInt(document.getElementById('t-mid').value)||0;
+  var prem=parseInt(document.getElementById('t-prem').value)||0;
+  var avg=(5*ff+10*mid+15*prem)/100;
+  var tb=0,tp=0;
+  ITEMS.forEach(function(it){tp+=qty[it.key];tb+=avg*it.coeff*qty[it.key];});
+  var tv=tb*0.7,aw=tv*0.8,nc=aw*0.5,pr=Math.round(tp*0.3);
+  document.getElementById('tags').innerHTML=ITEMS.filter(function(i){return qty[i.key]>0;}).map(function(i){return '<div class="tag">'+i.emoji+' '+qty[i.key]+' '+i.label+'</div>';}).join('');
+  document.getElementById('recap-line').innerHTML='<strong>'+tp+' pièces</strong> au total &middot; '+ff+'% fast / '+mid+'% mid / '+prem+'% premium';
+  document.getElementById('r-brut').textContent=fmt(tb);
+  document.getElementById('r-vendu').textContent=fmt(tv);
+  document.getElementById('r-whatnot').textContent=fmt(aw);
+  document.getElementById('r-part').textContent=fmt(nc);
+  document.getElementById('r-net').textContent=fmt(nc);
+  document.getElementById('r-pieces').textContent='+ tu gardes ~'+pr+' pièces non vendues (30% du stock)';
+  window._nc=nc;
+}
+function checkForm(){var ok=document.getElementById('c-prenom').value.trim()&&document.getElementById('c-tel').value.trim();document.getElementById('btn-confirm').disabled=!ok;}
+function submitForm(){
+  var p=document.getElementById('c-prenom').value.trim();
+  document.getElementById('cta-form').style.display='none';
+  var s=document.getElementById('cta-success');s.style.display='block';
+  s.innerHTML='&#127881; <strong>Merci '+p+' !</strong><br/>Margaux te rappelle très vite pour organiser ta vente.<br/><span style="opacity:0.7">Potentiel estimé : <strong>'+fmt(window._nc)+'</strong></span>';
+}
+function restart(){
+  qty={tshirts:0,pantalons:0,jupes:0,robes:0,chemisiers:0,vestes:0,chaussures:0,accessoires:0};
+  step="intro";
+  document.getElementById('cta-form').style.display='block';
+  document.getElementById('cta-success').style.display='none';
+  ['c-prenom','c-tel','c-date'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('btn-confirm').disabled=true;
+  document.getElementById('t-ff').value=40;document.getElementById('t-mid').value=40;document.getElementById('t-prem').value=20;
+  show('s-intro');
+}
+</script>
+</body>
+</html>
