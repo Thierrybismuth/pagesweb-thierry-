@@ -164,3 +164,22 @@ Thierry Bismuth
 | Veut en savoir plus | `INFOS` |
 | RDV calé | `RDV` |
 | Refus / plus en recherche | `STOP` |
+
+---
+
+## Convention Commentaire
+
+Chaque entrée dans la colonne `Commentaire` du tableau de chasse doit être précédée de la date courte :
+
+```
+DD/MM: texte du commentaire
+```
+
+Si un commentaire existe déjà → **lire d'abord**, puis ajouter en nouvelle ligne :
+
+```
+9/04: lancement de la boucle mail
+10/04: réponse positive - envoi email 2
+```
+
+Ne jamais écraser sans lire le contenu existant (workflow MAJ Bilan lit avant d'écrire).
