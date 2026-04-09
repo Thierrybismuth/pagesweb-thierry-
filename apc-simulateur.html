@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulateur Partenaire - Assurément Pas Cher</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Outfit', system-ui, sans-serif; background: #f7f9ff; min-height: 100vh; }
+  button { transition: opacity .15s; }
+  button:hover { opacity: 0.88; }
+  input { font-family: 'Outfit', system-ui, sans-serif; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const LOGO = "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";
+
+const B = "#1b4faf";
+const O = "#e87228";
+
+function Dots({step}) {
+  return (
+    <div style={{display:"flex",justifyContent:"center",gap:6,marginBottom:20}}>
+      {[0,1,2,3].map(i=>(
+        <div key={i} style={{width:8,height:8,borderRadius:"50%",background:i===step?O:i<step?B:"#ddd"}}/>
+      ))}
+    </div>
+  );
+}
+
+function Logo() {
+  return <img src={`data:image/png;base64,${LOGO}`} alt="APC" style={{height:60,marginBottom:6}}/>;
+}
+
+function App() {
+  const [step, setStep] = React.useState(0);
+  const [transactions, setTransactions] = React.useState("");
+  const [form, setForm] = React.useState({nom:"",tel:"",email:"",departement:""});
+  const [rappel, setRappel] = React.useState(false);
+  const [sending, setSending] = React.useState(false);
+
+  const montant = Math.round((parseFloat(transactions)||0)*0.80*450*0.40);
+  const fmt = n => n.toLocaleString("fr-FR")+" €";
+
+  const sendEmail = async (avecRappel) => {
+    setSending(true);
+    const html = `<h2 style="color:#1b4faf">Nouvelle simulation APC</h2>
+<table style="border-collapse:collapse">
+<tr><td style="padding:6px;font-weight:bold">Nom</td><td style="padding:6px">${form.nom||"—"}</td></tr>
+<tr><td style="padding:6px;font-weight:bold">Téléphone</td><td style="padding:6px">${form.tel||"—"}</td></tr>
+<tr><td style="padding:6px;font-weight:bold">Email</td><td style="padding:6px">${form.email||"—"}</td></tr>
+<tr><td style="padding:6px;font-weight:bold">Département</td><td style="padding:6px">${form.departement||"—"}</td></tr>
+<tr><td style="padding:6px;font-weight:bold">Transactions (24 mois)</td><td style="padding:6px">${transactions}</td></tr>
+<tr><td style="padding:6px;font-weight:bold;color:#e87228">Potentiel estimé</td><td style="padding:6px;color:#e87228;font-size:18px"><b>${fmt(montant)}</b></td></tr>
+<tr><td style="padding:6px;font-weight:bold">Demande rappel</td><td style="padding:6px">${avecRappel?"✅ OUI":"Non"}</td></tr>
+</table>`;
+    try {
+      await fetch("https://thierryb.app.n8n.cloud/webhook/3Uah7aS460nzvEHu", {
+        method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+          mail:"thierry@thierrybismuth.com",
+          subject:`Simulation APC - ${form.nom||"Anonyme"} (${form.departement||"?"})`,
+          message: html
+        })
+      });
+    } catch(e){}
+    setSending(false);
+  };
+
+  const handleCoordSubmit = () => { sendEmail(false); setStep(3); };
+  const handleRappel = () => { setRappel(true); sendEmail(true); };
+
+  const wrap = (children) => (
+    <div style={{fontFamily:"'Outfit',system-ui,sans-serif",background:"#f7f9ff",minHeight:"100vh",padding:"32px 20px"}}>
+      <div style={{maxWidth:600,margin:"0 auto"}}>
+        <div style={{textAlign:"center",marginBottom:8}}><Logo/></div>
+        {children}
+      </div>
+    </div>
+  );
+
+  /* ── STEP 0 : Avantages ── */
+  if(step===0) return wrap(<>
+    <div style={{textAlign:"center",marginBottom:28}}>
+      <Dots step={0}/>
+      <h1 style={{color:B,fontSize:24,fontWeight:800,marginBottom:6}}>Simulateur de gains partenaire</h1>
+      <p style={{color:"#666",fontSize:15}}>Découvrez ce que votre portefeuille clients peut vous rapporter</p>
+    </div>
+    <div style={{background:"#fff",borderRadius:16,padding:"24px 20px",boxShadow:"0 2px 20px rgba(27,79,175,0.08)",marginBottom:20}}>
+      <h2 style={{color:B,fontSize:16,marginBottom:16}}>Pourquoi Assurément Pas Cher ?</h2>
+      {[
+        ["💰","80% des crédits immobiliers sont assurés par les banques, souvent 2× trop cher. Changer d'assurance emprunteur peut faire économiser plusieurs milliers d'euros à votre client."],
+        ["🤝","Les courtiers en crédit rechignent à faire ce service pour ne pas froisser leurs banques partenaires. APC est un acteur indépendant et spécialisé — sans conflit d'intérêt."],
+        ["🏢","APC est une PME à l'écoute, à la différence des grands assureurs qui abusent de leur position dominante."],
+        ["✅","Changer d'assurance emprunteur ne change rien au crédit : même banque, même conseiller, même contrat. L'assurance de remplacement est légalement obligée d'être au moins aussi efficace."],
+        ["🛡️","Les assurances de remplacement sont portées par des partenaires de premier rang : AXA, Allianz..."],
+      ].map(([icon,text],i)=>(
+        <div key={i} style={{display:"flex",gap:12,marginBottom:14}}>
+          <span style={{fontSize:20,flexShrink:0}}>{icon}</span>
+          <p style={{margin:0,color:"#333",fontSize:14,lineHeight:1.65}}>{text}</p>
+        </div>
+      ))}
+    </div>
+    <button onClick={()=>setStep(1)} style={{width:"100%",background:O,color:"#fff",border:"none",borderRadius:12,padding:"16px 0",fontSize:17,fontWeight:700,cursor:"pointer"}}>
+      Calculer mon potentiel de gain →
+    </button>
+  </>);
+
+  /* ── STEP 1 : Transactions ── */
+  if(step===1) return wrap(<>
+    <Dots step={1}/>
+    <div style={{background:"#fff",borderRadius:16,padding:"28px 24px",boxShadow:"0 2px 20px rgba(27,79,175,0.08)"}}>
+      <h2 style={{color:B,fontSize:20,fontWeight:800,marginBottom:6}}>Vos transactions immobilières</h2>
+      <p style={{color:"#666",fontSize:14,marginBottom:24}}>Combien de ventes avez-vous réalisées sur les 24 derniers mois ?</p>
+      <input type="number" min="1" value={transactions} onChange={e=>setTransactions(e.target.value)}
+        placeholder="ex : 80"
+        style={{width:"100%",border:`2px solid ${B}`,borderRadius:10,padding:"14px",fontSize:28,fontWeight:800,color:B,textAlign:"center"}}/>
+      <p style={{color:"#999",fontSize:13,marginTop:10,fontStyle:"italic"}}>
+        💡 C'est un estimatif — pas besoin de les recompter un par un !
+      </p>
+      <div style={{background:"#e8f0fb",borderRadius:10,padding:"14px 16px",marginTop:16}}>
+        <p style={{margin:0,color:B,fontSize:13,lineHeight:1.7}}>
+          <b>La démarche est simple :</b><br/>
+          1. Appelez vos anciens clients<br/>
+          2. Demandez-leur si leur assurance emprunteur est compétitive<br/>
+          3. En cas d'intérêt, un spécialiste APC les rappelle sous 24h
+        </p>
+      </div>
+      <div style={{display:"flex",gap:12,marginTop:24}}>
+        <button onClick={()=>setStep(0)} style={{flex:1,background:"#eee",color:"#555",border:"none",borderRadius:10,padding:"13px 0",fontSize:15,cursor:"pointer"}}>← Retour</button>
+        <button onClick={()=>setStep(2)} disabled={!(parseFloat(transactions)>0)}
+          style={{flex:2,background:parseFloat(transactions)>0?O:"#ccc",color:"#fff",border:"none",borderRadius:10,padding:"13px 0",fontSize:15,fontWeight:700,cursor:parseFloat(transactions)>0?"pointer":"default"}}>
+          Suivant →
+        </button>
+      </div>
+    </div>
+  </>);
+
+  /* ── STEP 2 : Coordonnées ── */
+  if(step===2) return wrap(<>
+    <Dots step={2}/>
+    <div style={{background:"#fff",borderRadius:16,padding:"28px 24px",boxShadow:"0 2px 20px rgba(27,79,175,0.08)"}}>
+      <h2 style={{color:B,fontSize:20,fontWeight:800,marginBottom:4}}>Vos coordonnées</h2>
+      <p style={{color:"#666",fontSize:14,marginBottom:22}}>Facultatif — mais indispensable pour vous recontacter si vous le souhaitez</p>
+      {[
+        {label:"Votre nom",key:"nom",placeholder:"Jean Dupont"},
+        {label:"Téléphone",key:"tel",placeholder:"06 12 34 56 78",type:"tel"},
+        {label:"Email",key:"email",placeholder:"jean@agence.fr",type:"email"},
+        {label:"Département",key:"departement",placeholder:"ex : 75, 92, 13..."},
+      ].map(({label,key,placeholder,type="text"})=>(
+        <div key={key} style={{marginBottom:14}}>
+          <label style={{display:"block",color:"#444",fontSize:13,fontWeight:600,marginBottom:5}}>{label}</label>
+          <input type={type} value={form[key]} onChange={e=>setForm({...form,[key]:e.target.value})} placeholder={placeholder}
+            style={{width:"100%",border:"1.5px solid #ddd",borderRadius:8,padding:"10px 12px",fontSize:15}}/>
+        </div>
+      ))}
+      <div style={{display:"flex",gap:12,marginTop:20}}>
+        <button onClick={()=>setStep(1)} style={{flex:1,background:"#eee",color:"#555",border:"none",borderRadius:10,padding:"13px 0",fontSize:15,cursor:"pointer"}}>← Retour</button>
+        <button onClick={handleCoordSubmit} disabled={sending}
+          style={{flex:2,background:sending?"#ccc":B,color:"#fff",border:"none",borderRadius:10,padding:"13px 0",fontSize:14,fontWeight:700,cursor:sending?"default":"pointer",lineHeight:1.4,textAlign:"center"}}>
+          {sending?"Envoi...":"Voir ma simulation\net l'explication chiffrée →"}
+        </button>
+      </div>
+    </div>
+  </>);
+
+  /* ── STEP 3 : Résultats ── */
+  const t = parseFloat(transactions);
+  const assures = Math.round(t*0.80);
+  return wrap(<>
+    <Dots step={3}/>
+    <div style={{background:`linear-gradient(135deg,${B},#2d6fd4)`,borderRadius:20,padding:"32px 24px",textAlign:"center",color:"#fff",marginBottom:20,boxShadow:"0 8px 30px rgba(27,79,175,0.3)"}}>
+      <p style={{margin:"0 0 8px",fontSize:15,opacity:.85}}>Votre potentiel de gain estimé</p>
+      <div style={{fontSize:52,fontWeight:800,letterSpacing:-1}}>{fmt(montant)}</div>
+      <p style={{margin:"8px 0 0",fontSize:14,opacity:.75}}>sur votre portefeuille des 24 derniers mois</p>
+    </div>
+
+    <div style={{background:"#fff",borderRadius:16,padding:"20px",boxShadow:"0 2px 16px rgba(0,0,0,0.06)",marginBottom:16}}>
+      <h3 style={{color:B,margin:"0 0 14px",fontSize:15}}>📊 Comment on calcule ça ?</h3>
+      {[
+        ["Transactions réalisées",`${t}`],
+        ["Part assurée par la banque (80%)",`${assures}`],
+        ["Frais de dossier moyens","450 €"],
+        ["Votre commission","40%"],
+      ].map(([label,val],i)=>(
+        <div key={i} style={{display:"flex",justifyContent:"space-between",padding:"7px 0",borderBottom:i<3?"1px solid #f0f0f0":"none"}}>
+          <span style={{color:"#555",fontSize:14}}>{label}</span>
+          <span style={{color:B,fontWeight:700,fontSize:14}}>{val}</span>
+        </div>
+      ))}
+      <div style={{display:"flex",justifyContent:"space-between",padding:"10px 0 0",marginTop:4}}>
+        <span style={{color:"#333",fontWeight:700}}>= Potentiel estimé</span>
+        <span style={{color:O,fontWeight:800,fontSize:18}}>{fmt(montant)}</span>
+      </div>
+      <p style={{color:"#aaa",fontSize:12,fontStyle:"italic",marginTop:10}}>
+        {t} × 80% × 450€ × 40% = {fmt(montant)} — Estimation non contractuelle
+      </p>
+    </div>
+
+    <div style={{background:"#fff",borderRadius:16,padding:"20px",boxShadow:"0 2px 16px rgba(0,0,0,0.06)",marginBottom:20}}>
+      <h3 style={{color:B,margin:"0 0 14px",fontSize:15}}>🎯 3 bonnes raisons de ce partenariat</h3>
+      {[
+        ["📞","Un prétexte idéal pour rappeler vos clients","Identifiez de nouveaux projets d'achat ou de vente lors d'un appel naturel et bienveillant."],
+        ["💼","Un chiffre d'affaires additionnel sans effort","Vous passez l'appel, APC fait le reste. Votre rôle s'arrête à la mise en relation."],
+        ["🌱","Une activité idéale pour un négociateur débutant","Confiez ce travail de suivi à un junior qui monte en compétence tout en générant du revenu."],
+      ].map(([icon,title,desc],i)=>(
+        <div key={i} style={{display:"flex",gap:12,marginBottom:14}}>
+          <span style={{fontSize:22,flexShrink:0}}>{icon}</span>
+          <div>
+            <p style={{margin:"0 0 3px",fontWeight:700,color:"#222",fontSize:14}}>{title}</p>
+            <p style={{margin:0,color:"#666",fontSize:13}}>{desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {!rappel ? (
+      <div style={{background:"#fff8f4",border:`2px solid ${O}`,borderRadius:16,padding:"20px",textAlign:"center",marginBottom:20}}>
+        <p style={{color:"#333",fontWeight:600,margin:"0 0 10px",fontSize:15}}>Vous souhaitez en savoir plus ?</p>
+        <p style={{color:"#666",fontSize:13,margin:"0 0 16px"}}>Un conseiller APC vous rappelle dans les 24h.</p>
+        <button onClick={handleRappel}
+          style={{background:O,color:"#fff",border:"none",borderRadius:10,padding:"14px 32px",fontSize:16,fontWeight:700,cursor:"pointer"}}>
+          ✅ Je veux être rappelé(e)
+        </button>
+      </div>
+    ) : (
+      <div style={{background:"#edfaf2",border:"2px solid #2ecc71",borderRadius:16,padding:"20px",textAlign:"center",marginBottom:20}}>
+        <p style={{fontSize:24,margin:"0 0 8px"}}>✅</p>
+        <p style={{color:"#1a7a42",fontWeight:700,margin:"0 0 4px"}}>Demande envoyée !</p>
+        <p style={{color:"#555",fontSize:14,margin:0}}>Un conseiller APC vous contactera dans les 24 heures.</p>
+      </div>
+    )}
+
+    <button onClick={()=>{setStep(0);setTransactions("");setForm({nom:"",tel:"",email:"",departement:""});setRappel(false);}}
+      style={{width:"100%",background:"transparent",color:"#999",border:"1.5px solid #ddd",borderRadius:10,padding:"12px 0",fontSize:14,cursor:"pointer"}}>
+      Refaire une simulation
+    </button>
+  </>);
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
