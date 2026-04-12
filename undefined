@@ -1,24 +1,102 @@
-# Message prospection repreneurs ADA Nîmes
+# Campagne Prospection Repreneurs – Template ADA Nîmes
 
-Bonjour [Prénom],
+## Contexte
+Opération menée le 12 avril 2026 pour trouver un repreneur pour l'agence ADA Nîmes (Gard Mobilités, contact Sébastien Gallet). 221 candidats issus de Météo Job gestion de flotte contactés. Ce document est un template réutilisable pour toute campagne de cession/reprise similaire.
 
-Je vous contacte car la gestion de flotte automobile ne vous est pas étrangère, même si ce n'est pas la seule corde à votre arc 😃
+---
 
-Je représente une agence de location automobile en vente à Nîmes.
+## Architecture des Workflows N8N
 
-Superbe structure aux chiffres flatteurs et au potentiel prometteur.
+### WF Extraction CVs (existant, rendu paramétrique)
+**ID:** `6sTsKeZGpE8GEqwB`  
+**Webhook:** `POST /webhook/3e864c38-1fec-41e1-a048-bb44658e016d`  
+**Rôle:** Lit les PDFs d'un dossier Drive, extrait les données (nom, email, tel, poste, entreprise, localisation, département), injecte dans le Tableau de Chasse.  
+**Paramètres à passer au webhook:**
+```json
+{
+  "folderId": "ID_DOSSIER_DRIVE",
+  "enseigne": "NOM_ENSEIGNE",
+  "origine": "Météo Job gestion de flotte",
+  "commentaire": "JJ/MM: Mail envoyé",
+  "bilan": "CAMPAGNE_ENVOYEE"
+}
+```
+**Colonnes remplies:** Qui, Mail, Tel, Poste, Entreprise, Localisation, Département, Origine fichier, Enseigne envisagée, Statut, Commentaire, Date import, Recruteur (TB auto)
 
-Ma question initiale est donc double :
+---
 
-Pourriez-vous envisager une création d'entreprise dans la location automobile ?
+### WF1 – Envoi J0 Campagne
+**ID:** `UYPhsPX86rzHKkdj`  
+**Rôle:** Filtre les contacts avec Enseigne envisagée = cible et Statut = CAMPAGNE_ENVOYEE, construit un email personnalisé avec accroche sur le dernier poste/entreprise, envoie via Gmail, met à jour Commentaire + Date import.  
 
-Et le cas échéant, êtes-vous ouvert à une mobilité sur la jolie ville de Nîmes ?
+**Logique d'accroche personnalisée:**
+- Si poste + entreprise → "En tant que [poste] chez [entreprise], vous avez certainement été amené(e) à gérer ou superviser des véhicules professionnels."
+- Si poste seul → "Votre expérience en tant que [poste] vous a probablement confronté(e) aux enjeux de mobilité professionnelle."
+- Si entreprise seule → "Au sein de [entreprise], la gestion d'un parc de véhicules fait souvent partie du quotidien."
+- Si rien → message standard sans accroche
 
-Si tel est le cas, je peux vous envoyer les chiffres précis de cette entreprise.
+---
 
-Dans le cas contraire, n'hésitez pas à transmettre cette information autour de vous.
+### WF2 – Scanner Réponses + Relances
+**ID:** `jhvZJRGoiP3CwiBf`  
+**Planificateur:** Toutes les 2 heures  
+**Rôle:** Scanne Gmail, classe via Claude Haiku, gère relances J+2 et J+4, met à jour le Tableau de Chasse.
 
-Disponible pour un échange dès demain lundi.
+**Classification Claude (4 catégories):**
+- **POSITIF** → intérêt, question → alerte Thierry + Statut RAPPEL_DEMANDE
+- **PROJET** → autre projet/secteur → alerte Thierry + Statut RAPPEL_DEMANDE
+- **STOP** → refus explicite → Statut STOP
+- **NEUTRE** → ambigu → aucune action
 
-Thierry Bismuth
-0610703090 – thierry@thierrybismuth.com
+**Statuts:**
+- `CAMPAGNE_ENVOYEE` → J0 envoyé
+- `RELANCE_1` → Relance J+2 envoyée
+- `RELANCE_2` → Relance J+4 envoyée
+- `RAPPEL_DEMANDE` → Candidat intéressé, Thierry doit appeler
+- `STOP` → Refus ou sans réponse après 2 relances
+
+---
+
+## Tableau de Chasse – Colonnes
+
+| Colonne | Valeur |
+|---|---|
+| Origine fichier | Météo Job gestion de flotte |
+| Enseigne envisagée | ADA |
+| Statut | CAMPAGNE_ENVOYEE → ... → RAPPEL_DEMANDE / STOP |
+| Commentaire | Préfixé JJ/MM: à chaque action |
+| Date import | Date lancement J0 |
+| Recruteur | TB |
+
+**Sheet ID:** `1CqFrk0RgkO9xJuglSTPz3dgcd-tbU33VrYaM0lt_BJg`  
+**Onglet:** Suivi contacts (gid 294919887)
+
+---
+
+## Credentials N8N
+
+| Service | ID |
+|---|---|
+| Google Sheets | TqRSp5MdqhfG9oG5 |
+| Google Drive | 8YmfkOpKEBItuT4x |
+| Gmail | 00d0wM4bL9Q0T1Jj |
+| OpenAI | JVIF2RDe8moEGCi |
+
+**Règle:** Toujours réinjecter les credentials sur tous les nœuds à chaque PUT workflow via l'API.
+
+---
+
+## Pour réutiliser sur un nouveau dossier
+
+1. Préparer le dossier Drive avec les CVs
+2. Appeler le workflow extraction (folderId, enseigne, origine)
+3. Vérifier le Sheets — 3 colonnes bien remplies
+4. Adapter le texte J0 dans WF1
+5. Déclencher WF1
+6. WF2 tourne automatiquement toutes les 2h
+
+**Points d'attention:**
+- Noms de colonnes sensibles à la casse et aux accents
+- Le workflow extraction déplace les CVs dans un dossier traités après traitement
+- Claude Haiku pour la classification (API key dans header HTTP, pas de credential N8N)
+- OpenAI gpt-4.1-mini pour l'extraction des données CV
