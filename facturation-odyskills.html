@@ -7,39 +7,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f7f5f0;
-    --navy: #1a2e44;
-    --terra: #c8873a;
-    --white: #ffffff;
-    --light: #eceae4;
-    --muted: #8a8070;
-    --serif: 'Cormorant Garamond', serif;
-    --sans: 'Outfit', sans-serif;
+    --bg: #f7f5f0; --navy: #1a2e44; --terra: #c8873a; --white: #ffffff;
+    --light: #eceae4; --muted: #8a8070;
+    --serif: 'Cormorant Garamond', serif; --sans: 'Outfit', sans-serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: var(--sans); background: var(--bg); color: var(--navy); min-height: 100vh; }
   .app { display: flex; min-height: 100vh; }
-  .sidebar {
-    width: 320px; min-width: 320px; background: var(--navy); color: var(--white);
-    padding: 32px 24px; display: flex; flex-direction: column; gap: 28px;
-  }
+  .sidebar { width: 320px; min-width: 320px; background: var(--navy); color: var(--white); padding: 32px 24px; display: flex; flex-direction: column; gap: 28px; }
   .sidebar h1 { font-family: var(--serif); font-size: 26px; font-weight: 400; letter-spacing: 1px; }
   .sidebar h1 span { color: var(--terra); }
   .sidebar-section label { display: block; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
   .sidebar-section input, .sidebar-section textarea, .sidebar-section select {
     width: 100%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-    color: var(--white); border-radius: 6px; padding: 8px 12px; font-family: var(--sans); font-size: 13px;
-    outline: none; transition: border 0.2s;
+    color: var(--white); border-radius: 6px; padding: 8px 12px; font-family: var(--sans); font-size: 13px; outline: none; transition: border 0.2s;
   }
   .sidebar-section input:focus, .sidebar-section textarea:focus { border-color: var(--terra); }
   .sidebar-section textarea { resize: vertical; min-height: 64px; }
   .sidebar-section select option { background: var(--navy); }
   .sidebar-divider { border: none; border-top: 1px solid rgba(255,255,255,0.1); }
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .btn-action {
-    width: 100%; padding: 11px; border-radius: 8px; border: none; cursor: pointer;
-    font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: 0.5px; transition: all 0.2s;
-  }
+  .btn-action { width: 100%; padding: 11px; border-radius: 8px; border: none; cursor: pointer; font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: 0.5px; transition: all 0.2s; }
   .btn-primary { background: var(--terra); color: white; }
   .btn-primary:hover { background: #b5752f; }
   .btn-secondary { background: rgba(255,255,255,0.1); color: white; }
@@ -48,10 +36,7 @@
   .main-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
   .main-header h2 { font-family: var(--serif); font-size: 32px; font-weight: 300; }
   .badge { background: var(--terra); color: white; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.8px; }
-  .invoice {
-    background: white; border-radius: 12px; box-shadow: 0 4px 30px rgba(26,46,68,0.08);
-    padding: 48px; max-width: 860px; margin: 0 auto;
-  }
+  .invoice { background: white; border-radius: 12px; box-shadow: 0 4px 30px rgba(26,46,68,0.08); padding: 48px; max-width: 860px; margin: 0 auto; }
   .inv-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
   .inv-brand h1 { font-family: var(--serif); font-size: 36px; font-weight: 500; color: var(--navy); }
   .inv-brand h1 span { color: var(--terra); }
@@ -72,11 +57,7 @@
   .inv-table tbody tr:hover { background: #faf9f6; }
   .inv-table tbody td { padding: 12px 14px; font-size: 13px; color: var(--navy); }
   .inv-table tbody td:last-child { text-align: right; font-weight: 500; }
-  .inv-table input[type=text], .inv-table input[type=number] {
-    border: none; border-bottom: 1px solid var(--terra); outline: none;
-    font-family: var(--sans); font-size: 13px; color: var(--navy);
-    background: transparent; width: 100%; padding: 2px 0;
-  }
+  .inv-table input[type=text], .inv-table input[type=number] { border: none; border-bottom: 1px solid var(--terra); outline: none; font-family: var(--sans); font-size: 13px; color: var(--navy); background: transparent; width: 100%; padding: 2px 0; }
   .inv-table input[type=number] { text-align: right; width: 80px; }
   .inv-totals { display: flex; justify-content: flex-end; margin-bottom: 32px; }
   .inv-totals-box { min-width: 260px; }
@@ -87,26 +68,12 @@
   .inv-footer { border-top: 1px solid var(--light); padding-top: 20px; display: flex; justify-content: space-between; }
   .inv-footer p { font-size: 11px; color: var(--muted); line-height: 1.7; }
   .inv-footer .inv-rib { font-family: monospace; font-size: 11px; color: var(--navy); }
-  .add-line-btn {
-    display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 6px;
-    border: 1px dashed var(--terra); color: var(--terra); background: transparent;
-    cursor: pointer; font-family: var(--sans); font-size: 12px; font-weight: 500;
-    margin-bottom: 20px; transition: all 0.2s;
-  }
+  .add-line-btn { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 6px; border: 1px dashed var(--terra); color: var(--terra); background: transparent; cursor: pointer; font-family: var(--sans); font-size: 12px; font-weight: 500; margin-bottom: 20px; transition: all 0.2s; }
   .add-line-btn:hover { background: rgba(200,135,58,0.06); }
   .del-btn { color: #ccc; cursor: pointer; font-size: 16px; padding: 0 4px; transition: color 0.15s; }
   .del-btn:hover { color: #e05c5c; }
-  @media print {
-    body { background: white; }
-    .sidebar, .main-header, .add-line-btn, .del-btn { display: none !important; }
-    .main { padding: 0; }
-    .invoice { box-shadow: none; border-radius: 0; }
-  }
-  .toast {
-    position: fixed; bottom: 24px; right: 24px; background: var(--navy); color: white;
-    padding: 12px 20px; border-radius: 8px; font-size: 13px; z-index: 999;
-    opacity: 0; transition: opacity 0.3s; pointer-events: none;
-  }
+  @media print { body { background: white; } .sidebar, .main-header, .add-line-btn, .del-btn { display: none !important; } .main { padding: 0; } .invoice { box-shadow: none; border-radius: 0; } }
+  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--navy); color: white; padding: 12px 20px; border-radius: 8px; font-size: 13px; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
   .toast.show { opacity: 1; }
 </style>
 </head>
@@ -119,17 +86,11 @@
     </div>
     <div class="sidebar-section">
       <label>N de facture</label>
-      <input id="invNum" type="text" value="2026-001" />
+      <input id="invNum" type="text" value="2026-002" />
     </div>
     <div class="sidebar-section row2">
-      <div>
-        <label>Date d emission</label>
-        <input id="invDate" type="date" />
-      </div>
-      <div>
-        <label>Echeance (jours)</label>
-        <input id="invDue" type="number" value="30" min="0" />
-      </div>
+      <div><label>Date emission</label><input id="invDate" type="date" /></div>
+      <div><label>Echeance (jours)</label><input id="invDue" type="number" value="30" min="0" /></div>
     </div>
     <hr class="sidebar-divider">
     <div class="sidebar-section">
@@ -142,20 +103,12 @@
 75001 Paris"></textarea>
     </div>
     <div style="margin-top:-8px">
-      <span onclick="toggleAdvanced()" id="advToggle" style="font-size:11px;color:rgba(255,255,255,0.4);cursor:pointer;letter-spacing:0.5px;user-select:none;">
-        + Champs optionnels (SIRET, TVA intra-UE)
-      </span>
+      <span onclick="toggleAdvanced()" id="advToggle" style="font-size:11px;color:rgba(255,255,255,0.4);cursor:pointer;letter-spacing:0.5px;user-select:none;">+ Champs optionnels (SIRET, TVA intra-UE)</span>
     </div>
     <div id="advFields" style="display:none">
       <div class="sidebar-section row2">
-        <div>
-          <label>SIRET client</label>
-          <input id="clientSiret" type="text" placeholder="Optionnel" />
-        </div>
-        <div>
-          <label>N TVA client</label>
-          <input id="clientTva" type="text" placeholder="FR..." />
-        </div>
+        <div><label>SIRET client</label><input id="clientSiret" type="text" placeholder="Optionnel" /></div>
+        <div><label>N TVA client</label><input id="clientTva" type="text" placeholder="FR..." /></div>
       </div>
     </div>
     <hr class="sidebar-divider">
@@ -173,12 +126,8 @@
       <input id="invRef" type="text" placeholder="Developpement reseau franchise..." />
     </div>
     <div class="sidebar-section">
-      <label>Conditions / Notes pied de page</label>
-      <textarea id="invNotes" rows="3" placeholder="Paiement par virement bancaire..."></textarea>
-    </div>
-    <div class="sidebar-section">
-      <label>IBAN / RIB</label>
-      <input id="invIban" type="text" placeholder="FR76 XXXX XXXX..." />
+      <label>Notes pied de page</label>
+      <textarea id="invNotes" rows="3" placeholder="Conditions particulieres..."></textarea>
     </div>
     <hr class="sidebar-divider">
     <button class="btn-action btn-primary" onclick="window.print()">Imprimer / PDF</button>
@@ -188,21 +137,22 @@
   <div class="main">
     <div class="main-header">
       <h2>Apercu facture</h2>
-      <span class="badge" id="badgeNum">N 2026-001</span>
+      <span class="badge" id="badgeNum">N 2026-002</span>
     </div>
-    <div class="invoice" id="invoiceDoc">
+    <div class="invoice">
       <div class="inv-header">
         <div class="inv-brand">
           <h1>ODY<span>SKILLS</span></h1>
           <p>
             SAS ODYSKILLS - RCS Paris 902 770 627<br>
+            SIRET 90277062700017<br>
             15 rue de Phalsbourg, 75017 Paris<br>
             thierry@thierrybismuth.com - 06 10 70 30 90<br>
             N TVA : FR00 902 770 627
           </p>
         </div>
         <div class="inv-meta">
-          <div class="inv-num" id="previewNum">FACTURE N 2026-001</div>
+          <div class="inv-num" id="previewNum">FACTURE N 2026-002</div>
           <p id="previewDate">Emise le -</p>
           <p id="previewDue">Echeance le -</p>
           <p id="previewRef" style="margin-top:6px;font-size:12px;color:#c8873a;font-weight:500;"></p>
@@ -220,31 +170,20 @@
         </div>
       </div>
       <table class="inv-table">
-        <thead>
-          <tr>
-            <th style="width:45%">Designation</th>
-            <th style="width:15%">Qte</th>
-            <th style="width:20%">Prix unitaire HT</th>
-            <th style="width:20%">Total HT</th>
-          </tr>
-        </thead>
+        <thead><tr>
+          <th style="width:45%">Designation</th>
+          <th style="width:15%">Qte</th>
+          <th style="width:20%">Prix unitaire HT</th>
+          <th style="width:20%">Total HT</th>
+        </tr></thead>
         <tbody id="linesBody"></tbody>
       </table>
       <button class="add-line-btn" onclick="addLine()">+ Ajouter une ligne</button>
       <div class="inv-totals">
         <div class="inv-totals-box">
-          <div class="inv-totals-row">
-            <span>Total HT</span>
-            <span id="totalHT">0,00 EUR</span>
-          </div>
-          <div class="inv-totals-row">
-            <span id="tvaLabel">TVA 20%</span>
-            <span id="totalTVA">0,00 EUR</span>
-          </div>
-          <div class="inv-totals-row">
-            <span>TOTAL TTC</span>
-            <span id="totalTTC">0,00 EUR</span>
-          </div>
+          <div class="inv-totals-row"><span>Total HT</span><span id="totalHT">0,00 EUR</span></div>
+          <div class="inv-totals-row"><span id="tvaLabel">TVA 20%</span><span id="totalTVA">0,00 EUR</span></div>
+          <div class="inv-totals-row"><span>TOTAL TTC</span><span id="totalTTC">0,00 EUR</span></div>
         </div>
       </div>
       <div class="inv-footer">
@@ -254,7 +193,10 @@
           Indemnite forfaitaire de recouvrement : 40 EUR.
         </p>
         <div style="text-align:right">
-          <p class="inv-rib" id="footerIban"></p>
+          <p class="inv-rib">
+            IBAN : FR76 2823 3000 0195 4531 9866 004<br>
+            BIC : REVOFRP2 - Revolut Bank UAB
+          </p>
           <p style="font-size:11px;color:#8a8070;margin-top:4px;">SAS ODYSKILLS - RCS Paris 902 770 627</p>
         </div>
       </div>
@@ -267,133 +209,52 @@
 <script>
   const today = new Date();
   document.getElementById('invDate').value = today.toISOString().split('T')[0];
-
-  let lines = [
-    { desc: 'Prestation de conseil en developpement reseau', qty: 1, pu: 2500 },
-  ];
-
-  function fmt(n) {
-    return n.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' EUR';
-  }
-  function fmtDate(str) {
-    if (!str) return '-';
-    const [y,m,d] = str.split('-');
-    return d+'/'+m+'/'+y;
-  }
-  function addDays(dateStr, days) {
-    const d = new Date(dateStr);
-    d.setDate(d.getDate() + parseInt(days));
-    return d.toISOString().split('T')[0];
-  }
-
+  let lines = [{ desc: 'Prestation de conseil', qty: 1, pu: 0 }];
+  function fmt(n) { return n.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' EUR'; }
+  function fmtDate(str) { if (!str) return '-'; const [y,m,d] = str.split('-'); return d+'/'+m+'/'+y; }
+  function addDays(s, days) { const d = new Date(s); d.setDate(d.getDate() + parseInt(days)); return d.toISOString().split('T')[0]; }
   function renderLines() {
-    const tbody = document.getElementById('linesBody');
-    tbody.innerHTML = '';
+    const tb = document.getElementById('linesBody'); tb.innerHTML = '';
     lines.forEach(function(l, i) {
-      const total = l.qty * l.pu;
       const tr = document.createElement('tr');
-      tr.innerHTML = '<td><input type="text" value="'+l.desc+'" oninput="lines['+i+'].desc=this.value" style="width:100%" /></td><td><input type="number" value="'+l.qty+'" min="0" step="0.5" oninput="lines['+i+'].qty=parseFloat(this.value)||0;renderTotals()" style="width:60px;text-align:center" /></td><td><input type="number" value="'+l.pu+'" min="0" step="50" oninput="lines['+i+'].pu=parseFloat(this.value)||0;renderTotals()" style="width:100px;text-align:right" /></td><td>'+fmt(total)+' <span class="del-btn" onclick="delLine('+i+')">X</span></td>';
-      tbody.appendChild(tr);
-    });
-    renderTotals();
+      tr.innerHTML = '<td><input type="text" value="'+l.desc+'" oninput="lines['+i+'].desc=this.value" style="width:100%" /></td><td><input type="number" value="'+l.qty+'" min="0" step="0.5" oninput="lines['+i+'].qty=parseFloat(this.value)||0;renderTotals()" style="width:60px;text-align:center" /></td><td><input type="number" value="'+l.pu+'" min="0" step="50" oninput="lines['+i+'].pu=parseFloat(this.value)||0;renderTotals()" style="width:100px;text-align:right" /></td><td>'+fmt(l.qty*l.pu)+' <span class="del-btn" onclick="delLine('+i+')">X</span></td>';
+      tb.appendChild(tr);
+    }); renderTotals();
   }
-
-  function addLine() {
-    lines.push({ desc: 'Nouvelle prestation', qty: 1, pu: 0 });
-    renderLines();
-  }
-
-  function delLine(i) {
-    lines.splice(i, 1);
-    renderLines();
-  }
-
+  function addLine() { lines.push({ desc: 'Nouvelle prestation', qty: 1, pu: 0 }); renderLines(); }
+  function delLine(i) { lines.splice(i, 1); renderLines(); }
   function renderTotals() {
-    const ht = lines.reduce(function(s, l) { return s + l.qty * l.pu; }, 0);
-    const rate = parseFloat(document.getElementById('tvaRate').value) / 100;
-    const tva = ht * rate;
-    const ttc = ht + tva;
+    const ht = lines.reduce(function(s,l){ return s+l.qty*l.pu; }, 0);
+    const rate = parseFloat(document.getElementById('tvaRate').value)/100;
+    const tva = ht*rate, ttc = ht+tva;
     document.getElementById('totalHT').textContent = fmt(ht);
     document.getElementById('totalTVA').textContent = fmt(tva);
     document.getElementById('totalTTC').textContent = fmt(ttc);
-    document.getElementById('tvaLabel').textContent = rate === 0 ? 'TVA (exonere - art. 293B CGI)' : 'TVA '+document.getElementById('tvaRate').value+'%';
+    document.getElementById('tvaLabel').textContent = rate===0 ? 'TVA (exonere - art. 293B CGI)' : 'TVA '+document.getElementById('tvaRate').value+'%';
   }
-
-  function bind(id, fn) {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('input', fn);
-  }
-
-  bind('invNum', function() {
-    const v = document.getElementById('invNum').value;
-    document.getElementById('previewNum').textContent = 'FACTURE N ' + v;
-    document.getElementById('badgeNum').textContent = 'N ' + v;
-  });
-
-  bind('invDate', updateDates);
-  bind('invDue', updateDates);
-
-  function updateDates() {
-    const d = document.getElementById('invDate').value;
-    const due = document.getElementById('invDue').value;
-    document.getElementById('previewDate').textContent = 'Emise le ' + fmtDate(d);
-    if (d) document.getElementById('previewDue').textContent = 'Echeance le ' + fmtDate(addDays(d, due));
-  }
-
-  bind('invRef', function() {
-    document.getElementById('previewRef').textContent = document.getElementById('invRef').value;
-  });
-
+  function bind(id, fn) { const el = document.getElementById(id); if(el) el.addEventListener('input', fn); }
+  bind('invNum', function() { const v=document.getElementById('invNum').value; document.getElementById('previewNum').textContent='FACTURE N '+v; document.getElementById('badgeNum').textContent='N '+v; });
+  bind('invDate', updateDates); bind('invDue', updateDates);
+  function updateDates() { const d=document.getElementById('invDate').value, due=document.getElementById('invDue').value; document.getElementById('previewDate').textContent='Emise le '+fmtDate(d); if(d) document.getElementById('previewDue').textContent='Echeance le '+fmtDate(addDays(d,due)); }
+  bind('invRef', function() { document.getElementById('previewRef').textContent=document.getElementById('invRef').value; });
   function buildClientText() {
-    const name = document.getElementById('clientName').value;
-    const addr = document.getElementById('clientAddr').value;
-    const siretEl = document.getElementById('clientSiret');
-    const tvaEl = document.getElementById('clientTva');
-    const siret = siretEl ? siretEl.value : '';
-    const tva = tvaEl ? tvaEl.value : '';
-    if (!name && !addr) return '<em style="color:#ccc;">Renseigner le client</em>';
-    let html = '';
-    if (name) html += '<strong>'+name+'</strong><br>';
-    if (addr) html += addr.replace(/\n/g, '<br>');
-    if (siret) html += '<br><span style="font-size:11px;color:#8a8070">SIRET : '+siret+'</span>';
-    if (tva) html += '<br><span style="font-size:11px;color:#8a8070">N TVA : '+tva+'</span>';
-    return html;
+    const name=document.getElementById('clientName').value, addr=document.getElementById('clientAddr').value;
+    const se=document.getElementById('clientSiret'), te=document.getElementById('clientTva');
+    const siret=se?se.value:'', tva=te?te.value:'';
+    if(!name&&!addr) return '<em style="color:#ccc;">Renseigner le client</em>';
+    let h='';
+    if(name) h+='<strong>'+name+'</strong><br>';
+    if(addr) h+=addr.replace(/\n/g,'<br>');
+    if(siret) h+='<br><span style="font-size:11px;color:#8a8070">SIRET : '+siret+'</span>';
+    if(tva) h+='<br><span style="font-size:11px;color:#8a8070">N TVA : '+tva+'</span>';
+    return h;
   }
-
-  ['clientName','clientAddr','clientSiret','clientTva'].forEach(function(id) {
-    bind(id, function() { document.getElementById('previewClient').innerHTML = buildClientText(); });
-  });
-
-  bind('invNotes', function() {
-    const v = document.getElementById('invNotes').value;
-    if (v) document.getElementById('footerNotes').innerHTML = v.replace(/\n/g,'<br>');
-  });
-
-  bind('invIban', function() {
-    document.getElementById('footerIban').textContent = document.getElementById('invIban').value;
-  });
-
+  ['clientName','clientAddr','clientSiret','clientTva'].forEach(function(id){ bind(id, function(){ document.getElementById('previewClient').innerHTML=buildClientText(); }); });
+  bind('invNotes', function() { const v=document.getElementById('invNotes').value; if(v) document.getElementById('footerNotes').innerHTML=v.replace(/\n/g,'<br>'); });
   bind('tvaRate', renderTotals);
-
-  function toggleAdvanced() {
-    const el = document.getElementById('advFields');
-    const tog = document.getElementById('advToggle');
-    const visible = el.style.display !== 'none';
-    el.style.display = visible ? 'none' : 'flex';
-    el.style.flexDirection = 'column';
-    tog.textContent = visible ? '+ Champs optionnels (SIRET, TVA intra-UE)' : '- Masquer';
-    tog.style.color = visible ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.7)';
-  }
-
-  function copyInvNum() {
-    navigator.clipboard.writeText(document.getElementById('invNum').value);
-    const t = document.getElementById('toast');
-    t.classList.add('show');
-    setTimeout(function() { t.classList.remove('show'); }, 2000);
-  }
-
-  updateDates();
-  renderLines();
+  function toggleAdvanced() { const el=document.getElementById('advFields'), tog=document.getElementById('advToggle'), v=el.style.display!=='none'; el.style.display=v?'none':'flex'; el.style.flexDirection='column'; tog.textContent=v?'+ Champs optionnels (SIRET, TVA intra-UE)':'- Masquer'; tog.style.color=v?'rgba(255,255,255,0.4)':'rgba(255,255,255,0.7)'; }
+  function copyInvNum() { navigator.clipboard.writeText(document.getElementById('invNum').value); const t=document.getElementById('toast'); t.classList.add('show'); setTimeout(function(){ t.classList.remove('show'); }, 2000); }
+  updateDates(); renderLines();
 </script>
 </body>
 </html>
