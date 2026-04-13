@@ -1,1 +1,260 @@
-placeholder
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Re-uz · Guide Prospection par Territoire</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<style>* { margin: 0; padding: 0; box-sizing: border-box; } body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f4f7f5; } input, textarea, button { font-family: inherit; }</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+const data = {
+  paris: {
+    name: "Paris 🗄️", sub: "Ile-de-France · 75 / 92 / 93 / 94", ca: "920 K€",
+    tips: [
+      { title: "Agences event = levier clé", body: "1 agence signée = 30 événements/an. Cibler les 500 agences parisiennes via UNIMEV ou LinkedIn." },
+      { title: "Hippodromes en 1er", body: "5 adresses, CA garanti, décision unique. Commencer par Vincennes et Enghien." },
+      { title: "Groupes EHPAD", body: "Korian + DomusVi = 1 contrat = 20-50 sites. Porte d'entrée : direction RSE nationale." },
+      { title: "Salles de spectacle", body: "80 salles × 16K€ = 1,28M€ de marché. Cibler directeurs techniques, pas artistiques." },
+    ],
+    cats: [
+      { icon: "🏥", name: "EHPAD", model: "Achat pur", ca: "21 780€", label: "50% signés", nb: "484", caUnit: "90€", jours: "365j", gob: "~240", priority: 2, priorityText: "Ticket faible — viser les groupes (Korian, DomusVi, Clariane)", links: [{ r: 1, url: "https://www.pour-les-personnes-agees.gouv.fr/annuaire-ehpad-et-maisons-de-retraite", name: "pour-les-personnes-agees.gouv.fr", desc: "Officiel · par arrondissement" }, { r: 2, url: "https://www.data.gouv.fr/datasets/etablissements-ehpad-esld-residences-autonomie-accueils-de-jour", name: "data.gouv.fr", desc: "Base CSV téléchargeable" }] },
+      { icon: "⛺", name: "Campings", model: "Service complet", ca: "55 080€", label: "10% signés", nb: "~180", caUnit: "3 060€", jours: "120j", gob: "~900", priority: 2, priorityText: "Cibler Val d'Oise, Essonne, Seine-et-Marne", links: [{ r: 1, url: "https://www.campingfrance.com", name: "campingfrance.com", desc: "11 000 adresses" }] },
+      { icon: "🏇", name: "Hippodromes", model: "Service complet", ca: "90 000€", label: "5 signés", nb: "5", caUnit: "18 000€", jours: "30 réunions", gob: "3 000", priority: 1, priorityText: "🔥 Vincennes, Longchamp, Auteuil, Saint-Cloud, Enghien", links: [{ r: 1, url: "https://www.fnch.fr/hippodromes-france", name: "fnch.fr", desc: "Carte + contacts" }] },
+      { icon: "🎡", name: "Parcs de loisirs", model: "Service complet", ca: "114 750€", label: "30% signés", nb: "~15", caUnit: "25 500€", jours: "200j", gob: "3 000", priority: 1, priorityText: "🔥 Parc Astérix, Disneyland (sous-traitants), parcs régionaux", links: [{ r: 1, url: "https://www.parcs-france.com/carte", name: "parcs-france.com", desc: "Carte 2026" }] },
+      { icon: "🏛️", name: "Salles de spectacle", model: "Service complet", ca: "256 000€", label: "20% signés", nb: "~80", caUnit: "16 000€", jours: "100 événements", gob: "400", priority: 1, priorityText: "🔥 Zénith, Olympia, Accor Arena, salles municipales", links: [{ r: 1, url: "https://www.artcena.fr/annuaire", name: "artcena.fr", desc: "Officiel spectacle vivant" }, { r: 2, url: "https://www.lascene.com/ouvrages-outils/fichier-3-000-lieux-spectacles-2-100-festivals", name: "lascene.com", desc: "3 000 lieux CSV (payant)" }] },
+      { icon: "🏆", name: "Associations sportives", model: "Service ponctuel", ca: "112 500€", label: "5% signés", nb: "~3 000", caUnit: "750€", jours: "10 tournois/an", gob: "500", priority: 1, priorityText: "🔥 Volume énorme · tournois foot, rugby, basket, tennis, running", links: [{ r: 1, url: "https://www.helloasso.com", name: "helloasso.com", desc: "Annuaire assos sportives" }, { r: 2, url: "https://annuaire.sports.gouv.fr", name: "annuaire.sports.gouv.fr", desc: "Annuaire officiel fédérations" }] },
+      { icon: "🎓", name: "Soirées étudiantes", model: "Service ponctuel", ca: "24 000€", label: "8% signés", nb: "~200 établ.", caUnit: "1 500€", jours: "15 soirées/an", gob: "500", priority: 2, priorityText: "BDE, WEI, galas de promo · renouvellement annuel garanti", links: [{ r: 1, url: "https://www.helloasso.com", name: "helloasso.com", desc: "BDE / BDS par ville et école" }, { r: 2, url: "https://bde.fr", name: "bde.fr", desc: "Annuaire des BDE français" }] },
+      { icon: "🎪", name: "Agences événementielles", model: "Service complet", ca: "100 000€", label: "5% signés", nb: "~500", caUnit: "4 000€", jours: "30 events/an", gob: "500", priority: 1, priorityText: "🔥 Meilleur levier — 1 contrat agence = 30 événements/an automatiques", links: [{ r: 1, url: "https://www.unimev.fr", name: "unimev.fr", desc: "Union française métiers événement" }] },
+      { icon: "💍", name: "Mariages & réceptions", model: "Achat personnalisé", ca: "60 000€", label: "10% traiteurs", nb: "~150 traiteurs", caUnit: "4 000€", jours: "~30 mariages/an", gob: "200", priority: 2, priorityText: "Via traiteurs et wedding planners · gobelet personnalisé = souvenir", links: [{ r: 1, url: "https://www.mariages.net/traiteur-mariage", name: "mariages.net", desc: "Annuaire traiteurs" }] },
+      { icon: "📊", name: "Salons & incentives", model: "Service complet", ca: "24 000€", label: "20% signés", nb: "~30 salons", caUnit: "4 000€", jours: "3-5j/salon", gob: "2 000", priority: 2, priorityText: "Salon de l'Agri, Foire de Paris, salons pro · contrat annuel", links: [{ r: 1, url: "https://www.comexposium.com", name: "comexposium.com", desc: "130 salons en France" }] },
+    ]
+  },
+  lille: {
+    name: "Lille 🏙️", sub: "Hauts-de-France · 59 / 62", ca: "262 K€",
+    tips: [
+      { title: "Braderie de Lille", body: "1M de visiteurs · contacter la MEL dès le printemps." },
+      { title: "Agences événementielles", body: "Lille = 2e hub événementiel de France. Cibler les agences spécialisées MICE." },
+      { title: "Côte d'Opale", body: "Campings de Berck, Touquet, Dunkerque = segment fort peu prospectué." },
+      { title: "Assos sportives", body: "Culture sportive forte dans le Nord · clubs de foot amateur très nombreux." },
+    ],
+    cats: [
+      { icon: "🏥", name: "EHPAD", model: "Achat pur", ca: "5 625€", label: "50% signés", nb: "125", caUnit: "90€", jours: "365j", gob: "~240", priority: 3, priorityText: "Viser EHPAD privés ou groupes régionaux", links: [{ r: 1, url: "https://www.pour-les-personnes-agees.gouv.fr/annuaire-ehpad-et-maisons-de-retraite", name: "pour-les-personnes-agees.gouv.fr", desc: "Filtrer dép. 59" }] },
+      { icon: "⛺", name: "Campings", model: "Service complet", ca: "27 540€", label: "10% signés", nb: "~90", caUnit: "3 060€", jours: "120j", gob: "~900", priority: 2, priorityText: "Cibler Côte d'Opale · gros campings balnéaires", links: [{ r: 1, url: "https://www.campingfrance.com", name: "campingfrance.com", desc: "Filtrer 59 + 62" }] },
+      { icon: "🏇", name: "Hippodromes", model: "Service complet", ca: "36 000€", label: "2 signés", nb: "2", caUnit: "18 000€", jours: "30 réunions", gob: "3 000", priority: 1, priorityText: "🔥 Hippodrome Lille-Marcq + Mons-en-Barœul", links: [{ r: 1, url: "https://www.fnch.fr/hippodromes-france", name: "fnch.fr", desc: "Fédération Nord" }] },
+      { icon: "🎡", name: "Parcs de loisirs", model: "Service complet", ca: "53 550€", label: "30% signés", nb: "~7", caUnit: "25 500€", jours: "200j", gob: "3 000", priority: 1, priorityText: "🔥 Plopsaland, Dennlys Parc, parcs Nord", links: [{ r: 1, url: "https://www.parcs-france.com/carte", name: "parcs-france.com", desc: "Zone Nord" }] },
+      { icon: "🏛️", name: "Salles de spectacle", model: "Service complet", ca: "70 400€", label: "20% signés", nb: "~22", caUnit: "16 000€", jours: "100 événements", gob: "400", priority: 1, priorityText: "🔥 Zénith Lille, Le Splendid, L'Aéronef, Gare Saint-Sauveur", links: [{ r: 1, url: "https://www.artcena.fr/annuaire", name: "artcena.fr", desc: "Hauts-de-France" }] },
+      { icon: "🏆", name: "Associations sportives", model: "Service ponctuel", ca: "18 750€", label: "5% signés", nb: "~500", caUnit: "750€", jours: "10 tournois/an", gob: "500", priority: 1, priorityText: "🔥 Culture foot/rugby très forte dans le Nord", links: [{ r: 1, url: "https://www.helloasso.com", name: "helloasso.com", desc: "Assos sport Hauts-de-France" }] },
+      { icon: "🎓", name: "Soirées étudiantes", model: "Service ponctuel", ca: "3 750€", label: "8% signés", nb: "~30 établ.", caUnit: "1 500€", jours: "15 soirées/an", gob: "500", priority: 2, priorityText: "Univ. Lille, SKEMA, IESEG, Centrale Lille", links: [{ r: 1, url: "https://www.helloasso.com", name: "helloasso.com", desc: "BDE Lille" }] },
+      { icon: "🎪", name: "Agences événementielles", model: "Service complet", ca: "16 000€", label: "5% signés", nb: "~80", caUnit: "4 000€", jours: "30 events/an", gob: "500", priority: 1, priorityText: "🔥 Lille = hub MICE nordiste · agences séminaires entreprises", links: [{ r: 1, url: "https://www.unimev.fr", name: "unimev.fr", desc: "Union métiers événement" }] },
+      { icon: "💍", name: "Mariages & réceptions", model: "Achat personnalisé", ca: "16 000€", label: "10% traiteurs", nb: "~40 traiteurs", caUnit: "4 000€", jours: "~30 mariages/an", gob: "200", priority: 2, priorityText: "Nord = fort volume de mariages · gobelet personnalisé", links: [{ r: 1, url: "https://www.mariages.net/traiteur-mariage/traiteur-nord", name: "mariages.net", desc: "Traiteurs Nord" }] },
+      { icon: "📊", name: "Salons & incentives", model: "Service complet", ca: "6 000€", label: "20% signés", nb: "~8 salons", caUnit: "4 000€", jours: "3-5j/salon", gob: "2 000", priority: 2, priorityText: "Foires régionales, Salon des entrepreneurs Lille", links: [{ r: 1, url: "https://www.gl-events.com", name: "gl-events.com", desc: "Lille Grand Palais" }] },
+    ]
+  },
+  lyon: {
+    name: "Lyon 🦁", sub: "Auvergne-Rhône-Alpes · 69 / 01 / 38", ca: "367 K€",
+    tips: [
+      { title: "Nuits de Fourviere", body: "200 000 spectateurs mai-juillet · un contrat = CA festival majeur." },
+      { title: "Agences événementielles", body: "Lyon = 3e ville événementielle France · MICE tres developpe." },
+      { title: "Campings Ardeche", body: "Zone la plus dense en campings de France. Demarrer par Vallon-Pont-d'Arc." },
+      { title: "Fete des Lumieres", body: "4M visiteurs en decembre · contacter la Ville de Lyon des septembre." },
+    ],
+    cats: [
+      { icon: "🏥", name: "EHPAD", model: "Achat pur", ca: "6 525€", label: "50% signés", nb: "145", caUnit: "90€", jours: "365j", gob: "~240", priority: 2, priorityText: "Viser Korian Rhône-Alpes · direction régionale à Lyon", links: [{ r: 1, url: "https://www.pour-les-personnes-agees.gouv.fr/annuaire-ehpad-et-maisons-de-retraite", name: "pour-les-personnes-agees.gouv.fr", desc: "Dép. 69" }] },
+      { icon: "⛺", name: "Campings", model: "Service complet", ca: "67 320€", label: "10% signés", nb: "~220", caUnit: "3 060€", jours: "120j", gob: "~900", priority: 1, priorityText: "🔥 Ardèche + Drôme hyper dense · Vallon-Pont-d'Arc en priorité", links: [{ r: 1, url: "https://www.campingfrance.com", name: "campingfrance.com", desc: "Filtrer 07, 26, 01, 69" }] },
+      { icon: "🏇", name: "Hippodromes", model: "Service complet", ca: "36 000€", label: "2 signés", nb: "2", caUnit: "18 000€", jours: "30 réunions", gob: "3 000", priority: 1, priorityText: "🔥 Lyon Carré de Soie + Villeurbanne", links: [{ r: 1, url: "https://regions.equidia.fr", name: "regions.equidia.fr", desc: "Fédération Centre-Est" }] },
+      { icon: "🎡", name: "Parcs de loisirs", model: "Service complet", ca: "61 200€", label: "30% signés", nb: "~8", caUnit: "25 500€", jours: "200j", gob: "3 000", priority: 1, priorityText: "🔥 Walibi Rhône-Alpes, Nigloland, zoos régionaux", links: [{ r: 1, url: "https://www.parcs-france.com/carte", name: "parcs-france.com", desc: "Zone AuRA" }] },
+      { icon: "🏛️", name: "Salles de spectacle", model: "Service complet", ca: "80 000€", label: "20% signés", nb: "~25", caUnit: "16 000€", jours: "100 événements", gob: "400", priority: 1, priorityText: "🔥 Nuits de Fourviere, LDLC Arena, Halle Tony Garnier", links: [{ r: 1, url: "https://www.artcena.fr/annuaire", name: "artcena.fr", desc: "AuRA" }] },
+      { icon: "🏆", name: "Associations sportives", model: "Service ponctuel", ca: "30 000€", label: "5% signés", nb: "~800", caUnit: "750€", jours: "10 tournois/an", gob: "500", priority: 1, priorityText: "🔥 OL, ASVEL, LOU Rugby · milliers de clubs amateurs", links: [{ r: 1, url: "https://www.helloasso.com", name: "helloasso.com", desc: "Assos sport Rhône" }] },
+      { icon: "🎓", name: "Soirées étudiantes", model: "Service ponctuel", ca: "7 500€", label: "8% signés", nb: "~60 établ.", caUnit: "1 500€", jours: "15 soirées/an", gob: "500", priority: 2, priorityText: "emlyon, Sciences Po, INSA, Université Lyon 1/2/3 · 150 000 étudiants", links: [{ r: 1, url: "https://www.helloasso.com", name: "helloasso.com", desc: "BDE Lyon" }] },
+      { icon: "🎪", name: "Agences événementielles", model: "Service complet", ca: "24 000€", label: "5% signés", nb: "~120", caUnit: "4 000€", jours: "30 events/an", gob: "500", priority: 1, priorityText: "🔥 Lyon = ville événementielle majeure · Palais des Congrès", links: [{ r: 1, url: "https://www.unimev.fr", name: "unimev.fr", desc: "Organisateurs événements" }] },
+      { icon: "💍", name: "Mariages & réceptions", model: "Achat personnalisé", ca: "28 000€", label: "10% traiteurs", nb: "~70 traiteurs", caUnit: "4 000€", jours: "~30 mariages/an", gob: "200", priority: 2, priorityText: "Cadre gastronomique = nombreux mariages haut de gamme", links: [{ r: 1, url: "https://www.mariages.net/traiteur-mariage/traiteur-rhone", name: "mariages.net", desc: "Traiteurs Rhône" }] },
+      { icon: "📊", name: "Salons & incentives", model: "Service complet", ca: "12 000€", label: "20% signés", nb: "~15 salons", caUnit: "4 000€", jours: "3-5j/salon", gob: "2 000", priority: 2, priorityText: "Sirha, Pollutec, Eurexpo · GL Events basé à Lyon", links: [{ r: 1, url: "https://www.gl-events.com", name: "gl-events.com", desc: "GL Events · siège à Lyon" }] },
+    ]
+  },
+  marseille: {
+    name: "Marseille ☀️", sub: "PACA · 13 / 84 / 83", ca: "337 K€",
+    tips: [
+      { title: "Campings = priorité 1", body: "350 campings · saison plus longue (150j). Concentrer sur Var 83 en 1er." },
+      { title: "Agences événementielles", body: "Marseille Provence = destination congrès & incentives." },
+      { title: "OM Vélodrome", body: "60 000 places · contacter exploitant des buvettes (prestataire séparé)." },
+      { title: "Avignon / Nîmes", body: "Festival d'Avignon + Arènes = 2 gros clients à 60 min." },
+    ],
+    cats: [
+      { icon: "🏥", name: "EHPAD", model: "Achat pur", ca: "5 175€", label: "50% signés", nb: "115", caUnit: "90€", jours: "365j", gob: "~240", priority: 3, priorityText: "Ticket faible — viser Orpéa PACA ou EHPAD privés haut de gamme", links: [{ r: 1, url: "https://www.pour-les-personnes-agees.gouv.fr/annuaire-ehpad-et-maisons-de-retraite", name: "pour-les-personnes-agees.gouv.fr", desc: "Dép. 13" }] },
+      { icon: "⛺", name: "Campings", model: "Service complet", ca: "107 100€", label: "10% signés", nb: "~350", caUnit: "3 060€", jours: "150j", gob: "~900", priority: 1, priorityText: "🔥 Var + Vaucluse + BdR · saison plus longue qu'ailleurs", links: [{ r: 1, url: "https://www.campingfrance.com", name: "campingfrance.com", desc: "Filtrer 13, 83, 84" }] },
+      { icon: "🏇", name: "Hippodromes", model: "Service complet", ca: "18 000€", label: "1 signé", nb: "1", caUnit: "18 000€", jours: "30 réunions", gob: "3 000", priority: 1, priorityText: "🔥 Hippodrome Marseille-Borély · tracé PMU sélectif", links: [{ r: 1, url: "https://www.fnch.fr/hippodromes-france", name: "fnch.fr", desc: "Fédération Sud-Est" }] },
+      { icon: "🎡", name: "Parcs de loisirs", model: "Service complet", ca: "45 900€", label: "30% signés", nb: "~6", caUnit: "25 500€", jours: "200j", gob: "3 000", priority: 2, priorityText: "Zoos PACA, Aqualand, bases nautiques", links: [{ r: 1, url: "https://www.parcs-france.com/carte", name: "parcs-france.com", desc: "Zone PACA" }] },
+      { icon: "🏛️", name: "Salles de spectacle", model: "Service complet", ca: "64 000€", label: "20% signés", nb: "~20", caUnit: "16 000€", jours: "100 événements", gob: "400", priority: 1, priorityText: "🔥 Le Silo, Dock des Suds, Zénith Marseille, Friche Belle de Mai", links: [{ r: 1, url: "https://www.artcena.fr/annuaire", name: "artcena.fr", desc: "Zone PACA" }] },
+      { icon: "🏆", name: "Associations sportives", model: "Service ponctuel", ca: "26 250€", label: "5% signés", nb: "~700", caUnit: "750€", jours: "10 tournois/an", gob: "500", priority: 1, priorityText: "🔥 Culture sportive forte (pétanque, foot) · nombreux tournois", links: [{ r: 1, url: "https://www.helloasso.com", name: "helloasso.com", desc: "Assos sport BdR" }] },
+      { icon: "🎓", name: "Soirées étudiantes", model: "Service ponctuel", ca: "6 000€", label: "8% signés", nb: "~50 établ.", caUnit: "1 500€", jours: "15 soirées/an", gob: "500", priority: 2, priorityText: "AMU, Kedge, Centrale Marseille · 80 000 étudiants", links: [{ r: 1, url: "https://www.helloasso.com", name: "helloasso.com", desc: "BDE Marseille / Aix" }] },
+      { icon: "🎪", name: "Agences événementielles", model: "Service complet", ca: "20 000€", label: "5% signés", nb: "~100", caUnit: "4 000€", jours: "30 events/an", gob: "500", priority: 1, priorityText: "🔥 Destination congrès & incentives · Palais du Pharo", links: [{ r: 1, url: "https://www.unimev.fr", name: "unimev.fr", desc: "Membres organisateurs" }] },
+      { icon: "💍", name: "Mariages & réceptions", model: "Achat personnalisé", ca: "24 000€", label: "10% traiteurs", nb: "~60 traiteurs", caUnit: "4 000€", jours: "~30 mariages/an", gob: "200", priority: 2, priorityText: "Mariages en extérieur très courants en PACA", links: [{ r: 1, url: "https://www.mariages.net/traiteur-mariage/traiteur-bouches-du-rhone", name: "mariages.net", desc: "Traiteurs PACA" }] },
+      { icon: "📊", name: "Salons & incentives", model: "Service complet", ca: "8 000€", label: "20% signés", nb: "~10 salons", caUnit: "4 000€", jours: "3-5j/salon", gob: "2 000", priority: 2, priorityText: "Seafood Expo, Euromaritime · Parc Chanot", links: [{ r: 1, url: "https://www.gl-events.com", name: "gl-events.com", desc: "Parc Chanot Marseille" }] },
+    ]
+  },
+  bordeaux: {
+    name: "Bordeaux 🍷", sub: "Nouvelle-Aquitaine · 33 / 40 / 47", ca: "340 K€",
+    tips: [
+      { title: "Campings = jackpot", body: "400 campings · Arcachon seul = 50 campings haut de gamme. Démarrer 4 et 5 étoiles." },
+      { title: "Vignobles & mariages", body: "Châteaux du Médoc = mariages et événements privés récurrents." },
+      { title: "Agences événementielles", body: "Bordeaux = ville événementielle en forte croissance." },
+      { title: "Garorock", body: "30 000 personnes à Marmande (1h). Contacter l'asso en septembre." },
+    ],
+    cats: [
+      { icon: "🏥", name: "EHPAD", model: "Achat pur", ca: "4 410€", label: "50% signés", nb: "98", caUnit: "90€", jours: "365j", gob: "~240", priority: 3, priorityText: "Peu d'EHPAD — prioriser les autres catégories", links: [{ r: 1, url: "https://www.pour-les-personnes-agees.gouv.fr/annuaire-ehpad-et-maisons-de-retraite", name: "pour-les-personnes-agees.gouv.fr", desc: "Dép. 33" }] },
+      { icon: "⛺", name: "Campings", model: "Service complet", ca: "122 400€", label: "10% signés", nb: "~400", caUnit: "3 060€", jours: "120j", gob: "~900", priority: 1, priorityText: "🔥 N°1 France — Arcachon, Landes, Dordogne · 400 campings accessibles", links: [{ r: 1, url: "https://www.campingfrance.com", name: "campingfrance.com", desc: "Filtrer 33, 40, 47, 24" }] },
+      { icon: "🏇", name: "Hippodromes", model: "Service complet", ca: "36 000€", label: "2 signés", nb: "2", caUnit: "18 000€", jours: "30 réunions", gob: "3 000", priority: 1, priorityText: "🔥 La Teste-de-Buch (Arcachon) + Bordeaux-le-Bouscat", links: [{ r: 1, url: "https://www.fnch.fr/hippodromes-france", name: "fnch.fr", desc: "Fédération Sud-Ouest" }] },
+      { icon: "🎡", name: "Parcs de loisirs", model: "Service complet", ca: "38 250€", label: "30% signés", nb: "~5", caUnit: "25 500€", jours: "200j", gob: "3 000", priority: 2, priorityText: "Zoo Bordeaux-Pessac, Village Gaulois, parcs Dordogne", links: [{ r: 1, url: "https://www.parcs-france.com/carte", name: "parcs-france.com", desc: "Nouvelle-Aquitaine" }] },
+      { icon: "🏛️", name: "Salles de spectacle", model: "Service complet", ca: "57 600€", label: "20% signés", nb: "~18", caUnit: "16 000€", jours: "100 événements", gob: "400", priority: 1, priorityText: "🔥 Arkéa Arena, Rock School Barbey, Rocher de Palmer", links: [{ r: 1, url: "https://www.artcena.fr/annuaire", name: "artcena.fr", desc: "Nouvelle-Aquitaine" }] },
+      { icon: "🏆", name: "Associations sportives", model: "Service ponctuel", ca: "18 750€", label: "5% signés", nb: "~500", caUnit: "750€", jours: "10 tournois/an", gob: "500", priority: 1, priorityText: "🔥 Rugby = sport roi en Gironde · UBB + centaines de clubs amateurs", links: [{ r: 1, url: "https://www.helloasso.com", name: "helloasso.com", desc: "Assos sport Gironde" }] },
+      { icon: "🎓", name: "Soirées étudiantes", model: "Service ponctuel", ca: "4 500€", label: "8% signés", nb: "~40 établ.", caUnit: "1 500€", jours: "15 soirées/an", gob: "500", priority: 2, priorityText: "Univ. Bordeaux, Sciences Po, Kedge · 100 000 étudiants", links: [{ r: 1, url: "https://www.helloasso.com", name: "helloasso.com", desc: "BDE Bordeaux" }] },
+      { icon: "🎪", name: "Agences événementielles", model: "Service complet", ca: "16 000€", label: "5% signés", nb: "~80", caUnit: "4 000€", jours: "30 events/an", gob: "500", priority: 1, priorityText: "🔥 Bordeaux Event, Palais des Congrès très actif", links: [{ r: 1, url: "https://www.unimev.fr", name: "unimev.fr", desc: "Membres organisateurs" }] },
+      { icon: "💍", name: "Mariages & réceptions", model: "Achat personnalisé", ca: "20 000€", label: "10% traiteurs", nb: "~50 traiteurs", caUnit: "4 000€", jours: "~30 mariages/an", gob: "200", priority: 1, priorityText: "🔥 Châteaux viticoles = mariages premium · gobelet au logo du château", links: [{ r: 1, url: "https://www.mariages.net/traiteur-mariage/traiteur-gironde", name: "mariages.net", desc: "Traiteurs Gironde" }] },
+      { icon: "📊", name: "Salons & incentives", model: "Service complet", ca: "6 000€", label: "20% signés", nb: "~8 salons", caUnit: "4 000€", jours: "3-5j/salon", gob: "2 000", priority: 2, priorityText: "Vinoble, Vinexpo, Salon de l'Immobilier · Parc des Expositions", links: [{ r: 1, url: "https://www.gl-events.com", name: "gl-events.com", desc: "GL Events Bordeaux" }] },
+    ]
+  },
+  rennes: {
+    name: "Rennes 🎸", sub: "Bretagne · 35 / 22 / 56 / 29", ca: "287 K€",
+    tips: [
+      { title: "Campings bretons", body: "280 campings · commencer par les 3-4 étoiles du Morbihan (Carnac, Quiberon)." },
+      { title: "Assos sportives", body: "160 événements sportifs/an soutenus par la Ville · culture associative très forte." },
+      { title: "Transmusicales", body: "Festival mondial décembre · contacter l'asso Trans Musicales dès mai." },
+      { title: "Vieilles Charrues", body: "Plus grand festival de France à Carhaix (1h) · contacter la direction opérations." },
+    ],
+    cats: [
+      { icon: "🏥", name: "EHPAD", model: "Achat pur", ca: "2 745€", label: "50% signés", nb: "61", caUnit: "90€", jours: "365j", gob: "~240", priority: 3, priorityText: "Ticket trop faible — traiter en complément uniquement", links: [{ r: 1, url: "https://www.pour-les-personnes-agees.gouv.fr/annuaire-ehpad-et-maisons-de-retraite", name: "pour-les-personnes-agees.gouv.fr", desc: "Dép. 35" }] },
+      { icon: "⛺", name: "Campings", model: "Service complet", ca: "85 680€", label: "10% signés", nb: "~280", caUnit: "3 060€", jours: "120j", gob: "~900", priority: 1, priorityText: "🔥 Bretagne = région camping majeure · Quiberon, Carnac, Perros-Guírec", links: [{ r: 1, url: "https://www.campingfrance.com", name: "campingfrance.com", desc: "Filtrer 22, 29, 35, 56" }] },
+      { icon: "🏇", name: "Hippodromes", model: "Service complet", ca: "36 000€", label: "2 signés", nb: "2", caUnit: "18 000€", jours: "30 réunions", gob: "3 000", priority: 1, priorityText: "🔥 Maure-de-Bretagne + La Roche-Bernard · Fédération Ouest très active", links: [{ r: 1, url: "https://regions.equidia.fr", name: "regions.equidia.fr", desc: "Fédération Ouest · la + fournie" }] },
+      { icon: "🎡", name: "Parcs de loisirs", model: "Service complet", ca: "45 900€", label: "30% signés", nb: "~6", caUnit: "25 500€", jours: "200j", gob: "3 000", priority: 2, priorityText: "Cobac Parc, Village Gaulois, parcs animaliers bretons", links: [{ r: 1, url: "https://www.parcs-france.com/carte", name: "parcs-france.com", desc: "Zone Bretagne" }] },
+      { icon: "🏛️", name: "Salles de spectacle", model: "Service complet", ca: "48 000€", label: "20% signés", nb: "~15", caUnit: "16 000€", jours: "100 événements", gob: "400", priority: 1, priorityText: "🔥 Le Liberté, L'Ubu, La Citrouille + Transmusicales (décembre)", links: [{ r: 1, url: "https://www.artcena.fr/annuaire", name: "artcena.fr", desc: "Bretagne" }] },
+      { icon: "🏆", name: "Associations sportives", model: "Service ponctuel", ca: "22 500€", label: "5% signés", nb: "~600", caUnit: "750€", jours: "10 tournois/an", gob: "500", priority: 1, priorityText: "🔥 160 événements sportifs/an soutenus par la Ville", links: [{ r: 1, url: "https://www.sports-rennes.com", name: "sports-rennes.com", desc: "Office des sports de Rennes" }, { r: 2, url: "https://www.helloasso.com", name: "helloasso.com", desc: "Assos sport Ille-et-Vilaine" }] },
+      { icon: "🎓", name: "Soirées étudiantes", model: "Service ponctuel", ca: "6 000€", label: "10% signés", nb: "~50 établ.", caUnit: "1 500€", jours: "15 soirées/an", gob: "500", priority: 1, priorityText: "🔥 Rennes = ville très étudiante (70 000 étudiants) · BDE hyper actifs", links: [{ r: 1, url: "https://www.helloasso.com", name: "helloasso.com", desc: "BDE Rennes" }, { r: 2, url: "https://bde.fr", name: "bde.fr", desc: "Annuaire BDE" }] },
+      { icon: "🎪", name: "Agences événementielles", model: "Service complet", ca: "12 000€", label: "5% signés", nb: "~60", caUnit: "4 000€", jours: "30 events/an", gob: "500", priority: 2, priorityText: "Séminaires d'entreprises en forte croissance à Rennes", links: [{ r: 1, url: "https://www.pagesjaunes.fr", name: "pagesjaunes.fr", desc: "Agences Rennes" }] },
+      { icon: "💍", name: "Mariages & réceptions", model: "Achat personnalisé", ca: "16 000€", label: "10% traiteurs", nb: "~40 traiteurs", caUnit: "4 000€", jours: "~30 mariages/an", gob: "200", priority: 2, priorityText: "Mariages en manoirs bretons et domaines · gobelet personnalisé", links: [{ r: 1, url: "https://www.mariages.net/traiteur-mariage/traiteur-ille-et-vilaine", name: "mariages.net", desc: "Traiteurs Ille-et-Vilaine" }] },
+      { icon: "📊", name: "Salons & incentives", model: "Service complet", ca: "4 000€", label: "20% signés", nb: "~5 salons", caUnit: "4 000€", jours: "3-5j/salon", gob: "2 000", priority: 2, priorityText: "Salon de l'Habitat, B2B Rennes Metropole · Parc Expo", links: [{ r: 1, url: "https://www.rennes-metropole.fr", name: "rennes-metropole.fr", desc: "Evénements métropole" }] },
+    ]
+  }
+};
+
+const cities = ["paris","lille","lyon","marseille","bordeaux","rennes"];
+const pColors = { 1: "#dc2626", 2: "#d97706", 3: "#64748b" };
+
+function App() {
+  const [city, setCity] = React.useState("paris");
+  const [filter, setFilter] = React.useState("all");
+  const d = data[city];
+
+  const filteredCats = filter === "all" ? d.cats :
+    filter === "p1" ? d.cats.filter(c => c.priority === 1) :
+    d.cats.filter(c => c.model === filter);
+
+  return (
+    <div style={{ fontFamily: "'Segoe UI', system-ui, sans-serif", background: "#f4f7f5", minHeight: "100vh", color: "#111" }}>
+      <div style={{ background: "#111c14", color: "white", padding: "28px 20px 24px" }}>
+        <div style={{ display: "inline-block", background: "#1a6b3a", fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", padding: "3px 10px", borderRadius: 3, marginBottom: 10 }}>Multi-Potentiel × Re-uz</div>
+        <div style={{ fontSize: 24, fontWeight: 800, marginBottom: 6 }}>Guide Prospection — <span style={{ color: "#6fca96" }}>Gobelets Réemployables</span></div>
+        <div style={{ color: "#9ab8a4", fontSize: 13, marginBottom: 16 }}>10 catégories de cibles · CA potentiel · Annuaires de prospection · par territoire</div>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          {["6 territoires", "10 catégories", "Service lavage + rotation", "0,30€/gob · 0,20€/rotation"].map(t => (
+            <span key={t} style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", padding: "3px 10px", borderRadius: 20, fontSize: 11, color: "#c5deca" }}>{t}</span>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ background: "white", borderBottom: "2px solid #d0e4d8", padding: "0 8px", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 2px 8px rgba(0,0,0,0.06)", overflowX: "auto" }}>
+        <div style={{ display: "flex" }}>
+          {cities.map(c => (
+            <button key={c} onClick={() => { setCity(c); setFilter("all"); }} style={{ padding: "12px 14px", fontSize: 13, fontWeight: city === c ? 700 : 500, color: city === c ? "#1a6b3a" : "#3d5242", background: "none", border: "none", borderBottom: city === c ? "3px solid #1a6b3a" : "3px solid transparent", cursor: "pointer", whiteSpace: "nowrap" }}>
+              {data[c].name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ padding: "20px 16px", maxWidth: 1000, margin: "0 auto" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16, flexWrap: "wrap", gap: 12 }}>
+          <div>
+            <div style={{ fontSize: 26, fontWeight: 800, marginBottom: 2 }}>{d.name}</div>
+            <div style={{ color: "#3d5242", fontSize: 13 }}>{d.sub}</div>
+          </div>
+          <div style={{ background: "#1a6b3a", color: "white", padding: "12px 18px", borderRadius: 10, textAlign: "center" }}>
+            <div style={{ fontSize: 10, letterSpacing: 2, textTransform: "uppercase", opacity: 0.8, marginBottom: 2 }}>CA potentiel / an</div>
+            <div style={{ fontSize: 26, fontWeight: 800, lineHeight: 1 }}>{d.ca}</div>
+            <div style={{ fontSize: 10, opacity: 0.7, marginTop: 2 }}>Scénario réaliste</div>
+          </div>
+        </div>
+
+        <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
+          {[["all","Toutes (10)"],["p1","🔥 Priorité haute"],["Service complet","Service complet"],["Service ponctuel","Service ponctuel"],["Achat pur","Achat pur"],["Achat personnalisé","Mariages/perso"]].map(([val, label]) => (
+            <button key={val} onClick={() => setFilter(val)} style={{ padding: "6px 12px", fontSize: 12, fontWeight: filter === val ? 700 : 500, background: filter === val ? "#1a6b3a" : "white", color: filter === val ? "white" : "#3d5242", border: "1px solid " + (filter === val ? "#1a6b3a" : "#d0e4d8"), borderRadius: 20, cursor: "pointer" }}>{label}</button>
+          ))}
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(270px, 1fr))", gap: 14, marginBottom: 20 }}>
+          {filteredCats.map(cat => (
+            <div key={cat.name} style={{ background: "white", border: "1px solid #d0e4d8", borderRadius: 12, overflow: "hidden" }}>
+              <div style={{ padding: "12px 14px 10px", borderBottom: "1px solid #eef4f0", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                  <div style={{ width: 36, height: 36, background: "#e8f5ee", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>{cat.icon}</div>
+                  <div><div style={{ fontWeight: 700, fontSize: 13 }}>{cat.name}</div><div style={{ fontSize: 10, color: "#7a9a82" }}>{cat.model}</div></div>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <div style={{ fontSize: 15, fontWeight: 800, color: "#1a6b3a" }}>{cat.ca}</div>
+                  <div style={{ fontSize: 9, color: "#9ab8a4", textTransform: "uppercase", letterSpacing: 1 }}>{cat.label}</div>
+                </div>
+              </div>
+              <div style={{ padding: "10px 14px" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 10 }}>
+                  {[["Nb cibles", cat.nb], ["CA/client/an", cat.caUnit], ["Fréquence", cat.jours], ["Gob. actifs", cat.gob]].map(([l, v]) => (
+                    <div key={l} style={{ background: "#f4f7f5", borderRadius: 6, padding: "6px 8px" }}>
+                      <div style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: 1, color: "#7a9a82", marginBottom: 1 }}>{l}</div>
+                      <div style={{ fontSize: 12, fontWeight: 700 }}>{v}</div>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: 6, marginBottom: 10, padding: "6px 8px", background: cat.priority === 1 ? "#fff5f5" : cat.priority === 2 ? "#fefce8" : "#f8fafc", borderRadius: 6 }}>
+                  <div style={{ width: 7, height: 7, borderRadius: "50%", background: pColors[cat.priority], marginTop: 3, flexShrink: 0 }}></div>
+                  <div style={{ fontSize: 11, color: "#374151" }}>{cat.priorityText}</div>
+                </div>
+                <div style={{ borderTop: "1px solid #eef4f0", paddingTop: 8 }}>
+                  <div style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: 1, color: "#9ab8a4", marginBottom: 6 }}>Annuaires</div>
+                  {cat.links.map(lk => (
+                    <div key={lk.r} style={{ display: "flex", alignItems: "flex-start", gap: 6, marginBottom: 4 }}>
+                      <div style={{ width: 16, height: 16, background: "#e8f5ee", borderRadius: "50%", fontSize: 9, fontWeight: 700, color: "#1a6b3a", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{lk.r}</div>
+                      <div><a href={lk.url} target="_blank" rel="noreferrer" style={{ fontSize: 11, color: "#1a6b3a", fontWeight: 600, textDecoration: "none" }}>{lk.name}</a><div style={{ fontSize: 10, color: "#7a9a82" }}>{lk.desc}</div></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ background: "#111c14", color: "white", borderRadius: 12, padding: "18px 18px" }}>
+          <div style={{ fontSize: 16, fontWeight: 700, color: "#6fca96", marginBottom: 12 }}>💡 Stratégie {d.name.split(" ")[0]}</div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 10 }}>
+            {d.tips.map(t => (
+              <div key={t.title} style={{ background: "rgba(255,255,255,0.06)", borderRadius: 8, padding: "10px 12px" }}>
+                <div style={{ fontWeight: 700, color: "white", fontSize: 12, marginBottom: 4 }}>{t.title}</div>
+                <div style={{ fontSize: 11, color: "#c5deca", lineHeight: 1.5 }}>{t.body}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ textAlign: "center", marginTop: 20, fontSize: 10, color: "#9ab8a4" }}>Multi-Potentiel × Re-uz · Thierry Bismuth · thierrybismuth.com · Prix 0,30€/gob · 0,20€/rotation service</div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
