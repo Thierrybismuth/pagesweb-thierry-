@@ -3,347 +3,535 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Re-uz · Dossier Membre Partenaire</title>
+<title>Re-uz · Dossier Complet Membre Partenaire</title>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Segoe UI', system-ui, sans-serif; color:#1a2e3a; background:white; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',system-ui,sans-serif;color:#1a2e3a;background:white;}
+h1{font-size:22pt;font-weight:900;line-height:1.2;}
+h2{font-size:15pt;font-weight:800;color:#0d3340;margin-bottom:6pt;}
+h3{font-size:12pt;font-weight:700;color:#0d3340;margin:10pt 0 5pt;}
+h4{font-size:10pt;font-weight:700;color:#0d3340;margin:6pt 0 3pt;}
+p{line-height:1.6;margin-bottom:5pt;font-size:10pt;}
+a{color:inherit;text-decoration:none;}
+.page{padding:28pt 36pt;page-break-after:always;min-height:100vh;}
+.page:last-child{page-break-after:auto;}
+.gold{color:#f0a500;}.teal-col{color:#0d3340;}.green{color:#1a6b3a;}
 
-/* SCREEN */
-.no-print { display:block; }
-.print-only { display:none; }
+.cover{background:#0d3340;color:white;display:flex;flex-direction:column;justify-content:space-between;}
+.cover-logo{font-size:38pt;font-weight:900;color:#f0a500;letter-spacing:-2px;margin-bottom:4pt;}
+.cover-tag{font-size:9pt;text-transform:uppercase;letter-spacing:3px;opacity:0.6;margin-bottom:24pt;}
+.cover h1{color:white;font-size:26pt;}
+.cover .lead{font-size:11pt;opacity:0.8;max-width:460pt;line-height:1.7;margin-top:10pt;}
+.cover-meta{border-top:1pt solid rgba(255,255,255,0.2);padding-top:12pt;margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:14pt;font-size:9pt;color:rgba(255,255,255,0.8);}
+.cover-meta strong{display:block;color:#f0a500;font-size:8pt;text-transform:uppercase;letter-spacing:1px;margin-bottom:3pt;}
 
-@media screen {
-  body { max-width:860px; margin:0 auto; padding:24px 20px; }
-  .page-break { border-top:3px dashed #ccc; margin:32px 0; padding-top:8px; }
-  .page-break::before { content:"— Saut de page à l'impression —"; font-size:11px; color:#aaa; }
-  .screen-header {
-    background:#0d3340; color:white; padding:20px 24px; border-radius:12px;
-    margin-bottom:32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
-  }
+.section-tag{display:inline-block;background:#f0a500;color:#0d3340;padding:2pt 10pt;border-radius:10pt;font-size:8pt;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:8pt;}
+.lead-text{font-size:10pt;color:#4b6358;line-height:1.7;margin-bottom:12pt;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10pt;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8pt;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8pt;}
+
+.stat-card{background:#0d3340;color:white;border-radius:6pt;padding:10pt;text-align:center;}
+.stat-num{font-size:20pt;font-weight:900;color:#f0a500;line-height:1;}
+.stat-sub{font-size:8pt;opacity:0.6;margin-top:3pt;}
+.card{border:0.5pt solid #e0e8ec;border-radius:6pt;padding:10pt;}
+.green-band{background:#e8f5ee;border-left:3pt solid #1a6b3a;padding:9pt 13pt;margin:8pt 0;}
+.gold-band{background:#fffbeb;border-left:3pt solid #f0a500;padding:9pt 13pt;margin:7pt 0;}
+.dark-band{background:#0d3340;color:white;border-radius:6pt;padding:12pt 16pt;margin:8pt 0;}
+
+.cible-header{padding:9pt 13pt;color:white;border-radius:6pt 6pt 0 0;display:flex;align-items:center;gap:9pt;}
+.cible-body{border:0.5pt solid #e0e8ec;border-top:none;border-radius:0 0 6pt 6pt;padding:10pt;}
+.usage-item{display:flex;gap:5pt;padding:4pt 7pt;background:#fff5f5;border-radius:3pt;border:0.5pt solid #fecaca;margin-bottom:3pt;font-size:9pt;}
+.raison-mini{font-size:9pt;margin-bottom:3pt;}
+.objection-box{background:#fffbeb;border-left:3pt solid #f0a500;padding:7pt 11pt;margin-top:7pt;font-size:9pt;}
+.pill{padding:1pt 6pt;border-radius:3pt;font-size:8pt;font-weight:700;}
+.p1{background:#E1F5EE;color:#085041;}.p2{background:#FAEEDA;color:#633806;}
+.com-box{border-radius:6pt;padding:9pt;text-align:center;}
+.com-num{font-size:17pt;font-weight:900;line-height:1;}
+
+.ville-header{background:#0d3340;color:white;border-radius:5pt 5pt 0 0;padding:8pt 12pt;display:flex;justify-content:space-between;align-items:center;}
+.cat-row{display:flex;justify-content:space-between;align-items:center;padding:5pt 0;border-bottom:0.3pt solid #eef4f0;font-size:9pt;}
+.cat-row:last-child{border-bottom:none;}
+
+.sim-table{width:100%;border-collapse:collapse;margin-top:8pt;font-size:9pt;}
+.sim-table th{background:#0d3340;color:white;padding:5pt 8pt;text-align:left;font-size:8pt;font-weight:700;}
+.sim-table td{padding:5pt 8pt;border-bottom:0.3pt solid #eef4f0;}
+.sim-table tr:nth-child(even) td{background:#f8f9fa;}
+.com-h{font-weight:800;color:#1a6b3a;}
+
+.etape-row{display:flex;gap:11pt;align-items:flex-start;padding:7pt 0;border-bottom:0.3pt solid #eef4f0;}
+.etape-num{width:26pt;height:26pt;background:#0d3340;color:#f0a500;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12pt;flex-shrink:0;}
+.etape-content h4{margin:0 0 2pt;color:#0d3340;font-size:10pt;}
+.etape-content p{font-size:9pt;color:#4b6358;margin:0;}
+
+.statut-pros{list-style:none;margin-top:7pt;}
+.statut-pros li{font-size:9pt;color:#374151;padding:2pt 0 2pt 14pt;position:relative;}
+.statut-pros li::before{content:'✓';position:absolute;left:0;color:#1a6b3a;font-weight:700;}
+
+.contact-final{background:#0d3340;color:white;padding:22pt 28pt;text-align:center;border-radius:8pt;margin-top:18pt;}
+.contact-tel{font-size:32pt;font-weight:900;color:#f0a500;}
+
+/* SCREEN SPECIFIC */
+.screen-bar{background:#0d3340;color:white;padding:12pt 22pt;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10pt;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.3);}
+.toc{background:white;border:0.5pt solid #e0e8ec;border-radius:8pt;padding:14pt 22pt;margin:14pt auto;max-width:760pt;}
+.toc-list{list-style:none;columns:2;gap:20pt;}
+.toc-list li{padding:3pt 0;border-bottom:0.3pt solid #f0f0f0;font-size:10pt;break-inside:avoid;}
+.toc-list li::before{content:'→ ';color:#f0a500;font-weight:700;}
+.page-label{font-size:8pt;color:#aaa;border-bottom:2pt dashed #e0e8ec;margin-bottom:8pt;padding-bottom:4pt;}
+.print-btn-main{background:#f0a500;color:#0d3340;border:none;padding:10pt 22pt;border-radius:6pt;font-size:12pt;font-weight:800;cursor:pointer;font-family:inherit;}
+
+@media print{
+  .screen-bar,.toc,.no-print,.page-label{display:none!important;}
+  .page{min-height:0;padding:20pt 28pt;}
+  .cover{min-height:100vh;padding:36pt;}
+  body{font-size:9pt;}
+  @page{margin:0;size:A4;}
 }
-
-@media print {
-  .no-print { display:none !important; }
-  .print-only { display:block; }
-  body { font-size:10pt; color:#000; }
-  .page-break { page-break-before:always; }
-  .page-break::before { display:none; }
-  h1 { font-size:20pt; }
-  h2 { font-size:14pt; }
-  h3 { font-size:11pt; }
-  .section { padding:12pt 0; }
-  a { color:inherit; text-decoration:none; }
+@media screen{
+  body{background:#f4f7f5;}
+  .page{background:white;max-width:800pt;margin:0 auto 8pt;border:0.5pt solid #e0e8ec;box-shadow:0 1px 8px rgba(0,0,0,0.06);}
+  .cover{min-height:500pt;}
 }
-
-/* COMMUN */
-.cover { background:#0d3340; color:white; padding:48px 40px; margin-bottom:0; }
-.cover-logo { font-size:36px; font-weight:900; color:#f0a500; letter-spacing:-1px; margin-bottom:8px; }
-.cover-sub { font-size:14px; opacity:0.7; text-transform:uppercase; letter-spacing:2px; margin-bottom:32px; }
-.cover h1 { font-size:30px; font-weight:900; line-height:1.2; margin-bottom:16px; }
-.cover h1 span { color:#f0a500; }
-.cover-meta { font-size:13px; opacity:0.7; margin-top:32px; border-top:1px solid rgba(255,255,255,0.2); padding-top:16px; display:flex; gap:32px; flex-wrap:wrap; }
-.cover-meta strong { color:white; opacity:1; }
-
-.section { padding:24px 0; border-bottom:1px solid #e0e8ec; }
-.section:last-child { border-bottom:none; }
-.section-tag { display:inline-block; background:#f0a500; color:#0d3340; padding:3px 12px; border-radius:14px; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; }
-h2 { font-size:22px; font-weight:800; color:#0d3340; margin-bottom:8px; }
-h2 span { color:#1a6b3a; }
-h3 { font-size:15px; font-weight:700; color:#0d3340; margin-bottom:6px; margin-top:16px; }
-.lead { font-size:14px; color:#4b6358; line-height:1.7; margin-bottom:16px; max-width:680px; }
-
-.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-.grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
-
-.stat-card { background:#0d3340; color:white; border-radius:10px; padding:16px; text-align:center; }
-.stat-num { font-size:26px; font-weight:900; color:#f0a500; line-height:1; }
-.stat-label { font-size:11px; opacity:0.7; margin-top:4px; }
-
-.green-card { background:#e8f5ee; border-left:4px solid #1a6b3a; border-radius:0; padding:14px 18px; margin:12px 0; }
-.green-card h3 { color:#1a6b3a; margin-top:0; }
-.green-card p { font-size:13px; color:#1a4a2a; line-height:1.6; }
-
-.yellow-card { background:#fffbeb; border-left:4px solid #f0a500; padding:12px 16px; margin:10px 0; }
-.yellow-card p { font-size:12px; color:#5a4010; line-height:1.5; }
-.yellow-card strong { color:#7a5a00; }
-
-.cible-row { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; border-bottom:0.5px solid #eef4f0; font-size:12px; }
-.cible-row:last-child { border-bottom:none; }
-.cible-nom { font-weight:600; color:#1a2e3a; }
-.cible-desc { font-size:11px; color:#6b7280; }
-.pill { padding:2px 8px; border-radius:4px; font-size:10px; font-weight:700; }
-.p1 { background:#E1F5EE; color:#085041; }
-.p2 { background:#FAEEDA; color:#633806; }
-
-.produit-card { border:1px solid #e0e8ec; border-radius:10px; padding:14px; }
-.produit-icon { font-size:24px; margin-bottom:6px; }
-.produit-name { font-size:13px; font-weight:700; color:#0d3340; }
-.produit-desc { font-size:11px; color:#6b7280; margin-top:4px; line-height:1.4; }
-
-.etape-card { background:#f4f7f5; border-radius:10px; padding:14px; }
-.etape-num { width:32px; height:32px; background:#0d3340; color:#f0a500; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:900; margin-bottom:8px; }
-.etape-title { font-size:12px; font-weight:700; color:#0d3340; margin-bottom:4px; }
-.etape-desc { font-size:11px; color:#4b6358; line-height:1.4; }
-
-.statut-card { border:1px solid #e0e8ec; border-radius:10px; padding:16px; }
-.statut-card h3 { margin-top:0; }
-.statut-pros { list-style:none; margin-top:10px; }
-.statut-pros li { font-size:12px; color:#374151; padding:4px 0; padding-left:16px; position:relative; }
-.statut-pros li::before { content:'✓'; position:absolute; left:0; color:#1a6b3a; font-weight:700; }
-
-.contact-cta { background:#0d3340; color:white; padding:24px 28px; text-align:center; border-radius:12px; margin-top:24px; }
-.contact-tel { font-size:32px; font-weight:900; color:#f0a500; }
-.contact-sub { font-size:13px; opacity:0.7; margin-top:6px; }
 </style>
 </head>
 <body>
 
-<!-- SCREEN HEADER -->
-<div class="screen-header no-print">
+<div class="screen-bar no-print">
   <div>
-    <div style="font-size:11px; text-transform:uppercase; letter-spacing:2px; color:#6fca96; margin-bottom:4px;">Re-uz · Dossier complet</div>
-    <div style="font-size:17px; font-weight:700;">Aperçu avant impression — cliquez sur Imprimer</div>
+    <div style="font-size:9pt;color:#6fca96;text-transform:uppercase;letter-spacing:2px;margin-bottom:3pt;">Re-uz · Dossier complet membre partenaire</div>
+    <div style="font-size:13pt;font-weight:700;">16 pages · Toutes les fiches cibles · Simulateur · Prospection</div>
   </div>
-  <button onclick="window.print()" style="background:#f0a500; color:#0d3340; border:none; padding:12px 28px; border-radius:8px; font-size:14px; font-weight:800; cursor:pointer;">
-    🖨️ Télécharger le dossier PDF
-  </button>
+  <button class="print-btn-main" onclick="window.print()">🖨️ Télécharger le dossier PDF</button>
 </div>
 
-<!-- ======================== PAGE 1 — COUVERTURE ======================== -->
-<div class="cover">
-  <div class="cover-logo">Re-uz.</div>
-  <div class="cover-sub">Less is now</div>
-  <h1>Rejoignez le réseau<br>commercial <span>Re-uz</span></h1>
-  <p style="font-size:15px; opacity:0.85; max-width:540px; line-height:1.7;">Dossier membre partenaire — construction d'un réseau commercial externe sur le marché du gobelet réemployable.</p>
+<div class="toc no-print">
+  <h3 style="margin-bottom:10pt;">📋 Sommaire du dossier complet</h3>
+  <ul class="toc-list">
+    <li>Page 1 — Couverture</li>
+    <li>Page 2 — Le marché & les lois</li>
+    <li>Page 3 — L'entreprise & les 4 gammes</li>
+    <li>Pages 4-5 — 6 zones de recrutement & villes</li>
+    <li>Pages 6-7 — Campings & Hippodromes</li>
+    <li>Pages 8-9 — Salles de spectacle & Agences</li>
+    <li>Pages 10-11 — Assos sportives & Parcs de loisirs</li>
+    <li>Pages 12-13 — Collectivités & CHR</li>
+    <li>Page 14 — Mariages, Entreprises, BDE, Distributeurs</li>
+    <li>Page 15 — Simulateur de revenus complet</li>
+    <li>Page 16 — Statuts & Étapes pour rejoindre</li>
+  </ul>
+  <div style="margin-top:12pt;text-align:center;">
+    <button class="print-btn-main" onclick="window.print()">🖨️ Imprimer / Télécharger en PDF</button>
+  </div>
+</div>
+
+<!-- ========== PAGE 1 — COUVERTURE ========== -->
+<div class="page cover">
+  <div>
+    <div class="cover-logo">Re-uz.</div>
+    <div class="cover-tag">Ecocup · Less is now · Réseau commercial externe France</div>
+    <h1>Dossier <span class="gold">Membre Partenaire</span><br>Réseau Re-uz 2026</h1>
+    <p class="lead">Construction d'un réseau commercial externe sur le marché du gobelet réemployable. Un marché obligatoire en explosion — vous avez le réseau local, Re-uz a le produit leader et les clients de référence mondiale.</p>
+  </div>
   <div class="cover-meta">
-    <div><strong>Démarrage</strong><br>Semaine du 18 mai 2026 · Formation Lyon</div>
-    <div><strong>Contact</strong><br>Thierry Bismuth</div>
-    <div><strong>Téléphone</strong><br>06 10 70 30 90</div>
-    <div><strong>Zones ouvertes</strong><br>Paris · Lyon · Marseille · Bordeaux · Rennes · Lille</div>
+    <div><strong>Démarrage</strong>Semaine du 18 mai 2026<br>Formation initiale à Lyon</div>
+    <div><strong>Contact</strong>Thierry Bismuth<br>06 10 70 30 90</div>
+    <div><strong>Zones ouvertes</strong>Paris · Lyon · Marseille<br>Bordeaux · Rennes · Lille</div>
+    <div><strong>Statuts</strong>Auto-entrepreneur<br>Portage salarial</div>
   </div>
 </div>
 
-<!-- ======================== PAGE 2 — LE MARCHÉ ======================== -->
-<div class="page-break"></div>
-<div class="section">
+<!-- ========== PAGE 2 — LE MARCHÉ ========== -->
+<div class="page">
+  <div class="page-label">Page 2 — Le marché</div>
   <div class="section-tag">📈 Le marché</div>
-  <h2>Un marché <span>obligatoire</span> en explosion</h2>
-  <p class="lead">La loi AGEC interdit les plastiques jetables dans les ERP. Des milliers d'acteurs sont obligés de passer au réemploi — et cherchent des solutions maintenant.</p>
-
-  <div class="grid-4" style="margin-bottom:20px;">
-    <div class="stat-card"><div class="stat-num">4,7 Mds</div><div class="stat-label">Gobelets jetables / an en France</div></div>
-    <div class="stat-card"><div class="stat-num">+35%</div><div class="stat-label">Croissance réemploi / an depuis 2022</div></div>
-    <div class="stat-card"><div class="stat-num">6 pays</div><div class="stat-label">Présence internationale Re-uz</div></div>
-    <div class="stat-card"><div class="stat-num">2027</div><div class="stat-label">Objectif 10% réemploi en France</div></div>
+  <h2>Un marché <span class="green">obligatoire</span> en explosion</h2>
+  <p class="lead-text">La loi AGEC interdit les plastiques jetables dans les ERP. Des milliers d'acteurs sont obligés de passer au réemploi — et cherchent des solutions maintenant. Re-uz est le leader. Vous avez le réseau local. C'est le moment.</p>
+  <div class="grid4" style="margin-bottom:12pt;">
+    <div class="stat-card"><div class="stat-num">4,7 Mds</div><div class="stat-sub">Gobelets jetables / an en France</div></div>
+    <div class="stat-card"><div class="stat-num">+35%</div><div class="stat-sub">Croissance réemploi / an depuis 2022</div></div>
+    <div class="stat-card"><div class="stat-num">6 pays</div><div class="stat-sub">Présence internationale Re-uz</div></div>
+    <div class="stat-card"><div class="stat-num">2027</div><div class="stat-sub">Objectif 10% réemploi en France</div></div>
   </div>
-
-  <div class="grid-2" style="margin-bottom:16px;">
-    <div class="yellow-card"><p><strong>🇫🇷 Loi AGEC (en vigueur)</strong> — Interdiction des plastiques à usage unique dans les ERP. Obligation de gobelets réemployables dès +300 couverts. Contrôles DGCCRF en cours, amendes tombent.</p></div>
-    <div class="yellow-card"><p><strong>🎯 Objectif France 2027</strong> — 10% des emballages mis sur le marché doivent être réemployables. Directive SUP européenne : pression irréversible sur tous les États membres.</p></div>
-    <div class="yellow-card"><p><strong>🍺 Heineken, Coca, ABInBev</strong> — Les grands distributeurs de boissons financent déjà une partie du coût pour leurs clients. Objectifs groupe "plastic free" 2025-2027.</p></div>
-    <div class="yellow-card"><p><strong>📊 RSE entreprise obligatoire</strong> — La CSRD impose aux entreprises +250 salariés de mesurer et réduire leurs déchets. Supprimer les jetables = case facile à cocher.</p></div>
+  <h3>⚖️ Ce que dit la loi — votre levier commercial</h3>
+  <div class="grid2" style="margin-bottom:10pt;">
+    <div class="gold-band"><h4>🇫🇷 Loi AGEC (en vigueur)</h4><p>Interdiction des plastiques jetables dans les ERP. Obligation gobelets réemployables dès +300 couverts. Contrôles DGCCRF en cours — les amendes tombent avant le prochain été.</p></div>
+    <div class="gold-band"><h4>🎯 Objectif France 2027</h4><p>10% des emballages mis sur le marché doivent être réemployables. Directive SUP européenne : pression irréversible sur tous les États membres.</p></div>
+    <div class="gold-band"><h4>🍺 Les distributeurs financent</h4><p>Heineken, Coca-Cola, ABInBev ont des objectifs groupe "plastic free" 2025-2027. Ils financent déjà une partie du coût pour leurs clients bars et festivals.</p></div>
+    <div class="gold-band"><h4>📊 CSRD obligatoire</h4><p>Les entreprises +250 salariés doivent mesurer et réduire leurs déchets. Supprimer les gobelets jetables = case facile à cocher dans leur bilan RSE annuel.</p></div>
   </div>
-
-  <div class="green-card">
-    <h3>🔑 La règle d'or</h3>
-    <p>On ne vend pas à ceux qui ont déjà des verres et une plonge. On vend à ceux qui utilisent du plastique jetable <strong>parce qu'ils n'ont pas le choix</strong> — et bientôt plus le droit.</p>
+  <div class="green-band">
+    <h4>🔑 La règle d'or Re-uz</h4>
+    <p style="font-size:10pt;">On ne vend pas à ceux qui ont déjà des verres et une plonge. On vend à ceux qui utilisent du plastique jetable <strong>parce qu'ils n'ont pas le choix</strong> — et bientôt plus le droit.</p>
+  </div>
+  <h3 style="margin-top:10pt;">🚀 Les 4 relais de croissance</h3>
+  <div class="grid4">
+    <div class="card"><h4>🍺 Beer Up</h4><p>Tireuse bière innovante, remplissage par le fond, cashless. Nouveau segment campings & hôtellerie plein air.</p></div>
+    <div class="card"><h4>☕ Newcy</h4><p>Solution pause café entreprises clé en main. Collecte-lave-relivraison. Marché RSE en explosion.</p></div>
+    <div class="card"><h4>🥡 Kiobox</h4><p>Restauration à emporter. Obligation légale 2025. Achat + lavage logistique + R&D sur mesure.</p></div>
+    <div class="card"><h4>🍷 Cocktail & Vin</h4><p>Verres réemployables. Mariages, réceptions, salons gastronomiques.</p></div>
   </div>
 </div>
 
-<!-- ======================== PAGE 3 — L'ENTREPRISE ======================== -->
-<div class="page-break"></div>
-<div class="section">
+<!-- ========== PAGE 3 — L'ENTREPRISE ========== -->
+<div class="page">
+  <div class="page-label">Page 3 — L'entreprise & les produits</div>
   <div class="section-tag">🏢 L'entreprise</div>
-  <h2>Re-uz — Le leader <span>européen</span></h2>
-  <p class="lead">Pas une startup. Pas un pari. Une entreprise solide, présente dans 6 pays, avec des centaines de références — et qui a besoin de vous sur le terrain.</p>
-
-  <div class="grid-2" style="margin-bottom:20px;">
-    <div>
-      <h3>🌍 Présence internationale</h3>
-      <p style="font-size:12px; color:#4b6358; line-height:1.6;">France, UK, Belgique, Allemagne, Espagne, Portugal, Canada. Stations de lavage fixes et mobiles dans chaque pays. Fabrication France — 100% recyclable, résistant, incassable.</p>
-      <h3>🤝 Support complet membre partenaire</h3>
-      <p style="font-size:12px; color:#4b6358; line-height:1.6;">Formation initiale 3 jours · Animation 3×1h/semaine · RDV commercial en binôme avec expert technique Re-uz. Vous n'êtes jamais seul face à un client.</p>
+  <h2>Re-uz — Le leader <span class="green">européen</span> qui vous donne les moyens de gagner</h2>
+  <p class="lead-text">Pas une startup. Une entreprise solide, présente dans 6 pays, avec des centaines de références mondiales — et qui a besoin de vous sur le terrain.</p>
+  <div class="grid2" style="margin-bottom:10pt;">
+    <div class="card">
+      <h4>🌍 Présence internationale</h4>
+      <p>France · UK · Belgique · Allemagne · Espagne · Portugal · Canada. Stations de lavage fixes et mobiles dans chaque pays. Fabrication France — 100% recyclable.</p>
+      <h4 style="margin-top:8pt;">🤝 Support complet membre partenaire</h4>
+      <p>Formation initiale 3 jours · Animation 3×1h/semaine · RDV commercial en binôme avec expert technique Re-uz.</p>
+      <h4 style="margin-top:8pt;">🎯 Objectif réseau</h4>
+      <p>300K€ à 700K€ CA développés / membre / an. Soit 1,8M€ à 4,2M€/an pour un réseau de 15 membres.</p>
     </div>
-    <div>
-      <h3>🎯 Références clients</h3>
-      <p style="font-size:12px; color:#4b6358; line-height:1.6; margin-bottom:10px;">Tomorrowland · Vieilles Charrues · Disneyland Paris · Parc Astérix · PuyDuFou · Futuroscope · Tour de France · Roland Garros · Paris 2024 · Heineken · ABInBev · Bacardi · Coca-Cola · Subway · Burger King · Sodexo · Elior</p>
-      <h3>📊 Objectif réseau</h3>
-      <p style="font-size:12px; color:#4b6358; line-height:1.6;">300 000€ à 700 000€ de CA développés par membre partenaire et par an. Soit 1,8M€ à 4,2M€/an pour un réseau de 15 personnes.</p>
+    <div class="card">
+      <h4>🏆 Références clients</h4>
+      <p style="line-height:1.8;">Tomorrowland · Vieilles Charrues · Rolling Stones · Disneyland Paris · Parc Astérix · PuyDuFou · Futuroscope · Walibi · Tour de France · Roland Garros · Paris 2024 · Heineken · ABInBev · Bacardi · Johnnie Walker · Coca-Cola · Subway · Burger King · Elior · Sodexo · Marché Noël Colmar · Marché Noël Lille</p>
     </div>
   </div>
+  <h3>🥤 Les 4 gammes produits Ecocup by Re-uz</h3>
+  <div class="grid4">
+    <div class="card"><div style="font-size:18pt;margin-bottom:5pt;">🥤</div><h4>Gamme Standard</h4><p>Gobelet réemployable. 3 techniques d'impression : sérigraphie, digital, IML photo-qualité. Fabriqué en France, 100% recyclable, résistant.</p></div>
+    <div class="card"><div style="font-size:18pt;margin-bottom:5pt;">🍺</div><h4>Beer Up System</h4><p>Tireuse bière innovante. Remplissage par le fond du gobelet. Col de mousse parfait garanti. Cashless optionnel. Self-service possible.</p></div>
+    <div class="card"><div style="font-size:18pt;margin-bottom:5pt;">☕</div><h4>Newcy (pause café)</h4><p>Circuit fermé entreprises. Collecte - lave - restitue. Compatible lave-vaisselle industriel. Sans Bisphénol A. 100% recyclable.</p></div>
+    <div class="card"><div style="font-size:18pt;margin-bottom:5pt;">🥡</div><h4>Kiobox (restauration)</h4><p>Contenants réemployables pour restauration commerciale. Achat, lavage logistique, développement produit sur mesure.</p></div>
+  </div>
+</div>
 
-  <h3>🥤 Les 4 gammes produits</h3>
-  <div class="grid-4">
-    <div class="produit-card">
-      <div class="produit-icon">🥤</div>
-      <div class="produit-name">Ecocup (Standard)</div>
-      <div class="produit-desc">Gobelet réemployable personnalisable — 3 techniques impression. Fabriqué en France, 100% recyclable.</div>
+<!-- ========== PAGES 4-5 — ZONES VILLES ========== -->
+<div class="page">
+  <div class="page-label">Pages 4-5 — Zones de recrutement</div>
+  <div class="section-tag">📍 Zones</div>
+  <h2>6 zones ouvertes — <span class="green">places limitées</span></h2>
+  <p class="lead-text">Appelez ou SMS au 06 10 70 30 90 pour confirmer la disponibilité de votre ville avant la formation du 18 mai 2026.</p>
+  <div class="grid2" style="margin-bottom:14pt;gap:7pt;">
+    <div style="background:#f0a500;color:#0d3340;padding:9pt 14pt;border-radius:5pt;display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:800;font-size:11pt;">🗼 Paris & Île-de-France</span><span style="font-weight:900;font-size:13pt;">920K€</span></div>
+    <div style="background:#f0a500;color:#0d3340;padding:9pt 14pt;border-radius:5pt;display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:800;font-size:11pt;">🦁 Lyon & Auvergne-RA</span><span style="font-weight:900;font-size:13pt;">367K€</span></div>
+    <div style="background:#f0a500;color:#0d3340;padding:9pt 14pt;border-radius:5pt;display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:800;font-size:11pt;">☀️ Marseille & PACA</span><span style="font-weight:900;font-size:13pt;">337K€</span></div>
+    <div style="background:#f0a500;color:#0d3340;padding:9pt 14pt;border-radius:5pt;display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:800;font-size:11pt;">🍷 Bordeaux & Nouvelle-Aquitaine</span><span style="font-weight:900;font-size:13pt;">340K€</span></div>
+    <div style="background:#f0a500;color:#0d3340;padding:9pt 14pt;border-radius:5pt;display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:800;font-size:11pt;">🎸 Rennes & Bretagne</span><span style="font-weight:900;font-size:13pt;">287K€</span></div>
+    <div style="background:#f0a500;color:#0d3340;padding:9pt 14pt;border-radius:5pt;display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:800;font-size:11pt;">🏙️ Lille & Hauts-de-France</span><span style="font-weight:900;font-size:13pt;">262K€</span></div>
+  </div>
+  <h3>🎯 Cibles prioritaires par ville — Focus Bordeaux (exemple)</h3>
+  <div class="grid3">
+    <div><div class="ville-header"><span style="font-size:14pt;">⛺</span><span style="font-size:11pt;font-weight:800;">Campings Landes</span></div><div style="border:0.5pt solid #e0e8ec;border-top:none;border-radius:0 0 5pt 5pt;padding:9pt;"><div class="cat-row"><span>Campings Arcachon / Dordogne</span><span class="pill p1">P1</span></div><div class="cat-row"><span>400 campings zone Bordeaux</span><span class="pill p1">P1</span></div><div class="cat-row"><span>CA potentiel : 122 400€</span><span style="font-size:8pt;color:#1a6b3a;font-weight:700;">🔥</span></div></div></div>
+    <div><div class="ville-header"><span style="font-size:14pt;">🏇</span><span style="font-size:11pt;font-weight:800;">Hippodromes</span></div><div style="border:0.5pt solid #e0e8ec;border-top:none;border-radius:0 0 5pt 5pt;padding:9pt;"><div class="cat-row"><span>La Teste-de-Buch</span><span class="pill p1">P1</span></div><div class="cat-row"><span>Bordeaux-le-Bouscat</span><span class="pill p1">P1</span></div><div class="cat-row"><span>2 contrats = 36 000€ CA/an</span><span style="font-size:8pt;color:#1a6b3a;font-weight:700;">🔥</span></div></div></div>
+    <div><div class="ville-header"><span style="font-size:14pt;">💍</span><span style="font-size:11pt;font-weight:800;">Châteaux viticoles</span></div><div style="border:0.5pt solid #e0e8ec;border-top:none;border-radius:0 0 5pt 5pt;padding:9pt;"><div class="cat-row"><span>Médoc, Saint-Émilion</span><span class="pill p1">P1</span></div><div class="cat-row"><span>Mariages premium</span><span class="pill p2">P2</span></div><div class="cat-row"><span>CA potentiel mariages : 20K€</span><span style="font-size:8pt;color:#1a6b3a;font-weight:700;">⭐</span></div></div></div>
+  </div>
+</div>
+
+<!-- ========== FICHES CIBLES — 1 PAR PAGE (condensées) ========== -->
+
+<!-- CAMPINGS -->
+<div class="page">
+  <div class="page-label">Page 6 — Fiche cible : Campings</div>
+  <div class="cible-header" style="background:#1a6b3a;">
+    <span style="font-size:22pt;">⛺</span>
+    <div style="flex:1;"><div style="font-size:14pt;font-weight:900;">Campings</div><div style="font-size:9pt;opacity:0.85;">Le camping est LA cible idéale Re-uz. Volume, récurrence, saison longue — tout y est.</div></div>
+    <div style="text-align:right;"><span class="pill p1" style="font-size:9pt;">PRIORITÉ 1</span><div style="font-size:9pt;opacity:0.7;margin-top:3pt;">8 500 campings en France</div></div>
+  </div>
+  <div class="cible-body">
+    <div class="grid2" style="margin-bottom:8pt;">
+      <div><h4>🎯 Portrait</h4><p>Un camping 3-5 étoiles, c'est un bar de plage ouvert tous les soirs de juin à septembre. Des centaines d'emplacements, une clientèle captive. Impossible d'avoir une plonge industrielle en plein air. Le gobelet jetable est leur seule option… jusqu'ici.</p>
+      <h4 style="margin-top:6pt;">🗑️ Usage actuel</h4>
+      <div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Plastique jetable au bar extérieur (loi non respectée)</span></div>
+      <div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Budget consommables : 3 000 à 8 000€/saison</span></div>
+      <div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Pas de machine de lavage adaptée en plein air</span></div></div>
+      <div><h4>✅ Pourquoi Re-uz les intéresse</h4>
+      <p class="raison-mini">⚖️ <strong>Loi AGEC</strong> — ERP avec bar = obligation réemploi. Les amendes tombent avant le prochain été.</p>
+      <p class="raison-mini">💰 <strong>Économie réelle</strong> — Re-uz coûte moins cher que racheter des jetables chaque saison.</p>
+      <p class="raison-mini">🌿 <strong>Marketing</strong> — "Camping zéro déchet" est un argument de réservation sur Homair, Yelloh.</p>
+      <p class="raison-mini">🍺 <strong>Beer Up</strong> — La tireuse Beer Up est faite pour les campings. Self-service, cashless.</p>
+      <div class="objection-box"><strong>Objection :</strong> "On a déjà nos verres." <br>→ Combien vous coûtent vos jetables cette saison ? Avec Re-uz, vous ne rachetez plus rien — et vous êtes en règle.</div></div>
     </div>
-    <div class="produit-card">
-      <div class="produit-icon">🍺</div>
-      <div class="produit-name">Beer Up System</div>
-      <div class="produit-desc">Tireuse à bière innovante — remplissage par le fond, col de mousse parfait, cashless optionnel.</div>
-    </div>
-    <div class="produit-card">
-      <div class="produit-icon">☕</div>
-      <div class="produit-name">Newcy (pause café)</div>
-      <div class="produit-desc">Solution entreprise clé en main — collecte, lavage, relivraison. Marché RSE en explosion.</div>
-    </div>
-    <div class="produit-card">
-      <div class="produit-icon">🥡</div>
-      <div class="produit-name">Kiobox (restauration)</div>
-      <div class="produit-desc">Contenants réemployables pour la restauration commerciale. Obligation légale 2025.</div>
+    <h4>📊 Simulation — 1 client camping (400 gob × 130 jours de saison)</h4>
+    <div class="grid3">
+      <div class="com-box" style="background:#f4f7f5;"><div style="font-size:9pt;color:#6b7280;margin-bottom:3pt;">CA service / an</div><div class="com-num" style="color:#1a6b3a;">10 400€</div><div style="font-size:8pt;color:#6b7280;margin-top:2pt;">400 gob × 130j × 0,20€</div></div>
+      <div class="com-box" style="background:#f4f7f5;"><div style="font-size:9pt;color:#6b7280;margin-bottom:3pt;">Commission annuelle (12%)</div><div class="com-num" style="color:#0d3340;">1 248€</div><div style="font-size:8pt;color:#6b7280;margin-top:2pt;">par client / par an</div></div>
+      <div class="com-box" style="background:#e8f5ee;border:1pt solid #1a6b3a;"><div style="font-size:9pt;color:#1a6b3a;margin-bottom:3pt;">Commission sur 48 mois</div><div class="com-num" style="color:#1a6b3a;">4 992€</div><div style="font-size:8pt;color:#4b6358;margin-top:2pt;">par client signé</div></div>
     </div>
   </div>
 </div>
 
-<!-- ======================== PAGE 4 — VILLES & CIBLES ======================== -->
-<div class="page-break"></div>
-<div class="section">
-  <div class="section-tag">📍 Zones & cibles</div>
-  <h2>6 zones de recrutement <span>ouvertes</span></h2>
-
-  <div class="grid-2" style="margin-bottom:20px; gap:8px;">
-    <div style="background:#f0a500; color:#0d3340; padding:10px 16px; border-radius:8px; font-weight:700; font-size:13px;">🗼 Paris & Île-de-France — CA potentiel 920K€</div>
-    <div style="background:#f0a500; color:#0d3340; padding:10px 16px; border-radius:8px; font-weight:700; font-size:13px;">🦁 Lyon & Auvergne-RA — CA potentiel 367K€</div>
-    <div style="background:#f0a500; color:#0d3340; padding:10px 16px; border-radius:8px; font-weight:700; font-size:13px;">☀️ Marseille & PACA — CA potentiel 337K€</div>
-    <div style="background:#f0a500; color:#0d3340; padding:10px 16px; border-radius:8px; font-weight:700; font-size:13px;">🍷 Bordeaux & Nouvelle-Aquitaine — CA 340K€</div>
-    <div style="background:#f0a500; color:#0d3340; padding:10px 16px; border-radius:8px; font-weight:700; font-size:13px;">🎸 Rennes & Bretagne — CA potentiel 287K€</div>
-    <div style="background:#f0a500; color:#0d3340; padding:10px 16px; border-radius:8px; font-weight:700; font-size:13px;">🏙️ Lille & Hauts-de-France — CA potentiel 262K€</div>
+<!-- HIPPODROMES -->
+<div class="page">
+  <div class="page-label">Page 7 — Fiche cible : Hippodromes</div>
+  <div class="cible-header" style="background:#7c3aed;">
+    <span style="font-size:22pt;">🏇</span>
+    <div style="flex:1;"><div style="font-size:14pt;font-weight:900;">Hippodromes</div><div style="font-size:9pt;opacity:0.85;">Client or : récurrent, prévisible, gros volume, décision rapide — 1 interlocuteur, 1 contrat.</div></div>
+    <div style="text-align:right;"><span class="pill p1">PRIORITÉ 1</span><div style="font-size:9pt;opacity:0.7;margin-top:3pt;">900+ hippodromes en France</div></div>
   </div>
-
-  <h3>🎯 Vos cibles prioritaires</h3>
-  <div style="border:1px solid #e0e8ec; border-radius:10px; overflow:hidden; margin-top:10px;">
-    <div style="background:#0d3340; padding:8px 12px; display:grid; grid-template-columns:1fr 2fr 60px; gap:8px; font-size:10px; font-weight:700; color:rgba(255,255,255,0.6); text-transform:uppercase; letter-spacing:1px;">
-      <span>Cible</span><span>Argumentaire clé</span><span>Priorité</span>
+  <div class="cible-body">
+    <div class="grid2" style="margin-bottom:8pt;">
+      <div><h4>🎯 Portrait</h4><p>Un hippodrome tourne toute l'année : 25 à 50 réunions PMU, des journées festives. À chaque réunion, des centaines à plusieurs milliers de spectateurs au bar des tribunes. Le comité des courses décide seul — un interlocuteur, un contrat, du CA récurrent sur 48 mois.</p>
+      <h4 style="margin-top:6pt;">🗑️ Usage actuel</h4>
+      <div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Gobelets plastique réutilisés manuellement entre réunions</span></div>
+      <div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Logo PMU imprimé sur gobelets achetés en masse une fois/an</span></div>
+      <div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Pas de machine lavage — bénévoles lavent à la main</span></div></div>
+      <div><h4>✅ Pourquoi Re-uz les intéresse</h4>
+      <p class="raison-mini">📅 <strong>Récurrence garantie</strong> — 30 réunions/an. Le contrat tourne seul sans relance.</p>
+      <p class="raison-mini">🖨️ <strong>Gobelet = support sponsor</strong> — Logo PMU en IML full couleur. Valeur perçue élevée.</p>
+      <p class="raison-mini">⚖️ <strong>Obligation légale</strong> — ERP + public = conformité AGEC obligatoire immédiate.</p>
+      <p class="raison-mini">💼 <strong>Décision rapide</strong> — 1 directeur, 1 décision. Signature en 2 à 4 semaines.</p>
+      <div class="objection-box"><strong>Objection :</strong> "Pas de budget." <br>→ Le service Re-uz remplace votre achat annuel. Coût net souvent négatif la 1ère année.</div></div>
     </div>
-    <div class="cible-row"><div><div class="cible-nom">⛺ Campings</div><div class="cible-desc">8 500 campings en France · saison 120-150j · bar extérieur obligatoire</div></div><div></div><div><span class="pill p1">P1</span></div></div>
-    <div class="cible-row"><div><div class="cible-nom">🏇 Hippodromes</div><div class="cible-desc">30 réunions/an · 3 000 gob · décision rapide · sponsor PMU</div></div><div></div><div><span class="pill p1">P1</span></div></div>
-    <div class="cible-row"><div><div class="cible-nom">🎭 Salles de spectacle</div><div class="cible-desc">10 concerts/mois = 24 000€ CA/an · externaliser le lavage</div></div><div></div><div><span class="pill p1">P1</span></div></div>
-    <div class="cible-row"><div><div class="cible-nom">🎪 Agences événementielles</div><div class="cible-desc">1 contrat = 30 événements/an automatiques · meilleur levier</div></div><div></div><div><span class="pill p1">P1</span></div></div>
-    <div class="cible-row"><div><div class="cible-nom">🎡 Parcs de loisirs</div><div class="cible-desc">200j ouverture · buvettes multiples · gobelet souvenir IML</div></div><div></div><div><span class="pill p1">P1</span></div></div>
-    <div class="cible-row"><div><div class="cible-nom">🏛️ Collectivités & mairies</div><div class="cible-desc">Obligation légale + image publique · contrat-cadre tous événements</div></div><div></div><div><span class="pill p1">P1</span></div></div>
-    <div class="cible-row"><div><div class="cible-nom">🏆 Associations sportives</div><div class="cible-desc">180 000 clubs · tournois récurrents · moins cher que le jetable</div></div><div></div><div><span class="pill p1">P1</span></div></div>
-    <div class="cible-row"><div><div class="cible-nom">🍺 Cafés, bars & hôtellerie</div><div class="cible-desc">Obligation boissons à emporter · gobelet logo = pub gratuite</div></div><div></div><div><span class="pill p1">P1</span></div></div>
-    <div class="cible-row"><div><div class="cible-nom">🏭 Distributeurs boissons</div><div class="cible-desc">Heineken, Coca, ABInBev financent une partie · prescripteurs</div></div><div></div><div><span class="pill p1">P1</span></div></div>
-    <div class="cible-row"><div><div class="cible-nom">💍 Mariages & domaines viticoles</div><div class="cible-desc">Gobelet souvenir premium · traiteur = multiplicateur</div></div><div></div><div><span class="pill p2">P2</span></div></div>
-    <div class="cible-row"><div><div class="cible-nom">🎓 BDE & soirées étudiantes</div><div class="cible-desc">10-20 soirées/an · renouvellement automatique chaque rentrée</div></div><div></div><div><span class="pill p2">P2</span></div></div>
-    <div class="cible-row"><div><div class="cible-nom">🏢 Entreprises & RSE</div><div class="cible-desc">CSRD + Newcy cafétéria · contrat 4 ans récurrent</div></div><div></div><div><span class="pill p2">P2</span></div></div>
+    <h4>📊 Simulation — 1 client hippodrome (3 000 gob × 30 réunions)</h4>
+    <div class="grid3">
+      <div class="com-box" style="background:#f4f7f5;"><div style="font-size:9pt;color:#6b7280;margin-bottom:3pt;">CA service / an</div><div class="com-num" style="color:#7c3aed;">18 000€</div><div style="font-size:8pt;color:#6b7280;margin-top:2pt;">3 000 gob × 30 × 0,20€</div></div>
+      <div class="com-box" style="background:#f4f7f5;"><div style="font-size:9pt;color:#6b7280;margin-bottom:3pt;">Commission annuelle (12%)</div><div class="com-num" style="color:#0d3340;">2 160€</div></div>
+      <div class="com-box" style="background:#e8f5ee;border:1pt solid #1a6b3a;"><div style="font-size:9pt;color:#1a6b3a;margin-bottom:3pt;">Commission sur 48 mois</div><div class="com-num" style="color:#1a6b3a;">8 640€</div></div>
+    </div>
   </div>
 </div>
 
-<!-- ======================== PAGE 5 — REVENUS & STATUTS ======================== -->
-<div class="page-break"></div>
-<div class="section">
-  <div class="section-tag">💰 Revenus & statut</div>
-  <h2>Vos revenus <span>potentiels</span></h2>
-  <p class="lead">Commission 8% sur la vente · 12% sur le service rotation récurrent · durée contrat client : 48 mois en général.</p>
-
-  <div class="grid-3" style="margin-bottom:20px;">
-    <div style="border:1px solid #e0e8ec; border-radius:10px; padding:16px; text-align:center;">
-      <div style="font-size:11px; color:#6b7280; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Scénario démarrage</div>
-      <div style="font-size:28px; font-weight:900; color:#1a6b3a;">24 000€</div>
-      <div style="font-size:11px; color:#6b7280; margin-top:4px;">/an · 5 clients service rotation</div>
+<!-- SALLES + AGENCES sur même page -->
+<div class="page">
+  <div class="page-label">Pages 8-9 — Salles de spectacle & Agences événementielles</div>
+  <div style="margin-bottom:12pt;">
+    <div class="cible-header" style="background:#b45309;">
+      <span style="font-size:18pt;">🎭</span>
+      <div style="flex:1;"><div style="font-size:13pt;font-weight:900;">Salles de spectacle</div><div style="font-size:9pt;opacity:0.85;">10 concerts/mois = 24 000€ CA Re-uz par an, automatiquement.</div></div>
+      <span class="pill p1">PRIORITÉ 1</span>
     </div>
-    <div style="border:2px solid #f0a500; border-radius:10px; padding:16px; text-align:center;">
-      <div style="font-size:11px; color:#b45309; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Scénario réaliste</div>
-      <div style="font-size:28px; font-weight:900; color:#0d3340;">120 000€</div>
-      <div style="font-size:11px; color:#6b7280; margin-top:4px;">/an · 15 clients mixte vente+service</div>
-    </div>
-    <div style="border:1px solid #e0e8ec; border-radius:10px; padding:16px; text-align:center;">
-      <div style="font-size:11px; color:#6b7280; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Scénario ambitieux</div>
-      <div style="font-size:28px; font-weight:900; color:#1a6b3a;">300 000€+</div>
-      <div style="font-size:11px; color:#6b7280; margin-top:4px;">/an · 30+ clients récurrents</div>
+    <div class="cible-body">
+      <div class="grid2" style="margin-bottom:7pt;">
+        <div><div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Gobelets achetés en masse, lavés en cuisine — logistique lourde</span></div><div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Pertes, casse, vol à la sortie — stock à renouveler</span></div></div>
+        <div><p class="raison-mini">🔄 Externaliser le lavage — Re-uz livre propre avant, récupère sale après.</p><p class="raison-mini">📊 1 000 gob × 10 concerts/mois × 12 mois = <strong>24 000€ CA service</strong>.</p><p class="raison-mini">🎨 Gobelet souvenir IML = nouveau revenu pour la salle.</p></div>
+      </div>
+      <div class="grid3">
+        <div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">CA service / an</div><div class="com-num" style="color:#b45309;font-size:15pt;">24 000€</div></div>
+        <div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">Com. annuelle (12%)</div><div class="com-num" style="color:#0d3340;font-size:15pt;">2 880€</div></div>
+        <div class="com-box" style="background:#e8f5ee;border:1pt solid #1a6b3a;"><div style="font-size:8pt;color:#1a6b3a;">Com. 48 mois</div><div class="com-num" style="color:#1a6b3a;font-size:15pt;">11 520€</div></div>
+      </div>
     </div>
   </div>
+  <div>
+    <div class="cible-header" style="background:#0f766e;">
+      <span style="font-size:18pt;">🎪</span>
+      <div style="flex:1;"><div style="font-size:13pt;font-weight:900;">Agences événementielles / F&B</div><div style="font-size:9pt;opacity:0.85;">1 contrat agence = 30 événements/an automatiques. Meilleur levier Re-uz.</div></div>
+      <span class="pill p1">PRIORITÉ 1</span>
+    </div>
+    <div class="cible-body">
+      <div class="grid2" style="margin-bottom:7pt;">
+        <div><div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Gobelets jetables achetés/loués par événement, refacturés au client</span></div><div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Marques imposent "zéro jetable" dans leurs briefs events RSE</span></div></div>
+        <div><p class="raison-mini">📦 Service intégré dans leurs packs — refacturé avec marge.</p><p class="raison-mini">🔁 Récurrence automatique — revenu passif à chaque événement.</p><p class="raison-mini">📋 ABInBev, Heineken, Coca imposent "zéro plastique" dans leurs AO.</p></div>
+      </div>
+      <div class="grid3">
+        <div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">CA service / an</div><div class="com-num" style="color:#0f766e;font-size:15pt;">24 000€</div></div>
+        <div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">Com. annuelle (12%)</div><div class="com-num" style="color:#0d3340;font-size:15pt;">2 880€</div></div>
+        <div class="com-box" style="background:#e8f5ee;border:1pt solid #1a6b3a;"><div style="font-size:8pt;color:#1a6b3a;">Com. 48 mois</div><div class="com-num" style="color:#1a6b3a;font-size:15pt;">11 520€</div></div>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <div class="green-card" style="margin-bottom:20px;">
-    <h3>⏱️ La commission récurrente sur 48 mois</h3>
-    <p>Chaque client service signé génère votre commission chaque mois pendant toute la durée du contrat client (48 mois en général), <strong>tant que vous êtes membre partenaire actif du réseau</strong> et que vous assurez le suivi commercial. Un client hippodrome = 18 000€ × 0,20 × 12 × 0,12 × 4 ans = <strong>10 368€ sur la durée du contrat</strong>.</p>
+<!-- ASSOS + PARCS -->
+<div class="page">
+  <div class="page-label">Pages 10-11 — Associations sportives & Parcs de loisirs</div>
+  <div style="margin-bottom:12pt;">
+    <div class="cible-header" style="background:#dc2626;">
+      <span style="font-size:18pt;">🏆</span>
+      <div style="flex:1;"><div style="font-size:13pt;font-weight:900;">Associations sportives</div><div style="font-size:9pt;opacity:0.85;">180 000 clubs en France — chacun organise 5 à 20 événements par an.</div></div>
+      <span class="pill p1">PRIORITÉ 1</span>
+    </div>
+    <div class="cible-body">
+      <div class="grid2" style="margin-bottom:7pt;">
+        <div><div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Jetables achetés en supermarché avant chaque tournoi (100-400€)</span></div><div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Déchets énormes en fin de journée — problème d'image du club</span></div></div>
+        <div><p class="raison-mini">💸 Économie directe — Re-uz coûte moins cher que le jetable dès la 1ère utilisation.</p><p class="raison-mini">🌱 "Club zéro déchet" = capital image + sponsors locaux.</p><p class="raison-mini">📞 Président décide seul — signature en 1 semaine.</p></div>
+      </div>
+      <div class="grid3">
+        <div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">CA service / an</div><div class="com-num" style="color:#dc2626;font-size:15pt;">1 500€</div><div style="font-size:8pt;color:#6b7280;">500 gob × 15 × 0,20€</div></div>
+        <div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">Com. annuelle</div><div class="com-num" style="color:#0d3340;font-size:15pt;">180€</div></div>
+        <div class="com-box" style="background:#e8f5ee;border:1pt solid #1a6b3a;"><div style="font-size:8pt;color:#1a6b3a;">Com. 48 mois</div><div class="com-num" style="color:#1a6b3a;font-size:15pt;">720€ × nb clubs</div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="cible-header" style="background:#ea580c;">
+      <span style="font-size:18pt;">🎡</span>
+      <div style="flex:1;"><div style="font-size:13pt;font-weight:900;">Parcs de loisirs</div><div style="font-size:9pt;opacity:0.85;">200 jours/an, buvettes multiples, volume constant — le contrat idéal.</div></div>
+      <span class="pill p1">PRIORITÉ 1</span>
+    </div>
+    <div class="cible-body">
+      <div class="grid2" style="margin-bottom:7pt;">
+        <div><div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Mix gobelets perso + jetables en haute saison</span></div><div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Gobelets souvenirs vendus 5-10€ à l'entrée — fort potentiel IML</span></div></div>
+        <div><p class="raison-mini">📈 1 500 gob × 200j = <strong>60 000€ CA service/an</strong>.</p><p class="raison-mini">🎨 Gobelet souvenir IML = nouveau revenu pour le parc.</p><p class="raison-mini">🌱 Label écotourisme + pression familles "zéro déchet".</p></div>
+      </div>
+      <div class="grid3">
+        <div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">CA service / an</div><div class="com-num" style="color:#ea580c;font-size:15pt;">60 000€</div></div>
+        <div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">Com. annuelle</div><div class="com-num" style="color:#0d3340;font-size:15pt;">7 200€</div></div>
+        <div class="com-box" style="background:#e8f5ee;border:1pt solid #1a6b3a;"><div style="font-size:8pt;color:#1a6b3a;">Com. 48 mois</div><div class="com-num" style="color:#1a6b3a;font-size:15pt;">28 800€</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COLLECTIVITÉS + CHR -->
+<div class="page">
+  <div class="page-label">Pages 12-13 — Collectivités & CHR</div>
+  <div style="margin-bottom:12pt;">
+    <div class="cible-header" style="background:#1d4ed8;">
+      <span style="font-size:18pt;">🏛️</span>
+      <div style="flex:1;"><div style="font-size:13pt;font-weight:900;">Collectivités & mairies</div><div style="font-size:9pt;opacity:0.85;">10 à 30 événements/an — obligation d'être exemplaire sur le réemploi.</div></div>
+      <span class="pill p1">PRIORITÉ 1</span>
+    </div>
+    <div class="cible-body">
+      <div class="grid2" style="margin-bottom:7pt;">
+        <div><div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Jetables commandés par le service technique pour chaque événement</span></div><div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Pression élus et citoyens sur le "zéro déchet" croissante</span></div></div>
+        <div><p class="raison-mini">⚖️ Obligation légale + risque politique pour l'élu.</p><p class="raison-mini">🤝 Contrat-cadre pour tous les événements de la ville.</p><p class="raison-mini">💬 "Fête zéro plastique" = capital politique direct.</p></div>
+      </div>
+      <div class="grid3">
+        <div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">CA service / an</div><div class="com-num" style="color:#1d4ed8;font-size:15pt;">3 200€</div></div>
+        <div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">Com. annuelle</div><div class="com-num" style="color:#0d3340;font-size:15pt;">384€</div></div>
+        <div class="com-box" style="background:#e8f5ee;border:1pt solid #1a6b3a;"><div style="font-size:8pt;color:#1a6b3a;">Com. 48 mois</div><div class="com-num" style="color:#1a6b3a;font-size:15pt;">1 536€</div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="cible-header" style="background:#0369a1;">
+      <span style="font-size:18pt;">🍺</span>
+      <div style="flex:1;"><div style="font-size:13pt;font-weight:900;">Cafés, bars & hôtellerie (CHR)</div><div style="font-size:9pt;opacity:0.85;">Le marché de masse — chaque bar avec terrasse est une cible potentielle.</div></div>
+      <span class="pill p1">PRIORITÉ 1</span>
+    </div>
+    <div class="cible-body">
+      <div class="grid2" style="margin-bottom:7pt;">
+        <div><div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Plastique jetable terrasse & boissons à emporter (loi non respectée)</span></div><div class="usage-item"><span style="color:#dc2626;font-weight:700;">→</span><span>Contrôles DGCCRF en cours sur obligation réemploi emporter</span></div></div>
+        <div><p class="raison-mini">🎨 Gobelet logo = pub gratuite dans la rue.</p><p class="raison-mini">⚖️ Mise en conformité immédiate sans effort.</p><p class="raison-mini">🍺 Beer Up pour bars à bière = argument client ultra-fort.</p></div>
+      </div>
+      <div class="grid3">
+        <div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">CA service / an</div><div class="com-num" style="color:#0369a1;font-size:15pt;">8 000€</div></div>
+        <div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">Com. annuelle</div><div class="com-num" style="color:#0d3340;font-size:15pt;">960€</div></div>
+        <div class="com-box" style="background:#e8f5ee;border:1pt solid #1a6b3a;"><div style="font-size:8pt;color:#1a6b3a;">Com. 48 mois</div><div class="com-num" style="color:#1a6b3a;font-size:15pt;">3 840€</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MARIAGES + ENTREPRISES + BDE + DISTRIBUTEURS -->
+<div class="page">
+  <div class="page-label">Page 14 — Mariages, Entreprises, BDE, Distributeurs</div>
+  <div class="grid2">
+    <div>
+      <div class="cible-header" style="background:#9d174d;border-radius:6pt 6pt 0 0;"><span style="font-size:16pt;">💍</span><div><div style="font-size:12pt;font-weight:900;">Mariages & réceptions</div><div style="font-size:8pt;opacity:0.8;">Gobelet souvenir premium.</div></div><span class="pill p2" style="margin-left:auto;">P2</span></div>
+      <div class="cible-body"><p style="font-size:9pt;margin-bottom:5pt;">Domaines viticoles, traiteurs : 20 à 60 mariages/an. Gobelet IML aux prénoms des mariés = souvenir + pub du domaine. Ciblez le traiteur : 1 contrat = 40 mariages automatiques.</p>
+      <div class="grid2" style="gap:6pt;"><div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">CA / an</div><div class="com-num" style="color:#9d174d;font-size:14pt;">1 600€</div></div><div class="com-box" style="background:#e8f5ee;"><div style="font-size:8pt;color:#1a6b3a;">Com. 48 mois</div><div class="com-num" style="color:#1a6b3a;font-size:14pt;">768€</div></div></div></div>
+    </div>
+    <div>
+      <div class="cible-header" style="background:#475569;border-radius:6pt 6pt 0 0;"><span style="font-size:16pt;">🏢</span><div><div style="font-size:12pt;font-weight:900;">Entreprises & RSE</div><div style="font-size:8pt;opacity:0.8;">Newcy by Re-uz — pause café.</div></div><span class="pill p2" style="margin-left:auto;">P2</span></div>
+      <div class="cible-body"><p style="font-size:9pt;margin-bottom:5pt;">CSRD oblige les entreprises +250 salariés à mesurer leurs déchets. Newcy = collecte-lave-restitue clé en main. Entrées : DG RSE (budget ESG) ou CE/CSE (budget QVT).</p>
+      <div class="grid2" style="gap:6pt;"><div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">CA / an</div><div class="com-num" style="color:#475569;font-size:14pt;">13 200€</div></div><div class="com-box" style="background:#e8f5ee;"><div style="font-size:8pt;color:#1a6b3a;">Com. 48 mois</div><div class="com-num" style="color:#1a6b3a;font-size:14pt;">6 336€</div></div></div></div>
+    </div>
+    <div>
+      <div class="cible-header" style="background:#0284c7;border-radius:6pt 6pt 0 0;"><span style="font-size:16pt;">🎓</span><div><div style="font-size:12pt;font-weight:900;">BDE & soirées étudiantes</div><div style="font-size:8pt;opacity:0.8;">15 soirées/an. Renouvellé chaque rentrée.</div></div><span class="pill p2" style="margin-left:auto;">P2</span></div>
+      <div class="cible-body"><p style="font-size:9pt;margin-bottom:5pt;">BDE grande école : WEI, gala, soirées hebdo. Le bureau change chaque année mais les événements restent. 1 contrat école = 4-5 ans de commissions. Moins cher que le jetable.</p>
+      <div class="grid2" style="gap:6pt;"><div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">CA / an</div><div class="com-num" style="color:#0284c7;font-size:14pt;">1 200€</div></div><div class="com-box" style="background:#e8f5ee;"><div style="font-size:8pt;color:#1a6b3a;">Com. 48 mois</div><div class="com-num" style="color:#1a6b3a;font-size:14pt;">576€</div></div></div></div>
+    </div>
+    <div>
+      <div class="cible-header" style="background:#7c2d12;border-radius:6pt 6pt 0 0;"><span style="font-size:16pt;">🏭</span><div><div style="font-size:12pt;font-weight:900;">Distributeurs boissons</div><div style="font-size:8pt;opacity:0.8;">Heineken, Coca financent — prescripteurs massifs.</div></div><span class="pill p1" style="margin-left:auto;">P1</span></div>
+      <div class="cible-body"><p style="font-size:9pt;margin-bottom:5pt;">Portefeuilles de 200-500 clients bars/festivals. Signez le directeur régional Distriboissons ou Heineken — il déploie sur tout son portefeuille. Ils financent déjà une partie du coût.</p>
+      <div class="grid2" style="gap:6pt;"><div class="com-box" style="background:#f4f7f5;"><div style="font-size:8pt;color:#6b7280;">CA / an</div><div class="com-num" style="color:#7c2d12;font-size:14pt;">12 000€</div></div><div class="com-box" style="background:#e8f5ee;"><div style="font-size:8pt;color:#1a6b3a;">Com. 48 mois</div><div class="com-num" style="color:#1a6b3a;font-size:14pt;">5 760€</div></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PAGE 15 — SIMULATEUR COMPLET ========== -->
+<div class="page">
+  <div class="page-label">Page 15 — Simulateur de revenus complet</div>
+  <div class="section-tag">💰 Simulation de revenus</div>
+  <h2>Combien pouvez-vous <span class="green">vraiment gagner</span> ?</h2>
+  <p class="lead-text">Commission 8% vente (one-shot) · 12% service rotation (récurrent) · Versée pendant toute la durée du contrat client (48 mois en général), tant que vous êtes membre partenaire actif et assurez le suivi commercial.</p>
+
+  <div class="green-band" style="margin-bottom:12pt;">
+    <h4>⏱️ La logique clé — Vente vs Service</h4>
+    <p style="font-size:10pt;">Chaque client service signé génère votre commission <strong>chaque mois pendant 48 mois</strong> sans que vous ayez à le recontacter. La vraie différence entre vente et service : un client rotation vaut <strong>80× plus</strong> qu'une vente sèche sur la durée. Construisez un portefeuille, pas un carnet de commandes.</p>
   </div>
 
-  <h3>📋 Votre statut</h3>
-  <div class="grid-2">
-    <div class="statut-card">
-      <h3>🚀 Auto-Entrepreneur</h3>
-      <p style="font-size:12px; color:#6b7280; margin-bottom:8px;">Le statut le plus simple pour démarrer rapidement.</p>
+  <h3>📊 Scénarios de revenus</h3>
+  <table class="sim-table">
+    <thead><tr><th>Scénario</th><th>Clients service</th><th>CA service/an</th><th>Com. annuelle (12%)</th><th>Com. sur 48 mois</th><th>Total revenus/an *</th></tr></thead>
+    <tbody>
+      <tr><td><strong>🌱 Démarrage</strong> (part-time)</td><td>5 clients mixtes</td><td>~20 000€</td><td class="com-h">2 400€</td><td class="com-h">9 600€</td><td class="com-h">~24 000€</td></tr>
+      <tr><td><strong>🚀 Développement</strong> (full-time)</td><td>15 clients</td><td>~75 000€</td><td class="com-h">9 000€</td><td class="com-h">36 000€</td><td class="com-h">~75 000€</td></tr>
+      <tr><td><strong>🔥 Vitesse de croisière</strong></td><td>30 clients</td><td>~160 000€</td><td class="com-h">19 200€</td><td class="com-h">76 800€</td><td class="com-h">~180 000€</td></tr>
+      <tr><td><strong>⭐ Ambitieux</strong></td><td>60 clients</td><td>~320 000€</td><td class="com-h">38 400€</td><td class="com-h">153 600€</td><td class="com-h">~350 000€</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:12pt;">💡 Calcul par exemple de client</h3>
+  <table class="sim-table">
+    <thead><tr><th>Cible</th><th>Volume gob</th><th>Fréquence</th><th>CA service/an</th><th>Com./an</th><th>Com. 48 mois</th></tr></thead>
+    <tbody>
+      <tr><td>⛺ Camping moyen</td><td>400 gob/jour</td><td>130 jours/saison</td><td>10 400€</td><td>1 248€</td><td class="com-h">4 992€</td></tr>
+      <tr><td>🏇 Hippodrome</td><td>3 000 gob/réunion</td><td>30 réunions/an</td><td>18 000€</td><td>2 160€</td><td class="com-h">8 640€</td></tr>
+      <tr><td>🎭 Salle de spectacle</td><td>1 000 gob/concert</td><td>120 concerts/an</td><td>24 000€</td><td>2 880€</td><td class="com-h">11 520€</td></tr>
+      <tr><td>🎡 Parc de loisirs</td><td>1 500 gob/jour</td><td>200 jours/an</td><td>60 000€</td><td>7 200€</td><td class="com-h">28 800€</td></tr>
+      <tr><td>🍺 Bar avec terrasse</td><td>200 gob/jour</td><td>200 jours/an</td><td>8 000€</td><td>960€</td><td class="com-h">3 840€</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:8pt;color:#6b7280;margin-top:6pt;">* Revenus estimatifs. Hypothèse de calcul : CA service = volume gob × fréquence × 0,20€/gob. Commission service = 12% du CA. Com. 48 mois = com. annuelle × 4.</p>
+</div>
+
+<!-- ========== PAGE 16 — STATUTS & ÉTAPES ========== -->
+<div class="page">
+  <div class="page-label">Page 16 — Statuts & Étapes pour rejoindre</div>
+  <div class="section-tag">📋 Rejoindre le réseau</div>
+  <h2>Votre statut & les <span class="green">5 étapes</span> pour démarrer</h2>
+
+  <div class="grid2" style="margin-bottom:14pt;">
+    <div class="card">
+      <h3 style="margin-top:0;">🚀 Auto-Entrepreneur</h3>
+      <p style="font-size:9pt;color:#6b7280;margin-bottom:8pt;">Le statut le plus simple pour démarrer rapidement et tester le marché.</p>
       <ul class="statut-pros">
-        <li>Création en 24h en ligne</li>
-        <li>Cotisations uniquement sur encaissement</li>
+        <li>Création en 24h en ligne sur autoentrepreneur.urssaf.fr</li>
+        <li>Cotisations uniquement sur encaissement réel</li>
         <li>Cumulable avec un emploi salarié</li>
-        <li>Idéal pour tester avant de s'engager</li>
+        <li>Idéal pour tester avant de s'engager à 100%</li>
+        <li>Aucun CA minimum requis</li>
       </ul>
     </div>
-    <div class="statut-card">
-      <h3>🏢 Portage Salarial</h3>
-      <p style="font-size:12px; color:#6b7280; margin-bottom:8px;">La liberté du consultant avec la sécurité du salarié.</p>
+    <div class="card">
+      <h3 style="margin-top:0;">🏢 Portage Salarial</h3>
+      <p style="font-size:9pt;color:#6b7280;margin-bottom:8pt;">La liberté du consultant avec la sécurité du salarié.</p>
       <ul class="statut-pros">
-        <li>Statut cadre salarié avec bulletin de paie</li>
-        <li>Accès aux droits chômage si arrêt</li>
+        <li>Statut cadre salarié avec bulletin de paie mensuel</li>
+        <li>Accès aux droits chômage en cas d'arrêt</li>
         <li>Mutuelle et prévoyance incluses</li>
+        <li>Crédibilité renforcée face aux gros clients</li>
         <li>Idéal pour développer l'activité full-time</li>
       </ul>
     </div>
   </div>
-</div>
 
-<!-- ======================== PAGE 6 — ÉTAPES & CONTACT ======================== -->
-<div class="page-break"></div>
-<div class="section">
-  <div class="section-tag">📅 Comment rejoindre</div>
-  <h2>De la candidature à <span>vos premiers clients</span></h2>
-  <p style="font-size:13px; color:#6b7280; margin-bottom:20px;">⚠️ Les places sont limitées par zone géographique. Contactez-nous dès maintenant pour vérifier la disponibilité de votre ville.</p>
-
-  <div class="grid-2" style="margin-bottom:24px; gap:10px;">
-    <div class="etape-card">
-      <div class="etape-num">1</div>
-      <div class="etape-title">📞 Entretien téléphonique</div>
-      <div class="etape-desc">Appelez ou envoyez un SMS au 06 10 70 30 90 (Thierry). Validation de votre zone et de votre profil. Rapide et sans engagement.</div>
-    </div>
-    <div class="etape-card">
-      <div class="etape-num">2</div>
-      <div class="etape-title">💻 Échange Zoom</div>
-      <div class="etape-desc">Présentation approfondie du modèle Re-uz, des gammes, des marchés, de la commission et du fonctionnement terrain.</div>
-    </div>
-    <div class="etape-card">
-      <div class="etape-num">3</div>
-      <div class="etape-title">🎯 Présentation Zoom client</div>
-      <div class="etape-desc">Participation en binôme à un RDV commercial Zoom avec un expert Re-uz. Vous apprenez en faisant, sur un vrai prospect.</div>
-    </div>
-    <div class="etape-card">
-      <div class="etape-num">4</div>
-      <div class="etape-title">🤝 RDV dans votre ville</div>
-      <div class="etape-desc">Rencontre physique avec le client dans votre territoire. Vous êtes l'interlocuteur local Re-uz. Signature, premières commissions.</div>
-    </div>
+  <div style="background:#fff8e1;border:1pt solid #f0a500;border-radius:6pt;padding:10pt 14pt;margin-bottom:14pt;text-align:center;">
+    <div style="font-size:11pt;font-weight:800;color:#0d3340;">⭐ Prochaine session — Semaine du 18 mai 2026 · Formation initiale à Lyon</div>
+    <div style="font-size:9pt;color:#6b7280;margin-top:3pt;">Places limitées par zone géographique. Appelez ou SMS maintenant.</div>
   </div>
 
-  <div style="background:#f0a500; border-radius:12px; padding:20px 24px; text-align:center; margin-bottom:16px;">
-    <div style="font-size:13px; font-weight:700; color:#0d3340; margin-bottom:4px;">⭐ ÉTAPE 5 — Formation officielle</div>
-    <div style="font-size:20px; font-weight:900; color:#0d3340;">Semaine du 18 mai 2026 · Lyon</div>
-    <div style="font-size:12px; color:#0d3340; opacity:0.8; margin-top:4px;">Formation initiale complète avec toute l'équipe Re-uz. Produits, argumentaires, terrain, organisation.</div>
-  </div>
+  <h3>📅 Les 5 étapes pour rejoindre</h3>
+  <div class="etape-row"><div class="etape-num">1</div><div class="etape-content"><h4>📞 Entretien téléphonique</h4><p>Appelez ou envoyez un SMS au 06 10 70 30 90 (Thierry). Validation de votre zone géographique et de votre profil. Rapide et sans engagement.</p></div></div>
+  <div class="etape-row"><div class="etape-num">2</div><div class="etape-content"><h4>💻 Échange Zoom</h4><p>Présentation approfondie du modèle Re-uz : gammes, marchés, commission, fonctionnement terrain. Vos questions, nos réponses complètes.</p></div></div>
+  <div class="etape-row"><div class="etape-num">3</div><div class="etape-content"><h4>🎯 Présentation Zoom au client</h4><p>Participation en binôme à un vrai RDV commercial Zoom avec un expert Re-uz. Vous apprenez en faisant sur un prospect réel de votre zone.</p></div></div>
+  <div class="etape-row"><div class="etape-num">4</div><div class="etape-content"><h4>🤝 RDV physique dans votre ville</h4><p>Rencontre avec le client dans votre territoire. Vous êtes l'interlocuteur local Re-uz. Le contrat se signe, vos premières commissions tombent.</p></div></div>
+  <div class="etape-row" style="border-bottom:2pt solid #f0a500;"><div class="etape-num" style="background:#f0a500;color:#0d3340;">5</div><div class="etape-content"><h4>🏫 Formation — Semaine du 18 mai 2026 · Lyon</h4><p>Formation initiale complète avec toute l'équipe Re-uz. Produits, argumentaires, techniques de vente terrain, gestion du portefeuille clients sur 48 mois.</p></div></div>
 
-  <div class="contact-cta">
-    <div style="font-size:12px; color:rgba(255,255,255,0.6); text-transform:uppercase; letter-spacing:2px; margin-bottom:10px;">Contactez-nous maintenant</div>
+  <div class="contact-final">
+    <div style="font-size:8pt;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.5);margin-bottom:8pt;">Contactez-nous maintenant</div>
     <div class="contact-tel">06 10 70 30 90</div>
-    <div class="contact-sub">Thierry Bismuth · Appel ou SMS · Vérification dispo zone + informations démarrage</div>
-    <div style="margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.15); display:flex; justify-content:center; gap:24px; flex-wrap:wrap; font-size:11px; color:rgba(255,255,255,0.5);">
-      <span>🗺️ thierrybismuth.com/reuz-prospection-v2.html</span>
-      <span>📋 thierrybismuth.com/reuz-fiches-cibles.html</span>
-      <span>🏠 thierrybismuth.com/reuz-accueil.html</span>
+    <div style="font-size:11pt;color:rgba(255,255,255,0.7);margin-top:5pt;">Thierry Bismuth · Appel ou SMS</div>
+    <div style="font-size:9pt;color:rgba(255,255,255,0.5);margin-top:3pt;">Vérification disponibilité de votre zone · Informations démarrage semaine du 18 mai</div>
+    <div style="margin-top:12pt;padding-top:12pt;border-top:1pt solid rgba(255,255,255,0.15);display:flex;justify-content:center;gap:16pt;flex-wrap:wrap;font-size:8pt;color:rgba(255,255,255,0.35);">
+      <span>thierrybismuth.com/reuz-accueil.html</span>
+      <span>thierrybismuth.com/reuz-fiches-cibles.html</span>
+      <span>thierrybismuth.com/reuz-prospection-v2.html</span>
     </div>
   </div>
 </div>
 
-<!-- Screen bottom buttons -->
-<div class="no-print" style="margin-top:32px; text-align:center; padding:20px;">
-  <button onclick="window.print()" style="background:#0d3340; color:white; border:none; padding:14px 32px; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; margin-right:12px;">
-    🖨️ Télécharger le dossier PDF
-  </button>
-  <a href="javascript:window.close()" style="background:#f4f7f5; color:#0d3340; border:1px solid #e0e8ec; padding:14px 24px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; text-decoration:none;">
-    ✕ Fermer
-  </a>
+<div class="no-print" style="text-align:center;padding:20pt;background:#f4f7f5;">
+  <button class="print-btn-main" onclick="window.print()" style="font-size:14pt;padding:12pt 32pt;">🖨️ Télécharger le dossier complet en PDF</button>
 </div>
 
 </body>
