@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Re-uz · Outil Candidat</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f4f7f5; }
+  input, textarea, button { font-family: inherit; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+const UNIVERS = [
+  { id:"camping", icon:"⛺", label:"Campings", desc:"Bar + snack + animations · saison 120-150 jours", exemple:"Camping 4★ 200 emplacements, bar ouvert tous les soirs en saison", gob:400, rotations:40, color:"#1a6b3a", exemples_clients:["Campings Yelloh! Village","Campings Capfun","Campings indépendants 3-5★","Villages vacances","Centers Parcs"] },
+  { id:"hippodrome", icon:"🏇", label:"Hippodromes", desc:"2 à 3 réunions/semaine · public récurrent · buvettes multiples", exemple:"Hippodrome régional, 30 réunions/an, 1 500 spectateurs en moyenne", gob:3000, rotations:30, color:"#7c3aed", exemples_clients:["Hippodrome de Vincennes","Hippodrome de Cagnes-sur-Mer","Sociétés de courses régionales","Hippodromes PMU provinciaux"] },
+  { id:"salle", icon:"🎭", label:"Salles de spectacle", desc:"1 à 3 événements/semaine · bar systématique · rotation intense", exemple:"Salle de 600 places, 80 concerts/an, bar Re-uz à chaque date", gob:800, rotations:80, color:"#b45309", exemples_clients:["Zéniths","Salles municipales","Cafés-concerts","Salles de comédie","Maisons de la Culture"] },
+  { id:"asso_sport", icon:"🏆", label:"Associations sportives", desc:"Tournois, galas, compétitions · récurrence hebdo ou mensuelle", exemple:"Club de foot amateur, 10 tournois/an, 300 personnes", gob:500, rotations:15, color:"#dc2626", exemples_clients:["Clubs de foot amateur","Tournois de padel / tennis","Galas de judo / danse","Cross et trails locaux","Clubs de rugby fédéral"] },
+  { id:"etudiant", icon:"🎓", label:"Soirées étudiantes", desc:"BDE, WEI, galas de promo · renouvellement annuel garanti", exemple:"BDE école de commerce, 15 soirées/an, 400 étudiants par soirée", gob:400, rotations:15, color:"#0284c7", exemples_clients:["BDE grandes écoles","BDS universités","Soirées d'intégration (WEI)","Galas de promo","Associations étudiantes culturelles"] },
+  { id:"agence", icon:"🎪", label:"Agences événementielles", desc:"1 contrat agence = 20-50 événements automatiques par an", exemple:"Agence événementielle 30 événements/an, 500 personnes en moyenne", gob:500, rotations:30, color:"#0f766e", exemples_clients:["Agences MICE","Organisateurs de salons","Agences séminaires / team building","Event managers freelance","Agences de communication événementielle"] },
+  { id:"mariage", icon:"💍", label:"Mariages & réceptions", desc:"Via traiteurs et wedding planners · gobelet personnalisé = souvenir", exemple:"Traiteur haut de gamme, 40 mariages/an, 150 invités en moyenne", gob:200, rotations:40, color:"#9d174d", exemples_clients:["Traiteurs événementiels","Wedding planners","Domaines viticoles (mariages en château)","Salles de réception","Manoirs et domaines privatisables"] },
+  { id:"salon", icon:"📊", label:"Salons & foires", desc:"Gros volumes sur 3-5 jours · organisateur = contrat annuel", exemple:"Foire régionale, 5 000 visiteurs/jour, 3 jours, buvettes sur site", gob:2000, rotations:3, color:"#64748b", exemples_clients:["Foires régionales","Salons professionnels","Comexposium / GL Events / Reed","Salons de l'habitat","Salons gastronomiques"] },
+  { id:"parc", icon:"🎡", label:"Parcs de loisirs", desc:"Ouvert 200 jours/an · buvettes multiples · volume constant", exemple:"Parc animalier 1 500 visiteurs/jour, 200 jours d'ouverture", gob:1500, rotations:100, color:"#ea580c", exemples_clients:["Zoos et parcs animaliers","Parcs d'attractions","Parcs aquatiques","Bases de loisirs","Parcs à thème régionaux"] },
+];
+
+function App() {
+  const [step, setStep] = React.useState("intro");
+  const [sel, setSel] = React.useState(null);
+  const [gob, setGob] = React.useState("");
+  const [rot, setRot] = React.useState("");
+  const [reseau, setReseau] = React.useState({});
+  const [contacts, setContacts] = React.useState({});
+
+  const u = UNIVERS.find(x => x.id === sel);
+  const simGob = parseFloat(gob) || u?.gob || 0;
+  const simRot = parseFloat(rot) || u?.rotations || 0;
+  const caV = Math.round(simGob * 0.30);
+  const caS = Math.round(simGob * simRot * 0.20);
+  const comV = Math.round(caV * 0.08);
+  const comS = Math.round(caS * 0.12);
+  const score = UNIVERS.filter(x => reseau[x.id] === "oui").length;
+
+  const STEPS = [["intro","📖","Intro"],["prix","💶","Les prix"],["logique","🧠","Logique"],["simulation","📊","Simulation"],["reseau","🕸️","Mon réseau"],["bilan","✅","Bilan"]];
+
+  const btn = (label, onClick, primary) => (
+    <button onClick={onClick} style={{padding:"10px 18px",borderRadius:8,fontSize:13,fontWeight:primary?700:500,cursor:"pointer",background:primary?"#1a6b3a":"white",color:primary?"white":"#374151",border:primary?"none":"1px solid #d0e4d8"}}>
+      {label}
+    </button>
+  );
+
+  return (
+    <div style={{minHeight:"100vh",background:"#f4f7f5"}}>
+      <div style={{background:"#111c14",color:"white",padding:"20px 20px 16px"}}>
+        <div style={{fontSize:11,fontWeight:700,letterSpacing:2,textTransform:"uppercase",color:"#6fca96",marginBottom:6}}>Multi-Potentiel × Re-uz · Outil candidat</div>
+        <div style={{fontSize:20,fontWeight:800,marginBottom:14}}>Comprendre le business Re-uz en 5 étapes</div>
+        <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+          {STEPS.map(([id,ic,lb]) => (
+            <div key={id} onClick={()=>setStep(id)} style={{display:"flex",alignItems:"center",gap:5,padding:"5px 10px",borderRadius:20,cursor:"pointer",fontSize:12,fontWeight:step===id?700:400,background:step===id?"#1a6b3a":"rgba(255,255,255,0.08)",color:step===id?"white":"#9ab8a4"}}>
+              {ic} {lb}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{padding:"24px 16px",maxWidth:800,margin:"0 auto"}}>
+        {step==="intro" && (
+          <div style={{textAlign:"center"}}>
+            <div style={{background:"white",border:"1px solid #d0e4d8",borderRadius:12,padding:"24px"}}>
+              <div style={{fontSize:48,marginBottom:12}}>🥤</div>
+              <div style={{fontSize:22,fontWeight:800,marginBottom:10}}>Bienvenue chez Re-uz</div>
+              <div style={{fontSize:14,color:"#374151",lineHeight:1.7,maxWidth:520,margin:"0 auto 20px"}}>
+                Re-uz est la marque <strong>leader du gobelet réemployable</strong> en France. Votre rôle : trouver des clients qui utilisent du <strong>plastique jetable</strong> et les convertir.
+              </div>
+              <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:10,maxWidth:480,margin:"0 auto 20px"}}>
+                {[["🌿","Loi anti-plastique","Obligation légale en marche"],["📈","Marché vierge","Quasi aucune concurrence"],["🔄","Revenus récurrents","Clients qui reviennent"]].map(([ic,t,d]) => (
+                  <div key={t} style={{background:"#f4f7f5",borderRadius:10,padding:"12px 8px"}}>
+                    <div style={{fontSize:22,marginBottom:6}}>{ic}</div>
+                    <div style={{fontSize:12,fontWeight:700,marginBottom:3}}>{t}</div>
+                    <div style={{fontSize:11,color:"#6b7280"}}>{d}</div>
+                  </div>
+                ))}
+              </div>
+              <div style={{background:"#e8f5ee",borderRadius:8,padding:"12px 16px",fontSize:13,color:"#1a4a2a",marginBottom:20,textAlign:"left"}}>
+                💡 <strong>La règle d'or :</strong> On ne vend pas à ceux qui ont déjà des verres et une plonge. On vend à ceux qui utilisent du jetable parce qu'ils n'ont pas d'autre choix.
+              </div>
+              {btn("Découvrir les prix →", ()=>setStep("prix"), true)}
+            </div>
+          </div>
+        )}
+        {step==="bilan" && (
+          <div>
+            <div style={{fontSize:20,fontWeight:800,marginBottom:18}}>✅ Bilan de votre exploration</div>
+            <div style={{background:"#111c14",color:"white",borderRadius:14,padding:"18px",marginBottom:14}}>
+              <div style={{fontSize:14,fontWeight:700,color:"#6fca96",marginBottom:12}}>📋 Ce que vous avez compris</div>
+              {[["💶","Les 2 prix","0,30€/gob (vente) · 0,20€/gob/rotation (service)"],["🧠","La logique","Volume ET récurrence. Le service vaut 10× la vente."],["🎯","Les bonnes cibles","Campings, hippodromes, salles, agences event, parcs..."],["🕸️","Votre réseau",score+" univers avec contacts identifiés"]].map(([ic,t,d]) => (
+                <div key={t} style={{display:"flex",gap:10,alignItems:"flex-start",background:"rgba(255,255,255,0.06)",borderRadius:8,padding:"10px 12px",marginBottom:6}}>
+                  <span style={{fontSize:18}}>{ic}</span>
+                  <div><div style={{fontWeight:700,fontSize:13}}>{t}</div><div style={{fontSize:12,color:"#9ab8a4"}}>{d}</div></div>
+                </div>
+              ))}
+            </div>
+            <div style={{background:"#1a6b3a",color:"white",borderRadius:12,padding:"18px 20px",textAlign:"center"}}>
+              <div style={{fontSize:16,fontWeight:800,marginBottom:6}}>Prêt(e) à démarrer ?</div>
+              <div style={{fontSize:13,color:"#a7d9b8",marginBottom:14}}>Objectif : 3 clients signés dans les 60 premiers jours.</div>
+              <button onClick={()=>{setStep("intro");setSel(null);setReseau({});setContacts({});}} style={{background:"white",color:"#1a6b3a",border:"none",padding:"9px 14px",borderRadius:8,fontSize:13,fontWeight:700,cursor:"pointer"}}>🔄 Recommencer</button>
+            </div>
+          </div>
+        )}
+      </div>
+      <div style={{textAlign:"center",padding:"12px",fontSize:10,color:"#9ab8a4",borderTop:"1px solid #d0e4d8",background:"white",marginTop:20}}>
+        Multi-Potentiel × Re-uz · Outil découverte candidat · thierrybismuth.com
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
