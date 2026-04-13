@@ -122,6 +122,17 @@ const CITIES_DATA = {
     ]
   },
 };
+const FICHE_LINKS = {
+  'Campings': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
+  'Hippodromes': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
+  'Salles de spectacle': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
+  'Associations sportives': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
+  'Soirées étudiantes': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
+  'Agences événementielles': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
+  'Mariages & réceptions': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
+  'Parcs de loisirs': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
+};
+
 const CITIES = ['paris','bordeaux','lyon','marseille','lille','rennes'];
 const pColors = { 1: '#dc2626', 2: '#d97706', 3: '#64748b' };
 
@@ -185,6 +196,13 @@ function ProspectionView() {
                   <div style={{fontSize:9,textTransform:'uppercase',letterSpacing:1,color:'#9ab8a4',marginBottom:6}}>Annuaires</div>
                   {cat.links.map(lk => <div key={lk.r} style={{display:'flex',alignItems:'flex-start',gap:6,marginBottom:4}}><div style={{width:16,height:16,background:'#e8f5ee',borderRadius:'50%',fontSize:9,fontWeight:700,color:'#1a6b3a',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>{lk.r}</div><div><a href={lk.url} target="_blank" rel="noreferrer" style={{fontSize:11,color:'#1a6b3a',fontWeight:600,textDecoration:'none'}}>{lk.name}</a><div style={{fontSize:10,color:'#7a9a82'}}>{lk.desc}</div></div></div>)}
                 </div>
+                {FICHE_LINKS[cat.name] && (
+                  <div style={{marginTop:8,paddingTop:8,borderTop:'1px solid #eef4f0'}}>
+                    <a href={FICHE_LINKS[cat.name]} style={{fontSize:11,color:'#1a6b3a',fontWeight:700,textDecoration:'none',display:'flex',alignItems:'center',gap:4}}>
+                      📋 Voir la fiche cible détaillée →
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -221,6 +239,11 @@ function CandidatView() {
   const card = ch => <div style={{background:'white',border:'1px solid #d0e4d8',borderRadius:12,padding:'16px 18px',marginBottom:14}}>{ch}</div>;
   return (
     <div>
+      <div style={{background:'#0a1510',padding:'4px 8px',display:'flex',gap:0,overflowX:'auto'}}>
+        <a href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-accueil.html" style={{color:'rgba(255,255,255,0.5)',fontSize:10,fontWeight:600,textDecoration:'none',padding:'4px 10px',whiteSpace:'nowrap',borderRight:'1px solid rgba(255,255,255,0.1)'}}>🏠 Accueil</a>
+        <a href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html" style={{color:'rgba(255,255,255,0.5)',fontSize:10,fontWeight:600,textDecoration:'none',padding:'4px 10px',whiteSpace:'nowrap',borderRight:'1px solid rgba(255,255,255,0.1)'}}>📋 Fiches cibles</a>
+        <span style={{color:'#6fca96',fontSize:10,fontWeight:700,padding:'4px 10px',whiteSpace:'nowrap'}}>🎓 Outil membre</span>
+      </div>
       <div style={{background:'white',borderBottom:'2px solid #d0e4d8',padding:'0 8px',position:'sticky',top:58,zIndex:90,overflowX:'auto',boxShadow:'0 2px 8px rgba(0,0,0,0.04)'}}>
         <div style={{display:'flex'}}>
           {STEPS.map(([id,ic,lb]) => <div key={id} onClick={()=>setStep(id)} style={{display:'flex',alignItems:'center',gap:5,padding:'10px 12px',fontSize:12,fontWeight:step===id?700:400,color:step===id?'#1a6b3a':'#6b7280',cursor:'pointer',borderBottom:step===id?'3px solid #1a6b3a':'3px solid transparent',whiteSpace:'nowrap'}}>{ic} {lb}</div>)}
@@ -253,6 +276,14 @@ function App() {
             <button onClick={()=>setView('prospection')} style={{padding:'8px 16px',borderRadius:8,fontSize:13,fontWeight:view==='prospection'?700:500,background:view==='prospection'?'#1a6b3a':'rgba(255,255,255,0.1)',color:'white',border:view==='prospection'?'none':'1px solid rgba(255,255,255,0.2)',cursor:'pointer'}}>🗺️ Guide Prospection</button>
             <button onClick={()=>setView('candidat')} style={{padding:'8px 16px',borderRadius:8,fontSize:13,fontWeight:view==='candidat'?700:500,background:view==='candidat'?'#1a6b3a':'rgba(255,255,255,0.1)',color:'white',border:view==='candidat'?'none':'1px solid rgba(255,255,255,0.2)',cursor:'pointer'}}>🎓 Outil Candidat</button>
           </div>
+        </div>
+      </div>
+      <div style={{background:'#0a1510',borderTop:'1px solid rgba(255,255,255,0.1)',padding:'5px 20px'}}>
+        <div style={{maxWidth:1000,margin:'0 auto',display:'flex',gap:0,alignItems:'center',overflowX:'auto'}}>
+          <a href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-accueil.html" style={{color:'rgba(255,255,255,0.5)',fontSize:11,fontWeight:600,textDecoration:'none',padding:'5px 12px',whiteSpace:'nowrap',borderRight:'1px solid rgba(255,255,255,0.1)'}}>🏠 Accueil</a>
+          <span style={{color:'#6fca96',fontSize:11,fontWeight:700,padding:'5px 12px',whiteSpace:'nowrap',borderRight:'1px solid rgba(255,255,255,0.1)'}}>🗺️ Prospection ville par ville</span>
+          <a href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html" style={{color:'rgba(255,255,255,0.5)',fontSize:11,fontWeight:600,textDecoration:'none',padding:'5px 12px',whiteSpace:'nowrap',borderRight:'1px solid rgba(255,255,255,0.1)'}}>📋 Fiches cibles</a>
+          <a href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-candidat-decouverte.html" style={{color:'rgba(255,255,255,0.5)',fontSize:11,fontWeight:600,textDecoration:'none',padding:'5px 12px',whiteSpace:'nowrap'}}>🎓 Outil membre</a>
         </div>
       </div>
       {view==='prospection' ? <ProspectionView /> : <CandidatView />}
