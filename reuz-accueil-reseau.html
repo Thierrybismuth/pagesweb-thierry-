@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Re-uz — Réseau de Consultants Indépendants</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1a0f;
+    --paper: #f4f0e8;
+    --green: #2d5a3d;
+    --green-light: #4a8a60;
+    --green-pale: #d4e8da;
+    --terracotta: #c8622a;
+    --sand: #e8dfc8;
+    --muted: #6b7a6b;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.6; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--green);
+    color: var(--white);
+    padding: 80px 48px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -100px; right: -100px;
+    width: 440px; height: 440px; border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -60px; left: -60px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+  .hero-badge {
+    display: inline-block; background: var(--terracotta); color: white;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 6px 16px; border-radius: 2px; margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5.5vw, 64px); line-height: 1.1; max-width: 820px; margin-bottom: 20px;
+  }
+  .hero h1 em { font-style: italic; color: #a8d8b5; }
+  .hero-sub {
+    font-size: 17px; font-weight: 300; max-width: 580px;
+    color: rgba(255,255,255,0.72); line-height: 1.75; margin-bottom: 0;
+  }
+
+  /* ── SECTION ── */
+  .section { padding: 72px 48px; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--terracotta); margin-bottom: 14px;
+  }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 3.5vw, 42px); line-height: 1.15; margin-bottom: 48px;
+  }
+
+  /* ── GRILLE 6 ZONES ── */
+  .zones-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .zone-card {
+    background: white;
+    border-radius: 10px;
+    padding: 28px 28px 24px;
+    border: 1px solid #e0d8c8;
+    position: relative;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .zone-card:hover { box-shadow: 0 8px 28px rgba(45,90,61,0.12); transform: translateY(-2px); }
+
+  .zone-num {
+    position: absolute; top: 20px; right: 24px;
+    font-family: 'DM Serif Display', serif; font-size: 36px;
+    color: var(--green-pale); line-height: 1; user-select: none;
+  }
+  .zone-region {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+  }
+  .zone-city {
+    font-family: 'DM Serif Display', serif; font-size: 26px;
+    color: var(--green); margin-bottom: 16px;
+  }
+
+  .zone-candidats { display: flex; flex-direction: column; gap: 8px; }
+
+  .candidat-link {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--ink);
+    padding: 8px 12px; border-radius: 6px;
+    background: var(--paper);
+    border: 1px solid #ddd8cc;
+    font-size: 13px; font-weight: 500;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .candidat-link:hover { background: var(--green-pale); border-color: var(--green-light); color: var(--green); }
+  .candidat-link .dot-status {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  }
+  .dot-ok { background: #4a8a60; }
+  .dot-pending { background: #c8c0a8; }
+  .candidat-link .arr { margin-left: auto; color: var(--muted); font-size: 12px; }
+
+  .zone-empty {
+    font-size: 13px; color: var(--muted); font-style: italic;
+    padding: 8px 0;
+  }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1px solid #d8d0c0; margin: 0 48px; }
+
+  /* ── CALENDRIER ── */
+  .cal-section {
+    background: var(--green);
+    padding: 72px 48px;
+    color: white;
+  }
+  .cal-inner { max-width: 1100px; margin: 0 auto; }
+  .cal-section .section-label { color: #a8d8b5; }
+  .cal-section h2 { color: white; margin-bottom: 40px; }
+
+  .timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 52px; top: 12px; bottom: 12px;
+    width: 1px; background: rgba(255,255,255,0.15);
+  }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 105px 1fr;
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    align-items: start;
+  }
+  .tl-item:last-child { border-bottom: none; }
+
+  .tl-date {
+    text-align: right;
+    padding-right: 24px;
+    position: relative;
+  }
+  .tl-date::after {
+    content: ''; position: absolute; right: -6px; top: 6px;
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 2px solid var(--green);
+    background: var(--terracotta);
+  }
+  .tl-day {
+    font-family: 'DM Serif Display', serif; font-size: 28px; line-height: 1; color: white;
+  }
+  .tl-month {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 2px;
+  }
+
+  .tl-content {}
+  .tl-type {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .tl-type.visite { color: #a8d8b5; }
+  .tl-type.formation { color: var(--terracotta); }
+  .tl-title { font-size: 17px; font-weight: 500; color: white; margin-bottom: 4px; }
+  .tl-detail { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.55; }
+
+  .tl-badge {
+    display: inline-block; margin-top: 6px;
+    padding: 3px 10px; border-radius: 2px; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .badge-green { background: rgba(168,216,181,0.15); color: #a8d8b5; border: 1px solid rgba(168,216,181,0.25); }
+  .badge-terra { background: rgba(200,98,42,0.2); color: #e8a880; border: 1px solid rgba(200,98,42,0.3); }
+  .badge-grey { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.45); border: 1px solid rgba(255,255,255,0.12); }
+
+  /* ── CTA ── */
+  .cta-band {
+    background: var(--terracotta); padding: 48px;
+    text-align: center;
+  }
+  .cta-band p {
+    font-family: 'DM Serif Display', serif; font-size: 24px; color: white;
+    margin-bottom: 8px;
+  }
+  .cta-band small {
+    font-size: 14px; color: rgba(255,255,255,0.75);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); padding: 28px 48px;
+    font-size: 12px; color: rgba(255,255,255,0.35); text-align: center;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 800px) {
+    .hero { padding: 60px 24px 56px; }
+    .section { padding: 56px 24px; }
+    .zones-grid { grid-template-columns: 1fr 1fr; }
+    .divider { margin: 0 24px; }
+    .cal-section { padding: 56px 24px; }
+    .tl-item { grid-template-columns: 80px 1fr; gap: 16px; }
+    .cta-band { padding: 40px 24px; }
+    footer { padding: 24px; }
+  }
+  @media (max-width: 520px) {
+    .zones-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Re-uz · Réseau National</div>
+  <h1>6 zones, <em>une équipe</em><br>de consultants indépendants</h1>
+  <p class="hero-sub">Re-uz déploie son premier réseau de consultants terrain en France. Voici les profils présélectionnés dans chaque territoire — et le calendrier de rencontres avant la formation initiale du 18 mai.</p>
+</div>
+
+<!-- ZONES -->
+<div class="section">
+  <p class="section-label">Phase 1 — Déploiement national</p>
+  <h2>Les 6 territoires</h2>
+
+  <div class="zones-grid">
+
+    <!-- PARIS / IDF -->
+    <div class="zone-card">
+      <span class="zone-num">01</span>
+      <p class="zone-region">Île-de-France</p>
+      <p class="zone-city">Paris</p>
+      <div class="zone-candidats">
+        <a class="candidat-link" href="fiche-eric-broutin-reuz-idf.html">
+          <span class="dot-status dot-ok"></span>
+          Éric Broutin
+          <span class="arr">→</span>
+        </a>
+        <div class="candidat-link" style="opacity:0.45; pointer-events:none; cursor:default;">
+          <span class="dot-status dot-pending"></span>
+          2ᵉ profil — en cours
+          <span class="arr"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BORDEAUX -->
+    <div class="zone-card">
+      <span class="zone-num">02</span>
+      <p class="zone-region">Nouvelle-Aquitaine</p>
+      <p class="zone-city">Bordeaux</p>
+      <div class="zone-candidats">
+        <a class="candidat-link" href="fiche-vincent-gay-reuz-bordeaux.html">
+          <span class="dot-status dot-ok"></span>
+          Vincent Gay
+          <span class="arr">→</span>
+        </a>
+        <div class="candidat-link" style="opacity:0.45; pointer-events:none; cursor:default;">
+          <span class="dot-status dot-pending"></span>
+          2ᵉ profil — en cours
+          <span class="arr"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LYON -->
+    <div class="zone-card">
+      <span class="zone-num">03</span>
+      <p class="zone-region">Auvergne-Rhône-Alpes</p>
+      <p class="zone-city">Lyon</p>
+      <div class="zone-candidats">
+        <p class="zone-empty">Profils en cours de sélection</p>
+      </div>
+    </div>
+
+    <!-- MARSEILLE -->
+    <div class="zone-card">
+      <span class="zone-num">04</span>
+      <p class="zone-region">Provence-Alpes-Côte d'Azur</p>
+      <p class="zone-city">Marseille</p>
+      <div class="zone-candidats">
+        <p class="zone-empty">Profils en cours de sélection</p>
+      </div>
+    </div>
+
+    <!-- LILLE -->
+    <div class="zone-card">
+      <span class="zone-num">05</span>
+      <p class="zone-region">Hauts-de-France</p>
+      <p class="zone-city">Lille</p>
+      <div class="zone-candidats">
+        <p class="zone-empty">Profils en cours de sélection</p>
+      </div>
+    </div>
+
+    <!-- RENNES -->
+    <div class="zone-card">
+      <span class="zone-num">06</span>
+      <p class="zone-region">Bretagne</p>
+      <p class="zone-city">Rennes</p>
+      <div class="zone-candidats">
+        <p class="zone-empty">Profils en cours de sélection</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- CALENDRIER -->
+<div class="cal-section">
+  <div class="cal-inner">
+    <p class="section-label">Calendrier de déploiement</p>
+    <h2>Rencontres terrain + Formation — Avril / Mai</h2>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-date">
+          <div class="tl-day">28</div>
+          <div class="tl-month">Avril</div>
+        </div>
+        <div class="tl-content">
+          <p class="tl-type visite">Déplacement · Rencontre candidats</p>
+          <p class="tl-title">Lyon — Mardi</p>
+          <p class="tl-detail">Rencontre avec les candidats présélectionnés sur le territoire lyonnais en présence du franchiseur Re-uz.</p>
+          <span class="tl-badge badge-green">Présentiel</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">
+          <div class="tl-day">6–7</div>
+          <div class="tl-month">Mai</div>
+        </div>
+        <div class="tl-content">
+          <p class="tl-type visite">Déplacements · Rencontres candidats</p>
+          <p class="tl-title">Destinations selon disponibilités</p>
+          <p class="tl-detail">2 journées de rencontres terrain avec les candidats des zones restantes. Destinations confirmées dès validation des profils.</p>
+          <span class="tl-badge badge-grey">À confirmer</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">
+          <div class="tl-day">13–14</div>
+          <div class="tl-month">Mai</div>
+        </div>
+        <div class="tl-content">
+          <p class="tl-type visite">Déplacements · Rencontres candidats</p>
+          <p class="tl-title">Destinations selon disponibilités</p>
+          <p class="tl-detail">2 dernières journées de rencontres terrain avant la formation initiale. Calendrier calé sur les agendas des candidats retenus.</p>
+          <span class="tl-badge badge-grey">À confirmer</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">
+          <div class="tl-day">18–20</div>
+          <div class="tl-month">Mai</div>
+        </div>
+        <div class="tl-content">
+          <p class="tl-type formation">Formation initiale · Re-uz</p>
+          <p class="tl-title">Saint-Étienne — 3 jours</p>
+          <p class="tl-detail">Formation initiale de l'ensemble des consultants retenus : maîtrise de l'offre, techniques de prospection, outils, organisation terrain. Présentiel à Saint-Étienne ou distanciel selon configuration finale.</p>
+          <span class="tl-badge badge-terra">Formation obligatoire</span>
+          <span class="tl-badge badge-green" style="margin-left:6px;">Présentiel / Distanciel</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-band">
+  <p>Un profil dans votre ville vous intéresse ?</p>
+  <small>Contactez Thierry Bismuth · thierry@thierrybismuth.com · 06 XX XX XX XX</small>
+</div>
+
+<footer>
+  Re-uz · Réseau de consultants indépendants — Document préparé par Thierry Bismuth · ODYSKILLS · thierrybismuth.com
+</footer>
+
+</body>
+</html>
