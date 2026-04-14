@@ -40,21 +40,17 @@
   .highlight-box p{color:rgba(255,255,255,0.8);font-style:italic;font-size:15px;margin:0;line-height:1.8;}
   .highlight-box strong{color:var(--gold-light);font-style:normal;font-weight:600;}
 
-  /* CIBLES INVESTISSEMENT */
-  .targets-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0;}
-  .target-card{background:var(--white);border-radius:12px;padding:28px;box-shadow:0 2px 14px rgba(14,34,24,0.06);}
-  .target-card.primary{border-top:4px solid var(--forest-light);}
-  .target-card.secondary{border-top:4px solid var(--gold);}
-  .target-tag{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px;}
-  .target-card.primary .target-tag{color:var(--forest-light);}
-  .target-card.secondary .target-tag{color:var(--gold);}
-  .target-title{font-family:"Playfair Display",serif;font-size:19px;font-weight:700;color:var(--forest);margin-bottom:14px;}
-  .target-list{list-style:none;}
-  .target-list li{font-size:13.5px;color:var(--text-light);padding:7px 0;border-bottom:1px solid var(--ivory-dark);display:flex;gap:10px;align-items:flex-start;}
-  .target-card.primary .target-list li::before{content:"→";color:var(--forest-light);flex-shrink:0;}
-  .target-card.secondary .target-list li::before{content:"◆";color:var(--gold);flex-shrink:0;font-size:9px;margin-top:4px;}
+  .gold-box{background:rgba(196,154,60,0.12);border:1.5px solid var(--gold);border-radius:10px;padding:20px 24px;margin:20px 0;font-size:14px;color:var(--forest);line-height:1.75;}
+  .gold-box strong{color:var(--forest);font-weight:700;}
 
-  /* OPTIONS SGP */
+  .security-stack{display:flex;flex-direction:column;margin:20px 0;}
+  .security-item{display:flex;gap:24px;padding:24px;background:var(--white);border-bottom:1px solid var(--ivory-dark);}
+  .security-item:first-child{border-radius:12px 12px 0 0;}
+  .security-item-last{border-radius:0 0 12px 12px;border-bottom:none;}
+  .security-num{font-family:"Playfair Display",serif;font-size:36px;font-weight:700;color:var(--ivory-dark);line-height:1;flex-shrink:0;width:48px;}
+  .security-title{font-weight:700;font-size:14.5px;color:var(--forest);margin-bottom:8px;display:flex;align-items:center;gap:12px;}
+  .security-desc{font-size:13.5px;color:var(--text-light);line-height:1.7;}
+
   .options-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:24px 0;}
   .option-card{background:var(--white);border-radius:14px;padding:32px;box-shadow:0 2px 14px rgba(14,34,24,0.07);position:relative;overflow:hidden;}
   .option-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;}
@@ -64,7 +60,6 @@
   .option-card.option-a .option-tag{color:var(--forest-light);}
   .option-card.option-b .option-tag{color:var(--gold);}
   .option-title{font-family:"Playfair Display",serif;font-size:20px;font-weight:700;color:var(--forest);margin-bottom:14px;}
-  .option-desc{font-size:13.5px;color:var(--text-light);line-height:1.7;margin-bottom:20px;}
   .option-list{list-style:none;}
   .option-list li{font-size:13px;color:var(--text-light);padding:6px 0;border-bottom:1px solid var(--ivory-dark);display:flex;gap:8px;align-items:flex-start;}
   .option-card.option-a .option-list li::before{content:"→";color:var(--forest-light);flex-shrink:0;}
@@ -73,28 +68,13 @@
   .option-card.option-a .option-badge{background:var(--ivory-dark);color:var(--forest-mid);}
   .option-card.option-b .option-badge{background:var(--gold);color:white;}
 
-  /* SECURITY */
-  .security-stack{display:flex;flex-direction:column;gap:0;margin:20px 0;}
-  .security-item{display:flex;gap:24px;padding:24px;background:var(--white);border-bottom:1px solid var(--ivory-dark);}
-  .security-item:first-child{border-radius:12px 12px 0 0;}
-  .security-item-last{border-radius:0 0 12px 12px;border-bottom:none;}
-  .security-num{font-family:"Playfair Display",serif;font-size:36px;font-weight:700;color:var(--ivory-dark);line-height:1;flex-shrink:0;width:48px;}
-  .security-title{font-weight:700;font-size:14.5px;color:var(--forest);margin-bottom:8px;display:flex;align-items:center;gap:12px;}
-  .security-desc{font-size:13.5px;color:var(--text-light);line-height:1.7;}
-
   table{width:100%;border-collapse:collapse;font-size:14px;margin:16px 0;border-radius:10px;overflow:hidden;}
   thead th{background:var(--forest-mid);color:white;padding:13px 18px;text-align:left;font-weight:600;font-size:11px;letter-spacing:0.8px;text-transform:uppercase;border:none;}
   tbody tr:nth-child(even){background:var(--ivory-dark);}
   tbody tr:nth-child(odd){background:var(--white);}
   tbody td{padding:13px 18px;border:none;color:var(--text);vertical-align:top;}
   tbody tr.total-row td{background:var(--forest-light) !important;color:white;font-weight:600;}
-  tbody tr.gold-row td{background:rgba(196,154,60,0.12) !important;font-weight:600;color:var(--forest);}
-
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:20px 0;}
-  .card{background:var(--white);border-radius:12px;padding:24px;border-top:3px solid var(--gold);box-shadow:0 2px 14px rgba(14,34,24,0.06);}
-  .card-label{font-size:10px;text-transform:uppercase;letter-spacing:2.5px;color:var(--gold);font-weight:700;margin-bottom:10px;}
-  .card-value{font-family:"Playfair Display",serif;font-size:22px;font-weight:700;color:var(--forest);line-height:1.2;margin-bottom:8px;}
-  .card-desc{font-size:12px;color:var(--text-light);line-height:1.6;}
+  tbody tr.gold-row td{background:rgba(196,154,60,0.15) !important;font-weight:600;color:var(--forest);}
 
   .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:20px 0;}
   .col-box{background:var(--white);border-radius:12px;padding:24px;box-shadow:0 2px 10px rgba(14,34,24,0.05);}
@@ -105,11 +85,14 @@
 
   .divider{height:1px;background:linear-gradient(to right,var(--gold),transparent);margin:52px 0;opacity:0.35;}
 
-  .rendement-box{background:var(--forest);border-radius:16px;padding:40px;color:white;text-align:center;margin:24px 0;position:relative;overflow:hidden;}
-  .rendement-box::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(196,154,60,0.1),transparent 60%);}
-  .rendement-box .big-number{font-family:"Playfair Display",serif;font-size:80px;font-weight:700;color:var(--gold-light);line-height:1;position:relative;}
-  .rendement-box .big-label{font-size:12px;color:rgba(255,255,255,0.5);letter-spacing:2.5px;text-transform:uppercase;margin-top:10px;position:relative;}
-  .rendement-box .big-sub{font-size:13.5px;color:rgba(255,255,255,0.45);margin-top:14px;line-height:1.7;position:relative;}
+  .big-rendement{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0;}
+  .rend-box{border-radius:14px;padding:32px;text-align:center;position:relative;overflow:hidden;}
+  .rend-box.primary{background:var(--forest);}
+  .rend-box.secondary{background:var(--forest-mid);}
+  .rend-box::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(196,154,60,0.1),transparent);}
+  .rend-num{font-family:"Playfair Display",serif;font-size:64px;font-weight:700;color:var(--gold-light);line-height:1;position:relative;}
+  .rend-label{font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:2px;text-transform:uppercase;margin-top:8px;position:relative;}
+  .rend-sub{font-size:12.5px;color:rgba(255,255,255,0.35);margin-top:6px;position:relative;}
 
   .footer{background:var(--forest);color:rgba(255,255,255,0.4);text-align:center;padding:32px;font-size:12.5px;margin-top:60px;border-top:2px solid var(--gold);}
   .footer strong{color:var(--gold-light);}
@@ -117,7 +100,7 @@
   @media(max-width:700px){
     .header{padding:40px 24px;} .header h1{font-size:34px;}
     .content{padding:40px 20px;}
-    .cards,.two-col,.options-grid,.targets-grid{grid-template-columns:1fr;}
+    .two-col,.options-grid,.big-rendement{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -125,13 +108,13 @@
 
 <div class="header">
   <div class="header-tag">Proposition de partenariat — confidentiel</div>
-  <h1>Un fonds dédié<br><em>à l'écosystème franchise</em></h1>
-  <p class="header-sub">ODYSKILLS / Karedas souhaite s'adosser à une Société de Gestion agréée pour structurer et lancer un fonds de capital investissement ciblant franchiseurs et acteurs de l'écosystème franchise.</p>
+  <h1>Un fonds de prêt dédié<br><em>aux franchisés</em></h1>
+  <p class="header-sub">ODYSKILLS / Karedas souhaite s'adosser à une Société de Gestion agréée pour structurer et lancer un fonds de prêt aux franchisés, avec caution des franchiseurs.</p>
   <div class="header-stats">
     <div class="stat"><div class="stat-value">2,5M€</div><div class="stat-label">Enveloppe cible</div></div>
-    <div class="stat"><div class="stat-value">200k€</div><div class="stat-label">Ticket min. par dossier</div></div>
-    <div class="stat"><div class="stat-value">~12</div><div class="stat-label">Dossiers ciblés</div></div>
-    <div class="stat"><div class="stat-value">5 ans</div><div class="stat-label">Horizon de sortie</div></div>
+    <div class="stat"><div class="stat-value">15%</div><div class="stat-label">Taux prêt franchisé</div></div>
+    <div class="stat"><div class="stat-value">10%</div><div class="stat-label">Rendement investisseur</div></div>
+    <div class="stat"><div class="stat-value">5 ans</div><div class="stat-label">Horizon</div></div>
   </div>
 </div>
 
@@ -140,79 +123,77 @@
   <!-- 1. LE CONCEPT -->
   <div class="section">
     <div class="section-header"><div class="section-number">1</div><h2>Le concept</h2></div>
-    <p>Un fonds d'investissement qui prend des participations dans des franchiseurs et des acteurs de services de l'écosystème franchise — des contreparties structurées, à revenus récurrents, indépendantes du succès d'un point de vente unique.</p>
-
-    <div class="targets-grid">
-      <div class="target-card primary">
-        <div class="target-tag">Cible principale</div>
-        <div class="target-title">Franchiseurs en développement</div>
-        <ul class="target-list">
-          <li>Financement de l'ouverture de succursales en propre</li>
-          <li>Rachat de franchisés défaillants ou stratégiques</li>
-          <li>Aide à un multi-franchisé pour l'acquisition d'un énième point de vente</li>
-        </ul>
-      </div>
-      <div class="target-card secondary">
-        <div class="target-tag">Cible complémentaire</div>
-        <div class="target-title">Acteurs de l'écosystème franchise</div>
-        <ul class="target-list">
-          <li>Sociétés de services multi-enseignes</li>
-          <li>Groupements d'achat spécialisés franchise</li>
-          <li>Prestataires verticaux de l'univers franchise</li>
-          <li>Revenus indépendants du succès d'une enseigne unique</li>
-        </ul>
-      </div>
-    </div>
+    <p>Un fonds qui prête aux franchisés pour financer leur apport personnel manquant, avec caution solidaire du franchiseur. Le fonds prête à 15% et reverse 10% aux investisseurs — le spread de 5% couvre les frais de gestion et de sourcing.</p>
 
     <div class="highlight-box">
-      <p>Le fonds n'investit pas dans des opérateurs individuels. Il investit dans des <strong>structures de réseau et de services</strong> dont les revenus agrègent la performance de nombreux points de vente — ce qui réduit structurellement le risque.</p>
+      <p>Le franchisé emprunte. Le <strong>franchiseur se porte caution solidaire</strong>. En cas de défaillance ou d'insolvabilité organisée, c'est le franchiseur qui rembourse — pas le fonds qui perd.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="col-box">
+        <h4>La mécanique</h4>
+        <ul>
+          <li>Franchisé a 60k€, besoin 100k€ — le fonds prête 40k€</li>
+          <li>Fonds = 40% de l'apport, soit ~11% du projet total</li>
+          <li>Prêt à 15%/an, remboursement sur 5 ans</li>
+          <li>Caution solidaire du franchiseur contractualisée dès J0</li>
+        </ul>
+      </div>
+      <div class="col-box">
+        <h4>Pourquoi le franchiseur cautionne</h4>
+        <ul>
+          <li>Il a besoin que son réseau se développe</li>
+          <li>Il ne cautionne que les franchisés en qui il croit</li>
+          <li>C'est un levier de sélection de ses meilleurs profils</li>
+          <li>ODYSKILLS / Karedas lui apporte un financement qu'il ne peut offrir seul</li>
+        </ul>
+      </div>
     </div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- 2. SÉCURITÉ DE L'INVESTISSEMENT -->
+  <!-- 2. SÉCURITÉ -->
   <div class="section">
     <div class="section-header"><div class="section-number">2</div><h2>Les garanties de sécurité de l'investissement</h2></div>
-    <p>Cinq niveaux de protection s'empilent pour sécuriser le capital investi.</p>
 
     <div class="security-stack">
       <div class="security-item">
         <div class="security-num">01</div>
         <div class="security-body">
           <div class="security-title">
-            <span>Deux experts franchise membres du Collège Expert FFF depuis 15 ans</span>
-            <img src="data:image/jpeg;base64,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" style="width:56px;height:56px;object-fit:contain;border-radius:4px;flex-shrink:0;" alt="FFF Collège Expert">
+            <span>Deux experts franchise, membres du Collège Expert FFF depuis 15 ans</span>
+            <img src="data:image/jpeg;base64,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" style="width:56px;height:56px;object-fit:contain;border-radius:4px;flex-shrink:0;" alt="FFF">
           </div>
-          <div class="security-desc">ODYSKILLS et Karedas sélectionnent enseignes et dossiers selon des critères éprouvés : solidité du réseau, rentabilité prouvée, capacité de développement. Cette double expertise reconnue par la Fédération Française de la Franchise est le premier filtre de qualité du fonds.</div>
+          <div class="security-desc">ODYSKILLS et Karedas sélectionnent enseignes et franchisés selon des critères éprouvés : solidité du réseau, rentabilité prouvée, adéquation profil/projet.</div>
         </div>
       </div>
       <div class="security-item">
         <div class="security-num">02</div>
         <div class="security-body">
-          <div class="security-title">On investit dans le réseau, pas dans un point de vente</div>
-          <div class="security-desc">Un franchiseur perçoit des royalties sur l'ensemble de son réseau. Sa santé financière ne dépend pas d'un seul exploitant mais de dizaines. Le fonds s'appuie sur cette mécanique d'agrégation pour réduire le risque concentré.</div>
+          <div class="security-title">80% de taux de succès en franchise à 5 ans</div>
+          <div class="security-desc">La franchise affiche un taux de pérennité à 5 ans de 80%, contre moins de 50% pour la création indépendante. Le fonds s'appuie sur cette solidité structurelle.</div>
         </div>
       </div>
       <div class="security-item">
         <div class="security-num">03</div>
         <div class="security-body">
-          <div class="security-title">80% de taux de succès en franchise à 5 ans</div>
-          <div class="security-desc">La franchise affiche un taux de pérennité à 5 ans de 80%, contre moins de 50% pour la création indépendante. En investissant dans des réseaux éprouvés, le fonds s'appuie sur une classe d'actif structurellement solide.</div>
+          <div class="security-title">La validation bancaire comme filtre indépendant</div>
+          <div class="security-desc">Chaque dossier est financé en complément d'un financement bancaire. Les filiales spécialisées franchise des grandes banques ont validé la viabilité du projet en amont. Le fonds ne finance aucun dossier rejeté par les banques.</div>
         </div>
       </div>
       <div class="security-item">
         <div class="security-num">04</div>
         <div class="security-body">
           <div class="security-title">Les franchiseurs sont plus fiables que les franchisés</div>
-          <div class="security-desc">La capacité d'un franchiseur à rembourser ne dépend pas de la performance d'un point de vente en particulier, mais de la bonne santé économique de la tête de réseau — qui agrège les royalties de l'ensemble de ses franchisés. C'est une contrepartie structurellement plus solide et plus prévisible qu'un exploitant individuel.</div>
+          <div class="security-desc">La capacité du franchiseur à honorer sa caution ne dépend pas d'un point de vente en particulier, mais de la santé économique de la tête de réseau — qui agrège les royalties de l'ensemble de ses franchisés.</div>
         </div>
       </div>
       <div class="security-item security-item-last">
         <div class="security-num">05</div>
         <div class="security-body">
-          <div class="security-title">Un accompagnement opérationnel continu par ODYSKILLS / Karedas</div>
-          <div class="security-desc">ODYSKILLS / Karedas reste aux côtés de chaque structure financée pendant toute la durée du fonds. Ce suivi actif comprend : 2 visites terrain annuelles, une ligne directe permanente, de la génération de leads, du conseil RH et opérationnel. C'est ce dispositif qui différencie ce véhicule d'un fonds passif et qui protège la valorisation à la sortie.</div>
+          <div class="security-title">Un accompagnement opérationnel continu sur chaque point de vente</div>
+          <div class="security-desc">ODYSKILLS / Karedas assure 2 visites terrain annuelles, une ligne directe permanente et un suivi continu auprès de chaque franchisé financé — réduisant les risques de défaillance et protégeant le remboursement.</div>
         </div>
       </div>
     </div>
@@ -223,17 +204,14 @@
   <!-- 3. VOTRE RÔLE -->
   <div class="section">
     <div class="section-header"><div class="section-number">3</div><h2>Votre rôle — deux options</h2></div>
-    <p>Nous envisageons deux configurations selon votre positionnement.</p>
     <div class="options-grid">
       <div class="option-card option-a">
         <div class="option-tag">Option A</div>
         <div class="option-title">Partenaire réglementaire</div>
-        <div class="option-desc">Vous portez l'agrément AMF et la structure du fonds. ODYSKILLS / Karedas gère le dealflow, la sélection et le suivi.</div>
         <ul class="option-list">
-          <li>Agrément AIFM, compliance, reporting AMF</li>
+          <li>Portage agrément AIFM et compliance AMF</li>
           <li>Tenue des comptes et KYC investisseurs</li>
-          <li>0,5%/an des management fees</li>
-          <li>Part négociée du carried interest</li>
+          <li>0,5%/an de l'encours — 12 500€/an</li>
           <li>Pas d'apport en capital</li>
         </ul>
         <div class="option-badge">Partenariat structurel</div>
@@ -241,13 +219,12 @@
       <div class="option-card option-b">
         <div class="option-tag">Option B — Recommandée</div>
         <div class="option-title">Partenaire & co-investisseur</div>
-        <div class="option-desc">En plus du rôle structurel, vous participez au capital du fonds — ce qui renforce la crédibilité auprès des souscripteurs.</div>
         <ul class="option-list">
           <li>Tout ce qui est prévu en Option A</li>
-          <li>Quote-part du capital du fonds à définir</li>
-          <li>Rendement investisseur sur votre mise</li>
-          <li>Droit de regard renforcé sur la sélection</li>
-          <li>Signal fort : la SGP elle-même investit</li>
+          <li>Vous apportez une quote-part du capital</li>
+          <li>Pas de sourcing investisseur à payer</li>
+          <li>Vous percevez 11,5%/an sur votre mise</li>
+          <li>Les 1,5% de sourcing restent dans votre rendement</li>
         </ul>
         <div class="option-badge">Co-investissement</div>
       </div>
@@ -258,37 +235,58 @@
 
   <!-- 4. MÉCANIQUE FINANCIÈRE -->
   <div class="section">
-    <div class="section-header"><div class="section-number">4</div><h2>Mécanique financière</h2></div>
-    <p>Le fonds prend une participation minoritaire dans chaque structure financée, avec un ticket minimum de 200 000€ par dossier.</p>
+    <div class="section-header"><div class="section-number">4</div><h2>Mécanique financière — fonds entier à 2,5M€</h2></div>
 
     <table>
-      <thead><tr><th>Type de dossier</th><th>Objet du financement</th><th>Ticket fonds</th></tr></thead>
+      <thead><tr><th>Flux</th><th>Taux</th><th>€/an sur 2,5M€</th></tr></thead>
       <tbody>
-        <tr><td><strong>Franchiseur — succursales</strong></td><td>Ouverture de points de vente en propre</td><td>200 000€ +</td></tr>
-        <tr><td><strong>Franchiseur — rachat franchisé</strong></td><td>Rachat d'un franchisé défaillant ou stratégique</td><td>200 000€ +</td></tr>
-        <tr><td><strong>Multi-franchisé</strong></td><td>Acquisition d'un énième point de vente</td><td>200 000€ +</td></tr>
-        <tr><td><strong>Acteur écosystème</strong></td><td>Groupement d'achat, prestataire multi-enseignes</td><td>200 000€ +</td></tr>
+        <tr><td>Taux prêté aux franchisés</td><td>15%</td><td><strong>375 000€/an</strong></td></tr>
+        <tr class="gold-row"><td>Reversé aux investisseurs</td><td>10%</td><td><strong>250 000€/an</strong></td></tr>
+        <tr><td><strong>Spread disponible</strong></td><td><strong>5%</strong></td><td><strong>125 000€/an</strong></td></tr>
       </tbody>
     </table>
 
-    <p style="margin-top:24px;"><strong>Modèle de participation :</strong> le fonds entre minoritaire (jusqu'à 49%) et sort à 5 ans via rachat par la structure ou cession à un tiers.</p>
+    <p style="margin-top:24px;margin-bottom:12px;"><strong>Répartition du spread de 5% :</strong></p>
 
-    <div class="cards">
-      <div class="card">
-        <div class="card-label">Enveloppe totale</div>
-        <div class="card-value">2,5M€</div>
-        <div class="card-desc">~12 dossiers à 200k€ min.</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Investisseurs</div>
-        <div class="card-value">~100</div>
-        <div class="card-desc">Ticket minimum 25 000€ par souscripteur</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Horizon</div>
-        <div class="card-value">5 ans</div>
-        <div class="card-desc">Rachat contractualisé dès l'entrée</div>
-      </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Poste</th>
+          <th>%</th>
+          <th>€/an — SGP pure</th>
+          <th>€/an — SGP co-invest.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SGP — support réglementaire</td>
+          <td>0,5%</td>
+          <td>12 500€</td>
+          <td>12 500€</td>
+        </tr>
+        <tr>
+          <td>Sourcing investisseur</td>
+          <td>1,5% one-shot</td>
+          <td>37 500€ (an 1)</td>
+          <td>0€ — SGP investit elle-même</td>
+        </tr>
+        <tr>
+          <td>ODYSKILLS / Karedas<br><span style="font-size:11px;color:#888;">Identification réseaux · Audit initial et continu · Sélection franchisés · Suivi cautions · Gestion remboursements · Reporting investisseurs</span></td>
+          <td>3%</td>
+          <td>75 000€</td>
+          <td>75 000€</td>
+        </tr>
+        <tr class="total-row">
+          <td>Rendement investisseur</td>
+          <td>10%</td>
+          <td>250 000€/an</td>
+          <td>250 000€/an</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="gold-box" style="margin-top:20px;">
+      <strong>Si la SGP est par ailleurs investisseur du fonds :</strong> le sourcing d'investisseur disparaît. Les 1,5% correspondants restent dans le rendement de la SGP en tant qu'investisseur — soit <strong>11,5%/an sur sa mise</strong> au lieu de 10%.
     </div>
   </div>
 
@@ -296,102 +294,53 @@
 
   <!-- 5. RENDEMENT INVESTISSEUR -->
   <div class="section">
-    <div class="section-header"><div class="section-number">5</div><h2>Rendement investisseur</h2></div>
-    <p>Modèle basé sur 12 dossiers à 200 000€, participation de 49%, valorisation à la sortie sur multiple EBITDA ×8 — cohérent avec les standards de valorisation d'une tête de réseau franchise.</p>
-
-    <table>
-      <thead><tr><th>Paramètre</th><th>Hypothèse</th></tr></thead>
-      <tbody>
-        <tr><td>Investissement par dossier</td><td>200 000€ pour 49% du capital</td></tr>
-        <tr><td>EBITDA moyen à 5 ans</td><td>150 000€/an par structure financée</td></tr>
-        <tr><td>Multiple de valorisation</td><td>×8 — standard tête de réseau franchise</td></tr>
-        <tr><td>Valorisation à la sortie</td><td>1 200 000€</td></tr>
-        <tr class="total-row"><td>Part du fonds récupérée (49%)</td><td>588 000€ par dossier — soit +194% sur la mise</td></tr>
-      </tbody>
-    </table>
-
-    <p style="margin-top:24px;"><strong>Scénario avec 10% de défaillance</strong> — 2 dossiers sur 12 à zéro :</p>
+    <div class="section-header"><div class="section-number">5</div><h2>Rendement investisseur — 2,5M€ sur 5 ans</h2></div>
 
     <table>
       <thead><tr><th>Indicateur</th><th>Calcul</th><th>Résultat</th></tr></thead>
       <tbody>
-        <tr><td>Dossiers réussis (10 sur 12)</td><td>10 × 588 000€</td><td>5 880 000€</td></tr>
-        <tr><td>Dossiers défaillants</td><td>2 × 0€</td><td>0€</td></tr>
-        <tr><td>Carried interest ODYSKILLS / Karedas (20%)</td><td>20% × 3 380 000€ PV</td><td>− 676 000€</td></tr>
-        <tr><td>Net investisseurs</td><td></td><td>5 204 000€</td></tr>
-        <tr class="total-row"><td>Par investisseur (25 000€ → ~52 000€)</td><td>Rendement annualisé</td><td>~15% / an</td></tr>
+        <tr><td>Capital investi</td><td>100 investisseurs × 25 000€</td><td>2 500 000€</td></tr>
+        <tr><td>Intérêts perçus/an</td><td>2,5M€ × 10%</td><td>250 000€/an</td></tr>
+        <tr><td>Intérêts sur 5 ans</td><td>250 000€ × 5</td><td>1 250 000€</td></tr>
+        <tr><td>Capital récupéré à terme</td><td></td><td>2 500 000€</td></tr>
+        <tr class="total-row"><td>Total récupéré</td><td>25 000€ → 37 500€</td><td>3 750 000€ — soit +10%/an</td></tr>
       </tbody>
     </table>
 
-    <table style="margin-bottom:8px;">
-      <thead><tr><th colspan="3">Récapitulatif fonds entier — 2,5M€ sur 5 ans</th></tr>
-      <tr><th>Indicateur</th><th>Sans défaillance</th><th>Avec 10% défaillance</th></tr></thead>
-      <tbody>
-        <tr><td>Capital investi</td><td>2 500 000€</td><td>2 500 000€</td></tr>
-        <tr><td>Total récupéré (brut)</td><td>12 × 588k = <strong>7 056 000€</strong></td><td>10 × 588k = <strong>5 880 000€</strong></td></tr>
-        <tr><td>Carried interest (20%)</td><td>− 911 000€</td><td>− 676 000€</td></tr>
-        <tr><td>Net investisseurs</td><td><strong>6 145 000€</strong></td><td><strong>5 204 000€</strong></td></tr>
-        <tr><td>Par investisseur (25k€ mis)</td><td><strong>~51 200€</strong></td><td><strong>~43 400€</strong></td></tr>
-        <tr class="total-row"><td>Rendement annualisé</td><td><strong>~20% / an</strong></td><td><strong>~15% / an</strong></td></tr>
-      </tbody>
-    </table>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0;">
-      <div style="background:var(--forest);border-radius:16px;padding:32px;text-align:center;position:relative;overflow:hidden;">
-        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(196,154,60,0.1),transparent);"></div>
-        <div style="font-family:'Playfair Display',serif;font-size:60px;font-weight:700;color:var(--gold-light);line-height:1;position:relative;">~20%</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:2px;text-transform:uppercase;margin-top:8px;position:relative;">Sans défaillance</div>
-        <div style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:8px;position:relative;">12 dossiers réussis</div>
+    <div class="big-rendement">
+      <div class="rend-box primary">
+        <div class="rend-num">10%</div>
+        <div class="rend-label">Rendement annuel investisseur</div>
+        <div class="rend-sub">25 000€ → 37 500€ à 5 ans<br>Capital garanti par caution franchiseur</div>
       </div>
-      <div style="background:var(--forest-mid);border-radius:16px;padding:32px;text-align:center;position:relative;overflow:hidden;">
-        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(196,154,60,0.08),transparent);"></div>
-        <div style="font-family:'Playfair Display',serif;font-size:60px;font-weight:700;color:var(--gold-light);line-height:1;position:relative;">~15%</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:2px;text-transform:uppercase;margin-top:8px;position:relative;">Avec 10% de défaillance</div>
-        <div style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:8px;position:relative;">2 dossiers à zéro sur 12</div>
+      <div class="rend-box secondary">
+        <div class="rend-num">11,5%</div>
+        <div class="rend-label">Si la SGP co-investit</div>
+        <div class="rend-sub">1,5% de sourcing récupérés<br>sur la mise de la SGP</div>
       </div>
     </div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- 6. RÉMUNÉRATION ODYSKILLS -->
+  <!-- 6. SORTIE -->
   <div class="section">
-    <div class="section-header"><div class="section-number">5</div><h2>Rémunération d'ODYSKILLS / Karedas</h2></div>
-    <p>Quatre lignes standards à valider avec vous dans la convention de partenariat.</p>
-    <table>
-      <thead><tr><th>Flux</th><th>Base</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Management fees</strong></td><td>1,5%/an sur l'encours</td></tr>
-        <tr><td><strong>Fees de sourcing — entrepreneur</strong><br><span style="font-size:12px;color:#888;">Identification et sélection du franchiseur / multi-franchisé</span></td><td>2% par dossier</td></tr>
-        <tr><td><strong>Fees de sourcing — investisseur</strong><br><span style="font-size:12px;color:#888;">Apport et qualification des souscripteurs du fonds</span></td><td>2% par dossier</td></tr>
-        <tr><td><strong>Accompagnement opérationnel</strong></td><td>2%/an sur l'encours</td></tr>
-        <tr><td><strong>Carried interest</strong></td><td>20% des plus-values</td></tr>
-        <tr class="gold-row"><td><strong>Part GP</strong> — attribuée, non décaissée</td><td>2% du fonds</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- 7. SORTIE -->
-  <div class="section">
-    <div class="section-header"><div class="section-number">7</div><h2>Mécanisme de sortie</h2></div>
+    <div class="section-header"><div class="section-number">6</div><h2>Remboursement et gestion des risques</h2></div>
     <div class="two-col">
       <div class="col-box">
-        <h4>Contractualisé dès J0</h4>
+        <h4>Remboursement normal</h4>
         <ul>
-          <li>Obligation de rachat à 5 ans</li>
-          <li>Formule : multiple × résultat net ou EBITDA</li>
-          <li>Modalités de financement du rachat</li>
-          <li>Clause d'accompagnement sur toute la durée</li>
+          <li>Franchise rembourse capital + intérêts sur 5 ans</li>
+          <li>Échéancier contractualisé dès J0</li>
+          <li>Remboursement anticipé possible</li>
         </ul>
       </div>
       <div class="col-box">
-        <h4>Scénarios alternatifs</h4>
+        <h4>En cas de défaillance</h4>
         <ul>
-          <li>Cession à un investisseur tiers ou fonds secondaire</li>
-          <li>Prolongation de 2 ans si contexte défavorable</li>
-          <li>Rachat anticipé possible dès an 3</li>
+          <li>Activation de la caution solidaire du franchiseur</li>
+          <li>Mise en demeure gérée par ODYSKILLS / Karedas</li>
+          <li>Franchiseur rembourse la mise du fonds</li>
         </ul>
       </div>
     </div>
@@ -401,4 +350,8 @@
 
 <div class="footer">
   Document confidentiel — <strong>ODYSKILLS / Karedas</strong><br>
-  Thierry Bismuth · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1e6a76777b6c6c675
+  Thierry Bismuth · thierry@thierrybismuth.com · 06 10 70 30 90 · thierrybismuth.com
+</div>
+
+</body>
+</html>
