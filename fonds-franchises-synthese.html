@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposition de Partenariat — ODYSKILLS / Karé d'As</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest:       #0e2218;
+    --forest-mid:   #1c3d2a;
+    --forest-light: #2d5a3e;
+    --gold:         #c49a3c;
+    --gold-light:   #ddb95e;
+    --ivory:        #f7f4ee;
+    --ivory-dark:   #ece7db;
+    --text:         #1a1a18;
+    --text-light:   #5c5c52;
+    --white:        #ffffff;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Mulish',sans-serif; background:var(--ivory); color:var(--text); line-height:1.7; }
+
+  .header { background:var(--forest); color:white; padding:64px 80px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:0; right:0; width:50%; height:100%; background:linear-gradient(135deg,transparent,rgba(196,154,60,0.08)); pointer-events:none; }
+  .header::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(to right,var(--gold),transparent); }
+  .header-tag { font-size:11px; font-weight:600; letter-spacing:3.5px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
+  .header h1 { font-family:'Playfair Display',serif; font-size:48px; font-weight:700; line-height:1.15; margin-bottom:18px; }
+  .header h1 em { color:var(--gold-light); font-style:italic; font-weight:500; }
+  .header-sub { font-size:15px; font-weight:300; color:rgba(255,255,255,0.55); max-width:560px; margin-bottom:48px; line-height:1.8; }
+  .header-stats { display:flex; gap:48px; flex-wrap:wrap; }
+  .stat { border-left:2px solid var(--gold); padding-left:16px; }
+  .stat-value { font-family:'Playfair Display',serif; font-size:30px; font-weight:700; color:white; line-height:1; }
+  .stat-label { font-size:10px; color:rgba(255,255,255,0.45); text-transform:uppercase; letter-spacing:1.5px; margin-top:5px; }
+
+  .content { max-width:940px; margin:0 auto; padding:64px 40px; }
+  .section { margin-bottom:60px; }
+  .section-header { display:flex; align-items:center; gap:14px; margin-bottom:28px; }
+  .section-number { width:34px; height:34px; border-radius:6px; background:var(--forest); color:var(--gold-light); font-family:'Playfair Display',serif; font-size:15px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section h2 { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--forest); }
+  .section p { font-size:15px; color:var(--text-light); margin-bottom:20px; line-height:1.85; }
+
+  .highlight-box { background:var(--forest); border-left:4px solid var(--gold); border-radius:0 10px 10px 0; padding:24px 32px; margin:24px 0; }
+  .highlight-box p { color:rgba(255,255,255,0.8); font-style:italic; font-size:15px; margin:0; line-height:1.8; }
+  .highlight-box strong { color:var(--gold-light); font-style:normal; font-weight:600; }
+
+  .options-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin:24px 0; }
+  .option-card { background:var(--white); border-radius:14px; padding:32px; box-shadow:0 2px 14px rgba(14,34,24,0.07); position:relative; overflow:hidden; }
+  .option-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; }
+  .option-card.option-a::before { background:var(--forest-light); }
+  .option-card.option-b::before { background:var(--gold); }
+  .option-tag { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:10px; }
+  .option-card.option-a .option-tag { color:var(--forest-light); }
+  .option-card.option-b .option-tag { color:var(--gold); }
+  .option-title { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:var(--forest); margin-bottom:14px; }
+  .option-desc { font-size:13.5px; color:var(--text-light); line-height:1.7; margin-bottom:20px; }
+  .option-list { list-style:none; }
+  .option-list li { font-size:13px; color:var(--text-light); padding:6px 0; border-bottom:1px solid var(--ivory-dark); display:flex; gap:8px; align-items:flex-start; }
+  .option-card.option-a .option-list li::before { content:'→'; color:var(--forest-light); flex-shrink:0; }
+  .option-card.option-b .option-list li::before { content:'★'; color:var(--gold); flex-shrink:0; font-size:11px; margin-top:2px; }
+  .option-badge { display:inline-block; margin-top:20px; padding:6px 14px; border-radius:20px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+  .option-card.option-a .option-badge { background:var(--ivory-dark); color:var(--forest-mid); }
+  .option-card.option-b .option-badge { background:var(--gold); color:white; }
+
+  table { width:100%; border-collapse:collapse; font-size:14px; margin:16px 0; border-radius:10px; overflow:hidden; }
+  thead th { background:var(--forest-mid); color:white; padding:13px 18px; text-align:left; font-weight:600; font-size:11px; letter-spacing:0.8px; text-transform:uppercase; border:none; }
+  tbody tr:nth-child(even) { background:var(--ivory-dark); }
+  tbody tr:nth-child(odd) { background:var(--white); }
+  tbody td { padding:13px 18px; border:none; color:var(--text); vertical-align:top; }
+  tbody tr.total-row td { background:var(--forest-light) !important; color:white; font-weight:600; }
+  tbody tr.gold-row td { background:rgba(196,154,60,0.12) !important; font-weight:600; color:var(--forest); }
+
+  .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin:20px 0; }
+  .card { background:var(--white); border-radius:12px; padding:24px; border-top:3px solid var(--gold); box-shadow:0 2px 14px rgba(14,34,24,0.06); }
+  .card-label { font-size:10px; text-transform:uppercase; letter-spacing:2.5px; color:var(--gold); font-weight:700; margin-bottom:10px; }
+  .card-value { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:var(--forest); line-height:1.2; margin-bottom:8px; }
+  .card-desc { font-size:12px; color:var(--text-light); line-height:1.6; }
+
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:20px 0; }
+  .col-box { background:var(--white); border-radius:12px; padding:24px; box-shadow:0 2px 10px rgba(14,34,24,0.05); }
+  .col-box h4 { font-family:'Playfair Display',serif; font-size:17px; color:var(--forest); margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--ivory-dark); }
+  .col-box ul { list-style:none; }
+  .col-box ul li { font-size:13.5px; color:var(--text-light); padding:7px 0; border-bottom:1px solid #f0ead8; display:flex; align-items:flex-start; gap:8px; }
+  .col-box ul li::before { content:'↗'; color:var(--gold); flex-shrink:0; }
+
+  .service-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:20px 0; }
+  .service-item { background:var(--ivory-dark); border-radius:10px; padding:18px; }
+  .service-name { font-weight:700; font-size:13px; color:var(--forest); margin-bottom:4px; }
+  .service-desc { font-size:12px; color:var(--text-light); line-height:1.5; }
+
+  .divider { height:1px; background:linear-gradient(to right,var(--gold),transparent); margin:52px 0; opacity:0.35; }
+
+  .rendement-box { background:var(--forest); border-radius:16px; padding:40px; color:white; text-align:center; margin:24px 0; position:relative; overflow:hidden; }
+  .rendement-box::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 70% 50%,rgba(196,154,60,0.1),transparent 60%); }
+  .rendement-box .big-number { font-family:'Playfair Display',serif; font-size:80px; font-weight:700; color:var(--gold-light); line-height:1; position:relative; }
+  .rendement-box .big-label { font-size:12px; color:rgba(255,255,255,0.5); letter-spacing:2.5px; text-transform:uppercase; margin-top:10px; position:relative; }
+  .rendement-box .big-sub { font-size:13.5px; color:rgba(255,255,255,0.45); margin-top:14px; line-height:1.7; position:relative; }
+
+  .security-stack { display:flex; flex-direction:column; gap:0; margin:20px 0; }
+  .security-item { display:flex; gap:24px; padding:24px; background:var(--white); border-radius:0; border-bottom:1px solid var(--ivory-dark); }
+  .security-item:first-child { border-radius:12px 12px 0 0; }
+  .security-item-last { border-radius:0 0 12px 12px; border-bottom:none; }
+  .security-num { font-family:'Playfair Display',serif; font-size:36px; font-weight:700; color:var(--ivory-dark); line-height:1; flex-shrink:0; width:48px; }
+  .security-item:hover .security-num { color:var(--gold); transition:color 0.2s; }
+  .security-title { font-weight:700; font-size:14.5px; color:var(--forest); margin-bottom:8px; }
+  .security-desc { font-size:13.5px; color:var(--text-light); line-height:1.7; }
+
+  .note-box { background:var(--ivory-dark); border-radius:10px; padding:20px 24px; margin:20px 0; font-size:13.5px; color:var(--text-light); line-height:1.7; }
+  .note-box strong { color:var(--forest); }
+
+  .footer { background:var(--forest); color:rgba(255,255,255,0.4); text-align:center; padding:32px; font-size:12.5px; margin-top:60px; border-top:2px solid var(--gold); }
+  .footer strong { color:var(--gold-light); }
+
+  @media(max-width:700px){
+    .header{padding:40px 24px;} .header h1{font-size:34px;}
+    .content{padding:40px 20px;}
+    .cards,.two-col,.service-grid,.options-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-tag">Proposition de partenariat — confidentiel</div>
+  <h1>Un projet de fonds franchise<br><em>à construire ensemble</em></h1>
+  <p class="header-sub">ODYSKILLS / Karé d'As souhaite s'adosser à une Société de Gestion agréée pour structurer et lancer un fonds dédié au financement de franchisés sélectionnés. Voici notre projet et ce que nous apportons.</p>
+  <div class="header-stats">
+    <div class="stat"><div class="stat-value">2,5M€</div><div class="stat-label">Enveloppe cible</div></div>
+    <div class="stat"><div class="stat-value">~20%</div><div class="stat-label">Rendement annualisé</div></div>
+    <div class="stat"><div class="stat-value">62</div><div class="stat-label">Franchisés financés</div></div>
+    <div class="stat"><div class="stat-value">5 ans</div><div class="stat-label">Horizon de sortie</div></div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- 1. LE CONCEPT -->
+  <div class="section">
+    <div class="section-header"><div class="section-number">1</div><h2>Le concept</h2></div>
+    <p>Un fonds d'investissement qui finance l'apport personnel manquant de franchisés rigoureusement sélectionnés, en échange d'une participation minoritaire (49%) au capital de leur société exploitante.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-label">Investisseur</div>
+        <div class="card-value">Souscripteur</div>
+        <div class="card-desc">Souscrit des parts du fonds. Perçoit son rendement à 5 ans sans gestion à assurer.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">ODYSKILLS / Karé d'As</div>
+        <div class="card-value">Opérateur</div>
+        <div class="card-desc">Apporte le dealflow, sélectionne les dossiers, suit les participations sur toute la durée.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Franchisé</div>
+        <div class="card-value">Exploitant</div>
+        <div class="card-desc">Obtient le financement manquant, lance son activité, rachète les parts à terme.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 2. SÉCURITÉ DE L'INVESTISSEMENT -->
+  <div class="section">
+    <div class="section-header"><div class="section-number">2</div><h2>Les garanties de sécurité de l'investissement</h2></div>
+    <p>Investir dans des franchisés sélectionnés n'est pas investir dans des startups. Quatre niveaux de protection s'empilent pour sécuriser le capital.</p>
+    <div class="security-stack">
+      <div class="security-item">
+        <div class="security-num">01</div>
+        <div class="security-body">
+          <div class="security-title">Une sélection par deux experts franchise, membres du Collège Expert FFF depuis 15 ans</div>
+          <div class="security-desc">ODYSKILLS et Karé d'As sélectionnent enseignes et franchisés selon des critères éprouvés : solidité du réseau, rentabilité prouvée, adéquation profil/projet. Cette double expertise, reconnue par la Fédération Française de la Franchise, est le premier filtre de qualité du fonds.</div>
+        </div>
+      </div>
+      <div class="security-item">
+        <div class="security-num">02</div>
+        <div class="security-body">
+          <div class="security-title">80% de taux de succès en franchise à 5 ans</div>
+          <div class="security-desc">La franchise affiche un taux de pérennité à 5 ans de 80%, contre moins de 50% pour la création indépendante. En s'appuyant sur des modèles éprouvés avec accompagnement réseau, le fonds s'ancre sur une classe d'actif structurellement solide.</div>
+        </div>
+      </div>
+      <div class="security-item">
+        <div class="security-num">03</div>
+        <div class="security-body">
+          <div class="security-title">La validation bancaire comme filtre indépendant</div>
+          <div class="security-desc">Chaque dossier financé par le fonds l'est en complément d'un financement bancaire. Les filiales spécialisées franchise des grandes banques (BpiFrance, Caisse d'Épargne Entreprises, Société Générale Franchise…) ont validé la viabilité du projet en amont. Le fonds ne finance aucun dossier rejeté par les banques — leur analyse constitue un second avis indépendant systématique.</div>
+        </div>
+      </div>
+      <div class="security-item security-item-last">
+        <div class="security-num">04</div>
+        <div class="security-body">
+          <div class="security-title">Un accompagnement opérationnel continu sur chaque point de vente</div>
+          <div class="security-desc">ODYSKILLS / Karé d'As reste activement présent auprès de chaque franchisé pendant toute la durée du fonds. Ce suivi comprend 2 visites terrain annuelles, une ligne directe permanente, de la génération de leads, du conseil commercial et RH, et une aide au recrutement. C'est ce dispositif qui différencie ce fonds d'un véhicule passif — et qui sécurise la valorisation à la sortie.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3. VOTRE RÔLE — 2 OPTIONS -->
+  <div class="section">
+    <div class="section-header"><div class="section-number">3</div><h2>Votre rôle — deux options</h2></div>
+    <p>Nous envisageons deux configurations selon votre positionnement.</p>
+
+    <div class="options-grid">
+      <div class="option-card option-a">
+        <div class="option-tag">Option A</div>
+        <div class="option-title">Partenaire réglementaire</div>
+        <div class="option-desc">Vous portez l'agrément AMF et la structure du fonds. ODYSKILLS / Karé d'As gère le dealflow, la sélection et le suivi.</div>
+        <ul class="option-list">
+          <li>Agrément AIFM, compliance, reporting AMF</li>
+          <li>Tenue des comptes et KYC investisseurs</li>
+          <li>0,5%/an des management fees</li>
+          <li>Part négociée du carried interest</li>
+          <li>Pas d'apport en capital</li>
+        </ul>
+        <div class="option-badge">Partenariat structurel</div>
+      </div>
+
+      <div class="option-card option-b">
+        <div class="option-tag">Option B — Recommandée</div>
+        <div class="option-title">Partenaire & co-investisseur</div>
+        <div class="option-desc">En plus du rôle structurel, vous participez au capital du fonds — ce qui renforce la crédibilité auprès des souscripteurs.</div>
+        <ul class="option-list">
+          <li>Tout ce qui est prévu en Option A</li>
+          <li>Quote-part du capital du fonds à définir</li>
+          <li>Rendement investisseur (~20%/an) sur votre mise</li>
+          <li>Droit de regard renforcé sur la sélection</li>
+          <li>Signal fort : la SGP elle-même investit</li>
+        </ul>
+        <div class="option-badge">Co-investissement</div>
+      </div>
+    </div>
+
+    <table style="margin-top:28px;">
+      <thead><tr><th>Critère</th><th>Option A</th><th>Option B</th></tr></thead>
+      <tbody>
+        <tr><td>Agrément AMF</td><td>✅</td><td>✅</td></tr>
+        <tr><td>Apport en capital</td><td>❌</td><td>✅ Quote-part à définir</td></tr>
+        <tr><td>Rendement sur capital</td><td>—</td><td>~20%/an</td></tr>
+        <tr><td>Part des management fees</td><td>0,5%/an</td><td>0,5%/an</td></tr>
+        <tr><td>Part du carried interest</td><td>À négocier</td><td>À négocier (plus élevé)</td></tr>
+        <tr class="gold-row"><td>Signal auprès des investisseurs tiers</td><td>Cadre réglementaire sécurisé</td><td>La SGP co-investit — crédibilité maximale</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4. MÉCANIQUE FINANCIÈRE -->
+  <div class="section">
+    <div class="section-header"><div class="section-number">4</div><h2>Mécanique financière — un dossier type</h2></div>
+    <p>Le fonds finance 40% de l'apport personnel requis (~40 000€ par dossier) et prend 49% du capital de la société exploitante — prime de risque justifiée par un financement en capital pur.</p>
+    <table>
+      <thead><tr><th>Apporteur</th><th>Mise</th><th>Nature</th><th>% Capital</th></tr></thead>
+      <tbody>
+        <tr><td>Franchisé</td><td>60 000€</td><td>Apport personnel</td><td>51%</td></tr>
+        <tr><td>Fonds</td><td>40 000€</td><td>Capital investissement</td><td>49%</td></tr>
+        <tr><td>Banque</td><td>Financement complémentaire</td><td>Dette (hors capital)</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:20px;"><strong>Sortie à 5 ans</strong> — résultat net annuel moyen 80 000€, multiple ×3 :</p>
+    <table>
+      <thead><tr><th>Calcul</th><th>Détail</th><th>Montant</th></tr></thead>
+      <tbody>
+        <tr><td>Valorisation société</td><td>80 000€ × 3</td><td>240 000€</td></tr>
+        <tr><td>Part fonds (49%)</td><td>240 000€ × 49%</td><td>117 000€</td></tr>
+        <tr><td>Mise initiale</td><td></td><td>40 000€</td></tr>
+        <tr class="total-row"><td>Plus-value nette par dossier</td><td>+193% en 5 ans</td><td>+77 000€</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 5. RENDEMENT -->
+  <div class="section">
+    <div class="section-header"><div class="section-number">5</div><h2>Rendement — fonds entier à 2,5M€</h2></div>
+    <table>
+      <thead><tr><th>Indicateur</th><th>Calcul</th><th>Résultat</th></tr></thead>
+      <tbody>
+        <tr><td>Capital total déployé</td><td>62 dossiers × 40 000€</td><td>2 500 000€</td></tr>
+        <tr><td>Valeur récupérée</td><td>62 × 117 000€</td><td>7 254 000€</td></tr>
+        <tr><td>Carried interest ODYSKILLS / Karé d'As (20%)</td><td>20% × 4 754 000€ PV</td><td>− 955 000€</td></tr>
+        <tr><td>Net investisseurs</td><td></td><td>6 299 000€</td></tr>
+        <tr class="total-row"><td>Par investisseur (25 000€ → ~63 000€)</td><td>Rendement annualisé</td><td>~20% / an</td></tr>
+      </tbody>
+    </table>
+    <div class="rendement-box">
+      <div class="big-number">~20%</div>
+      <div class="big-label">Rendement annualisé investisseur</div>
+      <div class="big-sub">Sur actif réel — double sélection — 25 000€ investis → ~63 000€ récupérés à 5 ans</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 6. RÉMUNÉRATION ODYSKILLS -->
+  <div class="section">
+    <div class="section-header"><div class="section-number">6</div><h2>Rémunération d'ODYSKILLS / Karé d'As</h2></div>
+    <p>Quatre lignes standards à valider avec vous dans la convention de partenariat.</p>
+    <table>
+      <thead><tr><th>Flux</th><th>Base</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Management fees</strong></td><td>1,5%/an sur l'encours</td></tr>
+        <tr><td><strong>Fees de sourcing</strong></td><td>4% par dossier financé</td></tr>
+        <tr><td><strong>Accompagnement opérationnel</strong> — détail section 6</td><td>2%/an sur l'encours</td></tr>
+        <tr><td><strong>Carried interest</strong></td><td>20% des plus-values</td></tr>
+        <tr class="gold-row"><td><strong>Part GP</strong> — attribuée, non décaissée</td><td>2% du fonds</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 7. ACCOMPAGNEMENT TERRAIN — JUSTIFICATION DU 2% -->
+  <div class="section">
+    <div class="section-header"><div class="section-number">7</div><h2>Ce que couvre la ligne accompagnement (2%/an)</h2></div>
+    <p>Cette ligne rémunère un suivi actif de chaque franchisé pendant toute la durée du fonds. Elle est ce qui distingue ce véhicule d'un fonds passif — et ce qui sécurise la valorisation à la sortie.</p>
+    <div class="service-grid">
+      <div class="service-item">
+        <div class="service-name">📊 Étude de marché</div>
+        <div class="service-desc">Analyse du potentiel local avant ouverture.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">👥 Aide au recrutement</div>
+        <div class="service-desc">Sourcing des collaborateurs clés selon les besoins.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">📍 2 visites terrain / an</div>
+        <div class="service-desc">Audit opérationnel et plan d'action correctif.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">🎯 Génération de leads</div>
+        <div class="service-desc">Apport continu de prospects qualifiés.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">📞 Ligne directe permanente</div>
+        <div class="service-desc">Accès direct sans rendez-vous en temps réel.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">💡 Conseil opérationnel</div>
+        <div class="service-desc">Décisions commerciales, RH, développement local.</div>
+      </div>
+    </div>
+    <div class="note-box">
+      Sur 62 franchisés × 2 visites/an × 5 ans = <strong>620 interventions terrain planifiées</strong>. Le 2%/an représente ~800€ par franchisé par an — cohérent avec la charge réelle et le niveau de service rendu.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 8. SORTIE -->
+  <div class="section">
+    <div class="section-header"><div class="section-number">8</div><h2>Mécanisme de sortie</h2></div>
+    <p>Rachat par le franchisé à 5 ans, contractualisé dès l'entrée avec une formule de valorisation convenue (multiple du résultat net).</p>
+    <div class="two-col">
+      <div class="col-box">
+        <h4>Contractualisé dès J0</h4>
+        <ul>
+          <li>Obligation de rachat à 5 ans</li>
+          <li>Formule : multiple × résultat net</li>
+          <li>Modalités de financement du rachat</li>
+          <li>Clause d'accompagnement sur toute la durée</li>
+        </ul>
+      </div>
+      <div class="col-box">
+        <h4>Scénarios alternatifs</h4>
+        <ul>
+          <li>Cession à un repreneur tiers si besoin</li>
+          <li>Prolongation de 2 ans si contexte défavorable</li>
+          <li>Rachat anticipé possible dès an 3</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Document confidentiel — <strong>ODYSKILLS / Karé d'As</strong><br>
+  Thierry Bismuth · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e094888985929299a0
