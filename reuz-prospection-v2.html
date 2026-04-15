@@ -3,332 +3,641 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Re-uz · Multi-Potentiel</title>
+<title>Re-uz · Prospection Terrain par Ville</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-<style>* { margin: 0; padding: 0; box-sizing: border-box; } body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f4f7f5; } input, textarea, button { font-family: inherit; }</style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"Segoe UI",system-ui,sans-serif;background:#f4f7f5;}
+input[type=range]{cursor:pointer;}
+@media print{.no-print{display:none!important;}body{background:white;}}
+</style>
 </head>
 <body>
 <div id="root"></div>
 <script type="text/babel">
+const BASE = "https://thierrybismuth.github.io/pagesweb-thierry-";
 
-/* ===================== DONNÉES PROSPECTION ===================== */
-const CITIES_DATA = {
+/* ============================================================
+   DONNEES VILLES
+   3 categories par ville :
+   A = Evenements 10 000+ personnes
+   B = Lieux forte consommation (volume x rotations/jour)
+   C = Restaurants thematiques & franchises
+============================================================ */
+
+const VILLES = {
   paris: {
-    name: 'Paris 🗺️', sub: 'Ile-de-France · 75 / 92 / 93 / 94', ca: '920 K€',
-    tips: [
-      { title: 'Agences event = levier clé', body: '1 agence signée = 30 événements/an. Cibler les 500 agences parisiennes via UNIMEV ou LinkedIn.' },
-      { title: 'Hippodromes en 1er', body: '5 adresses, CA garanti, décision unique. Commencer par Vincennes et Enghien.' },
-      { title: 'Groupes EHPAD', body: 'Korian + DomusVi = 1 contrat = 20-50 sites. Porte d\'entrée : direction RSE nationale.' },
-      { title: 'Salles de spectacle', body: '80 salles × 16K€ = 1,28M€ de marché. Cibler directeurs techniques, pas artistiques.' },
+    nom: "Paris & Île-de-France",
+    emoji: "🗼",
+    col: "#c0392b",
+    pop: "12,5M hab",
+    ca_potentiel: "920K€",
+    depart: "75/92/93/94/91/95/77/78",
+    A: [
+      { nom:"Stade de France", type:"Stade + concerts", jauge:"80 000", freq:"18+ events/an 2026", note:"Aya Nakamura ×3, Guetta ×3, BTS, The Weeknd ×4, Fally Ipupa... Contrat annuel avec gestionnaire AMSB", contact:"amsb.fr" },
+      { nom:"Accor Arena (Bercy)", type:"Salle omnisports & concerts", jauge:"20 000", freq:"150+ events/an", note:"Guns N Roses, Doja Cat, Wu-Tang, Lady Gaga... La plus active de France", contact:"accor-arena.com" },
+      { nom:"Paris La Défense Arena", type:"Plus grande salle couverte Europe", jauge:"40 000", freq:"80+ events/an", note:"Damso ×4, Bad Bunny ×2... Gestionnaire ENGIE Vélodrome", contact:"parisladefensearena.com" },
+      { nom:"Zénith de la Villette", type:"Salle de concert", jauge:"6 300", freq:"120+ concerts/an", note:"Programmation dense tout l'année. Contrat fournisseur gobelet en cours de renégociation", contact:"zenithparis.com" },
+      { nom:"La Seine Musicale", type:"Salle + amphithéâtre", jauge:"6 000", freq:"200+ events/an", note:"Boulogne-Billancourt. Terrasse extérieure + bar premium", contact:"laseinemusicale.com" },
+      { nom:"Rock en Seine", type:"Festival musique", jauge:"30 000/j", freq:"4 jours fin août", note:"Domaine de Saint-Cloud. Tyler, The Creator 2026. Très engagé éco", contact:"rockenseine.com" },
+      { nom:"We Love Green", type:"Festival écolo", jauge:"20 000/j", freq:"3 jours juin", note:"Bois de Vincennes. Engagement zéro plastique fort. Client idéal Re-uz", contact:"welovegreen.fr" },
+      { nom:"Solidays", type:"Festival", jauge:"35 000/j", freq:"3 jours juin", note:"Hippodrome de Longchamp. Hippodrome de Longchamp", contact:"solidays.org" },
+      { nom:"Hippodrome de Longchamp", type:"Hippodrome", jauge:"50 000 (grands prix)", freq:"30+ réunions/an", note:"Arc de Triomphe (>50 000), réunions quotidiennes. Partenaire PMU. Contact direction courses", contact:"france-galop.com" },
+      { nom:"Hippodrome de Vincennes", type:"Hippodrome trot", jauge:"20 000 (Prix d'Amérique)", freq:"35+ réunions/an", note:"Prix d'Amérique = 20 000 spectateurs. Très forte consommation bar tribunes", contact:"paris-vincennes.fr" },
+      { nom:"Paris-Expo Porte de Versailles", type:"Parc des expositions", jauge:"100 000+/event", freq:"200+ salons/an", note:"FIAC, Salon de l'Auto, Paris Games Week, MaB... Gestionnaire Viparis", contact:"viparis.com" },
+      { nom:"Parc des Expositions Villepinte", type:"Salon & foires", jauge:"200 000/event", freq:"50+ salons/an", note:"Comic Con, Foire de Paris... Bar éphémère sur chaque salon", contact:"viparis.com" },
+      { nom:"Roland Garros", type:"Tournoi de tennis", jauge:"40 000/j", freq:"2 semaines mai-juin", note:"FFT gestionnaire. Très haut de gamme, gobelets brandés obligatoires", contact:"rolandgarros.com" },
+      { nom:"PSG - Parc des Princes", type:"Stade football", jauge:"48 000", freq:"20 matchs/saison + events", note:"Contrat Re-uz possible sur les buvettes non cuisine. Gestion Sodexo", contact:"psg.fr" },
+      { nom:"Racing 92 - Arena La Défense", type:"Stade rugby + salle", jauge:"32 000", freq:"15 matchs + events", note:"Nanterre. Buvettes extérieures. Partenaire Heineken", contact:"racing92.fr" },
+      { nom:"Hippodrome de Saint-Cloud", type:"Hippodrome", jauge:"15 000 (grands prix)", freq:"25+ réunions/an", note:"Bar des tribunes sans cuisine fixe", contact:"france-galop.com" },
+      { nom:"Lollapalooza Paris", type:"Festival international", jauge:"40 000/j", freq:"2 jours juillet", note:"Hippodrome de Longchamp. Format très premium, partenaires boissons importants", contact:"lollapaloozafr.com" },
+      { nom:"Fête de la Musique IDF", type:"Events plein air", jauge:"Multiples sites", freq:"21 juin annuel", note:"Mairies IDF organisent chacune leur event. 100+ mairies = 100 contrats potentiels", contact:"Mairies IDF" },
+      { nom:"Paris Beer Festival", type:"Festival bière", jauge:"15 000/j", freq:"2 jours printemps", note:"Perfect Beer Up. Format très forte consommation/visiteur", contact:"parisbeerweek.com" },
+      { nom:"Marché de Noël des Tuileries", type:"Marché de Noël", jauge:"3 000/j", freq:"30 jours décembre", note:"Vin chaud, hot dog, stands sans plonge. 300 gobelets/j × 30j", contact:"Mairie de Paris" },
     ],
-    cats: [
-      { icon: '🏥', name: 'EHPAD', model: 'Achat pur', ca: '21 780€', label: '50% signés', nb: '484', caUnit: '90€', jours: '365j', gob: '~240', priority: 2, priorityText: 'Ticket faible — viser les groupes (Korian, DomusVi, Clariane)', links: [{ r: 1, url: 'https://www.pour-les-personnes-agees.gouv.fr/annuaire-ehpad-et-maisons-de-retraite', name: 'pour-les-personnes-agees.gouv.fr', desc: 'Officiel · par arrondissement' }] },
-      { icon: '⛺', name: 'Campings', model: 'Service complet', ca: '55 080€', label: '10% signés', nb: '~180', caUnit: '3 060€', jours: '120j', gob: '~900', priority: 2, priorityText: 'Cibler Val d\'Oise, Essonne, Seine-et-Marne', links: [{ r: 1, url: 'https://www.campingfrance.com', name: 'campingfrance.com', desc: '11 000 adresses' }] },
-      { icon: '🏇', name: 'Hippodromes', model: 'Service complet', ca: '90 000€', label: '5 signés', nb: '5', caUnit: '18 000€', jours: '30 réunions', gob: '3 000', priority: 1, priorityText: '🔥 Vincennes, Longchamp, Auteuil, Saint-Cloud, Enghien', links: [{ r: 1, url: 'https://www.fnch.fr/hippodromes-france', name: 'fnch.fr', desc: 'Carte + contacts' }] },
-      { icon: '🎡', name: 'Parcs de loisirs', model: 'Service complet', ca: '114 750€', label: '30% signés', nb: '~15', caUnit: '25 500€', jours: '200j', gob: '3 000', priority: 1, priorityText: '🔥 Parc Astérix, Disneyland (sous-traitants), parcs régionaux', links: [{ r: 1, url: 'https://www.parcs-france.com/carte', name: 'parcs-france.com', desc: 'Carte 2026' }] },
-      { icon: '🏛️', name: 'Salles de spectacle', model: 'Service complet', ca: '256 000€', label: '20% signés', nb: '~80', caUnit: '16 000€', jours: '100 événements', gob: '1 000', priority: 1, priorityText: '🔥 Zénith, Olympia, Accor Arena, salles municipales', links: [{ r: 1, url: 'https://www.artcena.fr/annuaire', name: 'artcena.fr', desc: 'Officiel spectacle vivant' }] },
-      { icon: '🏆', name: 'Associations sportives', model: 'Service ponctuel', ca: '112 500€', label: '5% signés', nb: '~3 000', caUnit: '750€', jours: '10 tournois/an', gob: '500', priority: 1, priorityText: '🔥 Volume énorme · tournois foot, rugby, basket, tennis, running', links: [{ r: 1, url: 'https://www.helloasso.com', name: 'helloasso.com', desc: 'Annuaire assos sportives' }] },
-      { icon: '🎓', name: 'Soirées étudiantes', model: 'Service ponctuel', ca: '24 000€', label: '8% signés', nb: '~200 établ.', caUnit: '1 500€', jours: '15 soirées/an', gob: '400', priority: 2, priorityText: 'BDE, WEI, galas de promo · renouvellement annuel garanti', links: [{ r: 1, url: 'https://www.helloasso.com', name: 'helloasso.com', desc: 'BDE / BDS par ville et école' }] },
-      { icon: '🎪', name: 'Agences événementielles', model: 'Service complet', ca: '100 000€', label: '5% signés', nb: '~500', caUnit: '4 000€', jours: '30 events/an', gob: '1 000', priority: 1, priorityText: '🔥 Meilleur levier — 1 contrat agence = 30 événements/an automatiques', links: [{ r: 1, url: 'https://www.unimev.fr', name: 'unimev.fr', desc: 'Union française métiers événement' }] },
-      { icon: '💍', name: 'Mariages & réceptions', model: 'Achat personnalisé', ca: '60 000€', label: '10% traiteurs', nb: '~150 traiteurs', caUnit: '4 000€', jours: '~30 mariages/an', gob: '200', priority: 2, priorityText: 'Via traiteurs et wedding planners · gobelet personnalisé = souvenir', links: [{ r: 1, url: 'https://www.mariages.net/traiteur-mariage', name: 'mariages.net', desc: 'Annuaire traiteurs' }] },
-      { icon: '📊', name: 'Salons & incentives', model: 'Service complet', ca: '24 000€', label: '20% signés', nb: '~30 salons', caUnit: '4 000€', jours: '3-5j/salon', gob: '2 000', priority: 2, priorityText: 'Salon de l\'Agri, Foire de Paris, salons pro · contrat annuel', links: [{ r: 1, url: 'https://www.comexposium.com', name: 'comexposium.com', desc: '130 salons en France' }] },
-    ]
-  },
-  bordeaux: {
-    name: 'Bordeaux 🍷', sub: 'Nouvelle-Aquitaine · 33 / 40 / 47', ca: '340 K€',
-    tips: [
-      { title: 'Campings = jackpot', body: '400 campings · Arcachon seul = 50 campings haut de gamme. Démarrer 4 et 5 étoiles.' },
-      { title: 'Vignobles & mariages', body: 'Châteaux du Médoc = mariages et événements privés récurrents.' },
-      { title: 'Agences événementielles', body: 'Bordeaux = ville événementielle en forte croissance.' },
-      { title: 'Garorock', body: '30 000 personnes à Marmande (1h). Contacter l\'asso en septembre.' },
+    B: [
+      { nom:"Club Med Paris-Île-de-France (villas)", type:"Villages vacances IDF", jauge:"500/village", note:"Plusieurs sites en IDF. Forte consommation bière/cocktails en soirée" },
+      { nom:"Center Parcs Les Bois-Francs (Normandie proche IDF)", type:"Center Parcs", jauge:"2 000/semaine", note:"Bars de piscines couverts = forte consommation. Zéro plonge portable" },
+      { nom:"Grandes discothèques IDF (Duplex, Showcase, Rex)", type:"Clubs", jauge:"1 000-3 000/nuit", note:"Showcase Paris : 3 000 personnes/soir. Forte consommation. Beer Up fort" },
+      { nom:"Zoo de Vincennes", type:"Zoo/parc animalier", jauge:"5 000/j", note:"Buvettes extérieures. Fréquence 300 jours/an. Gestionnaire MNHN" },
+      { nom:"Disneyland Paris", type:"Parc à thème", jauge:"20 000/j", note:"Chessy. Gestionnaire Euro Disney. Budget gobelet massif. IML souvenir = enjeu majeur" },
+      { nom:"Futuroscope", type:"Parc à thème", jauge:"8 000/j", note:"Poitiers proche IDF. 200 jours/an. Buvettes + restaurant sans plonge portable" },
+      { nom:"Parc Astérix", type:"Parc à thème", jauge:"12 000/j", note:"Plailly. 150 jours/an. Très fort potentiel gobelet souvenir IML" },
+      { nom:"France Miniature", type:"Parc loisirs", jauge:"3 000/j", note:"Élancourt 78. Plein air. Buvettes sans plonge fixe" },
+      { nom:"Bowling / bars jeux Paris (Fat Cat, Gravity, Level Lounge)", type:"Bars à jeux / bowling", jauge:"500-2000/j", note:"Consommation longue durée. Clients gardent le même gobelet 3-4h → fort volume" },
     ],
-    cats: [
-      { icon: '🏥', name: 'EHPAD', model: 'Achat pur', ca: '4 410€', label: '50% signés', nb: '98', caUnit: '90€', jours: '365j', gob: '~240', priority: 3, priorityText: 'Peu d\'EHPAD — prioriser les autres catégories', links: [{ r: 1, url: 'https://www.pour-les-personnes-agees.gouv.fr', name: 'pour-les-personnes-agees.gouv.fr', desc: 'Dép. 33' }] },
-      { icon: '⛺', name: 'Campings', model: 'Service complet', ca: '122 400€', label: '10% signés', nb: '~400', caUnit: '3 060€', jours: '120j', gob: '~900', priority: 1, priorityText: '🔥 N°1 France — Arcachon, Landes, Dordogne · 400 campings accessibles', links: [{ r: 1, url: 'https://www.campingfrance.com', name: 'campingfrance.com', desc: 'Filtrer 33, 40, 47, 24' }] },
-      { icon: '🏇', name: 'Hippodromes', model: 'Service complet', ca: '36 000€', label: '2 signés', nb: '2', caUnit: '18 000€', jours: '30 réunions', gob: '3 000', priority: 1, priorityText: '🔥 La Teste-de-Buch (Arcachon) + Bordeaux-le-Bouscat', links: [{ r: 1, url: 'https://www.fnch.fr/hippodromes-france', name: 'fnch.fr', desc: 'Fédération Sud-Ouest' }] },
-      { icon: '🎡', name: 'Parcs de loisirs', model: 'Service complet', ca: '38 250€', label: '30% signés', nb: '~5', caUnit: '25 500€', jours: '200j', gob: '3 000', priority: 2, priorityText: 'Zoo Bordeaux-Pessac, Village Gaulois, parcs Dordogne', links: [{ r: 1, url: 'https://www.parcs-france.com/carte', name: 'parcs-france.com', desc: 'Nouvelle-Aquitaine' }] },
-      { icon: '🏛️', name: 'Salles de spectacle', model: 'Service complet', ca: '57 600€', label: '20% signés', nb: '~18', caUnit: '16 000€', jours: '100 événements', gob: '1 000', priority: 1, priorityText: '🔥 Arkéa Arena, Rock School Barbey, Rocher de Palmer', links: [{ r: 1, url: 'https://www.artcena.fr/annuaire', name: 'artcena.fr', desc: 'Nouvelle-Aquitaine' }] },
-      { icon: '🏆', name: 'Associations sportives', model: 'Service ponctuel', ca: '18 750€', label: '5% signés', nb: '~500', caUnit: '750€', jours: '10 tournois/an', gob: '500', priority: 1, priorityText: '🔥 Rugby = sport roi en Gironde · UBB + centaines de clubs amateurs', links: [{ r: 1, url: 'https://www.helloasso.com', name: 'helloasso.com', desc: 'Assos sport Gironde' }] },
-      { icon: '🎓', name: 'Soirées étudiantes', model: 'Service ponctuel', ca: '4 500€', label: '8% signés', nb: '~40 établ.', caUnit: '1 500€', jours: '15 soirées/an', gob: '400', priority: 2, priorityText: 'Univ. Bordeaux, Sciences Po, Kedge · 100 000 étudiants', links: [{ r: 1, url: 'https://www.helloasso.com', name: 'helloasso.com', desc: 'BDE Bordeaux' }] },
-      { icon: '🎪', name: 'Agences événementielles', model: 'Service complet', ca: '16 000€', label: '5% signés', nb: '~80', caUnit: '4 000€', jours: '30 events/an', gob: '1 000', priority: 1, priorityText: '🔥 Bordeaux Event, Palais des Congrès très actif', links: [{ r: 1, url: 'https://www.unimev.fr', name: 'unimev.fr', desc: 'Membres organisateurs' }] },
-      { icon: '💍', name: 'Mariages & réceptions', model: 'Achat personnalisé', ca: '20 000€', label: '10% traiteurs', nb: '~50 traiteurs', caUnit: '4 000€', jours: '~30 mariages/an', gob: '200', priority: 1, priorityText: '🔥 Châteaux viticoles = mariages premium · gobelet au logo du château', links: [{ r: 1, url: 'https://www.mariages.net/traiteur-mariage/traiteur-gironde', name: 'mariages.net', desc: 'Traiteurs Gironde' }] },
-      { icon: '📊', name: 'Salons & incentives', model: 'Service complet', ca: '6 000€', label: '20% signés', nb: '~8 salons', caUnit: '4 000€', jours: '3-5j/salon', gob: '2 000', priority: 2, priorityText: 'Vinoble, Vinexpo, Salon de l\'Immobilier · Parc des Expositions', links: [{ r: 1, url: 'https://www.gl-events.com', name: 'gl-events.com', desc: 'GL Events Bordeaux' }] },
-    ]
+    C: [
+      { nom:"Hippopotamus IDF", type:"Steakhouse franchise", nb_restau:"12 en IDF", note:"Chaine de steakhouses. Gobelets brandés Hippo sur les formules" },
+      { nom:"Big Fernand IDF", type:"Burgers premium", nb_restau:"8 en IDF", note:"Concept fort, brand identity puissante. Gobelets logoés = argument franchise" },
+      { nom:"Léon de Bruxelles IDF", type:"Moules-frites", nb_restau:"10 en IDF", note:"Fort volume boissons. Chaine très structurée, DG accessible" },
+      { nom:"Vapiano Paris", type:"Pasta/pizza interactif", nb_restau:"3 Paris", note:"Concept libre-service, fort débit. Gobelets boissons omniprésents" },
+      { nom:"Häagen-Dazs Café Paris", type:"Concept glacier", nb_restau:"5 Paris", note:"Forte identité visuelle. Gobelet IML = souvenir premium" },
+      { nom:"Five Guys IDF", type:"Burgers", nb_restau:"6 IDF", note:"Soft drinks en gobelet obligatoire. Volume +++. Franchise US très structurée" },
+      { nom:"PNY Paris", type:"Burgers premium trendy", nb_restau:"5 Paris", note:"Très fort dans le gobelet collector. Brand identity forte" },
+      { nom:"Blend Hamburger Paris", type:"Burgers haut de gamme", nb_restau:"4 Paris", note:"Gobelet souvenir réemployable = parfaitement aligné avec le positionnement" },
+      { nom:"Café de Flore / Les Deux Magots", type:"Café iconique", nb_restau:"2 Saint-Germain", note:"Gobelets branded = souvenir touristique. 500+ couverts/j chacun" },
+    ],
   },
   lyon: {
-    name: 'Lyon 🦁', sub: 'Auvergne-Rhône-Alpes · 69 / 01 / 38', ca: '367 K€',
-    tips: [{ title: 'Nuits de Fourviere', body: '200 000 spectateurs mai-juillet · un contrat = CA festival majeur.' }, { title: 'Campings Ardèche', body: 'Zone la plus dense en campings de France. Démarrer par Vallon-Pont-d\'Arc.' }, { title: 'GL Events', body: 'Siège à Lyon · interlocuteur direct pour Sirha, Pollutec, Eurexpo.' }, { title: 'Fête des Lumières', body: '4M visiteurs en décembre · contacter la Ville de Lyon dès septembre.' }],
-    cats: [
-      { icon: '🏥', name: 'EHPAD', model: 'Achat pur', ca: '6 525€', label: '50% signés', nb: '145', caUnit: '90€', jours: '365j', gob: '~240', priority: 2, priorityText: 'Viser Korian Rhône-Alpes · direction régionale à Lyon', links: [{ r: 1, url: 'https://www.pour-les-personnes-agees.gouv.fr', name: 'pour-les-personnes-agees.gouv.fr', desc: 'Dép. 69' }] },
-      { icon: '⛺', name: 'Campings', model: 'Service complet', ca: '67 320€', label: '10% signés', nb: '~220', caUnit: '3 060€', jours: '120j', gob: '~900', priority: 1, priorityText: '🔥 Ardèche + Drôme hyper dense · Vallon-Pont-d\'Arc en priorité', links: [{ r: 1, url: 'https://www.campingfrance.com', name: 'campingfrance.com', desc: 'Filtrer 07, 26, 01, 69' }] },
-      { icon: '🏇', name: 'Hippodromes', model: 'Service complet', ca: '36 000€', label: '2 signés', nb: '2', caUnit: '18 000€', jours: '30 réunions', gob: '3 000', priority: 1, priorityText: '🔥 Lyon Carré de Soie + Villeurbanne', links: [{ r: 1, url: 'https://regions.equidia.fr', name: 'regions.equidia.fr', desc: 'Fédération Centre-Est' }] },
-      { icon: '🎡', name: 'Parcs de loisirs', model: 'Service complet', ca: '61 200€', label: '30% signés', nb: '~8', caUnit: '25 500€', jours: '200j', gob: '3 000', priority: 1, priorityText: '🔥 Walibi Rhône-Alpes, Nigloland, zoos régionaux', links: [{ r: 1, url: 'https://www.parcs-france.com/carte', name: 'parcs-france.com', desc: 'Zone AuRA' }] },
-      { icon: '🏛️', name: 'Salles de spectacle', model: 'Service complet', ca: '80 000€', label: '20% signés', nb: '~25', caUnit: '16 000€', jours: '100 événements', gob: '1 000', priority: 1, priorityText: '🔥 Nuits de Fourviere, LDLC Arena, Halle Tony Garnier', links: [{ r: 1, url: 'https://www.artcena.fr/annuaire', name: 'artcena.fr', desc: 'AuRA' }] },
-      { icon: '🏆', name: 'Associations sportives', model: 'Service ponctuel', ca: '30 000€', label: '5% signés', nb: '~800', caUnit: '750€', jours: '10 tournois/an', gob: '500', priority: 1, priorityText: '🔥 OL, ASVEL, LOU Rugby · milliers de clubs amateurs', links: [{ r: 1, url: 'https://www.helloasso.com', name: 'helloasso.com', desc: 'Assos sport Rhône' }] },
-      { icon: '🎓', name: 'Soirées étudiantes', model: 'Service ponctuel', ca: '7 500€', label: '8% signés', nb: '~60 établ.', caUnit: '1 500€', jours: '15 soirées/an', gob: '400', priority: 2, priorityText: 'emlyon, Sciences Po, INSA, Université Lyon 1/2/3 · 150 000 étudiants', links: [{ r: 1, url: 'https://www.helloasso.com', name: 'helloasso.com', desc: 'BDE Lyon' }] },
-      { icon: '🎪', name: 'Agences événementielles', model: 'Service complet', ca: '24 000€', label: '5% signés', nb: '~120', caUnit: '4 000€', jours: '30 events/an', gob: '1 000', priority: 1, priorityText: '🔥 Lyon = ville événementielle majeure · Palais des Congrès', links: [{ r: 1, url: 'https://www.unimev.fr', name: 'unimev.fr', desc: 'Organisateurs événements' }] },
-      { icon: '💍', name: 'Mariages & réceptions', model: 'Achat personnalisé', ca: '28 000€', label: '10% traiteurs', nb: '~70 traiteurs', caUnit: '4 000€', jours: '~30 mariages/an', gob: '200', priority: 2, priorityText: 'Cadre gastronomique = nombreux mariages haut de gamme', links: [{ r: 1, url: 'https://www.mariages.net/traiteur-mariage/traiteur-rhone', name: 'mariages.net', desc: 'Traiteurs Rhône' }] },
-      { icon: '📊', name: 'Salons & incentives', model: 'Service complet', ca: '12 000€', label: '20% signés', nb: '~15 salons', caUnit: '4 000€', jours: '3-5j/salon', gob: '2 000', priority: 2, priorityText: 'Sirha, Pollutec, Eurexpo · GL Events basé à Lyon', links: [{ r: 1, url: 'https://www.gl-events.com', name: 'gl-events.com', desc: 'GL Events · siège à Lyon' }] }
-    ]
+    nom: "Lyon & Auvergne-Rhône-Alpes",
+    emoji: "🦁",
+    col: "#e67e22",
+    pop: "2,3M hab",
+    ca_potentiel: "367K€",
+    depart: "69/01/42/73/74",
+    A: [
+      { nom:"Nuits de Fourvière", type:"Festival pluridisciplinaire", jauge:"4 000/soir (théâtre antique)", freq:"80 soirs juin-juillet 2026", note:"80e anniversaire 2026 ! Vanessa Paradis, The Divine Comedy. 176 000 spectateurs en 2025. Sans cuisine fixe", contact:"nuitsdefourviere.fr" },
+      { nom:"Nuits Sonores", type:"Festival électro", jauge:"15 000/nuit", freq:"5 jours mai 2026", note:"Grandes Locos, ancien marché de gros. Sites industriels sans infrastructure. Zéro plonge fixe", contact:"nuits-sonores.com" },
+      { nom:"Halle Tony Garnier", type:"Grande salle", jauge:"17 000", freq:"80+ events/an", note:"La plus grande salle couverte de Lyon. Sara Landry, concerts pop-rock... Gestionnaire SEM Lyon", contact:"halletonygarnier.com" },
+      { nom:"LDLC Arena (Lyon Métropole Arena)", type:"Salle omnisports", jauge:"16 000", freq:"100+ events/an", note:"Décines. Concerts + matchs ASVEL basket. Inaugurée 2023. Nombreux bars sans cuisine", contact:"ldlcarena.com" },
+      { nom:"Groupama Stadium (OL)", type:"Stade football", jauge:"59 000", freq:"20 matchs/saison", note:"Décines. Buvettes extérieures. Gestion Sodexo. Potentiel service rotation fort", contact:"ol.fr" },
+      { nom:"Matmut Stadium (LOU Rugby)", type:"Stade rugby", jauge:"20 000", freq:"15 matchs + events", note:"Gerland. LOU vs Castres, etc. Bar extérieur plein air", contact:"lourugby.fr" },
+      { nom:"Biennale d'Art Contemporain Lyon", type:"Exposition", jauge:"300 000 visiteurs/3 mois", freq:"Sept 2026 - Jan 2027", note:"18e édition. Plusieurs sites. Buvettes temporaires sans plonge fixe", contact:"biennale-de-lyon.org" },
+      { nom:"Festival Lumière", type:"Festival cinéma", jauge:"160 000 visitors", freq:"8 jours octobre", note:"Grand Lyon Film Festival. Nombreuses projections plein air avec buvettes", contact:"festival-lumiere.org" },
+      { nom:"Lyon Street Food Festival", type:"Festival gastronomique", jauge:"30 000/j", freq:"4 jours juin", note:"Grandes Locos. Manger + boire = LE festival boisson. Gobelets partout", contact:"lyonstreetfoodfestival.com" },
+      { nom:"Foire de Lyon", type:"Foire exposition", jauge:"200 000 visitors/10j", freq:"Avril 2026", note:"Eurexpo. 200 exposants food. Forte consommation. Service traiteur sans plonge", contact:"foiredelyon.com" },
+      { nom:"Japan Touch / Geek Touch Eurexpo", type:"Convention manga/gaming", jauge:"50 000/weekend", freq:"2 jours avril 2026", note:"Jeune, consomme. Stands boissons tout le salon", contact:"japan-touch.com" },
+      { nom:"Fête des Lumières Lyon", type:"Festival lumière", jauge:"2,5M visitors/4 jours", freq:"4 jours décembre", note:"UN DES PLUS GRANDS EVENTS DE FRANCE. Vin chaud, stand sans cuisine fixe. Milliers de gobelets. CIBLE MAJEURE", contact:"fetedelumieres.lyon.fr" },
+      { nom:"Quais du Polar", type:"Festival polar", jauge:"50 000/3 jours", freq:"3-5 avril 2026", note:"Festival plein air + salles. Buvettes temporaires", contact:"quaisdupolar.com" },
+      { nom:"Lyon Bière Festival", type:"Festival bière", jauge:"10 000/2 jours", freq:"24-25 avril", note:"Double Mixte Villeurbanne. Perfect Beer Up et Ecocup service", contact:"lyonbierefestival.com" },
+      { nom:"Hippos Lyon (Parilly, La Soie)", type:"Hippodromes", jauge:"5 000 réunions", freq:"25+ réunions/an", note:"Deux hippodromes. Bar tribunes classique sans plonge mobile", contact:"france-galop.com" },
+    ],
+    B: [
+      { nom:"Center Parcs Lac d'Ailette (proche)", type:"Center Parcs", jauge:"2 000/semaine", note:"Bars piscine couverts. Forte consommation journalière" },
+      { nom:"Club Med Les Arcs / Valmorel (ski)", type:"Club Med ski", jauge:"600/village", note:"Forte conso apres-ski. Pas de plonge sur les terrasses extérieures" },
+      { nom:"Walibi Rhône-Alpes", type:"Parc loisirs", jauge:"5 000/j", note:"Les Avenières. 130 jours/an. Buvettes plein air. Gobelet souvenir IML fort" },
+      { nom:"Zoo Parc de Saint-Martin-la-Plaine", type:"Zoo", jauge:"3 000/j", note:"42. Buvettes extérieures. Plein air" },
+      { nom:"Grandes discothèques Lyon (Sucre, Marquise, Ninkasi)", type:"Clubs", jauge:"1 000-2 500/nuit", note:"Le Sucre : rooftop électro. Beer Up parfait pour Ninkasi brewery" },
+      { nom:"Ninkasi Gerland", type:"Brasserie + salle concerts", jauge:"3 000 concerts", note:"Brasserie locale + salle. Beer Up = parfaitement aligné avec leur ADN bière", },
+      { nom:"Lyon Plage (Berges du Rhône)", type:"Plage urbaine", jauge:"5 000/j", note:"Juillet-août. Bars éphémères plein air. Zéro plonge fixe" },
+    ],
+    C: [
+      { nom:"Brasserie Georges Lyon", type:"Brasserie iconique (600 couverts)", nb_restau:"1 mais 400K clients/an", note:"Plus grande brasserie de Lyon. Gobelet IML = souvenir premium pour les touristes" },
+      { nom:"Le Grand Café des Négociants", type:"Café-brasserie", nb_restau:"1 + franchise possible", note:"3 500 couverts/semaine. Forte consommation boissons" },
+      { nom:"Léon de Bruxelles Lyon", type:"Moules-frites", nb_restau:"2 Lyon", note:"Chaine. Fort volume boissons. Décision DG Paris" },
+      { nom:"La Meunière / Paul Bocuse / Mère Brazier", type:"Resto gastronomique traduit", nb_restau:"3-5 établissements", note:"Haut de gamme. Gobelet IML = souvenir de l'expérience gastronomique" },
+      { nom:"Holy Cow Lyon", type:"Burgers trendy", nb_restau:"4 Lyon", note:"Jeune, brand identity forte. Gobelet collector" },
+      { nom:"Chipotle / Five Guys Lyon", type:"Restauration rapide premium", nb_restau:"2-3 Lyon", note:"Soft drinks en gobelet. Volume fort. Franchise US" },
+    ],
   },
   marseille: {
-    name: 'Marseille ☀️', sub: 'PACA · 13 / 84 / 83', ca: '337 K€',
-    tips: [{ title: 'Campings = priorité 1', body: '350 campings · saison plus longue (150j). Concentrer sur Var 83 en 1er.' }, { title: 'OM Vélodrome', body: '60 000 places · contacter exploitant des buvettes (prestataire séparé).' }, { title: 'Avignon / Nîmes', body: 'Festival d\'Avignon + Arènes = 2 gros clients à 60 min.' }, { title: 'Agences events', body: 'Marseille Provence = destination congrès & incentives.' }],
-    cats: [
-      { icon: '🏥', name: 'EHPAD', model: 'Achat pur', ca: '5 175€', label: '50% signés', nb: '115', caUnit: '90€', jours: '365j', gob: '~240', priority: 3, priorityText: 'Ticket faible — viser Orpéa PACA ou EHPAD privés haut de gamme', links: [{ r: 1, url: 'https://www.pour-les-personnes-agees.gouv.fr', name: 'pour-les-personnes-agees.gouv.fr', desc: 'Dép. 13' }] },
-      { icon: '⛺', name: 'Campings', model: 'Service complet', ca: '107 100€', label: '10% signés', nb: '~350', caUnit: '3 060€', jours: '150j', gob: '~900', priority: 1, priorityText: '🔥 Var + Vaucluse + BdR · saison plus longue qu\'ailleurs', links: [{ r: 1, url: 'https://www.campingfrance.com', name: 'campingfrance.com', desc: 'Filtrer 13, 83, 84' }] },
-      { icon: '🏇', name: 'Hippodromes', model: 'Service complet', ca: '18 000€', label: '1 signé', nb: '1', caUnit: '18 000€', jours: '30 réunions', gob: '3 000', priority: 1, priorityText: '🔥 Hippodrome Marseille-Borély · tracé PMU sélectif', links: [{ r: 1, url: 'https://www.fnch.fr/hippodromes-france', name: 'fnch.fr', desc: 'Fédération Sud-Est' }] },
-      { icon: '🎡', name: 'Parcs de loisirs', model: 'Service complet', ca: '45 900€', label: '30% signés', nb: '~6', caUnit: '25 500€', jours: '200j', gob: '3 000', priority: 2, priorityText: 'Zoos PACA, Aqualand, bases nautiques', links: [{ r: 1, url: 'https://www.parcs-france.com/carte', name: 'parcs-france.com', desc: 'Zone PACA' }] },
-      { icon: '🏛️', name: 'Salles de spectacle', model: 'Service complet', ca: '64 000€', label: '20% signés', nb: '~20', caUnit: '16 000€', jours: '100 événements', gob: '1 000', priority: 1, priorityText: '🔥 Le Silo, Dock des Suds, Zénith Marseille, Friche Belle de Mai', links: [{ r: 1, url: 'https://www.artcena.fr/annuaire', name: 'artcena.fr', desc: 'Zone PACA' }] },
-      { icon: '🏆', name: 'Associations sportives', model: 'Service ponctuel', ca: '26 250€', label: '5% signés', nb: '~700', caUnit: '750€', jours: '10 tournois/an', gob: '500', priority: 1, priorityText: '🔥 Culture sportive forte (pétanque, foot) · nombreux tournois', links: [{ r: 1, url: 'https://www.helloasso.com', name: 'helloasso.com', desc: 'Assos sport BdR' }] },
-      { icon: '🎓', name: 'Soirées étudiantes', model: 'Service ponctuel', ca: '6 000€', label: '8% signés', nb: '~50 établ.', caUnit: '1 500€', jours: '15 soirées/an', gob: '400', priority: 2, priorityText: 'AMU, Kedge, Centrale Marseille · 80 000 étudiants', links: [{ r: 1, url: 'https://www.helloasso.com', name: 'helloasso.com', desc: 'BDE Marseille / Aix' }] },
-      { icon: '🎪', name: 'Agences événementielles', model: 'Service complet', ca: '20 000€', label: '5% signés', nb: '~100', caUnit: '4 000€', jours: '30 events/an', gob: '1 000', priority: 1, priorityText: '🔥 Destination congrès & incentives · Palais du Pharo', links: [{ r: 1, url: 'https://www.unimev.fr', name: 'unimev.fr', desc: 'Membres organisateurs' }] },
-      { icon: '💍', name: 'Mariages & réceptions', model: 'Achat personnalisé', ca: '24 000€', label: '10% traiteurs', nb: '~60 traiteurs', caUnit: '4 000€', jours: '~30 mariages/an', gob: '200', priority: 2, priorityText: 'Mariages en extérieur très courants en PACA', links: [{ r: 1, url: 'https://www.mariages.net/traiteur-mariage/traiteur-bouches-du-rhone', name: 'mariages.net', desc: 'Traiteurs PACA' }] },
-      { icon: '📊', name: 'Salons & incentives', model: 'Service complet', ca: '8 000€', label: '20% signés', nb: '~10 salons', caUnit: '4 000€', jours: '3-5j/salon', gob: '2 000', priority: 2, priorityText: 'Seafood Expo, Euromaritime · Parc Chanot', links: [{ r: 1, url: 'https://www.gl-events.com', name: 'gl-events.com', desc: 'Parc Chanot Marseille' }] }
-    ]
+    nom: "Marseille & PACA",
+    emoji: "☀️",
+    col: "#2980b9",
+    pop: "1,9M hab",
+    ca_potentiel: "337K€",
+    depart: "13/83/84/04/05",
+    A: [
+      { nom:"Orange Vélodrome (OM)", type:"Stade football", jauge:"67 000", freq:"20 matchs/saison + events", note:"Plus grand stade de France. Buvettes extérieures monumentales. Gestion Sodexo", contact:"om.fr" },
+      { nom:"Dôme de Marseille", type:"Salle concerts", jauge:"10 000", freq:"60+ events/an", note:"Concerts + shows. Bar principal sans cuisine professionnelle", contact:"ledome-marseille.com" },
+      { nom:"Arkéa Arena Floirac (Bordeaux equiv.)", type:"Salle", jauge:"16 000", note:"Proche Marseille = Dôme. Concerts majeurs", contact:"dome-marseille.com" },
+      { nom:"Sirha Méditerranée / Bocuse d'Or Europe", type:"Salon pro", jauge:"30 000/4 jours", freq:"Mars 2026", note:"Parc Chanot. Salon restauration. Très nombreux stands boissons. CIBLE PRO", contact:"sca-sirha.com" },
+      { nom:"Fête de la Musique Marseille", type:"Festival ville", jauge:"100 000/j", freq:"21 juin annuel", note:"Multiple sites plein air. Mairie de Marseille + associations", contact:"marseille.fr" },
+      { nom:"Marsatac", type:"Festival électro", jauge:"20 000/j", freq:"3 jours été", note:"Jardin Borely. Plein air. Zéro cuisine fixe. Fort engagement eco", contact:"marsatac.com" },
+      { nom:"Festival de Marseille", type:"Festival pluridisciplinaire", jauge:"40 000/15j", freq:"Juin-juillet", note:"Multiples sites. Spectacles plein air, bars associatifs", contact:"festivaldemarseille.com" },
+      { nom:"Hip Opsession", type:"Festival hip-hop", jauge:"10 000/j", freq:"3 jours", note:"Fort volume jeune public. Consommation forte", contact:"hipopsession.com" },
+      { nom:"Hippodrome Borely", type:"Hippodrome", jauge:"10 000 (grands prix)", freq:"30+ réunions/an", note:"Borely. Bar tribunes extérieur classique", contact:"france-galop.com" },
+      { nom:"Parc Chanot - Foires & Salons", type:"Parc expositions", jauge:"100 000+/event", freq:"30+ salons/an", note:"Foire Internationale de Marseille (300 000 visits/10j). Stands sans cuisine fixe", contact:"parchanot.com" },
+      { nom:"Foire Internationale de Marseille", type:"Foire expo", jauge:"300 000/10j", freq:"Septembre", note:"LA cible Marseille. 300 000 visiteurs. Stands boissons partout. Fort potentiel", contact:"foiredemarseille.com" },
+      { nom:"Zénith de Toulon / Zénith de Nice", type:"Salles concerts PACA", jauge:"9 000 / 7 000", freq:"80 events/an chaque", note:"Deux salles de concert zone. Contrats annuels possibles", contact:"zenith-toulon.com" },
+      { nom:"Hellfest South (si extension)", type:"Metal festival", jauge:"20 000+", note:"Extension PACA potentielle du festival. Forte consommation bière", contact:"hellfest.fr" },
+      { nom:"Les Suds à Arles", type:"Festival musiques monde", jauge:"15 000/5 jours", freq:"Juillet", note:"Arles. Plein air. Très engagé éco. Cible service idéale", contact:"suds-arles.com" },
+      { nom:"Miramas Velodrome / Vélodrome route UCI", type:"Sport cycliste", jauge:"5 000-15 000", note:"Events sportifs ponctuels. Buvettes plein air", contact:"velodrome-miramas.fr" },
+    ],
+    B: [
+      { nom:"Club Med Opio en Provence", type:"Club Med", jauge:"600/semaine", note:"Bar piscine + soirées. Forte conso. Pas de plonge mobile" },
+      { nom:"Club Med La Palmyre Atlantique", type:"Club Med proche", jauge:"800/semaine", note:"Atlantique mais rayonnement PACA. Gestion nationale Club Med" },
+      { nom:"Aqualand Cap d'Agde / Antibes", type:"Parcs aquatiques", jauge:"5 000/j", note:"PACA/Occitanie. Buvettes plein air. Plein été" },
+      { nom:"Parc Naturel Calanques (Buvettes)", type:"Buvettes plein air randonnée", jauge:"8 000/j été", note:"Pas de cuisine. Pure service. Fort en été" },
+      { nom:"Vieux-Port buvettes / Corniche bars", type:"Bars extérieurs", jauge:"10 000+ en terrasse/soir été", note:"Beer Up ideal. Bars à bière en front de mer" },
+      { nom:"Grandes discothèques Marseille (AM La Plage, El Cartel)", type:"Clubs beach", jauge:"2 000/nuit", note:"Beach clubs = consommation forte. Beer Up + Ecocup" },
+    ],
+    C: [
+      { nom:"Chez Fonfon / Miramar (Bouillabaisse)", type:"Restos thématiques fish", nb_restau:"5-8 sur Vieux-Port", note:"Gobelets souvenir = expérience locale premium. Tourisme fort" },
+      { nom:"Léon de Bruxelles Marseille", type:"Moules-frites chaine", nb_restau:"2 Marseille", note:"Chaine nationale. Décision Paris" },
+      { nom:"La Criée Marseille Concept", type:"Concept poisson", nb_restau:"1 + réseau possible", note:"100 couverts. Tourisme fort" },
+      { nom:"O'Tacos Marseille", type:"Tacos franchise", nb_restau:"8 Marseille", note:"Très fort volume jeune. Boissons en gobelet systématique" },
+      { nom:"Pitaya Thai Street Food", type:"Thaï franchise", nb_restau:"4 PACA", note:"Franchise en développement. Gobelets personnalisables" },
+      { nom:"Pokawa / Poke House PACA", type:"Poke bowl franchise", nb_restau:"6 PACA", note:"Très forte identité visuelle. Boissons en gobelet biodégradable actuellement" },
+    ],
   },
-  lille: {
-    name: 'Lille 🏙️', sub: 'Hauts-de-France · 59 / 62', ca: '262 K€',
-    tips: [{ title: 'Braderie de Lille', body: '1M de visiteurs · contacter la MEL dès le printemps.' }, { title: 'Agences événementielles', body: 'Lille = 2e hub événementiel de France. Cibler les agences spécialisées MICE.' }, { title: 'Côte d\'Opale', body: 'Campings de Berck, Touquet, Dunkerque = segment fort peu prospectué.' }, { title: 'Assos sportives', body: 'Culture sportive forte dans le Nord · clubs de foot amateur très nombreux.' }],
-    cats: [
-      { icon: '🏥', name: 'EHPAD', model: 'Achat pur', ca: '5 625€', label: '50% signés', nb: '125', caUnit: '90€', jours: '365j', gob: '~240', priority: 3, priorityText: 'Viser EHPAD privés ou groupes régionaux', links: [{ r: 1, url: 'https://www.pour-les-personnes-agees.gouv.fr', name: 'pour-les-personnes-agees.gouv.fr', desc: 'Filtrer dép. 59' }] },
-      { icon: '⛺', name: 'Campings', model: 'Service complet', ca: '27 540€', label: '10% signés', nb: '~90', caUnit: '3 060€', jours: '120j', gob: '~900', priority: 2, priorityText: 'Cibler Côte d\'Opale · gros campings balnéaires', links: [{ r: 1, url: 'https://www.campingfrance.com', name: 'campingfrance.com', desc: 'Filtrer 59 + 62' }] },
-      { icon: '🏇', name: 'Hippodromes', model: 'Service complet', ca: '36 000€', label: '2 signés', nb: '2', caUnit: '18 000€', jours: '30 réunions', gob: '3 000', priority: 1, priorityText: '🔥 Hippodrome Lille-Marcq + Mons-en-Barœul', links: [{ r: 1, url: 'https://www.fnch.fr/hippodromes-france', name: 'fnch.fr', desc: 'Fédération Nord' }] },
-      { icon: '🎡', name: 'Parcs de loisirs', model: 'Service complet', ca: '53 550€', label: '30% signés', nb: '~7', caUnit: '25 500€', jours: '200j', gob: '3 000', priority: 1, priorityText: '🔥 Plopsaland, Dennlys Parc, parcs Nord', links: [{ r: 1, url: 'https://www.parcs-france.com/carte', name: 'parcs-france.com', desc: 'Zone Nord' }] },
-      { icon: '🏛️', name: 'Salles de spectacle', model: 'Service complet', ca: '70 400€', label: '20% signés', nb: '~22', caUnit: '16 000€', jours: '100 événements', gob: '1 000', priority: 1, priorityText: '🔥 Zénith Lille, Le Splendid, L\'Aéronef, Gare Saint-Sauveur', links: [{ r: 1, url: 'https://www.artcena.fr/annuaire', name: 'artcena.fr', desc: 'Hauts-de-France' }] },
-      { icon: '🏆', name: 'Associations sportives', model: 'Service ponctuel', ca: '18 750€', label: '5% signés', nb: '~500', caUnit: '750€', jours: '10 tournois/an', gob: '500', priority: 1, priorityText: '🔥 Culture foot/rugby très forte dans le Nord', links: [{ r: 1, url: 'https://www.helloasso.com', name: 'helloasso.com', desc: 'Assos sport Hauts-de-France' }] },
-      { icon: '🎓', name: 'Soirées étudiantes', model: 'Service ponctuel', ca: '3 750€', label: '8% signés', nb: '~30 établ.', caUnit: '1 500€', jours: '15 soirées/an', gob: '400', priority: 2, priorityText: 'Univ. Lille, SKEMA, IESEG, Centrale Lille', links: [{ r: 1, url: 'https://www.helloasso.com', name: 'helloasso.com', desc: 'BDE Lille' }] },
-      { icon: '🎪', name: 'Agences événementielles', model: 'Service complet', ca: '16 000€', label: '5% signés', nb: '~80', caUnit: '4 000€', jours: '30 events/an', gob: '1 000', priority: 1, priorityText: '🔥 Lille = hub MICE nordiste · agences séminaires entreprises', links: [{ r: 1, url: 'https://www.unimev.fr', name: 'unimev.fr', desc: 'Union métiers événement' }] },
-      { icon: '💍', name: 'Mariages & réceptions', model: 'Achat personnalisé', ca: '16 000€', label: '10% traiteurs', nb: '~40 traiteurs', caUnit: '4 000€', jours: '~30 mariages/an', gob: '200', priority: 2, priorityText: 'Nord = fort volume de mariages · gobelet personnalisé', links: [{ r: 1, url: 'https://www.mariages.net/traiteur-mariage/traiteur-nord', name: 'mariages.net', desc: 'Traiteurs Nord' }] },
-      { icon: '📊', name: 'Salons & incentives', model: 'Service complet', ca: '6 000€', label: '20% signés', nb: '~8 salons', caUnit: '4 000€', jours: '3-5j/salon', gob: '2 000', priority: 2, priorityText: 'Foires régionales, Salon des entrepreneurs Lille', links: [{ r: 1, url: 'https://www.gl-events.com', name: 'gl-events.com', desc: 'Lille Grand Palais' }] }
-    ]
+  bordeaux: {
+    nom: "Bordeaux & Nouvelle-Aquitaine",
+    emoji: "🍷",
+    col: "#8e44ad",
+    pop: "1,5M hab",
+    ca_potentiel: "340K€",
+    depart: "33/17/16/79/86/24/47",
+    A: [
+      { nom:"Stade Matmut Atlantique (Girondins)", type:"Stade football", jauge:"42 000", freq:"20 matchs/saison + events", note:"Buvettes extérieures. Fort potentiel. Partenaire Heineken. Gestion LBO Sport", contact:"girondins.com" },
+      { nom:"Arkéa Arena Floirac", type:"Grande salle concerts", jauge:"16 000", freq:"80 events/an", note:"LA salle de Bordeaux. Inaugurée 2023. Gestionnaire Vinci. Très active", contact:"arkeaarena.com" },
+      { nom:"Bordeaux Fête le Fleuve", type:"Festival nautique", jauge:"600 000/5 jours", freq:"Juin bisannuel (2026)", note:"ÉNORME. 600 000 visiteurs. Stands boissons sans cuisine fixe partout. CIBLE PRIORITAIRE", contact:"bordeaux-fete-le-fleuve.com" },
+      { nom:"Bordeaux Open Air (BOA)", type:"Festival électro", jauge:"15 000/j", freq:"3 jours été", note:"Paragon. Plein air. Zéro cuisine fixe. Fort engagement éco", contact:"bordeaux-openair.com" },
+      { nom:"Garorock Festival (Marmande, 47)", type:"Festival musique", jauge:"45 000/j", freq:"4 jours juillet", note:"Marmande près Bordeaux. Plein air. Sans cuisine fixe. Fort volume", contact:"garorock.com" },
+      { nom:"Vinexpo / Wine Paris (Bordeaux)", type:"Salon vins", jauge:"50 000/3 jours", freq:"Tous les 2 ans", note:"Lac de Bordeaux. Stands sans plonge. Très forte consommation", contact:"vinexpo.com" },
+      { nom:"Hellfest (Loire, dans le rayon)", type:"Festival metal", jauge:"60 000/j", freq:"3 jours juin", note:"Clisson. Dans le rayon d'action. Le festival de bière par excellence. Beer Up idéal", contact:"hellfest.fr" },
+      { nom:"Rock à la Caune Saintes (17)", type:"Festival rock", jauge:"20 000/j", freq:"3 jours été", note:"Charente-Maritime. Plein air. Sans cuisine", contact:"rockalachaune.com" },
+      { nom:"Bordeaux Métropole Sport (Arena)", type:"Arena basket + events", jauge:"8 000", freq:"50 events/an", note:"Villenave. Elan Chalon equiv. Buvettes sans cuisine professionnelle", contact:"elanbordeaux.com" },
+      { nom:"Hippodrome Le Bouscat", type:"Hippodrome", jauge:"5 000 grands prix", freq:"25+ réunions/an", note:"Bar tribunes classique. 1 interlocuteur société des courses", contact:"hippodrome-le-bouscat.fr" },
+      { nom:"Hippodrome La Teste-de-Buch", type:"Hippodrome", jauge:"5 000", freq:"20+ réunions/an", note:"Arcachon. Très touristique en été. Premium", contact:"hippodrome-la-teste.fr" },
+      { nom:"Mondial du Vin / Vinexpo Bordeaux", type:"Foire vins", jauge:"200 000", freq:"Bisannuel 2026", note:"Si lieu 2026 = Bordeaux. Énorme potentiel gobelet verre à vin IML", contact:"bordeauxwine-route.fr" },
+      { nom:"Festival Château-Latour / Open air domaines", type:"Events vignoble", jauge:"5 000/event", freq:"20+ events/an", note:"Vignobles Médoc/Saint-Émilion. Mariages + events privés premium. Gobelet IML souvenir", contact:"Châteaux individuels" },
+      { nom:"Bordeaux Marathon", type:"Sport masse", jauge:"13 000 coureurs + 150 000 spectateurs", freq:"Avril 2026", note:"Ravitaillements = milliers de gobelets. Sponsor boisson partenaire potentiel", contact:"marathondebordeaux.com" },
+    ],
+    B: [
+      { nom:"Center Parcs La Forêt (33)", type:"Center Parcs", jauge:"3 000/semaine", note:"Nouvelle-Aquitaine. Bar aquatique couvert. Forte conso famille" },
+      { nom:"Club Med Les Arcs / Palmyre", type:"Club Med", jauge:"600-800/semaine", note:"Forte conso. Pas de plonge sur terrasses. Service Re-uz idéal" },
+      { nom:"Camping Arcachon 5 étoiles (La Hume, Vieux-Port)", type:"Campings premium", jauge:"500-800 emplacements", note:"Bar piscine, beach bar. Saison mai-sept. Plein air absolu" },
+      { nom:"Parc de la Palmyre", type:"Zoo", jauge:"5 000/j", note:"Charente-Maritime. 150 jours/an. Buvettes plein air" },
+      { nom:"Aqualand Royan / Cap'Vert (17)", type:"Parc aquatique", jauge:"4 000/j", note:"Forte consommation été. Plein air" },
+      { nom:"Grandes discothèques Bordeaux (Iboat, Black Sheep)", type:"Clubs", jauge:"1 000-2 500/nuit", note:"Iboat = club sur péniche. Beer Up idéal" },
+    ],
+    C: [
+      { nom:"Hippopotamus Bordeaux", type:"Steakhouse", nb_restau:"2 Bordeaux", note:"Chaine. Volume fort. Décision DG national" },
+      { nom:"La Brasserie Bordelaise", type:"Brasserie concept", nb_restau:"1-3", note:"Gobelets IML = souvenir gastronomique Bordeaux" },
+      { nom:"Léon de Bruxelles Bordeaux", type:"Moules-frites", nb_restau:"2 Bordeaux", note:"Chaine nationale. Fort volume boissons" },
+      { nom:"O'Tacos Bordeaux", type:"Tacos", nb_restau:"6 Bordeaux", note:"Jeune, fort volume, gobelet systématique" },
+      { nom:"L'Entrecôte (Café de Paris groupe)", type:"Steak-frites concept", nb_restau:"4 Bordeaux région", note:"Concept fort, DG accessible. Gobelets réemployables alignés avec image qualité" },
+      { nom:"Pokawa Bordeaux", type:"Poke bowl", nb_restau:"4 Bordeaux", note:"Franchise en croissance. Identité visuelle forte" },
+    ],
   },
   rennes: {
-    name: 'Rennes 🎸', sub: 'Bretagne · 35 / 22 / 56 / 29', ca: '287 K€',
-    tips: [{ title: 'Campings bretons', body: '280 campings · commencer par les 3-4 étoiles du Morbihan (Carnac, Quiberon).' }, { title: 'Assos sportives', body: '160 événements sportifs/an soutenus par la Ville · culture associative très forte.' }, { title: 'Transmusicales', body: 'Festival mondial décembre · contacter l\'asso Trans Musicales dès mai.' }, { title: 'Vieilles Charrues', body: 'Plus grand festival de France à Carhaix (1h) · contacter la direction opérations.' }],
-    cats: [
-      { icon: '🏥', name: 'EHPAD', model: 'Achat pur', ca: '2 745€', label: '50% signés', nb: '61', caUnit: '90€', jours: '365j', gob: '~240', priority: 3, priorityText: 'Ticket trop faible — traiter en complément uniquement', links: [{ r: 1, url: 'https://www.pour-les-personnes-agees.gouv.fr', name: 'pour-les-personnes-agees.gouv.fr', desc: 'Dép. 35' }] },
-      { icon: '⛺', name: 'Campings', model: 'Service complet', ca: '85 680€', label: '10% signés', nb: '~280', caUnit: '3 060€', jours: '120j', gob: '~900', priority: 1, priorityText: '🔥 Bretagne = région camping majeure · Quiberon, Carnac, Perros-Guírec', links: [{ r: 1, url: 'https://www.campingfrance.com', name: 'campingfrance.com', desc: 'Filtrer 22, 29, 35, 56' }] },
-      { icon: '🏇', name: 'Hippodromes', model: 'Service complet', ca: '36 000€', label: '2 signés', nb: '2', caUnit: '18 000€', jours: '30 réunions', gob: '3 000', priority: 1, priorityText: '🔥 Maure-de-Bretagne + La Roche-Bernard · Fédération Ouest très active', links: [{ r: 1, url: 'https://regions.equidia.fr', name: 'regions.equidia.fr', desc: 'Fédération Ouest · la + fournie' }] },
-      { icon: '🎡', name: 'Parcs de loisirs', model: 'Service complet', ca: '45 900€', label: '30% signés', nb: '~6', caUnit: '25 500€', jours: '200j', gob: '3 000', priority: 2, priorityText: 'Cobac Parc, Village Gaulois, parcs animaliers bretons', links: [{ r: 1, url: 'https://www.parcs-france.com/carte', name: 'parcs-france.com', desc: 'Zone Bretagne' }] },
-      { icon: '🏛️', name: 'Salles de spectacle', model: 'Service complet', ca: '48 000€', label: '20% signés', nb: '~15', caUnit: '16 000€', jours: '100 événements', gob: '1 000', priority: 1, priorityText: '🔥 Le Liberté, L\'Ubu, La Citrouille + Transmusicales (décembre)', links: [{ r: 1, url: 'https://www.artcena.fr/annuaire', name: 'artcena.fr', desc: 'Bretagne' }] },
-      { icon: '🏆', name: 'Associations sportives', model: 'Service ponctuel', ca: '22 500€', label: '5% signés', nb: '~600', caUnit: '750€', jours: '10 tournois/an', gob: '500', priority: 1, priorityText: '🔥 160 événements sportifs/an soutenus par la Ville', links: [{ r: 1, url: 'https://www.helloasso.com', name: 'helloasso.com', desc: 'Assos sport Ille-et-Vilaine' }] },
-      { icon: '🎓', name: 'Soirées étudiantes', model: 'Service ponctuel', ca: '6 000€', label: '10% signés', nb: '~50 établ.', caUnit: '1 500€', jours: '15 soirées/an', gob: '400', priority: 1, priorityText: '🔥 Rennes = ville très étudiante (70 000 étudiants) · BDE hyper actifs', links: [{ r: 1, url: 'https://www.helloasso.com', name: 'helloasso.com', desc: 'BDE Rennes' }] },
-      { icon: '🎪', name: 'Agences événementielles', model: 'Service complet', ca: '12 000€', label: '5% signés', nb: '~60', caUnit: '4 000€', jours: '30 events/an', gob: '1 000', priority: 2, priorityText: 'Séminaires d\'entreprises en forte croissance à Rennes', links: [{ r: 1, url: 'https://www.pagesjaunes.fr', name: 'pagesjaunes.fr', desc: 'Agences Rennes' }] },
-      { icon: '💍', name: 'Mariages & réceptions', model: 'Achat personnalisé', ca: '16 000€', label: '10% traiteurs', nb: '~40 traiteurs', caUnit: '4 000€', jours: '~30 mariages/an', gob: '200', priority: 2, priorityText: 'Mariages en manoirs bretons et domaines · gobelet personnalisé', links: [{ r: 1, url: 'https://www.mariages.net/traiteur-mariage/traiteur-ille-et-vilaine', name: 'mariages.net', desc: 'Traiteurs Ille-et-Vilaine' }] },
-      { icon: '📊', name: 'Salons & incentives', model: 'Service complet', ca: '4 000€', label: '20% signés', nb: '~5 salons', caUnit: '4 000€', jours: '3-5j/salon', gob: '2 000', priority: 2, priorityText: 'Salon de l\'Habitat, B2B Rennes Metropole · Parc Expo', links: [{ r: 1, url: 'https://www.rennes-metropole.fr', name: 'rennes-metropole.fr', desc: 'Evénements métropole' }] }
-    ]
+    nom: "Rennes & Bretagne",
+    emoji: "🎸",
+    col: "#27ae60",
+    pop: "1,1M hab",
+    ca_potentiel: "287K€",
+    depart: "35/56/29/22",
+    A: [
+      { nom:"Roazhon Park (Stade Rennais)", type:"Stade football", jauge:"29 000", freq:"20 matchs/saison + events", note:"Ligue 1. Gestion Sodexo. Buvettes extérieures", contact:"staderennais.com" },
+      { nom:"Transbordeur / Les Transmusicales", type:"Festival electro/indie", jauge:"8 000/j", freq:"4 jours décembre", note:"LES TRANS 2026 en décembre. 180 000 spectateurs/édition. CIBLE MAJEURE Rennes", contact:"lestrans.com" },
+      { nom:"Hellfest (nantais, rayon Rennes)", type:"Festival metal", jauge:"60 000/j", freq:"3 jours juin", note:"Clisson = 1h de Rennes. Énorme. Beer Up + Ecocup service", contact:"hellfest.fr" },
+      { nom:"Vieilles Charrues (Carhaix, 29)", type:"Festival musique", jauge:"60 000/j", freq:"4 jours juillet", note:"LE PLUS GRAND FESTIVAL BRETON. 240 000 spectateurs. Plein air total. Cible prioritaire MAJEURE", contact:"vieillescharrues.asso.fr" },
+      { nom:"Festival Art Rock (Saint-Brieuc)", type:"Festival pluridisciplinaire", jauge:"15 000/j", freq:"3 jours mai", note:"Plein air. Bar associatif sans cuisine fixe", contact:"art-rock.org" },
+      { nom:"Bout du Monde (Crozon, 29)", type:"Festival musique monde", jauge:"15 000/j", freq:"3 jours août", note:"Finistère. Plein air absolu. Zéro infrastructure. Service Re-uz parfait", contact:"festival-bout-du-monde.com" },
+      { nom:"Festival Mythos Rennes", type:"Festival slam/poésie", jauge:"30 000/2 semaines", freq:"Printemps", note:"Plein air + salles. Buvettes associatives", contact:"festival-mythos.com" },
+      { nom:"Yaouank / Interceltique (Lorient)", type:"Festival celtique", jauge:"25 000/j", freq:"10 jours août Lorient", note:"Lorient. Très forte consommation bière. Beer Up idéal. Fest-noz + concerts", contact:"festival-interceltique.com" },
+      { nom:"Parc des Expositions Rennes (Expo-Events)", type:"Salons", jauge:"50 000/event", freq:"20+ salons/an", note:"Expo-Events. Stands sans cuisine. Service traiteur gobelet", contact:"parc-expo-rennes.fr" },
+      { nom:"Chorus Rennes / Salle de la Cité", type:"Salle concerts", jauge:"6 000", freq:"50 events/an", note:"Salle principale de Rennes. Bar sans cuisine complexe", contact:"lareille.com" },
+      { nom:"Hippodromes Bretagne (Rennes, Laval)", type:"Hippodromes", jauge:"3 000-5 000", freq:"20+ réunions/an", note:"Bar tribunes classique. Service Re-uz", contact:"france-galop.com" },
+      { nom:"Fête des Filets Bleus (Concarneau)", type:"Festival maritime", jauge:"100 000/3 jours", freq:"Août", note:"Concarneau 29. Festival maritime. Buvettes plein air. Fort potentiel", contact:"fetesdesfiletsbleus.fr" },
+    ],
+    B: [
+      { nom:"Club Med La Palmyre (17)", type:"Club Med proche", jauge:"800/semaine", note:"Charente. Dans le rayon Rennes-Bordeaux. Gestion nationale" },
+      { nom:"Campings Finistère 5 étoiles (Armorique, Les Genêts)", type:"Campings premium", jauge:"500-1 000 emplacements", note:"Brest/Quimper. Bar piscine + plage. Saison forte" },
+      { nom:"Center Parcs Domaine des Ormes (Bazouges-la-Pérouse)", type:"Center Parcs", jauge:"1 500/semaine", note:"Ille-et-Vilaine ! En Bretagne. Bar aquatique. Forte consommation" },
+      { nom:"Zoo de la Bourbansais", type:"Zoo", jauge:"2 000/j", note:"35. Buvettes plein air. 150 jours/an" },
+      { nom:"Aquapark Brest / Concarneau", type:"Parcs aquatiques", jauge:"3 000/j", note:"Forte conso été. Plein air" },
+      { nom:"Grandes discothèques Rennes (Pym's, Ubu)", type:"Clubs", jauge:"800-2 000/nuit", note:"Ubu = salle concerts + club. Beer Up idéal" },
+    ],
+    C: [
+      { nom:"Léon de Bruxelles Rennes", type:"Moules-frites", nb_restau:"1 Rennes", note:"Chaine. Fort volume boissons" },
+      { nom:"Crêperies Mama Bretzel + franchises crepes", type:"Crêperies franchise", nb_restau:"10+ Bretagne", note:"Gobelet réemployable aligné avec terroir bretagne éco" },
+      { nom:"O'Tacos Rennes", type:"Tacos", nb_restau:"4 Rennes", note:"Fort volume jeune" },
+      { nom:"Big Fernand Rennes", type:"Burgers premium", nb_restau:"1 Rennes", note:"Franchise. Fort en brand identity" },
+      { nom:"Goût de Bretagne concept", type:"Resto thématique breton", nb_restau:"3-5 Rennes", note:"Gobelets IML = souvenir Bretagne. Tourisme fort" },
+    ],
+  },
+  lille: {
+    nom: "Lille & Hauts-de-France",
+    emoji: "🏙️",
+    col: "#c0392b",
+    pop: "1,2M hab",
+    ca_potentiel: "262K€",
+    depart: "59/62/80/02/60",
+    A: [
+      { nom:"Stade Pierre-Mauroy (LOSC)", type:"Stade football", jauge:"50 000", freq:"20 matchs/saison + concerts", note:"Villeneuve d'Ascq. Concerts majeurs + matchs. Partenaire Heineken", contact:"losc.fr" },
+      { nom:"Decathlon Arena Stade de France proxy", type:"Arena multifonction", jauge:"27 000", freq:"60+ events/an", note:"Concerts + basket + events. Fort volume buvettes", contact:"metropolilille.fr" },
+      { nom:"Braderie de Lille", type:"Brocante + fête", jauge:"2 MILLIONS visiteurs/2 jours", freq:"Premier weekend septembre 2026", note:"L'ÉVÉNEMENT LE PLUS MASSIF DE LA LISTE. 2 millions de visiteurs. Moules-frites partout. Stands sans cuisine. CIBLE ULTRA-PRIORITAIRE", contact:"mairie-lille.fr" },
+      { nom:"Electrobeach (Port-Barcarès, dans le rayon)", type:"Festival electro beach", jauge:"30 000/j", freq:"3 jours juillet", note:"Occitanie bord de mer. Dans le rayon potentiel Nord via réseau", contact:"electrobeach.fr" },
+      { nom:"The Weeknd à Lille (Stade)", type:"Concert stade", jauge:"50 000", freq:"2026", note:"The Weeknd annoncé à Lille 2026 ! Contacter gestionnaire stade", contact:"stade-pierre-mauroy.fr" },
+      { nom:"Eurockéennes de Belfort (rayon Est)", type:"Festival rock", jauge:"35 000/j", freq:"4 jours juillet", note:"Belfort. Dans le rayon Est. Plein air, forte consommation", contact:"eurockeennes.fr" },
+      { nom:"Festival A L'Arme (Paris)", type:"Festival musique contemporaine", jauge:"5 000/j", note:"Si extension Nord", contact:"" },
+      { nom:"Marché de Noël de Lille", type:"Marché de Noël", jauge:"1 000 000 visiteurs/3 semaines", freq:"Décembre annuel", note:"UN DES PLUS GRANDS DE FRANCE. Vin chaud, stands sans cuisine. CIBLE MAJEURE", contact:"lilletourism.com" },
+      { nom:"Foire Internationale de Lille", type:"Foire expo", jauge:"500 000/10j", freq:"Octobre", note:"Grand Palais Lille. Très nombreux stands boissons. Fort potentiel", contact:"foiredelille.fr" },
+      { nom:"Lille Grand Palais - Salons", type:"Centre congrès + salons", jauge:"100 000+/event", freq:"50 salons/an", note:"Très nombreux événements professionnels. Stands boissons traiteur", contact:"lillgrandpalais.com" },
+      { nom:"Hippodrome de Marcq-en-Baroeul", type:"Hippodrome", jauge:"5 000-8 000", freq:"25+ réunions/an", note:"Lavage depuis Saint-Nikolaas (Belgique). Bar tribunes. Service Re-uz", contact:"hippodrome-marcq.fr" },
+      { nom:"Zénith de Lille (Arena)", type:"Salle concerts", jauge:"9 000", freq:"80+ events/an", note:"Villeneuve d'Ascq. Dense. Bar sans cuisine pro", contact:"zenith-de-lille.com" },
+      { nom:"Festival Cracheur d'Etoiles (Hauts-de-France)", type:"Festival cirque", jauge:"20 000/5 jours", note:"Plein air. Buvettes associatives", contact:"" },
+      { nom:"FestiHome Walibi Hauts-de-France", type:"Parc loisirs", jauge:"5 000/j", freq:"100+ jours/an", note:"Walibi Belgique proche. Buvettes plein air. Gobelet souvenir IML", contact:"walibi.com" },
+    ],
+    B: [
+      { nom:"Center Parcs Domaine des Trois Forêts (57)", type:"Center Parcs", jauge:"2 500/semaine", note:"Moselle. Bar aquatique couvert. Très forte consommation" },
+      { nom:"Campings côte belge / Opaline (62)", type:"Campings 5 étoiles", jauge:"600-1 000 emplacements", note:"Côte d'Opale. Boulogne, Le Touquet. Fort en été" },
+      { nom:"Zoo d'Amnéville (57)", type:"Zoo", jauge:"7 000/j", note:"Le plus grand zoo de France après Paris. 300 jours/an. Fort potentiel" },
+      { nom:"Aquaclub Belle Dune / Base Nautique", type:"Parcs aquatiques", jauge:"3 000/j", note:"Picardie côtière. Forte conso été" },
+      { nom:"Grandes discothèques Lille (La Scala, Metropole)", type:"Clubs", jauge:"1 000-3 000/nuit", note:"Beer Up fort pour La Scala (2 000 places)" },
+      { nom:"Le Aéronef Lille", type:"Salle concerts", jauge:"3 000", freq:"100 concerts/an", note:"Bar actif. Sans cuisine pro. Service Re-uz" },
+    ],
+    C: [
+      { nom:"Estaminet Au Vieux de la Vieille / Meert", type:"Restos thématiques ch'ti", nb_restau:"3-5 Vieux-Lille", note:"Gobelets IML = souvenir ch'ti pour touristes. Fort potentiel souvenir" },
+      { nom:"Léon de Bruxelles Lille", type:"Moules-frites (concept fort ici !)", nb_restau:"3 Lille", note:"ICI c'est le terroir. Fort volume. La chaine nationale + concurrents locaux" },
+      { nom:"O'Tacos Lille", type:"Tacos", nb_restau:"8 Lille", note:"Fort volume jeune. Gobelet systématique" },
+      { nom:"Hippopotamus Lille", type:"Steakhouse", nb_restau:"2 Lille", note:"Chaine. Fort volume boissons" },
+      { nom:"C'est Beau La Vie (concept brunch)", type:"Brunch franchise", nb_restau:"2 Lille", note:"Forte identité visuelle. Gobelet réemployable aligné" },
+      { nom:"La Moulin de Faches (brasserie artisanale)", type:"Brasserie", nb_restau:"1 + distribution", note:"Beer Up parfaitement aligné avec une brasserie artisanale locale" },
+    ],
   },
 };
-const FICHE_LINKS = {
-  'Campings': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
-  'Hippodromes': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
-  'Salles de spectacle': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
-  'Associations sportives': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
-  'Soirées étudiantes': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
-  'Agences événementielles': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
-  'Mariages & réceptions': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
-  'Parcs de loisirs': 'https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html',
-};
 
-const CITIES = ['paris','bordeaux','lyon','marseille','lille','rennes'];
-const pColors = { 1: '#dc2626', 2: '#d97706', 3: '#64748b' };
+/* ============================================================
+   SIMULATION LOGIQUE
+   - Achat : 0,50eu/gob (correction : c'est 0,30eu mais la note dit 0,50eu)
+   - Service rotation : 0,20eu/gob/rotation
+   - Multiplicateur STOCK : client achete 4-5x le nb de participants
+     (meme s'il peut laver : delai lavage + pertes + anticipation)
+============================================================ */
 
-/* ===================== DONNÉES CANDIDAT ===================== */
-const UNIVERS = [
-  { id:'camping', icon:'⛺', label:'Campings', desc:'Bar + snack + animations · saison 120-150 jours', exemple:'Camping 4★ 200 emplacements, bar ouvert tous les soirs en saison', gob:400, rotations:40, color:'#1a6b3a', exemples_clients:['Campings Yelloh! Village','Campings Capfun','Campings indépendants 3-5★','Villages vacances','Centers Parcs'] },
-  { id:'hippodrome', icon:'🏇', label:'Hippodromes', desc:'2 à 3 réunions/semaine · public récurrent · buvettes multiples', exemple:'Hippodrome régional, 30 réunions/an, 1 500 spectateurs en moyenne', gob:3000, rotations:30, color:'#7c3aed', exemples_clients:['Hippodrome de Vincennes','Hippodrome de Cagnes-sur-Mer','Sociétés de courses régionales','Hippodromes PMU provinciaux'] },
-  { id:'salle', icon:'🎭', label:'Salles de spectacle', desc:'10 concerts/mois × 1 000 gobelets · service complet annuel', exemple:'Salle de 1 000 places, 10 concerts par mois, bar Re-uz à chaque date', gob:1000, rotations:120, color:'#b45309', exemples_clients:['Zéniths','Salles municipales','Cafés-concerts','Salles de comédie','Maisons de la Culture'] },
-  { id:'asso_sport', icon:'🏆', label:'Associations sportives', desc:'Tournois, galas, compétitions · récurrence hebdo ou mensuelle', exemple:'Club de foot amateur, 10 tournois/an, 300 personnes', gob:500, rotations:15, color:'#dc2626', exemples_clients:['Clubs de foot amateur','Tournois de padel / tennis','Galas de judo / danse','Cross et trails locaux','Clubs de rugby fédéral'] },
-  { id:'etudiant', icon:'🎓', label:'Soirées étudiantes', desc:'BDE, WEI, galas de promo · renouvellement annuel garanti', exemple:'BDE école de commerce, 15 soirées/an, 400 étudiants par soirée', gob:400, rotations:15, color:'#0284c7', exemples_clients:['BDE grandes écoles','BDS universités',"Soirées d'intégration (WEI)",'Galas de promo','Associations étudiantes culturelles'] },
-  { id:'agence', icon:'🎪', label:'Agences événementielles', desc:'10 événements/mois × 1 000 gobelets · contrat annuel', exemple:'Agence événementielle 10 événements/mois, 1 000 personnes en moyenne', gob:1000, rotations:120, color:'#0f766e', exemples_clients:['Agences MICE','Organisateurs de salons','Agences séminaires / team building','Event managers freelance','Agences de communication événementielle'] },
-  { id:'mariage', icon:'💍', label:'Mariages & réceptions', desc:'Via traiteurs et wedding planners · gobelet personnalisé = souvenir', exemple:'Traiteur haut de gamme, 40 mariages/an, 150 invités en moyenne', gob:200, rotations:40, color:'#9d174d', exemples_clients:['Traiteurs événementiels','Wedding planners','Domaines viticoles (mariages en château)','Salles de réception','Manoirs et domaines privatisables'] },
-  { id:'salon', icon:'📊', label:'Salons & foires', desc:'Gros volumes sur 3-5 jours · organisateur = contrat annuel', exemple:'Foire régionale, 5 000 visiteurs/jour, 3 jours, buvettes sur site', gob:2000, rotations:3, color:'#64748b', exemples_clients:['Foires régionales','Salons professionnels','Comexposium / GL Events / Reed',"Salons de l'habitat",'Salons gastronomiques'] },
-  { id:'parc', icon:'🎡', label:'Parcs de loisirs', desc:'Ouvert 200 jours/an · buvettes multiples · volume constant', exemple:"Parc animalier 1 500 visiteurs/jour, 200 jours d'ouverture", gob:1500, rotations:100, color:'#ea580c', exemples_clients:['Zoos et parcs animaliers',"Parcs d'attractions",'Parcs aquatiques','Bases de loisirs','Parcs à thème régionaux'] },
-];
+function SimGenerique() {
+  const [participants, setParticipants] = React.useState(10000);
+  const [rotations, setRotations] = React.useState(20);
+  const [mode, setMode] = React.useState("achat"); // achat ou service
+  const [multiplicateur, setMultiplicateur] = React.useState(5);
+  const fmt = n => Math.round(n).toLocaleString("fr-FR");
 
-/* ===================== PROSPECTION ===================== */
-function ProspectionView() {
-  const [city, setCity] = React.useState('paris');
-  const [filter, setFilter] = React.useState('all');
-  const d = CITIES_DATA[city];
-  const filtered = filter === 'all' ? d.cats : filter === 'p1' ? d.cats.filter(c => c.priority === 1) : d.cats.filter(c => c.model === filter);
+  const stockCmd = participants * multiplicateur;
+  const caAchat = stockCmd * 0.30;
+  const comAchat = caAchat * 0.08;
+  const caService = participants * rotations * 0.20;
+  const comService = caService * 0.12;
+  const com48service = comService * 4;
+
   return (
-    <div>
-      <div style={{background:'white',borderBottom:'2px solid #d0e4d8',padding:'0 8px',position:'sticky',top:58,zIndex:90,overflowX:'auto',boxShadow:'0 2px 8px rgba(0,0,0,0.04)'}}>
-        <div style={{display:'flex'}}>
-          {CITIES.map(c => <button key={c} onClick={()=>{setCity(c);setFilter('all');}} style={{padding:'12px 14px',fontSize:13,fontWeight:city===c?700:500,color:city===c?'#1a6b3a':'#3d5242',background:'none',border:'none',borderBottom:city===c?'3px solid #1a6b3a':'3px solid transparent',cursor:'pointer',whiteSpace:'nowrap'}}>{CITIES_DATA[c].name}</button>)}
+    <div style={{background:"#111c14",color:"white",borderRadius:14,padding:22}}>
+      <div style={{fontSize:10,color:"#6fca96",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Simulateur commercial</div>
+
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12,marginBottom:16}}>
+        <div>
+          <div style={{fontSize:10,color:"rgba(255,255,255,0.5)",marginBottom:5}}>Participants / utilisateurs</div>
+          <input type="range" min={500} max={100000} step={500} value={participants} onChange={e=>setParticipants(+e.target.value)} style={{width:"100%",accentColor:"#f0a500"}}/>
+          <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:3}}>{fmt(participants)}</div>
+        </div>
+        <div>
+          <div style={{fontSize:10,color:"rgba(255,255,255,0.5)",marginBottom:5}}>Multiplicateur stock (4-5x recommandé)</div>
+          <input type="range" min={1} max={10} step={0.5} value={multiplicateur} onChange={e=>setMultiplicateur(+e.target.value)} style={{width:"100%",accentColor:"#7c3aed"}}/>
+          <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:3}}>×{multiplicateur} = {fmt(stockCmd)} gob</div>
+        </div>
+        <div>
+          <div style={{fontSize:10,color:"rgba(255,255,255,0.5)",marginBottom:5}}>Rotations / an (service)</div>
+          <input type="range" min={1} max={200} step={1} value={rotations} onChange={e=>setRotations(+e.target.value)} style={{width:"100%",accentColor:"#6fca96"}}/>
+          <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:3}}>{rotations} rotations</div>
         </div>
       </div>
-      <div style={{padding:'20px 16px',maxWidth:1000,margin:'0 auto'}}>
-        <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:16,flexWrap:'wrap',gap:12}}>
-          <div><div style={{fontSize:24,fontWeight:800,marginBottom:2}}>{d.name}</div><div style={{color:'#3d5242',fontSize:13}}>{d.sub}</div></div>
-          <div style={{background:'#1a6b3a',color:'white',padding:'12px 18px',borderRadius:10,textAlign:'center'}}>
-            <div style={{fontSize:10,letterSpacing:2,textTransform:'uppercase',opacity:0.8,marginBottom:2}}>CA potentiel / an</div>
-            <div style={{fontSize:26,fontWeight:800,lineHeight:1}}>{d.ca}</div>
-            <div style={{fontSize:10,opacity:0.7,marginTop:2}}>Scénario réaliste</div>
+
+      <div style={{background:"rgba(240,165,0,0.12)",border:"1px solid rgba(240,165,0,0.3)",borderRadius:10,padding:14,marginBottom:14}}>
+        <div style={{fontSize:10,color:"#f0a500",fontWeight:700,marginBottom:8}}>Pourquoi le client commande ×{multiplicateur} le nombre de participants</div>
+        <div style={{fontSize:11,color:"rgba(255,255,255,0.7)",lineHeight:1.6}}>
+          Un stade de {fmt(participants)} personnes ne peut pas laver {fmt(participants)} gobelets d'un soir sur l'autre.
+          Il faut 2-3 jours de rotation = {fmt(participants * 3)} gob minimum.
+          + pertes (10-15%) + stock de sécurité = <strong style={{color:"#f0a500"}}>{fmt(stockCmd)} gobelets commandés</strong> pour tenir l'année.
+        </div>
+      </div>
+
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+        <div style={{background:"rgba(255,255,255,0.06)",borderRadius:10,padding:"14px"}}>
+          <div style={{fontSize:10,color:"#6fca96",fontWeight:700,marginBottom:8}}>Ecocup ACHAT (client avec plonge)</div>
+          <div style={{fontSize:12,color:"rgba(255,255,255,0.6)",marginBottom:4}}>Stock initial : {fmt(stockCmd)} gob × 0,30€</div>
+          <div style={{fontSize:20,fontWeight:800,color:"#6fca96"}}>{fmt(caAchat)}€</div>
+          <div style={{fontSize:11,color:"rgba(255,255,255,0.4)",marginTop:4}}>Votre com (8%) = <strong style={{color:"white"}}>{fmt(comAchat)}€</strong> one-shot</div>
+          <div style={{fontSize:10,color:"rgba(255,255,255,0.35)",marginTop:3}}>+ renouvellement annuel (casse, perte, IML nouveau logo)</div>
+        </div>
+        <div style={{background:"rgba(240,165,0,0.12)",border:"1px solid rgba(240,165,0,0.25)",borderRadius:10,padding:"14px"}}>
+          <div style={{fontSize:10,color:"#f0a500",fontWeight:700,marginBottom:8}}>Ecocup SERVICE (client sans plonge)</div>
+          <div style={{fontSize:12,color:"rgba(255,255,255,0.6)",marginBottom:4}}>{fmt(participants)} gob × {rotations} rotations × 0,20€</div>
+          <div style={{fontSize:20,fontWeight:800,color:"white"}}>{fmt(caService)}€/an</div>
+          <div style={{fontSize:11,color:"rgba(255,255,255,0.4)",marginTop:4}}>Votre com (12%) = <strong style={{color:"#f0a500"}}>{fmt(comService)}€/an</strong></div>
+          <div style={{fontSize:12,fontWeight:800,color:"#f0a500",marginTop:6}}>Sur 48 mois = {fmt(com48service)}€</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SimFranchise() {
+  const [nbRestaus, setNbRestaus] = React.useState(200);
+  const [tauxAdh, setTauxAdh] = React.useState(50);
+  const [consoJ, setConsoJ] = React.useState(150);
+  const [jours, setJours] = React.useState(280);
+  const fmt = n => Math.round(n).toLocaleString("fr-FR");
+
+  const restausAdh = Math.round(nbRestaus * tauxAdh / 100);
+  const gobelets = restausAdh * consoJ * jours * 5; // x5 multiplicateur
+  const ca = gobelets * 0.30;
+  const com = ca * 0.08;
+
+  return (
+    <div style={{background:"#0d1a2d",color:"white",borderRadius:14,padding:22,border:"1px solid rgba(100,150,255,0.2)"}}>
+      <div style={{fontSize:10,color:"#60a5fa",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Simulation réseau de franchise national</div>
+      <div style={{fontSize:12,color:"rgba(255,255,255,0.7)",lineHeight:1.6,marginBottom:16}}>
+        Si vous connaissez quelqu'un chez <strong style={{color:"white"}}>Hippopotamus, Léon de Bruxelles, Big Fernand, Holy Cow, O'Tacos, Pitaya, Pokawa, Chipotle, Five Guys, Eat Sushi, Côté Sushi, Sushi Shop, Subway, Burger King, KFC…</strong>
+      </div>
+
+      <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:12,marginBottom:16}}>
+        <div>
+          <div style={{fontSize:10,color:"rgba(255,255,255,0.45)",marginBottom:4}}>Nombre de restaurants France</div>
+          <input type="range" min={10} max={600} step={10} value={nbRestaus} onChange={e=>setNbRestaus(+e.target.value)} style={{width:"100%",accentColor:"#60a5fa"}}/>
+          <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:2}}>{nbRestaus} restaurants</div>
+        </div>
+        <div>
+          <div style={{fontSize:10,color:"rgba(255,255,255,0.45)",marginBottom:4}}>Taux d'adhésion (%)</div>
+          <input type="range" min={10} max={100} step={5} value={tauxAdh} onChange={e=>setTauxAdh(+e.target.value)} style={{width:"100%",accentColor:"#60a5fa"}}/>
+          <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:2}}>{tauxAdh}% → {restausAdh} restos</div>
+        </div>
+        <div>
+          <div style={{fontSize:10,color:"rgba(255,255,255,0.45)",marginBottom:4}}>Consommation moyenne / jour / resto</div>
+          <input type="range" min={50} max={500} step={10} value={consoJ} onChange={e=>setConsoJ(+e.target.value)} style={{width:"100%",accentColor:"#60a5fa"}}/>
+          <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:2}}>{consoJ} gobelets/j</div>
+        </div>
+        <div>
+          <div style={{fontSize:10,color:"rgba(255,255,255,0.45)",marginBottom:4}}>Jours ouverts / an</div>
+          <input type="range" min={200} max={365} step={5} value={jours} onChange={e=>setJours(+e.target.value)} style={{width:"100%",accentColor:"#60a5fa"}}/>
+          <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:2}}>{jours} jours</div>
+        </div>
+      </div>
+
+      <div style={{background:"rgba(96,165,250,0.12)",border:"1px solid rgba(96,165,250,0.3)",borderRadius:10,padding:14}}>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:10}}>
+          <div style={{textAlign:"center"}}>
+            <div style={{fontSize:9,color:"rgba(255,255,255,0.45)",marginBottom:3}}>Gobelets commandés/an</div>
+            <div style={{fontSize:18,fontWeight:800,color:"#60a5fa"}}>{fmt(gobelets)}</div>
+            <div style={{fontSize:9,color:"rgba(255,255,255,0.35)"}}>×5 multiplicateur stock</div>
+          </div>
+          <div style={{textAlign:"center"}}>
+            <div style={{fontSize:9,color:"rgba(255,255,255,0.45)",marginBottom:3}}>CA vente annuel</div>
+            <div style={{fontSize:18,fontWeight:800,color:"white"}}>{fmt(ca)}€</div>
+            <div style={{fontSize:9,color:"rgba(255,255,255,0.35)"}}>×0,30€/gob</div>
+          </div>
+          <div style={{textAlign:"center",background:"rgba(240,165,0,0.15)",borderRadius:8,padding:"8px"}}>
+            <div style={{fontSize:9,color:"#f0a500",marginBottom:3}}>Votre commission (8%)</div>
+            <div style={{fontSize:18,fontWeight:800,color:"#f0a500"}}>{fmt(com)}€/an</div>
+            <div style={{fontSize:9,color:"rgba(255,255,255,0.35)"}}>renouvelable annuellement</div>
           </div>
         </div>
-        <div style={{display:'flex',gap:8,marginBottom:20,flexWrap:'wrap'}}>
-          {[['all','Toutes (10)'],['p1','🔥 Priorité haute'],['Service complet','Service complet'],['Service ponctuel','Ponctuel'],['Achat pur','Achat pur'],['Achat personnalisé','Mariages']].map(([val,label]) => <button key={val} onClick={()=>setFilter(val)} style={{padding:'6px 12px',fontSize:12,fontWeight:filter===val?700:500,background:filter===val?'#1a6b3a':'white',color:filter===val?'white':'#3d5242',border:'1px solid '+(filter===val?'#1a6b3a':'#d0e4d8'),borderRadius:20,cursor:'pointer'}}>{label}</button>)}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   COMPOSANT VILLE
+============================================================ */
+function VilleView({ v }) {
+  const [cat, setCat] = React.useState("A");
+  const data = VILLES[v];
+  if (!data) return null;
+
+  const cats = {
+    A: { label:"Grands événements 10 000+", icon:"🎪", color:"#1a6b3a", items: data.A },
+    B: { label:"Lieux forte consommation", icon:"🍺", color:"#0369a1", items: data.B },
+    C: { label:"Restaurants thématiques & franchises", icon:"🍔", color:"#7c3aed", items: data.C },
+  };
+  const activeCat = cats[cat];
+
+  return (
+    <div style={{maxWidth:960,margin:"0 auto",padding:"16px 16px 48px"}}>
+      {/* Header ville */}
+      <div style={{background:data.col,borderRadius:14,padding:"20px 24px",color:"white",marginBottom:16}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:12}}>
+          <div>
+            <div style={{fontSize:11,opacity:0.7,textTransform:"uppercase",letterSpacing:2,marginBottom:6}}>Zone de recrutement Re-uz</div>
+            <div style={{fontSize:24,fontWeight:900}}>{data.emoji} {data.nom}</div>
+            <div style={{fontSize:12,opacity:0.8,marginTop:4}}>{data.pop} · Dép. {data.depart}</div>
+          </div>
+          <div style={{textAlign:"right"}}>
+            <div style={{fontSize:11,opacity:0.6}}>CA potentiel zone</div>
+            <div style={{fontSize:28,fontWeight:900,color:"#f0a500"}}>{data.ca_potentiel}</div>
+          </div>
         </div>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(270px,1fr))',gap:14,marginBottom:20}}>
-          {filtered.map(cat => (
-            <div key={cat.name} style={{background:'white',border:'1px solid #d0e4d8',borderRadius:12,overflow:'hidden'}}>
-              <div style={{padding:'12px 14px 10px',borderBottom:'1px solid #eef4f0',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-                <div style={{display:'flex',gap:8,alignItems:'center'}}>
-                  <div style={{width:36,height:36,background:'#e8f5ee',borderRadius:8,display:'flex',alignItems:'center',justifyContent:'center',fontSize:18}}>{cat.icon}</div>
-                  <div><div style={{fontWeight:700,fontSize:13}}>{cat.name}</div><div style={{fontSize:10,color:'#7a9a82'}}>{cat.model}</div></div>
-                </div>
-                <div style={{textAlign:'right'}}><div style={{fontSize:15,fontWeight:800,color:'#1a6b3a'}}>{cat.ca}</div><div style={{fontSize:9,color:'#9ab8a4',textTransform:'uppercase',letterSpacing:1}}>{cat.label}</div></div>
+      </div>
+
+      {/* Cat tabs */}
+      <div style={{display:"flex",gap:8,marginBottom:14,flexWrap:"wrap"}}>
+        {Object.entries(cats).map(([k, c]) => (
+          <button key={k} onClick={()=>setCat(k)} style={{
+            padding:"8px 14px",borderRadius:8,border:"1px solid",fontSize:12,fontWeight:cat===k?700:500,cursor:"pointer",
+            background:cat===k?c.color:"white",color:cat===k?"white":c.color,borderColor:c.color
+          }}>
+            {c.icon} {c.label} ({c.items.length})
+          </button>
+        ))}
+      </div>
+
+      {/* Liste prospects */}
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:10,marginBottom:20}}>
+        {activeCat.items.map((item, i) => (
+          <div key={i} style={{background:"white",border:"1px solid #e0e8ec",borderRadius:10,padding:14,borderLeft:`4px solid ${activeCat.color}`}}>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:8,marginBottom:6}}>
+              <div style={{fontSize:13,fontWeight:700,color:"#0d3340"}}>{item.nom}</div>
+              <span style={{background:activeCat.color+"20",color:activeCat.color,padding:"2px 8px",borderRadius:10,fontSize:10,fontWeight:700,white:"nowrap",flexShrink:0}}>{item.type}</span>
+            </div>
+            {"jauge" in item && <div style={{fontSize:11,color:"#1a6b3a",fontWeight:600,marginBottom:3}}>👥 {item.jauge} {item.freq?"· "+item.freq:""}</div>}
+            {"nb_restau" in item && <div style={{fontSize:11,color:"#7c3aed",fontWeight:600,marginBottom:3}}>🏪 {item.nb_restau}</div>}
+            {item.note && <div style={{fontSize:11,color:"#4b6358",lineHeight:1.5}}>{item.note}</div>}
+            {item.contact && <div style={{fontSize:10,color:"#888",marginTop:4}}>→ {item.contact}</div>}
+          </div>
+        ))}
+      </div>
+
+      {/* Rappel produits */}
+      <div style={{background:"#f4f7f5",borderRadius:10,padding:14,marginBottom:16}}>
+        <div style={{fontSize:10,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:10}}>Rappel — Nos 4 gammes à proposer sur cette zone</div>
+        <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
+          <span style={{background:"#1a6b3a",color:"white",padding:"5px 12px",borderRadius:14,fontSize:11,fontWeight:700}}>🥤 Ecocup SERVICE (0,20€/gob/rotation)</span>
+          <span style={{background:"#0d3340",color:"#f0a500",padding:"5px 12px",borderRadius:14,fontSize:11,fontWeight:700}}>🥤 Ecocup ACHAT (0,30€/gob × ×4-5)</span>
+          <span style={{background:"#7c3aed",color:"white",padding:"5px 12px",borderRadius:14,fontSize:11,fontWeight:700}}>🍺 Beer Up (bière pression par le fond)</span>
+          <span style={{background:"#b45309",color:"white",padding:"5px 12px",borderRadius:14,fontSize:11,fontWeight:700}}>☕ Newcy (pause café entreprises)</span>
+          <span style={{background:"#475569",color:"white",padding:"5px 12px",borderRadius:14,fontSize:11,fontWeight:700}}>🍽️ Pure (vaisselle réemployable)</span>
+          <span style={{background:"#059669",color:"white",padding:"5px 12px",borderRadius:14,fontSize:11,fontWeight:700}}>🥡 Kiobox (restauration à emporter)</span>
+        </div>
+      </div>
+
+      <div style={{background:"#111c14",borderRadius:8,padding:"10px 16px",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8}}>
+        <div style={{fontSize:11,color:"rgba(255,255,255,0.5)"}}>Question sur cette zone ? Vérifier la disponibilité ?</div>
+        <a href="tel:+33610703090" style={{color:"#f0a500",fontWeight:900,fontSize:16,textDecoration:"none"}}>📱 06 10 70 30 90</a>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   PAGE GENERIQUE
+============================================================ */
+function GeneriqueView() {
+  return (
+    <div style={{maxWidth:960,margin:"0 auto",padding:"16px 16px 48px"}}>
+      {/* Logique simulation */}
+      <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:12,padding:20,marginBottom:16}}>
+        <div style={{fontSize:12,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:14}}>
+          Le multiplicateur stock — La règle que tout commercial doit connaître
+        </div>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14,marginBottom:16}}>
+          <div style={{background:"#fff5f5",borderLeft:"4px solid #dc2626",padding:14,borderRadius:"0 8px 8px 0"}}>
+            <div style={{fontSize:12,fontWeight:700,color:"#dc2626",marginBottom:6}}>❌ Erreur classique du commercial débutant</div>
+            <p style={{fontSize:11,color:"#374151",lineHeight:1.6}}>
+              "Le stade fait 10 000 personnes → je lui propose 10 000 gobelets."<br/>
+              Résultat : CA = 3 000€, com = 240€. Pas intéressant.
+            </p>
+          </div>
+          <div style={{background:"#e8f5ee",borderLeft:"4px solid #1a6b3a",padding:14,borderRadius:"0 8px 8px 0"}}>
+            <div style={{fontSize:12,fontWeight:700,color:"#1a6b3a",marginBottom:6}}>✅ La réalité opérationnelle du client</div>
+            <p style={{fontSize:11,color:"#374151",lineHeight:1.6}}>
+              10 000 personnes → il faut 50 000 gobelets pour tenir l'année :<br/>
+              • 3 jours de rotation sans lavage = ×3 minimum<br/>
+              • Pertes + casse = +15%<br/>
+              • Stock de sécurité = +10%<br/>
+              <strong>→ CA = 15 000€, com = 1 200€</strong>
+            </p>
+          </div>
+        </div>
+        <SimGenerique />
+      </div>
+
+      {/* Simulation franchise */}
+      <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:12,padding:20,marginBottom:16}}>
+        <div style={{fontSize:12,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:8}}>
+          La simulation franchise nationale — Le grand coup
+        </div>
+        <p style={{fontSize:12,color:"#4b6358",lineHeight:1.6,marginBottom:14}}>
+          Un seul contact au siège d'une franchise nationale peut ouvrir 50 à 600 restaurants simultanément.
+          La formule : <strong>Nb restaurants × taux d'adhésion × consommation × multiplicateur stock = volume à vendre</strong>
+        </p>
+        <SimFranchise />
+        <div style={{marginTop:12,background:"#fffbeb",borderLeft:"4px solid #f0a500",padding:"10px 14px",fontSize:11,color:"#5a4010",lineHeight:1.6}}>
+          <strong>Franchises à cibler nationalement :</strong> Hippopotamus (120 restaus), Léon de Bruxelles (65), Big Fernand (45), O'Tacos (300+), Pitaya Thai (150), Pokawa (130), Holy Cow (60), Eat Sushi (200), Côté Sushi (220), Subway France (700+), Burger King France (500+), KFC France (380+), Five Guys France (25), Chipotle France (20)...
+        </div>
+      </div>
+
+      {/* Toutes les gammes */}
+      <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:12,padding:20}}>
+        <div style={{fontSize:12,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:14}}>
+          Les 6 gammes Re-uz — Ce qu'on vend selon le client
+        </div>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(250px,1fr))",gap:10}}>
+          {[
+            {col:"#1a6b3a",icon:"🥤",nom:"Ecocup SERVICE",desc:"Pour les clients sans plonge. 0,20€/gob/rotation. Commission 12% récurrente sur 48 mois. Le Graal commercial.",cibles:"Festivals, campings, hippodromes, assos sportives"},
+            {col:"#0d3340",icon:"🥤",nom:"Ecocup ACHAT (vente)",desc:"Pour clients avec plonge ET volume >5 000 gob. 0,30€/gob × ×4-5 multiplicateur. Commission 8%. Renouvellement annuel IML.",cibles:"Stades, grandes salles, parcs à thème"},
+            {col:"#7c3aed",icon:"🍺",nom:"Beer Up System",desc:"Tireuse bière brevetée. Remplissage par le fond. Col de mousse parfait. Cashless. Self-service. Location tireuse + gobelets récurrents.",cibles:"CHR, bars à bière, brasseries, hotel bar"},
+            {col:"#b45309",icon:"☕",nom:"Newcy (pause café)",desc:"Circuit fermé pour entreprises. Collecte-lave-restitue. CSRD oblige les entreprises +250 salariés. Commission 12% récurrente.",cibles:"Entreprises, sièges sociaux, coworking"},
+            {col:"#475569",icon:"🍽️",nom:"Pure (vaisselle réemployable)",desc:"Bols, assiettes, verres réemployables. Sans BPA, micro-ondes, lave-vaisselle. Pour la restauration collective et les events.",cibles:"Cantines, restauration collective, events haut de gamme"},
+            {col:"#059669",icon:"🥡",nom:"Kiobox (restauration emporter)",desc:"Contenants réemployables pour la restauration à emporter. Obligation légale 2025. Achat + lavage + R&D.",cibles:"Fast food, restauration rapide, food trucks"},
+          ].map((g,i) => (
+            <div key={i} style={{background:g.col+"10",border:`1px solid ${g.col}40`,borderRadius:10,padding:14}}>
+              <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}>
+                <span style={{fontSize:20}}>{g.icon}</span>
+                <span style={{fontSize:12,fontWeight:700,color:g.col}}>{g.nom}</span>
               </div>
-              <div style={{padding:'10px 14px'}}>
-                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:6,marginBottom:10}}>
-                  {[['Nb cibles',cat.nb],['CA/client/an',cat.caUnit],['Fréquence',cat.jours],['Gob. actifs',cat.gob]].map(([l,v]) => <div key={l} style={{background:'#f4f7f5',borderRadius:6,padding:'6px 8px'}}><div style={{fontSize:9,textTransform:'uppercase',letterSpacing:1,color:'#7a9a82',marginBottom:1}}>{l}</div><div style={{fontSize:12,fontWeight:700}}>{v}</div></div>)}
-                </div>
-                <div style={{display:'flex',alignItems:'flex-start',gap:6,marginBottom:10,padding:'6px 8px',background:cat.priority===1?'#fff5f5':cat.priority===2?'#fefce8':'#f8fafc',borderRadius:6}}>
-                  <div style={{width:7,height:7,borderRadius:'50%',background:pColors[cat.priority],marginTop:3,flexShrink:0}}></div>
-                  <div style={{fontSize:11,color:'#374151'}}>{cat.priorityText}</div>
-                </div>
-                <div style={{borderTop:'1px solid #eef4f0',paddingTop:8}}>
-                  <div style={{fontSize:9,textTransform:'uppercase',letterSpacing:1,color:'#9ab8a4',marginBottom:6}}>Annuaires</div>
-                  {cat.links.map(lk => <div key={lk.r} style={{display:'flex',alignItems:'flex-start',gap:6,marginBottom:4}}><div style={{width:16,height:16,background:'#e8f5ee',borderRadius:'50%',fontSize:9,fontWeight:700,color:'#1a6b3a',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>{lk.r}</div><div><a href={lk.url} target="_blank" rel="noreferrer" style={{fontSize:11,color:'#1a6b3a',fontWeight:600,textDecoration:'none'}}>{lk.name}</a><div style={{fontSize:10,color:'#7a9a82'}}>{lk.desc}</div></div></div>)}
-                </div>
-                {FICHE_LINKS[cat.name] && (
-                  <div style={{marginTop:8,paddingTop:8,borderTop:'1px solid #eef4f0'}}>
-                    <a href={FICHE_LINKS[cat.name]} style={{fontSize:11,color:'#1a6b3a',fontWeight:700,textDecoration:'none',display:'flex',alignItems:'center',gap:4}}>
-                      📋 Voir la fiche cible détaillée →
-                    </a>
-                  </div>
-                )}
-              </div>
+              <p style={{fontSize:11,color:"#374151",lineHeight:1.5,marginBottom:6}}>{g.desc}</p>
+              <div style={{fontSize:10,color:"#888"}}>Cibles → {g.cibles}</div>
             </div>
           ))}
         </div>
-        <div style={{background:'#111c14',color:'white',borderRadius:12,padding:'18px'}}>
-          <div style={{fontSize:15,fontWeight:700,color:'#6fca96',marginBottom:12}}>💡 Stratégie {d.name.split(' ')[0]}</div>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(180px,1fr))',gap:10}}>
-            {d.tips.map(t => <div key={t.title} style={{background:'rgba(255,255,255,0.06)',borderRadius:8,padding:'10px 12px'}}><div style={{fontWeight:700,color:'white',fontSize:12,marginBottom:4}}>{t.title}</div><div style={{fontSize:11,color:'#c5deca',lineHeight:1.5}}>{t.body}</div></div>)}
-          </div>
-        </div>
       </div>
     </div>
   );
 }
 
-/* ===================== CANDIDAT ===================== */
-function CandidatView() {
-  const [step, setStep] = React.useState('intro');
-  const [sel, setSel] = React.useState(null);
-  const [gob, setGob] = React.useState('');
-  const [rot, setRot] = React.useState('');
-  const [reseau, setReseau] = React.useState({});
-  const [contacts, setContacts] = React.useState({});
-  const u = UNIVERS.find(x => x.id === sel);
-  const simGob = parseFloat(gob) || u?.gob || 0;
-  const simRot = parseFloat(rot) || u?.rotations || 0;
-  const caV = Math.round(simGob * 0.30);
-  const caS = Math.round(simGob * simRot * 0.20);
-  const comV = Math.round(caV * 0.08);
-  const comS = Math.round(caS * 0.12);
-  const score = UNIVERS.filter(x => reseau[x.id] === 'oui').length;
-  const STEPS = [['intro','📖','Intro'],['prix','💶','Prix'],['logique','🧠','Logique'],['simulation','📊','Simulation'],['reseau','🕸️','Réseau'],['bilan','✅','Bilan']];
-  const btn = (lbl, fn, p) => <button onClick={fn} style={{padding:'10px 18px',borderRadius:8,fontSize:13,fontWeight:p?700:500,cursor:'pointer',background:p?'#1a6b3a':'white',color:p?'white':'#374151',border:p?'none':'1px solid #d0e4d8'}}>{lbl}</button>;
-  const card = ch => <div style={{background:'white',border:'1px solid #d0e4d8',borderRadius:12,padding:'16px 18px',marginBottom:14}}>{ch}</div>;
-  return (
-    <div>
-      <div style={{background:'#0a1510',padding:'4px 8px',display:'flex',gap:0,overflowX:'auto'}}>
-        <a href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-accueil.html" style={{color:'rgba(255,255,255,0.5)',fontSize:10,fontWeight:600,textDecoration:'none',padding:'4px 10px',whiteSpace:'nowrap',borderRight:'1px solid rgba(255,255,255,0.1)'}}>🏠 Accueil</a>
-        <a href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html" style={{color:'rgba(255,255,255,0.5)',fontSize:10,fontWeight:600,textDecoration:'none',padding:'4px 10px',whiteSpace:'nowrap',borderRight:'1px solid rgba(255,255,255,0.1)'}}>📋 Fiches cibles</a>
-        <span style={{color:'#6fca96',fontSize:10,fontWeight:700,padding:'4px 10px',whiteSpace:'nowrap'}}>🎓 Outil membre</span>
-      </div>
-      <div style={{background:'white',borderBottom:'2px solid #d0e4d8',padding:'0 8px',position:'sticky',top:58,zIndex:90,overflowX:'auto',boxShadow:'0 2px 8px rgba(0,0,0,0.04)'}}>
-        <div style={{display:'flex'}}>
-          {STEPS.map(([id,ic,lb]) => <div key={id} onClick={()=>setStep(id)} style={{display:'flex',alignItems:'center',gap:5,padding:'10px 12px',fontSize:12,fontWeight:step===id?700:400,color:step===id?'#1a6b3a':'#6b7280',cursor:'pointer',borderBottom:step===id?'3px solid #1a6b3a':'3px solid transparent',whiteSpace:'nowrap'}}>{ic} {lb}</div>)}
-        </div>
-      </div>
-      <div style={{padding:'24px 16px',maxWidth:800,margin:'0 auto'}}>
-        {step==='intro' && <div style={{textAlign:'center'}}>{card(<><div style={{fontSize:48,marginBottom:12}}>🥤</div><div style={{fontSize:22,fontWeight:800,marginBottom:10}}>Bienvenue chez Re-uz</div><div style={{fontSize:14,color:'#374151',lineHeight:1.7,maxWidth:520,margin:'0 auto 20px'}}>Re-uz est la marque <strong>leader du gobelet réemployable</strong> en France. Votre rôle : trouver des clients qui utilisent du <strong>plastique jetable</strong> et les convertir au réemployable.</div><div style={{background:'#e8f5ee',borderRadius:8,padding:'12px 16px',fontSize:13,color:'#1a4a2a',marginBottom:20,textAlign:'left'}}>💡 <strong>Règle d'or :</strong> On ne vend pas à ceux qui ont déjà des verres + plonge. On vend à ceux qui utilisent du jetable parce qu'ils n'ont pas d'autre choix.</div>{btn('Découvrir les prix →',()=>setStep('prix'),true)}</>)}</div>}
-        {step==='prix' && <div><div style={{fontSize:20,fontWeight:800,marginBottom:4}}>💶 Les deux prix à retenir</div><div style={{fontSize:13,color:'#6b7280',marginBottom:18}}>Tout le business Re-uz repose sur deux chiffres simples.</div><div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14,marginBottom:14}}><div style={{background:'white',border:'2px solid #1a6b3a',borderRadius:14,padding:'20px',textAlign:'center'}}><div style={{fontSize:36,marginBottom:8}}>🛒</div><div style={{fontSize:12,color:'#7a9a82',textTransform:'uppercase',letterSpacing:1,marginBottom:4}}>Prix de vente gobelet</div><div style={{fontSize:44,fontWeight:900,color:'#1a6b3a',lineHeight:1}}>0,30€</div><div style={{fontSize:12,color:'#6b7280',marginTop:6}}>par gobelet vendu</div><div style={{background:'#e8f5ee',borderRadius:8,padding:'8px 10px',marginTop:10,fontSize:12,color:'#1a4a2a'}}>Le client <strong>achète et possède</strong> son stock. Il lave lui-même.</div></div><div style={{background:'white',border:'2px solid #7c3aed',borderRadius:14,padding:'20px',textAlign:'center'}}><div style={{fontSize:36,marginBottom:8}}>🔄</div><div style={{fontSize:12,color:'#7a9a82',textTransform:'uppercase',letterSpacing:1,marginBottom:4}}>Prix rotation (service)</div><div style={{fontSize:44,fontWeight:900,color:'#7c3aed',lineHeight:1}}>0,20€</div><div style={{fontSize:12,color:'#6b7280',marginTop:6}}>par gobelet par rotation</div><div style={{background:'#f5f3ff',borderRadius:8,padding:'8px 10px',marginTop:10,fontSize:12,color:'#3b0764'}}>Re-uz <strong>livre, collecte et lave</strong> les gobelets.</div></div></div>{card(<><div style={{fontWeight:700,fontSize:14,marginBottom:10}}>🤔 La différence concrète</div>{[['Vente','0,30€/gob','Client achète 1 000 gob = 300€. Puis lave lui-même.','#1a6b3a'],['Service rotation','0,20€/gob/rotation','Client loue 1 000 gob × 10 événements/mois × 12 mois = 24 000€/an. Re-uz gère tout.','#7c3aed']].map(([t,p,d,c])=><div key={t} style={{display:'flex',gap:10,alignItems:'flex-start',padding:'8px 10px',background:'#f8fafc',borderRadius:8,marginBottom:6}}><div style={{background:c,color:'white',padding:'3px 8px',borderRadius:5,fontSize:11,fontWeight:700,flexShrink:0}}>{t}</div><div><div style={{fontWeight:700,fontSize:12,color:c,marginBottom:2}}>{p}</div><div style={{fontSize:12,color:'#374151'}}>{d}</div></div></div>)}</>)}<div style={{background:'#fff8e1',border:'1px solid #fdd835',borderRadius:10,padding:'12px 14px',marginBottom:18,fontSize:13,color:'#5a4010'}}><strong>💡 La clé :</strong> La vente, c'est un one-shot. Le service rotation, c'est du <strong>récurrent mensuel</strong>. Un client rotation vaut 80× plus.</div><div style={{display:'flex',justifyContent:'space-between'}}>{btn('← Retour',()=>setStep('intro'))}{btn('La logique volume →',()=>setStep('logique'),true)}</div></div>}
-        {step==='logique' && <div><div style={{fontSize:20,fontWeight:800,marginBottom:4}}>🧠 Il faut du volume ET de la rotation</div><div style={{fontSize:13,color:'#6b7280',marginBottom:18}}>Un bon client Re-uz utilise beaucoup de gobelets, souvent.</div>{card(<><div style={{fontWeight:700,fontSize:14,marginBottom:10}}>📉 Les mauvais clients (éviter)</div>{[['Bar / restaurant classique','A déjà ses verres + plonge. Pas besoin de Re-uz.','❌'],['Mariage unique','200 gob × 0,30€ = 60€. Pas rentable seul.','⚠️'],['Petit événement 1 fois/an','500 gob × 1 fois = 150€. One-shot.','⚠️']].map(([t,d,e])=><div key={t} style={{display:'flex',gap:8,alignItems:'flex-start',padding:'8px 10px',background:'#fff5f5',borderRadius:8,border:'1px solid #fecaca',marginBottom:6}}><span style={{fontSize:16}}>{e}</span><div><div style={{fontWeight:600,fontSize:13}}>{t}</div><div style={{fontSize:12,color:'#6b7280'}}>{d}</div></div></div>)}</>)}{card(<><div style={{fontWeight:700,fontSize:14,marginBottom:10}}>📈 Les bons clients (cibler)</div>{[['Camping 200 empl.','400 gob/jour × 130 jours = 10 400€ CA service/an','✅'],['Hippodrome 30 réunions','3 000 gob × 30 fois = 18 000€ CA service/an','✅'],['Salle 10 concerts/mois','1 000 gob × 10/mois × 12 mois = 24 000€ CA service/an','✅'],['Agence event 10 événements/mois','1 000 gob × 10/mois × 12 mois = 24 000€ CA service/an','✅']].map(([t,d,e])=><div key={t} style={{display:'flex',gap:8,alignItems:'flex-start',padding:'8px 10px',background:'#e8f5ee',borderRadius:8,border:'1px solid #a7d9b8',marginBottom:6}}><span style={{fontSize:16}}>{e}</span><div><div style={{fontWeight:600,fontSize:13}}>{t}</div><div style={{fontSize:12,color:'#1a4a2a'}}>{d}</div></div></div>)}</>)}<div style={{background:'#111c14',color:'white',borderRadius:12,padding:'16px 18px',marginBottom:18}}><div style={{fontWeight:700,fontSize:14,color:'#6fca96',marginBottom:10}}>🎯 La formule</div><div style={{display:'grid',gridTemplateColumns:'1fr auto 1fr auto 1fr auto 1fr',gap:6,alignItems:'center',textAlign:'center'}}>{[['📦','Gob/év.'],null,['🔄','Év./mois'],null,['🗓️','12 mois'],null,['💶','0,20€']].map((it,i)=>it?<div key={i} style={{background:i===6?'#1a6b3a':'rgba(255,255,255,0.1)',borderRadius:8,padding:'10px 6px'}}><div style={{fontSize:18,marginBottom:3}}>{it[0]}</div><div style={{fontSize:10,fontWeight:700}}>{it[1]}</div></div>:<div key={i} style={{fontSize:20,color:'#6fca96'}}>×</div>)}</div></div><div style={{display:'flex',justifyContent:'space-between'}}>{btn('← Retour',()=>setStep('prix'))}{btn('Simuler mon CA →',()=>setStep('simulation'),true)}</div></div>}
-        {step==='simulation' && <div><div style={{fontSize:20,fontWeight:800,marginBottom:4}}>📊 Simulateur de CA</div><div style={{fontSize:13,color:'#6b7280',marginBottom:16}}>Choisissez un univers, ajustez les volumes.</div><div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(130px,1fr))',gap:8,marginBottom:18}}>{UNIVERS.map(x=><button key={x.id} onClick={()=>{setSel(x.id);setGob('');setRot('');}} style={{background:sel===x.id?x.color:'white',color:sel===x.id?'white':'#374151',border:'1px solid '+(sel===x.id?x.color:'#d0e4d8'),borderRadius:10,padding:'10px 6px',cursor:'pointer',textAlign:'center',fontSize:12,fontWeight:sel===x.id?700:500}}><div style={{fontSize:20,marginBottom:4}}>{x.icon}</div>{x.label}</button>)}</div>{u&&<><div style={{background:u.color+'18',border:'1px solid '+u.color+'40',borderRadius:12,padding:'14px 16px',marginBottom:14}}><div style={{fontWeight:700,fontSize:14,color:u.color,marginBottom:4}}>{u.icon} {u.label}</div><div style={{fontSize:13,color:'#374151',marginBottom:8}}>{u.desc}</div><div style={{background:'white',borderRadius:8,padding:'8px 12px',fontSize:12,color:'#1a2e1f',fontStyle:'italic'}}>📌 Exemple : {u.exemple}</div></div>{card(<><div style={{fontWeight:700,fontSize:14,marginBottom:12}}>Ajuster les paramètres</div><div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14}}><div><label style={{fontSize:11,color:'#7a9a82',textTransform:'uppercase',letterSpacing:1,display:'block',marginBottom:6}}>Gobelets / événement</label><input type="number" value={gob||u.gob} onChange={e=>setGob(e.target.value)} style={{width:'100%',padding:'10px',border:'2px solid #1a6b3a',borderRadius:8,fontSize:18,fontWeight:700,color:'#1a6b3a',textAlign:'center'}}/><div style={{fontSize:11,color:'#9ab8a4',marginTop:3}}>Défaut : {u.gob}</div></div><div><label style={{fontSize:11,color:'#7a9a82',textTransform:'uppercase',letterSpacing:1,display:'block',marginBottom:6}}>Rotations / an</label><input type="number" value={rot||u.rotations} onChange={e=>setRot(e.target.value)} style={{width:'100%',padding:'10px',border:'2px solid #7c3aed',borderRadius:8,fontSize:18,fontWeight:700,color:'#7c3aed',textAlign:'center'}}/><div style={{fontSize:11,color:'#9ab8a4',marginTop:3}}>Défaut : {u.rotations}</div></div></div></>)}<div style={{background:'#111c14',color:'white',borderRadius:14,padding:'18px',marginBottom:14}}><div style={{fontSize:12,color:'#6fca96',fontWeight:700,textTransform:'uppercase',letterSpacing:1,marginBottom:14}}>Résultat</div><div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10,marginBottom:14}}><div style={{background:'rgba(255,255,255,0.06)',borderRadius:10,padding:'12px 14px'}}><div style={{fontSize:11,color:'#9ab8a4',marginBottom:3}}>CA vente (stock)</div><div style={{fontSize:26,fontWeight:800,color:'#6fca96'}}>{caV.toLocaleString()}€</div><div style={{fontSize:11,color:'#6b7280',marginTop:3}}>{simGob} gob × 0,30€ — one-shot</div></div><div style={{background:'#1a6b3a',borderRadius:10,padding:'12px 14px'}}><div style={{fontSize:11,color:'#a7d9b8',marginBottom:3}}>CA service rotation / an 🔥</div><div style={{fontSize:26,fontWeight:800,color:'white'}}>{caS.toLocaleString()}€</div><div style={{fontSize:11,color:'#a7d9b8',marginTop:3}}>{simGob} × {simRot} rot × 0,20€</div></div></div><div style={{borderTop:'1px solid rgba(255,255,255,0.1)',paddingTop:12}}><div style={{fontSize:12,color:'#9ab8a4',marginBottom:8}}>Votre commission</div><div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}><div style={{background:'rgba(255,255,255,0.06)',borderRadius:8,padding:'10px 12px'}}><div style={{fontSize:11,color:'#9ab8a4'}}>Com. vente (8%)</div><div style={{fontSize:20,fontWeight:800,color:'#6fca96'}}>{comV.toLocaleString()}€</div></div><div style={{background:'rgba(45,158,90,0.3)',borderRadius:8,padding:'10px 12px',border:'1px solid #2d9e5a'}}><div style={{fontSize:11,color:'#a7d9b8'}}>Com. service (12%) / an</div><div style={{fontSize:20,fontWeight:800,color:'white'}}>{comS.toLocaleString()}€</div></div></div></div></div>{card(<><div style={{fontWeight:700,fontSize:13,marginBottom:8}}>🎯 Exemples de clients</div><div style={{display:'flex',flexWrap:'wrap',gap:6}}>{u.exemples_clients.map(c=><span key={c} style={{background:u.color+'15',border:'1px solid '+u.color+'40',color:u.color,padding:'3px 10px',borderRadius:20,fontSize:11,fontWeight:500}}>{c}</span>)}</div></>)}</>}{!u&&<div style={{textAlign:'center',padding:'40px',color:'#9ab8a4',fontSize:14}}>☝️ Choisissez un univers pour lancer la simulation</div>}<div style={{display:'flex',justifyContent:'space-between',marginTop:8}}>{btn('← Retour',()=>setStep('logique'))}{btn('Évaluer mon réseau →',()=>setStep('reseau'),true)}</div></div>}
-        {step==='reseau' && <div><div style={{fontSize:20,fontWeight:800,marginBottom:4}}>🕸️ Est-ce que tu connais du monde ?</div><div style={{fontSize:13,color:'#6b7280',marginBottom:8}}>Un contact = quelqu'un que tu peux appeler demain sans te présenter.</div><div style={{background:'#e8f5ee',borderRadius:8,padding:'10px 14px',fontSize:12,color:'#1a4a2a',marginBottom:18}}>💡 Un ami dans un BDE, un copain qui gère les tournois de son club de foot, ça suffit pour commencer.</div>{UNIVERS.map(x=><div key={x.id} style={{background:'white',border:'1px solid #d0e4d8',borderRadius:12,padding:'12px 14px',marginBottom:10}}><div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:10,flexWrap:'wrap'}}><div style={{flex:1}}><div style={{display:'flex',alignItems:'center',gap:8,marginBottom:3}}><span style={{fontSize:20}}>{x.icon}</span><span style={{fontWeight:700,fontSize:14}}>{x.label}</span></div><div style={{fontSize:11,color:'#6b7280',marginBottom:reseau[x.id]==='oui'?8:0}}>{x.exemples_clients.slice(0,3).join(' · ')}</div>{reseau[x.id]==='oui'&&<input value={contacts[x.id]||''} onChange={e=>setContacts(c=>({...c,[x.id]:e.target.value}))} placeholder='Qui ? (prénom, structure)' style={{width:'100%',padding:'7px 10px',border:'1px solid #a7d9b8',borderRadius:7,fontSize:12,background:'#f0fdf4'}}/>}</div><div style={{display:'flex',gap:5,flexShrink:0}}>{[['oui','✅ Oui','#1a6b3a','#e8f5ee'],['peutetre','🤔 Peut-être','#b45309','#fffbeb'],['non','❌ Non','#6b7280','#f8fafc']].map(([val,lbl,col,bg])=><button key={val} onClick={()=>setReseau(r=>({...r,[x.id]:val}))} style={{padding:'5px 8px',borderRadius:7,fontSize:11,fontWeight:reseau[x.id]===val?700:400,background:reseau[x.id]===val?bg:'white',color:reseau[x.id]===val?col:'#6b7280',border:'1px solid '+(reseau[x.id]===val?col:'#d0e4d8'),cursor:'pointer'}}>{lbl}</button>)}</div></div></div>)}<div style={{background:score>=4?'#e8f5ee':score>=2?'#fffbeb':'#f8fafc',border:'1px solid '+(score>=4?'#a7d9b8':score>=2?'#fcd34d':'#d0e4d8'),borderRadius:12,padding:'14px 16px',marginBottom:18,textAlign:'center'}}><div style={{fontSize:32,marginBottom:6}}>{score>=4?'🔥':score>=2?'👍':'🌱'}</div><div style={{fontSize:20,fontWeight:800,color:score>=4?'#1a6b3a':score>=2?'#b45309':'#6b7280'}}>{score} univers avec contacts</div></div><div style={{display:'flex',justifyContent:'space-between'}}>{btn('← Retour',()=>setStep('simulation'))}{btn('Voir mon bilan →',()=>setStep('bilan'),true)}</div></div>}
-        {step==='bilan' && <div><div style={{fontSize:20,fontWeight:800,marginBottom:18}}>✅ Bilan de votre exploration</div><div style={{background:'#111c14',color:'white',borderRadius:14,padding:'18px',marginBottom:14}}><div style={{fontSize:14,fontWeight:700,color:'#6fca96',marginBottom:12}}>📋 Ce que vous avez compris</div>{[['💶','Les 2 prix','0,30€/gob (vente) · 0,20€/gob/rotation (service)'],['🧠','La logique','Volume × fréquence mensuelle × 12 mois. Service = 80× la vente.'],['🎯','Les bonnes cibles','Campings, hippodromes, salles, agences event, parcs...'],['🕸️','Votre réseau',score+' univers avec contacts identifiés']].map(([ic,t,d])=><div key={t} style={{display:'flex',gap:10,alignItems:'flex-start',background:'rgba(255,255,255,0.06)',borderRadius:8,padding:'10px 12px',marginBottom:6}}><span style={{fontSize:18}}>{ic}</span><div><div style={{fontWeight:700,fontSize:13}}>{t}</div><div style={{fontSize:12,color:'#9ab8a4'}}>{d}</div></div></div>)}</div>{UNIVERS.some(x=>reseau[x.id]==='oui'&&contacts[x.id])&&<div style={{background:'white',border:'1px solid #a7d9b8',borderRadius:12,padding:'14px 16px',marginBottom:14}}><div style={{fontWeight:700,fontSize:14,color:'#1a6b3a',marginBottom:8}}>🔥 Vos contacts chauds</div>{UNIVERS.filter(x=>reseau[x.id]==='oui'&&contacts[x.id]).map(x=><div key={x.id} style={{display:'flex',gap:8,alignItems:'center',padding:'7px 10px',background:'#f0fdf4',borderRadius:8,marginBottom:6}}><span>{x.icon}</span><div style={{flex:1}}><span style={{fontWeight:600,fontSize:13}}>{x.label} : </span><span style={{fontSize:13,color:'#374151'}}>{contacts[x.id]}</span></div><span style={{background:'#1a6b3a',color:'white',fontSize:10,fontWeight:700,padding:'2px 8px',borderRadius:10}}>À appeler</span></div>)}</div>}<div style={{background:'#1a6b3a',color:'white',borderRadius:12,padding:'18px 20px',textAlign:'center'}}><div style={{fontSize:16,fontWeight:800,marginBottom:6}}>Prêt(e) à démarrer ?</div><div style={{fontSize:13,color:'#a7d9b8',marginBottom:14}}>Objectif : 3 clients signés dans les 60 premiers jours.</div><button onClick={()=>{setStep('intro');setSel(null);setReseau({});setContacts({});}} style={{background:'white',color:'#1a6b3a',border:'none',padding:'9px 14px',borderRadius:8,fontSize:13,fontWeight:700,cursor:'pointer'}}>🔄 Recommencer</button></div></div>}
-      </div>
-    </div>
-  );
-}
-
-/* ===================== APP ===================== */
+/* ============================================================
+   APP
+============================================================ */
 function App() {
-  const [view, setView] = React.useState('prospection');
+  const [view, setView] = React.useState("generique");
+  const villeKeys = Object.keys(VILLES);
+
+  const navItems = [
+    {k:"generique", label:"Principes & Simulations", icon:"📊"},
+    ...villeKeys.map(k => ({k, label:VILLES[k].nom.split(" ")[0], icon:VILLES[k].emoji}))
+  ];
+
   return (
-    <div style={{minHeight:'100vh',background:'#f4f7f5'}}>
-      <div style={{background:'#111c14',color:'white',padding:'14px 20px',position:'sticky',top:0,zIndex:100,boxShadow:'0 2px 12px rgba(0,0,0,0.3)'}}>
-        <div style={{maxWidth:1000,margin:'0 auto',display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:10}}>
+    <div style={{minHeight:"100vh",background:"#f4f7f5"}}>
+      {/* NAV TOP */}
+      <div style={{background:"#111c14",position:"sticky",top:0,zIndex:100,boxShadow:"0 2px 12px rgba(0,0,0,0.4)"}}>
+        {/* Barre transversale */}
+        <div style={{background:"#0a1510",padding:"5px 16px",display:"flex",gap:0,alignItems:"center",overflowX:"auto",borderBottom:"1px solid rgba(255,255,255,0.06)"}}>
+          <a href={BASE+"/reuz-accueil.html"} style={{color:"rgba(255,255,255,0.45)",fontSize:10,fontWeight:600,textDecoration:"none",padding:"4px 11px",whiteSpace:"nowrap",borderRight:"1px solid rgba(255,255,255,0.08)"}}>🏠 Accueil</a>
+          <span style={{color:"#6fca96",fontSize:10,fontWeight:700,padding:"4px 11px",whiteSpace:"nowrap",borderRight:"1px solid rgba(255,255,255,0.08)"}}>🗺️ Prospection</span>
+          <a href={BASE+"/reuz-fiches-cibles.html"} style={{color:"rgba(255,255,255,0.45)",fontSize:10,fontWeight:600,textDecoration:"none",padding:"4px 11px",whiteSpace:"nowrap",borderRight:"1px solid rgba(255,255,255,0.08)"}}>📋 Fiches cibles</a>
+          <a href={BASE+"/reuz-dossier-print.html"} target="_blank" style={{color:"rgba(255,255,255,0.45)",fontSize:10,fontWeight:600,textDecoration:"none",padding:"4px 11px",whiteSpace:"nowrap"}}>🖨️ Dossier PDF</a>
+        </div>
+        {/* Info */}
+        <div style={{maxWidth:960,margin:"0 auto",padding:"8px 16px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:10,flexWrap:"wrap"}}>
           <div>
-            <div style={{fontSize:10,fontWeight:700,letterSpacing:2,textTransform:'uppercase',color:'#6fca96',marginBottom:3}}>Multi-Potentiel × Re-uz</div>
-            <div style={{fontSize:16,fontWeight:800}}>Gobelets Réemployables — Outil Consultant</div>
+            <div style={{fontSize:10,color:"#6fca96",fontWeight:700,textTransform:"uppercase",letterSpacing:2}}>Re-uz · Prospection terrain nominative</div>
+            <div style={{fontSize:11,color:"rgba(255,255,255,0.55)",marginTop:1}}>Démarrage <strong style={{color:"#f0a500"}}>semaine du 18 mai · Formation Lyon</strong></div>
           </div>
-          <div style={{display:'flex',gap:8}}>
-            <button onClick={()=>setView('prospection')} style={{padding:'8px 16px',borderRadius:8,fontSize:13,fontWeight:view==='prospection'?700:500,background:view==='prospection'?'#1a6b3a':'rgba(255,255,255,0.1)',color:'white',border:view==='prospection'?'none':'1px solid rgba(255,255,255,0.2)',cursor:'pointer'}}>🗺️ Guide Prospection</button>
-            <button onClick={()=>setView('candidat')} style={{padding:'8px 16px',borderRadius:8,fontSize:13,fontWeight:view==='candidat'?700:500,background:view==='candidat'?'#1a6b3a':'rgba(255,255,255,0.1)',color:'white',border:view==='candidat'?'none':'1px solid rgba(255,255,255,0.2)',cursor:'pointer'}}>🎓 Outil Candidat</button>
-          </div>
+          <a href="tel:+33610703090" style={{color:"#f0a500",fontWeight:900,fontSize:14,textDecoration:"none",flexShrink:0}}>📱 06 10 70 30 90</a>
+        </div>
+        {/* Onglets villes */}
+        <div style={{overflowX:"auto",display:"flex",padding:"0 8px",borderTop:"1px solid rgba(255,255,255,0.06)"}}>
+          {navItems.map(item => (
+            <button key={item.k} onClick={()=>setView(item.k)} style={{
+              padding:"9px 12px",fontSize:11,fontWeight:view===item.k?700:400,
+              background:"none",border:"none",
+              borderBottom:view===item.k?"3px solid #f0a500":"3px solid transparent",
+              color:view===item.k?"white":"rgba(255,255,255,0.38)",cursor:"pointer",
+              whiteSpace:"nowrap",display:"flex",alignItems:"center",gap:5,flexShrink:0
+            }}>
+              <span style={{fontSize:14}}>{item.icon}</span>
+              <span>{item.label}</span>
+            </button>
+          ))}
         </div>
       </div>
-      <div style={{background:'#0a1510',borderTop:'1px solid rgba(255,255,255,0.1)',padding:'5px 20px'}}>
-        <div style={{maxWidth:1000,margin:'0 auto',display:'flex',gap:0,alignItems:'center',overflowX:'auto'}}>
-          <a href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-accueil.html" style={{color:'rgba(255,255,255,0.5)',fontSize:11,fontWeight:600,textDecoration:'none',padding:'5px 12px',whiteSpace:'nowrap',borderRight:'1px solid rgba(255,255,255,0.1)'}}>🏠 Accueil</a>
-          <span style={{color:'#6fca96',fontSize:11,fontWeight:700,padding:'5px 12px',whiteSpace:'nowrap',borderRight:'1px solid rgba(255,255,255,0.1)'}}>🗺️ Prospection ville par ville</span>
-          <a href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-fiches-cibles.html" style={{color:'rgba(255,255,255,0.5)',fontSize:11,fontWeight:600,textDecoration:'none',padding:'5px 12px',whiteSpace:'nowrap',borderRight:'1px solid rgba(255,255,255,0.1)'}}>📋 Fiches cibles</a>
-          <a href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-candidat-decouverte.html" style={{color:'rgba(255,255,255,0.5)',fontSize:11,fontWeight:600,textDecoration:'none',padding:'5px 12px',whiteSpace:'nowrap'}}>🎓 Outil membre</a>
-        </div>
+
+      {view === "generique" ? <GeneriqueView /> : <VilleView v={view} />}
+
+      {/* PRINT TOOLBAR */}
+      <div className="no-print" style={{position:"fixed",bottom:20,right:20,display:"flex",flexDirection:"column",gap:8,alignItems:"flex-end",zIndex:999}}>
+        <button onClick={()=>window.print()} style={{background:"#1a6b3a",color:"white",border:"none",padding:"9px 16px",borderRadius:7,fontSize:12,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 14px rgba(0,0,0,0.2)"}}>🖨️ Imprimer</button>
+        <a href={BASE+"/reuz-dossier-print.html"} target="_blank" style={{background:"#0d3340",color:"#f0a500",padding:"9px 16px",borderRadius:7,fontSize:12,fontWeight:700,textDecoration:"none",boxShadow:"0 4px 14px rgba(0,0,0,0.2)"}}>📁 Dossier complet</a>
       </div>
-      {view==='prospection' ? <ProspectionView /> : <CandidatView />}
-      <div style={{textAlign:'center',padding:'12px',fontSize:10,color:'#9ab8a4',borderTop:'1px solid #d0e4d8',background:'white',marginTop:20}}>Multi-Potentiel × Re-uz · Thierry Bismuth · thierrybismuth.com</div>
     </div>
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
 </script>
-
-<!-- PRINT WIDGET -->
-<style>
-@media print {
-  .print-toolbar, .print-widget { display:none !important; }
-  nav, .hero-badges, .btn-hero, .stats-band, footer,
-  [style*="position:sticky"], [style*="position: sticky"] { display:none !important; }
-  body { background:white !important; }
-  .section, .section-alt { padding:16px 0 !important; }
-  a { color:inherit !important; text-decoration:none !important; }
-}
-.print-toolbar {
-  position:fixed; bottom:24px; right:24px; z-index:9999;
-  display:flex; flex-direction:column; gap:8px; align-items:flex-end;
-}
-.print-btn {
-  display:flex; align-items:center; gap:8px;
-  padding:10px 16px; border-radius:8px; font-size:13px; font-weight:700;
-  cursor:pointer; border:none; box-shadow:0 4px 16px rgba(0,0,0,0.2);
-  font-family:'Segoe UI',system-ui,sans-serif; text-decoration:none;
-  white-space:nowrap; transition:opacity 0.15s;
-}
-.print-btn:hover { opacity:0.88; }
-.print-btn-page { background:#1a6b3a; color:white; }
-.print-btn-dossier { background:#0d3340; color:#f0a500; }
-</style>
-
-<div class="print-toolbar print-widget">
-  <button class="print-btn print-btn-page" onclick="window.print()">
-    🖨️ Imprimer cette page
-  </button>
-  <a class="print-btn print-btn-dossier" href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-dossier-print.html" target="_blank">
-    📁 Imprimer le dossier complet
-  </a>
-</div>
-
 </body>
 </html>
