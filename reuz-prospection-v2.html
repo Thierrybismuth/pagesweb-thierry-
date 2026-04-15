@@ -33,7 +33,7 @@ const VILLES = {
     emoji: "🗼",
     col: "#c0392b",
     pop: "12,5M hab",
-    ca_potentiel: "920K€",
+    ca_potentiel: "692K€",
     depart: "75/92/93/94/91/95/77/78",
     A: [
       { nom:"Stade de France", type:"Stade + concerts", jauge:"80 000", freq:"18+ events/an 2026", note:"Aya Nakamura ×3, Guetta ×3, BTS, The Weeknd ×4, Fally Ipupa... Contrat annuel avec gestionnaire AMSB", contact:"amsb.fr" },
@@ -85,7 +85,7 @@ const VILLES = {
     emoji: "🦁",
     col: "#e67e22",
     pop: "2,3M hab",
-    ca_potentiel: "367K€",
+    ca_potentiel: "595K€",
     depart: "69/01/42/73/74",
     A: [
       { nom:"Nuits de Fourvière", type:"Festival pluridisciplinaire", jauge:"4 000/soir (théâtre antique)", freq:"80 soirs juin-juillet 2026", note:"80e anniversaire 2026 ! Vanessa Paradis, The Divine Comedy. 176 000 spectateurs en 2025. Sans cuisine fixe", contact:"nuitsdefourviere.fr" },
@@ -168,7 +168,7 @@ const VILLES = {
     emoji: "🍷",
     col: "#8e44ad",
     pop: "1,5M hab",
-    ca_potentiel: "340K€",
+    ca_potentiel: "382K€",
     depart: "33/17/16/79/86/24/47",
     A: [
       { nom:"Stade Matmut Atlantique (Girondins)", type:"Stade football", jauge:"42 000", freq:"20 matchs/saison + events", note:"Buvettes extérieures. Fort potentiel. Partenaire Heineken. Gestion LBO Sport", contact:"girondins.com" },
@@ -208,7 +208,7 @@ const VILLES = {
     emoji: "🎸",
     col: "#27ae60",
     pop: "1,1M hab",
-    ca_potentiel: "287K€",
+    ca_potentiel: "330K€",
     depart: "35/56/29/22",
     A: [
       { nom:"Roazhon Park (Stade Rennais)", type:"Stade football", jauge:"29 000", freq:"20 matchs/saison + events", note:"Ligue 1. Gestion Sodexo. Buvettes extérieures", contact:"staderennais.com" },
@@ -245,7 +245,7 @@ const VILLES = {
     emoji: "🏙️",
     col: "#c0392b",
     pop: "1,2M hab",
-    ca_potentiel: "262K€",
+    ca_potentiel: "705K€",
     depart: "59/62/80/02/60",
     A: [
       { nom:"Stade Pierre-Mauroy (LOSC)", type:"Stade football", jauge:"50 000", freq:"20 matchs/saison + concerts", note:"Villeneuve d'Ascq. Concerts majeurs + matchs. Partenaire Heineken", contact:"losc.fr" },
@@ -292,35 +292,36 @@ const VILLES = {
 
 const SIMS = {
   paris: {
-    A: [{m:"A",ca:60000,com:4800},{m:"A",ca:15000,com:1200},{m:"A",ca:30000,com:2400},{m:"A",ca:36000,com:2880},{m:"S",ca:30000,com:3600},{m:"S",ca:21000,com:2520},{m:"S",ca:24000,com:2880},{m:"S",ca:12000,com:1440},{m:"S",ca:21000,com:2520},{m:"S",ca:16000,com:1920},{m:"A",ca:18000,com:1440},{m:"A",ca:37500,com:3000}],
-    B: [{m:"A",ca:9000,com:720},{m:"A",ca:5400,com:432},{m:"S",ca:40000,com:4800},{m:"S",ca:20800,com:2496},{m:"S",ca:60000,com:7200}],
+    A: [{m:"A",ca:120000,com:9600},{m:"A",ca:30000,com:2400},{m:"A",ca:60000,com:4800},{m:"A",ca:72000,com:5760},{m:"S",ca:30000,com:3600},{m:"S",ca:21000,com:2520},{m:"S",ca:24000,com:2880},{m:"S",ca:12000,com:1440},{m:"S",ca:21000,com:2520},{m:"S",ca:16000,com:1920},{m:"A",ca:60000,com:4800},{m:"A",ca:75000,com:6000}],
+    B: [{m:"A",ca:18000,com:1440},{m:"A",ca:10800,com:864},{m:"S",ca:40000,com:4800},{m:"S",ca:20800,com:2496},{m:"S",ca:60000,com:7200}],
     C: [{m:"A",ca:300,com:24},{m:"A",ca:240,com:19},{m:"A",ca:360,com:29},{m:"A",ca:450,com:36},{m:"A",ca:270,com:22},{m:"A",ca:210,com:17}],
   },
   lyon: {
-    A: [{m:"S",ca:40000,com:4800},{m:"S",ca:48000,com:5760},{m:"A",ca:44250,com:3540},{m:"A",ca:12000,com:960},{m:"A",ca:9000,com:720},{m:"S",ca:15000,com:1800},{m:"S",ca:24000,com:2880},{m:"S",ca:40000,com:4800},{m:"A",ca:12750,com:1020},{m:"S",ca:24000,com:2880},{m:"S",ca:54000,com:6480},{m:"S",ca:15000,com:1800}],
-    B: [{m:"A",ca:2250,com:180},{m:"S",ca:60000,com:7200},{m:"S",ca:36000,com:4320},{m:"S",ca:28800,com:3456},{m:"S",ca:36000,com:4320}],
+    A: [{m:"S",ca:40000,com:4800},{m:"S",ca:48000,com:5760},{m:"A",ca:88500,com:7080},{m:"A",ca:24000,com:1920},{m:"A",ca:30000,com:2400},{m:"S",ca:15000,com:1800},{m:"S",ca:24000,com:2880},{m:"S",ca:40000,com:4800},{m:"A",ca:25500,com:2040},{m:"S",ca:24000,com:2880},{m:"S",ca:54000,com:6480},{m:"S",ca:15000,com:1800}],
+    B: [{m:"A",ca:4500,com:360},{m:"S",ca:60000,com:7200},{m:"S",ca:36000,com:4320},{m:"S",ca:28800,com:3456},{m:"S",ca:36000,com:4320}],
     C: [{m:"A",ca:600,com:48},{m:"A",ca:240,com:19},{m:"A",ca:360,com:29},{m:"A",ca:450,com:36},{m:"A",ca:270,com:22},{m:"A",ca:180,com:14}],
   },
   marseille: {
-    A: [{m:"A",ca:50250,com:4020},{m:"A",ca:7500,com:600},{m:"S",ca:20000,com:2400},{m:"S",ca:12000,com:1440},{m:"S",ca:15000,com:1800},{m:"S",ca:18000,com:2160},{m:"S",ca:24000,com:2880},{m:"S",ca:10000,com:1200},{m:"A",ca:6000,com:480},{m:"S",ca:6000,com:720}],
+    A: [{m:"A",ca:100500,com:8040},{m:"A",ca:15000,com:1200},{m:"S",ca:20000,com:2400},{m:"S",ca:12000,com:1440},{m:"S",ca:15000,com:1800},{m:"S",ca:18000,com:2160},{m:"S",ca:24000,com:2880},{m:"S",ca:10000,com:1200},{m:"A",ca:12000,com:960},{m:"S",ca:6000,com:720}],
     B: [{m:"S",ca:4160,com:499},{m:"S",ca:54000,com:6480},{m:"S",ca:36000,com:4320},{m:"S",ca:9000,com:1080}],
     C: [{m:"A",ca:450,com:36},{m:"A",ca:360,com:29},{m:"A",ca:210,com:17},{m:"A",ca:180,com:14},{m:"A",ca:300,com:24}],
   },
   bordeaux: {
-    A: [{m:"A",ca:31500,com:2520},{m:"A",ca:12000,com:960},{m:"S",ca:50000,com:6000},{m:"S",ca:9000,com:1080},{m:"S",ca:36000,com:4320},{m:"S",ca:15000,com:1800},{m:"S",ca:12000,com:1440},{m:"S",ca:1000,com:120},{m:"S",ca:12000,com:1440},{m:"S",ca:6000,com:720}],
+    A: [{m:"A",ca:63000,com:5040},{m:"A",ca:24000,com:1920},{m:"S",ca:50000,com:6000},{m:"S",ca:9000,com:1080},{m:"S",ca:36000,com:4320},{m:"S",ca:15000,com:1800},{m:"S",ca:12000,com:1440},{m:"S",ca:1000,com:120},{m:"S",ca:12000,com:1440},{m:"S",ca:6000,com:720}],
     B: [{m:"S",ca:13000,com:1560},{m:"S",ca:20800,com:2496},{m:"S",ca:90000,com:10800},{m:"S",ca:28800,com:3456}],
     C: [{m:"A",ca:300,com:24},{m:"A",ca:450,com:36},{m:"A",ca:360,com:29},{m:"A",ca:360,com:29},{m:"A",ca:180,com:14},{m:"A",ca:240,com:19}],
   },
   rennes: {
-    A: [{m:"S",ca:48000,com:5760},{m:"S",ca:6400,com:768},{m:"A",ca:21750,com:1740},{m:"S",ca:36000,com:4320},{m:"S",ca:9000,com:1080},{m:"S",ca:50000,com:6000},{m:"S",ca:18000,com:2160},{m:"S",ca:9000,com:1080},{m:"S",ca:8000,com:960},{m:"S",ca:12800,com:1536}],
+    A: [{m:"S",ca:48000,com:5760},{m:"S",ca:6400,com:768},{m:"A",ca:43500,com:3480},{m:"S",ca:36000,com:4320},{m:"S",ca:9000,com:1080},{m:"S",ca:50000,com:6000},{m:"S",ca:18000,com:2160},{m:"S",ca:9000,com:1080},{m:"S",ca:8000,com:960},{m:"S",ca:12800,com:1536}],
     B: [{m:"S",ca:15600,com:1872},{m:"S",ca:12000,com:1440},{m:"S",ca:24000,com:2880},{m:"S",ca:36000,com:4320}],
     C: [{m:"A",ca:150,com:12},{m:"A",ca:450,com:36},{m:"A",ca:360,com:29},{m:"A",ca:270,com:22},{m:"A",ca:210,com:17},{m:"A",ca:150,com:12}],
   },
   lille: {
-    A: [{m:"S",ca:40000,com:4800},{m:"S",ca:63000,com:7560},{m:"A",ca:37500,com:3000},{m:"A",ca:6750,com:540},{m:"S",ca:30000,com:3600},{m:"S",ca:25000,com:3000},{m:"S",ca:30000,com:3600},{m:"S",ca:16000,com:1920},{m:"A",ca:15000,com:1200},{m:"S",ca:28000,com:3360}],
+    A: [{m:"S",ca:40000,com:4800},{m:"S",ca:63000,com:7560},{m:"A",ca:75000,com:6000},{m:"A",ca:13500,com:1080},{m:"S",ca:30000,com:3600},{m:"S",ca:25000,com:3000},{m:"S",ca:30000,com:3600},{m:"S",ca:16000,com:1920},{m:"A",ca:75000,com:6000},{m:"S",ca:28000,com:3360}],
     B: [{m:"S",ca:200000,com:24000},{m:"S",ca:26000,com:3120},{m:"S",ca:9600,com:1152},{m:"S",ca:72000,com:8640}],
     C: [{m:"A",ca:360,com:29},{m:"A",ca:450,com:36},{m:"A",ca:360,com:29},{m:"A",ca:240,com:19},{m:"A",ca:210,com:17},{m:"A",ca:150,com:12}],
   },
+};
 };
 
 function SimGenerique() {
