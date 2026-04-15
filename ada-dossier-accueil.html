@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADA Nîmes & Alès — Dossier de reprise</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2e44;
+    --amber: #c8873a;
+    --amber-light: #e8a85a;
+    --cream: #f7f5f0;
+    --grey: #6b7280;
+    --light-grey: #e5e7eb;
+    --green: #2d6a4f;
+    --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .wrapper { max-width: 700px; width: 100%; }
+
+  /* LOGO / HEADER */
+  .top {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .ada-badge {
+    display: inline-block;
+    background: var(--white);
+    color: var(--navy);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    padding: 10px 24px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+  }
+  .top h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--white);
+  }
+  .top h1 span { color: var(--amber-light); }
+  .top p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 10px;
+    font-weight: 300;
+  }
+
+  /* CARDS */
+  .cards { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+
+  .card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-left: 4px solid var(--amber);
+    padding: 20px 24px;
+    text-decoration: none;
+    color: var(--white);
+    transition: background 0.2s, transform 0.15s;
+    cursor: pointer;
+  }
+  .card:hover {
+    background: rgba(200,135,58,0.15);
+    transform: translateX(4px);
+  }
+
+  .card .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--amber-light);
+    opacity: 0.6;
+    min-width: 36px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .card .info { flex: 1; }
+  .card .info .title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 3px;
+  }
+  .card .info .desc {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+  }
+
+  .card .arrow {
+    font-size: 20px;
+    color: var(--amber);
+    flex-shrink: 0;
+    transition: transform 0.15s;
+  }
+  .card:hover .arrow { transform: translateX(4px); }
+
+  /* PDF BUTTON */
+  .pdf-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--amber);
+    color: var(--navy);
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 16px 28px;
+    text-decoration: none;
+    width: 100%;
+    transition: background 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .pdf-btn:hover { background: var(--amber-light); }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+  }
+  .footer strong { color: rgba(255,255,255,0.4); }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="top">
+    <div class="ada-badge">ADA</div>
+    <h1>Dossier de reprise<br><span>Nîmes & Alès</span></h1>
+    <p>SAS Gard Mobilités — Document confidentiel — Préparé par Thierry Bismuth</p>
+  </div>
+
+  <div class="cards">
+
+    <a class="card" href="ada-nimes-ales-analyse-financiere.html">
+      <div class="num">01</div>
+      <div class="info">
+        <div class="title">Analyse financière 2022–2025</div>
+        <div class="desc">Chiffres clés, retraitements des années atypiques, EBE normalisé, prévisionnel 2026–2028</div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="card" href="mickael-plan-action-commercial.html">
+      <div class="num">02</div>
+      <div class="info">
+        <div class="title">Plan d'action commercial</div>
+        <div class="desc">Stratégie de redéveloppement, leviers de croissance, objectifs par agence</div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="card" href="ada-plan-financement.html">
+      <div class="num">03</div>
+      <div class="info">
+        <div class="title">Plan de financement</div>
+        <div class="desc">Structure de l'opération, montage sociétaire, avantages industriels pour l'associé</div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+  </div>
+
+  <a class="pdf-btn" href="https://github.com/Thierrybismuth/pagesweb-thierry-/raw/main/ada-nimes-ales-dossier-complet.pdf" target="_blank">
+    🖨️ Télécharger / Imprimer le dossier complet (PDF — 28 pages)
+  </a>
+
+  <div class="footer">
+    Document confidentiel — Destiné exclusivement aux parties prenantes de l'opération<br>
+    <strong>Thierry Bismuth — ODYSKILLS Multi-Potentiel</strong> — thierry@thierrybismuth.com
+  </div>
+
+</div>
+</body>
+</html>
