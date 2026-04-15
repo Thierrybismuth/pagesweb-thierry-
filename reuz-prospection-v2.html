@@ -714,12 +714,9 @@ function VilleView({ v }) {
                 );
               })}
             </div>
-            {cat.key === "C" && catSims.length > 0 && (() => {
-              // Calculer la moyenne des gob_unit (g/nb) pour cette ville
-              // On prend le gob moyen sur les clients fast-food (les 3 premiers généralement)
-              const avgGob = Math.round(catSims.slice(0, Math.min(3, catSims.length)).reduce((s,x)=>s+x.g,0) / Math.min(3, catSims.length) / 5);
-              return <SimMultiFranchise gob_unit={Math.max(60, Math.min(300, avgGob))} />;
-            })()}
+            {cat.key === "C" && catSims.length > 0 && (
+              <SimMultiFranchise gob_unit={Math.max(60, Math.min(300, Math.round(catSims.slice(0, Math.min(3, catSims.length)).reduce((s,x)=>s+x.g,0) / Math.min(3, catSims.length) / 5)))} />
+            )}
           </div>
         );
       })}
