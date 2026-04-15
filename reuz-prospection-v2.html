@@ -507,80 +507,174 @@ function VilleView({ v }) {
 function GeneriqueView() {
   return (
     <div style={{maxWidth:960,margin:"0 auto",padding:"16px 16px 48px"}}>
-      {/* Logique simulation */}
+
+      {/* === BLOC MARCHÉ === */}
       <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:12,padding:20,marginBottom:16}}>
-        <div style={{fontSize:12,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:14}}>
-          Le multiplicateur stock — La règle que tout commercial doit connaître
+        <div style={{fontSize:10,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>Le marché</div>
+        <div style={{fontSize:20,fontWeight:800,color:"#0d3340",marginBottom:14}}>Un marché <span style={{color:"#1a6b3a"}}>obligatoire</span> en explosion</div>
+        <p style={{fontSize:12,color:"#4b6358",lineHeight:1.7,marginBottom:16}}>La loi AGEC interdit les plastiques jetables dans les ERP. Des milliers d'acteurs sont obligés de passer au réemploi. Re-uz est le leader. Vous avez le réseau local. C'est le moment.</p>
+
+        <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:10,marginBottom:16}}>
+          {[
+            {n:"4,7 Mds", l:"Gobelets jetables / an en France"},
+            {n:"+35%", l:"Croissance réemploi / an depuis 2022"},
+            {n:"6 pays", l:"Présence internationale Re-uz"},
+            {n:"2027", l:"Objectif 10% réemploi en France"},
+          ].map((s,i)=>(
+            <div key={i} style={{background:"#0d3340",borderRadius:8,padding:"12px 14px",textAlign:"center"}}>
+              <div style={{fontSize:22,fontWeight:900,color:"#f0a500",lineHeight:1}}>{s.n}</div>
+              <div style={{fontSize:9,color:"rgba(255,255,255,0.6)",marginTop:4}}>{s.l}</div>
+            </div>
+          ))}
         </div>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14,marginBottom:16}}>
-          <div style={{background:"#fff5f5",borderLeft:"4px solid #dc2626",padding:14,borderRadius:"0 8px 8px 0"}}>
-            <div style={{fontSize:12,fontWeight:700,color:"#dc2626",marginBottom:6}}>❌ Erreur classique du commercial débutant</div>
-            <p style={{fontSize:11,color:"#374151",lineHeight:1.6}}>
-              "Le stade fait 10 000 personnes → je lui propose 10 000 gobelets."<br/>
-              Résultat : CA = 3 000€, com = 240€. Pas intéressant.
-            </p>
+
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:14}}>
+          {[
+            {t:"Loi AGEC (en vigueur)", d:"Interdiction des plastiques jetables dans les ERP. Obligation gobelets réemployables dès +300 couverts. Contrôles DGCCRF en cours — amendes en cours."},
+            {t:"Objectif France 2027", d:"10% des emballages mis sur le marché doivent être réemployables. Directive SUP européenne : pression irréversible."},
+            {t:"Heineken, Coca, ABInBev financent", d:"Objectifs groupe plastic free 2025-2027. Ils financent déjà une partie du coût pour leurs clients bars et festivals."},
+            {t:"CSRD obligatoire (entreprises +250 sal.)", d:"Les entreprises doivent mesurer et réduire leurs déchets. Supprimer les gobelets jetables = case facile à cocher."},
+          ].map((l,i)=>(
+            <div key={i} style={{background:"#fffbeb",borderLeft:"3px solid #f0a500",padding:"10px 13px"}}>
+              <div style={{fontSize:11,fontWeight:700,color:"#92400e",marginBottom:3}}>{l.t}</div>
+              <div style={{fontSize:11,color:"#5a4010",lineHeight:1.5}}>{l.d}</div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{background:"#e8f5ee",borderLeft:"4px solid #1a6b3a",padding:"12px 16px"}}>
+          <div style={{fontSize:11,fontWeight:700,color:"#1a6b3a",marginBottom:4}}>La règle d'or Re-uz</div>
+          <div style={{fontSize:12,color:"#1a4a2a",lineHeight:1.6}}>On ne vend pas à ceux qui ont déjà des verres et une plonge. On vend à ceux qui utilisent du plastique jetable <strong>parce qu'ils n'ont pas le choix</strong> — et bientôt plus le droit.</div>
+        </div>
+      </div>
+
+      {/* === BLOC ENTREPRISE === */}
+      <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:12,padding:20,marginBottom:16}}>
+        <div style={{fontSize:10,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>L'entreprise</div>
+        <div style={{fontSize:20,fontWeight:800,color:"#0d3340",marginBottom:12}}>Re-uz — Le leader <span style={{color:"#1a6b3a"}}>européen</span> qui vous donne les moyens</div>
+
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14,marginBottom:14}}>
+          <div>
+            <div style={{display:"flex",flexDirection:"column",gap:10}}>
+              {[
+                {i:"🌍", t:"Présence internationale", d:"France · UK · Belgique · Allemagne · Espagne · Portugal · Canada. Stations de lavage fixes et mobiles dans chaque pays."},
+                {i:"🏭", t:"Fabriqué en France", d:"Gobelets 100% recyclables, résistants, incassables. 3 techniques d'impression : sérigraphie, digital, IML photo-qualité."},
+                {i:"🤝", t:"Support complet membre partenaire", d:"Formation initiale 3 jours · Animation 3×1h/semaine · RDV commercial en binôme avec expert technique Re-uz."},
+                {i:"🎯", t:"Objectif réseau", d:"300K€ à 700K€ CA développés par membre / an. Soit 1,8M€ à 4,2M€/an pour un réseau de 15 membres."},
+              ].map((k,i)=>(
+                <div key={i} style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+                  <div style={{width:36,height:36,background:"#0d3340",borderRadius:8,display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,flexShrink:0}}>{k.i}</div>
+                  <div>
+                    <div style={{fontSize:12,fontWeight:700,color:"#0d3340",marginBottom:2}}>{k.t}</div>
+                    <div style={{fontSize:11,color:"#4b6358",lineHeight:1.4}}>{k.d}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div style={{background:"#e8f5ee",borderLeft:"4px solid #1a6b3a",padding:14,borderRadius:"0 8px 8px 0"}}>
-            <div style={{fontSize:12,fontWeight:700,color:"#1a6b3a",marginBottom:6}}>✅ La réalité opérationnelle du client</div>
-            <p style={{fontSize:11,color:"#374151",lineHeight:1.6}}>
-              10 000 personnes → il faut 50 000 gobelets pour tenir l'année :<br/>
-              • 3 jours de rotation sans lavage = ×3 minimum<br/>
-              • Pertes + casse = +15%<br/>
-              • Stock de sécurité = +10%<br/>
-              <strong>→ CA = 15 000€, com = 1 200€</strong>
+          <div style={{background:"#f4f7f5",borderRadius:10,padding:16}}>
+            <div style={{fontSize:11,fontWeight:700,color:"#0d3340",marginBottom:10}}>Références clients</div>
+            <p style={{fontSize:10,color:"#4b6358",lineHeight:1.9}}>
+              Tomorrowland · Vieilles Charrues · Rolling Stones · Disneyland Paris · Parc Astérix · PuyDuFou · Futuroscope · Walibi · Tour de France · Roland Garros · Paris 2024 · Heineken · ABInBev · Bacardi · Johnnie Walker · Coca-Cola · Subway · Burger King · Elior · Sodexo · Marché de Noël Colmar · Marché de Noël Lille
             </p>
+            <div style={{marginTop:10,display:"grid",gridTemplateColumns:"1fr 1fr",gap:6}}>
+              {[
+                {l:"Musique & Festival", ex:"Tomorrowland, Vieilles Charrues, Rolling Stones"},
+                {l:"Parcs de loisirs", ex:"Disneyland, Astérix, PuyDuFou"},
+                {l:"Sport", ex:"Tour de France, Roland Garros, Paris 2024"},
+                {l:"Entreprises & CHR", ex:"Coca-Cola, Burger King, Sodexo"},
+              ].map((g,i)=>(
+                <div key={i} style={{background:"#0d3340",borderRadius:6,padding:"7px 9px"}}>
+                  <div style={{fontSize:9,fontWeight:700,color:"#f0a500",marginBottom:2}}>{g.l}</div>
+                  <div style={{fontSize:9,color:"rgba(255,255,255,0.6)"}}>{g.ex}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* === BLOC GAMMES === */}
+      <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:12,padding:20,marginBottom:16}}>
+        <div style={{fontSize:10,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>Les produits</div>
+        <div style={{fontSize:20,fontWeight:800,color:"#0d3340",marginBottom:14}}>6 gammes. <span style={{color:"#1a6b3a"}}>Des marchés différents.</span> Une seule marque.</div>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(240px,1fr))",gap:10}}>
+          {[
+            {col:"#1a6b3a",icon:"🥤",nom:"Ecocup SERVICE",desc:"Pour clients SANS plonge. 0,20€/gob/rotation. Commission 12% récurrente 48 mois. LE Graal commercial. Cibles : festivals, campings, hippodromes, assos sportives, marchés de Noël."},
+            {col:"#0d3340",icon:"🥤",nom:"Ecocup ACHAT (vente)",desc:"Pour clients avec plonge ET volume >5 000 gob. 0,30€/gob × multiplicateur ×4-5. Commission 8%. Renouvellement IML annuel. Cibles : stades, grandes salles, parcs à thème."},
+            {col:"#7c3aed",icon:"🍺",nom:"Beer Up System",desc:"Tireuse bière brevetée. Remplissage par le fond, col de mousse parfait, cashless, self-service. Cibles : CHR, bars à bière, brasseries, hôtels, campings."},
+            {col:"#b45309",icon:"☕",nom:"Newcy (pause café)",desc:"Circuit fermé entreprises. Collecte-lave-restitue. CSRD oblige entreprises +250 sal. Commission 12% récurrente. Cibles : entreprises, coworking, sièges sociaux."},
+            {col:"#475569",icon:"🍽️",nom:"Pure (vaisselle réemployable)",desc:"Bols, assiettes, verres réemployables. Sans BPA, micro-ondes compatible, lave-vaisselle. Cibles : restauration collective, cantines, events haut de gamme."},
+            {col:"#059669",icon:"🥡",nom:"Kiobox (restauration emporter)",desc:"Contenants réemployables pour la restauration à emporter. Obligation légale 2025. Achat + lavage + R&D sur mesure. Cibles : fast food, restauration rapide, food trucks."},
+          ].map((g,i)=>(
+            <div key={i} style={{background:g.col+"12",border:`1px solid ${g.col}35`,borderRadius:10,padding:13}}>
+              <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:7}}>
+                <span style={{fontSize:18}}>{g.icon}</span>
+                <span style={{fontSize:12,fontWeight:700,color:g.col}}>{g.nom}</span>
+              </div>
+              <p style={{fontSize:10,color:"#374151",lineHeight:1.5}}>{g.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* === BLOC SIMULATION === */}
+      <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:12,padding:20,marginBottom:16}}>
+        <div style={{fontSize:10,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>Le multiplicateur stock</div>
+        <div style={{fontSize:20,fontWeight:800,color:"#0d3340",marginBottom:12}}>Pourquoi un client de <span style={{color:"#dc2626"}}>10 000 personnes</span> commande <span style={{color:"#1a6b3a"}}>50 000 gobelets</span></div>
+
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:16}}>
+          <div style={{background:"#fff5f5",borderLeft:"4px solid #dc2626",padding:14}}>
+            <div style={{fontSize:11,fontWeight:700,color:"#dc2626",marginBottom:6}}>Erreur du débutant</div>
+            <p style={{fontSize:11,color:"#374151",lineHeight:1.6}}>"Le stade fait 10 000 personnes je lui propose 10 000 gobelets."<br/>CA = 3 000€ · Commission = 240€. Pas rentable pour l'effort commercial.</p>
+          </div>
+          <div style={{background:"#e8f5ee",borderLeft:"4px solid #1a6b3a",padding:14}}>
+            <div style={{fontSize:11,fontWeight:700,color:"#1a6b3a",marginBottom:6}}>La réalité opérationnelle</div>
+            <p style={{fontSize:11,color:"#374151",lineHeight:1.6}}>10 000 personnes → il faut 50 000 gobelets pour tenir l'année :<br/>
+            • 3 jours de rotation sans lavage = ×3 minimum<br/>
+            • Pertes + casse = +15%<br/>
+            • Stock de sécurité = +10%<br/>
+            <strong>CA = 15 000€ · Commission = 1 200€</strong></p>
           </div>
         </div>
         <SimGenerique />
       </div>
 
-      {/* Simulation franchise */}
+      {/* === BLOC FRANCHISE === */}
       <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:12,padding:20,marginBottom:16}}>
-        <div style={{fontSize:12,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:8}}>
-          La simulation franchise nationale — Le grand coup
-        </div>
-        <p style={{fontSize:12,color:"#4b6358",lineHeight:1.6,marginBottom:14}}>
-          Un seul contact au siège d'une franchise nationale peut ouvrir 50 à 600 restaurants simultanément.
-          La formule : <strong>Nb restaurants × taux d'adhésion × consommation × multiplicateur stock = volume à vendre</strong>
-        </p>
+        <div style={{fontSize:10,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>Le grand coup franchise</div>
+        <div style={{fontSize:20,fontWeight:800,color:"#0d3340",marginBottom:8}}>Si vous connaissez quelqu'un chez une <span style={{color:"#1a6b3a"}}>enseigne nationale</span>…</div>
+        <p style={{fontSize:12,color:"#4b6358",lineHeight:1.7,marginBottom:14}}>Un seul contact au siège d'une franchise nationale peut ouvrir 50 à 600 restaurants simultanément. La formule : <strong>Nb restaurants × taux d'adhésion × consommation × multiplicateur stock = volume à vendre</strong></p>
         <SimFranchise />
-        <div style={{marginTop:12,background:"#fffbeb",borderLeft:"4px solid #f0a500",padding:"10px 14px",fontSize:11,color:"#5a4010",lineHeight:1.6}}>
+        <div style={{marginTop:12,background:"#fffbeb",borderLeft:"4px solid #f0a500",padding:"10px 14px",fontSize:11,color:"#5a4010",lineHeight:1.7}}>
           <strong>Franchises à cibler nationalement :</strong> Hippopotamus (120 restaus), Léon de Bruxelles (65), Big Fernand (45), O'Tacos (300+), Pitaya Thai (150), Pokawa (130), Holy Cow (60), Eat Sushi (200), Côté Sushi (220), Subway France (700+), Burger King France (500+), KFC France (380+), Five Guys France (25), Chipotle France (20)...
         </div>
       </div>
 
-      {/* Toutes les gammes */}
+      {/* === RELAIS CROISSANCE === */}
       <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:12,padding:20}}>
-        <div style={{fontSize:12,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:14}}>
-          Les 6 gammes Re-uz — Ce qu'on vend selon le client
-        </div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(250px,1fr))",gap:10}}>
+        <div style={{fontSize:10,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>Relais de croissance</div>
+        <div style={{fontSize:20,fontWeight:800,color:"#0d3340",marginBottom:14}}>4 marchés en plus <span style={{color:"#1a6b3a"}}>que l'Ecocup classique</span></div>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:10}}>
           {[
-            {col:"#1a6b3a",icon:"🥤",nom:"Ecocup SERVICE",desc:"Pour les clients sans plonge. 0,20€/gob/rotation. Commission 12% récurrente sur 48 mois. Le Graal commercial.",cibles:"Festivals, campings, hippodromes, assos sportives"},
-            {col:"#0d3340",icon:"🥤",nom:"Ecocup ACHAT (vente)",desc:"Pour clients avec plonge ET volume >5 000 gob. 0,30€/gob × ×4-5 multiplicateur. Commission 8%. Renouvellement annuel IML.",cibles:"Stades, grandes salles, parcs à thème"},
-            {col:"#7c3aed",icon:"🍺",nom:"Beer Up System",desc:"Tireuse bière brevetée. Remplissage par le fond. Col de mousse parfait. Cashless. Self-service. Location tireuse + gobelets récurrents.",cibles:"CHR, bars à bière, brasseries, hotel bar"},
-            {col:"#b45309",icon:"☕",nom:"Newcy (pause café)",desc:"Circuit fermé pour entreprises. Collecte-lave-restitue. CSRD oblige les entreprises +250 salariés. Commission 12% récurrente.",cibles:"Entreprises, sièges sociaux, coworking"},
-            {col:"#475569",icon:"🍽️",nom:"Pure (vaisselle réemployable)",desc:"Bols, assiettes, verres réemployables. Sans BPA, micro-ondes, lave-vaisselle. Pour la restauration collective et les events.",cibles:"Cantines, restauration collective, events haut de gamme"},
-            {col:"#059669",icon:"🥡",nom:"Kiobox (restauration emporter)",desc:"Contenants réemployables pour la restauration à emporter. Obligation légale 2025. Achat + lavage + R&D.",cibles:"Fast food, restauration rapide, food trucks"},
-          ].map((g,i) => (
-            <div key={i} style={{background:g.col+"10",border:`1px solid ${g.col}40`,borderRadius:10,padding:14}}>
-              <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}>
-                <span style={{fontSize:20}}>{g.icon}</span>
-                <span style={{fontSize:12,fontWeight:700,color:g.col}}>{g.nom}</span>
-              </div>
-              <p style={{fontSize:11,color:"#374151",lineHeight:1.5,marginBottom:6}}>{g.desc}</p>
-              <div style={{fontSize:10,color:"#888"}}>Cibles → {g.cibles}</div>
+            {i:"🍺",t:"Beer Up",d:"Tireuse bière brevetée. Remplissage par le fond. Nouveau segment CHR, campings, hôtellerie plein air. Cashless intégré."},
+            {i:"☕",t:"Newcy",d:"Solution pause café entreprises. Collecte-lave-restitue. Marché RSE en explosion avec CSRD."},
+            {i:"🥡",t:"Kiobox",d:"Restauration à emporter. Obligation légale 2025. Achat + lavage logistique + R&D sur mesure."},
+            {i:"🍷",t:"Pure & Cocktail & Vin",d:"Vaisselle réemployable + verres à vin et flûtes. Mariages, réceptions, salons gastronomiques."},
+          ].map((r,i)=>(
+            <div key={i} style={{background:"#f4f7f5",borderRadius:10,padding:14,textAlign:"center"}}>
+              <div style={{fontSize:28,marginBottom:8}}>{r.i}</div>
+              <div style={{fontSize:12,fontWeight:700,color:"#0d3340",marginBottom:5}}>{r.t}</div>
+              <div style={{fontSize:10,color:"#4b6358",lineHeight:1.4}}>{r.d}</div>
             </div>
           ))}
         </div>
       </div>
+
     </div>
   );
 }
 
-/* ============================================================
-   APP
-============================================================ */
 function App() {
   const [view, setView] = React.useState("generique");
   const villeKeys = Object.keys(VILLES);
