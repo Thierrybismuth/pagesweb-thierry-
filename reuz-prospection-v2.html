@@ -444,7 +444,7 @@ function SimFranchise() {
   const restausAdh = Math.round(nbRestaus * tauxAdh / 100);
 
   // ACHAT : stock ×5 × 0,30€ · com 8% · one-shot annuel
-  const gobeletsAchat = restausAdh * consoJ * jours * 5;
+  const gobeletsAchat = restausAdh * consoJ * 5;
   const caAchat = gobeletsAchat * 0.30;
   const comAchat = caAchat * 0.08;
 
@@ -500,11 +500,13 @@ function SimFranchise() {
           <input type="range" min={50} max={500} step={10} value={consoJ} onChange={e=>setConsoJ(+e.target.value)} style={{width:"100%",accentColor:"#60a5fa"}}/>
           <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:2}}>{consoJ} gobelets/j</div>
         </div>
-        <div>
-          <div style={{fontSize:10,color:"rgba(255,255,255,0.45)",marginBottom:4}}>Jours ouverts / an</div>
-          <input type="range" min={200} max={365} step={5} value={jours} onChange={e=>setJours(+e.target.value)} style={{width:"100%",accentColor:"#60a5fa"}}/>
-          <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:2}}>{jours} jours</div>
-        </div>
+        {!isAchat && (
+          <div>
+            <div style={{fontSize:10,color:"rgba(255,255,255,0.45)",marginBottom:4}}>Jours ouverts / an</div>
+            <input type="range" min={200} max={365} step={5} value={jours} onChange={e=>setJours(+e.target.value)} style={{width:"100%",accentColor:"#60a5fa"}}/>
+            <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:2}}>{jours} jours</div>
+          </div>
+        )}
       </div>
 
       {isAchat ? (
@@ -513,7 +515,7 @@ function SimFranchise() {
             <div style={{textAlign:"center"}}>
               <div style={{fontSize:9,color:"rgba(255,255,255,0.45)",marginBottom:3}}>Gobelets commandés / an (×5)</div>
               <div style={{fontSize:17,fontWeight:800,color:"#60a5fa"}}>{fmt(gobeletsAchat)}</div>
-              <div style={{fontSize:9,color:"rgba(255,255,255,0.35)"}}>{fmt(restausAdh)} restos × {consoJ}/j × {jours}j × 5</div>
+              <div style={{fontSize:9,color:"rgba(255,255,255,0.35)"}}>{fmt(restausAdh)} restos × {consoJ} gob/j × 5</div>
             </div>
             <div style={{textAlign:"center"}}>
               <div style={{fontSize:9,color:"rgba(255,255,255,0.45)",marginBottom:3}}>CA vente annuel</div>
