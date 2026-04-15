@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADA Nîmes & Alès — Plan de financement</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2e44;
+    --amber: #c8873a;
+    --amber-light: #e8a85a;
+    --cream: #f7f5f0;
+    --grey: #6b7280;
+    --light-grey: #e5e7eb;
+    --green: #2d6a4f;
+    --red: #c0392b;
+    --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--navy); font-size: 14px; line-height: 1.6; }
+  .page { max-width: 900px; margin: 0 auto; padding: 40px 30px; }
+
+  .header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    border-bottom: 3px solid var(--amber); padding-bottom: 24px; margin-bottom: 36px;
+  }
+  .header h1 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 700; line-height: 1.2; }
+  .header h1 span { color: var(--amber); }
+  .header p { font-size: 12px; color: var(--grey); margin-top: 6px; }
+  .ada-badge { background: var(--navy); color: var(--white); font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; padding: 8px 18px; letter-spacing: 2px; }
+
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; border-left: 4px solid var(--amber); padding-left: 14px; margin-bottom: 16px; margin-top: 32px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+
+  .card { background: var(--white); border: 1px solid var(--light-grey); border-top: 3px solid var(--amber); padding: 16px 18px; }
+  .card.navy { background: var(--navy); color: var(--white); border-top-color: var(--amber-light); }
+  .card.green { border-top-color: var(--green); }
+  .card h3 { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .card.navy h3 { color: var(--amber-light); }
+  .card p, .card li { font-size: 12.5px; font-weight: 300; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '→ '; color: var(--amber); font-weight: 600; }
+  .card.navy ul li::before { color: var(--amber-light); }
+
+  .big-number { font-size: 28px; font-weight: 700; color: var(--amber); }
+  .big-number.white { color: var(--amber-light); }
+  .label { font-size: 11px; color: var(--grey); margin-top: 2px; }
+  .label.white { color: rgba(255,255,255,0.7); }
+
+  .flow-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+  .flow-box { background: var(--navy); color: var(--white); padding: 10px 14px; text-align: center; font-size: 12px; min-width: 120px; }
+  .flow-box .val { font-size: 18px; font-weight: 700; color: var(--amber-light); }
+  .flow-arrow { font-size: 20px; color: var(--amber); font-weight: 700; }
+
+  .timeline { margin: 16px 0; }
+  .timeline-row { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--light-grey); }
+  .timeline-dot { width: 12px; height: 12px; background: var(--amber); border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+  .timeline-dot.green { background: var(--green); }
+  .timeline-content { font-size: 13px; }
+  .timeline-content strong { color: var(--navy); }
+
+  .avantage-card { background: var(--white); border: 1px solid var(--light-grey); border-left: 4px solid var(--green); padding: 14px 16px; margin-bottom: 12px; }
+  .avantage-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .avantage-card .tag { display: inline-block; background: var(--green); color: var(--white); font-size: 10px; font-weight: 600; padding: 2px 8px; text-transform: uppercase; margin-bottom: 8px; }
+  .avantage-card p { font-size: 12.5px; color: #374151; line-height: 1.6; font-weight: 300; }
+  .avantage-card .chiffre { font-size: 18px; font-weight: 700; color: var(--green); margin-top: 8px; }
+
+  .garantie-box { background: linear-gradient(135deg, var(--navy) 0%, #2a4a6e 100%); color: var(--white); padding: 20px 24px; margin: 20px 0; border-left: 5px solid var(--amber); }
+  .garantie-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--amber-light); margin-bottom: 12px; }
+  .garantie-box p { font-size: 13px; font-weight: 300; line-height: 1.7; }
+  .garantie-box strong { color: var(--amber-light); }
+
+  .pistes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+  .piste { background: rgba(255,255,255,0.08); padding: 10px 12px; font-size: 12px; text-align: center; font-weight: 500; }
+  .piste.highlight { background: var(--amber); color: var(--navy); font-weight: 700; }
+
+  .disclaimer { background: #f9fafb; border: 1px solid #e5e7eb; padding: 12px 16px; margin-top: 24px; font-size: 11.5px; color: var(--grey); font-style: italic; }
+  .footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--light-grey); display: flex; justify-content: space-between; }
+  .footer p { font-size: 11px; color: var(--grey); }
+  .footer .brand { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 700; color: var(--navy); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <h1>Plan de financement<br><span>Reprise ADA Nîmes & Alès</span></h1>
+      <p>SAS Gard Mobilités — Cession en cours — Document de travail confidentiel<br>
+         Montage financier provisoire — Susceptible d'évoluer</p>
+    </div>
+    <div style="text-align:right">
+      <div class="ada-badge">ADA</div>
+      <p style="font-size:12px; color:var(--grey); margin-top:6px;">Préparé par Thierry Bismuth<br>thierry@thierrybismuth.com</p>
+    </div>
+  </div>
+
+  <!-- STRUCTURE DU PRIX -->
+  <div class="section-title">Structure du prix de cession</div>
+
+  <div class="flow-row">
+    <div class="flow-box"><div class="val">600 k€</div>Prix de cession global</div>
+    <div class="flow-arrow">−</div>
+    <div class="flow-box"><div class="val">80 k€</div>Crédit vendeur (Sébastien)<br><span style="font-size:10px; opacity:0.7;">remboursé sur 3 à 5 ans</span></div>
+    <div class="flow-arrow">=</div>
+    <div class="flow-box" style="background:var(--amber); color:var(--navy);"><div class="val" style="color:var(--navy);">520 k€</div>Trésorerie à financer</div>
+  </div>
+
+  <!-- APPORTS -->
+  <div class="section-title">Constitution de l'apport (35% × 520 k€ = 182 k€)</div>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="big-number">20 k€</div>
+      <div class="label">Apport personnel Mickaël</div>
+    </div>
+    <div class="card">
+      <div class="big-number">40 k€</div>
+      <div class="label">France Initiative</div>
+    </div>
+    <div class="card">
+      <div class="big-number">40 k€</div>
+      <div class="label">Réseau Entreprendre</div>
+    </div>
+  </div>
+
+  <div class="card navy" style="margin-bottom:16px;">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <h3>Manque à trouver : 80 k€</h3>
+        <p>Via un associé stratégique — apport en fonds propres contre participation minoritaire<br>
+        progressivement rachetée par Mickaël sur la durée du crédit.</p>
+      </div>
+      <div style="text-align:center; padding-left:20px;">
+        <div class="big-number white">80 k€</div>
+        <div class="label white">associé à trouver</div>
+      </div>
+    </div>
+    <div class="pistes" style="margin-top:14px;">
+      <div class="piste highlight">Ewigo</div>
+      <div class="piste highlight">Carrossier local</div>
+      <div class="piste">Client Würth</div>
+      <div class="piste">Ziegler</div>
+      <div class="piste">Ludovic (EC)</div>
+      <div class="piste">Franchisé SAP</div>
+    </div>
+  </div>
+
+  <!-- MONTAGE SOCIETAIRE -->
+  <div class="section-title">Montage sociétaire et calendrier de rachat</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Répartition initiale</h3>
+      <ul>
+        <li>Associé stratégique : <strong>51%</strong></li>
+        <li>Mickaël : <strong>49%</strong></li>
+        <li>L'associé prête les 80 k€ contre participation majoritaire temporaire</li>
+        <li>Le crédit bancaire de 520 k€ est remboursé intégralement par Mickaël</li>
+      </ul>
+    </div>
+    <div class="card green">
+      <h3>Progression vers 100%</h3>
+      <ul>
+        <li>Au fur et à mesure des remboursements : rachat progressif des parts de l'associé</li>
+        <li>À l'issue du crédit : <strong>100% Mickaël de plein droit</strong></li>
+        <li>Clause de remboursement anticipé si l'activité le permet</li>
+        <li>Dividendes versés à l'associé au prorata (51%) pendant la durée</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- GARANTIE DE RENDEMENT -->
+  <div class="garantie-box">
+    <h3>🔒 Garantie de rendement pour l'associé</h3>
+    <p>Si les dividendes perçus par l'associé génèrent un rendement annuel <strong>inférieur à 8 %</strong> 
+    sur les 80 k€ investis, Mickaël s'engage, à l'issue du crédit, à verser le complément 
+    nécessaire pour atteindre un rendement effectif de <strong>10 % par an</strong> sur toute la durée. 
+    Cette clause protège l'associé d'un scénario de faible distribution et sécurise 
+    la relation financière sur la durée.</p>
+  </div>
+
+  <!-- AVANTAGES INDUSTRIELS -->
+  <div class="section-title">Avantages industriels proposés à l'associé stratégique</div>
+
+  <p style="font-size:13px; color:#374151; margin-bottom:16px; font-weight:300;">
+    En complément du rendement financier, deux profils d'associés peuvent bénéficier 
+    d'un avantage opérationnel direct, renforçant la valeur du partenariat au-delà du seul apport en capital.
+  </p>
+
+  <div class="avantage-card">
+    <div class="tag">Profil Ewigo</div>
+    <h3>Dépôt-vente des véhicules en fin de leasing</h3>
+    <p>En fin de contrat de leasing, au lieu de restituer les véhicules au bailleur, 
+    ADA les confie en dépôt-vente à Ewigo. En cas de vente, ADA rachète le véhicule 
+    au leaser plutôt que de le restituer, et Ewigo encaisse sa commission dans les 
+    conditions habituelles de son réseau. Avantage pour ADA : optimisation de la 
+    valeur résiduelle des véhicules. Avantage pour Ewigo : flux régulier de véhicules 
+    de qualité provenant d'un parc entretenu.</p>
+    <div class="chiffre">Parc actuel : 151 véhicules — renouvellements progressifs 2025–2027</div>
+  </div>
+
+  <div class="avantage-card">
+    <div class="tag">Profil Carrossier local</div>
+    <h3>Orientation de 80 % du budget carrosserie ADA</h3>
+    <p>ADA s'engage à orienter <strong>80 % de son budget annuel de réparations carrosserie</strong> 
+    vers l'atelier partenaire pendant toute la durée du crédit. Les 20 % restants 
+    concernent uniquement des réparations techniques spécifiques (véhicules électriques, 
+    obligations constructeur, camions lourds) pour lesquelles une expertise particulière 
+    est requise. Ce partenariat est formalisé dans les statuts ou dans une convention 
+    de partenariat annexée.</p>
+    <div class="chiffre">~240 k€/an de CA atelier garanti — soit 720 k€ à 1,2 M€ sur 3 à 5 ans</div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section-title">Calendrier synthétique</div>
+
+  <div class="timeline">
+    <div class="timeline-row">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content"><strong>J0 — Closing :</strong> Mickaël entre à 49%, associé à 51%. Crédit bancaire 520 k€ débloqué. Crédit vendeur 80 k€ acté sur 3–5 ans.</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content"><strong>Années 1 à N :</strong> Remboursement crédit par Mickaël. Rachat progressif des parts de l'associé. Dividendes versés au prorata. Convention carrosserie / dépôt-vente Ewigo active.</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content"><strong>Option remboursement anticipé :</strong> Si l'activité génère une trésorerie excédentaire, Mickaël peut rembourser par anticipation et accélérer le rachat des parts.</div>
+    </div>
+    <div class="timeline-row" style="border-bottom:none;">
+      <div class="timeline-dot green"></div>
+      <div class="timeline-content"><strong>Fin du crédit :</strong> Mickaël devient propriétaire à 100% de plein droit. Régularisation du rendement associé si < 8%/an (jusqu'à 10%/an). Fin de la convention industrielle ou reconduction libre.</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    Document de travail provisoire préparé par Thierry Bismuth dans le cadre de la mission d'accompagnement à la cession. 
+    Le montage financier, la valorisation, les engagements industriels et les modalités de rachat des parts 
+    devront être validés par un avocat d'affaires et un expert-comptable avant toute signature. 
+    Les chiffres et pourcentages sont indicatifs et susceptibles d'évoluer selon les négociations.
+  </div>
+
+  <div class="footer">
+    <p>Document confidentiel — Destiné exclusivement aux parties prenantes de l'opération</p>
+    <div class="brand">ODYSKILLS<br><span style="font-family:'Outfit',sans-serif; font-size:11px; font-weight:300; color:var(--grey);">Multi-Potentiel</span></div>
+  </div>
+
+</div>
+</body>
+</html>
