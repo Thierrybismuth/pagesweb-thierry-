@@ -485,7 +485,7 @@ function SimFranchise() {
       <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:12,marginBottom:14}}>
         <div>
           <div style={{fontSize:10,color:"rgba(255,255,255,0.45)",marginBottom:4}}>Nombre de restaurants France</div>
-          <input type="range" min={10} max={600} step={10} value={nbRestaus} onChange={e=>setNbRestaus(+e.target.value)} style={{width:"100%",accentColor:"#60a5fa"}}/>
+          <input type="range" min={1} max={600} step={1} value={nbRestaus} onChange={e=>setNbRestaus(+e.target.value)} style={{width:"100%",accentColor:"#60a5fa"}}/>
           <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:2}}>{nbRestaus} restaurants</div>
         </div>
         <div>
