@@ -580,6 +580,49 @@ function SimCard({ sim }) {
   );
 }
 
+function SimMultiFranchise({ gob_unit }) {
+  const fmt = n => Math.round(n).toLocaleString("fr-FR");
+  const nb = 5;
+  const jours = 280;
+  const g = gob_unit * nb;
+  // Vente : g × 1.5 (mult réduit pour restos avec plonge) × 0.30
+  const caV = g * 1.5 * 0.30;
+  const comV = caV * 0.08;
+  // Location : g × jours × 0.20
+  const caL = g * jours * 0.20;
+  const comL = caL * 0.12;
+  return (
+    <div style={{
+      background:"linear-gradient(135deg, #0d1a2d 0%, #1a2e44 100%)",
+      border:"2px solid #f0a500",
+      borderRadius:10,padding:"14px 16px",marginTop:10
+    }}>
+      <div style={{fontSize:9,color:"#f0a500",fontWeight:800,textTransform:"uppercase",letterSpacing:1.5,marginBottom:8}}>
+        Vous connaissez un multi-franchisé local avec 5 restaurants dans le département ?
+      </div>
+      <div style={{fontSize:10,color:"rgba(255,255,255,0.55)",marginBottom:10}}>
+        Base : {nb} restaurants × ~{gob_unit} gobelets/j estimés × {jours} jours ouverts
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+        <div style={{background:"rgba(240,165,0,0.12)",border:"1px solid rgba(240,165,0,0.3)",borderRadius:7,padding:"9px 12px"}}>
+          <div style={{fontSize:8,color:"#f0a500",fontWeight:700,marginBottom:3,textTransform:"uppercase"}}>Si vente (avec plonge)</div>
+          <div style={{fontSize:15,fontWeight:900,color:"white"}}>{fmt(caV)}€</div>
+          <div style={{fontSize:9,color:"rgba(255,255,255,0.45)",marginTop:1}}>{fmt(g * 1.5)} gob × 0,30€ · com 8% = <strong style={{color:"#f0a500"}}>{fmt(comV)}€</strong></div>
+        </div>
+        <div style={{background:"rgba(26,107,58,0.15)",border:"1px solid rgba(26,107,58,0.5)",borderRadius:7,padding:"9px 12px"}}>
+          <div style={{fontSize:8,color:"#6fca96",fontWeight:700,marginBottom:3,textTransform:"uppercase"}}>Si location (sans plonge)</div>
+          <div style={{fontSize:15,fontWeight:900,color:"white"}}>{fmt(caL)}€/an</div>
+          <div style={{fontSize:9,color:"rgba(255,255,255,0.45)",marginTop:1}}>{fmt(g)} × {jours}j × 0,20€ · com 12% = <strong style={{color:"#6fca96"}}>{fmt(comL)}€/an</strong></div>
+        </div>
+      </div>
+      <div style={{marginTop:8,fontSize:9,color:"rgba(255,255,255,0.35)",fontStyle:"italic"}}>
+        Sur 48 mois (contrat location) : {fmt(comL * 4)}€ de commission récurrente sur ce seul franchisé local.
+      </div>
+    </div>
+  );
+}
+
+
 function VilleView({ v }) {
   const data = VILLES[v];
   if (!data) return null;
@@ -671,6 +714,12 @@ function VilleView({ v }) {
                 );
               })}
             </div>
+            {cat.key === "C" && catSims.length > 0 && (() => {
+              // Calculer la moyenne des gob_unit (g/nb) pour cette ville
+              // On prend le gob moyen sur les clients fast-food (les 3 premiers généralement)
+              const avgGob = Math.round(catSims.slice(0, Math.min(3, catSims.length)).reduce((s,x)=>s+x.g,0) / Math.min(3, catSims.length) / 5);
+              return <SimMultiFranchise gob_unit={Math.max(60, Math.min(300, avgGob))} />;
+            })()}
           </div>
         );
       })}
