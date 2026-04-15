@@ -706,7 +706,65 @@ function GeneriqueView() {
   return (
     <div style={{maxWidth:960,margin:"0 auto",padding:"16px 16px 48px"}}>
 
-      {/* === BLOC MARCHÉ === */}
+      {/* === AVANTAGE CONCURRENTIEL MAJEUR === */}
+      <div style={{background:"#0d1a2d",border:"2px solid #f0a500",borderRadius:14,padding:22,marginBottom:16}}>
+        <div style={{fontSize:9,color:"#f0a500",fontWeight:700,textTransform:"uppercase",letterSpacing:2,marginBottom:10}}>L'argument décisif — Ce que 95% des concurrents ne peuvent pas faire</div>
+        <div style={{fontSize:20,fontWeight:900,color:"white",lineHeight:1.3,marginBottom:16}}>
+          Sur la vente, il y a de la concurrence.<br/>
+          <span style={{color:"#6fca96"}}>Sur le service, il n'y en a presque aucune.</span>
+        </div>
+
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:16}}>
+          <div style={{background:"rgba(220,38,38,0.12)",border:"1px solid rgba(220,38,38,0.3)",borderRadius:10,padding:14}}>
+            <div style={{fontSize:11,fontWeight:800,color:"#f87171",marginBottom:10}}>❌ Ce que tout le monde peut faire</div>
+            <div style={{display:"flex",flexDirection:"column",gap:7}}>
+              {["Fabriquer du gobelet plastique réemployable","Imprimer un logo dessus (sérigraphie, IML)","Vendre un stock à un client","Avoir un site e-commerce et un catalogue"].map((t,i)=>(
+                <div key={i} style={{display:"flex",gap:8,alignItems:"flex-start",fontSize:11,color:"rgba(255,255,255,0.6)"}}>
+                  <span style={{color:"#f87171",flexShrink:0}}>—</span><span>{t}</span>
+                </div>
+              ))}
+            </div>
+            <div style={{marginTop:10,fontSize:10,color:"rgba(255,255,255,0.4)",fontStyle:"italic"}}>Des centaines d'acteurs en France et en Europe.</div>
+          </div>
+
+          <div style={{background:"rgba(26,107,58,0.15)",border:"1px solid rgba(26,107,58,0.5)",borderRadius:10,padding:14}}>
+            <div style={{fontSize:11,fontWeight:800,color:"#6fca96",marginBottom:10}}>✅ Ce que Re-uz est l'un des seuls à pouvoir faire</div>
+            <div style={{display:"flex",flexDirection:"column",gap:7}}>
+              {[
+                "Des centres de nettoyage industriels partout en France",
+                "Une flotte logistique — camions, tournées, collectes programmées",
+                "Un service clé en main : livraison propre, collecte sale, lavage, retour",
+                "La capacité d'honorer un contrat de service sur 48 mois",
+                "Un modèle certifié et industrialisé dans 6 pays",
+              ].map((t,i)=>(
+                <div key={i} style={{display:"flex",gap:8,alignItems:"flex-start",fontSize:11,color:"rgba(255,255,255,0.85)"}}>
+                  <span style={{color:"#6fca96",flexShrink:0}}>✓</span><span>{t}</span>
+                </div>
+              ))}
+            </div>
+            <div style={{marginTop:10,fontSize:10,color:"#6fca96",fontStyle:"italic"}}>Accessible à moins de 5% du marché. Re-uz en fait partie.</div>
+          </div>
+        </div>
+
+        <div style={{background:"rgba(240,165,0,0.1)",border:"1px solid rgba(240,165,0,0.35)",borderRadius:8,padding:"12px 16px"}}>
+          <div style={{fontSize:12,fontWeight:800,color:"#f0a500",marginBottom:6}}>Ce que ça signifie pour vous en tant que membre partenaire :</div>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:10}}>
+            {[
+              ["🎯","Sur la vente","Vous êtes compétitifs mais dans un marché disputé. Argument : qualité Re-uz, IML photo-qualité, réseau national."],
+              ["★","Sur le service","Vous êtes seuls ou presque. Le client qui n'a pas de plonge n'a nulle part ailleurs où aller. C'est là que la commission est récurrente sur 48 mois."],
+              ["🏆","Le bon message terrain","Ne commencez pas par la vente. Demandez d'abord : avez-vous une plonge ? Si non — vous avez gagné avant même d'avoir sorti un catalogue."],
+            ].map(([icon,titre,desc],i)=>(
+              <div key={i} style={{background:"rgba(255,255,255,0.05)",borderRadius:8,padding:"10px 12px"}}>
+                <div style={{fontSize:20,marginBottom:5}}>{icon}</div>
+                <div style={{fontSize:11,fontWeight:700,color:"white",marginBottom:4}}>{titre}</div>
+                <div style={{fontSize:10,color:"rgba(255,255,255,0.6)",lineHeight:1.5}}>{desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* === BLOC MARCHÉ === */
       <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:12,padding:20,marginBottom:16}}>
         <div style={{fontSize:10,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>Le marché</div>
         <div style={{fontSize:20,fontWeight:800,color:"#0d3340",marginBottom:14}}>Un marché <span style={{color:"#1a6b3a"}}>obligatoire</span> en explosion</div>
