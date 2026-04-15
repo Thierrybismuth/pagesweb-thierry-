@@ -3,477 +3,369 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Re-uz · Fiches Cibles</title>
+<title>Re-uz · Fiches Cibles Membres Partenaires</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:#f4f7f5;}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:"Segoe UI",system-ui,sans-serif; background:#f4f7f5; }
+input[type=range] { cursor:pointer; }
+@media print {
+  .no-print, .nav-bar { display:none !important; }
+  body { background:white; }
+}
 </style>
 </head>
 <body>
 <div id="root"></div>
 <script type="text/babel">
 
-/* ─────────────────────────────────────────────
-   PRODUCT BADGES
-   ─────────────────────────────────────────── */
-const BADGE = {
-  service: { label:'Ecocup SERVICE', color:'#1a6b3a', bg:'#e8f5ee', desc:'Gobelets livrés, lavés, récupérés par Re-uz. Commission 12% récurrente.' },
-  vente:   { label:'Ecocup VENTE',   color:'#b45309', bg:'#fffbeb', desc:'Vente one-shot de gobelets personnalisés. Commission 8%. Renouvellement annuel.' },
-  beerup:  { label:'Beer Up SYSTEM', color:'#7c3aed', bg:'#f3f0ff', desc:'Tireuse bière innovante — remplissage par le fond. Location machine + consommables récurrents.' },
-  newcy:   { label:'Newcy PAUSE CAFÉ',color:'#0369a1', bg:'#eff6ff', desc:'Circuit fermé cafétéria : collecte-lave-restitue. Abonnement mensuel.' },
+const BASE = "https://thierrybismuth.github.io/pagesweb-thierry-";
+
+const PRODUITS = {
+  service: { label:"Ecocup SERVICE", bg:"#1a6b3a", desc:"0,20eu/gob - recurent - 48 mois" },
+  vente:   { label:"Ecocup VENTE",   bg:"#0d3340", desc:"0,30eu/gob - one-shot - IML annuel" },
+  beerup:  { label:"Beer Up System", bg:"#7c3aed", desc:"Tireuse biere brevetee - cashless - self-service" },
+  newcy:   { label:"Newcy Cafe",     bg:"#b45309", desc:"Pause cafe cle en main - abonnement mensuel" },
 };
 
-function ProdBadge({type, big}) {
-  const b = BADGE[type];
-  return <span style={{
-    display:'inline-flex', alignItems:'center', gap:5,
-    background:b.bg, color:b.color, border:`1px solid ${b.color}44`,
-    padding: big ? '5px 14px' : '3px 10px',
-    borderRadius:20, fontSize: big ? 12 : 10, fontWeight:700,
-    whiteSpace:'nowrap'
-  }}>
-    {type==='service' && '🔄'}
-    {type==='vente'   && '🛒'}
-    {type==='beerup'  && '🍺'}
-    {type==='newcy'   && '☕'}
-    {' '}{b.label}
-  </span>;
-}
+function Sim({ cible }) {
+  const { produit, gob0, freq0, lgob, lfreq, freqMax } = cible.sim;
+  const [g, setG] = React.useState(gob0);
+  const [f, setF] = React.useState(freq0);
+  const fmt = n => Math.round(n).toLocaleString("fr-FR");
 
-/* ─────────────────────────────────────────────
-   SIMULATOR COMPONENT
-   ─────────────────────────────────────────── */
-function Sim({cfg, col}) {
-  const [vals, setVals] = React.useState(cfg.map(c=>c.def));
-  const result = cfg.reduce((acc,c,i) => acc * vals[i], 1);
-  const isService = cfg.some(c=>c.type==='service');
-  const comRate = isService ? 0.12 : 0.08;
-  const com = Math.round(result * comRate);
-  const com48 = isService ? com*4 : com;
-  const f = n => n.toLocaleString('fr-FR');
+  let caS=0,caV=0,comS=0,comV=0,com48=0,caB=0,comB=0;
+  if (produit==="service"||produit==="service+beerup"||produit==="service+vente") {
+    caS=g*f*0.20; comS=caS*0.12;
+  }
+  if (produit==="vente"||produit==="service+vente") {
+    caV=g*(produit==="vente"?f:1)*0.30; comV=caV*0.08;
+  }
+  if (produit==="beerup"||produit==="service+beerup") {
+    caB=g*(produit==="beerup"?f:1)*0.20; comB=caB*0.12;
+  }
+  if (produit==="newcy") { caS=g*f*0.15; comS=caS*0.12; }
+  com48 = comS*4 + comV + comB*4;
+
   return (
-    <div style={{background:'#0d1f14',borderRadius:12,padding:20,marginTop:12}}>
-      <div style={{fontSize:10,color:'#6fca96',fontWeight:700,textTransform:'uppercase',letterSpacing:1,marginBottom:14}}>
-        📊 Simulateur — 1 client de cette cible
-      </div>
-      <div style={{display:'grid',gridTemplateColumns:`repeat(${cfg.length},1fr)`,gap:12,marginBottom:16}}>
-        {cfg.map((c,i)=>(
-          <div key={i}>
-            <div style={{fontSize:10,color:'rgba(255,255,255,0.45)',marginBottom:5}}>{c.label}</div>
-            <input type="range" min={c.min} max={c.max} step={c.step||1} value={vals[i]}
-              onChange={e=>{const nv=[...vals];nv[i]=+e.target.value;setVals(nv);}}
-              style={{width:'100%',accentColor:col}}/>
-            <div style={{fontSize:16,fontWeight:800,color:'white',marginTop:3}}>{f(vals[i])}{c.unit||''}</div>
-          </div>
-        ))}
-      </div>
-      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:8}}>
-        <div style={{background:'rgba(255,255,255,0.05)',borderRadius:8,padding:'10px 12px'}}>
-          <div style={{fontSize:9,color:'rgba(255,255,255,0.4)',marginBottom:3}}>CA {isService?'service':'vente'} / an</div>
-          <div style={{fontSize:18,fontWeight:900,color:'#6fca96'}}>{f(Math.round(result))}€</div>
+    <div style={{background:"#111c14",color:"white",borderRadius:12,padding:18,marginTop:14}}>
+      <div style={{fontSize:10,color:"#6fca96",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:14}}>Simulateur - 1 client</div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:16}}>
+        <div>
+          <div style={{fontSize:10,color:"rgba(255,255,255,0.45)",marginBottom:4}}>{lgob}</div>
+          <input type="range" min={Math.max(50,Math.round(gob0*0.2))} max={gob0*3} step={50} value={g} onChange={e=>setG(+e.target.value)} style={{width:"100%",accentColor:"#f0a500"}}/>
+          <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:2}}>{fmt(g)}</div>
         </div>
-        <div style={{background:'rgba(255,255,255,0.05)',borderRadius:8,padding:'10px 12px'}}>
-          <div style={{fontSize:9,color:'rgba(255,255,255,0.4)',marginBottom:3}}>Votre commission / an</div>
-          <div style={{fontSize:18,fontWeight:900,color:'white'}}>{f(com)}€</div>
-          <div style={{fontSize:9,color:'rgba(255,255,255,0.3)',marginTop:2}}>{isService?'12%':'8%'} du CA</div>
+        <div>
+          <div style={{fontSize:10,color:"rgba(255,255,255,0.45)",marginBottom:4}}>{lfreq}</div>
+          <input type="range" min={1} max={freqMax||freq0*2} step={1} value={f} onChange={e=>setF(+e.target.value)} style={{width:"100%",accentColor:"#7c3aed"}}/>
+          <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:2}}>{f}</div>
         </div>
-        <div style={{background:col+'33',border:`1px solid ${col}66`,borderRadius:8,padding:'10px 12px'}}>
-          <div style={{fontSize:9,color:'rgba(255,255,255,0.6)',marginBottom:3}}>{isService?'Com. sur 48 mois':'Ticket commission'}</div>
-          <div style={{fontSize:18,fontWeight:900,color:'white'}}>{f(com48)}€</div>
-          {isService && <div style={{fontSize:9,color:'rgba(255,255,255,0.35)',marginTop:2}}>durée contrat standard</div>}
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(130px,1fr))",gap:8}}>
+        {caS>0 && <div style={{background:"rgba(255,255,255,0.06)",borderRadius:8,padding:"10px 12px"}}>
+          <div style={{fontSize:9,color:"rgba(255,255,255,0.4)",marginBottom:2}}>CA service / an</div>
+          <div style={{fontSize:17,fontWeight:800,color:"#6fca96"}}>{fmt(caS)}eu</div>
+          <div style={{fontSize:9,color:"rgba(255,255,255,0.3)"}}>com 12% = {fmt(comS)}eu/an</div>
+        </div>}
+        {caV>0 && <div style={{background:"rgba(255,255,255,0.06)",borderRadius:8,padding:"10px 12px"}}>
+          <div style={{fontSize:9,color:"rgba(255,255,255,0.4)",marginBottom:2}}>CA vente</div>
+          <div style={{fontSize:17,fontWeight:800,color:"white"}}>{fmt(caV)}eu</div>
+          <div style={{fontSize:9,color:"rgba(255,255,255,0.3)"}}>com 8% = {fmt(comV)}eu</div>
+        </div>}
+        {caB>0 && <div style={{background:"rgba(120,80,200,0.2)",borderRadius:8,padding:"10px 12px"}}>
+          <div style={{fontSize:9,color:"rgba(200,160,255,0.7)",marginBottom:2}}>CA Beer Up / an</div>
+          <div style={{fontSize:17,fontWeight:800,color:"#c4a0ff"}}>{fmt(caB)}eu</div>
+          <div style={{fontSize:9,color:"rgba(255,255,255,0.3)"}}>com 12% = {fmt(comB)}eu/an</div>
+        </div>}
+        <div style={{background:"rgba(240,165,0,0.18)",border:"1px solid rgba(240,165,0,0.4)",borderRadius:8,padding:"10px 12px"}}>
+          <div style={{fontSize:9,color:"#f0a500",marginBottom:2}}>Votre com. 48 mois</div>
+          <div style={{fontSize:17,fontWeight:800,color:"white"}}>{fmt(com48)}eu</div>
+          <div style={{fontSize:9,color:"rgba(255,255,255,0.4)"}}>duree contrat standard</div>
         </div>
       </div>
     </div>
   );
 }
 
-/* ─────────────────────────────────────────────
-   DATA
-   ─────────────────────────────────────────── */
 const CIBLES = [
-
-  /* ══════════ ECOCUP SERVICE ══════════ */
-  {
-    id:'camping', icon:'⛺', label:'Campings', col:'#1a6b3a', produits:['service'],
-    pitch:'Pas de plonge industrielle en plein air. Ils consomment des milliers de gobelets par saison et ne peuvent pas les laver. Re-uz livre, lave, récupère. C\'est le contrat récurrent parfait.',
-    pourquoi:[
-      'Bar de plage/piscine ouvert 120-150 jours — aucune capacité de lavage sur place',
-      'Loi AGEC : ERP avec bar = obligation réemploi. Contrôles DGCCRF en cours',
-      '"Camping zéro déchet" = argument de réservation sur Homair, Yelloh, 4-5 étoiles',
-      'Beer Up en upsell : self-service bière, cashless — nouveau revenu pour le gérant',
+  { id:"camping", icon:"⛺", label:"Campings", col:"#1a6b3a", priorite:"P1",
+    accroche:"Plein air, zero plonge, saison longue -- la cible service ideale.",
+    portrait:"Un camping 3-5 etoiles, c est un bar de plage ouvert 130 jours par an. Impossible d avoir une plonge industrielle sur une terrasse en plein air. Le gerant achete des jetables parce qu il n a pas le choix -- jusqu ici. Re-uz livre, lave, recupere. Le gerant ne touche plus a rien.",
+    produits:[
+      {id:"service", why:"Pas de capacite de lavage en plein air. Service = livraison propre avant saison + collecte sale a la fermeture. Aucune contrainte operationnelle."},
+      {id:"beerup", why:"Beer Up est fait pour les campings. Bar exterieur, self-service biere pression, cashless. Argument commercial fort pour le gerant envers ses clients."},
     ],
-    objection:{ q:'"On a déjà des verres"', r:'Combien vous coûtent vos jetables cette saison ? Avec le service Re-uz : zéro consommable, zéro lavage, et vous êtes en conformité AGEC.' },
-    sim:[
-      {label:'Gobelets actifs / jour',def:400,min:100,max:1200,step:50},
-      {label:'Jours de saison',def:130,min:60,max:180,step:5,type:'service'},
-      {label:'Tarif service (0,20€/gob)',def:0.20,min:0.20,max:0.20,step:0},
-    ],
-    simNote:'Volume × jours × 0,20€ = CA service. Votre commission : 12%/an × 4 ans.',
+    usage:["Plastique jetable au bar exterieur (loi AGEC non respectee)","Budget consommables 3 000 a 8 000eu/saison -- remplace par le service Re-uz","Pas de machine de lavage adaptee en plein air"],
+    objection:"On a deja nos verres.",
+    reponse:"Combien coutent vos jetables cette saison ? Avec Re-uz, vous ne rachetez plus rien et vous etes en regle. Resultat net souvent positif des la 1ere saison.",
+    sim:{produit:"service+beerup",gob0:400,freq0:130,lgob:"gobelets actifs / jour",lfreq:"jours de saison",freqMax:200},
+    ex:["Yelloh Village","Campings Capfun","Camping 4-5 etoiles independants","Centers Parcs"],
   },
-
-  {
-    id:'festival', icon:'🎪', label:'Festivals & events', col:'#0f766e', produits:['service'],
-    pitch:'Infrastructure zéro. Tentes provisoires, bars éphémères, aucune cuisine fixe. Le festival a des dizaines de milliers de gobelets à gérer pendant 3-5 jours — et aucun moyen de les laver sur place. Re-uz gère tout.',
-    pourquoi:[
-      'Infrastructure éphémère : aucune capacité de lavage sur site, même dans les grands festivals',
-      '1 agence événementielle ou producteur de tournées = 10 à 30 festivals/an automatiques',
-      'ABInBev, Heineken, Coca-Cola imposent "zéro jetable" dans leurs briefs de sponsoring',
-      'Gobelets personnalisés IML par artist ou marque = argument d\'édition collector',
+  { id:"festival", icon:"🎸", label:"Festivals & events", col:"#059669", priorite:"P1",
+    accroche:"Infrastructure zero, volume max -- le service rotation a son meilleur.",
+    portrait:"Un festival 3 jours sur un champ n a aucune infrastructure de lavage. Il commande les gobelets 48h avant, les utilise, les rend sales. Re-uz gere tout. Le volume par evenement est enorme (10 000 a 100 000 gobelets) mais la frequence est faible. La valeur est dans le volume unitaire et dans l imprime IML aux couleurs du festival.",
+    produits:[
+      {id:"service", why:"Infrastructure de lavage = 0. Service rotation = la seule option professionnelle. Re-uz gere livraison + collecte + lavage. L organisateur n achete rien, ne stocke rien."},
     ],
-    objection:{ q:'"On a déjà un prestataire"', r:'Quand se termine votre contrat ? Re-uz gère livraison-lavage-collecte sur site en J+1 — même pour les festivals de 50 000 personnes.' },
-    sim:[
-      {label:'Gobelets actifs / event',def:5000,min:500,max:50000,step:500},
-      {label:'Events / an',def:20,min:3,max:60,step:1,type:'service'},
-      {label:'Tarif service (0,20€)',def:0.20,min:0.20,max:0.20},
-    ],
-    simNote:'Un producteur de 20 festivals/an à 5 000 gob = 20 000€ CA service récurrent.',
+    usage:["Location de gobelets a des prestataires locaux -- logistique chaos","Achat de jetables en masse (interdit, amende AGEC)","Consigne artisanale avec cagettes et benevoles"],
+    objection:"On a deja un prestataire gobelet.",
+    reponse:"Quand se termine votre contrat ? Re-uz propose le service complet livraison-lavage-collecte + personnalisation IML photo-qualite. Demandez un devis comparatif.",
+    sim:{produit:"service",gob0:5000,freq0:4,lgob:"gobelets actifs / jour",lfreq:"jours de festival / an",freqMax:30},
+    ex:["Festivals musique regionaux","Fetes de la biere","Foires et salons plein air","Festivals gastronomiques"],
   },
-
-  {
-    id:'marche_noel', icon:'🎄', label:'Marchés de Noël & ferias', col:'#b45309', produits:['service'],
-    pitch:'Chalets provisoires, pas de cuisine, des milliers de gobelets de vin chaud ou de bière. Le marché dure 4 semaines. Les collectivités et organisateurs cherchent une solution "clé en main" conforme à la loi. C\'est du service pur.',
-    pourquoi:[
-      'Chalets sans plonge : 100% dépendants d\'un service de lavage externe',
-      'Les collectivités organisatrices ont une obligation légale et d\'image publique forte',
-      'Marché de Noël de Colmar, Riquewihr, Lille, Strasbourg — Re-uz a déjà les références',
-      'Feria de Nîmes, Dax, Bayonne : même logique, volumes encore plus élevés',
+  { id:"noel", icon:"🎄", label:"Marches de Noel & fetes", col:"#b91c1c", priorite:"P1",
+    accroche:"30 jours, milliers de gobelets vin chaud, zero cuisine fixe -- recurence annuelle parfaite.",
+    portrait:"Un marche de Noel c est 30 jours d exploitation, 50 a 200 chalets servant du vin chaud. Aucun chalet n a de plonge. La gestion actuelle est artisanale : consigne avec benevoles, pertes enormes. Re-uz professionnalise tout avec un contrat annuel reconductible.",
+    produits:[
+      {id:"service", why:"Aucun chalet n a de plonge. Service rotation = professionnalisation complete. Re-uz livre les gobelets imprimes aux couleurs de la ville, collecte chaque soir ou en fin de marche."},
     ],
-    objection:{ q:'"On commande des gobelets perso chaque année"', r:'Exactement. Et si Re-uz gérait aussi la collecte et le lavage entre les jours d\'ouverture ? Vous économisez sur les pertes et vous n\'achetez plus en masse.' },
-    sim:[
-      {label:'Gobelets actifs / jour',def:2000,min:500,max:10000,step:200},
-      {label:'Jours d\'ouverture',def:28,min:7,max:45,step:1,type:'service'},
-      {label:'Tarif service (0,20€)',def:0.20,min:0.20,max:0.20},
-    ],
-    simNote:'Un marché de Noël de 2 000 gob/jour × 28 jours = 11 200€ CA service.',
+    usage:["Consigne artisanale avec benevoles -- pertes importantes","Gobelets souvenirs achetes en masse -- qualite mediocre","Gestion desorganisee entre les chalets -- image heterogene"],
+    objection:"C est la mairie qui gere, pas moi.",
+    reponse:"Parfait -- la mairie est soumise a la loi AGEC. Donnez-moi le contact du service culturel ou de l office de tourisme.",
+    sim:{produit:"service",gob0:800,freq0:30,lgob:"gobelets actifs / jour",lfreq:"jours de marche / an",freqMax:60},
+    ex:["Marches de Noel municipaux","Ferias","Fetes communales","Kermesses","Comites des fetes"],
   },
-
-  {
-    id:'asso', icon:'🏆', label:'Associations sportives & comités', col:'#dc2626', produits:['service'],
-    pitch:'Le bénévole qui gère la buvette du tournoi achète des jetables en supermarché la veille. Il n\'a ni plonge industrielle ni logistique. Re-uz lui économise ce coût dès la 1ère utilisation, et signe un contrat récurrent sur toute la saison.',
-    pourquoi:[
-      'Aucune infrastructure de lavage dans les clubs amateurs et comités des fêtes',
-      'Re-uz coûte moins cher que le jetable acheté en supermarché — argument immédiat',
-      '"Club zéro déchet" : sponsors locaux, mairie et parents d\'élèves valorisent',
-      'Président décide seul, signature en 1 semaine — cycle de vente le plus court du portefeuille',
+  { id:"hippodrome", icon:"🏇", label:"Hippodromes", col:"#7c3aed", priorite:"P1",
+    accroche:"30 reunions/an, decision rapide, sponsor PMU sur le gobelet -- client or.",
+    portrait:"Un hippodrome tourne toute l annee : 25 a 50 reunions PMU. A chaque reunion, le bar des tribunes sert des centaines a plusieurs milliers de personnes. La societe des courses decide seul -- 1 directeur, 1 decision. Et les partenaires PMU/brasseurs veulent leur logo sur les gobelets.",
+    produits:[
+      {id:"service", why:"Les tribunes n ont pas de plonge industrielle capable de traiter 3 000 gobelets entre deux reunions. Service rotation = seule option realiste."},
     ],
-    objection:{ q:'"On est une petite asso, pas les moyens"', r:'Re-uz est moins cher que ce que vous dépensez déjà en jetables. Calculez : combien de paquets de gobelets sur la dernière saison ?' },
-    sim:[
-      {label:'Gobelets actifs / event',def:400,min:100,max:2000,step:50},
-      {label:'Events / an',def:15,min:5,max:40,step:1,type:'service'},
-      {label:'Tarif service (0,20€)',def:0.20,min:0.20,max:0.20},
-    ],
-    simNote:'La valeur est dans le volume de clubs : 10 clubs × 720€ com/48 mois = 7 200€.',
+    usage:["Gobelets plastique durs reutilises manuellement entre reunions","Logo PMU sur gobelets achetes en masse une fois par an","Pas de machine de lavage -- benevoles ou jetables en complement"],
+    objection:"On n a pas le budget.",
+    reponse:"Le service Re-uz remplace votre achat annuel de gobelets. La difference de cout est nulle ou negative la 1ere annee -- et vous etes en conformite AGEC.",
+    sim:{produit:"service",gob0:3000,freq0:30,lgob:"gobelets actifs / reunion",lfreq:"reunions / an",freqMax:60},
+    ex:["Hippodromes PMU provinciaux","Hippodrome de Vincennes","Hippodrome de Longchamp","Societes de courses regionales"],
   },
-
-  {
-    id:'hippodrome', icon:'🏇', label:'Hippodromes', col:'#7c3aed', produits:['service'],
-    pitch:'30 réunions PMU par an, des tribunes pleines, un bar central — et zéro machine à laver dédiée. Le comité des courses décide seul. C\'est le client récurrent idéal : 1 RDV, 1 contrat, des commissions pendant 48 mois sans effort.',
-    pourquoi:[
-      'Pas de machine de lavage dédiée — les bénévoles lavent à la main ou jettent',
-      '30 réunions/an minimum = le contrat tourne seul, aucune relance nécessaire',
-      'Gobelet IML logo PMU/sponsor = valeur perçue élevée, se justifie auprès du sponsor',
-      '1 directeur = 1 décision. Cycle de signature : 2 à 4 semaines maximum',
+  { id:"agence", icon:"🎪", label:"Agences evenementielles", col:"#0f766e", priorite:"P1",
+    accroche:"1 contrat agence = 40 evenements/an automatiques. Le meilleur levier.",
+    portrait:"L agence F&B ou MICE ne consomme pas les gobelets elle-meme -- elle les integre dans ses packs. Elle n a aucune infrastructure de lavage (itinerante par definition). Signez l agence, vous signez tous ses clients en une fois.",
+    produits:[
+      {id:"service", why:"L agence est itinerante -- zero plonge fixe. Elle a besoin de gobelets propres livres sur chaque site, recuperes sales. Service rotation = seule option viable."},
     ],
-    objection:{ q:'"Pas de budget"', r:'Le service Re-uz remplace votre achat annuel de gobelets + coût du lavage bénévole. Le delta est souvent négatif la 1ère année.' },
-    sim:[
-      {label:'Gobelets actifs / réunion',def:3000,min:500,max:10000,step:200},
-      {label:'Réunions / an',def:30,min:15,max:60,step:1,type:'service'},
-      {label:'Tarif service (0,20€)',def:0.20,min:0.20,max:0.20},
-    ],
-    simNote:'Hippodrome moyen : 3 000 gob × 30 réunions = 18 000€ CA service → 8 640€ sur 48 mois.',
+    usage:["Location de gobelets a des prestataires locaux a chaque event","Achat de jetables refacture au client","Partenaires gobelet existants souvent peu professionnels"],
+    objection:"On a deja un partenaire gobelet.",
+    reponse:"Quand se renouvelle le contrat ? Re-uz fait le service complet livraison-lavage-collecte meme sur de petits events (200 gob+), ce que beaucoup de concurrents ne font pas.",
+    sim:{produit:"service",gob0:1000,freq0:40,lgob:"gobelets actifs / evenement",lfreq:"evenements / an",freqMax:120},
+    ex:["Agences MICE","Agences seminaires","Operateurs F&B","Event managers freelance"],
   },
-
-  {
-    id:'traiteur', icon:'💍', label:'Traiteurs & domaines viticoles', col:'#9d174d', produits:['service'],
-    pitch:'Le traiteur fait 40 mariages par an. Il n\'a pas de machine à laver adaptée pour les gobelets de réception. Signez le traiteur : vous ne signez pas 1 client, vous en signez 40. Le domaine viticole est le même cas : 30 mariages/saison, logo château en IML = souvenir premium.',
-    pourquoi:[
-      'Le traiteur est itinérant : aucune plonge industrielle sur les lieux de réception',
-      '1 contrat traiteur = 20 à 60 mariages/an automatiques sans effort additionnel',
-      'Gobelet IML aux prénoms des mariés ou logo du domaine : se vend, se garde, fait de la pub',
-      'Marché premium : personne ne marchande 0,30€/gobelet quand le traiteur coûte 80€/personne',
+  { id:"asso", icon:"🏆", label:"Associations sportives", col:"#dc2626", priorite:"P1",
+    accroche:"180 000 clubs en France -- buvettes outdoor, pas de plonge, budget greve par les jetables.",
+    portrait:"La buvette du tournoi de foot amateur est un bar exterieur sans infrastructure fixe. Le benevole achete des gobelets jetables au supermarche la veille. 100 a 400eu par evenement. Sur 15 tournois par saison, c est 1 500 a 6 000eu jetes -- souvent plus que ce que couterait le service Re-uz.",
+    produits:[
+      {id:"service", why:"La buvette de club est outdoor sans plonge industrielle. Service rotation = livraison sur le terrain, collecte apres le tournoi. Zero contrainte pour les benevoles."},
     ],
-    objection:{ q:'"Les mariages c\'est ponctuel"', r:'Pour un couple, oui. Pour le traiteur qui en fait 40/an, c\'est du récurrent solide. Ciblez le prestataire, pas le client final.' },
-    sim:[
-      {label:'Gobelets / événement',def:200,min:80,max:600,step:20},
-      {label:'Événements / an',def:40,min:10,max:80,step:5,type:'service'},
-      {label:'Tarif service (0,20€)',def:0.20,min:0.20,max:0.20},
-    ],
-    simNote:'Traiteur 40 mariages × 200 gob = 1 600€ CA service/an → 768€ com sur 48 mois.',
+    usage:["Jetables achetes en supermarche avant chaque tournoi (100-400eu/event)","Dechets enormes en fin de journee -- probleme image croissant","Parfois verres pretes par la mairie -- logistique lourde"],
+    objection:"On est une petite asso, pas les moyens.",
+    reponse:"Re-uz coute moins cher que vos jetables actuels. Faites le calcul sur vos 3 derniers tournois. La plupart des clubs economisent des la 1ere utilisation.",
+    sim:{produit:"service",gob0:500,freq0:15,lgob:"gobelets actifs / tournoi",lfreq:"evenements / an",freqMax:40},
+    ex:["Clubs foot amateur","Tournois padel / tennis","Galas judo / danse","Trails et cross locaux"],
   },
-
-  /* ══════════ ECOCUP VENTE ══════════ */
-  {
-    id:'grande_salle', icon:'🏟️', label:'Grands stades & Zéniths', col:'#b45309', produits:['vente','beerup'],
-    pitch:'Les grandes salles et stades ont des plonges professionnelles — elles ne passeront pas au service rotation. Mais quand un Zénith commande 15 000 gobelets IML par saison, la commission vente + le renouvellement annuel (casse, perte, nouvelle saison, nouvel artiste) crée un flux régulier. Et Beer Up pour les buvettes à bière.',
-    pourquoi:[
-      'Volume très élevé : 5 000 à 50 000 gobelets / commande. Ticket commission significatif',
-      'Renouvellement annuel garanti : casse, perte, changement de graphisme chaque saison',
-      'Gobelet personnalisé par artiste/tournée = édition collector. Prix premium justifié',
-      'Beer Up pour les buvettes bière : débit massif, qualité constante, option cashless',
+  { id:"salle_volume", icon:"🎭", label:"Grandes salles & stades (>5 000)", col:"#b45309", priorite:"P1",
+    accroche:"A partir de 5 000 personnes, la vente pure genere un ticket significatif + renouvellement IML annuel.",
+    portrait:"Un grand Zenith ou un stade a une cuisine professionnelle -- il peut laver. Le service rotation ne s applique pas. Mais 10 000 personnes x 0,30eu = 3 000eu de CA par concert. Et si le logo change chaque saison (IML personnalise tournee, sponsors), le client recommande tous les ans.",
+    produits:[
+      {id:"vente", why:"Le client a une plonge. Pas de service. Mais a 10 000+ gobelets/commande le ticket vente est significatif. Et la personnalisation IML force le renouvellement annuel."},
+      {id:"beerup", why:"Un stade ou grand Zenith avec bar biere est une cible parfaite Beer Up. Debit massif, cashless, self-service. L investissement tireuse est amorti rapidement."},
     ],
-    objection:{ q:'"On achète déjà nos gobelets"', r:'À qui ? Re-uz propose l\'impression IML photo-qualité — qualité supérieure à ce que vous avez probablement. Et Beer Up pour vos buvettes bière, ça change l\'expérience client.' },
-    sim:[
-      {label:'Gobelets commandés / an',def:15000,min:5000,max:100000,step:1000},
-      {label:'Prix unitaire (0,30€)',def:0.30,min:0.30,max:0.30},
-      {label:'Commande(s) / an',def:1,min:1,max:3,step:1},
-    ],
-    simNote:'15 000 gob × 0,30€ × 1 commande = 4 500€ CA vente → 360€ com. X Beer Up = contrat séparé.',
+    usage:["Gobelets reutilisables en stock, laves en cuisine entre concerts","Renouvellement partiel quand le stock est degrade","Personnalisation IML pour les grandes tournees"],
+    objection:"On a notre propre stock de gobelets.",
+    reponse:"Quand avez-vous renouvele votre stock ? Le prochain renouvellement + le logo de votre prochaine saison, c est Re-uz. On vous propose un devis IML full couleur.",
+    sim:{produit:"service+vente",gob0:8000,freq0:60,lgob:"gobelets actifs / evenement",lfreq:"evenements / an",freqMax:200},
+    ex:["Zenitths","Accors Arena","Salles municipales > 3000 places","Stades professionnels"],
   },
-
-  {
-    id:'parc', icon:'🎡', label:'Parcs de loisirs', col:'#ea580c', produits:['vente'],
-    pitch:'Disneyland, Parc Astérix, Futuroscope ont des cuisines et des plonges industrielles. Ils achètent — ils ne louent pas le service. Mais 50 000 gobelets IML avec le logo du parc vendus 5€ à l\'entrée, c\'est un nouveau centre de profit. Et les pertes + l\'usure génèrent un renouvellement annuel.',
-    pourquoi:[
-      'Volume massif : 10 000 à 100 000 gobelets/commande selon la taille du parc',
-      'Gobelet souvenir vendu à l\'entrée = centre de profit, pas un coût',
-      'Renouvellement annuel automatique : usure, nouveau design, nouvelle attraction',
-      'Capacité de payer un prix premium pour l\'IML photo-qualité au logo du parc',
+  { id:"parc", icon:"🎡", label:"Parcs de loisirs", col:"#ea580c", priorite:"P1",
+    accroche:"200 jours/an, gobelet souvenir IML = nouveau centre de profit.",
+    portrait:"Disneyland, Futuroscope, Walibi ou un zoo regional : flux constant, plusieurs points de vente. Le gobelet souvenir IML photo-qualite au logo du parc est vendu 3-5eu a l entree. Le parc a generalement une cuisine pro -- c est une vente, pas un service.",
+    produits:[
+      {id:"vente", why:"Le parc a une infrastructure de lavage. Vente annuelle de stock + personnalisation IML. Le gobelet souvenir se vend en plus du service boisson -- nouveau centre de profit."},
     ],
-    objection:{ q:'"On a déjà un fournisseur"', r:'Demandez-leur s\'ils font l\'IML photo-qualité. Re-uz propose aussi le développement produit sur mesure (Kiobox, Pure) pour la restauration du parc.' },
-    sim:[
-      {label:'Gobelets commandés / an',def:30000,min:5000,max:200000,step:2000},
-      {label:'Prix unitaire (0,30€)',def:0.30,min:0.30,max:0.30},
-      {label:'Commandes / an',def:1,min:1,max:2,step:1},
-    ],
-    simNote:'30 000 gob × 0,30€ = 9 000€ CA vente → 720€ com. + renouvellement annuel assuré.',
+    usage:["Mix gobelets personnalises ancienne saison + jetables en haute saison","Gobelets souvenirs vendus 5-10eu -- souvent de qualite mediocre","Lavage sur site -- suffisant mais logistique lourde en haute saison"],
+    objection:"On a deja un contrat avec un fournisseur.",
+    reponse:"Quand se renouvelle-t-il ? Re-uz propose l impression IML photo-qualite que beaucoup de concurrents ne font pas. Un echantillon gratuit pour vous convaincre.",
+    sim:{produit:"vente",gob0:20000,freq0:1,lgob:"gobelets commandes / an",lfreq:"commandes annuelles",freqMax:3},
+    ex:["Parcs Asterix Futuroscope Walibi","Zoos et parcs animaliers","Parcs aquatiques","Bases de loisirs"],
   },
-
-  {
-    id:'distributeur', icon:'🏭', label:'Distributeurs de boissons', col:'#7c2d12', produits:['vente','beerup'],
-    pitch:'Heineken, ABInBev, Distriboissons ont 200 à 500 clients bars et festivals. Ils financent déjà du matériel pour leurs clients (tireuses, glacières). Signez le directeur commercial régional : il impose Re-uz sur tout son portefeuille. Et Beer Up est directement dans leur logique bière premium.',
-    pourquoi:[
-      '1 accord distributeur régional = accès à 200-500 clients bars/festivals sans prospection',
-      'Ils financent déjà une partie du coût pour leurs clients — Re-uz s\'intègre dans leurs deals',
-      'Objectifs groupe "plastic free" : ABInBev, Heineken, Bacardi cherchent des solutions certifiées',
-      'Beer Up : directement aligné avec leur core business bière pression premium',
+  { id:"chr", icon:"🍺", label:"Cafes, bars & hotelllerie", col:"#0369a1", priorite:"P1",
+    accroche:"Ecocup non -- Beer Up oui. Le marche naturel de la tireuse biere par le bas.",
+    portrait:"Un bar ou une brasserie a une plonge professionnelle -- Ecocup service ne s applique pas. En revanche Beer Up est fait pour eux : systeme brevete de remplissage par le fond, col de mousse parfait a chaque service, self-service cashless. C est un argument commercial fort pour le patron envers ses clients.",
+    produits:[
+      {id:"beerup", why:"Le CHR a une plonge -- Ecocup ne s applique pas. Beer Up repond a un vrai besoin : qualite de service biere, debit, cashless, self-service. Vente de technologie + consommables recurrents."},
     ],
-    objection:{ q:'"Il faut valider en central"', r:'Re-uz travaille déjà avec ABInBev et Heineken au niveau national. Demandez à votre direction de contacter Re-uz France — la conversation est déjà ouverte.' },
-    sim:[
-      {label:'Clients dans le portefeuille',def:50,min:10,max:300,step:10},
-      {label:'Gob commandés / client / an',def:500,min:200,max:3000,step:100},
-      {label:'Prix unitaire (0,30€)',def:0.30,min:0.30,max:0.30},
-    ],
-    simNote:'50 clients × 500 gob × 0,30€ = 7 500€ CA vente → 600€ com en une commande.',
+    usage:["Tireuse classique -- mousse variable, temps de service long","Verres en verre casses regulierement","Pas de self-service -- personnel dedie au bar obligatoire"],
+    objection:"On est satisfait de notre tireuse.",
+    reponse:"Est-ce que vos clients attendent parfois au bar ? Avec Beer Up ils se servent seuls, qualite garantie, cashless integre. On vous propose une demonstration gratuite.",
+    sim:{produit:"beerup",gob0:200,freq0:200,lgob:"verres servis / jour",lfreq:"jours ouverture / an",freqMax:365},
+    ex:["Bars a biere","Brasseries","Hotels avec bar exterieur","Bars de festival indoor"],
   },
-
-  /* ══════════ BEER UP ══════════ */
-  {
-    id:'chr', icon:'🍺', label:'Bars, brasseries & restaurants', col:'#7c3aed', produits:['beerup'],
-    pitch:'CHR = mauvaise cible pour l\'Ecocup (ils ont une plonge). Mais Beer Up est fait pour eux. Le système de remplissage par le fond change leur expérience bière : mousse parfaite à chaque service, débit 3× plus rapide, cashless intégré. C\'est une technologie de différenciation, pas juste un gobelet.',
-    pourquoi:[
-      'Beer Up n\'est PAS un gobelet réemployable — c\'est un système de service bière breveté',
-      'Remplissage par le fond = col de mousse parfait garanti. Argument de qualité client fort',
-      'Débit 3× plus rapide qu\'une tireuse classique = moins de personnel aux pics d\'affluence',
-      'Cashless optionnel intégré — argument de modernisation auprès des jeunes patrons',
+  { id:"distributeur", icon:"🏭", label:"Distributeurs de boissons", col:"#7c2d12", priorite:"P1",
+    accroche:"Prescripteurs massifs : ils ouvrent 200 portes -- financement partiel deja acquis.",
+    portrait:"Distriboissons, Heineken France, Coca-Cola regional : ces acteurs distribuent leurs boissons dans des bars, restaurants, festivals et stades. Ils ont des objectifs groupe plastic free 2025-2027. Signez le directeur commercial regional -- il deploie sur tout son portefeuille de 200 a 500 clients.",
+    produits:[
+      {id:"beerup", why:"Les brasseurs sont directement interesses par Beer Up : ca ameliore la qualite de service de leur produit chez leurs clients CHR. C est un argument commercial pour eux."},
+      {id:"service", why:"Le distributeur peut financer des gobelets Ecocup pour ses clients festivals et evenements -- leur permettant de remplir leurs obligations AGEC sans cout direct."},
     ],
-    objection:{ q:'"On a déjà nos tireuses"', r:'Beer Up n\'est pas une tireuse de remplacement — c\'est un système complémentaire pour les créneaux à fort débit (terrasse, événements, happy hour). La qualité de la mousse est incomparable.' },
-    sim:[
-      {label:'Demi-pressions / jour',def:100,min:30,max:500,step:10},
-      {label:'Jours d\'exploitation / an',def:280,min:100,max:365,step:5},
-      {label:'Prix service / démi (0,20€)',def:0.20,min:0.20,max:0.20,type:'service'},
-    ],
-    simNote:'Beer Up = modèle location machine + commissions sur consommables. Revenus récurrents.',
+    usage:["Gobelets jetables offerts a leurs clients pour les evenements","Pression interne croissante sur les objectifs zero plastique","Diageo ABInBev Heineken cherchent activement des solutions certifiees"],
+    objection:"Il faut valider en central.",
+    reponse:"Re-uz travaille deja avec ABInBev, Heineken et Bacardi au niveau national. Demandez a votre direction de contacter Re-uz France -- la conversation est deja ouverte.",
+    sim:{produit:"service+beerup",gob0:1000,freq0:40,lgob:"gobelets actifs / client / event",lfreq:"events clients / an",freqMax:200},
+    ex:["Distriboissons","Heineken France regional","Coca-Cola distributeurs","HH Global Diageo"],
   },
-
-  {
-    id:'hotel', icon:'🏨', label:'Hôtellerie & glamping', col:'#0369a1', produits:['beerup','service'],
-    pitch:'L\'hôtel 4-5 étoiles avec bar de piscine ou terrasse : Beer Up pour le bar bière, Ecocup service pour les gobelets de la terrasse s\'ils n\'ont pas de machine adaptée en extérieur. Double opportunité sur un seul client.',
-    pourquoi:[
-      'Bar de piscine = extérieur sans plonge industrielle → Ecocup service potentiel',
-      'Bar principal avec bière pression → Beer Up pour différencier l\'offre premium',
-      'Forte appétence pour les solutions durables en 4-5 étoiles (labels, clientèle exigeante)',
-      'Glamping et éco-lodges : même logique que le camping — aucune infrastructure de lavage',
+  { id:"traiteur", icon:"💍", label:"Traiteurs & domaines viticoles", col:"#9d174d", priorite:"P2",
+    accroche:"1 traiteur signe = 40 mariages/an automatiques. Le gobelet IML = souvenir premium.",
+    portrait:"Le traiteur ou le domaine viticole organise 20 a 60 mariages par an en exterieur ou sous tente -- pas de plonge fixe. Un gobelet IML au prenom des maries et a la date du mariage, les invites le ramenent chez eux. Pub gratuite pour le domaine, valeur percue forte pour les maries.",
+    produits:[
+      {id:"service", why:"Le traiteur itinerant et le domaine viticole n ont pas de plonge industrielle sur les lieux de reception. Service rotation = seule solution professionnelle."},
     ],
-    objection:{ q:'"On gère nos verres en interne"', r:'En extérieur à la piscine ? Avec Beer Up au bar, vous différenciez votre offre bière et réduisez le temps de service. Et le gobelet Re-uz à votre logo part dans la chambre des clients — c\'est de la pub.' },
-    sim:[
-      {label:'Gobelets actifs / jour',def:150,min:50,max:500,step:25},
-      {label:'Jours d\'ouverture / an',def:200,min:100,max:365,step:10,type:'service'},
-      {label:'Tarif service (0,20€)',def:0.20,min:0.20,max:0.20},
-    ],
-    simNote:'Double pitch : Beer Up pour le bar bière + Ecocup service pour la terrasse extérieure.',
+    usage:["Verres en verre loues au traiteur -- risque de casse, cout eleve","Gobelets jetables pour le vin d honneur exterieur","Souvenir gobelet de mauvaise qualite si existant"],
+    objection:"Les mariages c est ponctuel.",
+    reponse:"Un traiteur qui fait 40 mariages/an n est pas ponctuel. Ciblez le traiteur ou le domaine -- pas le couple. 1 contrat cadre = 40 events recurrents.",
+    sim:{produit:"service",gob0:200,freq0:40,lgob:"gobelets actifs / evenement",lfreq:"mariages / an",freqMax:80},
+    ex:["Traiteurs evenementiels","Domaines viticoles Medoc Loire Provence","Manoirs et chateaux","Wedding planners"],
   },
-
-  /* ══════════ NEWCY ══════════ */
-  {
-    id:'entreprise', icon:'🏢', label:'Entreprises & cafétérias', col:'#0284c7', produits:['newcy'],
-    pitch:'Newcy by Re-uz = circuit fermé cafétéria. Le gobelet est collecté le soir, lavé en centre agréé, restitué le lendemain propre. Zéro gestion pour le facilities manager. Et la CSRD oblige les entreprises +250 salariés à mesurer leurs déchets — supprimer les jetables coche la case.',
-    pourquoi:[
-      'CSRD (obligatoire +250 sal.) : réduire les déchets = obligation de reporting, pas juste éthique',
-      'Newcy = aucun comportement individuel requis — le système tourne seul, pas de mugs perdus',
-      '2 portes d\'entrée : DG RSE (budget ESG) ou CE/CSE (budget QVT) dans la même entreprise',
-      'Contrat 4 ans renouvelé automatiquement — commission mensuelle sans effort',
+  { id:"entreprise", icon:"🏢", label:"Entreprises & cafeterias (RSE)", col:"#475569", priorite:"P2",
+    accroche:"Newcy by Re-uz -- pause cafe en circuit ferme. La CSRD cree l obligation.",
+    portrait:"Toute entreprise de +250 salaries est soumise a la CSRD. Supprimer les gobelets jetables de cafeteria est la mesure la plus visible, la plus facile a chiffrer. Newcy by Re-uz livre les gobelets, place les collecteurs, lave en centre agree, restitue propres.",
+    produits:[
+      {id:"newcy", why:"L entreprise a une plonge -- Ecocup service ne s applique pas. Newcy est un produit dedie : circuit ferme collect-lave-restitue, sans intervention des salaries."},
     ],
-    objection:{ q:'"On a essayé les mugs perso, ça ne marche pas"', r:'Newcy n\'est pas un mug personnel. C\'est un système industriel en circuit fermé. Aucun comportement individuel requis — ça fonctionne même dans une entreprise de 2 000 personnes.' },
-    sim:[
-      {label:'Gobelets actifs / jour',def:300,min:50,max:2000,step:50},
-      {label:'Jours ouvrés / an',def:220,min:200,max:240,step:5,type:'service'},
-      {label:'Tarif service (0,20€)',def:0.20,min:0.20,max:0.20},
+    usage:["Machines a cafe avec gobelets jetables -- milliers par mois","Budget gobelets cafeteria non mesure -- 5 000 a 50 000eu/an","Tentatives de mugs personnels abandonnees"],
+    objection:"On a essaye les mugs, ca ne marche pas.",
+    reponse:"Newcy n est pas un mug personnel. C est un systeme en circuit ferme avec collecte et lavage industriel. Aucun comportement individuel requis.",
+    sim:{produit:"newcy",gob0:300,freq0:220,lgob:"gobelets actifs / jour",lfreq:"jours ouvres / an",freqMax:250},
+    ex:["Entreprises +100 salaries","Espaces de coworking","Sieges sociaux","Cafeterias collectives"],
+  },
+  { id:"collectivite", icon:"🏛️", label:"Collectivites & mairies", col:"#1d4ed8", priorite:"P2",
+    accroche:"30 evenements/an, obligation legale, capital politique pour l elu.",
+    portrait:"Une mairie de taille moyenne organise 10 a 30 evenements publics par an. Fete nationale, marche de Noel, forum des associations -- tous en plein air, tous sans plonge fixe. Elle est doublement obligee par la loi AGEC.",
+    produits:[
+      {id:"service", why:"Les evenements municipaux sont en plein air sans plonge. Service rotation = seule solution conforme a la loi AGEC."},
     ],
-    simNote:'300 gob × 220j = 13 200€ CA service Newcy → 6 336€ com sur 48 mois.',
+    usage:["Jetables commandes par le service technique pour chaque evenement","Marche de Noel : consigne artisanale peu professionnelle","Pression elus et citoyens sur le zero dechet"],
+    objection:"On doit passer par appel d offres.",
+    reponse:"En dessous des seuils MAPA (40 000eu), vous contractez directement. Re-uz peut aussi repondre a vos marches publics.",
+    sim:{produit:"service",gob0:800,freq0:20,lgob:"gobelets actifs / evenement",lfreq:"evenements / an",freqMax:50},
+    ex:["Mairies de 5 000 a 100 000 hab","Marches de Noel","Ferias et fetes locales","Forums des associations"],
   },
 ];
 
-/* ─────────────────────────────────────────────
-   FICHE COMPONENT
-   ─────────────────────────────────────────── */
-function Fiche({c}) {
-  const prodStr = {
-    service:'Pourquoi le SERVICE Re-uz (pas la vente)',
-    vente:'Pourquoi la VENTE Re-uz (gros volumes)',
-    beerup:'Pourquoi Beer Up SYSTEM',
-    newcy:'Pourquoi Newcy PAUSE CAFÉ',
-  };
-
+function ProdCard({ p }) {
+  const info = PRODUITS[p.id];
   return (
-    <div style={{maxWidth:880,margin:'0 auto',padding:'20px 16px 56px'}}>
-
-      {/* HEADER */}
-      <div style={{background:c.col,borderRadius:14,padding:'22px 24px',color:'white',marginBottom:14}}>
-        <div style={{fontSize:9,textTransform:'uppercase',letterSpacing:2,opacity:0.6,marginBottom:6}}>
-          Fiche cible membre partenaire Re-uz
-        </div>
-        <div style={{display:'flex',alignItems:'center',gap:14,flexWrap:'wrap'}}>
-          <span style={{fontSize:40}}>{c.icon}</span>
-          <div style={{flex:1}}>
-            <h1 style={{fontSize:22,fontWeight:900,color:'white',lineHeight:1.1}}>{c.label}</h1>
-            <p style={{fontSize:13,opacity:0.85,marginTop:5,maxWidth:560}}>{c.pitch}</p>
-          </div>
-        </div>
-        <div style={{display:'flex',gap:8,marginTop:14,flexWrap:'wrap'}}>
-          {c.produits.map(p=><ProdBadge key={p} type={p} big/>)}
-        </div>
+    <div style={{background:"#f4f7f5",borderRadius:10,padding:12}}>
+      <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:5}}>
+        <span style={{background:info.bg,color:"white",padding:"2px 9px",borderRadius:12,fontSize:10,fontWeight:700}}>{info.label}</span>
+        <span style={{fontSize:10,color:"#888"}}>{info.desc}</span>
       </div>
-
-      {/* PRODUCT × REASON BLOCK — one per product */}
-      {c.produits.map(prod=>(
-        <div key={prod} style={{background:'white',border:'1px solid #e0e8ec',borderRadius:12,padding:18,marginBottom:12}}>
-          <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}>
-            <ProdBadge type={prod}/>
-            <span style={{fontSize:11,fontWeight:700,color:'#4b6358'}}>{prodStr[prod]}</span>
-          </div>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))',gap:10}}>
-            {c.pourquoi.map((r,i)=>(
-              <div key={i} style={{background:'#f4f7f5',borderRadius:8,padding:'10px 12px',fontSize:12,color:'#374151',lineHeight:1.5}}>
-                {r}
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-
-      {/* OBJECTION */}
-      <div style={{background:'#fffbeb',borderLeft:'4px solid #f0a500',padding:'12px 16px',marginBottom:4}}>
-        <div style={{fontSize:10,fontWeight:700,color:'#92400e',textTransform:'uppercase',letterSpacing:1,marginBottom:6}}>
-          💬 Objection fréquente & réponse terrain
-        </div>
-        <div style={{fontSize:13,fontWeight:700,color:'#92400e',fontStyle:'italic',marginBottom:4}}>"{c.objection.q}"</div>
-        <div style={{fontSize:12,color:'#374151',lineHeight:1.6}}>→ {c.objection.r}</div>
-      </div>
-
-      {/* SIMULATEUR */}
-      <Sim cfg={c.sim} col={c.col}/>
-      {c.simNote && (
-        <div style={{fontSize:11,color:'rgba(255,255,255,0.0)',background:'#0d1f14',borderRadius:'0 0 12px 12px',padding:'8px 20px',color:'rgba(255,255,255,0.4)',marginTop:-1}}>
-          💡 {c.simNote}
-        </div>
-      )}
-
-      {/* CONTACT */}
-      <div style={{marginTop:14,background:'#0d1f14',borderRadius:10,padding:'12px 18px',display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:10}}>
-        <div style={{fontSize:11,color:'rgba(255,255,255,0.5)'}}>
-          Vérifier la dispo de votre zone · Semaine du 18 mai · Formation Lyon
-        </div>
-        <a href="tel:+33610703090" style={{color:'#f0a500',fontWeight:900,fontSize:18,textDecoration:'none'}}>
-          📱 06 10 70 30 90
-        </a>
-      </div>
+      <div style={{fontSize:12,color:"#374151",lineHeight:1.5}}>{"-> "}{p.why}</div>
     </div>
   );
 }
 
-/* ─────────────────────────────────────────────
-   APP
-   ─────────────────────────────────────────── */
-const GROUPES = [
-  { label:'🔄 Ecocup Service', ids:['camping','festival','marche_noel','asso','hippodrome','traiteur'] },
-  { label:'🛒 Ecocup Vente volume', ids:['grande_salle','parc','distributeur'] },
-  { label:'🍺 Beer Up CHR', ids:['chr','hotel'] },
-  { label:'☕ Newcy', ids:['entreprise'] },
-];
-
-const BASE = 'https://thierrybismuth.github.io/pagesweb-thierry-';
-
-function App() {
-  const [active, setActive] = React.useState('camping');
-  const c = CIBLES.find(x=>x.id===active);
-
+function Fiche({ c }) {
   return (
-    <div style={{minHeight:'100vh',background:'#f4f7f5'}}>
-      {/* MAIN NAV */}
-      <div style={{background:'#0d1f14',position:'sticky',top:0,zIndex:100,boxShadow:'0 2px 12px rgba(0,0,0,0.4)'}}>
-        <div style={{maxWidth:880,margin:'0 auto',padding:'10px 16px 0',display:'flex',alignItems:'center',justifyContent:'space-between',gap:10,flexWrap:'wrap'}}>
+    <div style={{maxWidth:860,margin:"0 auto",padding:"20px 16px 56px"}}>
+      <div style={{background:c.col,borderRadius:14,padding:"22px 24px 18px",color:"white",marginBottom:14}}>
+        <div style={{fontSize:9,textTransform:"uppercase",letterSpacing:2,opacity:0.6,marginBottom:6}}>Fiche cible - membre partenaire Re-uz</div>
+        <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:10,flexWrap:"wrap"}}>
+          <span style={{fontSize:38}}>{c.icon}</span>
           <div>
-            <div style={{fontSize:9,color:'#6fca96',fontWeight:700,textTransform:'uppercase',letterSpacing:2}}>Re-uz · Fiches cibles membres partenaires</div>
-            <div style={{fontSize:11,color:'rgba(255,255,255,0.6)',marginTop:1}}>
-              Démarrage <strong style={{color:'#f0a500'}}>18 mai · Formation Lyon</strong>
-            </div>
+            <div style={{fontSize:22,fontWeight:900,lineHeight:1.2}}>{c.label}</div>
+            <div style={{fontSize:12,opacity:0.85,marginTop:4,maxWidth:520}}>{c.accroche}</div>
           </div>
-          <a href="tel:+33610703090" style={{color:'#f0a500',fontWeight:800,fontSize:14,textDecoration:'none',flexShrink:0}}>📱 06 10 70 30 90</a>
+          <span style={{marginLeft:"auto",background:"rgba(255,255,255,0.15)",padding:"3px 12px",borderRadius:12,fontSize:11,fontWeight:700,flexShrink:0}}>{c.priorite}</span>
         </div>
-
-        {/* SECONDARY NAV */}
-        <div style={{background:'rgba(0,0,0,0.2)',padding:'4px 8px',display:'flex',gap:0,overflowX:'auto'}}>
-          <a href={`${BASE}/reuz-accueil.html`} style={{color:'rgba(255,255,255,0.4)',fontSize:10,fontWeight:600,textDecoration:'none',padding:'4px 12px',whiteSpace:'nowrap',borderRight:'1px solid rgba(255,255,255,0.1)'}}>🏠 Accueil</a>
-          <a href={`${BASE}/reuz-prospection-v2.html`} style={{color:'rgba(255,255,255,0.4)',fontSize:10,fontWeight:600,textDecoration:'none',padding:'4px 12px',whiteSpace:'nowrap',borderRight:'1px solid rgba(255,255,255,0.1)'}}>🗺️ Prospection</a>
-          <span style={{color:'#6fca96',fontSize:10,fontWeight:700,padding:'4px 12px',whiteSpace:'nowrap',borderRight:'1px solid rgba(255,255,255,0.1)'}}>📋 Fiches cibles</span>
-          <a href={`${BASE}/reuz-candidat-decouverte.html`} style={{color:'rgba(255,255,255,0.4)',fontSize:10,fontWeight:600,textDecoration:'none',padding:'4px 12px',whiteSpace:'nowrap'}}>🎓 Outil membre</a>
+        <div style={{display:"flex",flexWrap:"wrap",gap:5}}>
+          {c.ex.map(e=><span key={e} style={{background:"rgba(255,255,255,0.15)",padding:"2px 10px",borderRadius:12,fontSize:10}}>{e}</span>)}
         </div>
+      </div>
 
-        {/* CIBLE TABS — grouped */}
-        <div style={{display:'flex',overflowX:'auto',padding:'0 4px',gap:0}}>
-          {GROUPES.map(g=>(
-            <div key={g.label} style={{display:'flex',alignItems:'stretch',borderRight:'1px solid rgba(255,255,255,0.08)'}}>
-              <div style={{fontSize:9,color:'rgba(255,255,255,0.3)',padding:'8px 10px',display:'flex',alignItems:'center',whiteSpace:'nowrap',borderRight:'1px solid rgba(255,255,255,0.06)'}}>{g.label}</div>
-              {g.ids.map(id=>{
-                const ci = CIBLES.find(x=>x.id===id);
-                return <button key={id} onClick={()=>setActive(id)} style={{
-                  padding:'8px 12px', fontSize:11, fontWeight:active===id?700:400,
-                  background:'none', border:'none',
-                  borderBottom: active===id ? `2px solid ${ci.col}` : '2px solid transparent',
-                  color: active===id ? 'white' : 'rgba(255,255,255,0.4)',
-                  cursor:'pointer', whiteSpace:'nowrap',
-                  display:'flex', alignItems:'center', gap:4,
-                }}>
-                  <span style={{fontSize:13}}>{ci.icon}</span>
-                  <span>{ci.label}</span>
-                </button>;
-              })}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:12}}>
+        <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:10,padding:16}}>
+          <div style={{fontSize:10,fontWeight:700,color:c.col,textTransform:"uppercase",letterSpacing:1,marginBottom:8}}>Portrait client</div>
+          <p style={{fontSize:12,color:"#374151",lineHeight:1.7}}>{c.portrait}</p>
+        </div>
+        <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:10,padding:16}}>
+          <div style={{fontSize:10,fontWeight:700,color:"#b45309",textTransform:"uppercase",letterSpacing:1,marginBottom:8}}>Usage actuel (le probleme)</div>
+          {c.usage.map((u,i)=>(
+            <div key={i} style={{display:"flex",gap:6,padding:"5px 7px",background:"#fff5f5",borderRadius:5,border:"1px solid #fecaca",marginBottom:4}}>
+              <span style={{color:"#dc2626",fontWeight:700,flexShrink:0}}>-></span>
+              <span style={{fontSize:12,color:"#374151"}}>{u}</span>
             </div>
           ))}
         </div>
       </div>
 
-      <Fiche c={c}/>
+      <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:10,padding:16,marginBottom:12}}>
+        <div style={{fontSize:10,fontWeight:700,color:"#1a6b3a",textTransform:"uppercase",letterSpacing:1,marginBottom:10}}>Ce qu on leur vend -- et pourquoi</div>
+        <div style={{display:"flex",flexDirection:"column",gap:8}}>
+          {c.produits.map((p,i)=><ProdCard key={i} p={p}/>)}
+        </div>
+      </div>
+
+      <Sim cible={c}/>
+
+      <div style={{background:"#fffbeb",borderLeft:"4px solid #f0a500",padding:"12px 16px",marginTop:12}}>
+        <div style={{fontSize:10,fontWeight:700,color:"#92400e",textTransform:"uppercase",letterSpacing:1,marginBottom:6}}>Objection frequente & reponse terrain</div>
+        <div style={{fontSize:13,fontWeight:700,color:"#92400e",marginBottom:5,fontStyle:"italic"}}>"{c.objection}"</div>
+        <div style={{fontSize:12,color:"#374151",lineHeight:1.6}}>{"--> "}{c.reponse}</div>
+      </div>
+
+      <div style={{marginTop:12,background:"#111c14",borderRadius:8,padding:"11px 16px",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8}}>
+        <div style={{fontSize:11,color:"rgba(255,255,255,0.5)"}}>Question ? Verifier la dispo de votre zone ?</div>
+        <a href="tel:+33610703090" style={{color:"#f0a500",fontWeight:900,fontSize:17,textDecoration:"none"}}>06 10 70 30 90</a>
+      </div>
     </div>
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+function App() {
+  const [active, setActive] = React.useState("camping");
+  const c = CIBLES.find(x=>x.id===active);
+  return (
+    <div style={{minHeight:"100vh",background:"#f4f7f5"}}>
+      <div style={{background:"#111c14",position:"sticky",top:0,zIndex:100,boxShadow:"0 2px 12px rgba(0,0,0,0.4)"}}>
+        <div style={{background:"#0a1510",padding:"5px 16px",display:"flex",gap:0,alignItems:"center",overflowX:"auto",borderBottom:"1px solid rgba(255,255,255,0.06)"}}>
+          <a href={BASE+"/reuz-accueil.html"} style={{color:"rgba(255,255,255,0.45)",fontSize:10,fontWeight:600,textDecoration:"none",padding:"4px 11px",whiteSpace:"nowrap",borderRight:"1px solid rgba(255,255,255,0.08)"}}>Accueil</a>
+          <a href={BASE+"/reuz-prospection-v2.html"} style={{color:"rgba(255,255,255,0.45)",fontSize:10,fontWeight:600,textDecoration:"none",padding:"4px 11px",whiteSpace:"nowrap",borderRight:"1px solid rgba(255,255,255,0.08)"}}>Prospection</a>
+          <span style={{color:"#6fca96",fontSize:10,fontWeight:700,padding:"4px 11px",whiteSpace:"nowrap",borderRight:"1px solid rgba(255,255,255,0.08)"}}>Fiches cibles</span>
+          <a href={BASE+"/reuz-candidat-decouverte.html"} style={{color:"rgba(255,255,255,0.45)",fontSize:10,fontWeight:600,textDecoration:"none",padding:"4px 11px",whiteSpace:"nowrap",borderRight:"1px solid rgba(255,255,255,0.08)"}}>Outil membre</a>
+          <a href={BASE+"/reuz-dossier-print.html"} target="_blank" style={{color:"rgba(255,255,255,0.45)",fontSize:10,fontWeight:600,textDecoration:"none",padding:"4px 11px",whiteSpace:"nowrap"}}>Dossier PDF</a>
+        </div>
+        <div style={{maxWidth:860,margin:"0 auto",padding:"8px 16px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:10,flexWrap:"wrap"}}>
+          <div>
+            <div style={{fontSize:10,color:"#6fca96",fontWeight:700,textTransform:"uppercase",letterSpacing:2}}>Re-uz - Fiches cibles membres partenaires</div>
+            <div style={{fontSize:11,color:"rgba(255,255,255,0.55)",marginTop:1}}>Demarrage semaine du 18 mai - Formation Lyon</div>
+          </div>
+          <a href="tel:+33610703090" style={{color:"#f0a500",fontWeight:900,fontSize:14,textDecoration:"none",flexShrink:0}}>06 10 70 30 90</a>
+        </div>
+        <div style={{overflowX:"auto",display:"flex",padding:"0 8px",borderTop:"1px solid rgba(255,255,255,0.06)"}}>
+          {CIBLES.map(ci=>(
+            <button key={ci.id} onClick={()=>setActive(ci.id)} style={{
+              padding:"9px 12px",fontSize:11,fontWeight:active===ci.id?700:400,
+              background:"none",border:"none",
+              borderBottom:active===ci.id?"3px solid "+ci.col:"3px solid transparent",
+              color:active===ci.id?"white":"rgba(255,255,255,0.38)",cursor:"pointer",
+              whiteSpace:"nowrap",display:"flex",alignItems:"center",gap:5,flexShrink:0
+            }}>
+              {ci.label.split(" ")[0]}
+            </button>
+          ))}
+        </div>
+      </div>
+      <Fiche c={c}/>
+      <div className="no-print" style={{position:"fixed",bottom:20,right:20,display:"flex",flexDirection:"column",gap:8,alignItems:"flex-end",zIndex:999}}>
+        <button onClick={()=>window.print()} style={{background:"#1a6b3a",color:"white",border:"none",padding:"9px 16px",borderRadius:7,fontSize:12,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 14px rgba(0,0,0,0.2)"}}>Imprimer cette fiche</button>
+        <a href={BASE+"/reuz-dossier-print.html"} target="_blank" style={{background:"#0d3340",color:"#f0a500",padding:"9px 16px",borderRadius:7,fontSize:12,fontWeight:700,textDecoration:"none",boxShadow:"0 4px 14px rgba(0,0,0,0.2)"}}>Dossier complet</a>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
 </script>
-
-<!-- PRINT WIDGET -->
-<style>
-@media print { .print-widget{display:none!important;} }
-.print-toolbar{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;align-items:flex-end;}
-.print-btn{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;box-shadow:0 4px 16px rgba(0,0,0,0.2);font-family:'Segoe UI',system-ui,sans-serif;text-decoration:none;white-space:nowrap;}
-</style>
-<div class="print-toolbar print-widget">
-  <button class="print-btn" style="background:#1a6b3a;color:white;" onclick="window.print()">🖨️ Imprimer cette fiche</button>
-  <a class="print-btn" style="background:#0d3340;color:#f0a500;" href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-dossier-print.html" target="_blank">📁 Dossier complet</a>
-</div>
-
 </body>
 </html>
