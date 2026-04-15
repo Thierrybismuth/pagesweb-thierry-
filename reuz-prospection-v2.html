@@ -333,6 +333,12 @@ function SimGenerique() {
         {isAchat
           ? "Le client lave lui-même ses gobelets. Il achète un stock × 5 pour couvrir l'année (rotation lavage + pertes + sécurité). Commission 8% one-shot, renouvelée chaque année."
           : "Le client n'a pas de plonge. Il ne rachète rien. Re-uz livre, lave, récupère. Facturation 0,20€/gob/rotation. Commission 12%/an récurrente sur 48 mois."}
+        <div style={{marginTop:8,background:"rgba(240,165,0,0.1)",border:"1px solid rgba(240,165,0,0.3)",borderRadius:8,padding:"9px 12px",fontSize:10,lineHeight:1.6,color:"rgba(255,255,255,0.75)"}}>
+          <strong style={{color:"#f0a500"}}>Exemple réel — Zénith Paris (6 300 places)</strong><br/>
+          <span style={{color:"rgba(255,255,255,0.5)"}}>Achat :</span> 6 300 × 5 × 0,30€ = <strong style={{color:"white"}}>9 450€</strong> · com 8% = <strong style={{color:"#f0a500"}}>756€</strong> one-shot<br/>
+          <span style={{color:"rgba(255,255,255,0.5)"}}>Service :</span> 6 300 × 120 concerts × 0,20€ = <strong style={{color:"white"}}>151 200€/an</strong> · com 12% = <strong style={{color:"#6fca96"}}>18 144€/an · 72 576€ sur 48 mois</strong><br/>
+          <span style={{color:"#f0a500",fontWeight:700}}>→ Le service rapporte 95× plus que l'achat sur la durée du contrat.</span>
+        </div>
       </div>
 
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:16}}>
