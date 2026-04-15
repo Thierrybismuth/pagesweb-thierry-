@@ -293,64 +293,101 @@ const VILLES = {
 function SimGenerique() {
   const [participants, setParticipants] = React.useState(10000);
   const [rotations, setRotations] = React.useState(20);
-  const [mode, setMode] = React.useState("achat"); // achat ou service
   const [multiplicateur, setMultiplicateur] = React.useState(5);
+  const [mode, setMode] = React.useState("achat"); // "achat" ou "service"
   const fmt = n => Math.round(n).toLocaleString("fr-FR");
 
+  // ACHAT : client avec plonge → stock ×5 × 0,30€ · com 8% · one-shot
   const stockCmd = participants * multiplicateur;
   const caAchat = stockCmd * 0.30;
   const comAchat = caAchat * 0.08;
+
+  // SERVICE : client sans plonge → 0 achat · 0,20€/gob/rotation · com 12%/an
   const caService = participants * rotations * 0.20;
   const comService = caService * 0.12;
-  const com48service = comService * 4;
+  const com48 = comService * 4;
+
+  const isAchat = mode === "achat";
 
   return (
     <div style={{background:"#111c14",color:"white",borderRadius:14,padding:22}}>
-      <div style={{fontSize:10,color:"#6fca96",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Simulateur commercial</div>
+      <div style={{fontSize:10,color:"#6fca96",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:12}}>Simulateur commercial</div>
 
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12,marginBottom:16}}>
+      {/* Toggle achat / service */}
+      <div style={{display:"flex",gap:8,marginBottom:16}}>
+        <button onClick={()=>setMode("achat")} style={{
+          flex:1,padding:"8px 0",borderRadius:7,border:"none",cursor:"pointer",fontFamily:"inherit",
+          fontWeight:700,fontSize:12,
+          background:isAchat?"#f0a500":"rgba(255,255,255,0.08)",
+          color:isAchat?"#0d3340":"rgba(255,255,255,0.5)"
+        }}>🥤 Achat (client avec plonge)</button>
+        <button onClick={()=>setMode("service")} style={{
+          flex:1,padding:"8px 0",borderRadius:7,border:"none",cursor:"pointer",fontFamily:"inherit",
+          fontWeight:700,fontSize:12,
+          background:!isAchat?"#1a6b3a":"rgba(255,255,255,0.08)",
+          color:!isAchat?"white":"rgba(255,255,255,0.5)"
+        }}>★ Service rotation (sans plonge)</button>
+      </div>
+
+      <div style={{background:"rgba(255,255,255,0.05)",borderRadius:8,padding:"8px 12px",marginBottom:14,fontSize:11,color:"rgba(255,255,255,0.65)",lineHeight:1.5}}>
+        {isAchat
+          ? "Le client lave lui-même ses gobelets. Il achète un stock × 5 pour couvrir l'année (rotation lavage + pertes + sécurité). Commission 8% one-shot, renouvelée chaque année."
+          : "Le client n'a pas de plonge. Il ne rachète rien. Re-uz livre, lave, récupère. Facturation 0,20€/gob/rotation. Commission 12%/an récurrente sur 48 mois."}
+      </div>
+
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:16}}>
         <div>
-          <div style={{fontSize:10,color:"rgba(255,255,255,0.5)",marginBottom:5}}>Participants / utilisateurs</div>
+          <div style={{fontSize:10,color:"rgba(255,255,255,0.45)",marginBottom:4}}>Participants / utilisateurs</div>
           <input type="range" min={500} max={100000} step={500} value={participants} onChange={e=>setParticipants(+e.target.value)} style={{width:"100%",accentColor:"#f0a500"}}/>
-          <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:3}}>{fmt(participants)}</div>
+          <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:2}}>{fmt(participants)}</div>
         </div>
-        <div>
-          <div style={{fontSize:10,color:"rgba(255,255,255,0.5)",marginBottom:5}}>Multiplicateur stock (4-5x recommandé)</div>
-          <input type="range" min={1} max={10} step={0.5} value={multiplicateur} onChange={e=>setMultiplicateur(+e.target.value)} style={{width:"100%",accentColor:"#7c3aed"}}/>
-          <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:3}}>×{multiplicateur} = {fmt(stockCmd)} gob</div>
-        </div>
-        <div>
-          <div style={{fontSize:10,color:"rgba(255,255,255,0.5)",marginBottom:5}}>Rotations / an (service)</div>
-          <input type="range" min={1} max={200} step={1} value={rotations} onChange={e=>setRotations(+e.target.value)} style={{width:"100%",accentColor:"#6fca96"}}/>
-          <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:3}}>{rotations} rotations</div>
-        </div>
+        {isAchat ? (
+          <div>
+            <div style={{fontSize:10,color:"rgba(255,255,255,0.45)",marginBottom:4}}>Multiplicateur stock (×5 recommandé)</div>
+            <input type="range" min={1} max={10} step={0.5} value={multiplicateur} onChange={e=>setMultiplicateur(+e.target.value)} style={{width:"100%",accentColor:"#f0a500"}}/>
+            <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:2}}>×{multiplicateur} = {fmt(stockCmd)} gob</div>
+          </div>
+        ) : (
+          <div>
+            <div style={{fontSize:10,color:"rgba(255,255,255,0.45)",marginBottom:4}}>Rotations / an</div>
+            <input type="range" min={1} max={365} step={1} value={rotations} onChange={e=>setRotations(+e.target.value)} style={{width:"100%",accentColor:"#1a6b3a"}}/>
+            <div style={{fontSize:16,fontWeight:800,color:"white",marginTop:2}}>{rotations} rotations/an</div>
+          </div>
+        )}
       </div>
 
-      <div style={{background:"rgba(240,165,0,0.12)",border:"1px solid rgba(240,165,0,0.3)",borderRadius:10,padding:14,marginBottom:14}}>
-        <div style={{fontSize:10,color:"#f0a500",fontWeight:700,marginBottom:8}}>Pourquoi le client commande ×{multiplicateur} le nombre de participants</div>
-        <div style={{fontSize:11,color:"rgba(255,255,255,0.7)",lineHeight:1.6}}>
-          Un stade de {fmt(participants)} personnes ne peut pas laver {fmt(participants)} gobelets d'un soir sur l'autre.
-          Il faut 2-3 jours de rotation = {fmt(participants * 3)} gob minimum.
-          + pertes (10-15%) + stock de sécurité = <strong style={{color:"#f0a500"}}>{fmt(stockCmd)} gobelets commandés</strong> pour tenir l'année.
+      {isAchat ? (
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+          <div style={{background:"rgba(255,255,255,0.06)",borderRadius:10,padding:"12px 14px"}}>
+            <div style={{fontSize:9,color:"rgba(255,255,255,0.4)",marginBottom:3}}>Stock commandé × 0,30€</div>
+            <div style={{fontSize:20,fontWeight:800,color:"#f0a500"}}>{fmt(caAchat)}€</div>
+            <div style={{fontSize:9,color:"rgba(255,255,255,0.3)",marginTop:2}}>{fmt(stockCmd)} gob × 0,30€</div>
+          </div>
+          <div style={{background:"rgba(240,165,0,0.18)",border:"1px solid rgba(240,165,0,0.4)",borderRadius:10,padding:"12px 14px"}}>
+            <div style={{fontSize:9,color:"#f0a500",marginBottom:3}}>Votre commission (8%)</div>
+            <div style={{fontSize:20,fontWeight:800,color:"white"}}>{fmt(comAchat)}€</div>
+            <div style={{fontSize:9,color:"rgba(255,255,255,0.4)",marginTop:2}}>one-shot · renouvelé chaque année</div>
+          </div>
         </div>
-      </div>
-
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
-        <div style={{background:"rgba(255,255,255,0.06)",borderRadius:10,padding:"14px"}}>
-          <div style={{fontSize:10,color:"#6fca96",fontWeight:700,marginBottom:8}}>Ecocup ACHAT (client avec plonge)</div>
-          <div style={{fontSize:12,color:"rgba(255,255,255,0.6)",marginBottom:4}}>Stock initial : {fmt(stockCmd)} gob × 0,30€</div>
-          <div style={{fontSize:20,fontWeight:800,color:"#6fca96"}}>{fmt(caAchat)}€</div>
-          <div style={{fontSize:11,color:"rgba(255,255,255,0.4)",marginTop:4}}>Votre com (8%) = <strong style={{color:"white"}}>{fmt(comAchat)}€</strong> one-shot</div>
-          <div style={{fontSize:10,color:"rgba(255,255,255,0.35)",marginTop:3}}>+ renouvellement annuel (casse, perte, IML nouveau logo)</div>
+      ) : (
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:10}}>
+          <div style={{background:"rgba(255,255,255,0.06)",borderRadius:10,padding:"12px 14px"}}>
+            <div style={{fontSize:9,color:"rgba(255,255,255,0.4)",marginBottom:3}}>CA service / an</div>
+            <div style={{fontSize:20,fontWeight:800,color:"#6fca96"}}>{fmt(caService)}€</div>
+            <div style={{fontSize:9,color:"rgba(255,255,255,0.3)",marginTop:2}}>{fmt(participants)} × {rotations} × 0,20€</div>
+          </div>
+          <div style={{background:"rgba(255,255,255,0.06)",borderRadius:10,padding:"12px 14px"}}>
+            <div style={{fontSize:9,color:"rgba(255,255,255,0.4)",marginBottom:3}}>Votre com / an (12%)</div>
+            <div style={{fontSize:20,fontWeight:800,color:"white"}}>{fmt(comService)}€</div>
+            <div style={{fontSize:9,color:"rgba(255,255,255,0.3)",marginTop:2}}>récurrente tant que membre actif</div>
+          </div>
+          <div style={{background:"rgba(26,107,58,0.3)",border:"1px solid rgba(26,107,58,0.6)",borderRadius:10,padding:"12px 14px"}}>
+            <div style={{fontSize:9,color:"#6fca96",marginBottom:3}}>Sur 48 mois</div>
+            <div style={{fontSize:20,fontWeight:800,color:"white"}}>{fmt(com48)}€</div>
+            <div style={{fontSize:9,color:"rgba(255,255,255,0.4)",marginTop:2}}>durée contrat standard</div>
+          </div>
         </div>
-        <div style={{background:"rgba(240,165,0,0.12)",border:"1px solid rgba(240,165,0,0.25)",borderRadius:10,padding:"14px"}}>
-          <div style={{fontSize:10,color:"#f0a500",fontWeight:700,marginBottom:8}}>Ecocup SERVICE (client sans plonge)</div>
-          <div style={{fontSize:12,color:"rgba(255,255,255,0.6)",marginBottom:4}}>{fmt(participants)} gob × {rotations} rotations × 0,20€</div>
-          <div style={{fontSize:20,fontWeight:800,color:"white"}}>{fmt(caService)}€/an</div>
-          <div style={{fontSize:11,color:"rgba(255,255,255,0.4)",marginTop:4}}>Votre com (12%) = <strong style={{color:"#f0a500"}}>{fmt(comService)}€/an</strong></div>
-          <div style={{fontSize:12,fontWeight:800,color:"#f0a500",marginTop:6}}>Sur 48 mois = {fmt(com48service)}€</div>
-        </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -360,21 +397,53 @@ function SimFranchise() {
   const [tauxAdh, setTauxAdh] = React.useState(50);
   const [consoJ, setConsoJ] = React.useState(150);
   const [jours, setJours] = React.useState(280);
+  const [mode, setMode] = React.useState("achat"); // "achat" ou "service"
   const fmt = n => Math.round(n).toLocaleString("fr-FR");
 
   const restausAdh = Math.round(nbRestaus * tauxAdh / 100);
-  const gobelets = restausAdh * consoJ * jours * 5; // x5 multiplicateur
-  const ca = gobelets * 0.30;
-  const com = ca * 0.08;
+
+  // ACHAT : stock ×5 × 0,30€ · com 8% · one-shot annuel
+  const gobeletsAchat = restausAdh * consoJ * jours * 5;
+  const caAchat = gobeletsAchat * 0.30;
+  const comAchat = caAchat * 0.08;
+
+  // SERVICE : 0 achat · 0,20€/gob/rotation · com 12%/an
+  const gobeletsService = restausAdh * consoJ * jours;
+  const caService = gobeletsService * 0.20;
+  const comService = caService * 0.12;
+
+  const isAchat = mode === "achat";
 
   return (
     <div style={{background:"#0d1a2d",color:"white",borderRadius:14,padding:22,border:"1px solid rgba(100,150,255,0.2)"}}>
-      <div style={{fontSize:10,color:"#60a5fa",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:16}}>Simulation réseau de franchise national</div>
-      <div style={{fontSize:12,color:"rgba(255,255,255,0.7)",lineHeight:1.6,marginBottom:16}}>
+      <div style={{fontSize:10,color:"#60a5fa",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:10}}>Simulation réseau de franchise national</div>
+      <div style={{fontSize:11,color:"rgba(255,255,255,0.65)",lineHeight:1.6,marginBottom:14}}>
         Si vous connaissez quelqu'un chez <strong style={{color:"white"}}>Hippopotamus, Léon de Bruxelles, Big Fernand, Holy Cow, O'Tacos, Pitaya, Pokawa, Chipotle, Five Guys, Eat Sushi, Côté Sushi, Sushi Shop, Subway, Burger King, KFC…</strong>
       </div>
 
-      <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:12,marginBottom:16}}>
+      {/* Toggle */}
+      <div style={{display:"flex",gap:8,marginBottom:14}}>
+        <button onClick={()=>setMode("achat")} style={{
+          flex:1,padding:"8px 0",borderRadius:7,border:"none",cursor:"pointer",fontFamily:"inherit",
+          fontWeight:700,fontSize:12,
+          background:isAchat?"#f0a500":"rgba(255,255,255,0.08)",
+          color:isAchat?"#0d3340":"rgba(255,255,255,0.5)"
+        }}>🥤 Les restos achètent les gobelets</button>
+        <button onClick={()=>setMode("service")} style={{
+          flex:1,padding:"8px 0",borderRadius:7,border:"none",cursor:"pointer",fontFamily:"inherit",
+          fontWeight:700,fontSize:12,
+          background:!isAchat?"#1a6b3a":"rgba(255,255,255,0.08)",
+          color:!isAchat?"white":"rgba(255,255,255,0.5)"
+        }}>★ Contrat service location</button>
+      </div>
+
+      <div style={{background:"rgba(255,255,255,0.05)",borderRadius:8,padding:"7px 12px",marginBottom:14,fontSize:11,color:"rgba(255,255,255,0.6)",lineHeight:1.5}}>
+        {isAchat
+          ? "Les restaurants ont une plonge. Ils achètent leur stock annuel × 5. Commission 8% one-shot, renouvelée chaque année."
+          : "Re-uz livre, lave, récupère. Le restaurant paie 0,20€/gob/rotation. Aucun achat initial. Commission 12%/an récurrente sur 48 mois."}
+      </div>
+
+      <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:12,marginBottom:14}}>
         <div>
           <div style={{fontSize:10,color:"rgba(255,255,255,0.45)",marginBottom:4}}>Nombre de restaurants France</div>
           <input type="range" min={10} max={600} step={10} value={nbRestaus} onChange={e=>setNbRestaus(+e.target.value)} style={{width:"100%",accentColor:"#60a5fa"}}/>
@@ -397,32 +466,56 @@ function SimFranchise() {
         </div>
       </div>
 
-      <div style={{background:"rgba(96,165,250,0.12)",border:"1px solid rgba(96,165,250,0.3)",borderRadius:10,padding:14}}>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:10}}>
-          <div style={{textAlign:"center"}}>
-            <div style={{fontSize:9,color:"rgba(255,255,255,0.45)",marginBottom:3}}>Gobelets commandés/an</div>
-            <div style={{fontSize:18,fontWeight:800,color:"#60a5fa"}}>{fmt(gobelets)}</div>
-            <div style={{fontSize:9,color:"rgba(255,255,255,0.35)"}}>×5 multiplicateur stock</div>
-          </div>
-          <div style={{textAlign:"center"}}>
-            <div style={{fontSize:9,color:"rgba(255,255,255,0.45)",marginBottom:3}}>CA vente annuel</div>
-            <div style={{fontSize:18,fontWeight:800,color:"white"}}>{fmt(ca)}€</div>
-            <div style={{fontSize:9,color:"rgba(255,255,255,0.35)"}}>×0,30€/gob</div>
-          </div>
-          <div style={{textAlign:"center",background:"rgba(240,165,0,0.15)",borderRadius:8,padding:"8px"}}>
-            <div style={{fontSize:9,color:"#f0a500",marginBottom:3}}>Votre commission (8%)</div>
-            <div style={{fontSize:18,fontWeight:800,color:"#f0a500"}}>{fmt(com)}€/an</div>
-            <div style={{fontSize:9,color:"rgba(255,255,255,0.35)"}}>renouvelable annuellement</div>
+      {isAchat ? (
+        <div style={{background:"rgba(96,165,250,0.12)",border:"1px solid rgba(96,165,250,0.3)",borderRadius:10,padding:14}}>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:10}}>
+            <div style={{textAlign:"center"}}>
+              <div style={{fontSize:9,color:"rgba(255,255,255,0.45)",marginBottom:3}}>Gobelets commandés / an (×5)</div>
+              <div style={{fontSize:17,fontWeight:800,color:"#60a5fa"}}>{fmt(gobeletsAchat)}</div>
+              <div style={{fontSize:9,color:"rgba(255,255,255,0.35)"}}>{fmt(restausAdh)} restos × {consoJ}/j × {jours}j × 5</div>
+            </div>
+            <div style={{textAlign:"center"}}>
+              <div style={{fontSize:9,color:"rgba(255,255,255,0.45)",marginBottom:3}}>CA vente annuel</div>
+              <div style={{fontSize:17,fontWeight:800,color:"white"}}>{fmt(caAchat)}€</div>
+              <div style={{fontSize:9,color:"rgba(255,255,255,0.35)"}}>× 0,30€/gob</div>
+            </div>
+            <div style={{textAlign:"center",background:"rgba(240,165,0,0.15)",borderRadius:8,padding:"8px"}}>
+              <div style={{fontSize:9,color:"#f0a500",marginBottom:3}}>Votre commission (8%)</div>
+              <div style={{fontSize:17,fontWeight:800,color:"#f0a500"}}>{fmt(comAchat)}€/an</div>
+              <div style={{fontSize:9,color:"rgba(255,255,255,0.35)"}}>renouvelable annuellement</div>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div style={{background:"rgba(26,107,58,0.15)",border:"1px solid rgba(26,107,58,0.4)",borderRadius:10,padding:14}}>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:10}}>
+            <div style={{textAlign:"center"}}>
+              <div style={{fontSize:9,color:"rgba(255,255,255,0.45)",marginBottom:3}}>Rotations totales / an</div>
+              <div style={{fontSize:17,fontWeight:800,color:"#6fca96"}}>{fmt(gobeletsService)}</div>
+              <div style={{fontSize:9,color:"rgba(255,255,255,0.35)"}}>{fmt(restausAdh)} × {consoJ}/j × {jours}j</div>
+            </div>
+            <div style={{textAlign:"center"}}>
+              <div style={{fontSize:9,color:"rgba(255,255,255,0.45)",marginBottom:3}}>CA service / an</div>
+              <div style={{fontSize:17,fontWeight:800,color:"white"}}>{fmt(caService)}€</div>
+              <div style={{fontSize:9,color:"rgba(255,255,255,0.35)"}}>× 0,20€/gob</div>
+            </div>
+            <div style={{textAlign:"center"}}>
+              <div style={{fontSize:9,color:"#6fca96",marginBottom:3}}>Votre com / an (12%)</div>
+              <div style={{fontSize:17,fontWeight:800,color:"white"}}>{fmt(comService)}€</div>
+              <div style={{fontSize:9,color:"rgba(255,255,255,0.35)"}}>récurrente</div>
+            </div>
+            <div style={{textAlign:"center",background:"rgba(26,107,58,0.3)",borderRadius:8,padding:"8px"}}>
+              <div style={{fontSize:9,color:"#6fca96",marginBottom:3}}>Sur 48 mois</div>
+              <div style={{fontSize:17,fontWeight:800,color:"white"}}>{fmt(comService*4)}€</div>
+              <div style={{fontSize:9,color:"rgba(255,255,255,0.35)"}}>durée contrat</div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-/* ============================================================
-   COMPOSANT VILLE
-============================================================ */
 function VilleView({ v }) {
   const [cat, setCat] = React.useState("A");
   const data = VILLES[v];
