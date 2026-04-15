@@ -82,7 +82,7 @@ footer{background:var(--teal);color:rgba(255,255,255,0.4);text-align:center;padd
 <div class="nav-bar">
   <span>🏠 Accueil</span>
   <a href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-prospection-v2.html">🗺️ Prospection & marché</a>
-  <a href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-dossier-print.html" target="_blank">🖨️ Dossier PDF</a>
+  <a href="javascript:void(0)" onclick="ouvrirDossier()" target="_blank">🖨️ Dossier PDF</a>
 </div>
 
 <div class="hero">
@@ -172,7 +172,7 @@ footer{background:var(--teal);color:rgba(255,255,255,0.4);text-align:center;padd
         <div style="font-size:28px;">🖨️</div>
         <h3>Dossier complet imprimable</h3>
         <p>16 pages PDF — marché, entreprise, gammes, villes, toutes les fiches cibles, simulations, statuts, étapes. À imprimer ou partager.</p>
-        <a href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-dossier-print.html" target="_blank">Ouvrir le dossier →</a>
+        <a href="javascript:void(0)" onclick="ouvrirDossier()" target="_blank">Ouvrir le dossier →</a>
       </div>
     </div>
   </div>
@@ -295,10 +295,13 @@ footer{background:var(--teal);color:rgba(255,255,255,0.4);text-align:center;padd
 
 <div class="print-bar">
   <button class="pbtn" style="background:#1a6b3a;color:white;" onclick="window.print()">🖨️ Imprimer</button>
-  <a class="pbtn" style="background:#0d3340;color:#f0a500;" href="https://thierrybismuth.github.io/pagesweb-thierry-/reuz-dossier-print.html" target="_blank">📁 Dossier complet</a>
+  <a class="pbtn" style="background:#0d3340;color:#f0a500;" href="javascript:void(0)" onclick="ouvrirDossier()" target="_blank">📁 Dossier complet</a>
 </div>
 
 <script>
+function ouvrirDossier() {
+  window.open("https://thierrybismuth.github.io/pagesweb-thierry-/reuz-dossier-print.html?v=" + Date.now(), "_blank");
+}
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});});
 });
