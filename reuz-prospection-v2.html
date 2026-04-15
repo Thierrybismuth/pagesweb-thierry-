@@ -164,11 +164,46 @@ const VILLES = {
     ],
   },
   bordeaux: {
-    A: [{g:42000,r:1,m:5},{g:16000,r:1,m:5},{g:50000,r:5,m:5},{g:15000,r:3,m:5},{g:45000,r:4,m:5},{g:3000,r:25,m:5},{g:3000,r:20,m:5},{g:5000,r:1,m:5},{g:20000,r:3,m:5},{g:10000,r:3,m:5},{g:15000,r:4,m:5},{g:8000,r:3,m:5},
-      {g:200000,r:5,m:5},{g:30000,r:5,m:5},{g:25000,r:4,m:5},{g:30000,r:1,m:5},{g:10000,r:7,m:5}],
-    B: [{g:500,r:130,m:5},{g:2000,r:52,m:5},{g:3000,r:150,m:5},{g:800,r:180,m:5}],
-    C: [{g:1000,r:1,m:1},{g:1500,r:1,m:1},{g:1200,r:1,m:1},{g:1200,r:1,m:1},{g:600,r:1,m:1},{g:800,r:1,m:1},
-      {g:2000,r:1,m:1},{g:3000,r:1,m:1},{g:5000,r:1,m:1},{g:1000,r:1,m:1}],
+    nom: "Bordeaux & Nouvelle-Aquitaine",
+    emoji: "🍷",
+    col: "#8e44ad",
+    pop: "1,5M hab",
+    ca_potentiel: "382K€",
+    depart: "33/17/16/79/86/24/47",
+    A: [
+      { nom:"Stade Matmut Atlantique", type:"Stade football", jauge:"42 000", freq:"20 matchs/saison + events", note:"Buvettes extérieures. Partenaire Heineken.", contact:"girondins.com" },
+      { nom:"Arkéa Arena Floirac", type:"Grande salle concerts", jauge:"16 000", freq:"80 events/an", note:"LA salle de Bordeaux. Inaugurée 2023. Très active.", contact:"arkeaarena.com" },
+      { nom:"Bordeaux Fête le Fleuve", type:"Festival nautique", jauge:"600 000/5 jours", freq:"Juin bisannuel 2026", note:"ÉNORME. 600 000 visiteurs. Stands boissons sans cuisine fixe.", contact:"bordeaux-fete-le-fleuve.com" },
+      { nom:"Bordeaux Open Air (BOA)", type:"Festival électro", jauge:"15 000/j", freq:"3 jours été", note:"Paragon. Plein air. Zéro cuisine fixe.", contact:"bordeaux-openair.com" },
+      { nom:"Garorock Festival (Marmande)", type:"Festival musique", jauge:"45 000/j", freq:"4 jours juillet", note:"Plein air. Sans cuisine fixe. Fort volume.", contact:"garorock.com" },
+      { nom:"Hippodrome Le Bouscat", type:"Hippodrome", jauge:"3 000", freq:"25 réunions/an", note:"Bar tribunes classique. Service Re-uz.", contact:"hippodrome-le-bouscat.fr" },
+      { nom:"Hippodrome La Teste-de-Buch", type:"Hippodrome", jauge:"3 000", freq:"20 réunions/an", note:"Arcachon. Très touristique en été.", contact:"hippodrome-la-teste.fr" },
+      { nom:"Bordeaux Marathon", type:"Sport masse", jauge:"13 000 coureurs", freq:"Avril 2026", note:"Ravitaillements = milliers de gobelets.", contact:"marathondebordeaux.com" },
+      { nom:"Rock à la Caune Saintes (17)", type:"Festival rock", jauge:"20 000/j", freq:"3 jours été", note:"Charente-Maritime. Plein air. Sans cuisine.", contact:"rockalachaune.com" },
+      { nom:"Vinexpo / Salon vins", type:"Salon vins", jauge:"50 000/3 jours", freq:"Tous les 2 ans", note:"Lac de Bordeaux. Stands sans plonge.", contact:"vinexpo.com" },
+      { nom:"Fêtes de Bayonne", type:"Feria / Fête basque", jauge:"1 000 000 visiteurs", freq:"5 jours fin juillet", note:"LA PLUS GRANDE FETE DU SUD-OUEST. Stands plein air sans cuisine fixe. CIBLE PRIORITAIRE.", contact:"fetes.bayonne.fr" },
+      { nom:"Féria de Dax", type:"Feria taurine", jauge:"150 000 visiteurs", freq:"5 jours août", note:"Landes. Bodegas plein air = aucune cuisine fixe. Service Re-uz parfait.", contact:"dax-tourisme.com" },
+      { nom:"Féria de Mont-de-Marsan", type:"Feria taurine", jauge:"100 000 visiteurs", freq:"4 jours juillet", note:"Landes 40. Très forte consommation bière et vin.", contact:"mont-de-marsan.fr" },
+      { nom:"Fête de la Transhumance (Espelette)", type:"Fête basque", jauge:"30 000 visiteurs", freq:"Octobre annuel", note:"Pays Basque 64. Événement plein air.", contact:"espelette.fr" },
+      { nom:"Fête de Bayonne / Fêtes côte basque", type:"Festival côtier", jauge:"50 000/semaine", freq:"Été", note:"64. Événements plein air sur le littoral basque.", contact:"" },
+    ],
+    B: [
+      { nom:"Campings Arcachon 5 étoiles (10)", type:"Campings premium", jauge:"500 gob/j × 10 campings", note:"Bar piscine + beach bar. Saison mai-sept." },
+      { nom:"Center Parcs LA Forêt (33)", type:"Center Parcs", jauge:"2 000/semaine", note:"Bar aquatique couvert. Forte conso famille." },
+      { nom:"Parc de la Palmyre (Zoo)", type:"Zoo", jauge:"3 000/j", note:"Charente-Maritime. 150 jours/an." },
+      { nom:"Iboat (club péniche)", type:"Club / Beer Up", jauge:"800/nuit", note:"Beer Up parfaitement aligné. 180 nuits/an." },
+    ],
+    C: [
+      { nom:"L'Entrecôte groupe (4)", type:"Steak-frites concept", nb_restau:"4 Bordeaux région", note:"Concept fort. Gobelets réemployables alignés avec image qualité." },
+      { nom:"O'Tacos Bordeaux (6)", type:"Tacos franchise", nb_restau:"6 Bordeaux", note:"Fort volume jeune, gobelet systématique." },
+      { nom:"Hippopotamus Bordeaux (2)", type:"Steakhouse", nb_restau:"2 Bordeaux", note:"Chaine. Fort volume boissons." },
+      { nom:"Léon de Bruxelles Bordeaux (2)", type:"Moules-frites", nb_restau:"2 Bordeaux", note:"Chaine nationale. Fort volume boissons." },
+      { nom:"Pokawa Bordeaux (4)", type:"Poke bowl franchise", nb_restau:"4 Bordeaux", note:"Franchise en croissance." },
+      { nom:"Châteaux Médoc (Margaux, Pauillac...)", type:"Domaines viticoles premium", nb_restau:"50+ châteaux", note:"Visites caves, events, mariages. Gamme verres sur pieds Re-uz — Eco Vin & Eco Rose." },
+      { nom:"Châteaux Saint-Émilion & Pomerol", type:"Domaines viticoles", nb_restau:"30+ châteaux", note:"Fort trafic touristique. Gobelet verre ballon IML = souvenir premium." },
+      { nom:"Cité du Vin Bordeaux", type:"Musée & événements", nb_restau:"1 site majeur", note:"500 000 visiteurs/an. Bar panoramique. Cible verres haut de gamme." },
+      { nom:"Vignobles Bergerac / Duras / Cahors", type:"Domaines viticoles dép.", nb_restau:"40+ domaines", note:"24/47. Salons des vins, routes touristiques." },
+    ],
   },
   rennes: {
     nom: "Rennes & Bretagne",
@@ -619,11 +654,11 @@ function VilleView({ v }) {
                 <span style={{color:"#a0ffbf"}}>Location {fmt(catCL)}€/an</span>
               </div>
             </div>
-            <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(265px,1fr))",gap:7,padding:8,background:"white",border:`1px solid ${cat.color}30`,borderTop:"none",borderRadius:"0 0 8px 8px"}}>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(265px,1fr))",gap:7,padding:8,background:"white",border:"1px solid "+cat.color+"50",borderTop:"none",borderRadius:"0 0 8px 8px"}}>
               {cat.items.map((item, i) => {
                 const sim = catSims[i];
                 return (
-                  <div key={i} style={{background:"#f9fafb",border:`1px solid ${cat.color}18`,borderLeft:`3px solid ${cat.color}`,borderRadius:6,padding:"9px 11px"}}>
+                  <div key={i} style={{background:"#f9fafb",border:"1px solid "+cat.color+"30",borderLeft:"3px solid "+cat.color,borderRadius:6,padding:"9px 11px"}}>
                     <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:5,marginBottom:3}}>
                       <div style={{fontSize:11,fontWeight:700,color:"#0d3340",lineHeight:1.3}}>{item.nom}</div>
                       <span style={{background:cat.color+"18",color:cat.color,padding:"2px 6px",borderRadius:9,fontSize:8,fontWeight:700,flexShrink:0,whiteSpace:"nowrap"}}>{item.type}</span>
@@ -770,7 +805,7 @@ function GeneriqueView() {
             {col:"#475569",icon:"🍽️",nom:"Pure (vaisselle réemployable)",desc:"Bols, assiettes, verres réemployables. Sans BPA, micro-ondes compatible, lave-vaisselle. Cibles : restauration collective, cantines, events haut de gamme."},
             {col:"#059669",icon:"🥡",nom:"Kiobox (restauration emporter)",desc:"Contenants réemployables pour la restauration à emporter. Obligation légale 2025. Achat + lavage + R&D sur mesure. Cibles : fast food, restauration rapide, food trucks."},
           ].map((g,i)=>(
-            <div key={i} style={{background:g.col+"12",border:`1px solid ${g.col}35`,borderRadius:10,padding:13}}>
+            <div key={i} style={{background:g.col+"12",border:"1px solid "+g.col+"55",borderRadius:10,padding:13}}>
               <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:7}}>
                 <span style={{fontSize:18}}>{g.icon}</span>
                 <span style={{fontSize:12,fontWeight:700,color:g.col}}>{g.nom}</span>
