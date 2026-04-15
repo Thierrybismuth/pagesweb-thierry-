@@ -920,7 +920,6 @@ function App() {
         <div style={{background:"#0a1510",padding:"5px 16px",display:"flex",gap:0,alignItems:"center",overflowX:"auto",borderBottom:"1px solid rgba(255,255,255,0.06)"}}>
           <a href={BASE+"/reuz-accueil.html"} style={{color:"rgba(255,255,255,0.45)",fontSize:10,fontWeight:600,textDecoration:"none",padding:"4px 11px",whiteSpace:"nowrap",borderRight:"1px solid rgba(255,255,255,0.08)"}}>🏠 Accueil</a>
           <span style={{color:"#6fca96",fontSize:10,fontWeight:700,padding:"4px 11px",whiteSpace:"nowrap",borderRight:"1px solid rgba(255,255,255,0.08)"}}>🗺️ Prospection</span>
-          <a href={BASE+"/reuz-dossier-print.html"} target="_blank" style={{color:"rgba(255,255,255,0.45)",fontSize:10,fontWeight:600,textDecoration:"none",padding:"4px 11px",whiteSpace:"nowrap"}}>🖨️ Dossier PDF</a>
         </div>
         {/* Info */}
         <div style={{maxWidth:960,margin:"0 auto",padding:"8px 16px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:10,flexWrap:"wrap"}}>
@@ -948,13 +947,6 @@ function App() {
       </div>
 
       {view === "generique" ? <GeneriqueView /> : <VilleView v={view} />}
-
-      {/* PRINT TOOLBAR */}
-      <div className="no-print" style={{position:"fixed",bottom:20,right:20,display:"flex",flexDirection:"column",gap:8,alignItems:"flex-end",zIndex:999}}>
-        <button onClick={()=>window.print()} style={{background:"#1a6b3a",color:"white",border:"none",padding:"9px 16px",borderRadius:7,fontSize:12,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 14px rgba(0,0,0,0.2)"}}>🖨️ Imprimer</button>
-        <a href={BASE+"/reuz-dossier-print.html"} target="_blank" style={{background:"#0d3340",color:"#f0a500",padding:"9px 16px",borderRadius:7,fontSize:12,fontWeight:700,textDecoration:"none",boxShadow:"0 4px 14px rgba(0,0,0,0.2)"}}>📁 Dossier complet</a>
-      </div>
-    </div>
   );
 }
 
