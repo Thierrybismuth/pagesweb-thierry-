@@ -815,6 +815,36 @@ function GeneriqueView() {
         </div>
       </div>
 
+      {/* === BLOC GAMME VERRES PREMIUM === */}
+      <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:12,padding:20,marginBottom:16}}>
+        <div style={{fontSize:10,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>Gamme verres premium</div>
+        <div style={{fontSize:20,fontWeight:800,color:"#0d3340",marginBottom:8}}>La vaisselle réemployable <span style={{color:"#1a6b3a"}}>haut de gamme</span></div>
+        <p style={{fontSize:12,color:"#4b6358",lineHeight:1.7,marginBottom:14}}>Verres à vin, coupes à champagne, carafes — personnalisables IML photo-qualité. Idéaux pour les domaines viticoles, réceptions, mariages, gastronomie, événements premium. La même logique de réemploi, dans un univers plus haut de gamme.</p>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16,marginBottom:14}}>
+          <img src="https://raw.githubusercontent.com/Thierrybismuth/pagesweb-thierry-/main/assets/reuz-gammes-verres.png" alt="Gamme verres Re-uz — Eco Vin, VAV25, Champ 12, Eco Carafe, Eco Rose, Eco Inao, Oenologie" style={{width:"100%",borderRadius:10,boxShadow:"0 2px 12px rgba(0,0,0,0.08)"}}/>
+          <div>
+            <img src="https://raw.githubusercontent.com/Thierrybismuth/pagesweb-thierry-/main/assets/reuz-verre-ballon.png" alt="Verre ballon Re-uz personnalisé IML" style={{width:"100%",borderRadius:10,boxShadow:"0 2px 12px rgba(0,0,0,0.08)",marginBottom:10}}/>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6}}>
+              {[
+                ["🍷","Verre à vin Eco Vin","Forme classique · personnalisable"],
+                ["🥂","Coupe Champ 12","Champagne · flûte réemployable"],
+                ["🫗","Carafe 1,5L Eco","Service à table premium"],
+                ["🍾","Verre ballon Tritan","Incassable · Eco Rose / Eco Inao"],
+              ].map(([i,n,d],idx)=>(
+                <div key={{idx}} style={{background:"#f4f7f5",borderRadius:7,padding:"8px 10px"}}>
+                  <div style={{fontSize:13,marginBottom:3}}>{i}</div>
+                  <div style={{fontSize:10,fontWeight:700,color:"#0d3340"}}>{n}</div>
+                  <div style={{fontSize:9,color:"#4b6358"}}>{d}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div style={{background:"#f4f7f5",borderRadius:8,padding:"10px 14px",fontSize:11,color:"#4b6358",lineHeight:1.6}}>
+          <strong>Cibles premium :</strong> Domaines viticoles (Médoc, Saint-Émilion, Bourgogne, Alsace), traiteurs événementiels, châteaux de réception, galas d'entreprise, mariages haut de gamme, restaurants étoilés, caves à vin.
+        </div>
+      </div>
+
       {/* === BLOC SIMULATION === */}
       <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:12,padding:20,marginBottom:16}}>
         <div style={{fontSize:10,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>Le multiplicateur stock</div>
