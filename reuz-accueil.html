@@ -338,14 +338,20 @@ footer{background:var(--teal);color:rgba(255,255,255,0.4);text-align:center;padd
 
 <script>
 function ouvrirDossier() {
-  window.open("https://thierrybismuth.github.io/pagesweb-thierry-/reuz-dossier-print.html?v=" + Date.now(), "_blank");
+  window.open("https://thierrybismuth.com/reuz-dossier-print.html?v=" + Date.now(), "_blank");
 }
-document.getElementById('villesBtn').addEventListener('click', function(e){
-  e.stopPropagation();
-  document.getElementById('villesMenu').classList.toggle('open');
-});
-document.addEventListener('click', function(){
-  document.getElementById('villesMenu').classList.remove('open');
+document.addEventListener('DOMContentLoaded', function(){
+  var btn = document.getElementById('villesBtn');
+  var menu = document.getElementById('villesMenu');
+  if(btn && menu){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    });
+    document.addEventListener('click', function(){
+      menu.style.display = 'none';
+    });
+  }
 });
 
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
