@@ -17,7 +17,7 @@
     --red: #c0392b;
     --white: #ffffff;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; max-width: 100%; }
   body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--navy); font-size: 14px; line-height: 1.6; overflow-x: hidden; }
   .page { max-width: 900px; margin: 0 auto; padding: 40px 30px; overflow-x: hidden; }
 
@@ -25,58 +25,56 @@
   .header h1 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 700; line-height: 1.2; }
   .header h1 span { color: var(--amber); }
   .header p { font-size: 12px; color: var(--grey); margin-top: 6px; }
-  .ada-badge { background: var(--navy); color: var(--white); font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; padding: 8px 18px; letter-spacing: 2px; }
+  .ada-badge { background: var(--navy); color: var(--white); font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; padding: 8px 18px; letter-spacing: 2px; display: inline-block; }
 
   .section-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; border-left: 4px solid var(--amber); padding-left: 14px; margin-bottom: 16px; margin-top: 32px; }
 
   .intro-box { background: var(--navy); color: var(--white); padding: 20px 24px; margin-bottom: 32px; border-left: 5px solid var(--amber); }
-  .intro-box p { font-size: 13px; font-weight: 300; line-height: 1.7; }
+  .intro-box p { font-size: 13px; font-weight: 300; line-height: 1.7; word-break: break-word; }
   .intro-box strong { color: var(--amber-light); }
 
-  .capital-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-  .capital-card { background: var(--white); border: 1px solid var(--light-grey); padding: 20px; text-align: center; position: relative; }
+  /* CAPITAL GRID */
+  .capital-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 8px; }
+  .capital-card { background: var(--white); border: 1px solid var(--light-grey); padding: 20px 14px; text-align: center; position: relative; margin-top: 14px; }
   .capital-card.leader { border: 2px solid var(--amber); background: rgba(200,135,58,0.05); }
-  .capital-card .pct { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 700; color: var(--amber); line-height: 1; }
-  .capital-card.leader .pct { font-size: 52px; }
-  .capital-card .name { font-size: 14px; font-weight: 600; color: var(--navy); margin: 6px 0 2px; }
-  .capital-card .role { font-size: 11.5px; color: var(--grey); font-weight: 300; }
-  .capital-card .valeur { font-size: 13px; font-weight: 600; color: var(--navy); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--light-grey); }
-  .badge-top { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); color: var(--white); font-size: 10px; font-weight: 700; padding: 2px 10px; white-space: nowrap; }
+  .capital-card .pct { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 700; color: var(--amber); line-height: 1; }
+  .capital-card.leader .pct { font-size: 48px; }
+  .capital-card .name { font-size: 13px; font-weight: 600; color: var(--navy); margin: 6px 0 2px; }
+  .capital-card .role { font-size: 11px; color: var(--grey); font-weight: 300; }
+  .capital-card .valeur { font-size: 12px; font-weight: 600; color: var(--navy); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--light-grey); }
+  .capital-card .apport { font-size: 11px; color: var(--grey); margin-top: 4px; }
+  .badge-top { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); color: var(--white); font-size: 10px; font-weight: 700; padding: 2px 10px; white-space: nowrap; }
 
-  .table-wrap { overflow-x: auto; margin-bottom: 12px; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  thead tr { background: var(--navy); color: var(--white); }
-  thead th { padding: 11px 14px; text-align: right; font-weight: 500; }
-  thead th:first-child { text-align: left; }
-  tbody tr:nth-child(even) { background: rgba(26,46,68,0.04); }
-  tbody td { padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--light-grey); font-size: 13px; }
-  tbody td:first-child { text-align: left; font-weight: 500; }
-  .row-total { background: rgba(200,135,58,0.12) !important; font-weight: 700; }
-  .val-pos { color: var(--green); font-weight: 600; }
-  .val-neg { color: var(--red); font-weight: 600; }
-  .val-amber { color: var(--amber); font-weight: 700; }
+  /* PHASES */
+  .phase-box { background: var(--white); border: 1px solid var(--light-grey); padding: 18px 20px; margin-bottom: 14px; }
+  .phase-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--amber); }
+  .phase-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid #f3f4f6; font-size: 13px; }
+  .phase-row:last-child { border-bottom: none; font-weight: 700; padding-top: 10px; }
 
-  .mecanique { background: var(--white); border: 1px solid var(--light-grey); padding: 20px 24px; margin-bottom: 16px; }
-  .mecanique h3 { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 14px; border-bottom: 2px solid var(--amber); padding-bottom: 8px; }
-  .step { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid #f3f4f6; align-items: flex-start; }
-  .step:last-child { border-bottom: none; }
-  .step .num { background: var(--amber); color: var(--white); font-size: 12px; font-weight: 700; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-  .step p { font-size: 13px; color: #374151; font-weight: 300; line-height: 1.6; }
-  .step p strong { color: var(--navy); font-weight: 600; }
-
+  /* SWEAT */
   .sweat-box { background: linear-gradient(135deg, #1a2e44, #2a4a6e); color: var(--white); padding: 20px 24px; margin: 16px 0; }
   .sweat-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--amber-light); margin-bottom: 12px; }
-  .sweat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; margin-top: 14px; }
+  .sweat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 14px; }
   .sweat-item { text-align: center; padding: 12px; background: rgba(255,255,255,0.08); }
   .sweat-item .val { font-size: 18px; font-weight: 700; color: var(--amber-light); }
   .sweat-item .lbl { font-size: 11px; opacity: 0.75; margin-top: 4px; line-height: 1.4; }
 
+  /* DILUTION */
+  .dilution-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+  .dilution-card { background: var(--white); border: 1px solid var(--light-grey); padding: 14px; text-align: center; }
+  .dilution-card .periode { font-size: 11px; font-weight: 700; color: var(--grey); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .dilution-card .parts { font-size: 12px; line-height: 1.8; }
+  .dilution-card .parts .mickael { color: var(--amber); font-weight: 700; }
+  .dilution-card .parts .autres { color: var(--navy); font-weight: 600; }
+  .dilution-card.final { border: 2px solid var(--green); background: rgba(45,106,79,0.04); }
+
+  /* PRÉVISIONNEL */
   .previsionnel-box { background: var(--white); border: 1px solid var(--light-grey); padding: 20px 24px; margin-bottom: 16px; }
   .previsionnel-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; margin-bottom: 14px; border-bottom: 2px solid var(--amber); padding-bottom: 8px; }
-  .prev-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f3f4f6; font-size: 13px; }
+  .prev-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f3f4f6; font-size: 13px; }
   .prev-row:last-child { border-bottom: none; font-weight: 700; font-size: 14px; padding-top: 12px; }
-  .prev-row .label { color: #374151; }
 
+  /* DÉMONSTRATION */
   .demonstration-box { background: #f0fdf4; border: 2px solid #86efac; padding: 20px 24px; margin: 16px 0; }
   .demonstration-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700; color: var(--green); margin-bottom: 14px; }
   .demo-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
@@ -87,23 +85,29 @@
   .demo-item.highlight .val { color: var(--white); font-size: 26px; }
   .demo-item.highlight .lbl { color: rgba(255,255,255,0.8); }
 
-  .creditvendeur-box { background: rgba(200,135,58,0.08); border: 1px solid var(--amber); padding: 16px 20px; margin: 16px 0; }
-  .creditvendeur-box h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
-  .creditvendeur-box p { font-size: 13px; color: #374151; font-weight: 300; line-height: 1.6; }
-
+  /* AVANTAGES */
   .avantage { background: var(--white); border: 1px solid var(--light-grey); border-left: 5px solid var(--green); padding: 16px 20px; margin-bottom: 12px; }
   .avantage .tag { display: inline-block; background: var(--green); color: var(--white); font-size: 10px; font-weight: 700; padding: 2px 8px; text-transform: uppercase; margin-bottom: 8px; }
   .avantage h3 { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; margin-bottom: 6px; }
   .avantage p { font-size: 12.5px; color: #374151; font-weight: 300; line-height: 1.7; }
   .avantage .chiffre { font-size: 17px; font-weight: 700; color: var(--green); margin-top: 10px; }
 
+  /* GARANTIES */
   .garanties-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
   .garantie-item { background: var(--white); border: 1px solid var(--light-grey); border-top: 3px solid var(--navy); padding: 14px 16px; }
   .garantie-item h4 { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
   .garantie-item p { font-size: 12px; color: var(--grey); font-weight: 300; line-height: 1.6; }
 
+  .val-pos { color: var(--green); font-weight: 600; }
+  .val-neg { color: var(--red); font-weight: 600; }
+  .val-amber { color: var(--amber); font-weight: 700; }
+
+  .creditvendeur-box { background: rgba(200,135,58,0.08); border: 1px solid var(--amber); padding: 16px 20px; margin: 16px 0; }
+  .creditvendeur-box h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+  .creditvendeur-box p { font-size: 13px; color: #374151; font-weight: 300; line-height: 1.6; }
+
   .disclaimer { background: #f9fafb; border: 1px solid #e5e7eb; padding: 12px 16px; margin-top: 24px; font-size: 11.5px; color: var(--grey); font-style: italic; }
-  .footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--light-grey); display: flex; justify-content: space-between; }
+  .footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--light-grey); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
   .footer p { font-size: 11px; color: var(--grey); }
   .footer .brand { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 700; color: var(--navy); }
 
@@ -115,19 +119,19 @@
     .sweat-grid { grid-template-columns: 1fr 1fr !important; }
     .demo-grid { grid-template-columns: 1fr !important; }
     .garanties-grid { grid-template-columns: 1fr !important; }
-    .previsionnel-box, .mecanique, .creditvendeur-box, .demonstration-box { padding: 14px; }
-    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    table { font-size: 11px; min-width: 500px; }
-    thead th, tbody td { padding: 7px 8px; }
-    .intro-box { padding: 14px; }
-    body { overflow-x: hidden; }
-    .page { overflow-x: hidden; }
+    .dilution-grid { grid-template-columns: 1fr 1fr !important; }
+    .phase-box, .previsionnel-box, .creditvendeur-box, .demonstration-box { padding: 14px; }
   }
+
+  /* BOUTON IMPRIMER */
+  .print-btn { position: fixed; bottom: 28px; right: 28px; background: #1a2e44; color: #fff; font-family: Outfit, sans-serif; font-size: 13px; font-weight: 600; padding: 12px 20px; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 16px rgba(0,0,0,0.25); border-left: 4px solid #c8873a; z-index: 9999; display: flex; align-items: center; gap: 8px; }
+  .print-btn:hover { background: #2a4a6e; }
 </style>
 </head>
 <body>
 <div class="page">
 
+  <!-- HEADER -->
   <div class="header">
     <div>
       <h1>Montage tripartite<br><span>Reprise ADA Nîmes & Alès</span></h1>
@@ -140,266 +144,219 @@
     </div>
   </div>
 
+  <!-- INTRO -->
   <div class="intro-box">
-    <p>Ce montage, proposé par <strong>Arnaud (expert-comptable)</strong>, repose sur une association 
-    stratégique à trois parties. Mickaël Cneude prend la majorité opérationnelle à <strong>51%</strong> 
-    et assure l'exploitation au quotidien. Nicolas Lodi (carrosserie) et FA Automobile 
-    (transaction automobile) entrent chacun à <strong>24,5%</strong> en apportant leur capacité financière 
-    et un avantage industriel direct. <strong>La structure est définitive</strong> — Mickaël conserve 51% 
-    à long terme. Le présent document démontre que le remboursement des prêts associés 
-    ne pose aucune difficulté au regard du prévisionnel d'activité.</p>
+    <p>Ce montage repose sur une association stratégique à trois parties. 
+    Nicolas Lodi et FA Automobile <strong>financent l'intégralité du closing</strong> et entrent 
+    majoritaires à 48% chacun. Mickaël Cneude entre à 4% avec son apport cash de 20 000 €. 
+    Sur 3 ans, son travail sans rémunération est valorisé et converti progressivement en parts, 
+    le faisant monter jusqu'à <strong>51% — sa cible définitive</strong>. 
+    Nicolas et FA Auto se diluent symétriquement de 48% à 24,5% chacun. 
+    <strong>La structure finale est définitive</strong> — personne ne monte ni ne descend au-delà.</p>
   </div>
 
-  <!-- CAPITAL -->
-  <div class="section-title">Répartition du capital — Structure définitive</div>
+  <!-- CLOSING -->
+  <div class="section-title">Phase 1 — Le closing : qui paie quoi à Sébastien</div>
 
-  <div class="capital-grid">
-    <div class="capital-card leader">
-      <div class="badge-top" style="background:var(--amber);">Gérant — Exploitation</div>
-      <div class="pct">51%</div>
-      <div class="name">Mickaël Cneude</div>
-      <div class="role">Dirigeant opérationnel</div>
-      <div class="valeur">265 200 € de parts</div>
+  <div class="phase-box">
+    <h3>Financement des 600 000 € au jour du closing</h3>
+    <div class="phase-row">
+      <span>Nicolas Lodi — apport cash</span>
+      <span class="val-amber">250 000 €</span>
     </div>
-    <div class="capital-card">
-      <div class="badge-top" style="background:var(--navy);">Associé industriel</div>
-      <div class="pct">24,5%</div>
-      <div class="name">Nicolas Lodi</div>
-      <div class="role">Carrosserie partenaire</div>
-      <div class="valeur">127 400 € de parts</div>
+    <div class="phase-row">
+      <span>FA Automobile — apport cash</span>
+      <span class="val-amber">250 000 €</span>
     </div>
-    <div class="capital-card">
-      <div class="badge-top" style="background:var(--navy);">Associé industriel</div>
-      <div class="pct">24,5%</div>
-      <div class="name">FA Automobile</div>
-      <div class="role">Transaction / dépôt-vente</div>
-      <div class="valeur">127 400 € de parts</div>
+    <div class="phase-row">
+      <span>Mickaël Cneude — apport cash personnel</span>
+      <span class="val-amber">20 000 €</span>
+    </div>
+    <div class="phase-row">
+      <span>Crédit vendeur Sébastien Gallo (reporté)</span>
+      <span style="color:var(--grey);">80 000 €</span>
+    </div>
+    <div class="phase-row">
+      <span>Total versé à Sébastien</span>
+      <span class="val-pos">600 000 € ✅</span>
     </div>
   </div>
-  <p style="font-size:12px; color:var(--grey); font-style:italic; margin-bottom:8px;">
-    Valorisation retenue : 600 000 € — Crédit vendeur Sébastien Gallo : 80 000 € — Montant à financer entre associés : 520 000 €
-  </p>
 
-  <!-- CRÉDIT VENDEUR -->
   <div class="creditvendeur-box">
     <h4>💡 Le crédit vendeur de 80 000 € — remboursé par la société</h4>
-    <p>Sébastien Gallo accepte de reporter 80 000 € du prix de cession, remboursés directement 
+    <p>Sébastien Gallo reporte 80 000 € du prix de cession, remboursés directement 
     par la <strong>trésorerie de SAS Gard Mobilités</strong> sur 3 à 5 ans (~1 600 €/mois). 
     Ce montant n'est pas à la charge des associés — c'est une dette de la société. 
-    Au regard de l'EBE prévisionnel (~240 000 €/an), cette charge est parfaitement absorbable 
-    sans impact sur les dividendes ni sur le fonctionnement opérationnel.</p>
+    Au regard de l'EBE prévisionnel (~240 000 €/an), cette charge est parfaitement absorbable.</p>
   </div>
 
+  <!-- RÉPARTITION INITIALE -->
+  <div class="section-title">Répartition des parts au closing — Structure initiale</div>
+
+  <div class="capital-grid">
+    <div class="capital-card">
+      <div class="badge-top" style="background:var(--navy);">Associé industriel — Majoritaire</div>
+      <div class="pct">48%</div>
+      <div class="name">Nicolas Lodi</div>
+      <div class="role">Carrosserie partenaire</div>
+      <div class="valeur">250 000 € de parts</div>
+      <div class="apport">Apport au closing</div>
+    </div>
+    <div class="capital-card">
+      <div class="badge-top" style="background:var(--navy);">Associé industriel — Majoritaire</div>
+      <div class="pct">48%</div>
+      <div class="name">FA Automobile</div>
+      <div class="role">Transaction / dépôt-vente</div>
+      <div class="valeur">250 000 € de parts</div>
+      <div class="apport">Apport au closing</div>
+    </div>
+    <div class="capital-card leader">
+      <div class="badge-top" style="background:var(--amber);">Gérant — Exploitation</div>
+      <div class="pct">4%</div>
+      <div class="name">Mickaël Cneude</div>
+      <div class="role">Dirigeant opérationnel</div>
+      <div class="valeur">20 000 € de parts</div>
+      <div class="apport">Monte à 51% en 3 ans</div>
+    </div>
+  </div>
+
+  <p style="font-size:12px; color:var(--grey); font-style:italic; margin-bottom:8px;">
+    Valorisation retenue : 600 000 € — Crédit vendeur Sébastien Gallo : 80 000 € — Montant financé entre associés : 520 000 €
+  </p>
+
   <!-- SWEAT EQUITY -->
-  <div class="section-title">L'apport de Mickaël : cash + travail valorisé sur 3 ans</div>
+  <div class="section-title">Phase 2 — Montée de Mickaël via sweat equity sur 36 mois</div>
 
   <div class="sweat-box">
-    <h3>💼 36 mois sans rémunération — un apport en nature de 180 000 €</h3>
+    <h3>💼 36 mois sans rémunération — 180 000 € valorisés en parts</h3>
     <p style="font-size:13px; font-weight:300; opacity:0.9;">
-      Mickaël s'engage à travailler <strong>36 mois sans percevoir de salaire</strong>, 
-      en tant que seul opérationnel de la structure. Sur la base d'un coût chargé de 
-      <strong>5 000 €/mois</strong> (3 000 € brut + charges patronales), ce renoncement 
-      est valorisé en apport en nature et converti en parts lors d'une augmentation de capital en AG.
+      Mickaël travaille <strong>36 mois sans percevoir de salaire</strong>, 
+      en tant que seul opérationnel. Sur la base d'un coût chargé de 
+      <strong>5 000 €/mois</strong> (3 000 € brut + charges patronales), 
+      ce renoncement est valorisé et converti en parts via des 
+      <strong>augmentations de capital successives en AG</strong>, 
+      à raison de 60 000 € par an (5 000 € × 12 mois).
     </p>
     <div class="sweat-grid">
       <div class="sweat-item">
-        <div class="val">20 000 €</div>
-        <div class="lbl">Apport cash personnel</div>
+        <div class="val">5 000 €</div>
+        <div class="lbl">Valorisation mensuelle<br>du travail de Mickaël</div>
+      </div>
+      <div class="sweat-item">
+        <div class="val">60 000 €</div>
+        <div class="lbl">Augmentation de capital<br>par an (en parts)</div>
       </div>
       <div class="sweat-item">
         <div class="val">180 000 €</div>
-        <div class="lbl">Sweat equity<br>36 mois × 5 000 €</div>
-      </div>
-      <div class="sweat-item">
-        <div class="val">200 000 €</div>
-        <div class="lbl">Total apport<br>Mickaël</div>
-      </div>
-      <div class="sweat-item">
-        <div class="val">65 200 €</div>
-        <div class="lbl">Manque à financer<br>via prêts associés</div>
+        <div class="lbl">Total sweat equity<br>sur 3 ans</div>
       </div>
     </div>
   </div>
 
-  <!-- MÉCANIQUE PRÊT -->
-  <div class="section-title">Mécanique du prêt entre associés</div>
+  <!-- DILUTION PROGRESSIVE -->
+  <div class="section-title">Dilution progressive — De 4% à 51% en 3 ans</div>
 
-  <div class="mecanique">
-    <h3>Comment Nicolas et FA Auto financent le complément de Mickaël</h3>
-    <div class="step">
-      <div class="num">1</div>
-      <p>Nicolas Lodi et FA Automobile apportent chacun <strong>32 600 €</strong> (50% du manque de Mickaël).</p>
+  <div class="dilution-grid">
+    <div class="dilution-card">
+      <div class="periode">Closing — J0</div>
+      <div class="parts">
+        <div class="mickael">Mickaël : 4%</div>
+        <div class="autres">Nicolas : 48%</div>
+        <div class="autres">FA Auto : 48%</div>
+      </div>
     </div>
-    <div class="step">
-      <div class="num">2</div>
-      <p>Ils mettent ces sommes à disposition de Mickaël sous forme de <strong>prêts entre associés</strong> — 
-      contrats de prêt entre associés avec taux d'intérêt négocié (~4%) et échéancier sur 5 ans.</p>
+    <div class="dilution-card">
+      <div class="periode">An 1 — +60k€</div>
+      <div class="parts">
+        <div class="mickael">Mickaël : ~19%</div>
+        <div class="autres">Nicolas : ~40,5%</div>
+        <div class="autres">FA Auto : ~40,5%</div>
+      </div>
     </div>
-    <div class="step">
-      <div class="num">3</div>
-      <p>Mickaël utilise ces 65 200 € + son apport de 200 000 € pour <strong>acquérir ses 51% 
-      auprès de Sébastien Gallo</strong>. Il est majoritaire dès le closing.</p>
+    <div class="dilution-card">
+      <div class="periode">An 2 — +60k€</div>
+      <div class="parts">
+        <div class="mickael">Mickaël : ~34%</div>
+        <div class="autres">Nicolas : ~33%</div>
+        <div class="autres">FA Auto : ~33%</div>
+      </div>
     </div>
-    <div class="step">
-      <div class="num">4</div>
-      <p>Mickaël rembourse les prêts <strong>sur sa quote-part de dividendes à 51%</strong>, 
-      selon un pacte d'associés formalisé. La démonstration ci-dessous prouve 
-      que ce remboursement ne pose aucune difficulté.</p>
+    <div class="dilution-card final">
+      <div class="periode">An 3 — +60k€ ✅</div>
+      <div class="parts">
+        <div class="mickael">Mickaël : 51%</div>
+        <div class="autres">Nicolas : 24,5%</div>
+        <div class="autres">FA Auto : 24,5%</div>
+      </div>
     </div>
   </div>
 
-  <!-- TABLEAU SYNTHÈSE -->
-  <div class="section-title">Tableau synthétique des flux par associé</div>
-
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Associé</th>
-          <th>Achat parts</th>
-          <th>Prêt à Mickaël</th>
-          <th>Total engagé</th>
-          <th>Retour financier</th>
-          <th>Retour industriel</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Mickaël Cneude (51%)</td>
-          <td>200 000 €*</td>
-          <td>—</td>
-          <td>200 000 €</td>
-          <td class="val-pos">Dividendes 51%</td>
-          <td>Salaire + gérance</td>
-        </tr>
-        <tr>
-          <td>Nicolas Lodi (24,5%)</td>
-          <td>127 400 €</td>
-          <td>32 600 €</td>
-          <td class="val-amber">160 000 €</td>
-          <td class="val-pos">Dividendes 24,5% + intérêts</td>
-          <td>~240k€/an CA atelier</td>
-        </tr>
-        <tr class="row-total">
-          <td>FA Automobile (24,5%)</td>
-          <td>127 400 €</td>
-          <td>32 600 €</td>
-          <td class="val-amber">160 000 €</td>
-          <td class="val-pos">Dividendes 24,5% + intérêts</td>
-          <td>Flux véhicules fin leasing</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p style="font-size:11.5px; color:var(--grey); font-style:italic; margin-bottom:8px;">
-    * 20k€ cash + 180k€ sweat equity (36 mois × 5 000 €) valorisé en apport en nature</p>
+  <p style="font-size:12px; color:var(--grey); font-style:italic; margin-bottom:8px;">
+    Les pourcentages intermédiaires sont calculés sur la base d'une valorisation stable de 600 000 €. 
+    Le mécanisme exact (valorisation par tranche, calendrier des AG) est à définir avec Arnaud (EC).
+  </p>
 
   <!-- PRÉVISIONNEL -->
   <div class="section-title">Prévisionnel d'activité — Base 2 000 000 € de CA dès 2027</div>
 
   <div class="previsionnel-box">
-    <h3>Compte de résultat prévisionnel (base CA 2 M€)</h3>
-    <div class="prev-row">
-      <span class="label">Chiffre d'affaires</span>
-      <span class="val-amber">2 000 000 €</span>
-    </div>
-    <div class="prev-row">
-      <span class="label">EBE (taux 12% — prudent vs 13,8% en 2022)</span>
-      <span class="val-pos">240 000 €</span>
-    </div>
-    <div class="prev-row">
-      <span class="label">− Dotations amortissements</span>
-      <span class="val-neg">− 75 000 €</span>
-    </div>
-    <div class="prev-row">
-      <span class="label">Résultat d'exploitation</span>
-      <span>165 000 €</span>
-    </div>
-    <div class="prev-row">
-      <span class="label">− Charges financières (emprunts + crédit vendeur ~1 600 €/mois)</span>
-      <span class="val-neg">− 20 000 €</span>
-    </div>
-    <div class="prev-row">
-      <span class="label">Résultat avant IS</span>
-      <span>145 000 €</span>
-    </div>
-    <div class="prev-row">
-      <span class="label">− Impôt sur les sociétés (25%)</span>
-      <span class="val-neg">− 36 000 €</span>
-    </div>
-    <div class="prev-row">
-      <span class="label">Résultat net</span>
-      <span class="val-amber">109 000 €</span>
-    </div>
-    <div class="prev-row">
-      <span class="label">Distribution dividendes (80% du résultat net)</span>
-      <span class="val-pos">87 000 €</span>
-    </div>
+    <h3>Compte de résultat prévisionnel</h3>
+    <div class="prev-row"><span>Chiffre d'affaires</span><span class="val-amber">2 000 000 €</span></div>
+    <div class="prev-row"><span>EBE (taux 12% — prudent vs 13,8% en 2022)</span><span class="val-pos">240 000 €</span></div>
+    <div class="prev-row"><span>− Dotations amortissements</span><span class="val-neg">− 75 000 €</span></div>
+    <div class="prev-row"><span>Résultat d'exploitation</span><span>165 000 €</span></div>
+    <div class="prev-row"><span>− Charges financières + crédit vendeur (~1 600 €/mois)</span><span class="val-neg">− 20 000 €</span></div>
+    <div class="prev-row"><span>Résultat avant IS</span><span>145 000 €</span></div>
+    <div class="prev-row"><span>− IS 25%</span><span class="val-neg">− 36 000 €</span></div>
+    <div class="prev-row"><span>Résultat net</span><span class="val-amber">109 000 €</span></div>
+    <div class="prev-row"><span>Distribution dividendes (80% du résultat net)</span><span class="val-pos">87 000 €</span></div>
   </div>
 
-  <!-- DÉMONSTRATION REMBOURSEMENT -->
-  <div class="section-title">Démonstration — Le remboursement ne pose aucun problème</div>
+  <!-- DÉMONSTRATION -->
+  <div class="section-title">Démonstration — Les dividendes couvrent largement la dilution</div>
 
   <div class="demonstration-box">
-    <h3>✅ La part de dividendes de Mickaël couvre largement ses remboursements</h3>
+    <h3>✅ Distribution annuelle à la structure finale (51% / 24,5% / 24,5%)</h3>
     <div class="demo-grid">
-      <div class="demo-item">
-        <div class="val">44 370 €</div>
-        <div class="lbl">Dividendes Mickaël/an<br>(51% × 87 000 €)</div>
-      </div>
-      <div class="demo-item">
-        <div class="val">13 040 €</div>
-        <div class="lbl">Remboursement prêts/an<br>(65 200 € sur 5 ans)</div>
-      </div>
       <div class="demo-item highlight">
-        <div class="val">31 330 €</div>
-        <div class="lbl">Reste net à Mickaël<br>après remboursement</div>
+        <div class="val">44 370 €</div>
+        <div class="lbl">Mickaël (51%)<br>dividendes/an</div>
+      </div>
+      <div class="demo-item">
+        <div class="val">21 315 €</div>
+        <div class="lbl">Nicolas Lodi (24,5%)<br>dividendes/an</div>
+      </div>
+      <div class="demo-item">
+        <div class="val">21 315 €</div>
+        <div class="lbl">FA Automobile (24,5%)<br>dividendes/an</div>
       </div>
     </div>
 
     <div style="margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
       <div style="background:var(--white); padding:14px; border:1px solid #86efac;">
-        <div style="font-size:12px; font-weight:600; color:var(--navy); margin-bottom:6px;">Taux de couverture du remboursement</div>
-        <div style="font-size:28px; font-weight:700; color:var(--green);">340 %</div>
-        <div style="font-size:11.5px; color:var(--grey);">Mickaël perçoit 3,4× ce qu'il rembourse chaque année</div>
+        <div style="font-size:12px; font-weight:600; color:var(--navy); margin-bottom:6px;">Retour sur investissement Nicolas / FA Auto</div>
+        <div style="font-size:24px; font-weight:700; color:var(--green);">~8,5% / an</div>
+        <div style="font-size:11.5px; color:var(--grey);">Dividendes seuls sur 250k€ investis — hors avantages industriels</div>
       </div>
       <div style="background:var(--white); padding:14px; border:1px solid #86efac;">
-        <div style="font-size:12px; font-weight:600; color:var(--navy); margin-bottom:6px;">Prêt soldé en</div>
-        <div style="font-size:28px; font-weight:700; color:var(--green);">5 ans</div>
-        <div style="font-size:11.5px; color:var(--grey);">Dès 2032, Mickaël perçoit 44 370 €/an de dividendes sans aucune charge de remboursement</div>
-      </div>
-    </div>
-
-    <div style="margin-top:14px; background:var(--white); padding:14px; border:1px solid #86efac;">
-      <div style="font-size:13px; font-weight:600; color:var(--navy); margin-bottom:10px;">Distribution annuelle complète</div>
-      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; font-size:13px;">
-        <div style="text-align:center; padding:10px; background:#f0fdf4; border:1px solid #86efac;">
-          <div style="font-weight:700; color:var(--green);">44 370 €</div>
-          <div style="font-size:11px; color:var(--grey);">Mickaël (51%)</div>
-        </div>
-        <div style="text-align:center; padding:10px; background:#f0fdf4; border:1px solid #86efac;">
-          <div style="font-weight:700; color:var(--green);">21 315 €</div>
-          <div style="font-size:11px; color:var(--grey);">Nicolas Lodi (24,5%)</div>
-        </div>
-        <div style="text-align:center; padding:10px; background:#f0fdf4; border:1px solid #86efac;">
-          <div style="font-weight:700; color:var(--green);">21 315 €</div>
-          <div style="font-size:11px; color:var(--grey);">FA Automobile (24,5%)</div>
-        </div>
+        <div style="font-size:12px; font-weight:600; color:var(--navy); margin-bottom:6px;">Mickaël perçoit dès An 4</div>
+        <div style="font-size:24px; font-weight:700; color:var(--green);">44 370 €/an</div>
+        <div style="font-size:11.5px; color:var(--grey);">Sans aucune charge de remboursement — propriétaire à 51% de plein droit</div>
       </div>
     </div>
   </div>
 
   <!-- AVANTAGES INDUSTRIELS -->
-  <div class="section-title">Avantages industriels — Au-delà du rendement financier</div>
+  <div class="section-title">Avantages industriels — Ce qui différencie ce montage</div>
 
   <div class="avantage">
     <div class="tag">Nicolas Lodi — Carrosserie</div>
     <h3>80% du budget carrosserie ADA orienté vers l'atelier partenaire</h3>
     <p>ADA s'engage à orienter <strong>80% de son budget annuel de réparations carrosserie</strong> 
     vers l'atelier Nicolas Lodi pendant toute la durée du partenariat (~300 000 € de budget total). 
-    Les 20% restants concernent uniquement des interventions techniques spécifiques 
+    Les 20% restants concernent des interventions techniques spécifiques 
     (véhicules électriques, obligations constructeur, véhicules lourds). 
-    Cet engagement est formalisé dans une convention de partenariat annexée aux statuts.</p>
+    Formalisé dans une convention de partenariat annexée aux statuts.</p>
     <div class="chiffre">~240 000 €/an de CA atelier garanti — soit 1,2 M€ sur 5 ans</div>
   </div>
 
@@ -408,39 +365,39 @@
     <h3>Dépôt-vente exclusif des véhicules ADA en fin de leasing</h3>
     <p>En fin de contrat de leasing, au lieu de restituer les véhicules au bailleur, 
     ADA les confie en <strong>dépôt-vente exclusif à FA Automobile</strong>. 
-    En cas de vente, ADA rachète le véhicule au leaser plutôt que de le restituer, 
-    et FA Automobile encaisse sa commission. Flux régulier et prévisible de véhicules 
-    issus d'un parc professionnel entretenu (151 véhicules, renouvellements 2025–2027).</p>
-    <div class="chiffre">Parc actuel : 151 véhicules — commissions régulières sur durée du partenariat</div>
+    En cas de vente, ADA rachète le véhicule au leaser et FA Automobile encaisse sa commission. 
+    Flux régulier de véhicules professionnels entretenus (151 véhicules, renouvellements 2025–2027).</p>
+    <div class="chiffre">Commissions régulières sur toute la durée du partenariat</div>
   </div>
 
   <!-- GARANTIES -->
-  <div class="section-title">Garanties et sécurisation du montage</div>
+  <div class="section-title">Sécurisation du montage</div>
 
   <div class="garanties-grid">
     <div class="garantie-item">
       <h4>📋 Pacte d'associés</h4>
-      <p>Formalise la priorité de remboursement des prêts sur les dividendes de Mickaël, les modalités de gouvernance et les clauses de protection des minoritaires.</p>
-    </div>
-    <div class="garantie-item">
-      <h4>🔒 Convention de prêt entre associés</h4>
-      <p>Contrats privés avec taux d'intérêt (~4%), échéancier sur 5 ans, clause de remboursement anticipé si l'activité le permet.</p>
+      <p>Définit précisément le mécanisme de dilution progressive, le calendrier des AG, la valorisation des parts à chaque étape et les droits des minoritaires.</p>
     </div>
     <div class="garantie-item">
       <h4>🏭 Convention industrielle</h4>
-      <p>Engagement contractuel d'ADA envers Nicolas Lodi (80% budget carrosserie) et FA Auto (dépôt-vente exclusif), annexé aux statuts.</p>
+      <p>Engagement contractuel d'ADA envers Nicolas Lodi (80% budget carrosserie) et FA Auto (dépôt-vente exclusif), annexé aux statuts de la société.</p>
     </div>
     <div class="garantie-item">
-      <h4>⚖️ Clause de rachat</h4>
-      <p>En cas de défaut de remboursement, les associés prêteurs peuvent convertir leur créance en parts supplémentaires selon une valorisation prédéfinie.</p>
+      <h4>⚙️ Gouvernance pendant la transition</h4>
+      <p>Pendant les 3 ans de montée en puissance, Nicolas et FA Auto sont majoritaires. Les décisions stratégiques importantes nécessitent leur accord. Mickaël gère l'exploitation au quotidien.</p>
+    </div>
+    <div class="garantie-item">
+      <h4>✅ Structure définitive à An 3</h4>
+      <p>À l'issue des 36 mois, Mickaël est à 51%, les deux associés à 24,5% chacun. La structure est définitive. Les conventions industrielles peuvent être reconduites librement.</p>
     </div>
   </div>
 
   <div class="disclaimer">
     Document de travail confidentiel réservé aux trois parties prenantes du montage. 
     Préparé par Thierry Bismuth sur la base d'une proposition structurée par Arnaud (expert-comptable). 
-    Les chiffres sont basés sur les bilans certifiés CECOFISC 2022–2025 et des hypothèses prudentes. 
-    Ce montage devra être validé par un avocat d'affaires et l'expert-comptable avant toute signature.
+    Les pourcentages intermédiaires de dilution et les modalités précises des augmentations de capital 
+    sont à valider avec l'expert-comptable et un avocat d'affaires avant toute signature.
+    Ce document est distinct du plan de financement alternatif en cours d'exploration avec d'autres investisseurs.
   </div>
 
   <div class="footer">
@@ -450,10 +407,6 @@
 
 </div>
 
-<style>
-.print-btn { position: fixed; bottom: 28px; right: 28px; background: #1a2e44; color: #fff; font-family: Outfit, sans-serif; font-size: 13px; font-weight: 600; padding: 12px 20px; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 16px rgba(0,0,0,0.25); border-left: 4px solid #c8873a; z-index: 9999; display: flex; align-items: center; gap: 8px; }
-.print-btn:hover { background: #2a4a6e; }
-</style>
 <a class="print-btn" href="https://github.com/Thierrybismuth/pagesweb-thierry-/raw/main/ada-nimes-ales-dossier-complet.pdf" target="_blank">
   🖨️ Imprimer le dossier complet
 </a>
