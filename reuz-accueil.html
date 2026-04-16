@@ -20,6 +20,7 @@ a{text-decoration:none;color:inherit;}
 .nav-dropdown-menu{display:none;position:absolute;top:40px;left:0;background:#0a1510;border:1px solid rgba(255,255,255,0.1);border-top:none;min-width:180px;z-index:200;}
 .nav-dropdown-menu a{display:block;padding:8px 14px;color:rgba(255,255,255,0.6);font-size:11px;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.05);}
 .nav-dropdown-menu a:hover{background:rgba(255,255,255,0.07);color:white;}
+.nav-dropdown.open .nav-dropdown-menu{display:block;}
 .nav-dropdown:hover .nav-dropdown-menu{display:block;}
 
 .hero{background:var(--teal);color:white;padding:52px 32px;}
@@ -27,7 +28,7 @@ a{text-decoration:none;color:inherit;}
 .hero-logo img{height:52px;margin-bottom:22px;display:block;}
 .zones-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.45);margin-bottom:10px;font-weight:600;}
 .zones{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px;}
-.zone{background:var(--gold);color:var(--teal);padding:7px 14px;border-radius:6px;font-size:12px;font-weight:800;}
+.zone{background:var(--gold);color:var(--teal);padding:7px 14px;border-radius:6px;font-size:12px;font-weight:800;text-decoration:none;cursor:pointer;}
 h1{font-size:38px;font-weight:900;line-height:1.2;margin-bottom:16px;}
 h1 span{color:var(--gold);}
 .hero-sub{font-size:16px;color:rgba(255,255,255,0.8);line-height:1.7;max-width:560px;margin-bottom:28px;}
@@ -90,7 +91,7 @@ footer{background:var(--teal);color:rgba(255,255,255,0.4);text-align:center;padd
   <span>🏠 Accueil</span>
   <a href="https://thierrybismuth.com/reuz-prospection-v2.html">🗺️ Prospection & marché</a>
   <div class="nav-dropdown">
-    <button class="nav-dropdown-btn">📍 Villes ▾</button>
+    <button class="nav-dropdown-btn" onclick="this.closest('.nav-dropdown').classList.toggle('open')">📍 Villes ▾</button>
     <div class="nav-dropdown-menu">
       <a href="https://thierrybismuth.com/reuz-prospection-v2.html#paris">🗼 Paris & Île-de-France</a>
       <a href="https://thierrybismuth.com/reuz-prospection-v2.html#lyon">🦁 Lyon & Auvergne-RA</a>
@@ -110,12 +111,12 @@ footer{background:var(--teal);color:rgba(255,255,255,0.4);text-align:center;padd
     </div>
     <div class="zones-label">📍 Zones de recrutement ouvertes</div>
     <div class="zones">
-      <span class="zone">🗼 Paris & Île-de-France</span>
-      <span class="zone">🦁 Lyon & Auvergne-RA</span>
-      <span class="zone">☀️ Marseille & PACA</span>
-      <span class="zone">🍷 Bordeaux & Nouvelle-Aquitaine</span>
-      <span class="zone">🎸 Rennes & Bretagne</span>
-      <span class="zone">🏙️ Lille & Hauts-de-France</span>
+      <a class="zone" href="https://thierrybismuth.com/reuz-prospection-v2.html#paris">🗼 Paris & Île-de-France</a>
+      <a class="zone" href="https://thierrybismuth.com/reuz-prospection-v2.html#lyon">🦁 Lyon & Auvergne-RA</a>
+      <a class="zone" href="https://thierrybismuth.com/reuz-prospection-v2.html#marseille">☀️ Marseille & PACA</a>
+      <a class="zone" href="https://thierrybismuth.com/reuz-prospection-v2.html#bordeaux">🍷 Bordeaux & Nouvelle-Aquitaine</a>
+      <a class="zone" href="https://thierrybismuth.com/reuz-prospection-v2.html#rennes">🎸 Rennes & Bretagne</a>
+      <a class="zone" href="https://thierrybismuth.com/reuz-prospection-v2.html#lille">🏙️ Lille & Hauts-de-France</a>
     </div>
     <h1>Un marché de <span>plusieurs milliards</span>.<br>Une fenêtre d'opportunité <span>maintenant.</span></h1>
     <p class="hero-sub">La loi oblige des milliers d'acteurs à passer au réemploi. Re-uz est le leader européen. Vous avez le réseau local. C'est le moment d'y aller.</p>
