@@ -748,7 +748,7 @@ function VilleView({ v }) {
   );
 }
 
-function GeneriqueView() {
+function GeneriqueView({isMobile=false}) {
   return (
     <div style={{maxWidth:960,margin:"0 auto",padding:"16px 16px 48px"}}>
 
@@ -758,7 +758,7 @@ function GeneriqueView() {
         <div style={{fontSize:20,fontWeight:800,color:"#0d3340",marginBottom:14}}>Un marché <span style={{color:"#1a6b3a"}}>obligatoire</span> en explosion</div>
         <p style={{fontSize:12,color:"#4b6358",lineHeight:1.7,marginBottom:16}}>La loi AGEC interdit les plastiques jetables dans les ERP. Des milliers d'acteurs sont obligés de passer au réemploi. Re-uz est le leader. Vous avez le réseau local. C'est le moment.</p>
 
-        <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:10,marginBottom:16}}>
+        <div style={{display:"grid",gridTemplateColumns:isMobile?"repeat(2,1fr)":"repeat(4,1fr)",gap:10,marginBottom:16}}>
           {[
             {n:"4,7 Mds", l:"Gobelets jetables / an en France"},
             {n:"+35%", l:"Croissance réemploi / an depuis 2022"},
@@ -988,7 +988,7 @@ function GeneriqueView() {
       <div style={{background:"white",border:"1px solid #e0e8ec",borderRadius:12,padding:20}}>
         <div style={{fontSize:10,fontWeight:700,color:"#0d3340",textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>Relais de croissance</div>
         <div style={{fontSize:20,fontWeight:800,color:"#0d3340",marginBottom:14}}>4 marchés en plus <span style={{color:"#1a6b3a"}}>que l'Ecocup classique</span></div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:10}}>
+        <div style={{display:"grid",gridTemplateColumns:isMobile?"repeat(2,1fr)":"repeat(4,1fr)",gap:10}}>
           {[
             {i:"🍺",t:"Beer Up",d:"Tireuse bière brevetée. Remplissage par le fond. Nouveau segment CHR, campings, hôtellerie plein air. Cashless intégré."},
             {i:"☕",t:"Newcy",d:"Solution pause café entreprises. Collecte-lave-restitue. Marché RSE en explosion avec CSRD."},
@@ -1010,7 +1010,7 @@ function GeneriqueView() {
         <div style={{fontSize:9,color:"rgba(255,255,255,0.45)",textTransform:"uppercase",letterSpacing:2,marginBottom:6,textAlign:"center"}}>Maintenant — choisissez votre zone</div>
         <div style={{fontSize:18,fontWeight:900,color:"white",textAlign:"center",marginBottom:4}}>Vos prospects, <span style={{color:"#f0a500"}}>nominatifs, par ville</span></div>
         <div style={{fontSize:11,color:"rgba(255,255,255,0.55)",textAlign:"center",marginBottom:16}}>30 à 50 cibles identifiées · simulations vente et location pour chaque client</div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:8}}>
+        <div style={{display:"grid",gridTemplateColumns:isMobile?"repeat(2,1fr)":"repeat(3,1fr)",gap:8}}>
           {[
             {k:"paris",     e:"🗼", n:"Paris & Île-de-France",    col:"#c0392b", cv:"910K€",  cl:"4,4M€"},
             {k:"lyon",      e:"🦁", n:"Lyon & Auvergne-RA",       col:"#e67e22", cv:"421K€",  cl:"1,9M€"},
@@ -1053,6 +1053,12 @@ function App() {
     return validViews.includes(h) ? h : "generique";
   };
   const [view, setView] = React.useState(initView);
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth < 640);
+  React.useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 640);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
   const villeKeys = Object.keys(VILLES);
 
   // Sync hash <-> view
@@ -1104,7 +1110,7 @@ function App() {
           ))}
         </div>
 
-      {view === "generique" ? <GeneriqueView /> : <VilleView v={view} />}
+      {view === "generique" ? <GeneriqueView isMobile={isMobile} /> : <VilleView v={view} />}
     </div>
   );
 }
