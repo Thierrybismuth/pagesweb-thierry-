@@ -17,11 +17,10 @@ a{text-decoration:none;color:inherit;}
 .nav-dropdown{position:relative;border-right:1px solid rgba(255,255,255,0.08);}
 .nav-dropdown-btn{background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.45);font-size:10px;font-weight:600;padding:4px 11px;white-space:nowrap;line-height:40px;height:40px;font-family:inherit;}
 .nav-dropdown-btn:hover{color:white;}
-.nav-dropdown-menu{display:none;position:absolute;top:40px;left:0;background:#0a1510;border:1px solid rgba(255,255,255,0.1);border-top:none;min-width:180px;z-index:200;}
-.nav-dropdown-menu a{display:block;padding:8px 14px;color:rgba(255,255,255,0.6);font-size:11px;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.05);}
-.nav-dropdown-menu a:hover{background:rgba(255,255,255,0.07);color:white;}
-.nav-dropdown.open .nav-dropdown-menu{display:block;}
-.nav-dropdown:hover .nav-dropdown-menu{display:block;}
+.nav-dropdown-menu{display:none;position:absolute;top:40px;left:0;background:#0a1510;border:1px solid rgba(255,255,255,0.15);min-width:200px;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,0.5);}
+.nav-dropdown-menu a{display:block;padding:9px 16px;color:rgba(255,255,255,0.7);font-size:11px;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.06);}
+.nav-dropdown-menu a:hover{background:rgba(255,255,255,0.08);color:white;}
+.nav-dropdown-menu.open{display:block;}
 
 .hero{background:var(--teal);color:white;padding:52px 32px;}
 .hero-inner{max-width:860px;margin:0 auto;}
@@ -91,8 +90,8 @@ footer{background:var(--teal);color:rgba(255,255,255,0.4);text-align:center;padd
   <span>🏠 Accueil</span>
   <a href="https://thierrybismuth.com/reuz-prospection-v2.html">🗺️ Prospection & marché</a>
   <div class="nav-dropdown">
-    <button class="nav-dropdown-btn" onclick="this.closest('.nav-dropdown').classList.toggle('open')">📍 Villes ▾</button>
-    <div class="nav-dropdown-menu">
+    <button class="nav-dropdown-btn" id="villesBtn">📍 Villes ▾</button>
+    <div class="nav-dropdown-menu" id="villesMenu">
       <a href="https://thierrybismuth.com/reuz-prospection-v2.html#paris">🗼 Paris & Île-de-France</a>
       <a href="https://thierrybismuth.com/reuz-prospection-v2.html#lyon">🦁 Lyon & Auvergne-RA</a>
       <a href="https://thierrybismuth.com/reuz-prospection-v2.html#marseille">☀️ Marseille & PACA</a>
@@ -341,6 +340,14 @@ footer{background:var(--teal);color:rgba(255,255,255,0.4);text-align:center;padd
 function ouvrirDossier() {
   window.open("https://thierrybismuth.github.io/pagesweb-thierry-/reuz-dossier-print.html?v=" + Date.now(), "_blank");
 }
+document.getElementById('villesBtn').addEventListener('click', function(e){
+  e.stopPropagation();
+  document.getElementById('villesMenu').classList.toggle('open');
+});
+document.addEventListener('click', function(){
+  document.getElementById('villesMenu').classList.remove('open');
+});
+
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});});
 });
