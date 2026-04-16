@@ -1050,6 +1050,36 @@ function App() {
             </button>
           ))}
         </div>
+
+      {/* GRILLE VILLES — visible sur tous les onglets */}
+      {view === "generique" && (
+        <div style={{background:"#0d1a2d",padding:"20px 16px"}}>
+          <div style={{maxWidth:960,margin:"0 auto"}}>
+            <div style={{fontSize:9,color:"rgba(255,255,255,0.4)",textTransform:"uppercase",letterSpacing:2,marginBottom:10,textAlign:"center"}}>Choisissez votre zone — Prospects nominatifs + simulations</div>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:8}}>
+              {[
+                {k:"paris",     e:"🗼", n:"Paris & Île-de-France",    col:"#c0392b", ca:"910K€"},
+                {k:"lyon",      e:"🦁", n:"Lyon & Auvergne-RA",       col:"#e67e22", ca:"421K€"},
+                {k:"marseille", e:"☀️", n:"Marseille & PACA",          col:"#2980b9", ca:"277K€"},
+                {k:"bordeaux",  e:"🍷", n:"Bordeaux & Nouvelle-Aq.",   col:"#8e44ad", ca:"770K€"},
+                {k:"rennes",    e:"🎸", n:"Rennes & Bretagne",          col:"#27ae60", ca:"430K€"},
+                {k:"lille",     e:"🏙️", n:"Lille & Hauts-de-France",   col:"#c0392b", ca:"505K€"},
+              ].map(v => (
+                <button key={v.k} onClick={()=>setView(v.k)} style={{
+                  background:v.col,color:"white",border:"none",cursor:"pointer",
+                  borderRadius:8,padding:"12px 14px",textAlign:"left",fontFamily:"inherit"
+                }}>
+                  <div style={{fontSize:18,marginBottom:4}}>{v.e}</div>
+                  <div style={{fontSize:12,fontWeight:800,lineHeight:1.2}}>{v.n}</div>
+                  <div style={{fontSize:10,opacity:0.75,marginTop:3}}>Vente : {v.ca}</div>
+                  <div style={{fontSize:10,fontWeight:700,color:"#f0a500",marginTop:1}}>Voir les prospects →</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {view === "generique" ? <GeneriqueView /> : <VilleView v={view} />}
     </div>
   );
