@@ -623,7 +623,7 @@ function SimMultiFranchise({ gob_unit }) {
 }
 
 
-function VilleView({ v }) {
+function VilleView({ v , isMobile=false}) {
   const data = VILLES[v];
   if (!data) return null;
   const simsVille = SIMS[v] || {};
@@ -1110,7 +1110,7 @@ function App() {
           ))}
         </div>
 
-      {view === "generique" ? <GeneriqueView isMobile={isMobile} /> : <VilleView v={view} />}
+      {view === "generique" ? <GeneriqueView isMobile={isMobile} /> : <VilleView v={view}  isMobile={isMobile}/>}
     </div>
   );
 }
