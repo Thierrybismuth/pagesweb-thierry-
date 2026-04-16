@@ -1047,8 +1047,23 @@ function GeneriqueView() {
 }
 
 function App() {
-  const [view, setView] = React.useState("generique");
+  const validViews = ["generique","paris","lyon","marseille","bordeaux","rennes","lille"];
+  const initView = () => {
+    const h = window.location.hash.replace("#","").toLowerCase();
+    return validViews.includes(h) ? h : "generique";
+  };
+  const [view, setView] = React.useState(initView);
   const villeKeys = Object.keys(VILLES);
+
+  // Sync hash <-> view
+  React.useEffect(() => {
+    const h = window.location.hash.replace("#","").toLowerCase();
+    if (validViews.includes(h) && h !== view) setView(h);
+  }, []);
+
+  React.useEffect(() => {
+    window.location.hash = view === "generique" ? "" : view;
+  }, [view]);
 
   const navItems = [
     {k:"generique", label:"Principes & Simulations", icon:"📊"},
