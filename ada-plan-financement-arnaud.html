@@ -108,20 +108,20 @@
   .footer .brand { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 700; color: var(--navy); }
 
   /* MOBILE */
-  @media (max-width: 600px) {
-    .page { padding: 20px 16px; }
-    .header { flex-direction: column; gap: 16px; }
-    .header-right { text-align: left; }
-    .capital-grid { grid-template-columns: 1fr; }
-    .sweat-grid { grid-template-columns: 1fr 1fr; }
-    .demo-grid { grid-template-columns: 1fr; }
-    .garanties-grid { grid-template-columns: 1fr; }
-    table { font-size: 11px; }
-    thead th, tbody td { padding: 8px 8px; }
-    .intro-box { padding: 16px; }
-    .intro-box p { font-size: 13px; word-break: break-word; overflow-wrap: break-word; }
+  @media (max-width: 768px) {
+    .page { padding: 20px 14px; }
+    .header { flex-direction: column; gap: 14px; }
+    .capital-grid { grid-template-columns: 1fr !important; }
+    .sweat-grid { grid-template-columns: 1fr 1fr !important; }
+    .demo-grid { grid-template-columns: 1fr !important; }
+    .garanties-grid { grid-template-columns: 1fr !important; }
+    .previsionnel-box, .mecanique, .creditvendeur-box, .demonstration-box { padding: 14px; }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { font-size: 11px; min-width: 500px; }
+    thead th, tbody td { padding: 7px 8px; }
+    .intro-box { padding: 14px; }
     body { overflow-x: hidden; }
-    * { max-width: 100%; box-sizing: border-box; }
+    .page { overflow-x: hidden; }
   }
 </style>
 </head>
