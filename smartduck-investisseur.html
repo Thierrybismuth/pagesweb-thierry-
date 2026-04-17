@@ -882,6 +882,7 @@
             <input type="range" id="apport-gerant" min="0" max="35000" step="500" value="0">
             <output id="apport-gerant-val">0 €</o>
           </div>
+          <div class="apport-complement" id="apport-complement" style="margin-top:8px;font-size:12px;color:var(--texte-soft);font-style:italic">→ Apport complémentaire de l'investisseur : 35 000 €</div>
         </div>
 
         <div class="calc-field">
@@ -1124,6 +1125,10 @@
     const gerance = +document.getElementById('gerance').value * 12;
     const apport = +document.getElementById('apport').value;
     const apportGerant = +document.getElementById('apport-gerant').value;
+    // Affiche la part restante apportée par l'investisseur
+    const compl = Math.max(apport - apportGerant, 0);
+    const complEl = document.getElementById('apport-complement');
+    if (complEl) complEl.textContent = '→ Apport complémentaire de l\'investisseur : ' + compl.toLocaleString('fr-FR') + ' €';
     const valo100Input = +document.getElementById('valo').value;
     const pctReinject = +document.getElementById('pct-reinject').value / 100;
 
