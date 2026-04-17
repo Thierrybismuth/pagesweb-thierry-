@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Duck — Parcours Investisseur · Multi-Potentiel</title>
+<meta name="description" content="Investissez dans un ou plusieurs centres Smart Duck avec un ticket de 30 à 35 k€ par centre, avec ou sans recours bancaire, et une rentabilité cible ~20% au régime de croisière.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="nav.js" defer></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --noir:#0a0a0a;
+    --noir-2:#141414;
+    --crème:#f5f0e8;
+    --crème-2:#ebe4d6;
+    --or:#d4a857;
+    --or-soft:#e8c88a;
+    --or-deep:#a87f30;
+    --rose:#ff5a8a;
+    --rose-soft:#ffc2d4;
+    --texte:#2a2320;
+    --texte-soft:#6d655e;
+    --bord:rgba(10,10,10,.08);
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--crème);
+    color:var(--texte);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .main{max-width:100%;padding:0}
+
+  /* Hero */
+  .hero{
+    background:linear-gradient(135deg,#1a1610 0%,#2a2218 40%,#3d2f1f 100%);
+    color:var(--crème);
+    padding:100px 40px 80px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';
+    position:absolute;
+    top:-30%;right:-10%;
+    width:700px;height:700px;
+    background:radial-gradient(circle,rgba(212,168,87,.2) 0%,transparent 60%);
+  }
+  .hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+  .breadcrumb{
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--or-soft);
+    margin-bottom:32px;
+  }
+  .breadcrumb a{color:var(--or-soft);text-decoration:none;opacity:.7}
+  .breadcrumb a:hover{opacity:1}
+  .tag-inv{
+    display:inline-block;
+    padding:8px 16px;
+    background:var(--or);
+    color:var(--noir);
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-weight:700;
+    margin-bottom:32px;
+  }
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:clamp(42px,6vw,80px);
+    line-height:1.02;
+    letter-spacing:-.02em;
+    max-width:900px;
+    margin-bottom:32px;
+  }
+  .hero h1 em{font-style:italic;font-weight:500;color:var(--or-soft)}
+  .hero-lede{
+    font-size:20px;
+    line-height:1.6;
+    color:rgba(245,240,232,.85);
+    max-width:720px;
+  }
+
+  /* Sections */
+  section{padding:100px 40px}
+  .wrap{max-width:1200px;margin:0 auto}
+  .wrap-narrow{max-width:900px;margin:0 auto}
+  .section-head{margin-bottom:64px}
+  h2.section-title{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:clamp(34px,4vw,54px);
+    line-height:1.05;
+    letter-spacing:-.02em;
+    margin-bottom:20px;
+  }
+  h2.section-title em{font-style:italic;font-weight:500;color:var(--or)}
+  .section-lede{
+    font-size:18px;
+    color:var(--texte-soft);
+    line-height:1.65;
+    max-width:720px;
+  }
+  .eyebrow{
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--or);
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .eyebrow::before{
+    content:'';width:40px;height:1px;background:var(--or);
+  }
+
+  /* These big stats */
+  .these{background:var(--crème-2)}
+  .these-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  .these-card{
+    background:var(--crème);
+    padding:48px 36px;
+    border:1px solid var(--bord);
+    border-top:3px solid var(--or);
+  }
+  .these-card .pre{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--or);
+    font-weight:600;
+    margin-bottom:20px;
+  }
+  .these-card strong{
+    display:block;
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:44px;
+    color:var(--noir);
+    line-height:1;
+    margin-bottom:14px;
+    letter-spacing:-.01em;
+  }
+  .these-card p{
+    font-size:15px;
+    color:var(--texte-soft);
+    line-height:1.6;
+  }
+
+  /* Ticket */
+  .ticket-hero{
+    background:var(--noir);
+    color:var(--crème);
+    padding:120px 40px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .ticket-hero::before{
+    content:'';
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:900px;height:900px;
+    background:radial-gradient(circle,rgba(212,168,87,.15) 0%,transparent 50%);
+    pointer-events:none;
+  }
+  .ticket-hero .wrap{position:relative;z-index:2}
+  .ticket-hero .pre{
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--rose-soft);
+    margin-bottom:24px;
+  }
+  .big-number{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:clamp(80px,14vw,180px);
+    line-height:.9;
+    letter-spacing:-.04em;
+    color:var(--crème);
+    margin-bottom:24px;
+  }
+  .big-number em{font-style:italic;color:var(--or-soft);font-weight:500}
+  .big-number-sub{
+    font-size:20px;
+    color:rgba(245,240,232,.8);
+    max-width:600px;
+    margin:0 auto 40px;
+    line-height:1.5;
+  }
+
+  /* Financement modes */
+  .financement{background:var(--crème)}
+  .fin-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+  }
+  .fin-card{
+    background:var(--crème-2);
+    padding:48px;
+    border-top:3px solid var(--or);
+    position:relative;
+  }
+  .fin-card .tag{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--or);
+    font-weight:600;
+    margin-bottom:20px;
+  }
+  .fin-card h3{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:30px;
+    line-height:1.2;
+    color:var(--noir);
+    margin-bottom:20px;
+  }
+  .fin-card h3 em{font-style:italic;color:var(--or-deep);font-weight:500}
+  .fin-card p{
+    font-size:15px;
+    color:var(--texte-soft);
+    line-height:1.65;
+    margin-bottom:20px;
+  }
+  .fin-card ul{list-style:none;padding:20px 0 0;border-top:1px solid var(--bord)}
+  .fin-card li{
+    padding:8px 0 8px 24px;
+    position:relative;
+    font-size:14px;
+    color:var(--texte);
+  }
+  .fin-card li::before{
+    content:'→';
+    position:absolute;left:0;top:8px;
+    color:var(--or);
+  }
+
+  /* Multi centres */
+  .multi{background:var(--noir);color:var(--crème);padding:120px 40px}
+  .multi h2.section-title{color:var(--crème)}
+  .multi h2.section-title em{color:var(--or-soft)}
+  .multi .section-lede{color:rgba(245,240,232,.7)}
+  .multi .eyebrow{color:var(--or-soft)}
+  .multi .eyebrow::before{background:var(--or-soft)}
+
+  .grappe-visual{
+    margin-top:64px;
+    background:rgba(245,240,232,.04);
+    border:1px solid rgba(245,240,232,.1);
+    padding:56px;
+    border-radius:2px;
+    display:grid;
+    grid-template-columns:1fr 1.5fr;
+    gap:56px;
+    align-items:center;
+  }
+  .city{
+    text-align:center;
+  }
+  .city .city-name{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:20px;
+    color:var(--or-soft);
+    margin-bottom:24px;
+  }
+  .city-dots{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-bottom:32px;
+  }
+  .center-dot{
+    width:72px;height:72px;
+    border-radius:50%;
+    background:var(--or);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Fraunces',serif;
+    font-size:32px;
+    font-weight:500;
+    color:var(--noir);
+    box-shadow:0 10px 30px rgba(212,168,87,.3);
+  }
+  .center-dot.alt{background:var(--rose);color:var(--noir);box-shadow:0 10px 30px rgba(255,90,138,.3)}
+  .center-dot.alt2{background:var(--or-soft);color:var(--noir)}
+  .city-label{
+    font-size:13px;
+    color:rgba(245,240,232,.6);
+    letter-spacing:1px;
+    text-transform:uppercase;
+  }
+  .grappe-text h3{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:32px;
+    line-height:1.2;
+    margin-bottom:20px;
+    color:var(--crème);
+  }
+  .grappe-text h3 em{color:var(--or-soft);font-style:italic;font-weight:500}
+  .grappe-text p{
+    font-size:16px;
+    color:rgba(245,240,232,.75);
+    line-height:1.65;
+    margin-bottom:16px;
+  }
+  .grappe-text p:last-child{margin-bottom:0}
+
+  /* ROI */
+  .roi{background:var(--crème-2)}
+  .roi-box{
+    background:var(--noir);
+    color:var(--crème);
+    padding:64px 56px;
+    border-radius:2px;
+    margin-top:48px;
+  }
+  .roi-box .head{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:32px;
+    align-items:end;
+    padding-bottom:32px;
+    margin-bottom:32px;
+    border-bottom:1px solid rgba(245,240,232,.2);
+  }
+  .roi-box .head h3{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:36px;
+    line-height:1.15;
+  }
+  .roi-box .head h3 em{color:var(--or-soft);font-style:italic;font-weight:500}
+  .roi-box .head .tag{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--or);
+    padding:8px 14px;
+    border:1px solid var(--or);
+    white-space:nowrap;
+  }
+  .roi-table{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+  }
+  .roi-left,.roi-right{
+    padding:0 32px;
+  }
+  .roi-left{border-right:1px solid rgba(245,240,232,.15)}
+  .roi-left{padding-left:0}
+  .roi-right{padding-right:0}
+  .roi-subtitle{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--or-soft);
+    margin-bottom:24px;
+  }
+  .roi-line{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:20px;
+    padding:14px 0;
+    border-bottom:1px solid rgba(245,240,232,.1);
+    align-items:baseline;
+  }
+  .roi-line:last-child{border-bottom:none}
+  .roi-line .l{
+    font-size:14px;
+    color:rgba(245,240,232,.7);
+  }
+  .roi-line .v{
+    font-family:'Fraunces',serif;
+    font-size:20px;
+    font-weight:500;
+    color:var(--crème);
+  }
+  .roi-line.highlight{
+    padding-top:20px;
+    margin-top:12px;
+    border-top:2px solid rgba(245,240,232,.3);
+    border-bottom:none;
+  }
+  .roi-line.highlight .l{color:var(--or);font-weight:600}
+  .roi-line.highlight .v{color:var(--or-soft);font-size:28px}
+
+  .roi-note{
+    margin-top:32px;
+    padding:24px 32px;
+    background:rgba(245,240,232,.04);
+    border-left:2px solid var(--rose);
+    font-size:14px;
+    color:rgba(245,240,232,.7);
+    line-height:1.6;
+    font-style:italic;
+  }
+
+  .roi-footnote{
+    margin-top:32px;
+    font-size:13px;
+    color:var(--texte-soft);
+    font-style:italic;
+    line-height:1.6;
+  }
+
+  /* Dilution */
+  .dilution{background:var(--crème)}
+  .dilution-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:start;
+  }
+  .dilution-schema{
+    background:var(--crème-2);
+    padding:48px;
+    border-radius:2px;
+  }
+  .dilution-schema h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:22px;
+    margin-bottom:32px;
+  }
+  .schema-bar{
+    display:grid;
+    grid-template-columns:80px 1fr;
+    gap:20px;
+    align-items:center;
+    margin-bottom:20px;
+  }
+  .schema-bar .year{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:14px;
+    color:var(--texte-soft);
+    letter-spacing:1px;
+  }
+  .bar-track{
+    height:44px;
+    background:#d9cfbd;
+    display:flex;
+    position:relative;
+    overflow:hidden;
+  }
+  .bar-inv{
+    background:var(--or);
+    color:var(--noir);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
+    font-size:13px;
+  }
+  .bar-expl{
+    background:var(--rose);
+    color:var(--noir);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
+    font-size:13px;
+  }
+  .schema-legend{
+    display:flex;
+    gap:24px;
+    margin-top:24px;
+    font-size:12px;
+    color:var(--texte-soft);
+  }
+  .dot{
+    display:inline-block;
+    width:12px;height:12px;
+    margin-right:8px;
+    vertical-align:middle;
+  }
+  .dot-inv{background:var(--or)}
+  .dot-expl{background:var(--rose)}
+
+  /* Process investisseur */
+  .process{
+    background:var(--crème-2);
+    padding:100px 40px;
+  }
+  .process-list{
+    counter-reset:step;
+    list-style:none;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .process-list li{
+    counter-increment:step;
+    padding:32px 0;
+    border-bottom:1px solid var(--bord);
+    display:grid;
+    grid-template-columns:80px 1fr;
+    gap:32px;
+    align-items:baseline;
+  }
+  .process-list li::before{
+    content:counter(step,decimal-leading-zero);
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:32px;
+    color:var(--or);
+  }
+  .process-list li strong{
+    display:block;
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:22px;
+    color:var(--noir);
+    margin-bottom:6px;
+  }
+  .process-list li span{
+    font-size:15px;
+    color:var(--texte-soft);
+  }
+
+  /* CTA */
+  .cta-section{
+    background:var(--noir);
+    color:var(--crème);
+    padding:100px 40px;
+    text-align:center;
+  }
+  .cta-section h2{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:clamp(32px,4vw,52px);
+    line-height:1.1;
+    margin-bottom:20px;
+  }
+  .cta-section h2 em{font-style:italic;color:var(--or-soft);font-weight:500}
+  .cta-section p{
+    font-size:17px;
+    color:rgba(245,240,232,.7);
+    max-width:600px;
+    margin:0 auto 48px;
+  }
+  .btn-group{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    display:inline-block;
+    padding:18px 36px;
+    font-size:14px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    font-weight:600;
+    text-decoration:none;
+    transition:all .3s ease;
+    border-radius:2px;
+  }
+  .btn-primary{background:var(--or);color:var(--noir)}
+  .btn-primary:hover{background:var(--or-soft);transform:translateY(-2px)}
+  .btn-ghost{border:1px solid rgba(245,240,232,.3);color:var(--crème)}
+  .btn-ghost:hover{border-color:var(--rose);color:var(--rose-soft)}
+
+  footer{
+    background:var(--noir-2);
+    color:rgba(245,240,232,.5);
+    padding:40px;
+    text-align:center;
+    font-size:13px;
+    border-top:1px solid rgba(245,240,232,.1);
+  }
+  footer a{color:var(--or-soft);text-decoration:none}
+
+  @media(max-width:960px){
+    section,.ticket-hero,.multi,.cta-section,.process{padding:72px 24px}
+    .hero{padding:72px 24px 56px}
+    .these-grid,.fin-grid,.dilution-grid{grid-template-columns:1fr;gap:24px}
+    .grappe-visual{grid-template-columns:1fr;gap:40px;padding:32px}
+    .roi-box{padding:40px 28px}
+    .roi-box .head{grid-template-columns:1fr;align-items:start}
+    .roi-table{grid-template-columns:1fr;gap:32px}
+    .roi-left,.roi-right{padding:0;border-right:none}
+    .roi-left{padding-bottom:32px;border-bottom:1px solid rgba(245,240,232,.15)}
+    .dilution-schema{padding:32px 24px}
+  }
+</style>
+</head>
+<body>
+<nav id="nav-placeholder"></nav>
+
+<div class="main">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="breadcrumb"><a href="smartduck.html">← Smart Duck</a> · Parcours Investisseur</div>
+    <span class="tag-inv">Parcours 02 · Investisseur</span>
+    <h1>Placez <em>30 à 35 k€</em><br>sur un marché qui<br>se structure <em>maintenant</em>.</h1>
+    <p class="hero-lede">
+      Le décret de mai 2024 a ouvert le segment non-médical de l'épilation laser. Smart Duck construit le premier réseau français sur ce créneau, avec un modèle économique hyper favorable et une croissance à +30 ouvertures prévues au S1 2026. Multi-Potentiel vous permet d'y entrer avec ou sans recours bancaire, sur un ou plusieurs centres.
+    </p>
+  </div>
+</section>
+
+<!-- THESE -->
+<section class="these">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">La thèse d'investissement</div>
+      <h2 class="section-title">Trois facteurs <em>convergents</em>.</h2>
+    </div>
+
+    <div class="these-grid">
+      <div class="these-card">
+        <div class="pre">Facteur 01</div>
+        <strong>Marché libéré</strong>
+        <p>Décret mai 2024 : retrait de l'obligation de présence médicale pour l'épilation laser. Le segment non-médical, jusque-là verrouillé par 2 200 acteurs, s'ouvre à de nouveaux entrants structurés.</p>
+      </div>
+      <div class="these-card">
+        <div class="pre">Facteur 02</div>
+        <strong>Modèle éprouvé</strong>
+        <p>Point mort atteint avec 1 nouveau client par jour. CA année 1 estimé 230 à 250 k€. Marge brute évoquée ~50%. Peu de personnel, pas de stock, acquisition client pilotée par la tête de réseau.</p>
+      </div>
+      <div class="these-card">
+        <div class="pre">Facteur 03</div>
+        <strong>Fenêtre qui se ferme</strong>
+        <p>17 centres en 10 mois, +30 ouvertures prévues au S1 2026, objectif 80 fin 2026. Les meilleures implantations partent vite. Entrer en 2026 n'aura pas la même valeur qu'entrer en 2027.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKET -->
+<section class="ticket-hero">
+  <div class="wrap">
+    <div class="pre">Votre ticket par centre</div>
+    <div class="big-number">30 à <em>35 k€</em></div>
+    <p class="big-number-sub">
+      Haut de fourchette de l'apport personnel exigé par la franchise. Ce ticket couvre votre part au capital de la société d'exploitation ; le laser reste financé en leasing et l'investissement total du centre (80 à 120 k€) est complété par la banque de la structure.
+    </p>
+  </div>
+</section>
+
+<!-- FINANCEMENT -->
+<section class="financement">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Deux façons d'y aller</div>
+      <h2 class="section-title">Avec ou sans <em>recours bancaire</em>.</h2>
+      <p class="section-lede">Selon votre trésorerie disponible et votre appétit pour l'endettement personnel, deux approches. Elles peuvent aussi se panacher entre plusieurs centres.</p>
+    </div>
+
+    <div class="fin-grid">
+      <div class="fin-card">
+        <div class="tag">Option A</div>
+        <h3>Sans recours <em>bancaire</em>.</h3>
+        <p>Vous apportez les 30 à 35 k€ par centre en fonds propres, depuis votre trésorerie personnelle ou votre holding. Pas de garantie personnelle, pas de caution, pas de dépendance à un partenaire bancaire. Idéal pour les investisseurs qui disposent de liquidités et qui veulent un déploiement rapide et propre.</p>
+        <ul>
+          <li>Aucun endettement personnel lié au projet</li>
+          <li>Décision et exécution rapides (pas de dossier bancaire)</li>
+          <li>Multi-centres fluide sur la même année fiscale</li>
+        </ul>
+      </div>
+      <div class="fin-card">
+        <div class="tag">Option B</div>
+        <h3>Avec recours <em>bancaire partiel</em>.</h3>
+        <p>Vous apportez une partie (par exemple 10 à 15 k€ par centre) et vous financez le reste par un emprunt personnel ou via votre holding. L'effet de levier améliore le rendement sur fonds propres si le centre performe — ce qui est le cas du modèle central (1 client/jour pour le point mort). À arbitrer avec votre conseil selon votre situation patrimoniale.</p>
+        <ul>
+          <li>Effet de levier sur le rendement des fonds propres</li>
+          <li>Préserve votre trésorerie pour d'autres opérations</li>
+          <li>Échéances alignées sur la montée en charge du centre</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MULTI CENTRES -->
+<section class="multi">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Stratégie multi-centres</div>
+      <h2 class="section-title">2 à 4 centres <em>sur la même ville</em>, avec des exploitants différents.</h2>
+      <p class="section-lede">Une ville moyenne ou grande peut absorber plusieurs centres Smart Duck sans cannibalisation (quartiers distincts, zones de chalandise séparées). Vous financez la grappe, Multi-Potentiel vous constitue le portefeuille d'exploitants.</p>
+    </div>
+
+    <div class="grappe-visual">
+      <div class="city">
+        <div class="city-name">Une même ville</div>
+        <div class="city-dots">
+          <div class="center-dot">01</div>
+          <div class="center-dot alt">02</div>
+          <div class="center-dot alt2">03</div>
+        </div>
+        <div class="city-label">3 centres · 3 exploitants</div>
+      </div>
+      <div class="grappe-text">
+        <h3>Une stratégie de <em>grappe</em> qui change les règles du jeu.</h3>
+        <p>Au lieu de répartir votre ticket sur 3 villes différentes — avec 3 études de marché, 3 structures, 3 exploitants et 3 dynamiques locales à suivre — vous concentrez sur une ville que vous connaissez. La marque s'installe plus vite, le réseau d'ambassadrices/prescripteurs mutualise, et la charge de suivi est divisée.</p>
+        <p>Chaque centre a son propre exploitant et son propre pacte d'associés. Vous pilotez la grappe sans porter l'opérationnel. Multi-Potentiel reste votre interlocuteur unique pour les trois structures.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section class="roi">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Synthèse financière</div>
+      <h2 class="section-title">Un <em>retour sur investissement</em> calibré.</h2>
+      <p class="section-lede">Hypothèses basées sur le scénario central communiqué par la tête de réseau Smart Duck. Les chiffres réels dépendent de la zone, de la montée en charge, et de la qualité d'exécution de l'exploitant.</p>
+    </div>
+
+    <div class="roi-box">
+      <div class="head">
+        <h3>Scénario central · <em>un centre</em></h3>
+        <span class="tag">Régime de croisière</span>
+      </div>
+
+      <div class="roi-table">
+        <div class="roi-left">
+          <div class="roi-subtitle">Investissement</div>
+          <div class="roi-line">
+            <span class="l">Votre apport (haut de fourchette)</span>
+            <span class="v">30–35 k€</span>
+          </div>
+          <div class="roi-line">
+            <span class="l">Investissement total centre</span>
+            <span class="v">80–120 k€</span>
+          </div>
+          <div class="roi-line">
+            <span class="l">Laser</span>
+            <span class="v">Leasing</span>
+          </div>
+          <div class="roi-line">
+            <span class="l">Charges mensuelles (2 ETP)</span>
+            <span class="v">15 k€ HT</span>
+          </div>
+          <div class="roi-line">
+            <span class="l">Point mort</span>
+            <span class="v">1 client / jour</span>
+          </div>
+        </div>
+
+        <div class="roi-right">
+          <div class="roi-subtitle">Performance économique</div>
+          <div class="roi-line">
+            <span class="l">CA année 1 estimé</span>
+            <span class="v">230–250 k€</span>
+          </div>
+          <div class="roi-line">
+            <span class="l">Démarrage observé (CA mensuel)</span>
+            <span class="v">25–28 k€</span>
+          </div>
+          <div class="roi-line">
+            <span class="l">Marge brute évoquée</span>
+            <span class="v">~50%</span>
+          </div>
+          <div class="roi-line">
+            <span class="l">Budget communication tête de réseau</span>
+            <span class="v">1 000–1 500 €/mois</span>
+          </div>
+          <div class="roi-line highlight">
+            <span class="l">Rentabilité cible fonds propres</span>
+            <span class="v">~20%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="roi-note">
+        <strong style="color:var(--or-soft);font-style:normal">Au-delà du point mort, la rentabilité « explose »</strong> — formulation Smart Duck. Structure de coûts majoritairement fixe : chaque client incrémental au-delà de 1/jour tombe presque intégralement en marge contributive.
+      </div>
+    </div>
+
+    <p class="roi-footnote">
+      Chiffres issus du scénario central Smart Duck et de la synthèse franchise Multi-Potentiel. Ils ne constituent pas une garantie de résultats. L'étude de marché locale, le DIP et le business plan remis lors de la réservation de territoire précisent les hypothèses adaptées à votre zone.
+    </p>
+  </div>
+</section>
+
+<!-- DILUTION -->
+<section class="dilution">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Si vous êtes associé à un exploitant</div>
+      <h2 class="section-title">Une <em>sortie progressive</em> prévue dès le départ.</h2>
+      <p class="section-lede">Quand Multi-Potentiel vous associe à un exploitant ne disposant pas du ticket complet, vous acceptez de lui céder progressivement vos parts sur 3 ans — avec une valorisation pré-définie, sans renégociation annuelle.</p>
+    </div>
+
+    <div class="dilution-grid">
+      <div class="dilution-schema">
+        <h3>Votre part au capital · évolution</h3>
+        <div class="schema-bar">
+          <span class="year">An 0</span>
+          <div class="bar-track">
+            <div class="bar-inv" style="width:80%">80%</div>
+            <div class="bar-expl" style="width:20%">20%</div>
+          </div>
+        </div>
+        <div class="schema-bar">
+          <span class="year">An 1</span>
+          <div class="bar-track">
+            <div class="bar-inv" style="width:70%">70%</div>
+            <div class="bar-expl" style="width:30%">30%</div>
+          </div>
+        </div>
+        <div class="schema-bar">
+          <span class="year">An 2</span>
+          <div class="bar-track">
+            <div class="bar-inv" style="width:60%">60%</div>
+            <div class="bar-expl" style="width:40%">40%</div>
+          </div>
+        </div>
+        <div class="schema-bar">
+          <span class="year">An 3</span>
+          <div class="bar-track">
+            <div class="bar-inv" style="width:49%">49%</div>
+            <div class="bar-expl" style="width:51%">51%</div>
+          </div>
+        </div>
+        <div class="schema-legend">
+          <span><span class="dot dot-inv"></span>Vous (investisseur)</span>
+          <span><span class="dot dot-expl"></span>Exploitant</span>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:17px;color:var(--texte);line-height:1.7;margin-bottom:24px">
+          Au démarrage, vous êtes majoritaire (80%). À la fin de chaque exercice, l'exploitant vous rachète un bloc de parts à une valorisation fixée d'avance dans le pacte. À l'issue de l'année 3, il passe à 51%, vous restez à 49% — ou vous sortez totalement si prévu.
+        </p>
+        <p style="font-size:17px;color:var(--texte);line-height:1.7;margin-bottom:24px">
+          Ce rachat est financé par la rémunération de gérance et les dividendes de l'exploitant. <strong>Vous ne subissez pas la dilution</strong> : vous <em>vendez</em> vos parts au prix convenu. L'opération se comporte comme un investissement à rendement + rachat programmé.
+        </p>
+        <p style="font-size:15px;color:var(--texte-soft);line-height:1.7;font-style:italic">
+          Ce dispositif est optionnel : vous pouvez aussi investir sur un centre sans exploitant associé (100% au capital), si vous préférez un schéma classique.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="wrap-narrow">
+    <div class="section-head">
+      <div class="eyebrow">Le parcours</div>
+      <h2 class="section-title">Comment on <em>avance ensemble</em>.</h2>
+    </div>
+
+    <ol class="process-list">
+      <li>
+        <div>
+          <strong>Qualification de votre appétence</strong>
+          <span>Ticket cible, ville(s) visée(s), nombre de centres, mode de financement (avec ou sans recours bancaire), horizon de sortie.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Mise en relation avec Smart Duck</strong>
+          <span>Réunion d'information avec la tête de réseau. DIP, business plan, étude de marché sur la ou les zones visées.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Visite du centre pilote</strong>
+          <span>Paris 11 (Voltaire). Vous validez le concept en situation réelle.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Identification de l'exploitant (si applicable)</strong>
+          <span>Multi-Potentiel vous présente un ou plusieurs exploitants qualifiés, adaptés à la zone. Entretiens et choix final.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Structuration juridique</strong>
+          <span>Création de la SAS d'exploitation, rédaction du pacte d'associés incluant le calendrier de rachat, signature du contrat de franchise.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Ouverture et suivi</strong>
+          <span>Lancement du centre. Reporting trimestriel, suivi de la montée en charge, exécution des tranches de rachat aux échéances prévues.</span>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="wrap">
+    <h2>Envie d'<em>étudier une opération</em> ?</h2>
+    <p>Un premier échange confidentiel pour cadrer votre thèse, votre ticket et votre zone. Sous NDA si besoin, pas de pitch commercial.</p>
+    <div class="btn-group">
+      <a href="mailto:thierry@thierrybismuth.com?subject=Smart%20Duck%20-%20Parcours%20Investisseur" class="btn btn-primary">Demander un échange</a>
+      <a href="smartduck.html" class="btn btn-ghost">← Revenir à la présentation</a>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <p>Smart Duck — Parcours Investisseur · <a href="smartduck.html">Retour à la présentation</a> · <a href="index.html">Multi-Potentiel</a></p>
+</footer>
+
+</body>
+</html>
