@@ -116,12 +116,42 @@ const statutClass = s => {
   return '';
 };
 
+// Normalisation enseignes (merge variantes)
+const ENSEIGNE_MAP = {
+  'reuz':'Re-uz','smartduck':'Smart Duck','optique2000':'Optic2000','optic2000':'Optic2000',
+  'ada':'ADA','kw':'KW','emma':'EMMA','lav':'LAV','anacours':'Anacours',
+  'multipotentiel':'MULTIPOTENTIEL','multipotentiels':'MULTIPOTENTIEL'
+};
+function normEnseigne(s) {
+  const v = String(s||'').trim();
+  if (!v) return [];
+  const parts = v.split(/[,;/]/).map(p => p.trim()).filter(Boolean);
+  return parts.map(p => {
+    const k = p.toLowerCase().replace(/[\s\-_]/g,'');
+    return ENSEIGNE_MAP[k] || p;
+  });
+}
+// Extraction département depuis adresse/code postal
+function extractDept(s) {
+  const v = String(s||'').trim();
+  if (!v) return '';
+  const pc5 = v.match(/\b(\d{2})\d{3}\b/);
+  if (pc5) return pc5[1];
+  const pc2 = v.match(/^(\d{1,2})(?:\D|$)/);
+  if (pc2) return pc2[1].padStart(2,'0');
+  return v.length <= 30 ? v.toLowerCase() : '';
+}
+
 async function loadRows(force) {
   if (force) document.getElementById('list').innerHTML = '<div class="loading">Rechargement…</div>';
   try {
     const res = await fetch(API_URL);
     const rows = await res.json();
     allRows = Array.isArray(rows) ? rows.filter(r => r && (r.Qui || r.Tel || r.Mail)) : [];
+    allRows.forEach(r => {
+      r._enseignes = normEnseigne(r['Enseigne envisagée']);
+      r._dept = extractDept(r['Département']);
+    });
     document.getElementById('meta').textContent = `${allRows.length} contacts chargés`;
     populateFilters();
     render();
@@ -131,10 +161,23 @@ async function loadRows(force) {
 }
 
 function populateFilters() {
-  const enseignes = [...new Set(allRows.map(r => (r['Enseigne envisagée']||'').trim()).filter(Boolean))].sort();
-  const depts = [...new Set(allRows.map(r => (r['Département']||'').trim()).filter(Boolean))].sort();
-  document.getElementById('filterEnseigne').innerHTML = '<option value="">Toutes enseignes</option>' + enseignes.map(e => `<option>${esc(e)}</option>`).join('');
-  document.getElementById('filterDept').innerHTML = '<option value="">Tous départements</option>' + depts.map(d => `<option>${esc(d)}</option>`).join('');
+  const eCount = {}, dCount = {};
+  allRows.forEach(r => {
+    r._enseignes.forEach(e => eCount[e] = (eCount[e]||0)+1);
+    if (r._dept) dCount[r._dept] = (dCount[r._dept]||0)+1;
+  });
+  const enseignes = Object.entries(eCount).sort((a,b)=>b[1]-a[1]);
+  const depts = Object.entries(dCount).sort((a,b) => {
+    const na = /^\d+$/.test(a[0]), nb = /^\d+$/.test(b[0]);
+    if (na && nb) return parseInt(a[0]) - parseInt(b[0]);
+    if (na && !nb) return -1;
+    if (!na && nb) return 1;
+    return a[0].localeCompare(b[0]);
+  });
+  document.getElementById('filterEnseigne').innerHTML = '<option value="">Toutes enseignes</option>' +
+    enseignes.map(([e,n]) => `<option value="${esc(e)}">${esc(e)} (${n})</option>`).join('');
+  document.getElementById('filterDept').innerHTML = '<option value="">Tous départements</option>' +
+    depts.map(([d,n]) => `<option value="${esc(d)}">${esc(d)} (${n})</option>`).join('');
 }
 
 function render() {
@@ -143,8 +186,8 @@ function render() {
   const qS = document.getElementById('search').value.toLowerCase().trim();
 
   const filtered = allRows.filter(r => {
-    if (qE && (r['Enseigne envisagée']||'').trim() !== qE) return false;
-    if (qD && (r['Département']||'').trim() !== qD) return false;
+    if (qE && !r._enseignes.includes(qE)) return false;
+    if (qD && r._dept !== qD) return false;
     if (qS) {
       const hay = `${r.Qui||''} ${r.Entreprise||''} ${r.Poste||''} ${r.Tel||''} ${r.Mail||''}`.toLowerCase();
       if (!hay.includes(qS)) return false;
@@ -155,7 +198,13 @@ function render() {
   document.getElementById('count').textContent = `${filtered.length} résultat${filtered.length>1?'s':''}`;
   const list = document.getElementById('list');
   if (filtered.length === 0) { list.innerHTML = '<div class="empty">Aucun contact</div>'; return; }
-  list.innerHTML = filtered.map(cardHTML).join('');
+  const CAP = 150;
+  const shown = filtered.slice(0, CAP);
+  let html = shown.map(cardHTML).join('');
+  if (filtered.length > CAP) {
+    html += `<div class="empty">📋 ${filtered.length - CAP} contacts supplémentaires — affine les filtres pour les voir</div>`;
+  }
+  list.innerHTML = html;
 }
 
 function cardHTML(r) {
