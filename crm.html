@@ -10,49 +10,32 @@
 html, body { margin: 0; padding: 0; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
-  background: #f1f5f9;
-  color: #0f172a;
-  font-size: 15px;
-  line-height: 1.4;
-  padding-bottom: 60px;
+  background: #f1f5f9; color: #0f172a; font-size: 15px; line-height: 1.4; padding-bottom: 60px;
 }
 header {
   position: sticky; top: 0; z-index: 100;
   background: linear-gradient(135deg, #4f46e5, #7c3aed);
-  color: white;
-  padding: 14px 16px;
+  color: white; padding: 14px 16px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.12);
 }
-header h1 { margin: 0; font-size: 17px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+header h1 { margin: 0; font-size: 17px; font-weight: 600; }
 header .meta { font-size: 12px; opacity: 0.9; margin-top: 4px; }
 .reload { background: rgba(255,255,255,0.2); border: none; color: white; padding: 6px 10px; border-radius: 6px; font-size: 12px; float: right; cursor: pointer; }
 .filters {
-  background: white;
-  padding: 10px 12px;
-  border-bottom: 1px solid #e2e8f0;
+  background: white; padding: 10px 12px; border-bottom: 1px solid #e2e8f0;
   position: sticky; top: 60px; z-index: 90;
 }
 .filter-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 6px; }
 .filters select, .filters input {
-  width: 100%;
-  padding: 9px 10px;
-  border: 1px solid #cbd5e1;
-  border-radius: 7px;
-  font-size: 14px;
-  background: white;
-  color: #0f172a;
-  -webkit-appearance: none;
+  width: 100%; padding: 9px 10px; border: 1px solid #cbd5e1; border-radius: 7px;
+  font-size: 14px; background: white; color: #0f172a; -webkit-appearance: none;
 }
 .filters input { font-size: 15px; }
 .count { font-size: 11px; color: #64748b; margin-top: 4px; text-align: right; }
 .list { padding: 8px 10px; }
 .card {
-  background: white;
-  border-radius: 10px;
-  padding: 12px 14px;
-  margin-bottom: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-  border-left: 3px solid transparent;
+  background: white; border-radius: 10px; padding: 12px 14px; margin-bottom: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 3px solid transparent;
 }
 .card.positif { border-left-color: #10b981; }
 .card.ko { border-left-color: #ef4444; }
@@ -62,13 +45,8 @@ header .meta { font-size: 12px; opacity: 0.9; margin-top: 4px; }
 .sub { color: #64748b; font-size: 13px; margin-bottom: 8px; }
 .badges { margin-bottom: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
 .badge {
-  display: inline-block;
-  padding: 2px 7px;
-  border-radius: 5px;
-  font-size: 11px;
-  font-weight: 500;
-  background: #e0e7ff;
-  color: #4338ca;
+  display: inline-block; padding: 2px 7px; border-radius: 5px; font-size: 11px; font-weight: 500;
+  background: #e0e7ff; color: #4338ca;
 }
 .badge.dept { background: #fef3c7; color: #92400e; }
 .badge.statut { background: #e2e8f0; color: #334155; }
@@ -77,50 +55,26 @@ header .meta { font-size: 12px; opacity: 0.9; margin-top: 4px; }
 .badge.statut.rdv { background: #fed7aa; color: #9a3412; }
 .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 6px; }
 .btn-action {
-  display: flex; align-items: center; justify-content: center;
-  padding: 11px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 14px;
-  border: none;
+  display: flex; align-items: center; justify-content: center; padding: 11px;
+  border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: none;
 }
 .btn-call { background: #10b981; color: white; }
 .btn-mail { background: #0ea5e9; color: white; }
 .btn-action:active { opacity: 0.75; }
 .btn-action.disabled { background: #e2e8f0; color: #94a3b8; pointer-events: none; }
-.toggle {
-  font-size: 12px;
-  color: #4f46e5;
-  padding: 8px 0 4px;
-  font-weight: 500;
-  cursor: pointer;
-}
+.toggle { font-size: 12px; color: #4f46e5; padding: 8px 0 4px; font-weight: 500; cursor: pointer; }
 .details { display: none; padding-top: 6px; border-top: 1px solid #f1f5f9; }
 .details.open { display: block; }
 .field { margin-bottom: 8px; }
 .field label { display: block; font-size: 11px; font-weight: 600; color: #475569; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.3px; }
 .field textarea, .field select {
-  width: 100%;
-  padding: 8px 10px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  font-family: inherit;
-  font-size: 14px;
-  background: white;
-  color: #0f172a;
+  width: 100%; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 6px;
+  font-family: inherit; font-size: 14px; background: white; color: #0f172a;
 }
 .field textarea { min-height: 70px; resize: vertical; }
 .btn-save {
-  width: 100%;
-  padding: 11px;
-  background: #4f46e5;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
+  width: 100%; padding: 11px; background: #4f46e5; color: white; border: none;
+  border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer;
 }
 .btn-save:disabled { background: #94a3b8; }
 .btn-save.saved { background: #10b981; }
@@ -131,7 +85,7 @@ header .meta { font-size: 12px; opacity: 0.9; margin-top: 4px; }
 </head>
 <body>
 <header>
-  <button class="reload" onclick="loadRows(true)">↻</button>
+  <button class="reload" onclick="loadRows(true)">↻ Recharger</button>
   <h1>🎯 CRM Tableau de chasse</h1>
   <div class="meta" id="meta">Chargement…</div>
 </header>
@@ -140,7 +94,7 @@ header .meta { font-size: 12px; opacity: 0.9; margin-top: 4px; }
     <select id="filterEnseigne"><option value="">Toutes enseignes</option></select>
     <select id="filterDept"><option value="">Tous départements</option></select>
   </div>
-  <input type="text" id="search" placeholder="🔍 Nom, entreprise ou tél…">
+  <input type="text" id="search" placeholder="🔍 Nom, entreprise, tél…">
   <div class="count" id="count"></div>
 </div>
 <div class="list" id="list">
@@ -148,12 +102,8 @@ header .meta { font-size: 12px; opacity: 0.9; margin-top: 4px; }
 </div>
 
 <script>
-const READ_URL = 'https://thierryb.app.n8n.cloud/webhook/lecteur-sheet-v3';
-const UPDATE_URL = 'https://thierryb.app.n8n.cloud/webhook/445f5803-663f-45f3-baf8-3e25101c2a6e';
-const SHEET_ID = '1CqFrk0RgkO9xJuglSTPz3dgcd-tbU33VrYaM0lt_BJg';
-const SHEET_NAME = 'Suivi contacts';
+const API_URL = 'https://script.google.com/macros/s/AKfycbw4xeDYgHlwl1-uJWpEBpMouv4AiGnw0e3hFO4VwmO1IFzQmT9HWlgxWlPh6KZ7X0yxyA/exec';
 const STATUTS = ['', 'Nouveau', 'Contacté', 'En cours', 'RDV programmé', 'Positif', 'KO', 'Stop', 'À relancer', 'Injoignable', 'Message laissé'];
-
 let allRows = [];
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -169,34 +119,22 @@ const statutClass = s => {
 async function loadRows(force) {
   if (force) document.getElementById('list').innerHTML = '<div class="loading">Rechargement…</div>';
   try {
-    const res = await fetch(READ_URL, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ spreadsheetId: SHEET_ID, sheetName: SHEET_NAME })
-    });
-    const raw = await res.json();
-    // Normalise : soit tableau direct, soit { data: [...] }, soit item unique
-    let rows;
-    if (Array.isArray(raw)) rows = raw;
-    else if (raw && Array.isArray(raw.data)) rows = raw.data;
-    else if (raw && raw.json) rows = [raw.json];
-    else rows = [raw];
-    allRows = rows.filter(r => r && (r.Qui || r.Tel || r.Mail));
+    const res = await fetch(API_URL);
+    const rows = await res.json();
+    allRows = Array.isArray(rows) ? rows.filter(r => r && (r.Qui || r.Tel || r.Mail)) : [];
     document.getElementById('meta').textContent = `${allRows.length} contacts chargés`;
     populateFilters();
     render();
   } catch (e) {
-    document.getElementById('list').innerHTML = `<div class="error">❌ ${e.message}<br><small>Vérifie ta connexion</small></div>`;
+    document.getElementById('list').innerHTML = `<div class="error">❌ ${e.message}</div>`;
   }
 }
 
 function populateFilters() {
   const enseignes = [...new Set(allRows.map(r => (r['Enseigne envisagée']||'').trim()).filter(Boolean))].sort();
   const depts = [...new Set(allRows.map(r => (r['Département']||'').trim()).filter(Boolean))].sort();
-  const fE = document.getElementById('filterEnseigne');
-  const fD = document.getElementById('filterDept');
-  fE.innerHTML = '<option value="">Toutes enseignes</option>' + enseignes.map(e => `<option>${esc(e)}</option>`).join('');
-  fD.innerHTML = '<option value="">Tous départements</option>' + depts.map(d => `<option>${esc(d)}</option>`).join('');
+  document.getElementById('filterEnseigne').innerHTML = '<option value="">Toutes enseignes</option>' + enseignes.map(e => `<option>${esc(e)}</option>`).join('');
+  document.getElementById('filterDept').innerHTML = '<option value="">Tous départements</option>' + depts.map(d => `<option>${esc(d)}</option>`).join('');
 }
 
 function render() {
@@ -221,7 +159,7 @@ function render() {
 }
 
 function cardHTML(r) {
-  const tel = (r.Tel || '').replace(/[^\d+]/g, '');
+  const tel = String(r.Tel || '').replace(/[^\d+]/g, '');
   const mail = r.Mail || '';
   const rowNum = r.row_number;
   const statut = r.Statut || '';
@@ -246,8 +184,8 @@ function cardHTML(r) {
       <div class="toggle" onclick="toggleDetails(${rowNum})">▾ Éditer commentaire / statut</div>
       <div class="details" id="details-${rowNum}">
         <div class="field">
-          <label>Commentaire (un préfixe date sera ajouté)</label>
-          <textarea id="com-${rowNum}" placeholder="Nouveau commentaire à ajouter…"></textarea>
+          <label>Nouveau commentaire (préfixé date, ajouté en haut)</label>
+          <textarea id="com-${rowNum}" placeholder="Ajouter…"></textarea>
         </div>
         <div class="field">
           <label>Statut</label>
@@ -271,13 +209,21 @@ async function saveRow(rowNum, btn) {
   const row = allRows.find(r => r.row_number === rowNum);
   if (!row) return;
 
-  // Construire le commentaire final : ancien + nouveau avec préfixe date
+  const payload = { row: rowNum };
   let finalCom = row.Commentaire || '';
   if (newCom) {
     const d = new Date();
     const dateStr = `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`;
     const prefixed = `${dateStr}: ${newCom}`;
     finalCom = finalCom ? `${prefixed}\n${finalCom}` : prefixed;
+    payload.commentaire = finalCom;
+  }
+  if (newStat !== (row.Statut || '')) payload.statut = newStat;
+
+  if (payload.commentaire === undefined && payload.statut === undefined) {
+    btn.textContent = '⚠️ Rien à sauver';
+    setTimeout(()=>{btn.textContent='💾 Enregistrer';}, 1500);
+    return;
   }
 
   btn.disabled = true;
@@ -285,20 +231,13 @@ async function saveRow(rowNum, btn) {
   btn.classList.remove('saved');
 
   try {
-    const data = [];
-    if (newCom) data.push({ range: `${SHEET_NAME}!J${rowNum}`, values: [[finalCom]] });
-    if (newStat !== (row.Statut || '')) data.push({ range: `${SHEET_NAME}!K${rowNum}`, values: [[newStat]] });
-    if (data.length === 0) { btn.textContent = '⚠️ Rien à sauver'; setTimeout(()=>{btn.textContent='💾 Enregistrer';btn.disabled=false;}, 1500); return; }
+    // Pas de Content-Type pour éviter le preflight CORS sur Apps Script
+    const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) });
+    const j = await res.json();
+    if (!j.ok) throw new Error(j.error || 'Erreur serveur');
 
-    const res = await fetch(UPDATE_URL, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ spreadsheetId: SHEET_ID, data })
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-    row.Commentaire = finalCom;
-    row.Statut = newStat;
+    if (payload.commentaire !== undefined) row.Commentaire = finalCom;
+    if (payload.statut !== undefined) row.Statut = newStat;
     document.getElementById(`com-${rowNum}`).value = '';
     btn.classList.add('saved');
     btn.textContent = '✅ Enregistré';
