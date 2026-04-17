@@ -877,7 +877,15 @@
         </div>
 
         <div class="calc-field">
-          <label>Apport initial investisseur</label>
+          <label>Apport initial du gérant</label>
+          <div class="calc-slider">
+            <input type="range" id="apport-gerant" min="0" max="35000" step="500" value="0">
+            <output id="apport-gerant-val">0 €</o>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label>Apport total au capital (investisseur + gérant)</label>
           <div class="calc-slider">
             <input type="range" id="apport" min="25000" max="40000" step="1000" value="35000">
             <output id="apport-val">35 k€</output>
@@ -1097,12 +1105,13 @@
   };
   const pct = v => Math.round(v*10)/10 + '%';
 
-  const ids = ['ca1','growth','charges','gerance','apport','valo','pct-reinject'];
+  const ids = ['ca1','growth','charges','gerance','apport-gerant','apport','valo','pct-reinject'];
   const labels = {
     'ca1': v => fmt(+v),
     'growth': v => '+'+v+'%',
     'charges': v => fmt(+v),
     'gerance': v => (+v).toLocaleString('fr-FR') + ' €',
+    'apport-gerant': v => (+v===0 ? '0 €' : fmt(+v)),
     'apport': v => fmt(+v),
     'valo': v => fmt(+v),
     'pct-reinject': v => v+'%'
@@ -1114,6 +1123,7 @@
     const charges = +document.getElementById('charges').value;
     const gerance = +document.getElementById('gerance').value * 12;
     const apport = +document.getElementById('apport').value;
+    const apportGerant = +document.getElementById('apport-gerant').value;
     const valo100Input = +document.getElementById('valo').value;
     const pctReinject = +document.getElementById('pct-reinject').value / 100;
 
@@ -1124,7 +1134,9 @@
     });
 
     const years = [];
-    let capitalGerant = 0; // % entre 0 et 1
+    // Part initiale du gérant = son apport / apport total au capital
+    let capitalGerant = apport > 0 ? Math.min(apportGerant / apport, 1) : 0;
+    const capitalInitialGerant = capitalGerant;
     let rachatsCumules = 0; // ce que l'investisseur a récupéré
     let resultatsInvCumules = 0; // part du résultat perçue par l'investisseur
 
