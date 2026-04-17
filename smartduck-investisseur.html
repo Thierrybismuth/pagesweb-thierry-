@@ -829,6 +829,389 @@
   </div>
 </section>
 
+<!-- ============ CALCULATEUR 5 ANS - Smart Duck ============ -->
+<!-- À insérer sur smartduck-exploitant.html ET smartduck-investisseur.html -->
+<section class="calc-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Projection 5 ans · interactive</div>
+      <h2 class="section-title">Modélisez <em>votre opération</em>.</h2>
+      <p class="section-lede">Modifiez les hypothèses et voyez en temps réel comment le capital, les revenus et la rentabilité évoluent sur 5 ans. Les chiffres par défaut correspondent au scénario central Smart Duck.</p>
+    </div>
+
+    <div class="calc-wrap">
+      <!-- Panneau hypothèses -->
+      <div class="calc-inputs">
+        <h3>Hypothèses</h3>
+
+        <div class="calc-field">
+          <label>CA année 1</label>
+          <div class="calc-slider">
+            <input type="range" id="ca1" min="150000" max="350000" step="10000" value="240000">
+            <output id="ca1-val">240 k€</output>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label>Croissance CA par an</label>
+          <div class="calc-slider">
+            <input type="range" id="growth" min="0" max="40" step="5" value="20">
+            <output id="growth-val">+20%</output>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label>Charges annuelles (hors gérance)</label>
+          <div class="calc-slider">
+            <input type="range" id="charges" min="140000" max="220000" step="5000" value="180000">
+            <output id="charges-val">180 k€</output>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label>Rémunération de gérance / mois</label>
+          <div class="calc-slider">
+            <input type="range" id="gerance" min="1500" max="5000" step="250" value="2500">
+            <output id="gerance-val">2 500 €</output>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label>Apport initial investisseur</label>
+          <div class="calc-slider">
+            <input type="range" id="apport" min="25000" max="40000" step="1000" value="35000">
+            <output id="apport-val">35 k€</output>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label>Multiple de valorisation (× résultat annuel)</label>
+          <div class="calc-slider">
+            <input type="range" id="multiple" min="1" max="5" step="0.5" value="3">
+            <output id="multiple-val">3,0×</output>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label>% gérance réinjectée dans le rachat</label>
+          <div class="calc-slider">
+            <input type="range" id="pct-gerance" min="0" max="100" step="10" value="50">
+            <output id="pct-gerance-val">50%</output>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label>% part du résultat (gérant) réinjectée</label>
+          <div class="calc-slider">
+            <input type="range" id="pct-resultat" min="0" max="100" step="10" value="100">
+            <output id="pct-resultat-val">100%</output>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panneau résultats -->
+      <div class="calc-output">
+        <div class="calc-table-wrap">
+          <table class="calc-table">
+            <thead>
+              <tr>
+                <th>Poste</th>
+                <th>An 1</th>
+                <th>An 2</th>
+                <th>An 3</th>
+                <th>An 4</th>
+                <th>An 5</th>
+              </tr>
+            </thead>
+            <tbody id="calc-tbody">
+              <!-- rempli par JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="calc-synth">
+          <div class="synth-card">
+            <div class="synth-label">Capital gérant fin an 5</div>
+            <div class="synth-val" id="synth-capital">—</div>
+          </div>
+          <div class="synth-card">
+            <div class="synth-label">Retour investisseur cumulé</div>
+            <div class="synth-val" id="synth-retour">—</div>
+          </div>
+          <div class="synth-card">
+            <div class="synth-label">TRI investisseur (5 ans)</div>
+            <div class="synth-val" id="synth-tri">—</div>
+          </div>
+        </div>
+
+        <p class="calc-footnote">Modèle illustratif. Valorisation = multiple × résultat annuel de l'exercice. Si le gérant démarre à 0% de capital, il ne touche aucune part du résultat en An 1 — seule sa gérance alimente le rachat. Dès qu'il détient des parts, la répartition du résultat suit sa quote-part. Rentrer en négociation avec son conseil pour valider la structure réelle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .calc-section{background:var(--crème-2);padding:100px 40px}
+  .calc-wrap{
+    display:grid;
+    grid-template-columns:360px 1fr;
+    gap:40px;
+    align-items:start;
+  }
+  .calc-inputs{
+    background:var(--crème);
+    padding:40px 32px;
+    border-radius:2px;
+    border:1px solid var(--bord);
+    position:sticky;
+    top:24px;
+  }
+  .calc-inputs h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:22px;
+    margin-bottom:28px;
+    color:var(--noir);
+  }
+  .calc-field{margin-bottom:24px}
+  .calc-field label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--texte-soft);
+    margin-bottom:8px;
+  }
+  .calc-slider{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .calc-slider input[type=range]{
+    flex:1;
+    accent-color:var(--rose);
+    cursor:pointer;
+  }
+  .calc-slider output{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:16px;
+    color:var(--noir);
+    min-width:80px;
+    text-align:right;
+  }
+  .calc-output{
+    background:var(--crème);
+    padding:40px;
+    border-radius:2px;
+    border:1px solid var(--bord);
+  }
+  .calc-table-wrap{
+    overflow-x:auto;
+    margin-bottom:32px;
+  }
+  .calc-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+  }
+  .calc-table th,.calc-table td{
+    padding:12px 10px;
+    text-align:right;
+    border-bottom:1px solid var(--bord);
+  }
+  .calc-table th:first-child,.calc-table td:first-child{
+    text-align:left;
+    font-weight:500;
+    color:var(--texte-soft);
+    white-space:nowrap;
+  }
+  .calc-table th{
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--rose);
+    font-weight:600;
+    padding-bottom:16px;
+  }
+  .calc-table tr.separator td{
+    border-top:2px solid var(--noir);
+    padding-top:14px;
+  }
+  .calc-table tr.highlight td{
+    font-family:'Fraunces',serif;
+    font-size:16px;
+    color:var(--noir);
+    font-weight:500;
+    background:rgba(255,90,138,.06);
+  }
+  .calc-table tr.highlight td:first-child{color:var(--rose)}
+  .calc-table tr.gerance-row td{color:#1a6b2e}
+  .calc-table tr.capital-row td{
+    font-family:'Fraunces',serif;
+    color:var(--or-deep,#a87f30);
+    font-weight:500;
+  }
+  .calc-synth{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-bottom:24px;
+  }
+  .synth-card{
+    background:var(--noir);
+    color:var(--crème);
+    padding:24px 20px;
+    border-radius:2px;
+    text-align:center;
+  }
+  .synth-label{
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--or,#e8c88a);
+    margin-bottom:8px;
+  }
+  .synth-val{
+    font-family:'Fraunces',serif;
+    font-size:28px;
+    font-weight:500;
+    color:var(--rose-soft,#ffc2d4);
+    line-height:1;
+  }
+  .calc-footnote{
+    font-size:13px;
+    color:var(--texte-soft);
+    font-style:italic;
+    line-height:1.6;
+  }
+  @media(max-width:960px){
+    .calc-section{padding:72px 24px}
+    .calc-wrap{grid-template-columns:1fr;gap:24px}
+    .calc-inputs{position:static;padding:28px 24px}
+    .calc-output{padding:24px}
+    .calc-synth{grid-template-columns:1fr;gap:12px}
+    .calc-table{font-size:12px}
+    .calc-table th,.calc-table td{padding:10px 6px}
+  }
+</style>
+
+<script>
+(function(){
+  const fmt = v => {
+    if (Math.abs(v) >= 1000) return Math.round(v/1000) + ' k€';
+    return Math.round(v) + ' €';
+  };
+  const pct = v => Math.round(v*10)/10 + '%';
+
+  const ids = ['ca1','growth','charges','gerance','apport','multiple','pct-gerance','pct-resultat'];
+  const labels = {
+    'ca1': v => fmt(+v),
+    'growth': v => '+'+v+'%',
+    'charges': v => fmt(+v),
+    'gerance': v => (+v).toLocaleString('fr-FR') + ' €',
+    'apport': v => fmt(+v),
+    'multiple': v => (+v).toFixed(1).replace('.',',')+'×',
+    'pct-gerance': v => v+'%',
+    'pct-resultat': v => v+'%'
+  };
+
+  function compute(){
+    const ca1 = +document.getElementById('ca1').value;
+    const growth = +document.getElementById('growth').value / 100;
+    const charges = +document.getElementById('charges').value;
+    const gerance = +document.getElementById('gerance').value * 12;
+    const apport = +document.getElementById('apport').value;
+    const multiple = +document.getElementById('multiple').value;
+    const pctGerance = +document.getElementById('pct-gerance').value / 100;
+    const pctResultat = +document.getElementById('pct-resultat').value / 100;
+
+    // Met à jour les labels
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      document.getElementById(id+'-val').textContent = labels[id](el.value);
+    });
+
+    const years = [];
+    let capitalGerant = 0; // % entre 0 et 1
+    let rachatsCumules = 0; // ce que l'investisseur a récupéré
+    let resultatsInvCumules = 0; // part du résultat perçue par l'investisseur
+
+    for (let i = 0; i < 5; i++) {
+      const ca = ca1 * Math.pow(1 + growth, i);
+      const resultat = ca - charges;
+      const resultatPositif = Math.max(resultat, 0);
+
+      // Répartition du résultat AU DÉBUT de l'année (selon capital au 1er janvier)
+      const partInv = resultatPositif * (1 - capitalGerant);
+      const partGerant = resultatPositif * capitalGerant;
+
+      // Réinjection par le gérant = % gérance + % part résultat
+      const injection = gerance * pctGerance + partGerant * pctResultat;
+
+      // Valorisation 100% en fin d'année (basée sur résultat de l'année)
+      const valo100 = Math.max(resultatPositif, 0) * multiple || 1;
+
+      // Part rachetée cette année (au prorata de l'injection / valo100)
+      let partRachetee = 0;
+      if (valo100 > 0 && injection > 0) {
+        partRachetee = Math.min(injection / valo100, 1 - capitalGerant - 0.49); // plafond 51%
+        if (partRachetee < 0) partRachetee = 0;
+      }
+
+      const montantRachat = partRachetee * valo100;
+
+      years.push({
+        ca, resultat, partInv, partGerant,
+        gerance, injection: Math.min(injection, montantRachat), montantRachat,
+        capitalDebut: capitalGerant,
+        partRachetee,
+        capitalFin: capitalGerant + partRachetee,
+        valo100
+      });
+
+      rachatsCumules += montantRachat;
+      resultatsInvCumules += partInv;
+      capitalGerant += partRachetee;
+      if (capitalGerant >= 0.51) capitalGerant = 0.51;
+    }
+
+    // Build tableau
+    const tbody = document.getElementById('calc-tbody');
+    const rows = [
+      {label:'CA', vals: years.map(y=>fmt(y.ca)), cls:''},
+      {label:'Résultat (avant gérance)', vals: years.map(y=>fmt(y.resultat)), cls:'highlight'},
+      {label:'Part investisseur', vals: years.map(y=>fmt(y.partInv)+' ('+pct((1-y.capitalDebut)*100)+')'), cls:''},
+      {label:'Part gérant', vals: years.map(y=>fmt(y.partGerant)+' ('+pct(y.capitalDebut*100)+')'), cls:''},
+      {label:'Rémunération de gérance', vals: years.map(y=>fmt(y.gerance)), cls:'gerance-row separator'},
+      {label:'Montant réinvesti en rachat', vals: years.map(y=>fmt(y.montantRachat)), cls:'gerance-row'},
+      {label:'% capital gérant (fin an)', vals: years.map(y=>pct(y.capitalFin*100)), cls:'capital-row separator'},
+    ];
+
+    tbody.innerHTML = rows.map(r => {
+      return '<tr class="'+r.cls+'"><td>'+r.label+'</td>' +
+        r.vals.map(v=>'<td>'+v+'</td>').join('') + '</tr>';
+    }).join('');
+
+    // Synthèses
+    const finalCapital = years[4].capitalFin * 100;
+    const totalRetourInv = resultatsInvCumules + rachatsCumules;
+    const tri5 = Math.pow(totalRetourInv / apport, 1/5) - 1;
+
+    document.getElementById('synth-capital').textContent = Math.round(finalCapital) + '%';
+    document.getElementById('synth-retour').textContent = fmt(totalRetourInv);
+    document.getElementById('synth-tri').textContent = isFinite(tri5) && tri5 > -1 ? '+'+Math.round(tri5*100)+'%/an' : '—';
+  }
+
+  // Init
+  ids.forEach(id => {
+    document.getElementById(id).addEventListener('input', compute);
+  });
+  compute();
+})();
+</script>
+
 <!-- DILUTION -->
 <section class="dilution">
   <div class="wrap">
