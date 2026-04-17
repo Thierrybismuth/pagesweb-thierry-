@@ -147,12 +147,25 @@ async function loadRows(force) {
   try {
     const res = await fetch(API_URL);
     const rows = await res.json();
-    allRows = Array.isArray(rows) ? rows.filter(r => r && (r.Qui || r.Tel || r.Mail)) : [];
+    let clean = Array.isArray(rows) ? rows.filter(r => r && (r.Qui || r.Tel || r.Mail)) : [];
+    // Exclure les statuts "actifs" ou "terminés" - garder uniquement les inactifs à relancer
+    const EXCLUDE = ['en cours','ko','stop','positif','rdv programmé','rdv','ok'];
+    clean = clean.filter(r => {
+      const s = String(r.Statut||'').toLowerCase().trim();
+      return !EXCLUDE.some(ex => s === ex || s.includes(ex));
+    });
+    // Shuffle aléatoire
+    for (let i = clean.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [clean[i], clean[j]] = [clean[j], clean[i]];
+    }
+    // Cap à 50
+    allRows = clean.slice(0, 50);
     allRows.forEach(r => {
       r._enseignes = normEnseigne(r['Enseigne envisagée']);
       r._dept = extractDept(r['Département']);
     });
-    document.getElementById('meta').textContent = `${allRows.length} candidats — filtre pour affiner`;
+    document.getElementById('meta').textContent = `${allRows.length} candidats inactifs (tirage aléatoire)`;
     populateFilters();
     render();
   } catch (e) {
