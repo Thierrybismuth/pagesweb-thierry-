@@ -885,27 +885,20 @@
         </div>
 
         <div class="calc-field">
-          <label>Multiple de valorisation (× résultat annuel)</label>
+          <label>Investissement total porté par l'investisseur (capital + dette bancaire)</label>
           <div class="calc-slider">
-            <input type="range" id="multiple" min="1" max="5" step="0.5" value="3">
-            <output id="multiple-val">3,0×</output>
+            <input type="range" id="valo" min="80000" max="200000" step="5000" value="150000">
+            <output id="valo-val">150 k€</o>
           </div>
         </div>
 
         <div class="calc-field">
-          <label>% gérance réinjectée dans le rachat</label>
+          <label>% des revenus du gérant (gérance + résultat) réinjecté dans le rachat</label>
           <div class="calc-slider">
-            <input type="range" id="pct-gerance" min="0" max="100" step="10" value="50">
-            <output id="pct-gerance-val">50%</output>
+            <input type="range" id="pct-reinject" min="0" max="100" step="10" value="80">
+            <output id="pct-reinject-val">80%</o>
           </div>
         </div>
-
-        <div class="calc-field">
-          <label>% part du résultat (gérant) réinjectée</label>
-          <div class="calc-slider">
-            <input type="range" id="pct-resultat" min="0" max="100" step="10" value="100">
-            <output id="pct-resultat-val">100%</output>
-          </div>
         </div>
       </div>
 
@@ -944,7 +937,7 @@
           </div>
         </div>
 
-        <p class="calc-footnote">Modèle illustratif. Valorisation = multiple × résultat annuel de l'exercice. Si le gérant démarre à 0% de capital, il ne touche aucune part du résultat en An 1 — seule sa gérance alimente le rachat. Dès qu'il détient des parts, la répartition du résultat suit sa quote-part. Rentrer en négociation avec son conseil pour valider la structure réelle.</p>
+        <p class="calc-footnote">Modèle illustratif. Valorisation 100% = ensemble de l'investissement porté par l'investisseur (son apport capital + la dette bancaire qu'il garantit, soit ~150 k€ pour un centre standard). C'est ce montant total que le gérant rachète pour devenir majoritaire. Si le gérant démarre à 0% de capital, il ne touche aucune part du résultat en An 1 — seule sa gérance alimente le rachat. Dès qu'il détient des parts, la répartition du résultat suit sa quote-part. Rentrer en négociation avec son conseil pour valider la structure réelle.</p>
       </div>
     </div>
   </div>
@@ -1105,16 +1098,15 @@
   };
   const pct = v => Math.round(v*10)/10 + '%';
 
-  const ids = ['ca1','growth','charges','gerance','apport','multiple','pct-gerance','pct-resultat'];
+  const ids = ['ca1','growth','charges','gerance','apport','valo','pct-reinject'];
   const labels = {
     'ca1': v => fmt(+v),
     'growth': v => '+'+v+'%',
     'charges': v => fmt(+v),
     'gerance': v => (+v).toLocaleString('fr-FR') + ' €',
     'apport': v => fmt(+v),
-    'multiple': v => (+v).toFixed(1).replace('.',',')+'×',
-    'pct-gerance': v => v+'%',
-    'pct-resultat': v => v+'%'
+    'valo': v => fmt(+v),
+    'pct-reinject': v => v+'%'
   };
 
   function compute(){
@@ -1123,9 +1115,8 @@
     const charges = +document.getElementById('charges').value;
     const gerance = +document.getElementById('gerance').value * 12;
     const apport = +document.getElementById('apport').value;
-    const multiple = +document.getElementById('multiple').value;
-    const pctGerance = +document.getElementById('pct-gerance').value / 100;
-    const pctResultat = +document.getElementById('pct-resultat').value / 100;
+    const valo100Input = +document.getElementById('valo').value;
+    const pctReinject = +document.getElementById('pct-reinject').value / 100;
 
     // Met à jour les labels
     ids.forEach(id => {
@@ -1147,16 +1138,19 @@
       const partInv = resultatPositif * (1 - capitalGerant);
       const partGerant = resultatPositif * capitalGerant;
 
-      // Réinjection par le gérant = % gérance + % part résultat
-      const injection = gerance * pctGerance + partGerant * pctResultat;
+      // Revenus du gérant sur l'année = gérance + part de résultat
+      const revenusGerant = gerance + partGerant;
+      // Réinjection dans le rachat
+      const injection = revenusGerant * pctReinject;
 
-      // Valorisation 100% en fin d'année (basée sur résultat de l'année)
-      const valo100 = Math.max(resultatPositif, 0) * multiple || 1;
+      // Valorisation 100% = investissement total porté par l'investisseur
+      // (capital + dette bancaire qu'il garantit)
+      const valo100 = valo100Input;
 
-      // Part rachetée cette année (au prorata de l'injection / valo100)
+      // Part rachetée cette année (plafond 51% total)
       let partRachetee = 0;
       if (valo100 > 0 && injection > 0) {
-        partRachetee = Math.min(injection / valo100, 1 - capitalGerant - 0.49); // plafond 51%
+        partRachetee = Math.min(injection / valo100, 0.51 - capitalGerant);
         if (partRachetee < 0) partRachetee = 0;
       }
 
@@ -1167,8 +1161,7 @@
         gerance, injection: Math.min(injection, montantRachat), montantRachat,
         capitalDebut: capitalGerant,
         partRachetee,
-        capitalFin: capitalGerant + partRachetee,
-        valo100
+        capitalFin: capitalGerant + partRachetee
       });
 
       rachatsCumules += montantRachat;
