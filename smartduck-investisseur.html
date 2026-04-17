@@ -52,6 +52,24 @@
     background:radial-gradient(circle,rgba(212,168,87,.2) 0%,transparent 60%);
   }
   .hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.6fr 1fr;
+    gap:64px;
+    align-items:center;
+  }
+  .hero-ducks-wrap{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  .hero-ducks-img{
+    max-width:100%;
+    max-height:480px;
+    width:auto;
+    height:auto;
+    filter:drop-shadow(0 30px 60px rgba(0,0,0,.5));
+  }
   .breadcrumb{
     font-size:12px;
     letter-spacing:2px;
@@ -592,6 +610,8 @@
   @media(max-width:960px){
     section,.ticket-hero,.multi,.cta-section,.process{padding:72px 24px}
     .hero{padding:72px 24px 56px}
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    .hero-ducks-img{max-height:320px}
     .these-grid,.fin-grid,.dilution-grid{grid-template-columns:1fr;gap:24px}
     .grappe-visual{grid-template-columns:1fr;gap:40px;padding:32px}
     .roi-box{padding:40px 28px}
@@ -611,12 +631,19 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="breadcrumb"><a href="smartduck.html">← Smart Duck</a> · Parcours Investisseur</div>
-    <span class="tag-inv">Parcours 02 · Investisseur</span>
-    <h1>Placez <em>30 à 35 k€</em><br>sur un marché qui<br>se structure <em>maintenant</em>.</h1>
-    <p class="hero-lede">
-      Le décret de mai 2024 a ouvert le segment non-médical de l'épilation laser. Smart Duck construit le premier réseau français sur ce créneau, avec un modèle économique hyper favorable et une croissance à +30 ouvertures prévues au S1 2026. Multi-Potentiel vous permet d'y entrer avec ou sans recours bancaire, sur un ou plusieurs centres.
-    </p>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="breadcrumb"><a href="smartduck.html">← Smart Duck</a> · Parcours Investisseur</div>
+        <span class="tag-inv">Parcours 02 · Investisseur</span>
+        <h1>Placez <em>30 à 35 k€</em><br>sur un marché qui<br>se structure <em>maintenant</em>.</h1>
+        <p class="hero-lede">
+          Le décret de mai 2024 a ouvert le segment non-médical de l'épilation laser. Smart Duck construit le premier réseau français sur ce créneau, avec un modèle économique hyper favorable et une croissance à +30 ouvertures prévues au S1 2026. Multi-Potentiel vous permet d'y entrer avec ou sans recours bancaire, sur un ou plusieurs centres.
+        </p>
+      </div>
+      <div class="hero-ducks-wrap">
+        <img src="images/smartduck/canard-balance.webp" alt="Smart Duck — investissement" class="hero-ducks-img">
+      </div>
+    </div>
   </div>
 </section>
 
@@ -921,6 +948,7 @@
 </div>
 
 <footer>
+  <img src="images/smartduck/logo-smartduck-blanc.webp" alt="Smart Duck" style="height:32px;display:block;margin:0 auto 16px;opacity:.7">
   <p>Smart Duck — Parcours Investisseur · <a href="smartduck.html">Retour à la présentation</a> · <a href="index.html">Multi-Potentiel</a></p>
 </footer>
 
