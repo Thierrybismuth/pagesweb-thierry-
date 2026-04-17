@@ -1,0 +1,191 @@
+{
+  "name": "📊 Daily 6h - Rapport Quotidien",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 6 * * *"
+            }
+          ]
+        }
+      },
+      "id": "trigger-6h",
+      "name": "Tous les jours 6h Paris",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [200, 400]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://thierryb.app.n8n.cloud/api/v1/executions",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {"name": "status", "value": "error"},
+            {"name": "limit", "value": "100"}
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {"name": "X-N8N-API-KEY", "value": "={{ $credentials.n8nApi.apiKey }}"}
+          ]
+        },
+        "options": {}
+      },
+      "id": "http-errors",
+      "name": "Exec en erreur 24h",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 200],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_REMPLIR",
+          "name": "N8N API Key Header"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://thierryb.app.n8n.cloud/api/v1/executions",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {"name": "status", "value": "success"},
+            {"name": "limit", "value": "250"}
+          ]
+        },
+        "options": {}
+      },
+      "id": "http-success",
+      "name": "Exec réussies 24h",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 400],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "A_REMPLIR",
+          "name": "N8N API Key Header"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1CqFrk0RgkO9xJuglSTPz3dgcd-tbU33VrYaM0lt_BJg",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Suivi contacts",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "read-chasse",
+      "name": "Lire Tableau Chasse",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [440, 600],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TqRSp5MdqhfG9oG5",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "A_REMPLIR_SHEET_SUJETS_OUVERTS",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "sujets",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "read-sujets",
+      "name": "Lire Sujets Ouverts",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [440, 800],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TqRSp5MdqhfG9oG5",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// ============ PARSING & CONSOLIDATION ============\nconst now = new Date();\nconst dayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);\n\n// --- 1. Récupérer les 4 flux ---\nconst errorsExec = $('Exec en erreur 24h').first().json.data || [];\nconst successExec = $('Exec réussies 24h').first().json.data || [];\nconst chasseRows = $('Lire Tableau Chasse').all().map(i => i.json);\nconst sujetsRows = $('Lire Sujets Ouverts').all().map(i => i.json);\n\n// --- 2. Workflows plantés (filtre 24h) ---\nconst errors24h = errorsExec.filter(e => new Date(e.startedAt) > dayAgo);\n\n// --- 3. Récurrences exécutées (mode=trigger, filtre 24h) ---\n// Mode 'trigger' = scheduled/webhook automatique\nconst recurrences = successExec.filter(e => \n  new Date(e.startedAt) > dayAgo && \n  (e.mode === 'trigger' || e.mode === 'webhook')\n);\n// Grouper par workflow\nconst recByWf = {};\nfor (const r of recurrences) {\n  const wf = r.workflowData?.name || r.workflowId || 'Inconnu';\n  recByWf[wf] = (recByWf[wf] || 0) + 1;\n}\n\n// --- 4. Sujets à relancer (tableau chasse, statut contient 'relanc' ou 'attente') ---\nconst aRelancer = chasseRows.filter(r => {\n  const s = (r['Statut'] || '').toLowerCase();\n  return s.includes('relanc') || s.includes('attente') || s.includes('rappel');\n});\n\n// --- 5. Sujets ouverts (conversations Claude non closes) ---\n// Convention sheet : sujet | date | lien | deadline | statut\nconst ouverts = sujetsRows.filter(r => {\n  const s = (r['statut'] || r['Statut'] || '').toLowerCase();\n  return s !== 'fait' && s !== 'clos' && s !== 'done';\n});\n\n// --- 6. Composer HTML ---\nconst fmtDate = d => new Date(d).toLocaleString('fr-FR', {timeZone:'Europe/Paris', day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit'});\n\nlet html = `<!DOCTYPE html><html><head><meta charset=\"utf-8\"><style>\nbody{font-family:-apple-system,Segoe UI,sans-serif;background:#f7f9fb;color:#1a2332;margin:0;padding:20px;}\n.wrap{max-width:680px;margin:0 auto;background:#fff;border-radius:12px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,0.04);}\nh1{color:#0f4c75;font-size:22px;margin:0 0 4px;}\n.date{color:#6b7f95;font-size:13px;margin-bottom:24px;}\nh2{font-size:15px;margin:24px 0 12px;padding:8px 12px;border-radius:6px;}\nh2.err{background:#fde8e8;color:#9b1c1c;}\nh2.rel{background:#fef3c7;color:#92400e;}\nh2.ouv{background:#dbeafe;color:#1e40af;}\nh2.rec{background:#d1fae5;color:#065f46;}\nul{margin:0;padding-left:20px;}\nli{margin:6px 0;line-height:1.5;font-size:14px;}\n.meta{color:#6b7f95;font-size:12px;}\n.empty{color:#6b7f95;font-style:italic;font-size:13px;padding-left:12px;}\na{color:#0f4c75;}\n.count{background:#fff;color:#1a2332;padding:2px 8px;border-radius:10px;font-size:12px;margin-left:8px;}\n</style></head><body><div class=\"wrap\">`;\n\nhtml += `<h1>📊 Rapport quotidien</h1><div class=\"date\">${now.toLocaleDateString('fr-FR', {timeZone:'Europe/Paris', weekday:'long', day:'numeric', month:'long'})}</div>`;\n\n// Section 1 : Workflows plantés\nhtml += `<h2 class=\"err\">⚠️ Workflows plantés <span class=\"count\">${errors24h.length}</span></h2>`;\nif (errors24h.length === 0) {\n  html += `<div class=\"empty\">Aucun plantage. RAS.</div>`;\n} else {\n  html += `<ul>`;\n  for (const e of errors24h.slice(0, 20)) {\n    const wfName = e.workflowData?.name || e.workflowId;\n    html += `<li><strong>${wfName}</strong> <span class=\"meta\">— ${fmtDate(e.startedAt)}</span><br><span class=\"meta\">Exec ID ${e.id}</span></li>`;\n  }\n  html += `</ul>`;\n}\n\n// Section 2 : Récurrences\nhtml += `<h2 class=\"rec\">🔄 Récurrences exécutées <span class=\"count\">${recurrences.length}</span></h2>`;\nconst recEntries = Object.entries(recByWf).sort((a,b) => b[1]-a[1]);\nif (recEntries.length === 0) {\n  html += `<div class=\"empty\">Aucune.</div>`;\n} else {\n  html += `<ul>`;\n  for (const [wf, count] of recEntries) {\n    html += `<li><strong>${wf}</strong> <span class=\"meta\">— ${count} exec</span></li>`;\n  }\n  html += `</ul>`;\n}\n\n// Section 3 : Sujets à relancer\nhtml += `<h2 class=\"rel\">📌 Sujets à relancer <span class=\"count\">${aRelancer.length}</span></h2>`;\nif (aRelancer.length === 0) {\n  html += `<div class=\"empty\">Aucun.</div>`;\n} else {\n  html += `<ul>`;\n  for (const r of aRelancer.slice(0, 25)) {\n    const qui = r['Qui'] || r['Entreprise'] || '?';\n    const enseigne = r['Enseigne envisagée'] || '';\n    const statut = r['Statut'] || '';\n    const com = (r['Commentaire'] || '').substring(0, 80);\n    html += `<li><strong>${qui}</strong> <span class=\"meta\">${enseigne} · ${statut}</span><br><span class=\"meta\">${com}</span></li>`;\n  }\n  html += `</ul>`;\n}\n\n// Section 4 : Sujets Claude ouverts\nhtml += `<h2 class=\"ouv\">💬 Sujets ouverts (convos Claude) <span class=\"count\">${ouverts.length}</span></h2>`;\nif (ouverts.length === 0) {\n  html += `<div class=\"empty\">Aucun. Tape \"track\" en fin de conversation pour ajouter un sujet ici.</div>`;\n} else {\n  html += `<ul>`;\n  for (const r of ouverts) {\n    const sujet = r['sujet'] || r['Sujet'] || '?';\n    const date = r['date'] || r['Date'] || '';\n    const lien = r['lien'] || r['Lien'] || '';\n    const deadline = r['deadline'] || r['Deadline'] || '';\n    html += `<li><strong>${sujet}</strong>`;\n    if (deadline) html += ` <span class=\"meta\">· échéance ${deadline}</span>`;\n    html += `<br><span class=\"meta\">${date}</span>`;\n    if (lien) html += ` · <a href=\"${lien}\">ouvrir la conversation</a>`;\n    html += `</li>`;\n  }\n  html += `</ul>`;\n}\n\nhtml += `</div></body></html>`;\n\nreturn [{\n  json: {\n    to: 'thierry@thierrybismuth.com',\n    subject: `📊 Daily ${now.toLocaleDateString('fr-FR', {timeZone:'Europe/Paris', day:'2-digit', month:'2-digit'})} — ${errors24h.length} err · ${aRelancer.length} relances · ${ouverts.length} ouverts`,\n    html: html,\n    stats: {\n      errors: errors24h.length,\n      recurrences: recurrences.length,\n      relances: aRelancer.length,\n      ouverts: ouverts.length\n    }\n  }\n}];"
+      },
+      "id": "code-format",
+      "name": "Consolider & formater",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [760, 400]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.to }}",
+        "subject": "={{ $json.subject }}",
+        "emailType": "html",
+        "message": "={{ $json.html }}",
+        "options": {}
+      },
+      "id": "send-gmail",
+      "name": "Envoyer Email Daily",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [1000, 400],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "00d0wM4bL9Q0T1Jj",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Tous les jours 6h Paris": {
+      "main": [[
+        {"node": "Exec en erreur 24h", "type": "main", "index": 0},
+        {"node": "Exec réussies 24h", "type": "main", "index": 0},
+        {"node": "Lire Tableau Chasse", "type": "main", "index": 0},
+        {"node": "Lire Sujets Ouverts", "type": "main", "index": 0}
+      ]]
+    },
+    "Exec en erreur 24h": {
+      "main": [[{"node": "Consolider & formater", "type": "main", "index": 0}]]
+    },
+    "Exec réussies 24h": {
+      "main": [[{"node": "Consolider & formater", "type": "main", "index": 0}]]
+    },
+    "Lire Tableau Chasse": {
+      "main": [[{"node": "Consolider & formater", "type": "main", "index": 0}]]
+    },
+    "Lire Sujets Ouverts": {
+      "main": [[{"node": "Consolider & formater", "type": "main", "index": 0}]]
+    },
+    "Consolider & formater": {
+      "main": [[{"node": "Envoyer Email Daily", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Paris"
+  },
+  "staticData": null,
+  "tags": []
+}
