@@ -368,9 +368,23 @@
   .form-input::placeholder { color: rgba(245,241,232,0.35); }
   .day-choice {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+  }
+  .slot-loading {
+    grid-column: 1 / -1;
+    padding: 22px;
+    text-align: center;
+    color: rgba(245,241,232,0.5);
+    font-size: 14px;
+    font-style: italic;
+  }
+  .slot-note {
+    font-size: 12.5px;
+    color: rgba(245,241,232,0.45);
+    margin-top: 4px;
+    letter-spacing: 0.2px;
   }
   .day-btn {
     padding: 20px 16px;
@@ -673,19 +687,11 @@
           <label class="form-label" for="email">Votre email</label>
           <input type="email" id="email" class="form-input" placeholder="prenom@exemple.com" autocomplete="email" required>
 
-          <label class="form-label">Créneau souhaité</label>
-          <div class="day-choice">
-            <button type="button" class="day-btn" data-day="monday" onclick="inscrire('monday')">
-              <div class="day-btn-day">Lundi</div>
-              <div class="day-btn-date" id="date-monday">—</div>
-              <div class="day-btn-time">13h00 — 14h00</div>
-            </button>
-            <button type="button" class="day-btn" data-day="wednesday" onclick="inscrire('wednesday')">
-              <div class="day-btn-day">Mercredi</div>
-              <div class="day-btn-date" id="date-wednesday">—</div>
-              <div class="day-btn-time">18h00 — 19h00</div>
-            </button>
+          <label class="form-label">Prochains créneaux disponibles</label>
+          <div class="day-choice" id="day-choice">
+            <div class="slot-loading">Chargement des créneaux…</div>
           </div>
+          <div class="slot-note">Inscriptions ouvertes jusqu'à 8 jours à l'avance.</div>
 
           <div id="form-msg" class="form-msg"></div>
         </div>
@@ -774,7 +780,7 @@
     return jours[d.getDay()] + ' ' + d.getDate() + ' ' + mois[d.getMonth()] + ' ' + d.getFullYear() + ' à ' + h + 'h' + m;
   }
 
-  async function inscrire(day) {
+  async function inscrire(day, date) {
     const emailInput = document.getElementById('email');
     const email = emailInput.value.trim();
     const buttons = document.querySelectorAll('.day-btn');
@@ -792,7 +798,7 @@
       const resp = await fetch(WEBHOOK, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ email: email, day: day })
+        body: JSON.stringify({ email: email, day: day, date: date })
       });
       const data = await resp.json();
 
@@ -812,6 +818,69 @@
     }
   }
 
+  // Génère dynamiquement les 3 prochains créneaux (lundi 13h + mercredi 18h), max 8 jours
+  function genererCreneaux() {
+    const now = new Date();
+    const horizonMs = 8 * 24 * 3600 * 1000;
+    const slots = [];
+
+    // Balayer 9 jours pour être sûr de couvrir tous les lundis/mercredis dans 8j
+    for (let d = 0; d <= 8; d++) {
+      const day = new Date(now);
+      day.setDate(now.getDate() + d);
+      const wd = day.getDay();
+      let slot = null;
+      if (wd === 1) { // Lundi 13h
+        slot = new Date(day);
+        slot.setHours(13, 0, 0, 0);
+        if (slot > now && (slot - now) <= horizonMs) {
+          slots.push({ date: slot, day: 'monday', time: '13h00 — 14h00', label: 'Lundi' });
+        }
+      } else if (wd === 3) { // Mercredi 18h
+        slot = new Date(day);
+        slot.setHours(18, 0, 0, 0);
+        if (slot > now && (slot - now) <= horizonMs) {
+          slots.push({ date: slot, day: 'wednesday', time: '18h00 — 19h00', label: 'Mercredi' });
+        }
+      }
+    }
+
+    slots.sort((a, b) => a.date - b.date);
+    const kept = slots.slice(0, 3);
+
+    const mois = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+    const container = document.getElementById('day-choice');
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (kept.length === 0) {
+      container.innerHTML = '<div class="slot-loading">Aucun créneau disponible dans les 8 prochains jours. Appelez le 06 10 70 30 90.</div>';
+      return;
+    }
+
+    kept.forEach(function(s) {
+      // Date au format YYYY-MM-DD local (pas UTC pour éviter décalage)
+      const y = s.date.getFullYear();
+      const m = String(s.date.getMonth() + 1).padStart(2, '0');
+      const dd = String(s.date.getDate()).padStart(2, '0');
+      const isoDate = y + '-' + m + '-' + dd;
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'day-btn';
+      btn.setAttribute('data-day', s.day);
+      btn.setAttribute('data-date', isoDate);
+      btn.innerHTML =
+        '<div class="day-btn-day">' + s.label + '</div>' +
+        '<div class="day-btn-date">' + s.date.getDate() + ' ' + mois[s.date.getMonth()] + '</div>' +
+        '<div class="day-btn-time">' + s.time + '</div>';
+      btn.addEventListener('click', function() { inscrire(s.day, isoDate); });
+      container.appendChild(btn);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', genererCreneaux);
+
   function sendHeight() {
     try {
       const h = document.documentElement.scrollHeight;
@@ -823,27 +892,6 @@
   window.addEventListener('load', sendHeight);
   window.addEventListener('resize', sendHeight);
   if (window.ResizeObserver) new ResizeObserver(sendHeight).observe(document.body);
-
-  // Affichage dynamique de la prochaine date pour chaque créneau
-  function nextSession(targetWeekday, sessionHour) {
-    // targetWeekday : 1=lundi, 3=mercredi (JS: 0=dimanche, 1=lundi, 2=mardi, 3=mercredi)
-    const now = new Date();
-    const today = now.getDay();
-    let daysUntil = (targetWeekday - today + 7) % 7;
-    // Si on est le jour même après l'heure de session, on vise la semaine suivante
-    if (daysUntil === 0 && now.getHours() >= sessionHour) daysUntil = 7;
-    const next = new Date(now);
-    next.setDate(now.getDate() + daysUntil);
-    const mois = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-    return next.getDate() + ' ' + mois[next.getMonth()];
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const dm = document.getElementById('date-monday');
-    const dw = document.getElementById('date-wednesday');
-    if (dm) dm.textContent = nextSession(1, 13);
-    if (dw) dw.textContent = nextSession(3, 18);
-  });
 </script>
 
 </body>
