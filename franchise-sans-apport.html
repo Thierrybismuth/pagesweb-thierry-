@@ -1005,6 +1005,34 @@
     line-height:1.55;
   }
 
+  /* Joignabilité directe (après formulaire) */
+  .joindre{background:var(--creme);padding:40px 40px 60px;text-align:center}
+  .joindre-lede{
+    font-size:14.5px;
+    color:var(--texte-soft);
+    margin-bottom:20px;
+    max-width:620px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .joindre-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+  .joindre-btns a{
+    display:inline-block;
+    padding:11px 22px;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--brique);
+    text-decoration:none;
+    border:1px solid var(--brique-soft);
+    border-radius:2px;
+    transition:all .2s;
+  }
+  .joindre-btns a:hover{
+    background:var(--brique);
+    color:var(--creme);
+    border-color:var(--brique);
+  }
+
   /* Responsive */
   @media (max-width:900px){
     .hero{padding:80px 24px 60px}
@@ -1313,59 +1341,6 @@
     </div>
   </section>
 
-  <!-- INSCRIPTION RÉUNIONS -->
-  <section class="inscription" id="inscription">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow">Réunions d'information</div>
-        <h2 class="section-title">Comprendre le dispositif, <em>en 60 minutes</em>.</h2>
-        <p class="section-lede">Deux créneaux hebdomadaires, en visioconférence. Gratuit, sans engagement. On présente le mécanisme, les enseignes partenaires, et vous posez toutes les questions qui comptent avant de vous positionner. Ouvertes aux futurs exploitants comme aux investisseurs.</p>
-      </div>
-
-      <div class="inscription-wrap">
-        <div class="form-box">
-          <div class="form-title">Je m'inscris à une session</div>
-          <div class="form-sub">Choisissez un créneau, laissez votre email — vous recevrez l'invitation Google Calendar avec le lien Google Meet.</div>
-
-          <label class="form-label" for="email">Votre email</label>
-          <input type="email" id="email" class="form-input" placeholder="prenom@exemple.com" autocomplete="email" required>
-
-          <label class="form-label">Créneau souhaité</label>
-          <div class="day-choice">
-            <button type="button" class="day-btn" data-day="monday" onclick="inscrire('monday')">
-              <div class="day-btn-day">Lundi</div>
-              <div class="day-btn-date" id="date-monday">—</div>
-              <div class="day-btn-time">13h00 — 14h00</div>
-            </button>
-            <button type="button" class="day-btn" data-day="wednesday" onclick="inscrire('wednesday')">
-              <div class="day-btn-day">Mercredi</div>
-              <div class="day-btn-date" id="date-wednesday">—</div>
-              <div class="day-btn-time">18h00 — 19h00</div>
-            </button>
-          </div>
-          <div class="slot-note">Inscription sur les deux prochaines sessions.</div>
-
-          <div id="form-msg" class="form-msg"></div>
-        </div>
-
-        <div class="inscription-details">
-          <div class="detail-item">
-            <h4>60 minutes structurées</h4>
-            <p>Présentation du mécanisme d'investissement, panorama des enseignes compatibles, critères de sélection des candidats, réponses à toutes vos questions.</p>
-          </div>
-          <div class="detail-item">
-            <h4>Aucun engagement</h4>
-            <p>Vous repartez avec une vision claire. La suite dépend de vous — et d'un premier échange individuel si le dispositif vous intéresse.</p>
-          </div>
-          <div class="detail-item">
-            <h4>Confidentiel</h4>
-            <p>Session en petit comité. Vos informations ne sont partagées avec aucune enseigne tant que vous ne l'avez pas explicitement validé.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- SIMULATEUR -->
   <section class="calc-section">
     <div class="wrap">
@@ -1590,15 +1565,68 @@
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta-section">
+  <!-- CTA : INSCRIPTION RÉUNIONS -->
+  <!-- INSCRIPTION RÉUNIONS -->
+  <section class="inscription" id="inscription">
     <div class="wrap">
-      <h2>Un <em>cadrage individuel</em> ?</h2>
-      <p>Au-delà de la réunion d'information en visio, vous pouvez me joindre directement pour un échange de 30 minutes sur votre projet spécifique — votre profil, votre zone, l'enseigne que vous visez, votre situation financière. Sans engagement.</p>
-      <div class="btn-group">
-        <a href="tel:+33610703090" class="btn btn-primary">Appeler · 06 10 70 30 90</a>
-        <a href="sms:+33610703090" class="btn btn-ghost">SMS</a>
-        <a href="mailto:thierry@thierrybismuth.com?subject=Franchis%C3%A9%20sans%20apport%20-%20Demande%20de%20cadrage" class="btn btn-ghost">Par mail</a>
+      <div class="section-head">
+        <div class="eyebrow">Réunions d'information</div>
+        <h2 class="section-title">Comprendre le dispositif, <em>en 60 minutes</em>.</h2>
+        <p class="section-lede">Deux créneaux hebdomadaires, en visioconférence. Gratuit, sans engagement. On présente le mécanisme, les enseignes partenaires, et vous posez toutes les questions qui comptent avant de vous positionner. Ouvertes aux futurs exploitants comme aux investisseurs.</p>
+      </div>
+
+      <div class="inscription-wrap">
+        <div class="form-box">
+          <div class="form-title">Je m'inscris à une session</div>
+          <div class="form-sub">Choisissez un créneau, laissez votre email — vous recevrez l'invitation Google Calendar avec le lien Google Meet.</div>
+
+          <label class="form-label" for="email">Votre email</label>
+          <input type="email" id="email" class="form-input" placeholder="prenom@exemple.com" autocomplete="email" required>
+
+          <label class="form-label">Créneau souhaité</label>
+          <div class="day-choice">
+            <button type="button" class="day-btn" data-day="monday" onclick="inscrire('monday')">
+              <div class="day-btn-day">Lundi</div>
+              <div class="day-btn-date" id="date-monday">—</div>
+              <div class="day-btn-time">13h00 — 14h00</div>
+            </button>
+            <button type="button" class="day-btn" data-day="wednesday" onclick="inscrire('wednesday')">
+              <div class="day-btn-day">Mercredi</div>
+              <div class="day-btn-date" id="date-wednesday">—</div>
+              <div class="day-btn-time">18h00 — 19h00</div>
+            </button>
+          </div>
+          <div class="slot-note">Inscription sur les deux prochaines sessions.</div>
+
+          <div id="form-msg" class="form-msg"></div>
+        </div>
+
+        <div class="inscription-details">
+          <div class="detail-item">
+            <h4>60 minutes structurées</h4>
+            <p>Présentation du mécanisme d'investissement, panorama des enseignes compatibles, critères de sélection des candidats, réponses à toutes vos questions.</p>
+          </div>
+          <div class="detail-item">
+            <h4>Aucun engagement</h4>
+            <p>Vous repartez avec une vision claire. La suite dépend de vous — et d'un premier échange individuel si le dispositif vous intéresse.</p>
+          </div>
+          <div class="detail-item">
+            <h4>Confidentiel</h4>
+            <p>Session en petit comité. Vos informations ne sont partagées avec aucune enseigne tant que vous ne l'avez pas explicitement validé.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Joignabilité directe -->
+  <section class="joindre">
+    <div class="wrap">
+      <p class="joindre-lede">Une question avant de vous inscrire, ou besoin d'un cadrage individuel ? Joignez-moi directement.</p>
+      <div class="joindre-btns">
+        <a href="tel:+33610703090">📞 06 10 70 30 90</a>
+        <a href="sms:+33610703090">💬 SMS</a>
+        <a href="mailto:thierry@thierrybismuth.com?subject=Franchis%C3%A9%20sans%20apport">✉ Email</a>
       </div>
     </div>
   </section>
