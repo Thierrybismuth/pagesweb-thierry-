@@ -1489,7 +1489,6 @@
   ids.forEach(id => {
     document.getElementById(id).addEventListener('input', compute);
   });
-  // Listener séparé pour la checkbox levier
   const levierEl = document.getElementById('levier');
   if (levierEl) levierEl.addEventListener('change', compute);
   compute();
