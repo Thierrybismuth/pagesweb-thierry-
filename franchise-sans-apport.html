@@ -1151,6 +1151,15 @@
           </div>
 
           <div class="calc-field">
+            <label>Apport personnel global exigé par l'enseigne</label>
+            <div class="calc-slider">
+              <input type="range" id="apport" min="15000" max="100000" step="1000" value="40000">
+              <output id="apport-val">40 k€</o>
+            </div>
+            <div class="calc-hint">Fonds propres exigés par l'enseigne pour ouvrir. Typiquement 15 à 100 k€. Se répartit ensuite entre exploitant et investisseur selon le curseur ci-dessous.</div>
+          </div>
+
+          <div class="calc-field">
             <label>Apport personnel de l'exploitant (trésorerie)</label>
             <div class="calc-slider">
               <input type="range" id="apport-gerant" min="0" max="80000" step="500" value="0">
@@ -1166,15 +1175,6 @@
               </div>
             </div>
             <div class="calc-hint" id="apport-complement" style="margin-top:10px">→ Apport complémentaire de l'investisseur : 40 000 €</div>
-          </div>
-
-          <div class="calc-field">
-            <label>Apport total au capital (exploitant + investisseur)</label>
-            <div class="calc-slider">
-              <input type="range" id="apport" min="15000" max="100000" step="1000" value="40000">
-              <output id="apport-val">40 k€</output>
-            </div>
-            <div class="calc-hint">Fonds propres exigés par l'enseigne pour ouvrir</div>
           </div>
 
           <div class="calc-field">
