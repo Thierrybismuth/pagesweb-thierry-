@@ -1336,7 +1336,7 @@
   };
   const pct = v => Math.round(v*10)/10 + '%';
 
-  const ids = ['ca1','growth','charges','gerance','apport-gerant','valo','pct-reinject','levier'];
+  const ids = ['ca1','growth','charges','gerance','apport-gerant','valo','pct-reinject'];
   const labels = {
     'ca1': v => fmt(+v),
     'growth': v => '+'+v+'%',
@@ -1344,8 +1344,7 @@
     'gerance': v => (+v).toLocaleString('fr-FR') + ' €',
     'apport-gerant': v => (+v===0 ? '0 €' : fmt(+v)),
     'valo': v => fmt(+v),
-    'pct-reinject': v => v+'%',
-    'levier': v => ''
+    'pct-reinject': v => v+'%'
   };
 
   function compute(){
@@ -1490,6 +1489,9 @@
   ids.forEach(id => {
     document.getElementById(id).addEventListener('input', compute);
   });
+  // Listener séparé pour la checkbox levier
+  const levierEl = document.getElementById('levier');
+  if (levierEl) levierEl.addEventListener('change', compute);
   compute();
 })();
 </script>
