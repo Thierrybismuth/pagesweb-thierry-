@@ -396,6 +396,12 @@
     margin-bottom: 4px;
     font-weight: 500;
   }
+  .day-btn-date {
+    font-size: 13px;
+    color: rgba(245,241,232,0.55);
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+  }
   .day-btn-time {
     font-size: 15px;
     color: var(--ivoire);
@@ -671,10 +677,12 @@
           <div class="day-choice">
             <button type="button" class="day-btn" data-day="monday" onclick="inscrire('monday')">
               <div class="day-btn-day">Lundi</div>
+              <div class="day-btn-date" id="date-monday">—</div>
               <div class="day-btn-time">13h00 — 14h00</div>
             </button>
             <button type="button" class="day-btn" data-day="wednesday" onclick="inscrire('wednesday')">
               <div class="day-btn-day">Mercredi</div>
+              <div class="day-btn-date" id="date-wednesday">—</div>
               <div class="day-btn-time">18h00 — 19h00</div>
             </button>
           </div>
@@ -815,6 +823,27 @@
   window.addEventListener('load', sendHeight);
   window.addEventListener('resize', sendHeight);
   if (window.ResizeObserver) new ResizeObserver(sendHeight).observe(document.body);
+
+  // Affichage dynamique de la prochaine date pour chaque créneau
+  function nextSession(targetWeekday, sessionHour) {
+    // targetWeekday : 1=lundi, 3=mercredi (JS: 0=dimanche, 1=lundi, 2=mardi, 3=mercredi)
+    const now = new Date();
+    const today = now.getDay();
+    let daysUntil = (targetWeekday - today + 7) % 7;
+    // Si on est le jour même après l'heure de session, on vise la semaine suivante
+    if (daysUntil === 0 && now.getHours() >= sessionHour) daysUntil = 7;
+    const next = new Date(now);
+    next.setDate(now.getDate() + daysUntil);
+    const mois = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+    return next.getDate() + ' ' + mois[next.getMonth()];
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const dm = document.getElementById('date-monday');
+    const dw = document.getElementById('date-wednesday');
+    if (dm) dm.textContent = nextSession(1, 13);
+    if (dw) dw.textContent = nextSession(3, 18);
+  });
 </script>
 
 </body>
