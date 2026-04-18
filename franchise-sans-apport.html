@@ -1165,16 +1165,16 @@
                 En France, un apport personnel représente en général 30 % de l'investissement global. Vous pouvez apporter sec (trésorerie = capital) ou utiliser votre apport comme effet de levier pour prendre une part plus importante. L'emprunt personnel se rembourse ensuite avec vos revenus de gérance et vos dividendes.
               </div>
             </div>
-            <div class="calc-hint" id="apport-complement" style="margin-top:10px">→ Apport complémentaire de l'investisseur : 40 000 €</div>
+            <div class="calc-hint" id="apport-complement" style="margin-top:10px">→ Capital effectif de l'exploitant : 0 €</div>
           </div>
 
           <div class="calc-field">
-            <label>Apport total au capital (exploitant + investisseur)</label>
+            <label>Apport de l'investisseur au capital</label>
             <div class="calc-slider">
-              <input type="range" id="apport" min="15000" max="100000" step="1000" value="40000">
-              <output id="apport-val">40 k€</output>
+              <input type="range" id="apport-invest" min="0" max="100000" step="1000" value="40000">
+              <output id="apport-invest-val">40 k€</output>
             </div>
-            <div class="calc-hint">Fonds propres exigés par l'enseigne pour ouvrir</div>
+            <div class="calc-hint" id="apport-total-hint">→ Apport total au capital : 40 000 € · Part initiale exploitant : 0 %</div>
           </div>
 
           <div class="calc-field">
@@ -1372,14 +1372,14 @@
   };
   const pct = v => Math.round(v*10)/10 + '%';
 
-  const ids = ['ca1','growth','charges','gerance','apport-gerant','apport','valo','pct-reinject','cible'];
+  const ids = ['ca1','growth','charges','gerance','apport-gerant','apport-invest','valo','pct-reinject','cible'];
   const labels = {
     'ca1': v => fmt(+v),
     'growth': v => '+'+v+'%',
     'charges': v => fmt(+v),
     'gerance': v => (+v).toLocaleString('fr-FR') + ' €',
     'apport-gerant': v => (+v===0 ? '0 €' : fmt(+v)),
-    'apport': v => fmt(+v),
+    'apport-invest': v => fmt(+v),
     'valo': v => fmt(+v),
     'pct-reinject': v => v+'%',
     'cible': v => v+'%'
@@ -1395,26 +1395,21 @@
     const chargesAn1 = +chargesEl.value;
     const growthCharges = growth; // charges indexées sur la croissance du CA
     const gerance = +document.getElementById('gerance').value * 12;
-    let apport = +document.getElementById('apport').value;
-    let apportGerantTreso = +document.getElementById('apport-gerant').value;
+    const apportGerantTreso = +document.getElementById('apport-gerant').value;
+    const apportInv = +document.getElementById('apport-invest').value;
     const levierActif = document.getElementById('levier') ? document.getElementById('levier').checked : false;
 
-    // Calcul capital effectif exploitant + emprunt personnel
+    // Capital effectif de l'exploitant : trésorerie sec ou ×3 avec levier
     let apportGerant, empruntPerso;
     if (levierActif) {
-      apportGerant = Math.min(apportGerantTreso * 3, apport);
-      empruntPerso = Math.max(apportGerant - apportGerantTreso, 0);
+      apportGerant = apportGerantTreso * 3;
+      empruntPerso = apportGerant - apportGerantTreso;
     } else {
       apportGerant = apportGerantTreso;
       empruntPerso = 0;
     }
-    // Sécurité : la trésorerie seule ne peut pas dépasser l'apport total
-    if (apportGerantTreso > apport) {
-      apportGerantTreso = apport;
-      document.getElementById('apport-gerant').value = apport;
-      apportGerant = levierActif ? Math.min(apportGerantTreso * 3, apport) : apportGerantTreso;
-      empruntPerso = levierActif ? Math.max(apportGerant - apportGerantTreso, 0) : 0;
-    }
+    // Apport total au capital = exploitant effectif + investisseur (dérivé)
+    const apport = apportGerant + apportInv;
 
     // Annuité emprunt perso : 5%/an sur 7 ans, annuité constante
     const TAUX_EMPRUNT = 0.05, DUREE_EMPRUNT = 7;
@@ -1426,15 +1421,22 @@
       annuiteEmprunt = mensu * 12;
     }
 
-    const compl = Math.max(apport - apportGerant, 0);
+    // Hint sous slider exploitant : capital effectif + emprunt éventuel
     const complEl = document.getElementById('apport-complement');
     if (complEl) {
-      let txt = '→ Apport complémentaire de l\'investisseur au capital : ' + compl.toLocaleString('fr-FR') + ' €';
+      let txt = '→ Capital effectif de l'exploitant au capital : ' + apportGerant.toLocaleString('fr-FR') + ' €';
       if (levierActif && empruntPerso > 0) {
         const mensu = annuiteEmprunt / 12;
-        txt += ' · Emprunt perso : ' + empruntPerso.toLocaleString('fr-FR') + ' € sur 7 ans à 5 % (' + Math.round(mensu).toLocaleString('fr-FR') + ' €/mois)';
+        txt += ' · dont ' + empruntPerso.toLocaleString('fr-FR') + ' € empruntés sur 7 ans à 5 % (' + Math.round(mensu).toLocaleString('fr-FR') + ' €/mois)';
       }
       complEl.innerHTML = txt;
+    }
+
+    // Hint sous slider investisseur : apport total + part initiale exploitant
+    const totalEl = document.getElementById('apport-total-hint');
+    if (totalEl) {
+      const pctExp = apport > 0 ? Math.round(apportGerant / apport * 100) : 0;
+      totalEl.innerHTML = '→ Apport total au capital : ' + apport.toLocaleString('fr-FR') + ' € · Part initiale exploitant : ' + pctExp + ' %';
     }
     const valo100Input = +document.getElementById('valo').value;
     const pctReinject = +document.getElementById('pct-reinject').value / 100;
@@ -1514,8 +1516,8 @@
 
     const finalCapital = years[4].capitalFin * 100;
     const totalRetourInv = resultatsInvCumules + rachatsCumules;
-    const apportInvInitial = Math.max(apport - apportGerant, 1);
-    const tri5 = Math.pow(totalRetourInv / apportInvInitial, 1/5) - 1;
+    const apportInvBase = Math.max(apportInv, 1);
+    const tri5 = Math.pow(totalRetourInv / apportInvBase, 1/5) - 1;
 
     document.getElementById('synth-capital').textContent = Math.round(finalCapital) + '%';
     document.getElementById('synth-retour').textContent = fmt(totalRetourInv);
