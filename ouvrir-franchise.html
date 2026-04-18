@@ -6,13 +6,13 @@
 <title>Vous voulez créer | Thierry Bismuth</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root { --blanc: #f7f5f0; --blanc-pur: #ffffff; --marine: #1a2e44; --marine-clair: #2a4a6b; --accent: #c8873a; --gris: #6b7280; --gris-clair: #e8e4dc; --texte: #1c1c1c; }
+  :root { --blanc: #fbf7f1; --blanc-pur: #ffffff; --marine: #1f2747; --marine-clair: #3a4570; --accent: #b84568; --accent-soft: #f2d4dc; --accent-deep: #8a2f4b; --gris: #6b6b74; --gris-clair: #e8e4dc; --texte: #18181f; }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body { background: var(--blanc); color: var(--texte); font-family: 'Outfit', sans-serif; font-weight: 300; line-height: 1.7; width: 100%; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   .hero { background: var(--marine); padding: 56px 8% 64px; width: 100%; position: relative; overflow: hidden; }
-  .hero::after { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(200,135,58,0.1) 0%, transparent 70%); top: -80px; right: -80px; pointer-events: none; }
+  .hero::after { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(184,69,104,0.12) 0%, transparent 70%); top: -80px; right: -80px; pointer-events: none; }
   .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.8rem; opacity: 0; animation: fadeUp 0.5s 0.1s forwards; }
   .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); display: block; }
   .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; color: #fff; line-height: 1.08; margin-bottom: 1.4rem; max-width: 760px; opacity: 0; animation: fadeUp 0.5s 0.2s forwards; }
@@ -45,7 +45,7 @@
   .methode h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 1rem; }
   .methode h2 em { font-style: italic; color: var(--accent); }
   .methode p { font-size: 0.97rem; color: rgba(255,255,255,0.6); line-height: 1.85; margin-bottom: 0.8rem; }
-  .methode-badge { display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(200,135,58,0.15); border: 1px solid rgba(200,135,58,0.3); color: var(--accent); font-size: 0.82rem; font-weight: 500; padding: 0.6rem 1.2rem; border-radius: 100px; margin-top: 0.4rem; }
+  .methode-badge { display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(184,69,104,0.15); border: 1px solid rgba(184,69,104,0.35); color: var(--accent); font-size: 0.82rem; font-weight: 500; padding: 0.6rem 1.2rem; border-radius: 100px; margin-top: 0.4rem; }
   .methode-detail { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 2px; padding: 2.4rem; }
   .methode-detail h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 1.4rem; }
   .methode-steps { display: flex; flex-direction: column; gap: 1.2rem; }
@@ -64,13 +64,47 @@
   .cta-btn.secondary { border: 1px solid var(--marine); color: var(--marine); }
   .cta-btn.secondary:hover { background: var(--marine); color: #fff; }
   @media (max-width: 860px) { .erreur-inner { grid-template-columns: 1fr; gap: 2rem; } .methode-inner { grid-template-columns: 1fr; gap: 2rem; } }
+
+  /* Bandeau principal Entreprendre avec 0 € */
+  .zero-hero { background: linear-gradient(135deg, #1f2747 0%, #2d3561 55%, #3a4570 100%); border-left: 6px solid var(--accent); padding: 22px 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; position: relative; overflow: hidden; }
+  .zero-hero::after { content: ''; position: absolute; top: -40%; right: -8%; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(184,69,104,0.22) 0%, transparent 60%); pointer-events: none; }
+  .zero-hero-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); flex-shrink: 0; z-index: 1; }
+  .zero-hero-content { flex: 1; min-width: 240px; z-index: 1; }
+  .zero-hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 6px; display: inline-flex; align-items: center; gap: 10px; }
+  .zero-hero-eyebrow .badge-new { background: var(--accent); color: #fff; padding: 2px 8px; border-radius: 2px; font-size: 10px; letter-spacing: 1.5px; }
+  .zero-hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 2.5vw, 26px); font-weight: 700; color: #fff; margin-bottom: 4px; line-height: 1.2; }
+  .zero-hero-title em { font-style: italic; color: var(--accent-soft); }
+  .zero-hero-sub { font-size: 13.5px; color: rgba(251, 247, 241, 0.7); line-height: 1.5; max-width: 560px; }
+  .zero-hero-cta { background: var(--accent); color: #fff; padding: 14px 26px; border-radius: 3px; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; flex-shrink: 0; z-index: 1; transition: background 0.2s; white-space: nowrap; }
+  .zero-hero-cta:hover { background: var(--accent-deep); }
+  @media (max-width: 720px) { .zero-hero-cta { width: 100%; text-align: center; } }
+
+  /* Mini-bannière inline */
+  .zero-strip { background: var(--blanc-pur); border: 1px solid var(--gris-clair); border-left: 4px solid var(--accent); padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; max-width: 1100px; margin: 0 auto; }
+  .zero-strip-text { flex: 1; min-width: 240px; }
+  .zero-strip-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .zero-strip-title { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 700; color: var(--marine); line-height: 1.3; }
+  .zero-strip-title em { font-style: italic; color: var(--accent); }
+  .zero-strip-link { font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; transition: color 0.2s; flex-shrink: 0; }
+  .zero-strip-link:hover { color: var(--accent-deep); border-bottom-color: var(--accent-deep); }
+
+  /* Section intermédiaire 0 € */
+  .zero-section { width: 100%; padding: 56px 8%; background: var(--blanc-pur); }
 </style>
 </head>
 <body>
 <div id="site-nav"></div>
 <script src="https://thierrybismuth.github.io/pagesweb-thierry-/nav.js"></script>
 
-<div style="background:linear-gradient(135deg,#1a2e44 0%,#243d5a 100%);border-left:6px solid #c8873a;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;"><div style="width:14px;height:14px;border-radius:50%;background:#c8873a;flex-shrink:0;"></div><div style="flex:1;min-width:220px;"><div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#c8873a;margin-bottom:4px;">&#128197; Événement à venir</div><div style="font-size:18px;font-weight:700;color:#ffffff;margin-bottom:4px;">Réunion d'information — Création d'entreprise</div><div style="font-size:13px;color:#b0bec5;">Mardi 24 mars · Cabinet TYLS · 8 Rue de la Fourane, 13100 Aix-en-Provence</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0;"><div style="display:flex;gap:8px;"><span style="background:rgba(255,255,255,0.08);border:1px solid rgba(200,135,58,0.4);color:#fff;padding:6px 14px;border-radius:3px;font-size:14px;font-weight:600;">9h00</span><span style="background:rgba(255,255,255,0.08);border:1px solid rgba(200,135,58,0.4);color:#fff;padding:6px 14px;border-radius:3px;font-size:14px;font-weight:600;">14h00</span></div><a href="tel:0610703090" style="background:#c8873a;color:#fff;padding:10px 22px;border-radius:3px;font-size:15px;font-weight:700;text-decoration:none;">&#128222; 06 10 70 30 90</a><div style="font-size:11px;color:#90a4ae;">Réservez votre créneau · Places limitées</div></div></div>
+<a href="franchise-sans-apport.html" class="zero-hero" style="text-decoration:none;color:inherit;">
+  <div class="zero-hero-dot"></div>
+  <div class="zero-hero-content">
+    <div class="zero-hero-eyebrow"><span class="badge-new">Nouveau</span> Un dispositif pour entreprendre</div>
+    <div class="zero-hero-title">Entreprendre avec <em>0 €</em> d'apport — c'est possible.</div>
+    <div class="zero-hero-sub">Un investisseur finance le ticket, vous exploitez, vous rachetez progressivement ses parts jusqu'à devenir majoritaire. Découvrez le dispositif complet.</div>
+  </div>
+  <span class="zero-hero-cta">Découvrir →</span>
+</a>
 <section class="hero">
   <div class="hero-eyebrow">Vous voulez créer</div>
   <h1>Avant de choisir une enseigne,<br><em>répondez aux bonnes questions.</em></h1>
@@ -94,6 +128,17 @@
     </div>
   </div>
 </section>
+
+<section class="zero-section">
+  <a href="franchise-sans-apport.html" class="zero-strip" style="text-decoration:none;color:inherit;">
+    <div class="zero-strip-text">
+      <div class="zero-strip-eyebrow">L'apport n'est plus un obstacle</div>
+      <div class="zero-strip-title">Vous pouvez aussi entreprendre avec <em>0 € d'apport</em> — un investisseur finance, vous exploitez, vous rachetez.</div>
+    </div>
+    <span class="zero-strip-link">Voir comment →</span>
+  </a>
+</section>
+
 <section class="questions">
   <div class="questions-inner">
     <div class="questions-intro">
@@ -133,6 +178,17 @@
     </div>
   </div>
 </section>
+
+<section class="zero-section" style="background:var(--blanc);">
+  <a href="franchise-sans-apport.html" class="zero-strip" style="text-decoration:none;color:inherit;background:var(--blanc-pur);">
+    <div class="zero-strip-text">
+      <div class="zero-strip-eyebrow">Rappel</div>
+      <div class="zero-strip-title">Pas de trésorerie disponible ? <em>Entreprendre avec 0 €</em> reste possible — il suffit de le structurer correctement.</div>
+    </div>
+    <span class="zero-strip-link">Découvrir le dispositif →</span>
+  </a>
+</section>
+
 <section class="cta">
   <h2>Challengez votre projet.<br><em>30 minutes suffisent.</em></h2>
   <p>Appelez-moi ou envoyez un message — je vous rappelle sous 24h pour fixer un premier échange.</p>
