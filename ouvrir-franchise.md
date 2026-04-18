@@ -1,21 +1,36 @@
 # ouvrir-franchise — Référence système
 
-Documentation du dispositif "entreprendre en franchise sans apport" — page principale `ouvrir-franchise.html`.
+Documentation de la paire de pages "entreprendre en franchise sans apport".
 
-## Positionnement
+## Architecture 2-pages
 
-**Cœur de la page** : entrepreneuriat en franchise **avec zéro apport**.
-**Mécanique** : investisseur finance le ticket → exploitant (franchisé) opère → rachat progressif → majoritaire en 5 ans.
-**Design** : palette D (noir #0a0a0a + or antique #c9a961 + ivoire #f5f1e8), typographie Cormorant Garamond + Inter.
+| Page | Rôle | Palette | Cibles |
+|---|---|---|---|
+| `ouvrir-franchise.html` | **Page d'entrée / CTA hub** — inscription réunions, appel, SMS, mail | D : noir #0a0a0a + or antique #c9a961 + ivoire #f5f1e8 | Tous visiteurs |
+| `franchise-sans-apport.html` | **Page détail du modèle** — parcours exploitant/investisseur, chiffres, tableau montée au capital, simulateur 5 ans | Vert forêt + brique + crème | Prospects sérieux qui veulent creuser |
 
-## URL
+Les deux pages se renvoient mutuellement via plusieurs points de contact.
 
-- Live : https://thierrybismuth.com/ouvrir-franchise.html
-- Ancienne page `franchise-sans-apport.html` → redirection meta-refresh vers ouvrir-franchise (fusion).
+### Liens ouvrir-franchise → franchise-sans-apport
 
-## CTA
+1. **Hero** : bouton tertiaire "Voir le dispositif en détail"
+2. **Bridge section** (après les 4 piliers) : bloc pleine largeur "Pour aller plus loin — chiffres, tableau, simulateur"
+3. **Sessions detail-item** : "Vous voulez creuser avant ?" avec lien en ligne vers la page dédiée
 
-1. **Inscription réunion d'information** (formulaire dans la page, section `#inscription`)
+### Liens franchise-sans-apport → ouvrir-franchise
+
+1. **Hero bandeau** : "Réunion d'information gratuite — s'inscrire à une session →" pointe sur `#inscription`
+2. **CTA section finale** : bouton primary "S'inscrire à une réunion d'information" en premier, suivi de appel/SMS/mail
+3. **Footer** : "Réserver une réunion d'info ou m'appeler"
+
+## URLs
+
+- Page d'entrée : https://thierrybismuth.com/ouvrir-franchise.html
+- Page détail : https://thierrybismuth.com/franchise-sans-apport.html
+
+## CTA (unifiés sur les 2 pages)
+
+1. **Inscription réunion d'information** (formulaire dans ouvrir-franchise.html, section `#inscription`) — primary CTA
 2. **Appel** : 06 10 70 30 90
 3. **SMS** : 06 10 70 30 90
 4. **Email** : thierry@thierrybismuth.com
@@ -38,8 +53,8 @@ Documentation du dispositif "entreprendre en franchise sans apport" — page pri
 ### Flow
 
 ```
-Formulaire (page web) 
-  ─POST JSON─▶ Apps Script webhook 
+Formulaire (ouvrir-franchise.html ou via lien depuis franchise-sans-apport.html)
+  ─POST JSON─▶ Apps Script webhook
                 ─▶ Calendar.Events.instances() prochain créneau
                 ─▶ Calendar.Events.patch() ajoute l'email comme invité
                 ─▶ Google envoie auto l'invitation Calendar avec lien Meet
@@ -134,21 +149,33 @@ URL reste identique — pas besoin de mettre à jour le HTML.
 2. **`Calendar.Events.instances()` ne garantit PAS l'ordre chronologique** → toujours `items.sort((a,b) => new Date(a.start.dateTime) - new Date(b.start.dateTime))` avant de prendre `[0]`.
 3. **Content-Type CORS-safe** : `text/plain;charset=utf-8` pour éviter le preflight OPTIONS qu'Apps Script ne gère pas.
 4. **Nouvelle version obligatoire** au redéploiement — sinon le code mis à jour ne s'exécute pas.
+5. **Ne pas écraser franchise-sans-apport.html par une redirection** — les 2 pages coexistent et se renvoient mutuellement (documenté ci-dessus).
 
-## Contenu secondaire conservé
+## Structure ouvrir-franchise.html
 
-La page intègre aussi (en position inférieure) le contenu "profil d'entrepreneur" de l'ancienne version :
-- 7 axes fondamentaux (particuliers/pros, commerçant/commercial, etc.)
-- CTA 30 min gratuites pour clarifier le projet
-
-## Structure de la page
-
-1. Hero — "Entreprendre. Sans apport. C'est désormais possible."
+1. Hero — "Entreprendre. Sans apport. C'est désormais possible." + 3 boutons (inscription, voir détail, appel)
 2. Les 4 piliers du dispositif
-3. **Réunions d'information + formulaire d'inscription** (ancre `#inscription`)
-4. Profil d'entrepreneur — 7 axes + CTA 30 min
-5. CTA final (appel/SMS/email)
+3. **Bridge** — "Pour aller plus loin" → franchise-sans-apport.html
+4. **Réunions d'information + formulaire d'inscription** (ancre `#inscription`)
+5. Profil d'entrepreneur — 7 axes + CTA 30 min
+6. CTA final (appel/SMS/email)
+
+## Structure franchise-sans-apport.html
+
+1. Hero — "Entreprenez sur votre talent, pas sur votre épargne" + bandeau réunion d'info (lien vers ouvrir-franchise)
+2. Profils visés (opérationnel, commerçant en reconversion, expert-métier sans épargne)
+3. Principe exploitant/investisseur (2 colonnes)
+4. Montée au capital (tableau)
+5. Mécanique 3 à 5 ans
+6. Sources de financement du rachat
+7. Perspective investisseur
+8. Copilote
+9. **Simulateur interactif 5 ans** (sliders : CA, charges, gérance, apport, rachat)
+10. Atouts du dispositif
+11. Process de la première discussion à l'ouverture
+12. **CTA final** : inscription réunion + appel + SMS + mail
+13. Footer → retour ouvrir-franchise
 
 ---
 
-*Dernière MAJ : 18/04/2026 — Claude assistant*
+*Dernière MAJ : 18/04/2026 — architecture 2-pages avec ponts bidirectionnels*
