@@ -826,18 +826,18 @@
         <a href="entrepreneur-ou-en-reconversion.html">← Espace entrepreneur</a> · Franchisé sans apport
       </div>
       <div class="tag-soupape">Soupape 04 · Franchisé sans apport</div>
-      <h1>Pas d'épargne, pas de capacité d'emprunt. Un investisseur prend le <em>risque</em> — sur votre <em>talent</em>.</h1>
+      <h1>Entreprenez sur <em>votre talent</em>, pas sur <em>votre épargne</em>.</h1>
       <p class="hero-lede">
-        En franchise, l'apport demandé est un filtre. 20, 40, 80 k€ de fonds propres — et souvent, une capacité d'emprunt personnel en plus. Quand on n'a ni l'un ni l'autre, beaucoup de bons profils restent à la porte. Ce dispositif ne vous dispense pas d'investir : il change ce que vous investissez. Vous engagez votre talent, votre temps, votre énergie. Un investisseur engage son épargne et accepte le risque financier à votre place. Chacun est rémunéré pour ce qu'il apporte, et vous rachetez ses parts au fil de votre performance jusqu'à devenir majoritaire.
+        Vous avez le profil, le savoir-faire, l'énergie pour porter un centre en franchise. Vous n'avez pas — ou pas encore — les 20, 40 ou 80 k€ d'apport exigés par l'enseigne. Un montage éprouvé vous permet de démarrer l'exploitation dès le jour 1, sans apport ou avec un apport partiel, et de monter progressivement au capital jusqu'à devenir majoritaire.
       </p>
       <div class="hero-duo">
         <div class="hero-duo-card">
-          <div class="k">Ce que l'exploitant engage</div>
-          <div class="v">Son talent, son temps, son énergie. Pas son épargne — il n'en a pas à mobiliser.</div>
+          <div class="k">Côté exploitant</div>
+          <div class="v">Apport 0 € possible. Rémunéré dès le jour 1. Majoritaire en 3 à 5 ans.</div>
         </div>
         <div class="hero-duo-card">
-          <div class="k">Ce que l'investisseur engage</div>
-          <div class="v">Son épargne. Un risque financier réel, rémunéré en dividendes puis en plus-value à la sortie.</div>
+          <div class="k">Côté investisseur</div>
+          <div class="v">Un placement chiffré sur un actif opérationnel, avec sortie calendée.</div>
         </div>
       </div>
     </div>
@@ -1388,7 +1388,11 @@
   function compute(){
     const ca1 = +document.getElementById('ca1').value;
     const growth = +document.getElementById('growth').value / 100;
-    const chargesAn1 = +document.getElementById('charges').value;
+    const chargesEl = document.getElementById('charges');
+    // Cap charges au CA An 1 (les charges ne peuvent pas dépasser le CA)
+    if (+chargesEl.max !== ca1) chargesEl.max = ca1;
+    if (+chargesEl.value > ca1) chargesEl.value = ca1;
+    const chargesAn1 = +chargesEl.value;
     const growthCharges = 0.05;
     const gerance = +document.getElementById('gerance').value * 12;
     let apport = +document.getElementById('apport').value;
