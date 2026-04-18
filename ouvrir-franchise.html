@@ -4,56 +4,54 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Entreprendre sans apport — Thierry Bismuth</title>
-<meta name="description" content="Créer votre entreprise sous enseigne nationale, avec la puissance d'un réseau de franchise, sans apport financier. C'est désormais possible.">
+<meta name="description" content="Devenez entrepreneur en franchise sans apport. Un investisseur finance votre projet, vous exploitez, vous devenez majoritaire en 5 ans.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="nav.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
   :root {
     --noir: #0a0a0a;
-    --noir-soft: #1a1a1a;
-    --noir-plus-soft: #2a2a2a;
+    --noir-doux: #1a1a1a;
+    --noir-carte: #141414;
     --or: #c9a961;
     --or-clair: #e0c285;
-    --or-fonce: #a38843;
+    --or-sombre: #a68841;
     --ivoire: #f5f1e8;
     --ivoire-pur: #faf7ef;
-    --texte: #0a0a0a;
-    --texte-doux: #4a4a4a;
-    --texte-gris: #6b6b6b;
-    --bordure: #e8e2d4;
+    --gris-texte: #6a6a6a;
+    --gris-clair: #d9d4c6;
+    --bordure: rgba(201, 169, 97, 0.18);
   }
 
   html { scroll-behavior: smooth; }
+
   body {
-    font-family: 'Inter', -apple-system, sans-serif;
+    font-family: 'Inter', sans-serif;
     background: var(--ivoire);
-    color: var(--texte);
-    line-height: 1.6;
-    font-weight: 300;
-    -webkit-font-smoothing: antialiased;
+    color: var(--noir);
+    line-height: 1.65;
+    font-weight: 400;
+    overflow-x: hidden;
   }
 
-  .main { width: 100%; }
+  .main { width: 100%; max-width: 100%; }
 
-  /* ========== HERO ========== */
+  /* ==== HERO ==== */
   .hero {
-    padding: 110px 40px 100px;
-    background: linear-gradient(135deg, var(--noir) 0%, var(--noir-soft) 100%);
-    color: var(--ivoire-pur);
+    background: var(--noir);
+    color: var(--ivoire);
+    padding: 120px 40px 100px;
     position: relative;
     overflow: hidden;
   }
   .hero::before {
     content: '';
     position: absolute;
-    top: -10%; right: -5%;
-    width: 55%; height: 120%;
-    background: radial-gradient(circle at 60% 50%, var(--or) 0%, transparent 55%);
-    opacity: 0.12;
+    top: -20%; right: -10%;
+    width: 70%; height: 140%;
+    background: radial-gradient(ellipse at center, rgba(201,169,97,0.12) 0%, transparent 55%);
     pointer-events: none;
   }
   .hero::after {
@@ -61,711 +59,680 @@
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--or), transparent);
-    opacity: 0.4;
+    background: linear-gradient(90deg, transparent 0%, var(--or) 50%, transparent 100%);
+    opacity: 0.3;
   }
-  .hero-inner { position: relative; z-index: 2; }
+  .hero-inner {
+    max-width: 100%;
+    position: relative;
+    z-index: 1;
+  }
   .hero-badge {
     display: inline-flex;
-    align-items: center; gap: 8px;
-    padding: 8px 16px;
-    background: rgba(201, 169, 97, 0.15);
-    border: 1px solid var(--or);
+    align-items: center;
+    gap: 10px;
+    padding: 8px 18px;
+    background: rgba(201,169,97,0.12);
+    border: 1px solid rgba(201,169,97,0.3);
     color: var(--or-clair);
     font-size: 11px;
-    letter-spacing: 2.5px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 500;
     border-radius: 2px;
-    margin-bottom: 32px;
+    margin-bottom: 36px;
   }
   .hero-badge::before {
     content: '';
-    width: 6px; height: 6px; border-radius: 50%;
+    width: 6px; height: 6px;
     background: var(--or);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--or);
   }
   .hero h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(44px, 7vw, 88px);
+    font-size: clamp(46px, 7vw, 92px);
     font-weight: 500;
     line-height: 1.02;
     letter-spacing: -0.02em;
     margin-bottom: 32px;
     max-width: 1200px;
   }
-  .hero h1 .or {
+  .hero h1 .accent {
     color: var(--or);
     font-style: italic;
-    font-weight: 600;
+    font-weight: 500;
   }
   .hero-sub {
-    font-size: clamp(18px, 2vw, 22px);
-    color: rgba(245, 241, 232, 0.85);
+    font-size: clamp(17px, 1.6vw, 21px);
+    color: rgba(245, 241, 232, 0.72);
     max-width: 780px;
     margin-bottom: 48px;
     font-weight: 300;
     line-height: 1.55;
   }
   .hero-cta {
-    display: flex; gap: 14px; flex-wrap: wrap;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
   }
-  .btn-or {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--or);
-    color: var(--noir);
-    padding: 18px 32px;
-    border: none;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    cursor: pointer;
-    letter-spacing: 0.3px;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: all 0.25s;
-  }
-  .btn-or:hover {
-    background: var(--or-clair);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(201, 169, 97, 0.3);
-  }
-  .btn-ghost {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: transparent;
-    color: var(--ivoire-pur);
-    padding: 18px 32px;
-    border: 1px solid rgba(245, 241, 232, 0.35);
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 17px 30px;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 15px;
+    letter-spacing: 0.3px;
     cursor: pointer;
+    border: none;
     border-radius: 2px;
+    transition: all 0.25s ease;
     text-decoration: none;
-    transition: all 0.2s;
   }
-  .btn-ghost:hover { background: rgba(245, 241, 232, 0.08); border-color: var(--or); }
+  .btn-primary {
+    background: var(--or);
+    color: var(--noir);
+    font-weight: 600;
+  }
+  .btn-primary:hover {
+    background: var(--or-clair);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(201,169,97,0.3);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ivoire);
+    border: 1px solid rgba(245,241,232,0.25);
+  }
+  .btn-ghost:hover {
+    background: rgba(245,241,232,0.08);
+    border-color: var(--or);
+  }
 
-  /* ========== CONSTAT ========== */
-  .constat {
-    padding: 100px 40px;
-    background: var(--ivoire);
-    border-bottom: 1px solid var(--bordure);
+  /* ==== SECTIONS ==== */
+  .section {
+    padding: 110px 40px;
+  }
+  .section-inner {
+    max-width: 100%;
   }
   .eyebrow {
     display: inline-block;
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 3.5px;
     text-transform: uppercase;
-    color: var(--or-fonce);
+    color: var(--or-sombre);
     font-weight: 600;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--or);
   }
-  .eyebrow::before { content: '— '; }
-  h2 {
+  .section h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(34px, 4.5vw, 58px);
+    font-size: clamp(36px, 4.8vw, 62px);
     font-weight: 500;
     line-height: 1.08;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.01em;
     margin-bottom: 28px;
     color: var(--noir);
-    max-width: 1000px;
+    max-width: 1100px;
   }
-  h2 .or { color: var(--or-fonce); font-style: italic; }
-  .lead {
-    font-size: 20px;
-    color: var(--texte-doux);
+  .section h2 .accent {
+    color: var(--or-sombre);
+    font-style: italic;
+  }
+  .section-lead {
+    font-size: 19px;
+    color: var(--gris-texte);
     max-width: 820px;
     font-weight: 300;
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
-  .constat-triptyque {
+  /* ==== PILIERS ==== */
+  .pillars {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0;
     margin-top: 70px;
-    padding-top: 60px;
     border-top: 1px solid var(--bordure);
+    border-left: 1px solid var(--bordure);
   }
-  .constat-item h3 {
+  .pillar {
+    padding: 44px 36px;
+    background: var(--ivoire-pur);
+    border-right: 1px solid var(--bordure);
+    border-bottom: 1px solid var(--bordure);
+    transition: background 0.3s ease;
+  }
+  .pillar:hover { background: #fff; }
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    color: var(--or);
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 22px;
+  }
+  .pillar h3 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 26px;
     font-weight: 600;
     color: var(--noir);
     margin-bottom: 14px;
     line-height: 1.2;
+    letter-spacing: -0.01em;
   }
-  .constat-item p {
-    color: var(--texte-doux);
-    font-size: 16px;
-  }
-  .constat-num {
-    display: inline-block;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 32px;
-    color: var(--or);
-    line-height: 1;
-    margin-bottom: 10px;
+  .pillar p {
+    color: var(--gris-texte);
+    font-size: 15.5px;
+    font-weight: 300;
+    line-height: 1.65;
   }
 
-  /* ========== PILIERS ========== */
-  .piliers {
-    padding: 100px 40px;
+  /* ==== SESSIONS ==== */
+  .sessions {
     background: var(--noir);
     color: var(--ivoire);
+    padding: 110px 40px;
     position: relative;
-    overflow: hidden;
   }
-  .piliers::before {
+  .sessions::before {
     content: '';
     position: absolute;
-    top: 50%; left: -10%;
-    width: 50%; height: 80%;
-    background: radial-gradient(ellipse, var(--or) 0%, transparent 60%);
-    opacity: 0.08;
-    transform: translateY(-50%);
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--or) 50%, transparent 100%);
+    opacity: 0.3;
   }
-  .piliers .eyebrow { color: var(--or); }
-  .piliers h2 { color: var(--ivoire-pur); }
-  .piliers h2 .or { color: var(--or); }
-  .piliers .lead { color: rgba(245, 241, 232, 0.8); }
+  .sessions .eyebrow { color: var(--or); border-bottom-color: var(--or); }
+  .sessions h2 { color: var(--ivoire); }
+  .sessions h2 .accent { color: var(--or); }
+  .sessions .section-lead { color: rgba(245,241,232,0.7); }
 
-  .piliers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 0;
-    margin-top: 70px;
-    border-top: 1px solid rgba(201, 169, 97, 0.25);
-  }
-  .pilier {
-    padding: 42px 30px 38px;
-    border-right: 1px solid rgba(201, 169, 97, 0.2);
-    border-bottom: 1px solid rgba(201, 169, 97, 0.2);
-    position: relative;
-    z-index: 2;
-  }
-  .pilier:last-child { border-right: none; }
-  .pilier-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    letter-spacing: 3px;
-    color: var(--or);
-    margin-bottom: 22px;
-    text-transform: uppercase;
-  }
-  .pilier h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 26px;
-    font-weight: 600;
-    color: var(--ivoire-pur);
-    margin-bottom: 16px;
-    line-height: 1.18;
-  }
-  .pilier p {
-    color: rgba(245, 241, 232, 0.75);
-    font-size: 15px;
-    line-height: 1.55;
-  }
-  @media (max-width: 900px) {
-    .piliers-grid { grid-template-columns: repeat(2, 1fr); }
-    .pilier:nth-child(2n) { border-right: none; }
-  }
-  @media (max-width: 500px) {
-    .piliers-grid { grid-template-columns: 1fr; }
-    .pilier { border-right: none; }
-  }
-
-  /* ========== PROFIL ========== */
-  .profil {
-    padding: 100px 40px;
-    background: var(--ivoire);
-    border-bottom: 1px solid var(--bordure);
-  }
-  .profil-axes {
+  .inscription-zone {
     margin-top: 60px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2px;
-    background: var(--bordure);
-    border: 1px solid var(--bordure);
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    align-items: start;
   }
-  .axe {
-    background: var(--ivoire-pur);
-    padding: 24px 22px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 16px;
-  }
-  .axe-left, .axe-right {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--noir);
-  }
-  .axe-vs {
-    color: var(--or-fonce);
-    font-size: 11px;
-    letter-spacing: 2px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-  .profil-note {
-    margin-top: 32px;
-    padding: 22px 28px;
-    background: var(--noir);
-    color: var(--ivoire);
-    border-left: 3px solid var(--or);
-    font-size: 16px;
-    max-width: 820px;
-  }
-  .profil-note strong { color: var(--or-clair); font-weight: 600; }
-
-  /* ========== RÉUNIONS ========== */
-  .reunions {
-    padding: 100px 40px;
-    background: linear-gradient(180deg, var(--noir) 0%, var(--noir-soft) 100%);
-    color: var(--ivoire);
-    position: relative;
-  }
-  .reunions .eyebrow { color: var(--or); }
-  .reunions h2 { color: var(--ivoire-pur); }
-  .reunions h2 .or { color: var(--or); }
-  .reunions .lead { color: rgba(245, 241, 232, 0.8); }
-
-  .session-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 28px;
-    margin-top: 60px;
-  }
-  .session-card {
-    background: rgba(245, 241, 232, 0.04);
-    border: 1px solid rgba(201, 169, 97, 0.25);
-    padding: 40px 34px;
+  .form-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,169,97,0.2);
+    padding: 44px;
     border-radius: 2px;
-    backdrop-filter: blur(8px);
-    transition: all 0.3s;
-    cursor: pointer;
+    backdrop-filter: blur(10px);
   }
-  .session-card:hover { border-color: var(--or); background: rgba(201, 169, 97, 0.06); }
-  .session-card.selected {
-    border-color: var(--or);
-    background: rgba(201, 169, 97, 0.1);
+  .form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--ivoire);
+    margin-bottom: 8px;
+    font-weight: 500;
   }
-  .session-card.selected::before {
-    content: '✓ Sélectionné';
+  .form-sub {
+    color: rgba(245,241,232,0.6);
+    font-size: 14px;
+    margin-bottom: 30px;
+    font-weight: 300;
+  }
+  .form-label {
     display: block;
     font-size: 11px;
     letter-spacing: 2px;
-    color: var(--or);
-    font-weight: 600;
-    margin-bottom: 16px;
     text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 10px;
+    font-weight: 600;
   }
-  .session-day {
+  .form-input {
+    width: 100%;
+    padding: 16px 18px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(245,241,232,0.15);
+    color: var(--ivoire);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    border-radius: 2px;
+    margin-bottom: 26px;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .form-input:focus {
+    outline: none;
+    border-color: var(--or);
+    background: rgba(255,255,255,0.06);
+  }
+  .form-input::placeholder { color: rgba(245,241,232,0.35); }
+  .day-choice {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .day-btn {
+    padding: 20px 16px;
+    background: transparent;
+    border: 1px solid rgba(245,241,232,0.18);
+    color: var(--ivoire);
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+  }
+  .day-btn:hover:not(:disabled) {
+    border-color: var(--or);
+    background: rgba(201,169,97,0.06);
+  }
+  .day-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .day-btn-day {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 38px;
+    font-size: 22px;
     font-style: italic;
     color: var(--or);
     margin-bottom: 4px;
-    line-height: 1;
-  }
-  .session-time {
-    font-size: 30px;
-    font-weight: 300;
-    color: var(--ivoire-pur);
-    margin-bottom: 18px;
-    letter-spacing: -0.01em;
-  }
-  .session-desc {
-    color: rgba(245, 241, 232, 0.7);
-    font-size: 14px;
-    line-height: 1.55;
-  }
-  @media (max-width: 700px) {
-    .session-grid { grid-template-columns: 1fr; }
-  }
-
-  /* Form */
-  .form-block {
-    margin-top: 50px;
-    max-width: 680px;
-    padding: 40px 36px;
-    background: rgba(245, 241, 232, 0.03);
-    border: 1px solid rgba(201, 169, 97, 0.3);
-    border-radius: 2px;
-  }
-  .form-block label {
-    display: block;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--or-clair);
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-  .form-block input[type="email"] {
-    width: 100%;
-    background: rgba(245, 241, 232, 0.05);
-    border: 1px solid rgba(201, 169, 97, 0.3);
-    color: var(--ivoire-pur);
-    padding: 16px 18px;
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    border-radius: 2px;
-    margin-bottom: 24px;
-    transition: border-color 0.2s;
-  }
-  .form-block input[type="email"]:focus {
-    outline: none;
-    border-color: var(--or);
-    background: rgba(245, 241, 232, 0.08);
-  }
-  .form-block input[type="email"]::placeholder { color: rgba(245, 241, 232, 0.4); }
-  .btn-submit {
-    width: 100%;
-    background: var(--or);
-    color: var(--noir);
-    padding: 18px;
-    border: none;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    cursor: pointer;
-    letter-spacing: 0.3px;
-    border-radius: 2px;
-    transition: all 0.2s;
-  }
-  .btn-submit:hover:not(:disabled) { background: var(--or-clair); }
-  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
-  .form-feedback {
-    margin-top: 20px;
-    padding: 16px 20px;
-    border-radius: 2px;
-    font-size: 15px;
-    display: none;
-  }
-  .form-feedback.ok {
-    display: block;
-    background: rgba(201, 169, 97, 0.12);
-    border-left: 3px solid var(--or);
-    color: var(--ivoire-pur);
-  }
-  .form-feedback.ko {
-    display: block;
-    background: rgba(180, 80, 80, 0.12);
-    border-left: 3px solid #b45050;
-    color: var(--ivoire-pur);
-  }
-
-  /* ========== CTA FINAL ========== */
-  .cta-final {
-    padding: 100px 40px;
-    background: var(--ivoire);
-    text-align: center;
-  }
-  .cta-final h2 {
-    margin-left: auto; margin-right: auto;
-    margin-bottom: 24px;
-    max-width: 900px;
-  }
-  .cta-final .lead {
-    margin: 0 auto 40px;
-    text-align: center;
-  }
-  .cta-buttons {
-    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
-  }
-  .cta-buttons a {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--noir);
-    color: var(--ivoire-pur);
-    padding: 18px 28px;
-    text-decoration: none;
-    border-radius: 2px;
     font-weight: 500;
-    font-size: 15px;
-    transition: all 0.25s;
-    border: 1px solid var(--noir);
   }
-  .cta-buttons a:hover {
-    background: var(--or);
-    color: var(--noir);
-    border-color: var(--or);
+  .day-btn-time {
+    font-size: 15px;
+    color: var(--ivoire);
+    font-weight: 300;
   }
 
-  /* ========== FOOTER ========== */
-  .footer {
-    padding: 50px 40px 40px;
-    background: var(--noir);
-    color: rgba(245, 241, 232, 0.6);
-    font-size: 14px;
-    border-top: 1px solid var(--or-fonce);
+  .form-msg {
+    margin-top: 24px;
+    padding: 18px 20px;
+    border-radius: 2px;
+    font-size: 14.5px;
+    display: none;
+    line-height: 1.5;
   }
-  .footer a { color: var(--or-clair); text-decoration: none; }
-  .footer-top {
-    display: flex; justify-content: space-between;
-    flex-wrap: wrap; gap: 20px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid rgba(201, 169, 97, 0.2);
-    margin-bottom: 30px;
+  .form-msg.success {
+    background: rgba(201,169,97,0.1);
+    border: 1px solid var(--or);
+    color: var(--or-clair);
+    display: block;
   }
-  .footer-brand {
+  .form-msg.error {
+    background: rgba(220,80,80,0.1);
+    border: 1px solid rgba(220,80,80,0.4);
+    color: #f0a0a0;
+    display: block;
+  }
+  .form-msg.loading {
+    background: rgba(245,241,232,0.05);
+    border: 1px solid rgba(245,241,232,0.15);
+    color: rgba(245,241,232,0.75);
+    display: block;
+  }
+
+  .sessions-details { padding: 20px 0; }
+  .detail-item {
+    padding: 26px 0;
+    border-bottom: 1px solid rgba(201,169,97,0.15);
+  }
+  .detail-item:last-child { border-bottom: none; }
+  .detail-item h4 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 22px;
     color: var(--or);
+    font-weight: 500;
     font-style: italic;
+    margin-bottom: 8px;
+  }
+  .detail-item p {
+    color: rgba(245,241,232,0.75);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
   }
 
+  /* ==== PROFIL ==== */
+  .profile-section {
+    background: var(--ivoire-pur);
+    padding: 110px 40px;
+  }
+  .axes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 50px;
+  }
+  .axis {
+    padding: 22px 24px;
+    background: #fff;
+    border-left: 2px solid var(--or);
+    font-size: 16px;
+    color: var(--noir);
+    font-weight: 400;
+  }
+  .axis-or {
+    color: var(--or-sombre);
+    font-style: italic;
+    margin: 0 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .profile-cta {
+    margin-top: 60px;
+    padding: 44px 40px;
+    background: var(--noir);
+    color: var(--ivoire);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .profile-cta-text h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .profile-cta-text h3 .accent { color: var(--or); font-style: italic; }
+  .profile-cta-text p {
+    color: rgba(245,241,232,0.7);
+    font-size: 15px;
+    font-weight: 300;
+  }
+
+  /* ==== CTA FINAL ==== */
+  .cta-final {
+    padding: 100px 40px;
+    background: var(--noir);
+    color: var(--ivoire);
+    text-align: center;
+    position: relative;
+  }
+  .cta-final::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 80px; height: 1px;
+    background: var(--or);
+  }
+  .cta-final .eyebrow { color: var(--or); border-bottom-color: var(--or); }
+  .cta-final h2 {
+    color: var(--ivoire);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+  }
+  .cta-final h2 .accent { color: var(--or); font-style: italic; }
+  .cta-final p {
+    color: rgba(245,241,232,0.65);
+    font-size: 17px;
+    max-width: 640px;
+    margin: 0 auto 40px;
+    font-weight: 300;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 28px;
+    background: transparent;
+    color: var(--ivoire);
+    text-decoration: none;
+    border: 1px solid rgba(245,241,232,0.2);
+    border-radius: 2px;
+    font-weight: 500;
+    font-size: 15px;
+    transition: all 0.2s ease;
+  }
+  .cta-btn:hover {
+    border-color: var(--or);
+    background: rgba(201,169,97,0.08);
+    color: var(--or-clair);
+  }
+  .cta-btn.primary {
+    background: var(--or);
+    color: var(--noir);
+    border-color: var(--or);
+    font-weight: 600;
+  }
+  .cta-btn.primary:hover {
+    background: var(--or-clair);
+    border-color: var(--or-clair);
+    color: var(--noir);
+  }
+
+  /* ==== MOBILE ==== */
+  @media (max-width: 900px) {
+    .inscription-zone { grid-template-columns: 1fr; gap: 40px; }
+  }
   @media (max-width: 768px) {
-    .hero { padding: 70px 22px 60px; }
-    .constat, .piliers, .profil, .reunions, .cta-final { padding: 60px 22px; }
-    .constat-triptyque { grid-template-columns: 1fr; gap: 40px; }
-    .form-block { padding: 28px 22px; }
-    .hero-cta { flex-direction: column; }
-    .btn-or, .btn-ghost { width: 100%; justify-content: center; }
+    .hero { padding: 80px 20px 70px; }
+    .section, .sessions, .profile-section, .cta-final { padding: 70px 20px; }
+    .hero-cta { flex-direction: column; align-items: stretch; }
+    .hero-cta .btn { justify-content: center; }
+    .form-box { padding: 32px 24px; }
+    .profile-cta { flex-direction: column; text-align: center; }
+    .day-choice { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
-<div id="nav-placeholder"></div>
 
 <main class="main">
 
-<!-- ========== HERO ========== -->
-<section class="hero">
-  <div class="hero-inner">
-    <span class="hero-badge">Dispositif inédit en franchise</span>
-    <h1>Entreprendre.<br>Sans apport.<br><span class="or">C'est désormais possible.</span></h1>
-    <p class="hero-sub">Créer votre magasin, votre restaurant, votre centre — sous une enseigne nationale, avec la puissance d'un réseau de franchise. Un investisseur finance. Vous exploitez. Vous devenez majoritaire en cinq ans.</p>
-    <div class="hero-cta">
-      <a href="#reunions" class="btn-or">S'inscrire à une réunion d'information →</a>
-      <a href="tel:0610703090" class="btn-ghost">📞 06 10 70 30 90</a>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-badge">Dispositif inédit</span>
+      <h1>Entreprendre.<br>Sans apport.<br><span class="accent">C'est désormais possible.</span></h1>
+      <p class="hero-sub">Un investisseur finance votre ticket d'entrée. Vous exploitez votre franchise, sous une enseigne nationale, avec le savoir-faire et les fournisseurs d'un réseau structuré. Et vous devenez majoritaire en cinq ans.</p>
+      <div class="hero-cta">
+        <a href="#inscription" class="btn btn-primary">S'inscrire à une réunion d'information →</a>
+        <a href="tel:0610703090" class="btn btn-ghost">📞 06 10 70 30 90</a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ========== CONSTAT ========== -->
-<section class="constat">
-  <div class="eyebrow">Le constat</div>
-  <h2>Pendant des années, l'apport était <span class="or">le seul verrou.</span></h2>
-  <p class="lead">L'envie d'entreprendre existe. La capacité de gestion, souvent aussi. Ce qui bloque, c'est la trésorerie immobilisée — 50 000, 100 000, parfois 200 000 euros d'apport personnel exigé par les enseignes. Un verrou qui exclut d'excellents profils.</p>
+  <!-- CONCEPT + PILIERS -->
+  <section class="section" style="background: var(--ivoire);">
+    <div class="section-inner">
+      <span class="eyebrow">Le dispositif</span>
+      <h2>La puissance d'une franchise,<br><span class="accent">sans le capital.</span></h2>
+      <p class="section-lead">Associer la force d'une enseigne nationale, le levier financier d'un investisseur partenaire, et un accompagnement structuré sur la durée — pour transformer l'envie d'entreprendre en entreprise viable, sans immobiliser votre patrimoine.</p>
 
-  <div class="constat-triptyque">
-    <div class="constat-item">
-      <span class="constat-num">i.</span>
-      <h3>L'envie, sans les moyens</h3>
-      <p>Cadres compétents, commerçants expérimentés, reconversions solides — beaucoup s'arrêtent au seuil du financement.</p>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-num">01</div>
+          <h3>Une marque installée</h3>
+          <p>Enseigne reconnue, notoriété locale et nationale, courbe d'apprentissage client réduite. Vous ne partez pas de zéro — vous héritez d'une légitimité.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">02</div>
+          <h3>Un investisseur partenaire</h3>
+          <p>Le ticket d'entrée est financé. Vous exploitez, sans immobiliser vos fonds personnels ni hypothéquer votre patrimoine familial.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">03</div>
+          <h3>Savoir-faire et fournisseurs</h3>
+          <p>Méthodes éprouvées, fournisseurs référencés, formation initiale structurée, accompagnement opérationnel continu. Le métier est transmis.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">04</div>
+          <h3>Majoritaire en 5 ans</h3>
+          <p>Vous rachetez progressivement les parts de l'investisseur. À terme, vous êtes seul propriétaire de votre entreprise — et vous l'avez bâtie sans apport initial.</p>
+        </div>
+      </div>
     </div>
-    <div class="constat-item">
-      <span class="constat-num">ii.</span>
-      <h3>Le banquier, réticent</h3>
-      <p>Sans apport conséquent, pas de levier bancaire. Le dossier ne passe pas, quel que soit le projet.</p>
-    </div>
-    <div class="constat-item">
-      <span class="constat-num">iii.</span>
-      <h3>Le patrimoine, préservé</h3>
-      <p>Même avec l'épargne disponible, beaucoup refusent de la mobiliser. À raison : l'entrepreneuriat reste un pari.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ========== PILIERS ========== -->
-<section class="piliers">
-  <div class="eyebrow">Le dispositif</div>
-  <h2>Quatre piliers. <span class="or">Un seul engagement : le vôtre.</span></h2>
-  <p class="lead">Associer la puissance d'une franchise nationale, un investisseur qui finance, un accompagnement structuré — et un mécanisme de rachat progressif. Vous n'avancez pas d'apport. Vous exploitez. Vous devenez propriétaire.</p>
+  <!-- SESSIONS / INSCRIPTION -->
+  <section class="sessions" id="inscription">
+    <div class="section-inner">
+      <span class="eyebrow">Réunions d'information</span>
+      <h2>Comprendre le dispositif.<br><span class="accent">En 60 minutes.</span></h2>
+      <p class="section-lead">Deux créneaux hebdomadaires, en visioconférence. Gratuit, sans engagement. On présente le mécanisme, les enseignes partenaires, et vous posez toutes les questions qui comptent avant de vous positionner.</p>
 
-  <div class="piliers-grid">
-    <div class="pilier">
-      <div class="pilier-num">Pilier 01</div>
-      <h3>La puissance d'une franchise</h3>
-      <p>Une enseigne nationale reconnue, un modèle économique éprouvé, une courbe d'apprentissage raccourcie. Vous n'inventez rien — vous exploitez un concept qui tourne.</p>
+      <div class="inscription-zone">
+
+        <div class="form-box">
+          <div class="form-title">Je m'inscris à une session</div>
+          <div class="form-sub">Choisissez un créneau, laissez votre email — vous recevrez l'invitation Google Calendar avec le lien Meet.</div>
+
+          <label class="form-label" for="email">Votre email</label>
+          <input type="email" id="email" class="form-input" placeholder="prenom@exemple.com" autocomplete="email" required>
+
+          <label class="form-label">Créneau souhaité</label>
+          <div class="day-choice">
+            <button type="button" class="day-btn" data-day="monday" onclick="inscrire('monday')">
+              <div class="day-btn-day">Lundi</div>
+              <div class="day-btn-time">13h00 — 14h00</div>
+            </button>
+            <button type="button" class="day-btn" data-day="wednesday" onclick="inscrire('wednesday')">
+              <div class="day-btn-day">Mercredi</div>
+              <div class="day-btn-time">18h00 — 19h00</div>
+            </button>
+          </div>
+
+          <div id="form-msg" class="form-msg"></div>
+        </div>
+
+        <div class="sessions-details">
+          <div class="detail-item">
+            <h4>60 minutes structurées</h4>
+            <p>Présentation du mécanisme d'investissement, panorama des enseignes compatibles avec le dispositif, critères de sélection des candidats, réponses aux questions.</p>
+          </div>
+          <div class="detail-item">
+            <h4>Aucun engagement</h4>
+            <p>Vous repartez avec une vision claire. La suite dépend de vous — et d'un premier échange individuel si le dispositif vous intéresse.</p>
+          </div>
+          <div class="detail-item">
+            <h4>Confidentiel</h4>
+            <p>Session en petit comité. Vos informations ne sont partagées avec aucune enseigne tant que vous ne l'avez pas explicitement validé.</p>
+          </div>
+        </div>
+
+      </div>
     </div>
-    <div class="pilier">
-      <div class="pilier-num">Pilier 02</div>
-      <h3>Un investisseur partenaire</h3>
-      <p>Le ticket d'entrée est financé par un investisseur dédié. Votre patrimoine reste intact. Vous démarrez avec les moyens, sans les avoir immobilisés.</p>
+  </section>
+
+  <!-- PROFIL ENTREPRENEUR -->
+  <section class="profile-section">
+    <div class="section-inner">
+      <span class="eyebrow">Avant de vous engager</span>
+      <h2>Entreprendre exige de la lucidité.<br><span class="accent">Pas seulement de l'envie.</span></h2>
+      <p class="section-lead">Le dispositif est puissant — encore faut-il qu'il colle à votre profil. Avant de choisir une enseigne, il faut se positionner honnêtement sur plusieurs axes fondamentaux. Chaque réponse oriente radicalement le bon modèle.</p>
+
+      <div class="axes-grid">
+        <div class="axis">Particuliers <span class="axis-or">ou</span> Professionnels</div>
+        <div class="axis">Commerçant <span class="axis-or">ou</span> Commercial</div>
+        <div class="axis">Manager <span class="axis-or">ou</span> Gestionnaire</div>
+        <div class="axis">Home office <span class="axis-or">ou</span> Point de vente</div>
+        <div class="axis">Seul <span class="axis-or">ou</span> Petite ou grosse équipe</div>
+        <div class="axis">Travail le WE <span class="axis-or">ou</span> Liberté complète</div>
+        <div class="axis">Plaisir du métier <span class="axis-or">ou</span> Rentabilité avant tout</div>
+      </div>
+
+      <div class="profile-cta">
+        <div class="profile-cta-text">
+          <h3>30 minutes pour <span class="accent">clarifier votre projet.</span></h3>
+          <p>Un échange structuré, confidentiel, financé par les enseignes. Aucun engagement de votre côté.</p>
+        </div>
+        <a href="tel:0610703090" class="btn btn-primary">Réserver l'échange →</a>
+      </div>
     </div>
-    <div class="pilier">
-      <div class="pilier-num">Pilier 03</div>
-      <h3>Marque, savoir-faire, fournisseurs</h3>
-      <p>Vous bénéficiez d'une marque installée, d'un savoir-faire transmis, de fournisseurs référencés et d'un accompagnement opérationnel continu.</p>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final">
+    <div class="section-inner">
+      <span class="eyebrow">Parler à Thierry</span>
+      <h2>Une question précise ?<br><span class="accent">Appelez. Écrivez.</span></h2>
+      <p>Réponse sous 24h. Aucune relance commerciale agressive — ce n'est pas mon style.</p>
+      <div class="cta-buttons">
+        <a href="tel:0610703090" class="cta-btn primary">📞 06 10 70 30 90</a>
+        <a href="sms:0610703090" class="cta-btn">💬 SMS</a>
+        <a href="mailto:thierry@thierrybismuth.com" class="cta-btn">✉ Email</a>
+      </div>
     </div>
-    <div class="pilier">
-      <div class="pilier-num">Pilier 04</div>
-      <h3>Majoritaire en 5 ans</h3>
-      <p>Le mécanisme prévoit le rachat progressif des parts de l'investisseur sur cinq exercices. À terme, vous êtes propriétaire de votre outil.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ========== PROFIL ========== -->
-<section class="profil">
-  <div class="eyebrow">Avant de vous lancer</div>
-  <h2>Le dispositif existe. Reste à savoir <span class="or">s'il vous correspond.</span></h2>
-  <p class="lead">L'absence d'apport n'est pas une autorisation à sauter les étapes. Entreprendre exige un profil réel, une envie solidifiée, une compréhension non affective du modèle. Avant de vous inscrire, positionnez-vous sur ces sept axes.</p>
-
-  <div class="profil-axes">
-    <div class="axe"><span class="axe-left">Particuliers</span><span class="axe-vs">ou</span><span class="axe-right">Professionnels</span></div>
-    <div class="axe"><span class="axe-left">Commerçant</span><span class="axe-vs">ou</span><span class="axe-right">Commercial</span></div>
-    <div class="axe"><span class="axe-left">Manager</span><span class="axe-vs">ou</span><span class="axe-right">Gestionnaire</span></div>
-    <div class="axe"><span class="axe-left">Home office</span><span class="axe-vs">ou</span><span class="axe-right">Point de vente</span></div>
-    <div class="axe"><span class="axe-left">Seul</span><span class="axe-vs">ou</span><span class="axe-right">Équipe</span></div>
-    <div class="axe"><span class="axe-left">Travail le WE</span><span class="axe-vs">ou</span><span class="axe-right">Liberté complète</span></div>
-    <div class="axe"><span class="axe-left">Plaisir du métier</span><span class="axe-vs">ou</span><span class="axe-right">Rentabilité avant tout</span></div>
-  </div>
-
-  <div class="profil-note">
-    Chaque réponse oriente radicalement le bon modèle. <strong>Nous explorons ces axes ensemble lors de la réunion d'information</strong> — puis en entretien individuel si le dispositif vous intéresse.
-  </div>
-</section>
-
-<!-- ========== RÉUNIONS ========== -->
-<section class="reunions" id="reunions">
-  <div class="eyebrow">Réunions d'information</div>
-  <h2>Comprendre le dispositif. <span class="or">En 60 minutes.</span></h2>
-  <p class="lead">Deux créneaux hebdomadaires, en visioconférence Google Meet. Gratuit, sans engagement. L'inscription vous envoie automatiquement l'invitation avec le lien de connexion pour la prochaine session du jour choisi.</p>
-
-  <div class="session-grid">
-    <div class="session-card" data-day="monday" onclick="selectDay('monday')">
-      <div class="session-day">Chaque lundi</div>
-      <div class="session-time">13h00 — 14h00</div>
-      <p class="session-desc">Créneau midi. Idéal pour un premier tour d'horizon sur la pause déjeuner.</p>
-    </div>
-    <div class="session-card" data-day="wednesday" onclick="selectDay('wednesday')">
-      <div class="session-day">Chaque mercredi</div>
-      <div class="session-time">18h00 — 19h00</div>
-      <p class="session-desc">Créneau fin de journée, au calme. Pour approfondir sans contrainte horaire.</p>
-    </div>
-  </div>
-
-  <div class="form-block">
-    <label for="email-input">Votre email</label>
-    <input type="email" id="email-input" placeholder="prenom.nom@exemple.fr" autocomplete="email">
-    <button class="btn-submit" id="submit-btn" onclick="submitInscription()" disabled>
-      Sélectionnez d'abord un créneau ↑
-    </button>
-    <div class="form-feedback" id="feedback"></div>
-  </div>
-</section>
-
-<!-- ========== CTA FINAL ========== -->
-<section class="cta-final">
-  <div class="eyebrow">Parler à Thierry</div>
-  <h2>Une question précise avant de vous inscrire ? <span class="or">Appelez. Écrivez.</span></h2>
-  <p class="lead">Réponse sous 24h. Aucun engagement, aucune relance commerciale agressive — ce n'est pas ma manière de travailler.</p>
-  <div class="cta-buttons">
-    <a href="tel:0610703090">📞 06 10 70 30 90</a>
-    <a href="sms:0610703090">💬 SMS</a>
-    <a href="mailto:thierry@thierrybismuth.com">✉ Email</a>
-  </div>
-</section>
-
-<!-- ========== FOOTER ========== -->
-<footer class="footer">
-  <div class="footer-top">
-    <div>
-      <div class="footer-brand">Thierry Bismuth</div>
-      <div style="margin-top:6px;">Constitution de réseaux · Conversion d'activités · Conseil entrepreneurial</div>
-    </div>
-    <div style="text-align:right;">
-      <a href="mailto:thierry@thierrybismuth.com">thierry@thierrybismuth.com</a><br>
-      <a href="tel:0610703090">06 10 70 30 90</a>
-    </div>
-  </div>
-  <div style="font-size:13px; opacity:0.7;">
-    © 2026 ODYSKILLS / Multi-Potentiel · Boulogne-Billancourt · Membre du Collège Expert de la FFF
-  </div>
-</footer>
+  </section>
 
 </main>
 
-<script src="nav.js"></script>
 <script>
-  // ====== Inscription réunion ======
-  const APPS_SCRIPT_URL = ''; // À remplir après déploiement Apps Script
-  let selectedDay = null;
+  const WEBHOOK = 'https://script.google.com/macros/s/AKfycbynoSPK22E8vt8GJZRDmB6qoHVehSSh4M9P7DvtF0IzKgJsF5bkRGQC_0wZf0Fv6qpk/exec';
 
-  function selectDay(day) {
-    selectedDay = day;
-    document.querySelectorAll('.session-card').forEach(c => c.classList.remove('selected'));
-    document.querySelector(`.session-card[data-day="${day}"]`).classList.add('selected');
-    updateBtn();
+  function showMsg(type, html) {
+    const box = document.getElementById('form-msg');
+    box.className = 'form-msg ' + type;
+    box.innerHTML = html;
   }
 
-  function updateBtn() {
-    const btn = document.getElementById('submit-btn');
-    const email = document.getElementById('email-input').value.trim();
-    const labels = { monday: 'lundi 13h', wednesday: 'mercredi 18h' };
-    if (selectedDay && email) {
-      btn.disabled = false;
-      btn.textContent = `M'inscrire au ${labels[selectedDay]} →`;
-    } else if (selectedDay) {
-      btn.disabled = true;
-      btn.textContent = `Entrez votre email pour vous inscrire au ${labels[selectedDay]}`;
-    } else {
-      btn.disabled = true;
-      btn.textContent = 'Sélectionnez d\'abord un créneau ↑';
-    }
+  function formatDate(iso) {
+    const d = new Date(iso);
+    const jours = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+    const mois = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+    const h = d.getHours().toString().padStart(2,'0');
+    const m = d.getMinutes().toString().padStart(2,'0');
+    return jours[d.getDay()] + ' ' + d.getDate() + ' ' + mois[d.getMonth()] + ' ' + d.getFullYear() + ' à ' + h + 'h' + m;
   }
 
-  document.getElementById('email-input').addEventListener('input', updateBtn);
+  async function inscrire(day) {
+    const emailInput = document.getElementById('email');
+    const email = emailInput.value.trim();
+    const buttons = document.querySelectorAll('.day-btn');
 
-  async function submitInscription() {
-    const email = document.getElementById('email-input').value.trim();
-    const fb = document.getElementById('feedback');
-    const btn = document.getElementById('submit-btn');
-    if (!selectedDay || !email) return;
-
-    btn.disabled = true;
-    btn.textContent = 'Envoi en cours...';
-    fb.className = 'form-feedback';
-    fb.textContent = '';
-
-    // Fallback si URL pas encore déployée
-    if (!APPS_SCRIPT_URL) {
-      const labels = { monday: 'lundi 13h', wednesday: 'mercredi 18h' };
-      const subject = encodeURIComponent(`Inscription réunion ${labels[selectedDay]}`);
-      const body = encodeURIComponent(`Bonjour Thierry,\n\nJe souhaite m'inscrire à la réunion d'information "Entreprendre avec zéro euro" du ${labels[selectedDay]}.\n\nEmail : ${email}\n\nMerci de m'envoyer le lien Google Meet.\n\nCordialement`);
-      window.location.href = `mailto:thierry@thierrybismuth.com?subject=${subject}&body=${body}`;
-      fb.className = 'form-feedback ok';
-      fb.textContent = 'Ouverture de votre messagerie… envoyez l\'email pour confirmer l\'inscription.';
-      btn.disabled = false;
-      updateBtn();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showMsg('error', 'Merci de saisir une adresse email valide.');
+      emailInput.focus();
       return;
     }
 
+    buttons.forEach(b => b.disabled = true);
+    showMsg('loading', 'Inscription en cours…');
+
     try {
-      const res = await fetch(APPS_SCRIPT_URL, {
+      const resp = await fetch(WEBHOOK, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ email, day: selectedDay })
+        body: JSON.stringify({ email: email, day: day })
       });
-      const data = await res.json();
+      const data = await resp.json();
+
       if (data.ok) {
-        fb.className = 'form-feedback ok';
-        fb.textContent = '✓ Inscription confirmée. L\'invitation Google Meet vous arrive par email dans quelques secondes.';
-        document.getElementById('email-input').value = '';
-        selectedDay = null;
-        document.querySelectorAll('.session-card').forEach(c => c.classList.remove('selected'));
+        showMsg('success',
+          '<strong style="color:var(--or-clair); font-size:16px;">✓ Inscription confirmée</strong><br>' +
+          'Rendez-vous ' + formatDate(data.when) + '.<br>' +
+          'Vous allez recevoir d\'ici quelques minutes une invitation Google Calendar à l\'adresse <strong>' + email + '</strong>, avec le lien Google Meet.');
+        emailInput.value = '';
       } else {
-        throw new Error(data.error || 'Erreur inconnue');
+        showMsg('error', 'Une erreur est survenue : ' + (data.error || 'inconnue') + '. Appelez le 06 10 70 30 90, je vous inscris manuellement.');
       }
     } catch (err) {
-      fb.className = 'form-feedback ko';
-      fb.innerHTML = `Une erreur est survenue. Contactez-moi directement : <a href="mailto:thierry@thierrybismuth.com" style="color:var(--or-clair);">thierry@thierrybismuth.com</a> ou <a href="tel:0610703090" style="color:var(--or-clair);">06 10 70 30 90</a>.`;
+      showMsg('error', 'Connexion impossible. Appelez le 06 10 70 30 90, je vous inscris manuellement.');
+    } finally {
+      buttons.forEach(b => b.disabled = false);
     }
-    btn.disabled = false;
-    updateBtn();
   }
 
-  // ====== Wix embed compat (au cas où) ======
   function sendHeight() {
     try {
-      window.parent.postMessage({ type: 'setHeight', height: document.body.scrollHeight }, '*');
+      const h = document.documentElement.scrollHeight;
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'setHeight', height: h }, '*');
+      }
     } catch(e) {}
   }
   window.addEventListener('load', sendHeight);
