@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Franchisé sans apport — Thierry Bismuth</title>
+<meta name="description" content="Devenir franchisé quand on a le talent et l'énergie, mais pas (ou peu) de cash : un investisseur finance l'apport, vous exploitez, et vous rachetez progressivement ses parts pour devenir majoritaire.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="nav.js" defer></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --noir:#12201b;
+    --noir-2:#1a2a24;
+    --creme:#f5efe3;
+    --creme-2:#ebe4d1;
+    --vert:#143a31;
+    --vert-2:#1e5244;
+    --vert-herbe:#4a7d5e;
+    --vert-soft:#a8c3b1;
+    --brique:#b85c3b;
+    --brique-soft:#e6b9a4;
+    --brique-deep:#8a3f26;
+    --texte:#2a342e;
+    --texte-soft:#667066;
+    --bord:rgba(18,32,27,.08);
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--creme);
+    color:var(--texte);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .main{max-width:100%;padding:0}
+
+  /* Hero */
+  .hero{
+    background:linear-gradient(135deg,#0e2a23 0%,#143a31 45%,#1e5244 100%);
+    color:var(--creme);
+    padding:100px 40px 90px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';
+    position:absolute;
+    top:-30%;right:-10%;
+    width:720px;height:720px;
+    background:radial-gradient(circle,rgba(184,92,59,.18) 0%,transparent 60%);
+  }
+  .hero::after{
+    content:'';
+    position:absolute;
+    bottom:-40%;left:-10%;
+    width:540px;height:540px;
+    background:radial-gradient(circle,rgba(74,125,94,.22) 0%,transparent 60%);
+  }
+  .hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+  .breadcrumb{
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--vert-soft);
+    margin-bottom:32px;
+  }
+  .breadcrumb a{color:var(--vert-soft);text-decoration:none;opacity:.7}
+  .breadcrumb a:hover{opacity:1}
+  .tag-soupape{
+    display:inline-block;
+    padding:8px 16px;
+    background:var(--brique);
+    color:var(--creme);
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-weight:700;
+    margin-bottom:32px;
+  }
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:clamp(42px,6vw,80px);
+    line-height:1.02;
+    letter-spacing:-.02em;
+    max-width:900px;
+    margin-bottom:32px;
+  }
+  .hero h1 em{font-style:italic;color:var(--brique-soft);font-weight:400}
+  .hero h1 strong{font-weight:700;color:var(--creme)}
+  .hero-lede{
+    font-size:20px;
+    line-height:1.55;
+    max-width:720px;
+    color:rgba(245,239,227,.88);
+    margin-bottom:40px;
+  }
+  .hero-duo{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+    max-width:760px;
+    margin-top:24px;
+  }
+  .hero-duo-card{
+    background:rgba(245,239,227,.06);
+    border:1px solid rgba(245,239,227,.12);
+    border-radius:2px;
+    padding:24px 26px;
+    backdrop-filter:blur(4px);
+  }
+  .hero-duo-card .k{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--brique-soft);
+    margin-bottom:10px;
+  }
+  .hero-duo-card .v{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:22px;
+    color:var(--creme);
+    line-height:1.2;
+  }
+
+  /* Wraps */
+  .wrap{max-width:1200px;margin:0 auto}
+  .wrap-narrow{max-width:920px;margin:0 auto}
+
+  /* Section commune */
+  section{padding:100px 40px}
+  .section-head{margin-bottom:60px;max-width:820px}
+  .eyebrow{
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--brique);
+    font-weight:600;
+    margin-bottom:20px;
+  }
+  .section-title{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:clamp(34px,4.5vw,54px);
+    line-height:1.08;
+    letter-spacing:-.02em;
+    color:var(--noir);
+  }
+  .section-title em{font-style:italic;color:var(--brique);font-weight:400}
+  .section-lede{
+    font-size:18px;
+    line-height:1.6;
+    color:var(--texte-soft);
+    margin-top:20px;
+    max-width:680px;
+  }
+
+  /* Profils */
+  .profils{background:var(--creme)}
+  .profils-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  .profil{
+    background:var(--creme-2);
+    padding:40px 32px;
+    border-radius:2px;
+    border-top:3px solid var(--vert-herbe);
+  }
+  .profil h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:24px;
+    color:var(--noir);
+    margin-bottom:14px;
+    line-height:1.15;
+  }
+  .profil p{font-size:15px;color:var(--texte)}
+
+  /* Principe */
+  .principe{background:var(--noir);color:var(--creme)}
+  .principe .section-title{color:var(--creme)}
+  .principe .section-title em{color:var(--brique-soft)}
+  .principe .section-lede{color:rgba(245,239,227,.72)}
+  .principe-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    margin-top:32px;
+  }
+  .principe-block{
+    background:rgba(245,239,227,.04);
+    border:1px solid rgba(245,239,227,.1);
+    padding:40px 36px;
+    border-radius:2px;
+  }
+  .principe-block.exploitant{border-top:3px solid var(--brique)}
+  .principe-block.investisseur{border-top:3px solid var(--vert-herbe)}
+  .principe-block .role{
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-weight:700;
+    margin-bottom:16px;
+  }
+  .principe-block.exploitant .role{color:var(--brique-soft)}
+  .principe-block.investisseur .role{color:var(--vert-soft)}
+  .principe-block h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:28px;
+    color:var(--creme);
+    margin-bottom:18px;
+    line-height:1.15;
+  }
+  .principe-block p{
+    color:rgba(245,239,227,.82);
+    font-size:15.5px;
+    margin-bottom:14px;
+  }
+  .principe-block ul{list-style:none;margin-top:16px}
+  .principe-block li{
+    padding-left:20px;
+    position:relative;
+    margin-bottom:10px;
+    font-size:14.5px;
+    color:rgba(245,239,227,.82);
+  }
+  .principe-block li::before{
+    content:'→';
+    position:absolute;
+    left:0;
+    font-weight:600;
+  }
+  .principe-block.exploitant li::before{color:var(--brique-soft)}
+  .principe-block.investisseur li::before{color:var(--vert-soft)}
+
+  /* Visualisation montée capital */
+  .montee{background:var(--creme-2)}
+  .montee-bars{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
+    margin-top:40px;
+    max-width:900px;
+  }
+  .bar-col{text-align:center}
+  .bar-year{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--texte-soft);
+    margin-bottom:10px;
+    font-weight:600;
+  }
+  .bar{
+    width:100%;
+    height:240px;
+    background:var(--creme);
+    position:relative;
+    border:1px solid var(--bord);
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+  }
+  .bar-exp{
+    background:var(--brique);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--creme);
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:15px;
+    padding:4px 0;
+    transition:height .6s ease;
+  }
+  .bar-inv{
+    position:absolute;
+    top:0;left:0;right:0;
+    background:var(--vert-2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--creme);
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:15px;
+    padding:4px 0;
+    transition:height .6s ease;
+  }
+  .montee-legend{
+    display:flex;
+    gap:28px;
+    margin-top:28px;
+    font-size:13px;
+    color:var(--texte-soft);
+  }
+  .montee-legend span{display:inline-flex;align-items:center;gap:8px}
+  .leg-dot{width:12px;height:12px;display:inline-block;border-radius:2px}
+  .leg-exp{background:var(--brique)}
+  .leg-inv{background:var(--vert-2)}
+  .montee-note{
+    margin-top:32px;
+    padding:20px 24px;
+    background:var(--creme);
+    border-left:3px solid var(--brique);
+    font-size:14.5px;
+    color:var(--texte);
+    max-width:820px;
+  }
+  .montee-note strong{color:var(--brique-deep)}
+
+  /* Mécanique 3 étapes */
+  .mecanique{background:var(--creme)}
+  .etapes{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:24px;
+    margin-top:32px;
+  }
+  .etape{
+    background:var(--creme-2);
+    padding:40px 32px;
+    border-radius:2px;
+    position:relative;
+  }
+  .etape-num{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:52px;
+    color:var(--brique);
+    line-height:1;
+    margin-bottom:16px;
+  }
+  .etape-phase{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--texte-soft);
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .etape h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:22px;
+    color:var(--noir);
+    margin-bottom:14px;
+    line-height:1.2;
+  }
+  .etape h3 em{color:var(--brique);font-style:italic;font-weight:500}
+  .etape p{font-size:14.5px;color:var(--texte)}
+
+  /* Sources financement */
+  .sources{background:var(--vert)}
+  .sources .section-title{color:var(--creme)}
+  .sources .section-title em{color:var(--brique-soft)}
+  .sources .section-lede{color:rgba(245,239,227,.72)}
+  .sources-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    margin-top:32px;
+  }
+  .source{
+    background:rgba(245,239,227,.06);
+    border:1px solid rgba(245,239,227,.12);
+    padding:40px 36px;
+    border-radius:2px;
+  }
+  .source-tag{
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--brique-soft);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  .source h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:26px;
+    color:var(--creme);
+    margin-bottom:16px;
+    line-height:1.2;
+  }
+  .source p{
+    color:rgba(245,239,227,.82);
+    font-size:15px;
+  }
+
+  /* Côté investisseur */
+  .invest{background:var(--creme)}
+  .invest-head{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+  .invest-tag{
+    display:inline-block;
+    padding:6px 14px;
+    background:var(--vert-herbe);
+    color:var(--creme);
+    font-size:10px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    font-weight:700;
+    margin-bottom:24px;
+  }
+  .invest-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+    margin-top:48px;
+  }
+  .invest-card{
+    background:var(--creme-2);
+    padding:36px 30px;
+    border-radius:2px;
+    border-top:3px solid var(--vert-2);
+  }
+  .invest-card .n{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:40px;
+    color:var(--vert-2);
+    line-height:1;
+    margin-bottom:14px;
+  }
+  .invest-card h4{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:20px;
+    color:var(--noir);
+    margin-bottom:12px;
+    line-height:1.2;
+  }
+  .invest-card p{font-size:14.5px;color:var(--texte)}
+
+  /* Simulateur */
+  .calc-section{background:var(--creme-2);padding:100px 40px}
+  .calc-wrap{
+    display:grid;
+    grid-template-columns:380px 1fr;
+    gap:40px;
+    align-items:start;
+  }
+  .calc-inputs{
+    background:var(--creme);
+    padding:40px 32px;
+    border-radius:2px;
+    border:1px solid var(--bord);
+    position:sticky;
+    top:24px;
+  }
+  .calc-inputs h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:22px;
+    margin-bottom:28px;
+    color:var(--noir);
+  }
+  .calc-field{margin-bottom:24px}
+  .calc-field label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--texte-soft);
+    margin-bottom:8px;
+  }
+  .calc-slider{display:flex;align-items:center;gap:12px}
+  .calc-slider input[type=range]{
+    flex:1;
+    accent-color:var(--brique);
+    cursor:pointer;
+  }
+  .calc-slider output{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:16px;
+    color:var(--noir);
+    min-width:80px;
+    text-align:right;
+  }
+  .calc-hint{font-size:12px;color:var(--texte-soft);font-style:italic;margin-top:4px}
+  .calc-output{
+    background:var(--creme);
+    padding:40px;
+    border-radius:2px;
+    border:1px solid var(--bord);
+  }
+  .calc-table-wrap{overflow-x:auto;margin-bottom:32px}
+  .calc-table{width:100%;border-collapse:collapse;font-size:14px}
+  .calc-table th,.calc-table td{
+    padding:12px 10px;
+    text-align:right;
+    border-bottom:1px solid var(--bord);
+  }
+  .calc-table th:first-child,.calc-table td:first-child{
+    text-align:left;
+    font-weight:500;
+    color:var(--texte-soft);
+    white-space:nowrap;
+  }
+  .calc-table th{
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--brique);
+    font-weight:600;
+    padding-bottom:16px;
+  }
+  .calc-table tr.separator td{border-top:2px solid var(--noir);padding-top:14px}
+  .calc-table tr.highlight td{
+    font-family:'Fraunces',serif;
+    font-size:16px;
+    color:var(--noir);
+    font-weight:500;
+    background:rgba(184,92,59,.06);
+  }
+  .calc-table tr.highlight td:first-child{color:var(--brique)}
+  .calc-table tr.gerance-row td{color:#1a6b3e}
+  .calc-table tr.capital-row td{
+    font-family:'Fraunces',serif;
+    color:var(--vert-2);
+    font-weight:500;
+  }
+  .calc-synth{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-bottom:24px;
+  }
+  .synth-card{
+    background:var(--noir);
+    color:var(--creme);
+    padding:24px 20px;
+    border-radius:2px;
+    text-align:center;
+  }
+  .synth-label{
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    opacity:.7;
+    margin-bottom:10px;
+  }
+  .synth-val{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:28px;
+    color:var(--brique-soft);
+  }
+  .calc-footnote{
+    font-size:12.5px;
+    color:var(--texte-soft);
+    font-style:italic;
+    line-height:1.55;
+  }
+
+  /* Atouts */
+  .atouts{background:var(--creme)}
+  .atouts-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:32px;
+    margin-top:32px;
+  }
+  .atout{
+    display:flex;
+    gap:24px;
+    padding:32px 0;
+    border-top:1px solid var(--bord);
+  }
+  .atout .num{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:42px;
+    color:var(--brique);
+    line-height:1;
+    flex-shrink:0;
+  }
+  .atout h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:20px;
+    color:var(--noir);
+    margin-bottom:10px;
+  }
+  .atout p{font-size:14.5px;color:var(--texte)}
+
+  /* Process */
+  .process{background:var(--creme-2)}
+  .process-list{list-style:none;counter-reset:step;margin-top:32px}
+  .process-list li{
+    counter-increment:step;
+    display:flex;
+    gap:32px;
+    padding:28px 0;
+    border-top:1px solid var(--bord);
+    align-items:baseline;
+  }
+  .process-list li::before{
+    content:counter(step,decimal-leading-zero);
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:22px;
+    color:var(--vert-herbe);
+    min-width:48px;
+  }
+  .process-list strong{
+    display:block;
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:20px;
+    color:var(--noir);
+    margin-bottom:6px;
+  }
+  .process-list span{font-size:14.5px;color:var(--texte)}
+
+  /* CTA */
+  .cta-section{
+    background:linear-gradient(135deg,#0e2a23 0%,#143a31 45%,#1e5244 100%);
+    color:var(--creme);
+    text-align:center;
+  }
+  .cta-section h2{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:clamp(32px,4vw,48px);
+    line-height:1.1;
+    margin-bottom:20px;
+    color:var(--creme);
+  }
+  .cta-section h2 em{color:var(--brique-soft);font-style:italic}
+  .cta-section p{
+    font-size:17px;
+    color:rgba(245,239,227,.82);
+    max-width:620px;
+    margin:0 auto 40px;
+  }
+  .btn-group{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    display:inline-block;
+    padding:18px 32px;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    text-decoration:none;
+    border:1px solid transparent;
+    transition:all .2s;
+  }
+  .btn-primary{background:var(--brique);color:var(--creme)}
+  .btn-primary:hover{background:var(--brique-deep)}
+  .btn-ghost{background:transparent;color:var(--creme);border-color:rgba(245,239,227,.3)}
+  .btn-ghost:hover{background:rgba(245,239,227,.08);border-color:var(--creme)}
+
+  footer{
+    background:var(--noir);
+    color:rgba(245,239,227,.55);
+    padding:40px;
+    text-align:center;
+    font-size:13px;
+  }
+  footer a{color:var(--brique-soft);text-decoration:none}
+  footer a:hover{color:var(--creme)}
+
+  /* Responsive */
+  @media (max-width:900px){
+    .hero{padding:80px 24px 60px}
+    section{padding:70px 24px}
+    .calc-section{padding:70px 24px}
+    .profils-grid,.etapes,.invest-grid,.atouts-grid,.sources-grid,.principe-grid,.invest-head,.calc-wrap{
+      grid-template-columns:1fr;gap:20px
+    }
+    .calc-inputs{position:static}
+    .calc-synth{grid-template-columns:1fr}
+    .hero-duo{grid-template-columns:1fr}
+    .montee-bars{grid-template-columns:repeat(5,1fr);gap:6px}
+    .bar{height:160px}
+    .bar-exp,.bar-inv{font-size:12px}
+    .calc-table{font-size:12.5px}
+    .calc-table th,.calc-table td{padding:8px 6px}
+  }
+</style>
+</head>
+<body>
+
+<div class="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="breadcrumb">
+        <a href="entrepreneur-ou-en-reconversion.html">← Espace entrepreneur</a> · Franchisé sans apport
+      </div>
+      <div class="tag-soupape">Soupape 04 · Franchisé sans apport</div>
+      <h1>Entreprenez sur <em>votre talent</em>, pas sur <em>votre épargne</em>.</h1>
+      <p class="hero-lede">
+        Vous avez le profil, le savoir-faire, l'énergie pour porter un centre en franchise. Vous n'avez pas — ou pas encore — les 20, 40 ou 80 k€ d'apport exigés par l'enseigne. Un montage éprouvé vous permet de démarrer l'exploitation dès le jour 1, sans apport ou avec un apport partiel, et de monter progressivement au capital jusqu'à devenir majoritaire.
+      </p>
+      <div class="hero-duo">
+        <div class="hero-duo-card">
+          <div class="k">Côté exploitant</div>
+          <div class="v">Apport 0 € possible. Rémunéré dès le jour 1. Majoritaire en 3 à 5 ans.</div>
+        </div>
+        <div class="hero-duo-card">
+          <div class="k">Côté investisseur</div>
+          <div class="v">Un placement chiffré sur un actif opérationnel, avec sortie calendée.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFILS -->
+  <section class="profils">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Pour qui, concrètement</div>
+        <h2 class="section-title">Le talent <em>d'abord</em>, le cash ensuite.</h2>
+        <p class="section-lede">Ce dispositif s'adresse à celles et ceux qui ont tout pour réussir en franchise — sauf l'apport demandé à l'ouverture.</p>
+      </div>
+      <div class="profils-grid">
+        <div class="profil">
+          <h3>L'opérationnel prêt à entreprendre</h3>
+          <p>Vous avez géré un point de vente, une équipe, un P&L. Vous voulez votre propre affaire, mais vous n'êtes pas prêt à vider votre trésorerie familiale pour un ticket d'apport.</p>
+        </div>
+        <div class="profil">
+          <h3>Le commerçant en reconversion</h3>
+          <p>Vous cédez ou fermez un commerce existant. Vous cherchez un modèle plus simple, piloté par une tête de réseau, sans immobiliser vos liquidités dans l'apport d'entrée.</p>
+        </div>
+        <div class="profil">
+          <h3>L'expert-métier sans épargne</h3>
+          <p>Votre savoir-faire et votre réseau local valent l'apport demandé — mais votre épargne personnelle ne les reflète pas. Ce dispositif valorise votre travail en lieu et place du cash.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPE -->
+  <section class="principe">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Le principe</div>
+        <h2 class="section-title">Deux rôles. Un <em>pacte</em>. Une sortie programmée.</h2>
+        <p class="section-lede">On associe un exploitant-entrepreneur et un ou plusieurs investisseurs dans la même société d'exploitation. Chacun apporte ce qu'il a de plus : l'un son énergie opérationnelle, l'autre son apport financier. Le pacte d'associés fixe d'avance la trajectoire.</p>
+      </div>
+      <div class="principe-grid">
+        <div class="principe-block exploitant">
+          <div class="role">L'exploitant-entrepreneur</div>
+          <h3>Vous portez le projet au quotidien.</h3>
+          <p>Vous êtes gérant de la société. Vous ouvrez le centre, vous développez le CA, vous encaissez une rémunération de gérance dès le démarrage. C'est vous qui créez la valeur.</p>
+          <ul>
+            <li>Apport personnel libre, de 0 € jusqu'au ticket total si vous le souhaitez</li>
+            <li>Part au capital au démarrage au prorata exact de votre apport</li>
+            <li>Rachat progressif des parts de l'investisseur jusqu'à 51 % ou plus</li>
+          </ul>
+        </div>
+        <div class="principe-block investisseur">
+          <div class="role">Le ou les investisseurs</div>
+          <h3>Ils apportent le ou les tickets manquants.</h3>
+          <p>Un ou plusieurs investisseurs financent la différence entre votre apport personnel et le ticket total exigé par l'enseigne. Ils détiennent le capital au prorata de leur contribution.</p>
+          <ul>
+            <li>Part au capital au démarrage au prorata de l'apport financier</li>
+            <li>Perception des dividendes sur leur quote-part pendant toute la durée</li>
+            <li>Sortie progressive par rachat de parts, calendrier écrit dans le pacte</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MONTÉE AU CAPITAL -->
+  <section class="montee">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">La montée au capital</div>
+        <h2 class="section-title">Vous partez <em>minoritaire</em>. Vous finissez <em>majoritaire</em>.</h2>
+        <p class="section-lede">Illustration générique avec un exploitant qui démarre à 0 % (apport personnel nul). La trajectoire s'adapte à votre apport initial et à la performance réelle du centre.</p>
+      </div>
+      <div class="montee-bars">
+        <div class="bar-col">
+          <div class="bar-year">An 0</div>
+          <div class="bar">
+            <div class="bar-inv" style="height:100%">100 %</div>
+          </div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-year">An 1</div>
+          <div class="bar">
+            <div class="bar-inv" style="height:85%">85 %</div>
+            <div class="bar-exp" style="height:15%">15 %</div>
+          </div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-year">An 2</div>
+          <div class="bar">
+            <div class="bar-inv" style="height:72%">72 %</div>
+            <div class="bar-exp" style="height:28%">28 %</div>
+          </div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-year">An 3</div>
+          <div class="bar">
+            <div class="bar-inv" style="height:58%">58 %</div>
+            <div class="bar-exp" style="height:42%">42 %</div>
+          </div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-year">An 4</div>
+          <div class="bar">
+            <div class="bar-inv" style="height:49%">49 %</div>
+            <div class="bar-exp" style="height:51%">51 %</div>
+          </div>
+        </div>
+      </div>
+      <div class="montee-legend">
+        <span><span class="leg-dot leg-exp"></span>Exploitant (vous)</span>
+        <span><span class="leg-dot leg-inv"></span>Investisseur partenaire</span>
+      </div>
+      <div class="montee-note">
+        <strong>Pourquoi s'arrêter à 51 % ?</strong> Parce que c'est le seuil de contrôle. Une fois majoritaire, vous décidez seul des orientations stratégiques. Certains pactes prévoient de continuer jusqu'à 100 % — sortie complète de l'investisseur —, d'autres s'arrêtent à 51 % avec maintien de l'investisseur en minoritaire passif. Ce point est négocié au moment de la structuration, en fonction de votre stratégie patrimoniale et de celle de l'investisseur.
+      </div>
+    </div>
+  </section>
+
+  <!-- MÉCANIQUE 3 ÉTAPES -->
+  <section class="mecanique">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Mécanique</div>
+        <h2 class="section-title">Trois étapes, <em>3 à 5 ans</em>.</h2>
+        <p class="section-lede">Un cadre simple, documenté dans le pacte d'associés entre vous et l'investisseur. Pas d'ambiguïté, pas de renégociation chaque année.</p>
+      </div>
+      <div class="etapes">
+        <div class="etape">
+          <div class="etape-num">01</div>
+          <div class="etape-phase">Année 1</div>
+          <h3>Vous <em>exploitez</em>, vous stabilisez.</h3>
+          <p>Ouverture du centre, montée en charge, atteinte du point mort. Vous touchez une rémunération de gérance dès le démarrage. L'investisseur détient la part majoritaire, mais le pacte prévoit déjà votre sortie progressive.</p>
+        </div>
+        <div class="etape">
+          <div class="etape-num">02</div>
+          <div class="etape-phase">Années 2 à 4</div>
+          <h3>Vous <em>rachetez</em> par tranches.</h3>
+          <p>Chaque année, vous rachetez un bloc de parts à l'investisseur à une valorisation qui évolue avec la performance du centre. Le paiement se fait depuis votre rémunération de gérance et votre quote-part de dividendes.</p>
+        </div>
+        <div class="etape">
+          <div class="etape-num">03</div>
+          <div class="etape-phase">Fin de période</div>
+          <h3>Vous passez <em>majoritaire</em>.</h3>
+          <p>Vous détenez 51 % du capital — et au-delà selon ce qui est prévu. Vous contrôlez la société, vous décidez, vous capitalisez sur le travail des premières années. L'investisseur reste minoritaire ou sort totalement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOURCES -->
+  <section class="sources">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Comment vous financez le rachat</div>
+        <h2 class="section-title">Deux sources, <em>zéro sortie</em> de trésorerie perso.</h2>
+        <p class="section-lede">Le rachat des parts est financé par les flux que le centre produit pour vous. Vous ne mobilisez pas votre épargne personnelle, et vous n'avez pas besoin d'emprunter auprès d'une banque à titre perso.</p>
+      </div>
+      <div class="sources-grid">
+        <div class="source">
+          <div class="source-tag">Source 01</div>
+          <h3>Votre rémunération de gérance</h3>
+          <p>En tant qu'exploitant-gérant de la société, vous êtes rémunéré dès le jour 1 pour votre travail opérationnel. Une partie de cette rémunération nette est affectée au rachat progressif des parts de l'investisseur, selon un calendrier fixé dans le pacte.</p>
+        </div>
+        <div class="source">
+          <div class="source-tag">Source 02</div>
+          <h3>Vos dividendes annuels</h3>
+          <p>Dès que le centre dégage un résultat distribuable, votre quote-part de dividendes — même si elle est initialement minoritaire — vient s'ajouter à votre gérance pour accélérer le rachat. Plus le centre performe, plus vous montez vite au capital.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÔTÉ INVESTISSEUR -->
+  <section class="invest">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Côté investisseur</div>
+        <h2 class="section-title">Un <em>placement</em> calibré, une <em>sortie</em> programmée.</h2>
+        <p class="section-lede">Cette page s'adresse d'abord à vous, exploitant. Mais le modèle ne tient que si l'investisseur y trouve son compte. Voici ce qu'on lui propose concrètement.</p>
+      </div>
+      <div class="invest-grid">
+        <div class="invest-card">
+          <div class="n">01</div>
+          <h4>Une quote-part de résultat dès l'année 1</h4>
+          <p>L'investisseur détient la majorité du capital au démarrage. Il perçoit donc la majorité du résultat distribuable au prorata exact de sa quote-part, tant qu'il n'a pas été racheté.</p>
+        </div>
+        <div class="invest-card">
+          <div class="n">02</div>
+          <h4>Une valorisation indexée sur la performance</h4>
+          <p>La valeur des parts rachetées évolue avec le résultat du centre. Si la performance est au rendez-vous, l'investisseur sort avec une plus-value. Le pacte prévoit la formule de calcul.</p>
+        </div>
+        <div class="invest-card">
+          <div class="n">03</div>
+          <h4>Une sortie calendée, pas une sortie à négocier</h4>
+          <p>Le pacte fixe les années de rachat, les volumes de parts et les modalités de paiement. L'investisseur sait dès la signature quand et comment il récupère son apport et sa plus-value.</p>
+        </div>
+        <div class="invest-card">
+          <div class="n">04</div>
+          <h4>Un exploitant sélectionné, pas parachuté</h4>
+          <p>L'investisseur choisit ou valide l'exploitant. Le montage ne fonctionne que si les deux profils sont alignés sur la vision du centre et la durée du partenariat.</p>
+        </div>
+        <div class="invest-card">
+          <div class="n">05</div>
+          <h4>Un format multi-centres possible</h4>
+          <p>Certains investisseurs financent plusieurs centres en parallèle — grappe sur une ville ou portefeuille régional —, chacun avec son exploitant dédié et son propre pacte. L'effort de suivi est mutualisé.</p>
+        </div>
+        <div class="invest-card">
+          <div class="n">06</div>
+          <h4>Un cadre sécurisé juridiquement</h4>
+          <p>Pacte d'associés, statuts, clause de rachat forcé en cas d'inexécution, clause de sortie en cas de rupture de confiance. Le risque opérationnel reste lié au centre ; le risque juridique est encadré.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIMULATEUR -->
+  <section class="calc-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Projection 5 ans · interactive</div>
+        <h2 class="section-title">Modélisez <em>votre opération</em>.</h2>
+        <p class="section-lede">Tous les indicateurs sont variables. Modifiez les hypothèses et voyez en temps réel comment le capital, les revenus et la rentabilité évoluent sur 5 ans. Les valeurs par défaut sont génériques — à recaler avec les chiffres réels de l'enseigne visée.</p>
+      </div>
+
+      <div class="calc-wrap">
+        <div class="calc-inputs">
+          <h3>Hypothèses</h3>
+
+          <div class="calc-field">
+            <label>CA année 1</label>
+            <div class="calc-slider">
+              <input type="range" id="ca1" min="80000" max="600000" step="10000" value="250000">
+              <output id="ca1-val">250 k€</output>
+            </div>
+            <div class="calc-hint">Chiffre d'affaires estimé la première année</div>
+          </div>
+
+          <div class="calc-field">
+            <label>Croissance du CA par an</label>
+            <div class="calc-slider">
+              <input type="range" id="growth" min="0" max="25" step="1" value="8">
+              <output id="growth-val">+8%</output>
+            </div>
+            <div class="calc-hint">Hypothèse prudente de montée en charge</div>
+          </div>
+
+          <div class="calc-field">
+            <label>Charges annuelles (hors gérance)</label>
+            <div class="calc-slider">
+              <input type="range" id="charges" min="60000" max="500000" step="5000" value="180000">
+              <output id="charges-val">180 k€</output>
+            </div>
+            <div class="calc-hint">Loyer, salaires, achats, comm. · +5%/an (inflation)</div>
+          </div>
+
+          <div class="calc-field">
+            <label>Rémunération de gérance / mois</label>
+            <div class="calc-slider">
+              <input type="range" id="gerance" min="1500" max="6000" step="250" value="2500">
+              <output id="gerance-val">2 500 €</output>
+            </div>
+          </div>
+
+          <div class="calc-field">
+            <label>Apport personnel de l'exploitant</label>
+            <div class="calc-slider">
+              <input type="range" id="apport-gerant" min="0" max="80000" step="500" value="0">
+              <output id="apport-gerant-val">0 €</output>
+            </div>
+            <div class="calc-hint" id="apport-complement">→ Apport complémentaire de l'investisseur : 40 000 €</div>
+          </div>
+
+          <div class="calc-field">
+            <label>Apport total au capital (exploitant + investisseur)</label>
+            <div class="calc-slider">
+              <input type="range" id="apport" min="15000" max="100000" step="1000" value="40000">
+              <output id="apport-val">40 k€</output>
+            </div>
+            <div class="calc-hint">Fonds propres exigés par l'enseigne pour ouvrir</div>
+          </div>
+
+          <div class="calc-field">
+            <label>Valorisation 100 % à l'ouverture</label>
+            <div class="calc-slider">
+              <input type="range" id="valo" min="40000" max="400000" step="5000" value="150000">
+              <output id="valo-val">150 k€</output>
+            </div>
+            <div class="calc-hint">Capital + dette bancaire · base du rachat</div>
+          </div>
+
+          <div class="calc-field">
+            <label>% des revenus de l'exploitant réinjecté dans le rachat</label>
+            <div class="calc-slider">
+              <input type="range" id="pct-reinject" min="0" max="100" step="10" value="80">
+              <output id="pct-reinject-val">80%</output>
+            </div>
+            <div class="calc-hint">Gérance + quote-part de résultat affectés au rachat</div>
+          </div>
+
+          <div class="calc-field">
+            <label>Seuil de capital visé par l'exploitant</label>
+            <div class="calc-slider">
+              <input type="range" id="cible" min="51" max="100" step="1" value="51">
+              <output id="cible-val">51%</output>
+            </div>
+            <div class="calc-hint">Au-delà de 51 %, l'investisseur continue à vendre</div>
+          </div>
+        </div>
+
+        <div class="calc-output">
+          <div class="calc-table-wrap">
+            <table class="calc-table">
+              <thead>
+                <tr>
+                  <th>Poste</th>
+                  <th>An 1</th>
+                  <th>An 2</th>
+                  <th>An 3</th>
+                  <th>An 4</th>
+                  <th>An 5</th>
+                </tr>
+              </thead>
+              <tbody id="calc-tbody"></tbody>
+            </table>
+          </div>
+
+          <div class="calc-synth">
+            <div class="synth-card">
+              <div class="synth-label">Capital exploitant fin an 5</div>
+              <div class="synth-val" id="synth-capital">—</div>
+            </div>
+            <div class="synth-card">
+              <div class="synth-label">Retour investisseur cumulé</div>
+              <div class="synth-val" id="synth-retour">—</div>
+            </div>
+            <div class="synth-card">
+              <div class="synth-label">TRI investisseur (5 ans)</div>
+              <div class="synth-val" id="synth-tri">—</div>
+            </div>
+          </div>
+
+          <p class="calc-footnote">Modèle illustratif. La valorisation 100 % est revalorisée chaque année au prorata de la croissance du résultat net (la société vaut plus cher quand elle génère plus de résultat). Charges hors gérance indexées +5 %/an. Si l'exploitant démarre à 0 % de capital, il ne touche aucune part du résultat en An 1 — seule sa gérance alimente le rachat. Dès qu'il détient des parts, la répartition du résultat suit sa quote-part. Chaque montage doit être validé avec un conseil juridique et un expert-comptable pour caler la structure réelle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATOUTS -->
+  <section class="atouts">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Pourquoi ça marche</div>
+        <h2 class="section-title">Les <em>atouts</em> du dispositif.</h2>
+      </div>
+      <div class="atouts-grid">
+        <div class="atout">
+          <div class="num">01</div>
+          <div>
+            <h3>Une barrière d'entrée effacée</h3>
+            <p>L'apport demandé par l'enseigne passe d'un ticket à plusieurs dizaines de milliers d'euros à 0 €. Le modèle redevient accessible à des profils opérationnels solides mais sans épargne significative.</p>
+          </div>
+        </div>
+        <div class="atout">
+          <div class="num">02</div>
+          <div>
+            <h3>Rémunéré dès le jour 1</h3>
+            <p>Pas d'attente d'un hypothétique dividende dans plusieurs années : la rémunération de gérance assure un revenu opérationnel stable dès l'ouverture, même sur la phase de montée en charge.</p>
+          </div>
+        </div>
+        <div class="atout">
+          <div class="num">03</div>
+          <div>
+            <h3>Un cadre juridique verrouillé</h3>
+            <p>Le pacte d'associés fixe d'avance la valorisation des parts à racheter, le calendrier, les conditions de sortie et les clauses en cas de rupture. Aucune renégociation annuelle.</p>
+          </div>
+        </div>
+        <div class="atout">
+          <div class="num">04</div>
+          <div>
+            <h3>Un investisseur aligné, pas hostile</h3>
+            <p>L'investisseur sait dès le départ qu'il sort ou se dilue progressivement. Il a tout intérêt à ce que le centre performe. Je fais le pont entre les deux profils et je garantis la cohérence de l'attelage.</p>
+          </div>
+        </div>
+        <div class="atout">
+          <div class="num">05</div>
+          <div>
+            <h3>Un apport personnel modulable</h3>
+            <p>Vous pouvez partir à 0 %, ou choisir d'apporter une fraction — 10, 20, 30 % du ticket — pour accélérer votre accession au capital. Le montage s'adapte exactement à votre situation.</p>
+          </div>
+        </div>
+        <div class="atout">
+          <div class="num">06</div>
+          <div>
+            <h3>Un accompagnement sur toute la durée</h3>
+            <p>Au-delà du montage initial, je reste présent sur la durée du rachat : suivi du pacte, exécution des tranches, relation avec l'investisseur et avec la tête de réseau. Je ne vous lâche pas après la signature.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <div class="eyebrow">Comment on avance</div>
+        <h2 class="section-title">De la première discussion à <em>l'ouverture du centre</em>.</h2>
+      </div>
+      <ol class="process-list">
+        <li>
+          <div>
+            <strong>Premier échange de cadrage</strong>
+            <span>On qualifie votre projet, votre zone, vos contraintes de calendrier et de financement, et l'enseigne visée. 30 minutes par téléphone, sans engagement.</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Validation du modèle économique</strong>
+            <span>On modélise ensemble votre opération sur le simulateur, avec les chiffres réels de l'enseigne. Objectif : s'assurer que le rachat est tenable sur 3 à 5 ans avec les hypothèses de votre zone.</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Mise en relation avec la tête de réseau</strong>
+            <span>Présentation de votre profil à l'enseigne, envoi du DIP, business plan sur votre zone. Validation de votre profil exploitant par la tête de réseau.</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Identification de l'investisseur</strong>
+            <span>Je sélectionne et vous présente un ou plusieurs investisseurs compatibles avec votre projet — profil, ticket, horizon de sortie. Rendez-vous de présentation tripartite.</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Structuration juridique et financière</strong>
+            <span>Rédaction du pacte d'associés, des statuts, du calendrier de rachat. Validation par vos conseils respectifs. C'est ici que tout se joue pour la sérénité des années qui suivent.</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Réservation de territoire et ouverture</strong>
+            <span>Signature du contrat de franchise et du pacte d'associés. Constitution de la société, déblocage des fonds, démarrage des travaux. Ouverture du centre dans les semaines qui suivent.</span>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="wrap">
+      <h2>Vous avez <em>le profil</em>. Parlons <em>du montage</em>.</h2>
+      <p>Un premier échange de 30 minutes pour voir si votre projet rentre dans ce cadre, quelle enseigne irait, et quel investisseur serait compatible. Sans engagement.</p>
+      <div class="btn-group">
+        <a href="sms:+33610703090" class="btn btn-primary">SMS · 06 10 70 30 90</a>
+        <a href="tel:+33610703090" class="btn btn-ghost">Appeler</a>
+        <a href="mailto:thierry@thierrybismuth.com?subject=Franchis%C3%A9%20sans%20apport%20-%20Demande%20de%20cadrage" class="btn btn-ghost">Par mail</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>Franchisé sans apport · <a href="entrepreneur-ou-en-reconversion.html">Retour espace entrepreneur</a> · <a href="accueil.html">thierrybismuth.com</a></p>
+</footer>
+
+<script>
+(function(){
+  const fmt = v => {
+    if (Math.abs(v) >= 1000) return Math.round(v/1000) + ' k€';
+    return Math.round(v) + ' €';
+  };
+  const pct = v => Math.round(v*10)/10 + '%';
+
+  const ids = ['ca1','growth','charges','gerance','apport-gerant','apport','valo','pct-reinject','cible'];
+  const labels = {
+    'ca1': v => fmt(+v),
+    'growth': v => '+'+v+'%',
+    'charges': v => fmt(+v),
+    'gerance': v => (+v).toLocaleString('fr-FR') + ' €',
+    'apport-gerant': v => (+v===0 ? '0 €' : fmt(+v)),
+    'apport': v => fmt(+v),
+    'valo': v => fmt(+v),
+    'pct-reinject': v => v+'%',
+    'cible': v => v+'%'
+  };
+
+  function compute(){
+    const ca1 = +document.getElementById('ca1').value;
+    const growth = +document.getElementById('growth').value / 100;
+    const chargesAn1 = +document.getElementById('charges').value;
+    const growthCharges = 0.05;
+    const gerance = +document.getElementById('gerance').value * 12;
+    let apport = +document.getElementById('apport').value;
+    let apportGerant = +document.getElementById('apport-gerant').value;
+    // Sécurité : l'apport exploitant ne peut pas dépasser l'apport total
+    if (apportGerant > apport) {
+      apportGerant = apport;
+      document.getElementById('apport-gerant').value = apport;
+    }
+    const compl = Math.max(apport - apportGerant, 0);
+    const complEl = document.getElementById('apport-complement');
+    if (complEl) complEl.textContent = '→ Apport complémentaire de l\'investisseur : ' + compl.toLocaleString('fr-FR') + ' €';
+    const valo100Input = +document.getElementById('valo').value;
+    const pctReinject = +document.getElementById('pct-reinject').value / 100;
+    const cible = +document.getElementById('cible').value / 100;
+
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      document.getElementById(id+'-val').textContent = labels[id](el.value);
+    });
+
+    const years = [];
+    let capitalGerant = apport > 0 ? Math.min(apportGerant / apport, 1) : 0;
+    const resultatAn1 = chargesAn1>0 ? (ca1 - chargesAn1 - gerance) : 1;
+    let rachatsCumules = 0;
+    let resultatsInvCumules = 0;
+
+    for (let i = 0; i < 5; i++) {
+      const ca = ca1 * Math.pow(1 + growth, i);
+      const charges = chargesAn1 * Math.pow(1 + growthCharges, i);
+      const resultat = ca - charges - gerance;
+      const resultatPositif = Math.max(resultat, 0);
+
+      const partInv = resultatPositif * (1 - capitalGerant);
+      const partGerant = resultatPositif * capitalGerant;
+
+      const revenusGerant = gerance + partGerant;
+      const injection = revenusGerant * pctReinject;
+
+      const valo100 = resultatAn1 > 0 ? valo100Input * (resultat / resultatAn1) : valo100Input;
+
+      let partRachetee = 0;
+      if (valo100 > 0 && injection > 0) {
+        partRachetee = Math.min(injection / valo100, cible - capitalGerant);
+        if (partRachetee < 0) partRachetee = 0;
+      }
+
+      const montantRachat = partRachetee * valo100;
+
+      years.push({
+        ca, charges, resultat, partInv, partGerant,
+        gerance, injection: Math.min(injection, montantRachat), montantRachat,
+        capitalDebut: capitalGerant,
+        partRachetee,
+        capitalFin: capitalGerant + partRachetee,
+        valo100
+      });
+
+      rachatsCumules += montantRachat;
+      resultatsInvCumules += partInv;
+      capitalGerant += partRachetee;
+      if (capitalGerant >= cible) capitalGerant = cible;
+    }
+
+    const tbody = document.getElementById('calc-tbody');
+    const rows = [
+      {label:'CA', vals: years.map(y=>fmt(y.ca)), cls:''},
+      {label:'− Charges', vals: years.map(y=>fmt(-y.charges)), cls:''},
+      {label:'− Rémunération de gérance', vals: years.map(()=>fmt(-gerance)), cls:'gerance-row'},
+      {label:'= Résultat net distribuable', vals: years.map(y=>fmt(y.resultat)), cls:'highlight'},
+      {label:'Part investisseur (au prorata)', vals: years.map(y=>fmt(y.partInv)+' ('+pct((1-y.capitalDebut)*100)+')'), cls:''},
+      {label:'Part exploitant (au prorata)', vals: years.map(y=>fmt(y.partGerant)+' ('+pct(y.capitalDebut*100)+')'), cls:''},
+      {label:'Revenus cash exploitant (gérance + part résultat)', vals: years.map(y=>fmt(y.gerance+y.partGerant)), cls:'gerance-row separator'},
+      {label:'Montant réinvesti en rachat de parts', vals: years.map(y=>fmt(y.montantRachat)), cls:'gerance-row'},
+      {label:'% capital exploitant (fin an)', vals: years.map(y=>pct(y.capitalFin*100)), cls:'capital-row separator'},
+      {label:'Valorisation 100% (revalorisée)', vals: years.map(y=>fmt(y.valo100)), cls:''},
+    ];
+
+    tbody.innerHTML = rows.map(r => {
+      return '<tr class="'+r.cls+'"><td>'+r.label+'</td>' +
+        r.vals.map(v=>'<td>'+v+'</td>').join('') + '</tr>';
+    }).join('');
+
+    const finalCapital = years[4].capitalFin * 100;
+    const totalRetourInv = resultatsInvCumules + rachatsCumules;
+    const apportInvInitial = Math.max(apport - apportGerant, 1);
+    const tri5 = Math.pow(totalRetourInv / apportInvInitial, 1/5) - 1;
+
+    document.getElementById('synth-capital').textContent = Math.round(finalCapital) + '%';
+    document.getElementById('synth-retour').textContent = fmt(totalRetourInv);
+    document.getElementById('synth-tri').textContent = isFinite(tri5) && tri5 > -1 ? '+'+Math.round(tri5*100)+'%/an' : '—';
+  }
+
+  ids.forEach(id => {
+    document.getElementById(id).addEventListener('input', compute);
+  });
+  compute();
+})();
+</script>
+
+</body>
+</html>
