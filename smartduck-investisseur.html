@@ -877,12 +877,21 @@
         </div>
 
         <div class="calc-field">
-          <label>Apport initial du gérant</label>
+          <label>Apport initial du gérant (trésorerie personnelle)</label>
           <div class="calc-slider">
             <input type="range" id="apport-gerant" min="0" max="35000" step="500" value="0">
             <output id="apport-gerant-val">0 €</o>
           </div>
-          <div class="apport-complement" id="apport-complement" style="margin-top:8px;font-size:12px;color:var(--texte-soft);font-style:italic">→ Apport complémentaire de l'investisseur : 35 000 €</div>
+          <div class="levier-toggle" style="margin-top:12px;padding:12px 14px;background:rgba(255,90,138,.08);border-left:2px solid var(--rose);border-radius:2px">
+            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin:0;text-transform:none;letter-spacing:0;font-size:13px;color:var(--texte);font-weight:500">
+              <input type="checkbox" id="levier" style="margin-top:3px;accent-color:var(--rose);cursor:pointer">
+              <span>J'utilise mon apport comme <strong>levier bancaire</strong> (×3 : 30% d'apport + 70% d'emprunt personnel)</span>
+            </label>
+            <div id="levier-info" style="margin-top:8px;font-size:11px;color:var(--texte-soft);line-height:1.5;padding-left:24px">
+              En France, un apport personnel représente en général 30% de l'investissement global. Vous pouvez apporter sec (trésorerie = capital) ou utiliser votre apport comme effet de levier pour prendre une part plus importante. L'emprunt personnel se rembourse ensuite avec vos revenus de gérance et vos dividendes.
+            </div>
+          </div>
+          <div class="apport-complement" id="apport-complement" style="margin-top:10px;font-size:12px;color:var(--texte-soft);font-style:italic;line-height:1.5">→ Apport complémentaire de l'investisseur : 35 000 €</div>
         </div>
 
         <div class="calc-field">
@@ -1106,7 +1115,7 @@
   };
   const pct = v => Math.round(v*10)/10 + '%';
 
-  const ids = ['ca1','growth','charges','gerance','apport-gerant','apport','valo','pct-reinject'];
+  const ids = ['ca1','growth','charges','gerance','apport-gerant','apport','valo','pct-reinject','levier'];
   const labels = {
     'ca1': v => fmt(+v),
     'growth': v => '+'+v+'%',
@@ -1115,7 +1124,8 @@
     'apport-gerant': v => (+v===0 ? '0 €' : fmt(+v)),
     'apport': v => fmt(+v),
     'valo': v => fmt(+v),
-    'pct-reinject': v => v+'%'
+    'pct-reinject': v => v+'%',
+    'levier': v => ''
   };
 
   function compute(){
@@ -1125,11 +1135,40 @@
     const growthCharges = 0.05; // +5%/an figé
     const gerance = +document.getElementById('gerance').value * 12;
     const apport = +document.getElementById('apport').value;
-    const apportGerant = +document.getElementById('apport-gerant').value;
-    // Affiche la part restante apportée par l'investisseur
-    const compl = Math.max(apport - apportGerant, 0);
+    const apportGerantTreso = +document.getElementById('apport-gerant').value;
+    const levierActif = document.getElementById('levier').checked;
+    
+    // Calcul du capital effectif du gérant (plafonné à apport total)
+    let capitalGerantBrut, empruntPerso;
+    if (levierActif) {
+      capitalGerantBrut = Math.min(apportGerantTreso * 3, apport);
+      empruntPerso = Math.max(capitalGerantBrut - apportGerantTreso, 0);
+    } else {
+      capitalGerantBrut = apportGerantTreso;
+      empruntPerso = 0;
+    }
+    
+    // Mensualité emprunt personnel (5% sur 7 ans, annuité constante)
+    const TAUX_EMPRUNT = 0.05, DUREE_EMPRUNT = 7;
+    let annuiteEmprunt = 0;
+    if (empruntPerso > 0) {
+      const n = DUREE_EMPRUNT * 12;
+      const t = TAUX_EMPRUNT / 12;
+      const mensu = empruntPerso * t / (1 - Math.pow(1+t, -n));
+      annuiteEmprunt = mensu * 12;
+    }
+    
+    // Met à jour l'affichage du complément
+    const complInvest = Math.max(apport - capitalGerantBrut, 0);
     const complEl = document.getElementById('apport-complement');
-    if (complEl) complEl.textContent = '→ Apport complémentaire de l\'investisseur : ' + compl.toLocaleString('fr-FR') + ' €';
+    if (complEl) {
+      let txt = '→ Apport complémentaire de l\'investisseur au capital : ' + complInvest.toLocaleString('fr-FR') + ' €';
+      if (levierActif && empruntPerso > 0) {
+        const mensu = annuiteEmprunt / 12;
+        txt += ' · Votre emprunt perso : ' + empruntPerso.toLocaleString('fr-FR') + ' € sur 7 ans à 5% (' + Math.round(mensu) + ' €/mois)';
+      }
+      complEl.innerHTML = txt;
+    }
     const valo100Input = +document.getElementById('valo').value;
     const pctReinject = +document.getElementById('pct-reinject').value / 100;
 
@@ -1141,7 +1180,7 @@
 
     const years = [];
     // Part initiale du gérant = son apport / apport total au capital
-    let capitalGerant = apport > 0 ? Math.min(apportGerant / apport, 1) : 0;
+    let capitalGerant = apport > 0 ? Math.min(capitalGerantBrut / apport, 1) : 0;
     const capitalInitialGerant = capitalGerant;
     // Résultat An 1 de référence pour revaloriser les parts
     const resultatAn1 = chargesAn1>0 ? (ca1 - chargesAn1 - gerance) : 1;
@@ -1160,8 +1199,12 @@
 
       // Revenus du gérant sur l'année = gérance + part de résultat
       const revenusGerant = gerance + partGerant;
+      // Remboursement emprunt personnel (dans la durée du prêt)
+      const rbstEmprunt = i < DUREE_EMPRUNT ? annuiteEmprunt : 0;
+      // Trésorerie disponible après remboursement
+      const dispoGerant = Math.max(revenusGerant - rbstEmprunt, 0);
       // Réinjection dans le rachat
-      const injection = revenusGerant * pctReinject;
+      const injection = dispoGerant * pctReinject;
 
       // Valorisation 100% = investissement initial porté par l'investisseur
       // revalorisée chaque année au prorata de la croissance du résultat
@@ -1182,7 +1225,8 @@
         capitalDebut: capitalGerant,
         partRachetee,
         capitalFin: capitalGerant + partRachetee,
-        valo100
+        valo100,
+        rbstEmprunt
       });
 
       rachatsCumules += montantRachat;
@@ -1201,6 +1245,7 @@
       {label:'Part investisseur (au prorata)', vals: years.map(y=>fmt(y.partInv)+' ('+pct((1-y.capitalDebut)*100)+')'), cls:''},
       {label:'Part gérant (au prorata)', vals: years.map(y=>fmt(y.partGerant)+' ('+pct(y.capitalDebut*100)+')'), cls:''},
       {label:'Revenus cash du gérant (gérance + part résultat)', vals: years.map(y=>fmt(y.gerance+y.partGerant)), cls:'gerance-row separator'},
+      {label:'− Remboursement emprunt personnel', vals: years.map(y=>y.rbstEmprunt>0 ? fmt(-y.rbstEmprunt) : '—'), cls:'gerance-row'},
       {label:'Montant réinvesti en rachat de parts', vals: years.map(y=>fmt(y.montantRachat)), cls:'gerance-row'},
       {label:'% capital gérant (fin an)', vals: years.map(y=>pct(y.capitalFin*100)), cls:'capital-row separator'},
       {label:'Valorisation 100% (revalorisée)', vals: years.map(y=>fmt(y.valo100)), cls:''},
