@@ -1056,40 +1056,478 @@
   </div>
 </section>
 
-<!-- ============ CHOIX PROFIL ============ -->
+<!-- ============ CALCULATEUR (partagé exploitant + investisseur) ============ -->
+<section class="calc-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Projection 5 ans · interactive</div>
+      <h2 class="section-title">Modélisez <em>votre opération</em>.</h2>
+      <p class="section-lede">Modifiez les hypothèses et voyez en temps réel comment le capital, les revenus et la rentabilité évoluent sur 5 ans. Les chiffres par défaut correspondent au scénario central Smart Duck.</p>
+    </div>
+
+    <div class="calc-wrap">
+      <!-- Panneau hypothèses -->
+      <div class="calc-inputs">
+        <h3>Hypothèses</h3>
+
+        <div class="calc-field">
+          <label>CA année 1</label>
+          <div class="calc-slider">
+            <input type="hidden" id="ca1" value="240000">
+            <output id="ca1-val" style="flex:1;text-align:left;color:var(--texte-soft);font-weight:400;font-size:14px">240 k€ · scénario central Smart Duck</output>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label>Croissance CA par an</label>
+          <div class="calc-slider">
+            <input type="hidden" id="growth" value="10">
+            <output id="growth-val" style="flex:1;text-align:left;color:var(--texte-soft);font-weight:400;font-size:14px">+10% · hypothèse prudente</output>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label>Charges annuelles (hors gérance)</label>
+          <div class="calc-slider">
+            <input type="hidden" id="charges" value="180000">
+            <output id="charges-val" style="flex:1;text-align:left;color:var(--texte-soft);font-weight:400;font-size:14px">180 k€ An 1 · +5%/an (inflation, hausse ETP)</output>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label>Rémunération de gérance / mois</label>
+          <div class="calc-slider">
+            <input type="range" id="gerance" min="1500" max="5000" step="250" value="2500">
+            <output id="gerance-val">2 500 €</output>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label>Apport initial du gérant (trésorerie personnelle)</label>
+          <div class="calc-slider">
+            <input type="range" id="apport-gerant" min="0" max="35000" step="500" value="0">
+            <output id="apport-gerant-val">0 €</output>
+          </div>
+          <div class="levier-toggle" style="margin-top:12px;padding:12px 14px;background:rgba(255,90,138,.08);border-left:2px solid var(--rose);border-radius:2px">
+            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin:0;text-transform:none;letter-spacing:0;font-size:13px;color:var(--texte);font-weight:500">
+              <input type="checkbox" id="levier" style="margin-top:3px;accent-color:var(--rose);cursor:pointer">
+              <span>J'utilise mon apport comme <strong>levier bancaire</strong> (×3 : 30% d'apport + 70% d'emprunt personnel)</span>
+            </label>
+            <div id="levier-info" style="margin-top:8px;font-size:11px;color:var(--texte-soft);line-height:1.5;padding-left:24px">
+              En France, un apport personnel représente en général 30% de l'investissement global. Vous pouvez apporter sec (trésorerie = capital) ou utiliser votre apport comme effet de levier pour prendre une part plus importante. L'emprunt personnel se rembourse ensuite avec vos revenus de gérance et vos dividendes.
+            </div>
+          </div>
+          <div class="apport-complement" id="apport-complement" style="margin-top:10px;font-size:12px;color:var(--texte-soft);font-style:italic;line-height:1.5">→ Apport complémentaire de l'investisseur : 35 000 €</div>
+        </div>
+
+        <!-- Apport capital société (valeur fixe, utilisée par le JS) -->
+        <input type="hidden" id="apport" value="35000">
+
+        <div class="calc-field">
+          <label>Investissement total porté par l'investisseur (capital + dette bancaire)</label>
+          <div class="calc-slider">
+            <input type="hidden" id="valo" value="150000">
+            <output id="valo-val" style="flex:1;text-align:left;color:var(--texte-soft);font-weight:400;font-size:14px">150 k€ · montant standard d'ouverture</output>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label>% des revenus du gérant (gérance + résultat) réinjecté dans le rachat</label>
+          <div class="calc-slider">
+            <input type="range" id="pct-reinject" min="0" max="100" step="10" value="80">
+            <output id="pct-reinject-val">80%</output>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panneau résultats -->
+      <div class="calc-output">
+        <div class="calc-table-wrap">
+          <table class="calc-table">
+            <thead>
+              <tr>
+                <th>Poste</th>
+                <th>An 1</th>
+                <th>An 2</th>
+                <th>An 3</th>
+                <th>An 4</th>
+                <th>An 5</th>
+              </tr>
+            </thead>
+            <tbody id="calc-tbody">
+              <!-- rempli par JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="calc-synth">
+          <div class="synth-card">
+            <div class="synth-label">Capital gérant fin an 5</div>
+            <div class="synth-val" id="synth-capital">—</div>
+          </div>
+          <div class="synth-card">
+            <div class="synth-label">Retour investisseur cumulé</div>
+            <div class="synth-val" id="synth-retour">—</div>
+          </div>
+          <div class="synth-card">
+            <div class="synth-label">TRI investisseur (5 ans)</div>
+            <div class="synth-val" id="synth-tri">—</div>
+          </div>
+        </div>
+
+        <p class="calc-footnote">Modèle illustratif. Valorisation 100% = 150 k€ An 1 (capital investisseur + dette bancaire), revalorisée chaque année au prorata de la croissance du résultat net (la société vaut plus cher quand elle génère plus de résultat). Charges fixes : 180 k€ An 1, +5%/an pour tenir compte de l'inflation et de la revalorisation des ETP. Si le gérant démarre à 0% de capital, il ne touche aucune part du résultat en An 1 — seule sa gérance alimente le rachat. Dès qu'il détient des parts, la répartition du résultat suit sa quote-part. Rentrer en négociation avec son conseil pour valider la structure réelle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .calc-section{background:var(--crème-2);padding:100px 40px}
+  .calc-wrap{
+    display:grid;
+    grid-template-columns:360px 1fr;
+    gap:40px;
+    align-items:start;
+  }
+  .calc-inputs{
+    background:var(--crème);
+    padding:40px 32px;
+    border-radius:2px;
+    border:1px solid var(--bord);
+    position:sticky;
+    top:24px;
+  }
+  .calc-inputs h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:22px;
+    margin-bottom:28px;
+    color:var(--noir);
+  }
+  .calc-field{margin-bottom:24px}
+  .calc-field label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--texte-soft);
+    margin-bottom:8px;
+  }
+  .calc-slider{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .calc-slider input[type=range]{
+    flex:1;
+    accent-color:var(--rose);
+    cursor:pointer;
+  }
+  .calc-slider output{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:16px;
+    color:var(--noir);
+    min-width:80px;
+    text-align:right;
+  }
+  .calc-output{
+    background:var(--crème);
+    padding:40px;
+    border-radius:2px;
+    border:1px solid var(--bord);
+  }
+  .calc-table-wrap{
+    overflow-x:auto;
+    margin-bottom:32px;
+  }
+  .calc-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+  }
+  .calc-table th,.calc-table td{
+    padding:12px 10px;
+    text-align:right;
+    border-bottom:1px solid var(--bord);
+  }
+  .calc-table th:first-child,.calc-table td:first-child{
+    text-align:left;
+    font-weight:500;
+    color:var(--texte-soft);
+    white-space:nowrap;
+  }
+  .calc-table th{
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--rose);
+    font-weight:600;
+    padding-bottom:16px;
+  }
+  .calc-table tr.separator td{
+    border-top:2px solid var(--noir);
+    padding-top:14px;
+  }
+  .calc-table tr.highlight td{
+    font-family:'Fraunces',serif;
+    font-size:16px;
+    color:var(--noir);
+    font-weight:500;
+    background:rgba(255,90,138,.06);
+  }
+  .calc-table tr.highlight td:first-child{color:var(--rose)}
+  .calc-table tr.gerance-row td{color:#1a6b2e}
+  .calc-table tr.capital-row td{
+    font-family:'Fraunces',serif;
+    color:var(--or-deep,#a87f30);
+    font-weight:500;
+  }
+  .calc-synth{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-bottom:24px;
+  }
+  .synth-card{
+    background:var(--noir);
+    color:var(--crème);
+    padding:24px 20px;
+    border-radius:2px;
+    text-align:center;
+  }
+  .synth-label{
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--or,#e8c88a);
+    margin-bottom:8px;
+  }
+  .synth-val{
+    font-family:'Fraunces',serif;
+    font-size:28px;
+    font-weight:500;
+    color:var(--rose-soft,#ffc2d4);
+    line-height:1;
+  }
+  .calc-footnote{
+    font-size:13px;
+    color:var(--texte-soft);
+    font-style:italic;
+    line-height:1.6;
+  }
+  @media(max-width:960px){
+    .calc-section{padding:72px 24px}
+    .calc-wrap{grid-template-columns:1fr;gap:24px}
+    .calc-inputs{position:static;padding:28px 24px}
+    .calc-output{padding:24px}
+    .calc-synth{grid-template-columns:1fr;gap:12px}
+    .calc-table{font-size:12px}
+    .calc-table th,.calc-table td{padding:10px 6px}
+  }
+</style>
+
+<script>
+(function(){
+  const fmt = v => {
+    if (Math.abs(v) >= 1000) return Math.round(v/1000) + ' k€';
+    return Math.round(v) + ' €';
+  };
+  const pct = v => Math.round(v*10)/10 + '%';
+
+  const ids = ['ca1','growth','charges','gerance','apport-gerant','valo','pct-reinject','levier'];
+  const labels = {
+    'ca1': v => fmt(+v),
+    'growth': v => '+'+v+'%',
+    'charges': v => fmt(+v),
+    'gerance': v => (+v).toLocaleString('fr-FR') + ' €',
+    'apport-gerant': v => (+v===0 ? '0 €' : fmt(+v)),
+    'valo': v => fmt(+v),
+    'pct-reinject': v => v+'%',
+    'levier': v => ''
+  };
+
+  function compute(){
+    const ca1 = +document.getElementById('ca1').value;
+    const growth = +document.getElementById('growth').value / 100;
+    const chargesAn1 = +document.getElementById('charges').value;
+    const growthCharges = 0.05; // +5%/an figé
+    const gerance = +document.getElementById('gerance').value * 12;
+    const apport = +document.getElementById('apport').value;
+    const apportGerantTreso = +document.getElementById('apport-gerant').value;
+    const levierActif = document.getElementById('levier').checked;
+    
+    // Calcul du capital effectif du gérant (plafonné à apport total)
+    let capitalGerantBrut, empruntPerso;
+    if (levierActif) {
+      capitalGerantBrut = Math.min(apportGerantTreso * 3, apport);
+      empruntPerso = Math.max(capitalGerantBrut - apportGerantTreso, 0);
+    } else {
+      capitalGerantBrut = apportGerantTreso;
+      empruntPerso = 0;
+    }
+    
+    // Mensualité emprunt personnel (5% sur 7 ans, annuité constante)
+    const TAUX_EMPRUNT = 0.05, DUREE_EMPRUNT = 7;
+    let annuiteEmprunt = 0;
+    if (empruntPerso > 0) {
+      const n = DUREE_EMPRUNT * 12;
+      const t = TAUX_EMPRUNT / 12;
+      const mensu = empruntPerso * t / (1 - Math.pow(1+t, -n));
+      annuiteEmprunt = mensu * 12;
+    }
+    
+    // Met à jour l'affichage du complément
+    const complInvest = Math.max(apport - capitalGerantBrut, 0);
+    const complEl = document.getElementById('apport-complement');
+    if (complEl) {
+      let txt = '→ Apport complémentaire de l\'investisseur au capital : ' + complInvest.toLocaleString('fr-FR') + ' €';
+      if (levierActif && empruntPerso > 0) {
+        const mensu = annuiteEmprunt / 12;
+        txt += ' · Votre emprunt perso : ' + empruntPerso.toLocaleString('fr-FR') + ' € sur 7 ans à 5% (' + Math.round(mensu) + ' €/mois)';
+      }
+      complEl.innerHTML = txt;
+    }
+    const valo100Input = +document.getElementById('valo').value;
+    const pctReinject = +document.getElementById('pct-reinject').value / 100;
+
+    // Met à jour les labels
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      document.getElementById(id+'-val').textContent = labels[id](el.value);
+    });
+
+    const years = [];
+    // Part initiale du gérant = son apport / apport total au capital
+    let capitalGerant = apport > 0 ? Math.min(capitalGerantBrut / apport, 1) : 0;
+    const capitalInitialGerant = capitalGerant;
+    // Résultat An 1 de référence pour revaloriser les parts
+    const resultatAn1 = chargesAn1>0 ? (ca1 - chargesAn1 - gerance) : 1;
+    let rachatsCumules = 0; // ce que l'investisseur a récupéré
+    let resultatsInvCumules = 0; // part du résultat perçue par l'investisseur
+
+    for (let i = 0; i < 5; i++) {
+      const ca = ca1 * Math.pow(1 + growth, i);
+      const charges = chargesAn1 * Math.pow(1 + growthCharges, i);
+      const resultat = ca - charges - gerance;
+      const resultatPositif = Math.max(resultat, 0);
+
+      // Répartition du résultat AU DÉBUT de l'année (selon capital au 1er janvier)
+      const partInv = resultatPositif * (1 - capitalGerant);
+      const partGerant = resultatPositif * capitalGerant;
+
+      // Revenus du gérant sur l'année = gérance + part de résultat
+      const revenusGerant = gerance + partGerant;
+      // Remboursement emprunt personnel (dans la durée du prêt)
+      const rbstEmprunt = i < DUREE_EMPRUNT ? annuiteEmprunt : 0;
+      // Trésorerie disponible après remboursement
+      const dispoGerant = Math.max(revenusGerant - rbstEmprunt, 0);
+      // Réinjection dans le rachat
+      const injection = dispoGerant * pctReinject;
+
+      // Valorisation 100% = investissement initial porté par l'investisseur
+      // revalorisée chaque année au prorata de la croissance du résultat
+      const valo100 = resultatAn1 > 0 ? valo100Input * (resultat / resultatAn1) : valo100Input;
+
+      // Part rachetée cette année (plafond 51% total)
+      let partRachetee = 0;
+      if (valo100 > 0 && injection > 0) {
+        partRachetee = Math.min(injection / valo100, 0.51 - capitalGerant);
+        if (partRachetee < 0) partRachetee = 0;
+      }
+
+      const montantRachat = partRachetee * valo100;
+
+      years.push({
+        ca, charges, resultat, partInv, partGerant,
+        gerance, injection: Math.min(injection, montantRachat), montantRachat,
+        capitalDebut: capitalGerant,
+        partRachetee,
+        capitalFin: capitalGerant + partRachetee,
+        valo100,
+        rbstEmprunt
+      });
+
+      rachatsCumules += montantRachat;
+      resultatsInvCumules += partInv;
+      capitalGerant += partRachetee;
+      if (capitalGerant >= 0.51) capitalGerant = 0.51;
+    }
+
+    // Build tableau
+    const tbody = document.getElementById('calc-tbody');
+    const rows = [
+      {label:'CA', vals: years.map(y=>fmt(y.ca)), cls:''},
+      {label:'− Charges', vals: years.map(y=>fmt(-y.charges)), cls:''},
+      {label:'− Rémunération de gérance', vals: years.map(()=>fmt(-gerance)), cls:'gerance-row'},
+      {label:'= Résultat net distribuable', vals: years.map(y=>fmt(y.resultat)), cls:'highlight'},
+      {label:'Part investisseur (au prorata)', vals: years.map(y=>fmt(y.partInv)+' ('+pct((1-y.capitalDebut)*100)+')'), cls:''},
+      {label:'Part gérant (au prorata)', vals: years.map(y=>fmt(y.partGerant)+' ('+pct(y.capitalDebut*100)+')'), cls:''},
+      {label:'Revenus cash du gérant (gérance + part résultat)', vals: years.map(y=>fmt(y.gerance+y.partGerant)), cls:'gerance-row separator'},
+      {label:'− Remboursement emprunt personnel', vals: years.map(y=>y.rbstEmprunt>0 ? fmt(-y.rbstEmprunt) : '—'), cls:'gerance-row'},
+      {label:'Montant réinvesti en rachat de parts', vals: years.map(y=>fmt(y.montantRachat)), cls:'gerance-row'},
+      {label:'% capital gérant (fin an)', vals: years.map(y=>pct(y.capitalFin*100)), cls:'capital-row separator'},
+      {label:'Valorisation 100% (revalorisée)', vals: years.map(y=>fmt(y.valo100)), cls:''},
+    ];
+
+    tbody.innerHTML = rows.map(r => {
+      return '<tr class="'+r.cls+'"><td>'+r.label+'</td>' +
+        r.vals.map(v=>'<td>'+v+'</td>').join('') + '</tr>';
+    }).join('');
+
+    // Synthèses
+    const finalCapital = years[4].capitalFin * 100;
+    const totalRetourInv = resultatsInvCumules + rachatsCumules;
+    const tri5 = Math.pow(totalRetourInv / apport, 1/5) - 1;
+
+    document.getElementById('synth-capital').textContent = Math.round(finalCapital) + '%';
+    document.getElementById('synth-retour').textContent = fmt(totalRetourInv);
+    document.getElementById('synth-tri').textContent = isFinite(tri5) && tri5 > -1 ? '+'+Math.round(tri5*100)+'%/an' : '—';
+  }
+
+  // Init
+  ids.forEach(id => {
+    document.getElementById(id).addEventListener('input', compute);
+  });
+  compute();
+})();
+</script>
+
+<!-- ============ AVANTAGES PAR PROFIL ============ -->
 <section class="profils">
   <div class="profils-intro">
-    <div class="eyebrow" style="justify-content:center;color:var(--rose)">Deux parcours possibles</div>
-    <h2 class="section-title">Vous êtes plutôt <em>exploitant</em> ou <em>investisseur</em> ?</h2>
-    <p class="section-lede">Deux approches complémentaires du réseau Smart Duck. Elles peuvent se combiner.</p>
+    <div class="eyebrow" style="justify-content:center;color:var(--rose)">Deux profils, un même centre</div>
+    <h2 class="section-title">Les avantages, <em>côté gérant</em> ou <em>côté investisseur</em>.</h2>
+    <p class="section-lede">Le dispositif crée un alignement d'intérêts entre les deux profils. Chacun y gagne quelque chose de différent, sur la même opération.</p>
   </div>
 
   <div class="profils-grid">
-    <a href="smartduck-exploitant.html" class="profil-card exploitant">
-      <div class="tag">Parcours 01 · Exploitant</div>
-      <h3>Vous montez <em>votre centre</em>.</h3>
-      <p class="pitch">Esthéticienne, commerçante en reconversion, profil opérationnel. Vous gérez le centre au quotidien, vous encaissez la rémunération de gérance, et vous pouvez monter progressivement au capital.</p>
+    <div class="profil-card exploitant">
+      <div class="tag">Côté Exploitant · le gérant</div>
+      <h3>Se lancer à son compte, <em>sans apport</em>.</h3>
+      <p class="pitch">Esthéticienne, commerçante en reconversion, profil opérationnel. Vous faites tourner le centre, vous encaissez la rémunération de gérance dès le jour 1, et vous montez progressivement au capital.</p>
       <ul>
-        <li>Apport personnel de 0 à 20% seulement</li>
-        <li>Montée au capital jusqu'à 51% sur 3 ans</li>
-        <li>Revenu de gérance dès l'ouverture</li>
-        <li>Formation complète incluse</li>
+        <li>Zéro euro d'apport possible au démarrage</li>
+        <li>Rémunération de gérance dès l'ouverture pour assurer votre revenu pendant la montée en charge</li>
+        <li>Rachat progressif des parts avec la gérance et les dividendes, selon votre capacité année après année</li>
+        <li>Accession à un pourcentage d'actionnariat négocié en amont avec l'investisseur</li>
+        <li>Vous construisez un actif dont vous devenez majoritaire à terme</li>
       </ul>
-      <span class="cta">Découvrir le parcours exploitant <span class="arrow">→</span></span>
-    </a>
+    </div>
 
-    <a href="smartduck-investisseur.html" class="profil-card investisseur">
-      <div class="tag">Parcours 02 · Investisseur</div>
-      <h3>Vous financez, <em>vous pilotez</em>.</h3>
-      <p class="pitch">Vous cherchez un placement rentable dans un marché à fort potentiel. Vous financez un ou plusieurs centres, vous sélectionnez l'exploitant, vous encaissez les dividendes. Multi-centres possible sur une même ville.</p>
+    <div class="profil-card investisseur">
+      <div class="tag">Côté Investisseur · le partenaire financier</div>
+      <h3>Se positionner sur <em>un marché en croissance</em>, sans exploiter.</h3>
+      <p class="pitch">Vous financez, vous choisissez l'exploitant, vous encaissez la rémunération de votre mise sans porter l'opérationnel. Souvent dans une région que vous connaissez, avec quelqu'un que vous avez sélectionné.</p>
       <ul>
-        <li>Ticket 30 à 35 k€ par centre (haut de fourchette)</li>
-        <li>Avec ou sans recours bancaire selon trésorerie</li>
-        <li>Possibilité de 2 à 4 centres sur une même ville</li>
-        <li>Marge nette cible sur CA ~20% au régime de croisière</li>
+        <li>Positionnement sur un marché structurellement en croissance (+10 à 15% / an)</li>
+        <li>Pas besoin d'exploiter — vous choisissez un exploitant motivé</li>
+        <li>Souvent dans votre région, avec un partenaire sur qui vous avez de la visibilité</li>
+        <li>Sortie progressive : récupérez votre trésorerie pour un autre projet dans 3 à 5 ans</li>
+        <li>Ou restez durablement actionnaire minoritaire pour toucher des dividendes récurrents</li>
       </ul>
-      <span class="cta">Découvrir le parcours investisseur <span class="arrow">→</span></span>
-    </a>
+    </div>
   </div>
 </section>
 
