@@ -1424,7 +1424,7 @@
     // Hint sous slider exploitant : capital effectif + emprunt éventuel
     const complEl = document.getElementById('apport-complement');
     if (complEl) {
-      let txt = '→ Capital effectif de l'exploitant au capital : ' + apportGerant.toLocaleString('fr-FR') + ' €';
+      let txt = '→ Capital effectif de l\'exploitant au capital : ' + apportGerant.toLocaleString('fr-FR') + ' €';
       if (levierActif && empruntPerso > 0) {
         const mensu = annuiteEmprunt / 12;
         txt += ' · dont ' + empruntPerso.toLocaleString('fr-FR') + ' € empruntés sur 7 ans à 5 % (' + Math.round(mensu).toLocaleString('fr-FR') + ' €/mois)';
