@@ -441,6 +441,130 @@
   }
   .invest-card p{font-size:14.5px;color:var(--texte)}
 
+  /* Encart copilote Multi-Potentiel */
+  .copilote{background:var(--creme);padding:80px 40px 100px}
+  .copilote-box{
+    background:linear-gradient(135deg,#fff8ef 0%,#f7ecd8 100%);
+    border:1px solid var(--bord);
+    border-left:5px solid var(--brique);
+    padding:56px 52px;
+    border-radius:2px;
+    position:relative;
+    box-shadow:0 2px 24px rgba(18,32,27,.04);
+  }
+  .copilote-box::before{
+    content:'';
+    position:absolute;
+    top:0;right:0;
+    width:180px;height:180px;
+    background:radial-gradient(circle at top right,rgba(184,92,59,.14) 0%,transparent 70%);
+    pointer-events:none;
+  }
+  .copilote-tag{
+    display:inline-block;
+    padding:7px 14px;
+    background:var(--brique);
+    color:var(--creme);
+    font-size:10.5px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    font-weight:700;
+    margin-bottom:22px;
+  }
+  .copilote-title{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:clamp(28px,3.5vw,42px);
+    line-height:1.1;
+    letter-spacing:-.015em;
+    color:var(--noir);
+    margin-bottom:18px;
+    max-width:720px;
+  }
+  .copilote-title em{font-style:italic;color:var(--brique);font-weight:400}
+  .copilote-lede{
+    font-size:16.5px;
+    color:var(--texte);
+    line-height:1.6;
+    max-width:720px;
+    margin-bottom:40px;
+  }
+  .copilote-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px;
+    margin-bottom:44px;
+  }
+  .copilote-item{
+    background:rgba(255,255,255,.6);
+    padding:28px 26px;
+    border-radius:2px;
+    border-top:2px solid var(--brique-soft);
+  }
+  .copilote-icon{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:24px;
+    color:var(--brique);
+    margin-bottom:10px;
+    line-height:1;
+  }
+  .copilote-item h4{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:18px;
+    color:var(--noir);
+    margin-bottom:10px;
+    line-height:1.2;
+  }
+  .copilote-item p{font-size:14px;color:var(--texte);line-height:1.6}
+  .copilote-price{
+    display:flex;
+    align-items:center;
+    gap:28px;
+    padding:28px 32px;
+    background:var(--noir);
+    color:var(--creme);
+    border-radius:2px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+  }
+  .copilote-price .price-tag{
+    font-size:11px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:var(--brique-soft);
+    font-weight:700;
+    flex-shrink:0;
+  }
+  .copilote-price .price-value{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:34px;
+    color:var(--creme);
+    line-height:1;
+    flex-shrink:0;
+  }
+  .copilote-price .price-detail{
+    font-size:13.5px;
+    color:rgba(245,239,227,.75);
+    line-height:1.55;
+    flex:1;
+    min-width:240px;
+  }
+  .copilote-footer p{
+    font-size:13.5px;
+    color:var(--texte-soft);
+    font-style:italic;
+    line-height:1.5;
+  }
+  @media (max-width:860px){
+    .copilote{padding:60px 20px}
+    .copilote-box{padding:40px 28px}
+    .copilote-grid{grid-template-columns:1fr;gap:16px}
+    .copilote-price{flex-direction:column;align-items:flex-start;gap:12px;padding:24px 22px}
+  }
+
   /* Simulateur */
   .calc-section{background:var(--creme-2);padding:100px 40px}
   .calc-wrap{
@@ -916,13 +1040,59 @@
         </div>
         <div class="invest-card">
           <div class="n">05</div>
+          <h4>Un intérêt parfaitement convergent</h4>
+          <p>Plus le centre performe vite, plus l'exploitant monte vite au capital. Il a donc un intérêt direct et immédiat à accélérer la performance dès le premier jour — ce qui sert exactement les intérêts de l'investisseur pendant la période où il est majoritaire.</p>
+        </div>
+        <div class="invest-card">
+          <div class="n">06</div>
           <h4>Un format multi-centres possible</h4>
           <p>Certains investisseurs financent plusieurs centres en parallèle — grappe sur une ville ou portefeuille régional —, chacun avec son exploitant dédié et son propre pacte. L'effort de suivi est mutualisé.</p>
         </div>
         <div class="invest-card">
-          <div class="n">06</div>
+          <div class="n">07</div>
+          <h4>Un actif adossé à un réseau de franchise</h4>
+          <p>Le placement n'est pas un pari isolé : le centre appartient à une enseigne structurée, avec un modèle éprouvé, des process documentés et des résultats traçables sur les autres points de vente du réseau. L'investisseur dispose d'un référentiel comparable avant de s'engager et tout au long de la détention.</p>
+        </div>
+        <div class="invest-card">
+          <div class="n">08</div>
           <h4>Un cadre sécurisé juridiquement</h4>
           <p>Pacte d'associés, statuts, clause de rachat forcé en cas d'inexécution, clause de sortie en cas de rupture de confiance. Le risque opérationnel reste lié au centre ; le risque juridique est encadré.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENCART OPTIONNEL MULTIPOTENTIEL -->
+  <section class="copilote">
+    <div class="wrap">
+      <div class="copilote-box">
+        <div class="copilote-tag">Option · Copilotage Multi-Potentiel</div>
+        <h2 class="copilote-title">Vous voulez <em>un copilote</em> aux côtés de l'entrepreneur ?</h2>
+        <p class="copilote-lede">Pour l'investisseur qui veut plus de sécurité et pour l'exploitant qui veut plus de traction : Multi-Potentiel peut accompagner le centre sur toute la durée du rachat. Un consultant dédié, en binôme avec l'exploitant.</p>
+        <div class="copilote-grid">
+          <div class="copilote-item">
+            <div class="copilote-icon">01</div>
+            <h4>Coaching entrepreneurial</h4>
+            <p>Points réguliers avec l'exploitant : pilotage commercial, management de l'équipe, lecture des indicateurs, prises de décision stratégiques. Un œil extérieur qui challenge et qui soutient.</p>
+          </div>
+          <div class="copilote-item">
+            <div class="copilote-icon">02</div>
+            <h4>Ouverture de carnet d'adresses</h4>
+            <p>Mise en relation avec prescripteurs locaux, partenaires commerciaux, dispositifs d'aides sectoriels. Accélération de l'ancrage territorial du centre dès les premiers mois.</p>
+          </div>
+          <div class="copilote-item">
+            <div class="copilote-icon">03</div>
+            <h4>Visites régulières sur site</h4>
+            <p>Présence physique au centre à intervalles réguliers : observation terrain, retour franc à l'exploitant, alerte à l'investisseur en cas de dérive, reporting synthétique trimestriel.</p>
+          </div>
+        </div>
+        <div class="copilote-price">
+          <div class="price-tag">Ticket de mission</div>
+          <div class="price-value">2 % du capital</div>
+          <div class="price-detail">Forfait annuel indexé sur le capital de la société d'exploitation. Facturé à la société, amortissable. Durée calée sur la période de rachat (3 à 5 ans typiquement).</div>
+        </div>
+        <div class="copilote-footer">
+          <p>À décider au moment de la structuration, ou à ajouter plus tard en cours de parcours si le besoin apparaît. Pas obligatoire — juste disponible.</p>
         </div>
       </div>
     </div>
