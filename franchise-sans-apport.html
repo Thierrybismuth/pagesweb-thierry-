@@ -873,28 +873,32 @@
     <div class="wrap">
       <div class="section-head">
         <div class="eyebrow">Le principe</div>
-        <h2 class="section-title">Deux rôles. Un <em>pacte</em>. Une sortie programmée.</h2>
-        <p class="section-lede">On associe un exploitant-entrepreneur et un ou plusieurs investisseurs dans la même société d'exploitation. Chacun apporte ce qu'il a de plus : l'un son énergie opérationnelle, l'autre son apport financier. Le pacte d'associés fixe d'avance la trajectoire.</p>
+        <h2 class="section-title">Les avantages, <em>côté exploitant</em> ou <em>côté investisseur</em>.</h2>
+        <p class="section-lede">Le dispositif crée un alignement d'intérêts entre les deux profils. Chacun apporte ce qu'il a de plus — énergie opérationnelle d'un côté, apport financier de l'autre — et chacun y gagne quelque chose de différent sur la même opération. Le pacte d'associés fixe d'avance la trajectoire.</p>
       </div>
       <div class="principe-grid">
         <div class="principe-block exploitant">
-          <div class="role">L'exploitant-entrepreneur</div>
-          <h3>Vous portez le projet au quotidien.</h3>
-          <p>Vous êtes gérant de la société. Vous ouvrez le centre, vous développez le CA, vous encaissez une rémunération de gérance dès le démarrage. C'est vous qui créez la valeur.</p>
+          <div class="role">Côté exploitant · le gérant</div>
+          <h3>Se lancer à son compte, <em>sans apport</em>.</h3>
+          <p>Profil opérationnel, commerçant en reconversion, expert-métier sans épargne. Vous faites tourner le centre, vous encaissez la rémunération de gérance dès le jour 1, et vous montez progressivement au capital jusqu'à devenir majoritaire.</p>
           <ul>
-            <li>Apport personnel libre, de 0 € jusqu'au ticket total si vous le souhaitez</li>
-            <li>Part au capital au démarrage au prorata exact de votre apport</li>
-            <li>Rachat progressif des parts de l'investisseur jusqu'à 51 % ou plus</li>
+            <li>Zéro euro d'apport possible au démarrage</li>
+            <li>Rémunération de gérance dès l'ouverture pour assurer votre revenu pendant la montée en charge</li>
+            <li>Rachat progressif des parts avec la gérance et les dividendes, selon votre capacité année après année</li>
+            <li>Accession à un pourcentage d'actionnariat négocié en amont avec l'investisseur</li>
+            <li>Vous construisez un actif dont vous devenez majoritaire à terme</li>
           </ul>
         </div>
         <div class="principe-block investisseur">
-          <div class="role">Le ou les investisseurs</div>
-          <h3>Ils apportent le ou les tickets manquants.</h3>
-          <p>Un ou plusieurs investisseurs financent la différence entre votre apport personnel et le ticket total exigé par l'enseigne. Ils détiennent le capital au prorata de leur contribution.</p>
+          <div class="role">Côté investisseur · le partenaire financier</div>
+          <h3>Se positionner sur <em>un marché en croissance</em>, sans exploiter.</h3>
+          <p>Vous financez, vous choisissez l'exploitant, vous encaissez la rémunération de votre mise sans porter l'opérationnel. Souvent dans une région que vous connaissez, avec quelqu'un que vous avez sélectionné.</p>
           <ul>
-            <li>Part au capital au démarrage au prorata de l'apport financier</li>
-            <li>Perception des dividendes sur leur quote-part pendant toute la durée</li>
-            <li>Sortie progressive par rachat de parts, calendrier écrit dans le pacte</li>
+            <li>Positionnement sur un marché en croissance, adossé à une enseigne structurée</li>
+            <li>Pas besoin d'exploiter — vous choisissez un exploitant motivé</li>
+            <li>Souvent dans votre région, avec un partenaire sur qui vous avez de la visibilité</li>
+            <li>Sortie progressive : récupérez votre trésorerie pour un autre projet dans 3 à 5 ans</li>
+            <li>Ou restez durablement actionnaire minoritaire pour toucher des dividendes récurrents</li>
           </ul>
         </div>
       </div>
@@ -1147,12 +1151,21 @@
           </div>
 
           <div class="calc-field">
-            <label>Apport personnel de l'exploitant</label>
+            <label>Apport personnel de l'exploitant (trésorerie)</label>
             <div class="calc-slider">
               <input type="range" id="apport-gerant" min="0" max="80000" step="500" value="0">
               <output id="apport-gerant-val">0 €</output>
             </div>
-            <div class="calc-hint" id="apport-complement">→ Apport complémentaire de l'investisseur : 40 000 €</div>
+            <div class="levier-toggle" style="margin-top:12px;padding:12px 14px;background:rgba(184,92,59,.08);border-left:2px solid var(--brique);border-radius:2px">
+              <label style="display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--texte);font-weight:500;text-transform:none;letter-spacing:0;cursor:pointer;line-height:1.45;margin-bottom:0">
+                <input type="checkbox" id="levier" style="margin-top:3px;accent-color:var(--brique);cursor:pointer">
+                <span>J'utilise mon apport comme <strong>levier bancaire</strong> (×3 : 30 % apport + 70 % emprunt personnel)</span>
+              </label>
+              <div style="margin-top:8px;font-size:11px;color:var(--texte-soft);line-height:1.5;padding-left:24px">
+                En France, un apport personnel représente en général 30 % de l'investissement global. Vous pouvez apporter sec (trésorerie = capital) ou utiliser votre apport comme effet de levier pour prendre une part plus importante. L'emprunt personnel se rembourse ensuite avec vos revenus de gérance et vos dividendes.
+              </div>
+            </div>
+            <div class="calc-hint" id="apport-complement" style="margin-top:10px">→ Apport complémentaire de l'investisseur : 40 000 €</div>
           </div>
 
           <div class="calc-field">
@@ -1379,15 +1392,46 @@
     const growthCharges = 0.05;
     const gerance = +document.getElementById('gerance').value * 12;
     let apport = +document.getElementById('apport').value;
-    let apportGerant = +document.getElementById('apport-gerant').value;
-    // Sécurité : l'apport exploitant ne peut pas dépasser l'apport total
-    if (apportGerant > apport) {
-      apportGerant = apport;
-      document.getElementById('apport-gerant').value = apport;
+    let apportGerantTreso = +document.getElementById('apport-gerant').value;
+    const levierActif = document.getElementById('levier') ? document.getElementById('levier').checked : false;
+
+    // Calcul capital effectif exploitant + emprunt personnel
+    let apportGerant, empruntPerso;
+    if (levierActif) {
+      apportGerant = Math.min(apportGerantTreso * 3, apport);
+      empruntPerso = Math.max(apportGerant - apportGerantTreso, 0);
+    } else {
+      apportGerant = apportGerantTreso;
+      empruntPerso = 0;
     }
+    // Sécurité : la trésorerie seule ne peut pas dépasser l'apport total
+    if (apportGerantTreso > apport) {
+      apportGerantTreso = apport;
+      document.getElementById('apport-gerant').value = apport;
+      apportGerant = levierActif ? Math.min(apportGerantTreso * 3, apport) : apportGerantTreso;
+      empruntPerso = levierActif ? Math.max(apportGerant - apportGerantTreso, 0) : 0;
+    }
+
+    // Annuité emprunt perso : 5%/an sur 7 ans, annuité constante
+    const TAUX_EMPRUNT = 0.05, DUREE_EMPRUNT = 7;
+    let annuiteEmprunt = 0;
+    if (empruntPerso > 0) {
+      const n = DUREE_EMPRUNT * 12;
+      const t = TAUX_EMPRUNT / 12;
+      const mensu = empruntPerso * t / (1 - Math.pow(1+t, -n));
+      annuiteEmprunt = mensu * 12;
+    }
+
     const compl = Math.max(apport - apportGerant, 0);
     const complEl = document.getElementById('apport-complement');
-    if (complEl) complEl.textContent = '→ Apport complémentaire de l\'investisseur : ' + compl.toLocaleString('fr-FR') + ' €';
+    if (complEl) {
+      let txt = '→ Apport complémentaire de l\'investisseur au capital : ' + compl.toLocaleString('fr-FR') + ' €';
+      if (levierActif && empruntPerso > 0) {
+        const mensu = annuiteEmprunt / 12;
+        txt += ' · Emprunt perso : ' + empruntPerso.toLocaleString('fr-FR') + ' € sur 7 ans à 5 % (' + Math.round(mensu).toLocaleString('fr-FR') + ' €/mois)';
+      }
+      complEl.innerHTML = txt;
+    }
     const valo100Input = +document.getElementById('valo').value;
     const pctReinject = +document.getElementById('pct-reinject').value / 100;
     const cible = +document.getElementById('cible').value / 100;
@@ -1413,7 +1457,10 @@
       const partGerant = resultatPositif * capitalGerant;
 
       const revenusGerant = gerance + partGerant;
-      const injection = revenusGerant * pctReinject;
+      // Remboursement emprunt personnel pendant la durée du prêt
+      const rbstEmprunt = i < DUREE_EMPRUNT ? annuiteEmprunt : 0;
+      const dispoGerant = Math.max(revenusGerant - rbstEmprunt, 0);
+      const injection = dispoGerant * pctReinject;
 
       const valo100 = resultatAn1 > 0 ? valo100Input * (resultat / resultatAn1) : valo100Input;
 
@@ -1431,7 +1478,8 @@
         capitalDebut: capitalGerant,
         partRachetee,
         capitalFin: capitalGerant + partRachetee,
-        valo100
+        valo100,
+        rbstEmprunt
       });
 
       rachatsCumules += montantRachat;
@@ -1449,6 +1497,7 @@
       {label:'Part investisseur (au prorata)', vals: years.map(y=>fmt(y.partInv)+' ('+pct((1-y.capitalDebut)*100)+')'), cls:''},
       {label:'Part exploitant (au prorata)', vals: years.map(y=>fmt(y.partGerant)+' ('+pct(y.capitalDebut*100)+')'), cls:''},
       {label:'Revenus cash exploitant (gérance + part résultat)', vals: years.map(y=>fmt(y.gerance+y.partGerant)), cls:'gerance-row separator'},
+      {label:'− Remboursement emprunt personnel', vals: years.map(y=>y.rbstEmprunt>0 ? fmt(-y.rbstEmprunt) : '—'), cls:'gerance-row'},
       {label:'Montant réinvesti en rachat de parts', vals: years.map(y=>fmt(y.montantRachat)), cls:'gerance-row'},
       {label:'% capital exploitant (fin an)', vals: years.map(y=>pct(y.capitalFin*100)), cls:'capital-row separator'},
       {label:'Valorisation 100% (revalorisée)', vals: years.map(y=>fmt(y.valo100)), cls:''},
@@ -1472,6 +1521,8 @@
   ids.forEach(id => {
     document.getElementById(id).addEventListener('input', compute);
   });
+  const levierEl = document.getElementById('levier');
+  if (levierEl) levierEl.addEventListener('change', compute);
   compute();
 })();
 </script>
