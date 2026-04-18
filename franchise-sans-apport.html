@@ -1033,6 +1033,69 @@
     border-color:var(--brique);
   }
 
+  /* Encart Pourquoi la franchise */
+  .pourquoi-franchise{
+    background:var(--creme);
+    padding:70px 40px;
+  }
+  .pourquoi-box{
+    max-width:920px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:180px 1fr;
+    gap:44px;
+    align-items:start;
+    background:var(--creme-2);
+    border-left:5px solid var(--vert-herbe);
+    padding:48px 52px;
+    border-radius:2px;
+  }
+  .pourquoi-pict{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:110px;
+    line-height:.9;
+    color:var(--vert-herbe);
+    letter-spacing:-.04em;
+  }
+  .pourquoi-pict .sym{
+    display:block;
+    font-size:22px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    color:var(--vert-2);
+    margin-top:10px;
+  }
+  .pourquoi-content h3{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:28px;
+    line-height:1.15;
+    color:var(--noir);
+    margin-bottom:16px;
+    letter-spacing:-.01em;
+  }
+  .pourquoi-content h3 em{color:var(--vert-2);font-style:italic}
+  .pourquoi-content p{
+    font-size:15.5px;
+    color:var(--texte);
+    line-height:1.65;
+    margin-bottom:14px;
+  }
+  .pourquoi-content p:last-child{margin-bottom:0}
+  .pourquoi-content strong{color:var(--noir);font-weight:600}
+  @media (max-width:780px){
+    .pourquoi-box{
+      grid-template-columns:1fr;
+      gap:20px;
+      padding:36px 28px;
+    }
+    .pourquoi-pict{font-size:72px}
+    .pourquoi-pict .sym{font-size:18px}
+  }
+
   /* Responsive */
   @media (max-width:900px){
     .hero{padding:80px 24px 60px}
@@ -1262,6 +1325,21 @@
           <h3>Vos dividendes annuels</h3>
           <p>Dès que le point de vente dégage un résultat distribuable, votre quote-part de dividendes — même si elle est initialement minoritaire — vient s'ajouter à votre gérance pour accélérer le rachat. Plus le point de vente performe, plus vous montez vite au capital.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POURQUOI LA FRANCHISE -->
+  <section class="pourquoi-franchise">
+    <div class="pourquoi-box">
+      <div class="pourquoi-pict">
+        ★
+        <span class="sym">Pourquoi la franchise</span>
+      </div>
+      <div class="pourquoi-content">
+        <h3>La franchise transforme un projet entrepreneurial en <em>entreprise vouée au succès</em>.</h3>
+        <p>Dans ce dispositif, la franchise n'est pas un cadre subi — c'est une garantie offerte à l'investisseur. Vous ne lancez pas votre projet seul dans l'inconnu : vous rejoignez un <strong>réseau national qui a déjà ouvert des dizaines, parfois des centaines de points de vente avant le vôtre</strong>. Un modèle éprouvé, des méthodes rodées, une animation locale dédiée, un accompagnement opérationnel continu.</p>
+        <p>Les chances de succès d'une entreprise sous enseigne sont structurellement supérieures à celles d'un projet isolé. Pour l'entrepreneur, c'est la quasi-certitude d'être guidé aux bons moments. Pour l'investisseur, c'est une sécurité essentielle : <strong>la franchise est ce qui permet de dire que ce projet est voué au succès</strong>, parce qu'il s'appuie sur un référentiel comparable, mesurable, et sur des années d'exécution réussie ailleurs.</p>
       </div>
     </div>
   </section>
