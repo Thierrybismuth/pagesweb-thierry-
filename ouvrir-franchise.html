@@ -233,6 +233,50 @@
     line-height: 1.65;
   }
 
+  /* ==== BRIDGE vers page détail ==== */
+  .detail-bridge {
+    background: var(--noir-doux);
+    color: var(--ivoire);
+    padding: 80px 40px;
+    border-top: 1px solid var(--bordure);
+    position: relative;
+  }
+  .detail-bridge::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 60px; height: 1px;
+    background: var(--or);
+  }
+  .detail-bridge-inner {
+    display: grid;
+    grid-template-columns: 1.6fr auto;
+    gap: 60px;
+    align-items: center;
+  }
+  .detail-bridge h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.2vw, 40px);
+    color: var(--ivoire);
+    font-weight: 500;
+    margin: 18px 0 16px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .detail-bridge h3 .accent { color: var(--or); font-style: italic; }
+  .detail-bridge p {
+    color: rgba(245,241,232,0.7);
+    font-size: 16px;
+    font-weight: 300;
+    max-width: 720px;
+    line-height: 1.6;
+  }
+  @media (max-width: 900px) {
+    .detail-bridge-inner { grid-template-columns: 1fr; gap: 30px; }
+    .detail-bridge { padding: 60px 20px; }
+  }
+
   /* ==== SESSIONS ==== */
   .sessions {
     background: var(--noir);
@@ -541,6 +585,7 @@
       <p class="hero-sub">Un investisseur finance votre ticket d'entrée. Vous exploitez votre franchise, sous une enseigne nationale, avec le savoir-faire et les fournisseurs d'un réseau structuré. Et vous devenez majoritaire en cinq ans.</p>
       <div class="hero-cta">
         <a href="#inscription" class="btn btn-primary">S'inscrire à une réunion d'information →</a>
+        <a href="franchise-sans-apport.html" class="btn btn-ghost">Voir le dispositif en détail</a>
         <a href="tel:0610703090" class="btn btn-ghost">📞 06 10 70 30 90</a>
       </div>
     </div>
@@ -575,6 +620,18 @@
           <p>Vous rachetez progressivement les parts de l'investisseur. À terme, vous êtes seul propriétaire de votre entreprise — et vous l'avez bâtie sans apport initial.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- BRIDGE vers page détail -->
+  <section class="detail-bridge">
+    <div class="detail-bridge-inner">
+      <div class="detail-bridge-text">
+        <span class="eyebrow" style="color:var(--or); border-bottom-color:var(--or);">Pour aller plus loin</span>
+        <h3>Chiffres, tableau de montée au capital,<br><span class="accent">simulateur interactif.</span></h3>
+        <p>Un exploitant démarre à 0 % du capital, devient majoritaire en 3 à 5 ans. Côté investisseur, un placement calibré avec sortie programmée. Tous les paramètres sont modélisables sur la page dédiée — CA, charges, rémunération de gérance, apport, rachat progressif.</p>
+      </div>
+      <a href="franchise-sans-apport.html" class="btn btn-primary">Voir le modèle complet →</a>
     </div>
   </section>
 
@@ -621,6 +678,10 @@
           <div class="detail-item">
             <h4>Confidentiel</h4>
             <p>Session en petit comité. Vos informations ne sont partagées avec aucune enseigne tant que vous ne l'avez pas explicitement validé.</p>
+          </div>
+          <div class="detail-item">
+            <h4>Vous voulez creuser avant ?</h4>
+            <p>Chiffres détaillés, mécanique complète, tableau de montée au capital et simulateur interactif — <a href="franchise-sans-apport.html" style="color:var(--or); text-decoration:underline; text-underline-offset:3px;">la page dédiée au modèle</a> reprend tout en profondeur.</p>
           </div>
         </div>
 
