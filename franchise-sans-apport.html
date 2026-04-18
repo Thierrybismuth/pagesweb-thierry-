@@ -1134,12 +1134,12 @@
           </div>
 
           <div class="calc-field">
-            <label>Charges annuelles (hors gérance)</label>
+            <label>Charges année 1 (hors gérance)</label>
             <div class="calc-slider">
               <input type="range" id="charges" min="60000" max="500000" step="5000" value="180000">
               <output id="charges-val">180 k€</output>
             </div>
-            <div class="calc-hint">Loyer, salaires, achats, comm. · +5%/an (inflation)</div>
+            <div class="calc-hint">Loyer, salaires, achats, comm. · évoluent au même rythme que le CA</div>
           </div>
 
           <div class="calc-field">
@@ -1237,7 +1237,7 @@
             </div>
           </div>
 
-          <p class="calc-footnote">Modèle illustratif. La valorisation 100 % est revalorisée chaque année au prorata de la croissance du résultat net (la société vaut plus cher quand elle génère plus de résultat). Charges hors gérance indexées +5 %/an. Si l'exploitant démarre à 0 % de capital, il ne touche aucune part du résultat en An 1 — seule sa gérance alimente le rachat. Dès qu'il détient des parts, la répartition du résultat suit sa quote-part. Chaque montage doit être validé avec un conseil juridique et un expert-comptable pour caler la structure réelle.</p>
+          <p class="calc-footnote">Modèle illustratif. La valorisation 100 % est revalorisée chaque année au prorata de la croissance du résultat net (la société vaut plus cher quand elle génère plus de résultat). Charges hors gérance indexées sur la croissance du CA (mêmes taux de croissance appliqué chaque année). Si l'exploitant démarre à 0 % de capital, il ne touche aucune part du résultat en An 1 — seule sa gérance alimente le rachat. Dès qu'il détient des parts, la répartition du résultat suit sa quote-part. Chaque montage doit être validé avec un conseil juridique et un expert-comptable pour caler la structure réelle.</p>
         </div>
       </div>
     </div>
@@ -1393,7 +1393,7 @@
     if (+chargesEl.max !== ca1) chargesEl.max = ca1;
     if (+chargesEl.value > ca1) chargesEl.value = ca1;
     const chargesAn1 = +chargesEl.value;
-    const growthCharges = 0.05;
+    const growthCharges = growth; // charges indexées sur la croissance du CA
     const gerance = +document.getElementById('gerance').value * 12;
     let apport = +document.getElementById('apport').value;
     let apportGerantTreso = +document.getElementById('apport-gerant').value;
